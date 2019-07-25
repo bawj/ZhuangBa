@@ -34,6 +34,8 @@ import org.greenrobot.eventbus.ThreadMode;
  */
 public class MainActivity extends BaseActivity {
 
+    /**测试提交*/
+
     @Override
     protected int getContextViewId() {
         return R.id.frameLayoutMain;
