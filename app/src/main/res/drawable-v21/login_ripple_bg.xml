@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+    android:color="#3333FF"><!--#FF21272B -->
+    <item>
+        <shape android:shape="rectangle">
+            <!--<solid android:color="@color/fun_car_colorPrimary" />-->
+            <corners android:radius="@dimen/tool_lib_38dp" />
+            <gradient android:angle="0" android:centerX="0.3" android:centerY="0.7"
+                android:endColor="#F4702C" android:startColor="#EF2B2B" android:type="linear"
+                android:useLevel="false" />
+        </shape>
+    </item>
+    <item>
+        <shape android:shape="rectangle">
+            <!--<solid android:color="@color/fun_car_colorPrimary" />-->
+            <corners android:radius="@dimen/tool_lib_38dp" />
+            <gradient android:angle="0" android:centerX="0.3" android:centerY="0.7"
+                android:endColor="#F4702C" android:startColor="#EF2B2B" android:type="linear"
+                android:useLevel="false" />
+        </shape>
+    </item>
+</ripple>

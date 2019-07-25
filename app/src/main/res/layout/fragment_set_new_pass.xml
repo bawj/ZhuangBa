@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/tool_lib_gray_F5F6FA"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/tool_lib_16dp"
+    android:paddingRight="@dimen/tool_lib_16dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/tool_lib_20dp"
+        android:text="@string/set_new_pass"
+        android:textColor="@color/tool_lib_gray_222222"
+        android:textSize="@dimen/tool_lib_20sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/tool_lib_30dp"
+        android:text="@string/enter_the_old_password"
+        android:textColor="@color/tool_lib_gray_222222"
+        android:textSize="@dimen/tool_lib_14sp" />
+
+
+    <EditText
+        android:id="@+id/editUpdatePass"
+        style="@style/base_editText"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="@dimen/tool_lib_12dp"
+        android:layout_marginRight="0dp"
+        android:digits="0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+        android:hint="@string/enter_the_old_password" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/tool_lib_20dp"
+        android:text="@string/input_password"
+        android:textColor="@color/tool_lib_gray_222222"
+        android:textSize="@dimen/tool_lib_14sp" />
+
+    <EditText
+        android:id="@+id/editUpdatePassTwoPass"
+        style="@style/base_editText"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="@dimen/tool_lib_12dp"
+        android:layout_marginRight="0dp"
+        android:digits="0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+        android:hint="@string/input_password" />
+
+    <Button
+        android:id="@+id/btnUpdatePassTwo"
+        style="@style/base_btn"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="@dimen/tool_lib_30dp"
+        android:layout_marginRight="0dp"
+        android:text="@string/ok" />
+</LinearLayout>

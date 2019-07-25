@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/tool_lib_gray_F5F6FA"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:paddingLeft="@dimen/tool_lib_16dp"
+        android:paddingTop="@dimen/tool_lib_18dp"
+        android:paddingRight="@dimen/tool_lib_16dp"
+        android:paddingBottom="@dimen/tool_lib_13dp">
+
+        <ImageView
+            android:id="@+id/ivUserHead"
+            android:layout_width="@dimen/tool_lib_64dp"
+            android:layout_height="@dimen/tool_lib_64dp"
+            android:layout_marginTop="@dimen/tool_lib_12dp"
+            android:layout_marginBottom="@dimen/tool_lib_12dp"
+            tools:src="@mipmap/ic_launcher" />
+
+        <TextView
+            android:id="@+id/tvPersonalName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/tool_lib_12dp"
+            android:layout_marginRight="@dimen/tool_lib_12dp"
+            android:layout_toEndOf="@+id/ivUserHead"
+            android:layout_toRightOf="@+id/ivUserHead"
+            android:textColor="@color/tool_lib_gray_222222"
+            android:textSize="@dimen/tool_lib_22sp"
+            tools:text="张老板" />
+    </RelativeLayout>
+
+    <!--历史订单-->
+    <RelativeLayout
+        android:id="@+id/relHistoricalOrder"
+        style="@style/personal_rel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/tool_lib_8dp">
+
+        <ImageView
+            android:id="@+id/ivHistoricalOrder"
+            style="@style/personal_img"
+            android:src="@drawable/ic_historical_order" />
+
+        <TextView
+            android:id="@+id/tvHistoricalOrder"
+            style="@style/personal_text"
+            android:layout_toEndOf="@+id/ivHistoricalOrder"
+            android:layout_toRightOf="@+id/ivHistoricalOrder"
+            android:text="@string/historical_order" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="@dimen/tool_lib_12dp"
+            android:layout_marginRight="@dimen/tool_lib_12dp"
+            android:layout_toStartOf="@+id/ivPersonalRight"
+            android:layout_toLeftOf="@+id/ivPersonalRight"
+            android:text="@string/view_order"
+            android:textColor="@color/tool_lib_gray_B1B1B1"
+            android:textSize="@dimen/tool_lib_12sp" />
+
+        <ImageView
+            android:id="@+id/ivPersonalRight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_right" />
+    </RelativeLayout>
+
+    <!--设置-->
+    <RelativeLayout
+        android:id="@+id/relSetUp"
+        style="@style/personal_rel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/tool_lib_8dp">
+
+        <ImageView
+            android:id="@+id/ivPersonalSetUp"
+            style="@style/personal_img"
+            android:src="@drawable/ic_set" />
+
+        <TextView
+            android:id="@+id/tvPersonalWallet"
+            style="@style/personal_text"
+            android:layout_toEndOf="@+id/ivPersonalSetUp"
+            android:layout_toRightOf="@+id/ivPersonalSetUp"
+            android:text="@string/set_up" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_right" />
+    </RelativeLayout>
+
+    <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
+        android:id="@+id/btnLogout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/tool_lib_46dp"
+        android:layout_marginLeft="@dimen/tool_lib_16dp"
+        android:layout_marginTop="@dimen/tool_lib_30dp"
+        android:layout_marginRight="@dimen/tool_lib_16dp"
+        android:text="@string/logout"
+        android:textColor="@color/tool_lib_gray_222222"
+        android:textSize="@dimen/tool_lib_14sp"
+        app:qmui_backgroundColor="@android:color/white"
+        app:qmui_borderColor="@android:color/white"
+        app:qmui_borderWidth="@dimen/tool_lib_1dp" />
+
+</LinearLayout>

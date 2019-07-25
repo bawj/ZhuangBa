@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.qmuiteam.qmui.layout.QMUILinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/itemOrderLayoutFor"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_horizontal"
+    android:background="@color/qmui_config_color_white"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:layout_marginBottom="@dimen/tool_lib_12dp"
+    app:qmui_borderColor="?attr/qmui_config_color_separator"
+    app:qmui_outerNormalColor="?attr/qmui_config_color_background"
+    app:qmui_showBorderOnlyBeforeL="true">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tvItemOrdersTitle"
+            style="@style/item_text_title"
+            tools:text="公共安全-视频监控" />
+
+        <TextView
+            android:id="@+id/tvItemOrdersType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="@dimen/tool_lib_12dp"
+            android:background="@drawable/distribution_half_fillet_bg"
+            android:padding="@dimen/tool_lib_5dp"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/tool_lib_12sp"
+            tools:text="分配中" />
+
+        <ImageView
+            android:id="@+id/ivItemOrdersIdentification"
+            style="@style/item_ic"
+            android:layout_below="@+id/tvItemOrdersTitle"
+            android:src="@drawable/ic_identification" />
+
+        <TextView
+            android:id="@+id/tvItemOrdersIdentification"
+            style="@style/item_text_content"
+            android:layout_below="@+id/tvItemOrdersTitle"
+            android:layout_alignBottom="@+id/ivItemOrdersIdentification"
+            android:layout_toEndOf="@+id/ivItemOrdersIdentification"
+            android:layout_toRightOf="@+id/ivItemOrdersIdentification"
+            android:textColor="@color/tool_lib_orange_F4702C"
+            tools:text="请在13:50之前确认接单" />
+
+        <ImageView
+            android:id="@+id/ivItemOrdersTime"
+            style="@style/item_ic"
+            android:layout_below="@+id/ivItemOrdersIdentification"
+            android:src="@drawable/ic_time" />
+
+        <TextView
+            android:id="@+id/tvItemOrdersTime"
+            style="@style/item_text_content"
+            android:layout_below="@+id/ivItemOrdersIdentification"
+            android:layout_alignBottom="@+id/ivItemOrdersTime"
+            android:layout_toEndOf="@+id/ivItemOrdersTime"
+            android:layout_toRightOf="@+id/ivItemOrdersTime"
+            tools:text="预约时间：2019/06/07 13:30" />
+
+        <TextView
+            android:id="@+id/tvItemOrdersTimeout"
+            style="@style/item_text_content"
+            android:layout_below="@+id/ivItemOrdersIdentification"
+            android:layout_alignBottom="@+id/ivItemOrdersTime"
+            android:layout_toEndOf="@+id/tvItemOrdersTime"
+            android:layout_toRightOf="@+id/tvItemOrdersTime"
+            android:textColor="@color/tool_lib_red_EF2B2B"
+            tools:text="已超时" />
+
+        <ImageView
+            android:id="@+id/ivItemOrdersLocation"
+            style="@style/item_ic"
+            android:layout_below="@+id/ivItemOrdersTime"
+            android:src="@drawable/ic_location" />
+
+        <TextView
+            android:id="@+id/tvItemOrdersLocation"
+            style="@style/item_text_content"
+            android:layout_below="@+id/ivItemOrdersTime"
+            android:layout_alignBottom="@+id/ivItemOrdersLocation"
+            android:layout_toEndOf="@+id/ivItemOrdersLocation"
+            android:layout_toRightOf="@+id/ivItemOrdersLocation"
+            android:ellipsize="end"
+            android:singleLine="true"
+            tools:text="杭州市江干钱江新城2390号" />
+
+        <View
+            android:id="@+id/viewHorizontalLine"
+            style="@style/tool_lib_horizontal_line"
+            android:layout_below="@+id/ivItemOrdersLocation"
+            android:layout_marginLeft="@dimen/tool_lib_12dp"
+            android:layout_marginTop="@dimen/tool_lib_14dp"
+            android:layout_marginRight="@dimen/tool_lib_12dp" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/viewHorizontalLine"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="@dimen/tool_lib_10dp"
+            android:layout_marginBottom="@dimen/tool_lib_10dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tvItemOrdersNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/tool_lib_6dp"
+                android:layout_marginRight="@dimen/tool_lib_6dp"
+                android:textColor="@color/tool_lib_gray_777777"
+                android:textSize="@dimen/tool_lib_11sp"
+                tools:text="共6项" />
+
+            <TextView
+                android:id="@+id/tvItemOrdersTotal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="项目总计："
+                android:textColor="@color/tool_lib_gray_222222"
+                android:textSize="@dimen/tool_lib_12sp" />
+
+            <TextView
+                android:id="@+id/tvItemOrdersMoney"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/tool_lib_12dp"
+                android:layout_marginRight="@dimen/tool_lib_12dp"
+                android:textColor="@color/tool_lib_red_EF2B2B"
+                android:textSize="@dimen/tool_lib_14sp"
+                tools:text="¥300.00" />
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</com.qmuiteam.qmui.layout.QMUILinearLayout>

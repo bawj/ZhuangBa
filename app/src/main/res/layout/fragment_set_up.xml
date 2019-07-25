@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/tool_lib_gray_F5F6FA"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/relSetUpUpdatePass"
+        style="@style/personal_rel"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/tool_lib_56dp"
+        android:layout_marginTop="@dimen/tool_lib_10dp">
+
+        <TextView
+            style="@style/personal_text"
+            android:text="@string/update_password" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_right" />
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/relSetUpAbout"
+        style="@style/personal_rel"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/tool_lib_56dp"
+        android:layout_marginTop="@dimen/tool_lib_8dp">
+
+        <TextView
+            style="@style/personal_text"
+            android:text="@string/about" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_right" />
+    </RelativeLayout>
+
+</LinearLayout>

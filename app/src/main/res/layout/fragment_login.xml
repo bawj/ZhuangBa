@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white">
+
+    <TextView
+        style="@style/login_registered_title"
+        android:layout_alignTop="@+id/ivLoginBg"
+        android:text="@string/log_in_to_your_account" />
+
+    <TextView
+        style="@style/login_registered_text"
+        android:layout_alignBottom="@+id/ivLoginBg"
+        android:text="@string/phone_number" />
+
+    <ImageView
+        android:id="@+id/ivLoginBg"
+        style="@style/login_registered_bg" />
+
+    <EditText
+        android:id="@+id/editUserNumber"
+        style="@style/base_editText"
+        android:layout_below="@+id/ivLoginBg"
+        android:hint="@string/phone_number_hint"
+        android:inputType="number"
+        android:maxLength="11" />
+
+    <TextView
+        android:id="@+id/tvPass"
+        style="@style/login_registered_text"
+        android:layout_below="@+id/editUserNumber"
+        android:layout_marginTop="@dimen/tool_lib_26dp"
+        android:text="@string/password" />
+
+    <com.xiaomai.zhuangba.weight.PasswordEditText
+        android:id="@+id/editUserPass"
+        style="@style/base_editText"
+        android:layout_below="@+id/tvPass"
+        android:digits="0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+        android:hint="@string/password_hint"
+        android:inputType="text" />
+
+    <Button
+        android:id="@+id/btnLogin"
+        style="@style/base_btn"
+        android:layout_below="@+id/editUserPass"
+        android:layout_marginTop="@dimen/tool_lib_30dp"
+        android:layout_marginRight="@dimen/tool_lib_38dp"
+        android:layout_marginLeft="@dimen/tool_lib_38dp"
+        android:enabled="false"
+        android:text="@string/login" />
+
+    <TextView
+        android:id="@+id/tvRegistered"
+        style="@style/login_TextView"
+        android:layout_below="@+id/btnLogin"
+        android:text="@string/registered" />
+
+    <TextView
+        android:id="@+id/tvForgetPassword"
+        style="@style/login_TextView"
+        android:layout_below="@+id/btnLogin"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:text="@string/forget_password" />
+
+</RelativeLayout>

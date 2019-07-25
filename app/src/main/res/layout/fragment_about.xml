@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/tool_lib_gray_F5F6FA"
+    android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="@dimen/tool_lib_85dp"
+        android:layout_height="@dimen/tool_lib_85dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/tool_lib_30dp"
+        android:src="@mipmap/ic_launcher" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/tool_lib_25dp"
+        android:background="@android:color/white"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:id="@+id/relSetUpContactUs"
+            style="@style/personal_rel"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/tool_lib_56dp"
+            android:layout_marginTop="@dimen/tool_lib_8dp">
+
+            <TextView
+                style="@style/personal_text"
+                android:text="@string/edition" />
+
+            <TextView
+                android:id="@+id/tvAboutEdition"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:textColor="@color/tool_lib_gray_B1B1B1"
+                android:textSize="@dimen/tool_lib_12sp"
+                tools:text="1.0.0" />
+        </RelativeLayout>
+
+    </LinearLayout>
+</LinearLayout>

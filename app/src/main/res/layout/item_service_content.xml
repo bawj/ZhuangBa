@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="@dimen/tool_lib_12dp">
+
+    <ImageView
+        android:id="@+id/ivServiceContentIcon"
+        android:layout_width="@dimen/tool_lib_75dp"
+        android:layout_height="@dimen/tool_lib_75dp"
+        android:background="@android:color/white"
+        tools:src="@mipmap/ic_launcher" />
+
+    <TextView
+        android:id="@+id/tvServiceContentName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/tool_lib_10dp"
+        android:layout_marginLeft="@dimen/tool_lib_10dp"
+        android:layout_toEndOf="@+id/ivServiceContentIcon"
+        android:layout_toRightOf="@+id/ivServiceContentIcon"
+        android:textColor="@color/tool_lib_gray_222222"
+        android:textSize="@dimen/tool_lib_14sp"
+        tools:text="智能通讯座调试" />
+
+    <TextView
+        android:id="@+id/tvServiceContentMoney"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvServiceContentName"
+        android:layout_marginStart="@dimen/tool_lib_10dp"
+        android:layout_marginLeft="@dimen/tool_lib_10dp"
+        android:layout_marginTop="@dimen/tool_lib_4dp"
+        android:layout_toEndOf="@+id/ivServiceContentIcon"
+        android:layout_toRightOf="@+id/ivServiceContentIcon"
+        android:textColor="#ffef2b2b"
+        android:textSize="@dimen/tool_lib_14sp"
+        tools:text="¥80.00" />
+
+    <TextView
+        android:id="@+id/tvServiceContentMoney_"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvServiceContentName"
+        android:layout_marginTop="@dimen/tool_lib_4dp"
+        android:layout_toEndOf="@+id/tvServiceContentMoney"
+        android:layout_toRightOf="@+id/tvServiceContentMoney"
+        android:text="@string/individual"
+        android:textColor="@color/tool_lib_gray_777777"
+        android:textSize="@dimen/tool_lib_14sp" />
+
+    <com.xiaomai.zhuangba.weight.AnimShopsButton
+        android:id="@+id/animShop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/tool_lib_16dp"
+        android:layout_marginLeft="@dimen/tool_lib_16dp"
+        android:layout_alignBottom="@+id/ivServiceContentIcon"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        tools:ignore="RelativeOverlap" />
+
+</RelativeLayout>

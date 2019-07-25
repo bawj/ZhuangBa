@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/tool_lib_gray_F5F6FA">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tvOrderInformationContactsTip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/tool_lib_12dp"
+            android:layout_marginLeft="@dimen/tool_lib_12dp"
+            android:layout_marginTop="@dimen/tool_lib_20dp"
+            android:text="@string/on_site_contact_person"
+            android:textColor="@color/tool_lib_gray_222222"
+            android:textSize="@dimen/tool_lib_12sp" />
+
+        <RelativeLayout
+            android:id="@+id/relOrderInformationNamePhone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvOrderInformationContactsTip"
+            android:layout_marginTop="@dimen/tool_lib_10dp"
+            android:background="@android:color/white"
+            android:paddingLeft="@dimen/tool_lib_12dp"
+            android:paddingRight="@dimen/tool_lib_12dp">
+
+
+            <TextView
+                android:id="@+id/tvOrderInformationName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/editOrderInformationName"
+                android:layout_alignBottom="@+id/editOrderInformationName"
+                android:gravity="center_vertical"
+                android:text="@string/name"
+                android:textColor="@color/tool_lib_gray_222222"
+                android:textSize="@dimen/tool_lib_14sp" />
+
+            <EditText
+                android:id="@+id/editOrderInformationName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/tool_lib_50dp"
+                android:layout_marginLeft="@dimen/tool_lib_50dp"
+                android:layout_marginTop="@dimen/tool_lib_20dp"
+                android:layout_toEndOf="@+id/tvOrderInformationName"
+                android:layout_toRightOf="@+id/tvOrderInformationName"
+                android:background="@null"
+                android:gravity="center_vertical"
+                android:hint="@string/click_input_name"
+                android:maxLength="10"
+                android:padding="@dimen/tool_lib_3dp"
+                android:textColor="@color/tool_lib_gray_B1B1B1"
+                android:textSize="@dimen/tool_lib_14sp"
+                tools:text="张三" />
+
+            <View
+                android:id="@+id/viewHorizontalLine"
+                style="@style/tool_lib_horizontal_line"
+                android:layout_below="@+id/editOrderInformationName"
+                android:layout_marginTop="@dimen/tool_lib_20dp" />
+
+            <TextView
+                android:id="@+id/tvOrderInformationPhone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/viewHorizontalLine"
+                android:layout_alignTop="@+id/editOrderInformationPhone"
+                android:layout_alignBottom="@+id/editOrderInformationPhone"
+                android:gravity="center_vertical"
+                android:text="@string/phone"
+                android:textColor="@color/tool_lib_gray_222222"
+                android:textSize="@dimen/tool_lib_14sp" />
+
+            <EditText
+                android:id="@+id/editOrderInformationPhone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/viewHorizontalLine"
+                android:layout_marginStart="@dimen/tool_lib_50dp"
+                android:layout_marginLeft="@dimen/tool_lib_50dp"
+                android:layout_marginTop="@dimen/tool_lib_20dp"
+                android:layout_marginBottom="@dimen/tool_lib_20dp"
+                android:layout_toEndOf="@+id/tvOrderInformationPhone"
+                android:layout_toRightOf="@+id/tvOrderInformationPhone"
+                android:background="@null"
+                android:gravity="center_vertical"
+                android:hint="@string/click_input_phone"
+                android:inputType="phone"
+                android:maxLength="11"
+                android:padding="@dimen/tool_lib_3dp"
+                android:textColor="@color/tool_lib_gray_B1B1B1"
+                android:textSize="@dimen/tool_lib_14sp"
+                tools:text="13757188697" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/tvOrderInformationAddressTip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/relOrderInformationNamePhone"
+            android:layout_marginStart="@dimen/tool_lib_12dp"
+            android:layout_marginLeft="@dimen/tool_lib_12dp"
+            android:layout_marginTop="@dimen/tool_lib_20dp"
+            android:text="@string/check_address"
+            android:textColor="@color/tool_lib_gray_222222"
+            android:textSize="@dimen/tool_lib_12sp" />
+
+
+        <RelativeLayout
+            android:id="@+id/relOrderInformationAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvOrderInformationAddressTip"
+            android:layout_marginTop="@dimen/tool_lib_10dp"
+            android:background="@android:color/white"
+            android:paddingLeft="@dimen/tool_lib_12dp"
+            android:paddingRight="@dimen/tool_lib_12dp">
+
+            <TextView
+                android:id="@+id/tvOrderInformationServiceAddress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/relOrderInformationClickServiceAddress"
+                android:layout_alignBottom="@+id/relOrderInformationClickServiceAddress"
+                android:gravity="center_vertical"
+                android:text="@string/service_address"
+                android:textColor="@color/tool_lib_gray_222222"
+                android:textSize="@dimen/tool_lib_14sp" />
+
+            <RelativeLayout
+                android:id="@+id/relOrderInformationClickServiceAddress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/tool_lib_21dp"
+                android:layout_marginLeft="@dimen/tool_lib_21dp"
+                android:layout_marginTop="@dimen/tool_lib_20dp"
+                android:layout_marginEnd="@dimen/tool_lib_12dp"
+                android:layout_marginRight="@dimen/tool_lib_12sp"
+                android:layout_toEndOf="@+id/tvOrderInformationServiceAddress"
+                android:layout_toRightOf="@+id/tvOrderInformationServiceAddress">
+
+                <TextView
+                    android:id="@+id/tvOrderInformationClickServiceAddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_toStartOf="@+id/ivOrderInformationLocation"
+                    android:layout_toLeftOf="@+id/ivOrderInformationLocation"
+                    android:background="@null"
+                    android:gravity="center_vertical"
+                    android:singleLine="true"
+                    android:ellipsize="end"
+                    android:hint="@string/click_check_address"
+                    android:maxLength="30"
+                    android:padding="@dimen/tool_lib_3dp"
+                    android:textColor="@color/tool_lib_gray_B1B1B1"
+                    android:textSize="@dimen/tool_lib_14sp"
+                    tools:text="武林广场21号杭州大厦购物中心" />
+
+                <ImageView
+                    android:id="@+id/ivOrderInformationLocation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_location_orange" />
+            </RelativeLayout>
+
+
+            <View
+                android:id="@+id/viewHorizontalLine1"
+                style="@style/tool_lib_horizontal_line"
+                android:layout_below="@+id/relOrderInformationClickServiceAddress"
+                android:layout_marginTop="@dimen/tool_lib_20dp" />
+
+            <TextView
+                android:id="@+id/tvOrderInformationDetailedAddress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/viewHorizontalLine1"
+                android:layout_alignTop="@+id/editOrderInformationDetailedAddress"
+                android:layout_alignBottom="@+id/editOrderInformationDetailedAddress"
+                android:gravity="center_vertical"
+                android:text="@string/detailed_address"
+                android:textColor="@color/tool_lib_gray_222222"
+                android:textSize="@dimen/tool_lib_14sp" />
+
+            <EditText
+                android:id="@+id/editOrderInformationDetailedAddress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/viewHorizontalLine1"
+                android:layout_marginStart="@dimen/tool_lib_21dp"
+                android:layout_marginLeft="@dimen/tool_lib_21dp"
+                android:layout_marginTop="@dimen/tool_lib_20dp"
+                android:layout_marginBottom="@dimen/tool_lib_20dp"
+                android:layout_toEndOf="@+id/tvOrderInformationDetailedAddress"
+                android:layout_toRightOf="@+id/tvOrderInformationDetailedAddress"
+                android:background="@null"
+                android:maxLength="30"
+                android:gravity="center_vertical"
+                android:hint="@string/click_input_detailed_address"
+                android:padding="@dimen/tool_lib_3dp"
+                android:textColor="@color/tool_lib_gray_B1B1B1"
+                android:textSize="@dimen/tool_lib_14sp"
+                tools:text="详细地址" />
+        </RelativeLayout>
+
+
+        <TextView
+            android:id="@+id/tvOrderInformationTimeOfAppointment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/relOrderInformationAddress"
+            android:layout_marginStart="@dimen/tool_lib_12dp"
+            android:layout_marginLeft="@dimen/tool_lib_12dp"
+            android:layout_marginTop="@dimen/tool_lib_12dp"
+            android:text="@string/time_of_appointment"
+            android:textColor="@color/tool_lib_gray_222222"
+            android:textSize="@dimen/tool_lib_12sp" />
+
+        <RelativeLayout
+            android:id="@+id/relOrderInformationTime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvOrderInformationTimeOfAppointment"
+            android:layout_marginTop="@dimen/tool_lib_10dp"
+            android:background="@android:color/white"
+            android:paddingLeft="@dimen/tool_lib_12dp"
+            android:paddingRight="@dimen/tool_lib_12dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/tool_lib_20dp"
+                android:layout_marginBottom="@dimen/tool_lib_20dp"
+                android:text="@string/date"
+                android:textColor="@color/tool_lib_gray_222222"
+                android:textSize="@dimen/tool_lib_14sp" />
+
+            <TextView
+                android:id="@+id/tvOrderInformationDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="@dimen/tool_lib_12dp"
+                android:layout_marginRight="@dimen/tool_lib_12dp"
+                android:layout_toStartOf="@+id/ivOrderInformationRight"
+                android:layout_toLeftOf="@+id/ivOrderInformationRight"
+                android:text="@string/check_time"
+                android:textColor="@color/tool_lib_gray_B1B1B1"
+                android:textSize="@dimen/tool_lib_14sp" />
+
+            <ImageView
+                android:id="@+id/ivOrderInformationRight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_right" />
+        </RelativeLayout>
+
+        <Button
+            android:id="@+id/btnOrderInformation"
+            style="@style/base_btn"
+            android:layout_below="@+id/relOrderInformationTime"
+            android:layout_marginLeft="@dimen/tool_lib_16dp"
+            android:layout_marginTop="@dimen/tool_lib_35dp"
+            android:layout_marginRight="@dimen/tool_lib_16dp"
+            android:layout_marginBottom="@dimen/tool_lib_16dp"
+            tools:text="下一步" />
+    </RelativeLayout>
+</android.support.v4.widget.NestedScrollView>

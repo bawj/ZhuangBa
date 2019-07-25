@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white">
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerDialogService"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/tool_lib_20dp" />
+
+    <RelativeLayout
+        android:id="@+id/layDialogClose"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/tool_lib_125dp"
+        android:layout_below="@+id/recyclerDialogService"
+        android:layout_marginTop="-25dp"
+        android:background="@drawable/bg_bottom">
+
+        <ImageView
+            android:id="@+id/ivDialogServiceClose"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/tool_lib_16dp"
+            android:src="@drawable/ic_close" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

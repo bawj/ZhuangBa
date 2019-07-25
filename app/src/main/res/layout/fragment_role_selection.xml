@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/relMasterWorker"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/tool_lib_120dp"
+        android:layout_marginLeft="@dimen/tool_lib_30dp"
+        android:layout_marginTop="@dimen/tool_lib_120dp"
+        android:layout_marginRight="@dimen/tool_lib_30dp"
+        android:background="@color/tool_lib_gray_F9F9F9">
+
+        <ImageView
+            android:id="@+id/ivMasterWorker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/tool_lib_30dp"
+            android:layout_marginLeft="@dimen/tool_lib_30dp"
+            android:src="@drawable/bg_master_worker" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/tool_lib_30dp"
+            android:layout_marginLeft="@dimen/tool_lib_30dp"
+            android:layout_toEndOf="@+id/ivMasterWorker"
+            android:layout_toRightOf="@+id/ivMasterWorker"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/i_am_a_master_worker"
+                android:textColor="@color/tool_lib_gray_222222"
+                android:textSize="@dimen/tool_lib_26sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/i_want_to_make_money"
+                android:textColor="@color/tool_lib_gray_777777"
+                android:textSize="@dimen/tool_lib_12sp" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/relEmployer"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/tool_lib_120dp"
+        android:layout_below="@+id/relMasterWorker"
+        android:layout_marginLeft="@dimen/tool_lib_30dp"
+        android:layout_marginTop="@dimen/tool_lib_20sp"
+        android:layout_marginRight="@dimen/tool_lib_30dp"
+        android:background="@color/tool_lib_gray_F9F9F9">
+
+        <ImageView
+            android:id="@+id/ivEmployer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/tool_lib_30dp"
+            android:layout_marginLeft="@dimen/tool_lib_30dp"
+            android:src="@drawable/bg_employer" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/tool_lib_30dp"
+            android:layout_marginLeft="@dimen/tool_lib_30dp"
+            android:layout_toEndOf="@+id/ivEmployer"
+            android:layout_toRightOf="@+id/ivEmployer"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/i_am_an_employer"
+                android:textColor="@color/tool_lib_gray_222222"
+                android:textSize="@dimen/tool_lib_26sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/i_want_to_send_out_the_demand"
+                android:textColor="@color/tool_lib_gray_777777"
+                android:textSize="@dimen/tool_lib_12sp" />
+        </LinearLayout>
+    </RelativeLayout>
+
+
+    <TextView
+        android:id="@+id/tvLogout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/tool_lib_20dp"
+        android:text="@string/logout"
+        android:textColor="@color/tool_lib_gray_777777"
+        android:textSize="@dimen/tool_lib_14sp" />
+</RelativeLayout>

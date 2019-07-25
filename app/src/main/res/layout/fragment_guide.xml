@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/ivGuide"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitXY"
+        tools:src="@drawable/bg_guide_one" />
+
+    <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
+        android:id="@+id/btnGuideGo"
+        android:layout_width="@dimen/tool_lib_148dp"
+        android:layout_height="@dimen/tool_lib_40dp"
+        android:visibility="gone"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/tool_lib_32dp"
+        android:text="@string/go_zhuang_ba"
+        android:textColor="@color/tool_lib_gray_222222"
+        app:qmui_backgroundColor="@android:color/white"
+        app:qmui_borderColor="@android:color/white"
+        app:qmui_isRadiusAdjustBounds="true" />
+
+</RelativeLayout>

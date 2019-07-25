@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/tool_lib_8dp">
+
+    <TextView
+        android:id="@+id/tvItemOrderDateListCodeTxt"
+        android:layout_width="@dimen/tool_lib_84dp"
+        android:layout_height="wrap_content"
+        android:textColor="@color/tool_lib_gray_777777"
+        android:textSize="@dimen/tool_lib_12sp"
+        tools:text="验收提交时间：" />
+
+    <TextView
+        android:id="@+id/tvItemOrderDateListCode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/tool_lib_4dp"
+        android:layout_marginLeft="@dimen/tool_lib_4dp"
+        android:textColor="@color/tool_lib_gray_222222"
+        android:textSize="@dimen/tool_lib_12sp"
+        tools:text="25682776834254324" />
+
+</LinearLayout>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/tool_lib_gray_F5F6FA"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/tool_lib_16dp"
+    android:paddingRight="@dimen/tool_lib_16dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/tool_lib_20dp"
+        android:text="@string/input_verification_code"
+        android:textColor="@color/tool_lib_gray_222222"
+        android:textSize="@dimen/tool_lib_20sp" />
+
+    <TextView
+        android:id="@+id/tvUpdatePassHasBeenSent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/tool_lib_12dp"
+        android:textColor="@color/tool_lib_gray_222222"
+        android:textSize="@dimen/tool_lib_12sp"
+        tools:text="验证码已通过短信发送至 133333333333" />
+
+    <com.xiaomai.zhuangba.weight.CodeEditText
+        android:id="@+id/codeTxt"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/tool_lib_50dp"
+        android:layout_marginTop="@dimen/dp_40"
+        app:backColor="@android:color/white"
+        app:checkedColor="@color/tool_lib_gray_E8E8E8"
+        app:circle="@dimen/tool_lib_6dp"
+        app:defaultColor="@color/tool_lib_gray_E8E8E8"
+        app:round="0dp"
+        app:space="0dp"
+        app:textLength="6" />
+
+
+    <com.example.toollib.weight.SingleCountDownView
+        android:id="@+id/singleCountDown"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:layout_marginTop="@dimen/tool_lib_10dp"
+        android:paddingLeft="@dimen/tool_lib_16dp"
+        android:paddingRight="@dimen/tool_lib_16dp" />
+
+    <Button
+        android:id="@+id/btnUpdatePassNext"
+        style="@style/base_btn"
+        android:layout_marginTop="@dimen/tool_lib_30dp"
+        android:text="@string/next" />
+
+</LinearLayout>

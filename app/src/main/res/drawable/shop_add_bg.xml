@@ -1,0 +1,16 @@
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <gradient
+        android:angle="0"
+        android:centerX="0.3"
+        android:centerY="0.7"
+        android:endColor="#F5F8FA"
+        android:startColor="#F5F8FA"
+        android:type="linear"
+        android:useLevel="false" />
+    <corners
+        android:bottomRightRadius="@dimen/tool_lib_45dp"
+        android:topRightRadius="@dimen/tool_lib_45dp" />
+    <stroke
+        android:width="@dimen/tool_lib_1dp"
+        android:color="@android:color/transparent" />
+</shape>

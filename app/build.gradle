@@ -1,0 +1,86 @@
+apply plugin: 'com.android.application'
+apply plugin: 'org.greenrobot.greendao'
+
+def libs = rootProject.ext.dependencies
+def config = rootProject.ext.android
+def database = rootProject.ext.database
+def database_url = "src/main/database"
+
+def KEY_ALIAS = "xmkj"
+def KEY_PASSWORD = "xmkj.android"
+def STORE_PASSWORD = "xmkj.android"
+android {
+    compileSdkVersion config.compileSdkVersion
+    defaultConfig {
+        applicationId config.applicationId
+        minSdkVersion config.minSdkVersion
+        targetSdkVersion config.targetSdkVersion
+        versionCode config.versionCode
+        versionName config.versionName
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
+        ndk {
+            abiFilters 'armeabi-v7a', "arm64-v8a"
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            //压缩
+            zipAlignEnabled true
+            //是否移除无用资源
+            shrinkResources true
+        }
+    }
+
+    //签名
+    signingConfigs {
+        debug {
+            storeFile rootProject.file("key\\xiaomai.keystore")
+            keyAlias "${KEY_ALIAS}"
+            keyPassword "${KEY_PASSWORD}"
+            storePassword "${STORE_PASSWORD}"
+        }
+        release {
+            storeFile rootProject.file("key\\xiaomai.keystore")
+            keyAlias "${KEY_ALIAS}"
+            keyPassword "${KEY_PASSWORD}"
+            storePassword "${STORE_PASSWORD}"
+        }
+    }
+    applicationVariants.all { variant ->
+        variant.outputs.all { output ->
+            outputFileName = "zhuangba_${defaultConfig.versionName}_${buildTime()}.apk"
+        }
+    }
+    sourceSets {
+        main {
+            java.srcDirs = ['src/main/java', database_url]
+        }
+    }
+}
+
+static def buildTime() {
+    return new Date().format("yyyy-MM-dd", TimeZone.getDefault())
+}
+
+greendao {
+    //数据库
+    schemaVersion database.schemaVersion
+    targetGenDir database_url
+    daoPackage config.applicationId
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation libs["umsdkcommon"]
+    implementation libs["umsdkpush"]
+    implementation libs["3dmap"]
+    implementation libs["search"]
+    implementation libs["latest"]
+    implementation libs["wechatPlay"]
+    annotationProcessor libs["butterknife-compiler"]
+    implementation project(':toollib')
+    implementation project(':citypicker')
+}

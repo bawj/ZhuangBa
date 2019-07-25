@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="tool_lib_QMUI_AppTheme" parent="QMUI.Compat.NoActionBar">
+        <!-- 配置Android提供的theme -->
+        <item name="android:textAppearanceListItemSmall">@style/tool_lib_QDTextAppearanceListItemSmall</item>
+        <item name="android:textAppearanceListItem">@style/tool_lib_QDtextAppearanceListItem</item>
+        <item name="android:listPreferredItemHeight">?attr/qmui_list_item_height_higher</item>
+        <item name="android:listPreferredItemHeightSmall">?attr/qmui_list_item_height</item>
+
+        <!-- 配置qmui提供的theme -->
+        <item name="qmui_config_color_blue">@color/tool_lib_colorAccent</item>
+        <item name="qmui_round_btn_bg_color">@color/tool_lib_colorAccent</item>
+        <item name="qmui_round_btn_border_color">@color/tool_lib_colorAccent</item>
+        <item name="qmui_round_btn_text_color">@color/tool_lib_colorAccent</item>
+        <item name="qmui_content_spacing_horizontal">@dimen/tool_lib_20dp</item>
+        <item name="qmui_content_padding_horizontal">@dimen/qmui_content_spacing_horizontal</item>
+
+        <item name="QMUITopBarStyle">@style/tool_lib_QDTopBar</item>
+
+        <!-- 配置app自己的theme -->
+        <item name="tool_lib_app_primary_color">?attr/qmui_config_color_blue</item>
+        <item name="tool_lib_app_content_bg_color">@color/qmui_config_color_white</item>
+    </style>
+
+    <style name="tool_lib_QDTopBar" parent="QMUI.TopBar">
+        <item name="qmui_topbar_bg_color">?attr/tool_lib_app_primary_color</item>
+        <item name="qmui_topbar_title_color">@color/qmui_config_color_white</item>
+        <item name="qmui_topbar_subtitle_color">@color/qmui_config_color_white</item>
+        <item name="qmui_topbar_text_btn_color_state_list">@color/tool_lib_s_topbar_btn_color</item>
+        <item name="qmui_topbar_height">@dimen/tool_lib_48dp</item>
+        <item name="qmui_topbar_image_btn_height">@dimen/tool_lib_48dp</item>
+    </style>
+
+    <style name="tool_lib_QDTextAppearanceListItemSmall">
+        <item name="android:textColor">?attr/qmui_config_color_gray_4</item>
+        <item name="android:textSize">@dimen/tool_lib_16sp</item>
+        <item name="android:background">?attr/qmui_s_list_item_bg_with_border_bottom_inset_left
+        </item>
+    </style>
+
+    <style name="tool_lib_QDtextAppearanceListItem">
+        <item name="android:textColor">?attr/qmui_config_color_black</item>
+        <item name="android:textSize">@dimen/tool_lib_18sp</item>
+        <item name="android:background">?attr/qmui_s_list_item_bg_with_border_bottom_inset_left
+        </item>
+    </style>
+
+    <style name="tool_lib_horizontal_line">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:background">@color/tool_lib_gray_E8E8E8</item>
+    </style>
+
+    <style name="tool_lib_vertical_line">
+        <item name="android:layout_width">1dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:background">@color/tool_lib_gray_E8E8E8</item>
+    </style>
+</resources>

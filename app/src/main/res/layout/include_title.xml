@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_vertical"
+    android:gravity="center_vertical">
+
+    <!--用户头像-->
+    <ImageView
+        android:id="@+id/ivUserHead"
+        android:layout_width="@dimen/tool_lib_30dp"
+        android:layout_height="@dimen/tool_lib_30dp"
+        tools:src="@mipmap/ic_launcher" />
+
+    <TextView
+        android:id="@+id/tvUserName"
+        style="@style/text_name"
+        android:layout_alignTop="@+id/ivUserHead"
+        android:layout_alignBottom="@+id/ivUserHead"
+        android:layout_toEndOf="@+id/ivUserHead"
+        android:layout_toRightOf="@+id/ivUserHead"
+        tools:text="康师傅" />
+
+    <com.xiaomai.zhuangba.weight.MyToggleButton
+        android:id="@+id/toggleButton"
+        style="@style/MySwitch"
+        android:layout_alignBottom="@+id/tvUserName"
+        android:layout_toEndOf="@+id/tvUserName"
+        android:layout_toRightOf="@+id/tvUserName" />
+
+    <ImageView
+        android:id="@+id/ivMessage"
+        android:layout_width="@dimen/tool_lib_26dp"
+        android:layout_height="@dimen/tool_lib_26dp"
+        android:layout_alignBottom="@+id/tvUserName"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/ic_message" />
+
+</RelativeLayout>

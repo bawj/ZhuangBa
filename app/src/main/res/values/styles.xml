@@ -1,0 +1,260 @@
+<resources>
+
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="main_activity_theme" parent="tool_lib_QMUI_AppTheme">
+        <item name="android:windowBackground">@drawable/bg_guide_main</item>
+        <item name="android:windowActionBar">false</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+
+
+        <item name="cpClearTextIcon">@mipmap/cp_icon_clear_all</item>
+        <item name="cpSearchTextSize">@dimen/cp_search_text_size</item>
+        <item name="cpSearchTextColor">@color/cp_color_gray_dark</item>
+        <item name="cpSearchHintText">@string/cp_search_hint_text</item>
+        <item name="cpSearchHintTextColor">@color/cp_color_gray_light</item>
+        <item name="cpSearchCursorDrawable">@color/cp_color_gray_dark</item>
+
+        <item name="cpListItemHeight">@dimen/cp_list_item_height</item>
+        <item name="cpListItemTextSize">@dimen/cp_list_item_text_size</item>
+        <item name="cpListItemTextColor">@color/cp_color_gray_deep</item>
+
+        <item name="cpEmptyIcon">@mipmap/cp_icon_empty</item>
+        <item name="cpEmptyIconWidth">@dimen/cp_empty_icon_width</item>
+        <item name="cpEmptyIconHeight">@dimen/cp_empty_icon_height</item>
+        <item name="cpEmptyText">@string/cp_no_result</item>
+        <item name="cpEmptyTextSize">@dimen/cp_empty_text_size</item>
+        <item name="cpEmptyTextColor">@color/cp_color_gray_deep</item>
+
+        <item name="cpGridItemBackground">@drawable/cp_grid_item_bg</item>
+        <item name="cpGridItemSpace">@dimen/cp_grid_item_space</item>
+
+        <item name="cpSectionHeight">@dimen/cp_section_height</item>
+        <item name="cpSectionTextSize">@dimen/cp_section_text_size</item>
+        <item name="cpSectionTextColor">@color/cp_color_gray</item>
+        <item name="cpSectionBackground">@color/cp_color_section_bg</item>
+        <item name="cpIndexBarTextSize">@dimen/cp_index_bar_text_size</item>
+        <item name="cpIndexBarNormalTextColor">@color/cp_color_gray</item>
+        <item name="cpIndexBarSelectedTextColor">@color/cp_color_gray_dark</item>
+
+        <item name="cpOverlayWidth">@dimen/cp_overlay_width</item>
+        <item name="cpOverlayHeight">@dimen/cp_overlay_height</item>
+        <item name="cpOverlayTextSize">@dimen/cp_overlay_text_size</item>
+        <item name="cpOverlayTextColor">@android:color/white</item>
+        <item name="cpOverlayBackground">@drawable/cp_overlay_bg</item>
+    </style>
+
+    <!--自定义Dialog样式-->
+    <style name="MyDialog" parent="AlertDialog.AppCompat">
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:backgroundDimAmount">0.42</item>
+    </style>
+
+    <style name="base_btn">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/tool_lib_46dp</item>
+        <item name="android:background">@drawable/login_login_btn</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">@dimen/tool_lib_16sp</item>
+    </style>
+
+    <style name="login_registered_bg">
+        <item name="android:layout_width">@dimen/tool_lib_100dp</item>
+        <item name="android:layout_height">@dimen/tool_lib_124dp</item>
+        <item name="android:layout_alignParentRight">true</item>
+        <item name="android:layout_marginRight">@dimen/tool_lib_47dp</item>
+        <item name="android:layout_marginTop">@dimen/tool_lib_85dp</item>
+        <item name="android:src">@drawable/bg_login</item>
+    </style>
+
+    <style name="login_registered_title">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">@dimen/tool_lib_48dp</item>
+        <item name="android:layout_marginTop">@dimen/tool_lib_29dp</item>
+        <item name="android:textColor">@color/tool_lib_gray_222222</item>
+        <item name="android:textSize">@dimen/tool_lib_20sp</item>
+    </style>
+
+    <style name="login_registered_text">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">@dimen/tool_lib_58dp</item>
+        <item name="android:layout_marginBottom">@dimen/tool_lib_10dp</item>
+        <item name="android:textColor">@color/tool_lib_gray_777777</item>
+        <item name="android:textSize">@dimen/tool_lib_12sp</item>
+    </style>
+
+    <style name="login_TextView">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">@dimen/tool_lib_58dp</item>
+        <item name="android:layout_marginRight">@dimen/tool_lib_58dp</item>
+        <item name="android:layout_marginTop">@dimen/tool_lib_16sp</item>
+        <item name="android:textColor">@color/tool_lib_gray_777777</item>
+        <item name="android:textSize">@dimen/tool_lib_12sp</item>
+    </style>
+
+    <!--输入框-->
+    <style name="base_editText">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/tool_lib_50sp</item>
+        <item name="android:layout_marginLeft">@dimen/tool_lib_38dp</item>
+        <item name="android:layout_marginRight">@dimen/tool_lib_38dp</item>
+        <item name="android:background">@drawable/gray_fillet_bg</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textSize">@dimen/tool_lib_15sp</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:paddingLeft">@dimen/tool_lib_20dp</item>
+        <item name="android:paddingTop">@dimen/tool_lib_15dp</item>
+        <item name="android:paddingBottom">@dimen/tool_lib_15dp</item>
+        <item name="android:paddingRight">@dimen/tool_lib_15dp</item>
+        <item name="android:layout_gravity">center_horizontal</item>
+    </style>
+
+    <!--密码输入框-->
+    <declare-styleable name="PasswordEditText">
+        <attr name="openPasswdRes" format="reference" />
+        <attr name="closePasswdRes" format="reference" />
+    </declare-styleable>
+
+    <style name="text_name">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">@dimen/tool_lib_6dp</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:textColor">@color/tool_lib_gray_222222</item>
+        <item name="android:textSize">@dimen/tool_lib_12sp</item>
+    </style>
+
+    <style name="MySwitch" parent="@android:style/Widget.CompoundButton">
+        <item name="android:button">@drawable/switch_button</item>
+        <item name="android:layout_width">@dimen/tool_lib_62dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">@dimen/tool_lib_6dp</item>
+        <item name="android:background">#00000000</item>
+        <item name="android:checked">false</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textOff">@null</item>
+        <item name="android:textOn">@null</item>
+    </style>
+
+    <style name="item_text_title">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">@dimen/tool_lib_12dp</item>
+        <item name="android:layout_marginLeft">@dimen/tool_lib_12dp</item>
+        <item name="android:textColor">@color/tool_lib_gray_222222</item>
+        <item name="android:textSize">@dimen/tool_lib_16sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="item_ic">
+        <item name="android:layout_width">@dimen/tool_lib_16dp</item>
+        <item name="android:layout_height">@dimen/tool_lib_16dp</item>
+        <item name="android:layout_marginTop">@dimen/tool_lib_10dp</item>
+        <item name="android:layout_marginLeft">@dimen/tool_lib_12dp</item>
+    </style>
+
+    <style name="item_text_content">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">@dimen/tool_lib_6dp</item>
+        <item name="android:layout_marginTop">@dimen/tool_lib_8dp</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:textColor">@color/tool_lib_gray_777777</item>
+        <item name="android:textSize">@dimen/tool_lib_12sp</item>
+    </style>
+
+    <style name="order_status">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_alignParentRight">true</item>
+        <item name="android:layout_marginTop">@dimen/tool_lib_12dp</item>
+        <item name="android:padding">@dimen/tool_lib_6dp</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">@dimen/tool_lib_11sp</item>
+    </style>
+
+    <style name="order_text">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">@dimen/tool_lib_12dp</item>
+        <item name="android:layout_marginTop">@dimen/tool_lib_12dp</item>
+        <item name="android:textColor">@color/tool_lib_gray_777777</item>
+        <item name="android:textSize">@dimen/tool_lib_12sp</item>
+    </style>
+
+    <style name="order_money">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_alignParentRight">true</item>
+        <item name="android:layout_marginTop">@dimen/tool_lib_12dp</item>
+        <item name="android:layout_marginRight">@dimen/tool_lib_12dp</item>
+        <item name="android:textColor">@color/tool_lib_red_EF2B2B</item>
+        <item name="android:textSize">@dimen/tool_lib_16sp</item>
+    </style>
+
+    <style name="translucent" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowIsTranslucent">true</item>
+    </style>
+
+    <style name="CustomCheckBoxTheme" parent="@android:style/Widget.CompoundButton.CheckBox">
+        <item name="android:button">@drawable/checkbox_style</item>
+    </style>
+
+    <style name="personal_rel">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/tool_lib_55dp</item>
+        <item name="android:background">@android:color/white</item>
+        <item name="android:paddingLeft">@dimen/tool_lib_16dp</item>
+        <item name="android:paddingRight">@dimen/tool_lib_16dp</item>
+    </style>
+
+    <style name="personal_img">
+        <item name="android:layout_width">@dimen/tool_lib_18dp</item>
+        <item name="android:layout_height">@dimen/tool_lib_18dp</item>
+        <item name="android:layout_marginTop">@dimen/tool_lib_14dp</item>
+        <item name="android:layout_marginBottom">@dimen/tool_lib_14dp</item>
+    </style>
+
+    <style name="personal_text">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:layout_marginLeft">@dimen/tool_lib_9dp</item>
+        <item name="android:layout_marginRight">@dimen/tool_lib_9dp</item>
+        <item name="android:textColor">@color/tool_lib_gray_222222</item>
+        <item name="android:textSize">@dimen/tool_lib_14sp</item>
+    </style>
+
+    <declare-styleable name="CodeEditText">
+        <attr name="space" format="dimension" />
+        <attr name="wide" format="dimension" />
+        <attr name="strokeWidth" format="dimension" />
+        <attr name="checkedColor" format="color" />
+        <attr name="defaultColor" format="color" />
+        <attr name="textLength" format="integer" />
+        <attr name="backColor" format="color" />
+        <attr name="textColor" format="color" />
+        <attr name="circle" format="dimension" />
+        <attr name="round" format="dimension" />
+        <attr name="textSize" format="dimension" />
+        <attr name="isPwd" format="boolean" />
+        <attr name="waitInputColor" format="color" />
+        <attr name="isWaitInput" format="boolean" />
+    </declare-styleable>
+</resources>

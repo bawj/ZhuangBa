@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/whit_bg"
+    android:gravity="center_vertical"
+    android:paddingLeft="@dimen/tool_lib_25dp"
+    android:paddingRight="@dimen/tool_lib_25dp">
+
+    <TextView
+        android:id="@+id/tvTodayFlowing"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/today_flowing"
+        android:textColor="@color/tool_lib_gray_777777"
+        android:textSize="@dimen/tool_lib_12sp" />
+
+    <TextView
+        android:id="@+id/tvTodayFlowingRMB"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvTodayFlowing"
+        android:layout_marginTop="@dimen/tool_lib_4dp"
+        android:text="@string/zero"
+        android:textColor="@color/tool_lib_gray_222222"
+        android:textSize="@dimen/tool_lib_26sp" />
+
+    <TextView
+        android:id="@+id/tvOrderToday_"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/tool_lib_40dp"
+        android:layout_marginRight="@dimen/tool_lib_40dp"
+        android:layout_toStartOf="@+id/tvFinishToday_"
+        android:layout_toLeftOf="@+id/tvFinishToday_"
+        android:text="@string/order_today"
+        android:textColor="@color/tool_lib_gray_777777"
+        android:textSize="@dimen/tool_lib_12sp" />
+
+    <TextView
+        android:id="@+id/tvOrderToday"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvOrderToday_"
+        android:layout_alignStart="@+id/tvOrderToday_"
+        android:layout_alignLeft="@+id/tvOrderToday_"
+        android:layout_marginTop="@dimen/tool_lib_4dp"
+        android:text="@string/zero"
+        android:textColor="@color/tool_lib_gray_222222"
+        android:textSize="@dimen/tool_lib_26sp" />
+
+    <TextView
+        android:id="@+id/tvFinishToday_"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:text="@string/finish_today"
+        android:textColor="@color/tool_lib_gray_777777"
+        android:textSize="@dimen/tool_lib_12sp" />
+
+    <TextView
+        android:id="@+id/tvFinishToday"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvFinishToday_"
+        android:layout_alignStart="@+id/tvFinishToday_"
+        android:layout_alignLeft="@+id/tvFinishToday_"
+        android:layout_marginTop="@dimen/tool_lib_4dp"
+        android:text="@string/zero"
+        android:textColor="@color/tool_lib_gray_222222"
+        android:textSize="@dimen/tool_lib_26sp" />
+
+</RelativeLayout>

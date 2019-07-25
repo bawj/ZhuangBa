@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/tool_lib_gray_F5F8FA"
+    android:paddingLeft="@dimen/tool_lib_16dp"
+    android:paddingRight="@dimen/tool_lib_16dp">
+
+    <TextView
+        android:id="@+id/tvServiceDetailTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/tool_lib_20dp"
+        android:textColor="@color/tool_lib_gray_222222"
+        android:textSize="@dimen/tool_lib_16sp"
+        tools:text="智能座调试" />
+
+
+    <TextView
+        android:id="@+id/tvServiceDetailContent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvServiceDetailTitle"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/tool_lib_20dp"
+        android:textColor="@color/tool_lib_gray_222222"
+        android:textSize="@dimen/tool_lib_16sp"
+        tools:text="1、基础的钢筋笼应临时固定，同时确保钢筋宠的基础顶板平面水平，即用水平尺在基础顶板垂直两个方向测量，观察其气泡必须居中；监控立杆预埋件基础混凝土浇捣必须密实，禁止混凝土有空鼓； 2、施工时要在预埋管口预先用塑料纸或其它材料封口，以防止混凝土浇捣时混凝土漏入预埋管中，造成预埋管堵塞；基础浇捣后，基础面必须要高于地平面5MM～10MM；混凝土必须要养护一段时间，以确保混凝土能达到一定的安装强度。 3、每一根金属立杆都必须接地，其接地电阻小于4欧；各立杆基础具体数据视现场施工需要为准。" />
+</RelativeLayout>

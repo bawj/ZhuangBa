@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/tool_lib_gray_F5F6FA"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/successful_payment_bg"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/ivSuccessfulPayment"
+            android:layout_alignBottom="@+id/ivSuccessfulPayment"
+            android:layout_marginStart="@dimen/tool_lib_46dp"
+            android:layout_marginLeft="@dimen/tool_lib_46dp"
+            android:layout_marginEnd="@dimen/tool_lib_12dp"
+            android:layout_marginRight="@dimen/tool_lib_12dp"
+            android:layout_toStartOf="@+id/ivSuccessfulPayment"
+            android:layout_toLeftOf="@+id/ivSuccessfulPayment"
+            android:gravity="center_vertical"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/successful_payment"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/tool_lib_18sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/successful_payment_tip"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/tool_lib_12sp" />
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/ivSuccessfulPayment"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/tool_lib_124dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="@dimen/tool_lib_45dp"
+            android:layout_marginEnd="@dimen/tool_lib_46dp"
+            android:layout_marginRight="@dimen/tool_lib_46dp"
+            android:layout_marginBottom="@dimen/tool_lib_16dp"
+            android:src="@drawable/bg_successful_payment" />
+
+    </RelativeLayout>
+
+    <!--订单信息-->
+    <RelativeLayout
+        android:id="@+id/relPaymentDetailsTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white">
+
+        <TextView
+            android:id="@+id/tvSuccessfulTitle"
+            style="@style/item_text_title"
+            android:layout_marginTop="@dimen/tool_lib_6dp"
+            android:text="@string/service_information" />
+
+        <TextView
+            android:id="@+id/tvPaymentName_"
+            style="@style/order_text"
+            android:layout_below="@+id/tvSuccessfulTitle"
+            android:text="@string/contacts_" />
+
+        <TextView
+            android:id="@+id/tvPaymentName"
+            style="@style/order_text"
+            android:layout_below="@+id/tvSuccessfulTitle"
+            android:layout_marginStart="@dimen/tool_lib_23dp"
+            android:layout_marginLeft="@dimen/tool_lib_23dp"
+            android:layout_toEndOf="@+id/tvPaymentName_"
+            android:layout_toRightOf="@+id/tvPaymentName_"
+            android:textColor="@color/tool_lib_gray_222222"
+            tools:text="王翠花" />
+
+        <TextView
+            android:id="@+id/tvSuccessfulPhone_"
+            style="@style/order_text"
+            android:layout_below="@+id/tvPaymentName_"
+            android:text="@string/contact_number" />
+
+        <TextView
+            android:id="@+id/tvSuccessfulPhone"
+            style="@style/order_text"
+            android:layout_below="@+id/tvPaymentName_"
+            android:layout_toEndOf="@+id/tvSuccessfulPhone_"
+            android:layout_toRightOf="@+id/tvSuccessfulPhone_"
+            android:textColor="@color/tool_lib_gray_222222"
+            tools:text="13082779654" />
+
+
+        <TextView
+            android:id="@+id/tvSuccessfulAddress_"
+            style="@style/order_text"
+            android:layout_below="@+id/tvSuccessfulPhone_"
+            android:text="@string/service_address_" />
+
+        <TextView
+            android:id="@+id/tvSuccessfulAddress"
+            style="@style/order_text"
+            android:layout_below="@+id/tvSuccessfulPhone_"
+            android:layout_toEndOf="@+id/tvSuccessfulAddress_"
+            android:layout_toRightOf="@+id/tvSuccessfulAddress_"
+            android:paddingEnd="@dimen/tool_lib_30dp"
+            android:paddingRight="@dimen/tool_lib_30dp"
+            android:textColor="@color/tool_lib_gray_222222"
+            tools:ignore="RtlSymmetry"
+            tools:text="浙江省杭州市余杭区良渚镇梁柱姐到要价路2号浙江" />
+
+
+        <TextView
+            android:id="@+id/tvSuccessfulActualPayment_"
+            style="@style/order_text"
+            android:layout_below="@+id/tvSuccessfulAddress"
+            android:layout_marginBottom="@dimen/tool_lib_12dp"
+            android:text="@string/actual_payment" />
+
+        <TextView
+            android:id="@+id/tvSuccessfulActualPayment"
+            style="@style/order_text"
+            android:layout_below="@+id/tvSuccessfulAddress"
+            android:layout_marginStart="@dimen/tool_lib_23dp"
+            android:layout_marginLeft="@dimen/tool_lib_23dp"
+            android:layout_toEndOf="@+id/tvSuccessfulActualPayment_"
+            android:layout_toRightOf="@+id/tvSuccessfulActualPayment_"
+            android:textColor="@color/tool_lib_red_EF2B2B"
+            tools:text="¥240.00" />
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/btnSuccessfulMissionDetails"
+        style="@style/base_btn"
+        android:layout_marginLeft="@dimen/tool_lib_16dp"
+        android:layout_marginTop="@dimen/tool_lib_26dp"
+        android:layout_marginRight="@dimen/tool_lib_16dp"
+        android:text="@string/mission_details"
+        android:textSize="@dimen/tool_lib_14sp" />
+
+    <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
+        android:id="@+id/btnSuccessfulBackHome"
+        style="@style/base_btn"
+        android:layout_marginLeft="@dimen/tool_lib_16dp"
+        android:layout_marginTop="@dimen/tool_lib_10dp"
+        android:layout_marginRight="@dimen/tool_lib_16dp"
+        android:text="@string/back_to_home_page"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/tool_lib_14sp"
+        app:qmui_backgroundColor="@android:color/white"
+        app:qmui_borderColor="@android:color/white"
+        app:qmui_isRadiusAdjustBounds="true" />
+</LinearLayout>
