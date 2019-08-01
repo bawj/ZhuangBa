@@ -8,13 +8,19 @@ import android.widget.TextView;
 
 import com.example.toollib.manager.GlideManager;
 import com.xiaomai.zhuangba.R;
+import com.xiaomai.zhuangba.data.MessageEvent;
 import com.xiaomai.zhuangba.data.UserInfo;
 import com.xiaomai.zhuangba.data.db.DBHelper;
 import com.xiaomai.zhuangba.data.module.login.ILoginRegisteredModule;
 import com.xiaomai.zhuangba.data.module.login.LoginRegisteredModule;
+import com.xiaomai.zhuangba.enums.EventBusEnum;
 import com.xiaomai.zhuangba.fragment.login.BaseLoginRegisteredFragment;
 import com.xiaomai.zhuangba.fragment.login.LoginFragment;
 import com.xiaomai.zhuangba.fragment.personal.set.SetUpFragment;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -46,6 +52,7 @@ public class PersonalFragment extends BaseLoginRegisteredFragment {
 
     @Override
     public void initView() {
+        EventBus.getDefault().register(this);
         UserInfo userInfo = DBHelper.getInstance().getUserInfoDao().queryBuilder().unique();
         if (userInfo != null){
             tvPersonalName.setText(TextUtils.isEmpty(userInfo.getUserText()) ? getString(R.string.no_certification) : userInfo.getUserText());
@@ -53,7 +60,7 @@ public class PersonalFragment extends BaseLoginRegisteredFragment {
         }
     }
 
-    @OnClick({R.id.relHistoricalOrder, R.id.relSetUp, R.id.btnLogout})
+    @OnClick({R.id.relHistoricalOrder, R.id.relSetUp,R.id.relServiceAgreement, R.id.btnLogout})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.relHistoricalOrder:
@@ -62,11 +69,26 @@ public class PersonalFragment extends BaseLoginRegisteredFragment {
             case R.id.relSetUp:
                 startFragment(SetUpFragment.newInstance());
                 break;
+            case R.id.relServiceAgreement:
+                //服务协议
+                startServiceAgreement();
+                break;
             case R.id.btnLogout:
                 iModule.logout();
                 break;
             default:
         }
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onWeChatSuccess(MessageEvent messageEvent) {
+        if (messageEvent.getErrCode() == EventBusEnum.CASH_SUCCESS.getCode()){
+            initView();
+        }
+    }
+
+    public void startServiceAgreement() {
+
     }
 
     @Override
@@ -84,4 +106,10 @@ public class PersonalFragment extends BaseLoginRegisteredFragment {
         return getString(R.string.my);
     }
 
+
+    @Override
+    public void onDestroy() {
+        EventBus.getDefault().unregister(this);
+        super.onDestroy();
+    }
 }

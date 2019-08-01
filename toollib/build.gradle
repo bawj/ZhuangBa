@@ -56,5 +56,4 @@ dependencies {
     api libs["joda-time"]
     api libs["rxpermissions"]
     api libs["pickerView"]
-    debugApi libs["leakcanary"]
 }

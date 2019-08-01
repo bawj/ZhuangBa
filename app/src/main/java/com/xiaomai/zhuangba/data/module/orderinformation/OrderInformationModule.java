@@ -101,8 +101,8 @@ public class OrderInformationModule extends BaseModule<IOrderInformationView> im
             mViewRef.get().showToast(mContext.get().getString(R.string.please_input_appointment_time));
             return null;
         }
-        String date = DateUtil.strToDate(appointmentTime);
-        Long aLong = DateUtil.dateToCurrentTimeMillis(date);
+        String date = DateUtil.dateToStr(appointmentTime , "yyyy-MM-dd HH:mm:ss");
+        Long aLong = DateUtil.dateToCurrentTimeMillis(date , "yyyy-MM-dd HH:mm:ss");
         if (!dateCompare(aLong)) {
             mViewRef.get().showToast(mContext.get().getString(R.string.reservation_time_prompt));
             return null;

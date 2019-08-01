@@ -6,6 +6,7 @@ import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.FrameLayout;
 
 import com.example.toollib.R;
@@ -152,8 +153,9 @@ public abstract class BaseFragment<M extends IBaseModule> extends BaseRxFragment
     private void setBackRightArrow() {
         String rightTitle = getRightTitle();
         if (topBarBase != null && !TextUtils.isEmpty(rightTitle)) {
-            topBarBase.addRightTextButton(rightTitle, QMUIViewHelper.generateViewId())
-                    .setOnClickListener(new View.OnClickListener() {
+            Button button = topBarBase.addRightTextButton(rightTitle, QMUIViewHelper.generateViewId());
+            button.setTextColor(Color.BLACK);
+            button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     rightTitleClick(v);

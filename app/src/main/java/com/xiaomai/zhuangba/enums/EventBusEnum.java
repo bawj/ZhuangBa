@@ -15,6 +15,7 @@ public enum EventBusEnum {
     NOTIFICATION_REFRESH(5 , "通知列表刷新"),
     START_FLAG(6 , "退保证金 修改首页"),
     WITHDRAWAL_PASSWORD(7 , "提现密码设置成功 更新状态"),
+    CASH_SUCCESS(8 , "提现成功 更新状态"),
     ;
     private int code;
     private String explain;

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/tool_lib_gray_F5F6FA"
+    android:orientation="vertical">
+
+    <TextView
+        style="@style/text_14_222222"
+        android:layout_marginStart="@dimen/tool_lib_36dp"
+        android:layout_marginLeft="@dimen/tool_lib_36dp"
+        android:layout_marginTop="@dimen/tool_lib_30dp"
+        android:text="@string/name" />
+
+    <EditText
+        android:id="@+id/editAccountName"
+        style="@style/base_editText"
+        android:layout_marginLeft="@dimen/tool_lib_16dp"
+        android:layout_marginTop="@dimen/tool_lib_12dp"
+        android:layout_marginRight="@dimen/tool_lib_16dp"
+        android:background="@drawable/white_fillet_bg" />
+
+    <TextView
+        style="@style/text_14_222222"
+        android:layout_marginStart="@dimen/tool_lib_36dp"
+        android:layout_marginLeft="@dimen/tool_lib_36dp"
+        android:layout_marginTop="@dimen/tool_lib_18dp"
+        android:text="@string/wallet_alipay_account" />
+
+    <EditText
+        android:id="@+id/editAccountNumber"
+        style="@style/base_editText"
+        android:layout_marginLeft="@dimen/tool_lib_16dp"
+        android:layout_marginTop="@dimen/tool_lib_12dp"
+        android:layout_marginRight="@dimen/tool_lib_16dp"
+        android:background="@drawable/white_fillet_bg" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/tool_lib_8dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="@dimen/tool_lib_12dp"
+            android:layout_height="@dimen/tool_lib_12dp"
+            android:src="@drawable/icon_warning" />
+
+        <TextView
+            style="@style/text_12_ef2b2b"
+            android:layout_marginStart="@dimen/tool_lib_6dp"
+            android:layout_marginLeft="@dimen/tool_lib_6dp"
+            android:text="@string/wallet_alipay_hint" />
+    </LinearLayout>
+
+    <com.qmuiteam.qmui.layout.QMUIButton
+        android:id="@+id/tv_add"
+        style="@style/text_14_ffffff"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/tool_lib_46dp"
+        android:layout_marginLeft="@dimen/tool_lib_16dp"
+        android:layout_marginTop="@dimen/tool_lib_30dp"
+        android:layout_marginRight="@dimen/tool_lib_16dp"
+        android:background="@drawable/login_login_btn"
+        android:gravity="center"
+        android:text="@string/wallet_add" />
+
+</LinearLayout>

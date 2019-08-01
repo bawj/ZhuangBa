@@ -74,7 +74,9 @@ public class BaseListFragment<T extends BaseQuickAdapter> extends BaseFragment i
     public void onRefresh(@NonNull RefreshLayout refreshLayout) {
         //刷新
         page = 1;
-        baseListAdapter.setEnableLoadMore(false);
+        if (baseListAdapter != null){
+            baseListAdapter.setEnableLoadMore(false);
+        }
         onBaseRefresh(refreshLayout);
     }
 
@@ -98,7 +100,9 @@ public class BaseListFragment<T extends BaseQuickAdapter> extends BaseFragment i
     @Override
     public void finishRefresh() {
         //刷新完成 可以上拉加载
-        baseListAdapter.setEnableLoadMore(true);
+        if (baseListAdapter != null){
+            baseListAdapter.setEnableLoadMore(true);
+        }
         refreshLayout.finishRefresh();
     }
 
@@ -114,13 +118,17 @@ public class BaseListFragment<T extends BaseQuickAdapter> extends BaseFragment i
     @Override
     public void loadMoreEnd() {
         //加载完成 可以刷新
-        baseListAdapter.loadMoreEnd();
+        if (baseListAdapter != null){
+            baseListAdapter.loadMoreEnd();
+        }
         refreshLayout.setEnableRefresh(true);
     }
 
     @Override
     public void loadMoreComplete() {
-        baseListAdapter.loadMoreComplete();
+        if (baseListAdapter != null){
+            baseListAdapter.loadMoreComplete();
+        }
         refreshLayout.setEnableRefresh(true);
     }
 

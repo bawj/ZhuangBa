@@ -257,4 +257,61 @@
         <attr name="waitInputColor" format="color" />
         <attr name="isWaitInput" format="boolean" />
     </declare-styleable>
+
+
+    <style name="wrap_wrap">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+    </style>
+    <style name="text_14_222222" parent="wrap_wrap">
+        <item name="android:textSize">@dimen/tool_lib_14sp</item>
+        <item name="android:textColor">@color/tool_lib_gray_222222</item>
+    </style>
+    <style name="text_12_777777" parent="wrap_wrap">
+        <item name="android:textSize">@dimen/tool_lib_12sp</item>
+        <item name="android:textColor">@color/tool_lib_gray_777777</item>
+    </style>
+    <style name="text_12_222222" parent="wrap_wrap">
+        <item name="android:textSize">@dimen/tool_lib_12sp</item>
+        <item name="android:textColor">@color/tool_lib_gray_222222</item>
+    </style>
+    <style name="text_16_222222" parent="wrap_wrap">
+        <item name="android:textSize">@dimen/tool_lib_16sp</item>
+        <item name="android:textColor">@color/tool_lib_gray_222222</item>
+    </style>
+    <style name="text_14_777777" parent="wrap_wrap">
+        <item name="android:textSize">@dimen/tool_lib_14sp</item>
+        <item name="android:textColor">@color/tool_lib_gray_777777</item>
+    </style>
+    <style name="text_14_ffffff" parent="wrap_wrap">
+        <item name="android:textSize">@dimen/tool_lib_14sp</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+    <style name="popup_bottom_in">
+        <item name="android:windowEnterAnimation">@anim/popup_bottom_in</item>
+        <!-- 指定显示的动画xml -->
+
+        <item name="android:windowExitAnimation">@anim/popup_bottom_out</item>
+        <!-- 指定消失的动画xml -->
+    </style>
+    <style name="text_20_222222" parent="wrap_wrap">
+        <item name="android:textSize">@dimen/tool_lib_20sp</item>
+        <item name="android:textColor">@color/tool_lib_gray_222222</item>
+    </style>
+    <style name="text_16_ffffff" parent="wrap_wrap">
+        <item name="android:textSize">@dimen/tool_lib_16dp</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+    <style name="text_18_222222" parent="wrap_wrap">
+        <item name="android:textSize">@dimen/tool_lib_18sp</item>
+        <item name="android:textColor">@color/tool_lib_gray_222222</item>
+    </style>
+    <style name="text_12_ef2b2b" parent="wrap_wrap">
+        <item name="android:textSize">@dimen/tool_lib_12sp</item>
+        <item name="android:textColor">@color/tool_lib_red_EF2B2B</item>
+    </style>
+
+    <style name="CustomPayDepositMoney" parent="@android:style/Widget.CompoundButton.CheckBox">
+        <item name="android:button">@drawable/checkbox_deposit_style</item>
+    </style>
 </resources>

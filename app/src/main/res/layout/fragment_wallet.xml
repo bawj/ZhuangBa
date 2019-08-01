@@ -74,6 +74,7 @@
                 </LinearLayout>
 
                 <com.qmuiteam.qmui.layout.QMUIButton
+                    android:id="@+id/btnWithdraw"
                     android:layout_width="@dimen/tool_lib_100dp"
                     android:layout_height="@dimen/tool_lib_36dp"
                     android:layout_gravity="center_horizontal"
@@ -109,7 +110,7 @@
                             android:src="@drawable/ic_account_manager" />
 
                         <TextView
-                            android:id="@+id/tv_account_manager"
+                            android:id="@+id/tvAccountManager"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/wallet_withdraw_account_manager"
@@ -130,7 +131,7 @@
                             android:src="@drawable/ic_account_safe" />
 
                         <TextView
-                            android:id="@+id/tv_account_safe"
+                            android:id="@+id/tvAccountSafe"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/wallet_withdraw_account_safe"
@@ -196,7 +197,7 @@
                 <View style="@style/tool_lib_horizontal_line" />
 
                 <RelativeLayout
-                    android:id="@+id/rl_income"
+                    android:id="@+id/rlIncome"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/tool_lib_82dp"
                     android:gravity="center_vertical">
@@ -232,7 +233,7 @@
             </LinearLayout>
 
             <RelativeLayout
-                android:id="@+id/rl_already_withdraw"
+                android:id="@+id/rlAlreadyWithdraw"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/tool_lib_82dp"
                 android:layout_marginTop="@dimen/tool_lib_10dp"

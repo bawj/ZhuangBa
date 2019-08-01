@@ -17,11 +17,11 @@ android {
         targetSdkVersion config.targetSdkVersion
         versionCode config.versionCode
         versionName config.versionName
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
         ndk {
-            abiFilters 'armeabi-v7a', "arm64-v8a"
+            abiFilters 'armeabi-v7a'
         }
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
         release {
@@ -79,8 +79,10 @@ dependencies {
     implementation libs["3dmap"]
     implementation libs["search"]
     implementation libs["latest"]
+    implementation libs["agentweb"]
     implementation libs["wechatPlay"]
     annotationProcessor libs["butterknife-compiler"]
     implementation project(':toollib')
     implementation project(':citypicker')
+    implementation project(':calendarview')
 }

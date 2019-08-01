@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/tool_lib_gray_F5F8FA">
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/tool_lib_16dp"
+        android:layout_marginLeft="@dimen/tool_lib_16dp"
+        android:layout_marginTop="@dimen/tool_lib_30dp"
+        android:text="@string/phone_number"
+        android:textColor="@color/tool_lib_gray_222222"
+        android:textSize="@dimen/tool_lib_14sp" />
+
+    <EditText
+        android:id="@+id/edtPhone"
+        style="@style/base_editText"
+        android:layout_below="@id/tvTitle"
+        android:layout_marginLeft="@dimen/tool_lib_16dp"
+        android:layout_marginTop="@dimen/tool_lib_12dp"
+        android:layout_marginRight="@dimen/tool_lib_16dp"
+        android:background="@drawable/white_fillet_bg"
+        android:hint="@string/please_enter_your_cell_phone_number"
+        android:inputType="phone"
+        android:maxLength="11"
+        android:textSize="@dimen/tool_lib_18sp" />
+
+    <com.qmuiteam.qmui.layout.QMUIButton
+        android:id="@+id/btnCode"
+        style="@style/base_btn"
+        android:layout_below="@+id/edtPhone"
+        android:layout_marginLeft="@dimen/tool_lib_16dp"
+        android:layout_marginTop="@dimen/tool_lib_30dp"
+        android:layout_marginRight="@dimen/tool_lib_16dp"
+        android:text="@string/get_the_authentication_code" />
+
+
+</RelativeLayout>

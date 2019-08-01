@@ -85,17 +85,17 @@ public class HistoricalOrderFragment extends BaseListFragment<HistoricalAdapter>
                         if (getPage() != StaticExplain.PAGE_NUMBER.getCode()) {
                             //加载
                             historicalAdapter.addData(orders.getList());
+                            if (orders.getList().size() < StaticExplain.PAGE_NUM.getCode()) {
+                                //加载结束
+                                loadMoreEnd();
+                            } else {
+                                //加载完成
+                                loadMoreComplete();
+                            }
                         } else {
                             //刷新
                             historicalAdapter.setNewData(orders.getList());
                             finishRefresh();
-                        }
-                        if (orders.getList().size() < StaticExplain.PAGE_NUM.getCode()) {
-                            //加载结束
-                            loadMoreEnd();
-                        } else {
-                            //加载完成
-                            loadMoreComplete();
                         }
                     }
 

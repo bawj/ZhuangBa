@@ -20,6 +20,7 @@ import com.xiaomai.zhuangba.fragment.employer.EmployerFragment;
 import com.xiaomai.zhuangba.fragment.guide.GuidePageFragment;
 import com.xiaomai.zhuangba.fragment.login.LoginFragment;
 import com.xiaomai.zhuangba.fragment.masterworker.MasterWorkerFragment;
+import com.xiaomai.zhuangba.fragment.personal.wallet.detailed.WalletDetailFragment;
 import com.xiaomai.zhuangba.spf.SpfConst;
 import com.xiaomai.zhuangba.weight.dialog.UpdateVersionDialog;
 import com.xiaomai.zhuangba.weight.dialog.VersionDialog;
@@ -33,8 +34,6 @@ import org.greenrobot.eventbus.ThreadMode;
  * @date 2019/6/24 0024
  */
 public class MainActivity extends BaseActivity {
-
-    /**测试提交*/
 
     @Override
     protected int getContextViewId() {
@@ -164,19 +163,19 @@ public class MainActivity extends BaseActivity {
     private long touchTime = 0;
     private static final long WAIT_TIME = 2000L;
 
-
     @Override
     public void onBackPressed() {
         QMUIFragment currentFragment = getCurrentFragment();
-        if (currentFragment instanceof  LoginFragment || currentFragment instanceof MasterWorkerFragment
-                || currentFragment instanceof EmployerFragment || currentFragment instanceof AuthenticationFragment){
+        if (currentFragment instanceof LoginFragment || currentFragment instanceof MasterWorkerFragment
+                || currentFragment instanceof EmployerFragment || currentFragment instanceof AuthenticationFragment
+                || currentFragment instanceof WalletDetailFragment) {
             if (System.currentTimeMillis() - touchTime < WAIT_TIME) {
                 finish();
-            }else {
+            } else {
                 touchTime = System.currentTimeMillis();
                 ToastUtil.showShort(getString(R.string.press_again_exit));
             }
-        }else{
+        } else {
             super.onBackPressed();
         }
     }

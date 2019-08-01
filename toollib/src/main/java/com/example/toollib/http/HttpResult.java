@@ -39,7 +39,7 @@ public class HttpResult<T> {
 
 
     public T getData() {
-        return data == null ? (T) "" : data;
+        return data;
     }
 
     public void setData(T data) {

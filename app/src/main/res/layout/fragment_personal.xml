@@ -80,6 +80,33 @@
             android:src="@drawable/ic_right" />
     </RelativeLayout>
 
+    <RelativeLayout
+        android:id="@+id/relServiceAgreement"
+        style="@style/personal_rel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/ivPersonalServiceAgreement"
+            style="@style/personal_img"
+            android:src="@drawable/ic_service_agreement" />
+
+        <TextView
+            android:id="@+id/tvPersonalServiceAgreement"
+            style="@style/personal_text"
+            android:layout_toEndOf="@+id/ivPersonalServiceAgreement"
+            android:layout_toRightOf="@+id/ivPersonalServiceAgreement"
+            android:text="服务协议" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_right" />
+    </RelativeLayout>
+
     <!--设置-->
     <RelativeLayout
         android:id="@+id/relSetUp"

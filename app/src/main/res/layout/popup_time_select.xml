@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="467dp"
+    android:background="@android:color/white"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/tool_lib_60dp"
+        android:gravity="center_vertical">
+
+        <TextView
+            style="@style/text_16_222222"
+            android:layout_marginStart="@dimen/tool_lib_16dp"
+            android:layout_marginLeft="@dimen/tool_lib_16dp"
+            android:text="@string/wallet_detail_query"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_select_time"
+            style="@style/text_14_777777"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginEnd="@dimen/tool_lib_16dp"
+            android:layout_marginRight="@dimen/tool_lib_16dp" />
+
+    </RelativeLayout>
+
+    <View style="@style/tool_lib_horizontal_line" />
+
+    <com.haibin.calendarview.CalendarView
+        android:id="@+id/calendarView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/tool_lib_white_FFFFFF"
+        app:calendar_height="@dimen/tool_lib_40dp"
+        app:calendar_padding="@dimen/tool_lib_10dp"
+        app:current_month_text_color="@color/tool_lib_gray_777777"
+        app:day_text_size="@dimen/tool_lib_14sp"
+        app:current_day_text_color="@color/tool_lib_gray_777777"
+        app:month_view="com.xiaomai.zhuangba.weight.calendar.CustomRangeMonthView"
+        app:month_view_show_mode="mode_only_current"
+        app:month_view_scrollable="true"
+        app:select_mode="range_mode"
+        app:selected_text_color="@color/tool_lib_white_FFFFFF"
+        app:week_background="@color/tool_lib_white_FFFFFF"
+        app:week_text_color="@color/tool_lib_gray_777777"
+        app:week_text_size="@dimen/tool_lib_14sp"
+        />
+
+    <TextView
+        android:id="@+id/tv_finish"
+        style="@style/text_14_ffffff"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/tool_lib_46dp"
+        android:layout_margin="@dimen/tool_lib_16dp"
+        android:background="@drawable/login_login_btn"
+        android:gravity="center"
+        android:text="@string/wallet_finish" />
+
+</LinearLayout>

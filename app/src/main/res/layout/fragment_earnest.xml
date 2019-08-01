@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/tool_lib_gray_F5F8FA"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/tool_lib_10dp"
+        android:background="@android:color/white"
+        android:orientation="vertical">
+
+        <TextView
+            style="@style/text_12_222222"
+            android:layout_marginStart="@dimen/tool_lib_16dp"
+            android:layout_marginLeft="@dimen/tool_lib_16dp"
+            android:layout_marginTop="@dimen/tool_lib_16dp"
+            android:text="@string/wallet_earnest_money" />
+
+        <TextView
+            android:id="@+id/tv_earnest_money"
+            style="@style/text_12_222222"
+            android:layout_gravity="center_horizontal"
+            android:text="¥0.0"
+            android:textSize="@dimen/tool_lib_20sp" />
+
+        <View
+            style="@style/tool_lib_horizontal_line"
+            android:layout_marginLeft="@dimen/tool_lib_16dp"
+            android:layout_marginTop="@dimen/tool_lib_20dp"
+            android:layout_marginRight="@dimen/tool_lib_16dp" />
+
+        <TextView
+            android:id="@+id/tv_earnest_hint"
+            style="@style/text_12_222222"
+            android:layout_margin="@dimen/tool_lib_16dp" />
+
+    </LinearLayout>
+
+    <com.qmuiteam.qmui.layout.QMUIButton
+        android:id="@+id/tvReturn"
+        style="@style/text_14_ffffff"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/tool_lib_46dp"
+        android:layout_marginLeft="@dimen/tool_lib_16dp"
+        android:layout_marginTop="@dimen/tool_lib_30dp"
+        android:layout_marginRight="@dimen/tool_lib_16dp"
+        android:background="@drawable/login_login_btn"
+        android:gravity="center"
+        android:text="@string/wallet_earnest_return" />
+
+</LinearLayout>

@@ -15,7 +15,7 @@ import com.xiaomai.zhuangba.data.UserInfo;
 /** 
  * DAO for table "USER_INFO".
 */
-public class UserInfoDao extends AbstractDao<UserInfo, Void> {
+public class UserInfoDao extends AbstractDao<UserInfo, Long> {
 
     public static final String TABLENAME = "USER_INFO";
 
@@ -24,7 +24,7 @@ public class UserInfoDao extends AbstractDao<UserInfo, Void> {
      * Can be used for QueryBuilder and for referencing column names.
      */
     public static class Properties {
-        public final static Property Id = new Property(0, Long.class, "id", false, "ID");
+        public final static Property Id = new Property(0, Long.class, "id", true, "_id");
         public final static Property PhoneNumber = new Property(1, String.class, "phoneNumber", false, "PHONE_NUMBER");
         public final static Property UserText = new Property(2, String.class, "userText", false, "USER_TEXT");
         public final static Property Password = new Property(3, String.class, "password", false, "PASSWORD");
@@ -45,8 +45,13 @@ public class UserInfoDao extends AbstractDao<UserInfo, Void> {
         public final static Property Address = new Property(18, String.class, "address", false, "ADDRESS");
         public final static Property Longitude = new Property(19, double.class, "longitude", false, "LONGITUDE");
         public final static Property Latitude = new Property(20, double.class, "latitude", false, "LATITUDE");
-        public final static Property StartFlag = new Property(21, int.class, "startFlag", false, "START_FLAG");
-        public final static Property PayFlag = new Property(22, int.class, "payFlag", false, "PAY_FLAG");
+        public final static Property BusinessLicense = new Property(21, String.class, "businessLicense", false, "BUSINESS_LICENSE");
+        public final static Property EmergencyContact = new Property(22, String.class, "emergencyContact", false, "EMERGENCY_CONTACT");
+        public final static Property ContactAddress = new Property(23, String.class, "contactAddress", false, "CONTACT_ADDRESS");
+        public final static Property StartFlag = new Property(24, int.class, "startFlag", false, "START_FLAG");
+        public final static Property PayFlag = new Property(25, int.class, "payFlag", false, "PAY_FLAG");
+        public final static Property MasterRankId = new Property(26, String.class, "masterRankId", false, "MASTER_RANK_ID");
+        public final static Property MasterRankName = new Property(27, String.class, "masterRankName", false, "MASTER_RANK_NAME");
     }
 
 
@@ -62,7 +67,7 @@ public class UserInfoDao extends AbstractDao<UserInfo, Void> {
     public static void createTable(Database db, boolean ifNotExists) {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "\"USER_INFO\" (" + //
-                "\"ID\" INTEGER," + // 0: id
+                "\"_id\" INTEGER PRIMARY KEY ," + // 0: id
                 "\"PHONE_NUMBER\" TEXT," + // 1: phoneNumber
                 "\"USER_TEXT\" TEXT," + // 2: userText
                 "\"PASSWORD\" TEXT," + // 3: password
@@ -83,8 +88,13 @@ public class UserInfoDao extends AbstractDao<UserInfo, Void> {
                 "\"ADDRESS\" TEXT," + // 18: address
                 "\"LONGITUDE\" REAL NOT NULL ," + // 19: longitude
                 "\"LATITUDE\" REAL NOT NULL ," + // 20: latitude
-                "\"START_FLAG\" INTEGER NOT NULL ," + // 21: startFlag
-                "\"PAY_FLAG\" INTEGER NOT NULL );"); // 22: payFlag
+                "\"BUSINESS_LICENSE\" TEXT," + // 21: businessLicense
+                "\"EMERGENCY_CONTACT\" TEXT," + // 22: emergencyContact
+                "\"CONTACT_ADDRESS\" TEXT," + // 23: contactAddress
+                "\"START_FLAG\" INTEGER NOT NULL ," + // 24: startFlag
+                "\"PAY_FLAG\" INTEGER NOT NULL ," + // 25: payFlag
+                "\"MASTER_RANK_ID\" TEXT," + // 26: masterRankId
+                "\"MASTER_RANK_NAME\" TEXT);"); // 27: masterRankName
     }
 
     /** Drops the underlying database table. */
@@ -185,8 +195,33 @@ public class UserInfoDao extends AbstractDao<UserInfo, Void> {
         }
         stmt.bindDouble(20, entity.getLongitude());
         stmt.bindDouble(21, entity.getLatitude());
-        stmt.bindLong(22, entity.getStartFlag());
-        stmt.bindLong(23, entity.getPayFlag());
+ 
+        String businessLicense = entity.getBusinessLicense();
+        if (businessLicense != null) {
+            stmt.bindString(22, businessLicense);
+        }
+ 
+        String emergencyContact = entity.getEmergencyContact();
+        if (emergencyContact != null) {
+            stmt.bindString(23, emergencyContact);
+        }
+ 
+        String contactAddress = entity.getContactAddress();
+        if (contactAddress != null) {
+            stmt.bindString(24, contactAddress);
+        }
+        stmt.bindLong(25, entity.getStartFlag());
+        stmt.bindLong(26, entity.getPayFlag());
+ 
+        String masterRankId = entity.getMasterRankId();
+        if (masterRankId != null) {
+            stmt.bindString(27, masterRankId);
+        }
+ 
+        String masterRankName = entity.getMasterRankName();
+        if (masterRankName != null) {
+            stmt.bindString(28, masterRankName);
+        }
     }
 
     @Override
@@ -281,13 +316,38 @@ public class UserInfoDao extends AbstractDao<UserInfo, Void> {
         }
         stmt.bindDouble(20, entity.getLongitude());
         stmt.bindDouble(21, entity.getLatitude());
-        stmt.bindLong(22, entity.getStartFlag());
-        stmt.bindLong(23, entity.getPayFlag());
+ 
+        String businessLicense = entity.getBusinessLicense();
+        if (businessLicense != null) {
+            stmt.bindString(22, businessLicense);
+        }
+ 
+        String emergencyContact = entity.getEmergencyContact();
+        if (emergencyContact != null) {
+            stmt.bindString(23, emergencyContact);
+        }
+ 
+        String contactAddress = entity.getContactAddress();
+        if (contactAddress != null) {
+            stmt.bindString(24, contactAddress);
+        }
+        stmt.bindLong(25, entity.getStartFlag());
+        stmt.bindLong(26, entity.getPayFlag());
+ 
+        String masterRankId = entity.getMasterRankId();
+        if (masterRankId != null) {
+            stmt.bindString(27, masterRankId);
+        }
+ 
+        String masterRankName = entity.getMasterRankName();
+        if (masterRankName != null) {
+            stmt.bindString(28, masterRankName);
+        }
     }
 
     @Override
-    public Void readKey(Cursor cursor, int offset) {
-        return null;
+    public Long readKey(Cursor cursor, int offset) {
+        return cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0);
     }    
 
     @Override
@@ -314,8 +374,13 @@ public class UserInfoDao extends AbstractDao<UserInfo, Void> {
             cursor.isNull(offset + 18) ? null : cursor.getString(offset + 18), // address
             cursor.getDouble(offset + 19), // longitude
             cursor.getDouble(offset + 20), // latitude
-            cursor.getInt(offset + 21), // startFlag
-            cursor.getInt(offset + 22) // payFlag
+            cursor.isNull(offset + 21) ? null : cursor.getString(offset + 21), // businessLicense
+            cursor.isNull(offset + 22) ? null : cursor.getString(offset + 22), // emergencyContact
+            cursor.isNull(offset + 23) ? null : cursor.getString(offset + 23), // contactAddress
+            cursor.getInt(offset + 24), // startFlag
+            cursor.getInt(offset + 25), // payFlag
+            cursor.isNull(offset + 26) ? null : cursor.getString(offset + 26), // masterRankId
+            cursor.isNull(offset + 27) ? null : cursor.getString(offset + 27) // masterRankName
         );
         return entity;
     }
@@ -343,25 +408,33 @@ public class UserInfoDao extends AbstractDao<UserInfo, Void> {
         entity.setAddress(cursor.isNull(offset + 18) ? null : cursor.getString(offset + 18));
         entity.setLongitude(cursor.getDouble(offset + 19));
         entity.setLatitude(cursor.getDouble(offset + 20));
-        entity.setStartFlag(cursor.getInt(offset + 21));
-        entity.setPayFlag(cursor.getInt(offset + 22));
+        entity.setBusinessLicense(cursor.isNull(offset + 21) ? null : cursor.getString(offset + 21));
+        entity.setEmergencyContact(cursor.isNull(offset + 22) ? null : cursor.getString(offset + 22));
+        entity.setContactAddress(cursor.isNull(offset + 23) ? null : cursor.getString(offset + 23));
+        entity.setStartFlag(cursor.getInt(offset + 24));
+        entity.setPayFlag(cursor.getInt(offset + 25));
+        entity.setMasterRankId(cursor.isNull(offset + 26) ? null : cursor.getString(offset + 26));
+        entity.setMasterRankName(cursor.isNull(offset + 27) ? null : cursor.getString(offset + 27));
      }
     
     @Override
-    protected final Void updateKeyAfterInsert(UserInfo entity, long rowId) {
-        // Unsupported or missing PK type
-        return null;
+    protected final Long updateKeyAfterInsert(UserInfo entity, long rowId) {
+        entity.setId(rowId);
+        return rowId;
     }
     
     @Override
-    public Void getKey(UserInfo entity) {
-        return null;
+    public Long getKey(UserInfo entity) {
+        if(entity != null) {
+            return entity.getId();
+        } else {
+            return null;
+        }
     }
 
     @Override
     public boolean hasKey(UserInfo entity) {
-        // TODO
-        return false;
+        return entity.getId() != null;
     }
 
     @Override

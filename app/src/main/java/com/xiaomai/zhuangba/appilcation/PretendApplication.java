@@ -8,7 +8,6 @@ import com.example.toollib.ToolLib;
 import com.example.toollib.util.Log;
 import com.google.gson.Gson;
 import com.qmuiteam.qmui.arch.QMUISwipeBackActivityManager;
-import com.squareup.leakcanary.LeakCanary;
 import com.umeng.commonsdk.UMConfigure;
 import com.umeng.message.IUmengRegisterCallback;
 import com.umeng.message.PushAgent;
@@ -50,10 +49,6 @@ public class PretendApplication extends Application {
     public void onCreate() {
         super.onCreate();
         pretendApplication = this;
-        if (LeakCanary.isInAnalyzerProcess(this)) {
-            return;
-        }
-        LeakCanary.install(this);
 
         QMUISwipeBackActivityManager.init(this);
 

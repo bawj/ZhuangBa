@@ -4,10 +4,10 @@ ext {
             compileSdkVersion: 28,
             buildToolsVersion: "28.0.3",
             applicationId    : "com.xiaomai.zhuangba",
-            minSdkVersion    : 14,
+            minSdkVersion    : 15,
             targetSdkVersion : 28,
-            versionCode      : 4,
-            versionName      : "1.0.3",
+            versionCode      : 10,
+            versionName      : "1.3.0",
     ]
 
     //version配置
@@ -65,10 +65,11 @@ ext {
             "latest"                       : "com.amap.api:location:latest.integration",
             "pickerView"                   : "com.contrarywind:Android-PickerView:4.1.8",
             "wechatPlay"                   : "com.tencent.mm.opensdk:wechat-sdk-android-without-mta:+",
+            "agentweb"                     : "com.just.agentweb:agentweb:4.0.3-beta",
     ]
     //数据库框架
     database = [
-            "schemaVersion"     : 1,
+            "schemaVersion"     : 10,
             "greendao"          : 'org.greenrobot:greendao:3.2.0',
             "greendao-generator": 'org.greenrobot:greendao-generator:3.2.0',
     ]

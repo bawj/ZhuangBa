@@ -24,6 +24,14 @@ public class RxUtils {
     }
 
 
+    /** 链式请求 */
+    public static <T> Observable<T> getObservableJust(Observable<T> httpResultObservable) {
+        return httpResultObservable.delaySubscription(1, TimeUnit.SECONDS)
+                .onErrorResumeNext(new HttpResultFunction<T>())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
     /**
      * 并发请求
      *

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rl_add"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/tool_lib_60dp"
+    android:visibility="gone">
+
+    <ImageView
+        android:id="@+id/iv_icon"
+        android:layout_width="@dimen/tool_lib_36dp"
+        android:layout_height="@dimen/tool_lib_36dp"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="@dimen/tool_lib_16dp"
+        android:layout_marginLeft="@dimen/tool_lib_16dp"
+        android:src="@drawable/icon_alipay_add" />
+
+    <TextView
+        android:id="@+id/tv_name"
+        style="@style/text_12_222222"
+        android:layout_alignTop="@id/iv_icon"
+        android:layout_marginStart="@dimen/tool_lib_16dp"
+        android:layout_marginLeft="@dimen/tool_lib_16dp"
+        android:layout_toEndOf="@+id/iv_icon"
+        android:layout_toRightOf="@id/iv_icon"
+        android:text="@string/wallet_withdraw_account_add" />
+
+    <TextView
+        android:id="@+id/tv_account"
+        style="@style/text_12_777777"
+        android:layout_alignBottom="@id/iv_icon"
+        android:layout_marginStart="@dimen/tool_lib_16dp"
+        android:layout_marginLeft="@dimen/tool_lib_16dp"
+        android:layout_toEndOf="@+id/iv_icon"
+        android:layout_toRightOf="@id/iv_icon"
+        android:text="@string/wallet_withdraw_account_add_hint" />
+</RelativeLayout>

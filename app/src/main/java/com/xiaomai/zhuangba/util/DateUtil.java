@@ -21,7 +21,7 @@ import java.util.Locale;
 public class DateUtil {
 
     @SuppressLint("SimpleDateFormat")
-    public static String getDate(String oldDate , String formatStr) {
+    public static String getDate(String oldDate, String formatStr) {
         if (TextUtils.isEmpty(oldDate)) {
             return "";
         }
@@ -30,24 +30,22 @@ public class DateUtil {
         try {
             DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
             Date date = df.parse(oldDate);
-            SimpleDateFormat df1 = new SimpleDateFormat ("EEE MMM dd HH:mm:ss Z yyyy", Locale.UK);
+            SimpleDateFormat df1 = new SimpleDateFormat("EEE MMM dd HH:mm:ss Z yyyy", Locale.UK);
             date1 = df1.parse(date.toString());
             df2 = new SimpleDateFormat(formatStr);
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        if (df2 != null){
+        if (df2 != null) {
             return df2.format(date1);
         }
         return "";
     }
 
-    public static String strToDate(String date){
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss" , Locale.UK);
+    public static String dateToStr(String date, String pattern) {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern, Locale.UK);
         try {
             Date parse = simpleDateFormat.parse(date);
-            //SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ" , Locale.UK);
-            //return df.format(parse);
             return simpleDateFormat.format(parse);
         } catch (ParseException e) {
             e.printStackTrace();
@@ -55,9 +53,20 @@ public class DateUtil {
         return null;
     }
 
-    public static Long dateToCurrentTimeMillis(String date){
+    public static Date strToDate_(String date, String pattern) {
+        Date parse = null;
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern, Locale.UK);
         try {
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss" , Locale.UK);
+            parse = simpleDateFormat.parse(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return parse;
+    }
+
+    public static Long dateToCurrentTimeMillis(String date , String pattern) {
+        try {
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern, Locale.UK);
             Date parse = simpleDateFormat.parse(date);
             return parse.getTime();
         } catch (ParseException e) {
@@ -67,8 +76,7 @@ public class DateUtil {
     }
 
     /**
-     *
-     * @param time  1541569323155
+     * @param time    1541569323155
      * @param pattern yyyy-MM-dd HH:mm:ss
      * @return 2018-11-07 13:42:03
      */
@@ -78,31 +86,47 @@ public class DateUtil {
         return format.format(date);
     }
 
-    /** 年份 */
-    public static Integer getYear(){
+    /**
+     * Date类型转为指定格式的String类型
+     */
+    public static String dateToString(Date source, String pattern) {
+        @SuppressLint("SimpleDateFormat")
+        SimpleDateFormat  simpleDateFormat = new SimpleDateFormat(pattern);
+        return simpleDateFormat.format(source);
+    }
+
+    /**
+     * 年份
+     */
+    public static Integer getYear() {
         Calendar c = Calendar.getInstance();
         return c.get(Calendar.YEAR);
     }
 
-    /** 月份 */
-    public static Integer getMonth(){
+    /**
+     * 月份
+     */
+    public static Integer getMonth() {
         Calendar c = Calendar.getInstance();
         return c.get(Calendar.MONTH);
     }
 
-    /** 几号 */
-    public static Integer getDay(){
+    /**
+     * 几号
+     */
+    public static Integer getDay() {
         Calendar c = Calendar.getInstance();
         return c.get(Calendar.DAY_OF_MONTH);
     }
 
     /**
      * 获取 hours小时后的时间
-     * @param hours 小时
+     *
+     * @param hours     小时
      * @param formatStr 时间格式
      * @return string
      */
-    public static Calendar getHours(int hours , String formatStr){
+    public static Calendar getHours(int hours, String formatStr) {
         DateTime dt = new DateTime();
         DateTime y = dt.plusHours(hours);
         String dateStr = y.toString(formatStr);
@@ -114,11 +138,12 @@ public class DateUtil {
 
     /**
      * 获取 month 个月后的时间
-     * @param month       month 个月后的时间
+     *
+     * @param month     month 个月后的时间
      * @param formatStr 时间格式
      * @return string
      */
-    public static Calendar getMonth(int month , String formatStr){
+    public static Calendar getMonth(int month, String formatStr) {
         DateTime dt = new DateTime();
         DateTime y = dt.plusMonths(month);
         String dateStr = y.toString(formatStr);
@@ -134,10 +159,13 @@ public class DateUtil {
      * @param formatStr 转化规则
      * @return 返回转化后的Date类型的时间
      */
-    public static DateTime strToDate(String dateTimeStr, String formatStr){
+    public static DateTime strToDate(String dateTimeStr, String formatStr) {
         //根据时间表达式生成DateTimeFormatter对象
         DateTimeFormatter fmt = DateTimeFormat.forPattern(formatStr);
         //2019-10-28T10:23:12.000+08:00
         return fmt.parseDateTime(dateTimeStr);
     }
+
+
+
 }

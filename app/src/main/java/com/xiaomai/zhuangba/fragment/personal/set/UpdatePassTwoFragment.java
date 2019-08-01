@@ -78,12 +78,7 @@ public class UpdatePassTwoFragment extends BaseFragment {
             case R.id.btnUpdatePassNext:
                 //验证验证码输入是否正确
                 Object tag = codeTxt.getTag();
-                if (verificationCode.equals(tag)) {
-                    //修改密码
-                    startFragment(SetNewPassFragment.newInstance(getPhone()));
-                } else {
-                    showToast(getString(R.string.verification_code_input_incorrectly));
-                }
+                verificationCode(tag);
                 break;
             case R.id.singleCountDown:
                 if (!singleCountDown.isContinue()) {
@@ -103,6 +98,15 @@ public class UpdatePassTwoFragment extends BaseFragment {
         }
     }
 
+    public void verificationCode(Object tag) {
+        if (verificationCode.equals(tag)) {
+            //修改密码
+            startFragment(SetNewPassFragment.newInstance(getPhone()));
+        } else {
+            showToast(getString(R.string.verification_code_input_incorrectly));
+        }
+    }
+
     private String getPhone() {
         if (getArguments() != null) {
             return getArguments().getString(PHONE);
@@ -110,7 +114,7 @@ public class UpdatePassTwoFragment extends BaseFragment {
         return "";
     }
 
-    private String getVerificationCode() {
+    public String getVerificationCode() {
         if (getArguments() != null) {
             return getArguments().getString(VERIFICATION_CODE);
         }

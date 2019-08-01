@@ -1,1 +1,1 @@
-include ':app', ':toollib', ':citypicker'
+include ':app', ':toollib', ':citypicker', ':calendarview'

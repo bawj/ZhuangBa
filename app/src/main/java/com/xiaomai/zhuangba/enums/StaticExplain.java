@@ -9,6 +9,9 @@ public enum  StaticExplain {
     /** 枚举状态 */
     FU_FU_SHI(0 , "师傅端"),
     EMPLOYER(1 , "雇主端"),
+    OBSERVER(1 , "观察员"),
+    INTERNSHIP(2 , "实习"),
+    FORMAL_MASTER(3 , "正式师傅"),
     NO_CERTIFICATION(0 , "未认证"),
     CERTIFIED(1 , "已认证"),
     IN_AUDIT(2 , "审核中"),

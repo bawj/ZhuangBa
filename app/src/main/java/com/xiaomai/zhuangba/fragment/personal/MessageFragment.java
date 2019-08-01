@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import com.example.toollib.base.BaseFragment;
 import com.example.toollib.data.IBaseModule;
+import com.xiaomai.zhuangba.R;
 
 /**
  * @author Administrator
@@ -30,7 +31,7 @@ public class MessageFragment extends BaseFragment {
 
     @Override
     public int getContentView() {
-        return 0;
+        return R.layout.fragment_message;
     }
 
     @Override

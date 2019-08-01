@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/white"
+    android:paddingLeft="@dimen/tool_lib_16dp"
+    android:paddingRight="@dimen/tool_lib_16dp">
+
+    <TextView
+        android:id="@+id/tv_order_code"
+        style="@style/text_14_222222"
+        android:layout_marginTop="@dimen/tool_lib_10dp"
+        tools:text="20192465361616515" />
+
+    <TextView
+        android:id="@+id/tv_order_time"
+        style="@style/text_12_777777"
+        android:layout_below="@id/tv_order_code"
+        android:layout_marginTop="@dimen/tool_lib_3dp"
+        android:layout_marginBottom="@dimen/dp_10"
+        tools:text="04-06 17:58:26" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:gravity="center_vertical"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_order_info"
+            style="@style/wrap_wrap"
+            android:textColor="@color/tool_lib_color_3AB960"
+            android:textSize="@dimen/sp_12"
+            tools:text="+￥300.00" />
+
+        <TextView
+            android:id="@+id/tv_type"
+            style="@style/text_12_777777"
+            android:layout_marginTop="@dimen/tool_lib_4dp"
+            tools:text="处理中" />
+
+    </LinearLayout>
+
+</RelativeLayout>

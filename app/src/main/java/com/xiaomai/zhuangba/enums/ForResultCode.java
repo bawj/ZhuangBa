@@ -9,6 +9,7 @@ public enum ForResultCode {
      * startForResult
      */
     START_FOR_RESULT_CODE(1000, "startForResult code"),
+    START_FOR_RESULT_CODE_(1001 , "startForResult code"),
     RESULT_OK(-1 , "setFragmentResult code"),
     RESULT_KEY(100 , "result_key"),
     LONGITUDE(101 , "longitude"),

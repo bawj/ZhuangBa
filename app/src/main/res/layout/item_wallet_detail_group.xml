@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/tool_lib_gray_F5F8FA"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/tool_lib_16dp"
+        android:paddingTop="@dimen/tool_lib_20dp"
+        android:paddingRight="@dimen/tool_lib_16dp"
+        android:paddingBottom="@dimen/tool_lib_10dp"
+        android:textColor="@color/tool_lib_gray_222222"
+        android:textSize="@dimen/tool_lib_12sp"
+        tools:text="2019年4月（本月）" />
+</LinearLayout>

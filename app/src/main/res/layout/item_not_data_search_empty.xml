@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/linSearchEmpty"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:visibility="gone"
+    android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="@dimen/tool_lib_130dp"
+        android:layout_height="@dimen/tool_lib_130dp"
+        android:layout_marginTop="@dimen/tool_lib_70dp"
+        android:src="@drawable/bg_search_empty" />
+
+    <TextView
+        style="@style/text_14_777777"
+        android:layout_marginTop="@dimen/tool_lib_12dp"
+        android:text="@string/search_empty" />
+
+</LinearLayout>
