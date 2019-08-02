@@ -7,6 +7,7 @@ import com.example.toollib.data.BaseModule;
 import com.example.toollib.data.base.BaseCallback;
 import com.example.toollib.http.HttpResult;
 import com.example.toollib.http.observer.BaseHttpZipRxObserver;
+import com.example.toollib.util.ToastUtil;
 import com.xiaomai.zhuangba.R;
 import com.xiaomai.zhuangba.data.bean.ImgUrl;
 import com.xiaomai.zhuangba.http.ServiceUrl;
@@ -40,6 +41,11 @@ public class MasterAuthenticationModule extends BaseModule<IMasterAuthentication
         String idCardBackPhoto = mViewRef.get().getIdCardBackPhoto();
         //身份证有效期
         String validityData = mViewRef.get().getValidityData();
+        //紧急联系电话
+        String emergencyContact = mViewRef.get().getEmergencyContact();
+
+        String address = mViewRef.get().getAddress();
+
         if (TextUtils.isEmpty(userText)) {
             mViewRef.get().showToast(mContext.get().getString(R.string.user_name_null));
         } else if (TextUtils.isEmpty(identityCard)) {
@@ -50,6 +56,10 @@ public class MasterAuthenticationModule extends BaseModule<IMasterAuthentication
             mViewRef.get().showToast(mContext.get().getString(R.string.id_card_back_photo));
         } else if (TextUtils.isEmpty(validityData)) {
             mViewRef.get().showToast(mContext.get().getString(R.string.validity_data));
+        } else if (TextUtils.isEmpty(emergencyContact)) {
+            ToastUtil.showShort(mContext.get().getString(R.string.phone_number_hint));
+        } else if (TextUtils.isEmpty(address)) {
+            ToastUtil.showShort(mContext.get().getString(R.string.please_input_address));
         } else {
             //上传正面图片
             try {

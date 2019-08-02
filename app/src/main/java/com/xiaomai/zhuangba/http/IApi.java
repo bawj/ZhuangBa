@@ -456,4 +456,13 @@ public interface IApi {
      */
     @POST("user/updateRegistrationInformation")
     Observable<HttpResult<UserInfo>> updateRegistrationInformation(@Body RequestBody requestBody);
+
+
+    /**
+     * 修改服务范围
+     * @param requestBody body
+     * @return observable
+     */
+    @POST("user/userAuthenticationAddress")
+    Observable<HttpResult<Object>> userAuthenticationAddress(@Body RequestBody requestBody);
 }

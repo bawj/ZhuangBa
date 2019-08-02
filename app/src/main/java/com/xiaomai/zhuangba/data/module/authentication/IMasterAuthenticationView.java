@@ -44,4 +44,16 @@ public interface IMasterAuthenticationView extends IBaseView {
      * @param imgUrl img
      */
     void uploadSuccess(ImgUrl imgUrl);
+
+    /**
+     * 紧急联系地址
+     * @return string
+     */
+    String getEmergencyContact();
+
+    /**
+     * 联系地址
+     * @return string
+     */
+    String getAddress();
 }

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Base64;
 import android.view.View;
 import android.widget.Button;
@@ -14,8 +15,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.toollib.base.BaseFragment;
-import com.example.toollib.data.IBaseModule;
 import com.example.toollib.data.base.BaseCallback;
+import com.example.toollib.util.ToastUtil;
 import com.google.gson.Gson;
 import com.xiaomai.zhuangba.R;
 import com.xiaomai.zhuangba.appilcation.PretendApplication;
@@ -205,6 +206,16 @@ public class RealAuthenticationFragment extends BaseFragment<IMasterAuthenticati
     }
 
     @Override
+    public String getEmergencyContact() {
+        return editEmergencyContact.getText().toString();
+    }
+
+    @Override
+    public String getAddress() {
+        return editAddress.getText().toString();
+    }
+
+    @Override
     public void uploadSuccess(ImgUrl imgUrl) {
         MasterAuthenticationInfo masterAuthenticationInfo = new MasterAuthenticationInfo();
         masterAuthenticationInfo.setUserText(getUserText());
@@ -212,8 +223,11 @@ public class RealAuthenticationFragment extends BaseFragment<IMasterAuthenticati
         masterAuthenticationInfo.setIdentityCard(getIdentityCard());
         masterAuthenticationInfo.setIdCardFrontPhoto(imgUrl.getFrontPhoto());
         masterAuthenticationInfo.setIdCardBackPhoto(imgUrl.getIdCardBackPhoto());
-        masterAuthenticationInfo.setEmergencyContact(editEmergencyContact.getText().toString());
-        masterAuthenticationInfo.setContactAddress(editAddress.getText().toString());
+        String emergencyContact = editEmergencyContact.getText().toString();
+        String address = editAddress.getText().toString();
+        masterAuthenticationInfo.setEmergencyContact(emergencyContact);
+        masterAuthenticationInfo.setContactAddress(address);
         startFragment(BareheadedFragment.newInstance(new Gson().toJson(masterAuthenticationInfo)));
     }
+
 }

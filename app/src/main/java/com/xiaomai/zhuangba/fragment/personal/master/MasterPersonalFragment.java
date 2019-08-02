@@ -11,8 +11,8 @@ import com.xiaomai.zhuangba.data.db.DBHelper;
 import com.xiaomai.zhuangba.enums.StaticExplain;
 import com.xiaomai.zhuangba.fragment.personal.PersonalFragment;
 import com.xiaomai.zhuangba.fragment.personal.agreement.WebViewFragment;
-import com.xiaomai.zhuangba.fragment.personal.wallet.paydeposit.PayDepositFragment;
 import com.xiaomai.zhuangba.fragment.personal.wallet.WalletFragment;
+import com.xiaomai.zhuangba.fragment.personal.wallet.paydeposit.PayDepositFragment;
 import com.xiaomai.zhuangba.util.ConstantUtil;
 
 import butterknife.BindView;
@@ -87,8 +87,8 @@ public class MasterPersonalFragment extends PersonalFragment {
                 startFragment(WalletFragment.newInstance());
                 break;
             case R.id.relPersonalScopeOfService:
-                //服务范围
-                // TODO: 2019/8/1 0001  服务范围 修改
+                //修改服务范围
+                startFragment(UpdateScopeOfServiceFragment.newInstance());
                 break;
             case R.id.relPlatformMaster:
                 //缴纳保证金

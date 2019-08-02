@@ -96,9 +96,9 @@ public class MainActivity extends BaseActivity {
         } else {
             //未认证
             String role = userInfo.getRole();
-            if (role.equals(String.valueOf(StaticExplain.EMPLOYER.getCode()))){
+            if (role.equals(String.valueOf(StaticExplain.EMPLOYER.getCode()))) {
                 init(EmployerAuthenticationFragment.newInstance());
-            }else if (role.equals(String.valueOf(StaticExplain.FU_FU_SHI.getCode()))){
+            } else if (role.equals(String.valueOf(StaticExplain.FU_FU_SHI.getCode()))) {
                 init(MasterAuthenticationFragment.newInstance());
             }
         }
@@ -176,7 +176,7 @@ public class MainActivity extends BaseActivity {
         QMUIFragment currentFragment = getCurrentFragment();
         if (currentFragment instanceof LoginFragment || currentFragment instanceof MasterWorkerFragment
                 || currentFragment instanceof EmployerFragment || currentFragment instanceof AuthenticationFragment
-                || currentFragment instanceof WalletDetailFragment || currentFragment instanceof CertificationSuccessfulFragment) {
+                || currentFragment instanceof CertificationSuccessfulFragment) {
             if (System.currentTimeMillis() - touchTime < WAIT_TIME) {
                 finish();
             } else {

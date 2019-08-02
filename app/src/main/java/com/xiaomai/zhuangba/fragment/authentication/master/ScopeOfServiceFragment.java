@@ -96,8 +96,8 @@ public class ScopeOfServiceFragment extends BaseFragment implements BaseQuickAda
         }
     }
 
-    private void submission() {
-        String address = tvScopeServiceSkillsClickServiceAddress.getText().toString();
+    public void submission() {
+        String address = getAddress();
         if (TextUtils.isEmpty(address)) {
             showToast(getString(R.string.please_check_service_address));
         } else {
@@ -196,6 +196,10 @@ public class ScopeOfServiceFragment extends BaseFragment implements BaseQuickAda
             }
         }
         return skillList;
+    }
+
+    public String getAddress() {
+        return tvScopeServiceSkillsClickServiceAddress.getText().toString();
     }
 
     @Override
