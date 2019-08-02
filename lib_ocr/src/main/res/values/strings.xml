@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="ocr_id_card_tip">请将身份证边角和外框重合</string>
+    <string name="tip">请确认正反面是否正确, 退出重试</string>
+</resources>

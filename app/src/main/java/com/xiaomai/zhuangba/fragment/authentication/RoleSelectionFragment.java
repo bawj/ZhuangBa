@@ -7,8 +7,11 @@ import com.xiaomai.zhuangba.R;
 import com.xiaomai.zhuangba.data.module.login.ILoginRegisteredModule;
 import com.xiaomai.zhuangba.data.module.login.LoginRegisteredModule;
 import com.xiaomai.zhuangba.enums.StaticExplain;
+import com.xiaomai.zhuangba.fragment.authentication.employer.EmployerAuthenticationFragment;
+import com.xiaomai.zhuangba.fragment.authentication.master.MasterAuthenticationFragment;
 import com.xiaomai.zhuangba.fragment.login.BaseLoginRegisteredFragment;
 import com.xiaomai.zhuangba.fragment.login.LoginFragment;
+import com.xiaomai.zhuangba.util.UserInfoUtil;
 
 import butterknife.OnClick;
 
@@ -32,7 +35,6 @@ public class RoleSelectionFragment extends BaseLoginRegisteredFragment {
     }
     @Override
     public void initView() {
-        statusBarBlack();
     }
 
     @OnClick({R.id.relMasterWorker, R.id.relEmployer , R.id.tvLogout})
@@ -55,9 +57,13 @@ public class RoleSelectionFragment extends BaseLoginRegisteredFragment {
     }
 
     @Override
-    public void startAuthentication() {
-        //去认证
-        startFragmentAndDestroyCurrent(AuthenticationFragment.newInstance());
+    public void startMasterAuthentication() {
+        startFragmentAndDestroyCurrent(MasterAuthenticationFragment.newInstance());
+    }
+
+    @Override
+    public void startEmployerAuthentication() {
+        startFragmentAndDestroyCurrent(EmployerAuthenticationFragment.newInstance());
     }
 
     @Override

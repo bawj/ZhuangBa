@@ -1,12 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/tool_lib_gray_F5F8FA"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/tool_lib_56dp"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="@dimen/tool_lib_16dp"
+        android:layout_marginRight="@dimen/tool_lib_16dp">
+
+        <ImageView
+            android:id="@+id/ivAuthenticationBack"
+            android:layout_width="@dimen/tool_lib_24dp"
+            android:layout_height="@dimen/tool_lib_24dp"
+            android:layout_centerVertical="true"
+            android:src="@drawable/cq_ic_arrow_back_white_24dp" />
+
+        <!--用户头像-->
+        <ImageView
+            android:id="@+id/ivUserHead"
+            android:layout_width="@dimen/tool_lib_30dp"
+            android:layout_height="@dimen/tool_lib_30dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/bg_def_head" />
+
+    </RelativeLayout>
 
 
-    <TextView
-        android:text="认证"
+    <RelativeLayout
+        android:id="@+id/btnRectangle"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/bg_rectangle"
+        android:textColor="@android:color/white" />
 </RelativeLayout>

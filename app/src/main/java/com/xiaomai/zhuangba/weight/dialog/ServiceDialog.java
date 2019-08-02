@@ -13,7 +13,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.qmuiteam.qmui.widget.dialog.QMUIDialog;
 import com.xiaomai.zhuangba.R;
 import com.xiaomai.zhuangba.adapter.ServiceDialogAdapter;
-import com.xiaomai.zhuangba.data.ServiceData;
+import com.xiaomai.zhuangba.data.bean.ServiceData;
 
 import java.util.List;
 

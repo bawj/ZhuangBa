@@ -7,11 +7,11 @@ import com.example.toollib.data.base.BaseCallback;
 import com.example.toollib.http.HttpResult;
 import com.example.toollib.http.observer.BaseHttpZipRxObserver;
 import com.example.toollib.http.util.RxUtils;
-import com.xiaomai.zhuangba.data.DeliveryContent;
-import com.xiaomai.zhuangba.data.OngoingOrdersList;
-import com.xiaomai.zhuangba.data.OrderDateList;
-import com.xiaomai.zhuangba.data.OrderServiceDate;
-import com.xiaomai.zhuangba.data.OrderServiceItem;
+import com.xiaomai.zhuangba.data.bean.DeliveryContent;
+import com.xiaomai.zhuangba.data.bean.OngoingOrdersList;
+import com.xiaomai.zhuangba.data.bean.OrderDateList;
+import com.xiaomai.zhuangba.data.bean.OrderServiceDate;
+import com.xiaomai.zhuangba.data.bean.OrderServiceItem;
 import com.xiaomai.zhuangba.http.ServiceUrl;
 
 import java.util.List;

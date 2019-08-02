@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/tool_lib_gray_F5F8FA"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/tool_lib_16dp"
+        android:paddingRight="@dimen/tool_lib_16dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/tool_lib_56dp"
+            android:background="@android:color/white"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/name_of_employer"
+                android:textColor="@color/tool_lib_gray_888888"
+                android:textSize="@dimen/tool_lib_14sp" />
+
+            <EditText
+                android:id="@+id/editEmployerName"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="@dimen/tool_lib_34dp"
+                android:layout_marginLeft="@dimen/tool_lib_34dp"
+                android:background="@null"
+                android:hint="@string/please_enter_the_employer_name"
+                android:textColor="@color/tool_lib_gray_222222"
+                android:textSize="@dimen/tool_lib_14sp"
+                tools:text="常威" />
+
+        </LinearLayout>
+
+        <View style="@style/tool_lib_horizontal_line" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/tool_lib_56dp"
+            android:background="@android:color/white"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/contact_information"
+                android:textColor="@color/tool_lib_gray_888888"
+                android:textSize="@dimen/tool_lib_14sp" />
+
+            <EditText
+                android:id="@+id/editPhone"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="@dimen/tool_lib_34dp"
+                android:layout_marginLeft="@dimen/tool_lib_34dp"
+                android:background="@null"
+                android:hint="@string/please_enter_your_contact_information"
+                android:inputType="phone"
+                android:maxLength="11"
+                android:textColor="@color/tool_lib_gray_222222"
+                android:textSize="@dimen/tool_lib_14sp"
+                tools:text="123456789012345678" />
+
+        </LinearLayout>
+
+        <View style="@style/tool_lib_horizontal_line" />
+
+        <RelativeLayout
+            android:id="@+id/relAddress"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/tool_lib_56dp"
+            android:background="@android:color/white"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:id="@+id/tvAddress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="@string/where_address"
+                android:textColor="@color/tool_lib_gray_888888"
+                android:textSize="@dimen/tool_lib_14sp" />
+
+            <TextView
+                android:id="@+id/editAddress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/tool_lib_34dp"
+                android:layout_marginLeft="@dimen/tool_lib_34dp"
+                android:layout_toStartOf="@+id/ivOrderInformationLocation"
+                android:layout_toLeftOf="@+id/ivOrderInformationLocation"
+                android:layout_toEndOf="@+id/tvAddress"
+                android:layout_toRightOf="@+id/tvAddress"
+                android:background="@null"
+                android:hint="@string/click_to_select_the_address"
+                android:maxLength="30"
+                android:singleLine="true"
+                android:textColor="@color/tool_lib_gray_222222"
+                android:textSize="@dimen/tool_lib_14sp"
+                tools:text="浙江省杭州市余杭区西溪北院" />
+
+            <ImageView
+                android:id="@+id/ivOrderInformationLocation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_location_orange" />
+        </RelativeLayout>
+
+        <View style="@style/tool_lib_horizontal_line" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/tool_lib_56dp"
+            android:background="@android:color/white"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/detailed_address"
+                android:textColor="@color/tool_lib_gray_888888"
+                android:textSize="@dimen/tool_lib_14sp" />
+
+            <EditText
+                android:id="@+id/editAddressDetail"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="@dimen/tool_lib_34dp"
+                android:layout_marginLeft="@dimen/tool_lib_34dp"
+                android:background="@null"
+                android:hint="@string/please_input_detail_address"
+                android:textColor="@color/tool_lib_gray_222222"
+                android:textSize="@dimen/tool_lib_14sp" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/tool_lib_12dp"
+        android:layout_marginLeft="@dimen/tool_lib_12dp"
+        android:layout_marginTop="@dimen/tool_lib_14dp"
+        android:text="@string/confirmation_information"
+        android:textColor="@color/tool_lib_gray_777777"
+        android:textSize="@dimen/tool_lib_12sp" />
+
+    <com.qmuiteam.qmui.layout.QMUIButton
+        android:id="@+id/btnUpload"
+        style="@style/base_btn"
+        android:layout_marginLeft="@dimen/tool_lib_12dp"
+        android:layout_marginTop="@dimen/tool_lib_14dp"
+        android:layout_marginRight="@dimen/tool_lib_12dp"
+        android:text="@string/upload" />
+</LinearLayout>

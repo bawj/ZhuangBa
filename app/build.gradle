@@ -81,8 +81,10 @@ dependencies {
     implementation libs["latest"]
     implementation libs["agentweb"]
     implementation libs["wechatPlay"]
+    implementation libs["subsampling"]
     annotationProcessor libs["butterknife-compiler"]
     implementation project(':toollib')
     implementation project(':citypicker')
     implementation project(':calendarview')
+    implementation project(':lib_ocr')
 }

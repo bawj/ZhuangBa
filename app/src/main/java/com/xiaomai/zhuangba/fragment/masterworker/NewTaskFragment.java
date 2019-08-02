@@ -7,7 +7,7 @@ import android.view.View;
 
 import com.example.toollib.util.Log;
 import com.xiaomai.zhuangba.R;
-import com.xiaomai.zhuangba.data.OngoingOrdersList;
+import com.xiaomai.zhuangba.data.bean.OngoingOrdersList;
 import com.xiaomai.zhuangba.enums.ForResultCode;
 import com.xiaomai.zhuangba.enums.OrdersEnum;
 import com.xiaomai.zhuangba.enums.StringTypeExplain;

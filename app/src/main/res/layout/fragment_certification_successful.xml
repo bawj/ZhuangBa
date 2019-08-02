@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/ivComplete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/tool_lib_43dp"
+        android:src="@drawable/bg_success" />
+
+    <TextView
+        android:id="@+id/tvCompleteTip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ivComplete"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/tool_lib_4dp"
+        android:textColor="@color/tool_lib_gray_303343"
+        android:textSize="@dimen/tool_lib_17sp"
+        android:text="@string/successful_submit" />
+
+    <Button
+        android:id="@+id/btnCompleteMissionDetails"
+        style="@style/base_btn"
+        android:layout_below="@+id/tvCompleteTip"
+        android:layout_marginLeft="@dimen/tool_lib_16dp"
+        android:layout_marginTop="@dimen/tool_lib_30dp"
+        android:layout_marginRight="@dimen/tool_lib_16dp"
+        android:text="@string/back_to_home_page" />
+
+</RelativeLayout>

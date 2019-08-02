@@ -11,8 +11,8 @@ import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.toollib.base.BaseFragment;
 import com.example.toollib.data.IBaseModule;
 import com.xiaomai.zhuangba.R;
-import com.xiaomai.zhuangba.data.WalletDetailBean;
-import com.xiaomai.zhuangba.data.WalletOrderDetailBean;
+import com.xiaomai.zhuangba.data.bean.WalletDetailBean;
+import com.xiaomai.zhuangba.data.bean.WalletOrderDetailBean;
 import com.xiaomai.zhuangba.enums.WalletOrderTypeEnum;
 
 import java.math.BigDecimal;

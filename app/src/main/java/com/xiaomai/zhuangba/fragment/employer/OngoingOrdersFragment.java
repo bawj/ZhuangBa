@@ -5,7 +5,7 @@ import android.os.Handler;
 import android.view.View;
 
 import com.xiaomai.zhuangba.R;
-import com.xiaomai.zhuangba.data.OngoingOrdersList;
+import com.xiaomai.zhuangba.data.bean.OngoingOrdersList;
 import com.xiaomai.zhuangba.enums.StringTypeExplain;
 import com.xiaomai.zhuangba.fragment.base.BaseMasterEmployerContentFragment;
 

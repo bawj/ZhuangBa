@@ -6,7 +6,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.View;
 
-import com.example.toollib.data.base.IBaseView;
 import com.example.toollib.util.Log;
 import com.qmuiteam.qmui.arch.QMUIFragment;
 import com.trello.rxlifecycle2.LifecycleProvider;

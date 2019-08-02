@@ -49,7 +49,6 @@ public class RegisteredSetPasswordFragment extends BaseLoginRegisteredFragment {
 
     @Override
     public void initView() {
-        statusBarBlack();
         BtnToEditListenerUtils.getInstance()
                 .addEditView(editPassword)
                 .addEditView(editConfirmPassword)

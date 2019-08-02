@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/linearLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tvBaiDuMap"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:gravity="center"
+        android:paddingTop="@dimen/tool_lib_16dp"
+        android:paddingBottom="@dimen/tool_lib_16dp"
+        android:text="@string/using_bai_du_map_navigation" />
+
+    <View style="@style/tool_lib_horizontal_line" />
+
+    <TextView
+        android:id="@+id/tvGoldenMap"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:gravity="center"
+        android:paddingTop="@dimen/tool_lib_16dp"
+        android:paddingBottom="@dimen/tool_lib_16dp"
+        android:text="@string/navigation_using_golden_map" />
+
+    <View style="@style/tool_lib_horizontal_line" />
+
+    <TextView
+        android:id="@+id/tvCancel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:gravity="center"
+        android:paddingTop="@dimen/tool_lib_16dp"
+        android:paddingBottom="@dimen/tool_lib_16dp"
+        android:text="@string/close" />
+</LinearLayout>

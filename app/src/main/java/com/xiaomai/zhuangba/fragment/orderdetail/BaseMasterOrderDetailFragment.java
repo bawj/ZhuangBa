@@ -5,7 +5,7 @@ import android.widget.TextView;
 import com.example.toollib.util.AmountUtil;
 import com.example.toollib.util.DensityUtils;
 import com.xiaomai.zhuangba.R;
-import com.xiaomai.zhuangba.data.OngoingOrdersList;
+import com.xiaomai.zhuangba.data.bean.OngoingOrdersList;
 
 import butterknife.BindView;
 

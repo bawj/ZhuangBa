@@ -314,4 +314,14 @@
     <style name="CustomPayDepositMoney" parent="@android:style/Widget.CompoundButton.CheckBox">
         <item name="android:button">@drawable/checkbox_deposit_style</item>
     </style>
+
+    <style name="base_gray_btn">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/tool_lib_46dp</item>
+        <item name="android:background">@drawable/gray_radius_bg</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:textColor">@color/tool_lib_gray_666666</item>
+        <item name="android:textSize">@dimen/tool_lib_14sp</item>
+    </style>
 </resources>

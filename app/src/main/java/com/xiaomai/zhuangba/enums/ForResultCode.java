@@ -14,6 +14,8 @@ public enum ForResultCode {
     RESULT_KEY(100 , "result_key"),
     LONGITUDE(101 , "longitude"),
     LATITUDE(102 , "latitude"),
+    LOCATION_ADDRESS(103 , "location_address"),
+    CITY(103 , "city"),
     ;
 
     private int code;

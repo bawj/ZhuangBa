@@ -9,7 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.xiaomai.zhuangba.R;
-import com.xiaomai.zhuangba.data.LocationSearch;
+import com.xiaomai.zhuangba.data.bean.LocationSearch;
 
 import java.util.List;
 

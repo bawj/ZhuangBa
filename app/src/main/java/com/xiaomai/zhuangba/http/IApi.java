@@ -1,22 +1,24 @@
 package com.xiaomai.zhuangba.http;
 
 import com.example.toollib.http.HttpResult;
-import com.xiaomai.zhuangba.data.AliPayAccountBean;
-import com.xiaomai.zhuangba.data.DeliveryContent;
-import com.xiaomai.zhuangba.data.EarnestBean;
-import com.xiaomai.zhuangba.data.OngoingOrdersList;
-import com.xiaomai.zhuangba.data.OrderDateList;
-import com.xiaomai.zhuangba.data.OrderServiceItem;
-import com.xiaomai.zhuangba.data.OrderStatistics;
-import com.xiaomai.zhuangba.data.Orders;
-import com.xiaomai.zhuangba.data.PayData;
-import com.xiaomai.zhuangba.data.PayDepositBean;
-import com.xiaomai.zhuangba.data.ServiceData;
-import com.xiaomai.zhuangba.data.ServiceSubcategory;
-import com.xiaomai.zhuangba.data.StatisticsData;
-import com.xiaomai.zhuangba.data.UserInfo;
-import com.xiaomai.zhuangba.data.WalletBean;
-import com.xiaomai.zhuangba.data.WalletDetailBean;
+import com.xiaomai.zhuangba.data.bean.AliPayAccountBean;
+import com.xiaomai.zhuangba.data.bean.DeliveryContent;
+import com.xiaomai.zhuangba.data.bean.EarnestBean;
+import com.xiaomai.zhuangba.data.bean.OngoingOrdersList;
+import com.xiaomai.zhuangba.data.bean.OrderDateList;
+import com.xiaomai.zhuangba.data.bean.OrderServiceItem;
+import com.xiaomai.zhuangba.data.bean.OrderStatistics;
+import com.xiaomai.zhuangba.data.bean.Orders;
+import com.xiaomai.zhuangba.data.bean.PayData;
+import com.xiaomai.zhuangba.data.bean.PayDepositBean;
+import com.xiaomai.zhuangba.data.bean.ProvincialBean;
+import com.xiaomai.zhuangba.data.bean.ServiceData;
+import com.xiaomai.zhuangba.data.bean.ServiceSubcategory;
+import com.xiaomai.zhuangba.data.bean.SkillList;
+import com.xiaomai.zhuangba.data.bean.StatisticsData;
+import com.xiaomai.zhuangba.data.bean.UserInfo;
+import com.xiaomai.zhuangba.data.bean.WalletBean;
+import com.xiaomai.zhuangba.data.bean.WalletDetailBean;
 
 import java.util.List;
 
@@ -98,7 +100,7 @@ public interface IApi {
      * @return observable
      */
     @FormUrlEncoded
-    @POST("user/selectionRole")
+    @POST("user/getRole")
     Observable<HttpResult<UserInfo>> role(@Field("role") String role);
 
 
@@ -409,4 +411,49 @@ public interface IApi {
      */
     @GET("user/getUser")
     Observable<HttpResult<UserInfo>> getUser();
+
+    /**
+     * 查询价目表
+     * @param enumCode String
+     * @return observable
+     */
+    @GET("communal/getEnumerate")
+    Observable<HttpResult<String>> getEnumerate(@Query("enumCode") String enumCode);
+
+
+    /**
+     * 单图上传
+     *
+     * @param body body
+     * @return Observable
+     */
+    @POST("ftp/uploadFile")
+    Observable<HttpResult<Object>> uploadFile(@Body RequestBody body);
+
+    /**
+     * 技能列表
+     *
+     * @return observable
+     */
+    @GET("skill/getSkillList")
+    Observable<HttpResult<List<SkillList>>> getSkillList();
+
+    /**
+     * 请求省市区
+     * @param parentId parentId
+     * @param level level
+     * @return observable
+     */
+    @GET("communal/getRegion")
+    Observable<HttpResult<List<ProvincialBean>>> getRegion(@Query("parentId") int parentId , @Query("level") int level);
+
+
+    /**
+     * 提交身份认证
+     *
+     * @param requestBody body
+     * @return observable
+     */
+    @POST("user/updateRegistrationInformation")
+    Observable<HttpResult<UserInfo>> updateRegistrationInformation(@Body RequestBody requestBody);
 }

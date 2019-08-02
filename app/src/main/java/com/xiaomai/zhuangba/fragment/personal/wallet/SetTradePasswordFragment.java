@@ -10,7 +10,7 @@ import com.example.toollib.http.observer.BaseHttpRxObserver;
 import com.example.toollib.http.util.RxUtils;
 import com.example.toollib.util.ToastUtil;
 import com.xiaomai.zhuangba.R;
-import com.xiaomai.zhuangba.data.MessageEvent;
+import com.xiaomai.zhuangba.data.bean.MessageEvent;
 import com.xiaomai.zhuangba.enums.EventBusEnum;
 import com.xiaomai.zhuangba.http.ServiceUrl;
 import com.xiaomai.zhuangba.weight.CodeEditText;

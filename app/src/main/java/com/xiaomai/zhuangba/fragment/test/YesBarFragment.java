@@ -11,7 +11,7 @@ import com.example.toollib.http.observer.BaseHttpRxObserver;
 import com.example.toollib.http.util.RxUtils;
 import com.example.toollib.util.Log;
 import com.xiaomai.zhuangba.R;
-import com.xiaomai.zhuangba.data.UserInfo;
+import com.xiaomai.zhuangba.data.bean.UserInfo;
 import com.xiaomai.zhuangba.http.ServiceUrl;
 
 import butterknife.BindView;

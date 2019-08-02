@@ -4,7 +4,7 @@ import android.os.Bundle;
 
 import com.example.toollib.http.HttpResult;
 import com.xiaomai.zhuangba.R;
-import com.xiaomai.zhuangba.data.WalletDetailBean;
+import com.xiaomai.zhuangba.data.bean.WalletDetailBean;
 import com.xiaomai.zhuangba.enums.StaticExplain;
 import com.xiaomai.zhuangba.enums.WalletOrderTypeEnum;
 import com.xiaomai.zhuangba.http.ServiceUrl;

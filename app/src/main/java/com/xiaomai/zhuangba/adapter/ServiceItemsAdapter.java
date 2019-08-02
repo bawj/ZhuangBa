@@ -7,7 +7,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.toollib.manager.GlideManager;
 import com.xiaomai.zhuangba.R;
-import com.xiaomai.zhuangba.data.OrderServiceItem;
+import com.xiaomai.zhuangba.data.bean.OrderServiceItem;
 
 /**
  * @author Administrator

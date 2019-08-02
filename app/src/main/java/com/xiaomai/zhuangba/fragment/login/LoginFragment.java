@@ -9,8 +9,9 @@ import com.example.toollib.weight.BtnToEditListenerUtils;
 import com.xiaomai.zhuangba.R;
 import com.xiaomai.zhuangba.data.module.login.ILoginRegisteredModule;
 import com.xiaomai.zhuangba.data.module.login.LoginRegisteredModule;
-import com.xiaomai.zhuangba.fragment.authentication.AuthenticationFragment;
 import com.xiaomai.zhuangba.fragment.authentication.RoleSelectionFragment;
+import com.xiaomai.zhuangba.fragment.authentication.employer.EmployerAuthenticationFragment;
+import com.xiaomai.zhuangba.fragment.authentication.master.MasterAuthenticationFragment;
 import com.xiaomai.zhuangba.fragment.employer.EmployerFragment;
 import com.xiaomai.zhuangba.fragment.masterworker.MasterWorkerFragment;
 
@@ -45,7 +46,6 @@ public class LoginFragment extends BaseLoginRegisteredFragment{
 
     @Override
     public void initView() {
-        statusBarBlack();
         BtnToEditListenerUtils.getInstance()
                 .addEditView(editUserNumber)
                 .addEditView(editUserPass)
@@ -101,9 +101,13 @@ public class LoginFragment extends BaseLoginRegisteredFragment{
     }
 
     @Override
-    public void startAuthentication() {
-        //去认证
-        startFragmentAndDestroyCurrent(AuthenticationFragment.newInstance());
+    public void startMasterAuthentication() {
+        startFragmentAndDestroyCurrent(MasterAuthenticationFragment.newInstance());
+    }
+
+    @Override
+    public void startEmployerAuthentication() {
+        startFragmentAndDestroyCurrent(EmployerAuthenticationFragment.newInstance());
     }
 
     @Override

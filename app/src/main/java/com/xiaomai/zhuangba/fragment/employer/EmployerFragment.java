@@ -9,15 +9,13 @@ import com.example.toollib.http.observer.BaseHttpRxObserver;
 import com.example.toollib.http.util.RxUtils;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.xiaomai.zhuangba.R;
-import com.xiaomai.zhuangba.data.OrderStatistics;
-import com.xiaomai.zhuangba.data.ServiceData;
+import com.xiaomai.zhuangba.data.bean.OrderStatistics;
+import com.xiaomai.zhuangba.data.bean.ServiceData;
 import com.xiaomai.zhuangba.fragment.SelectServiceFragment;
 import com.xiaomai.zhuangba.fragment.base.BaseMasterEmployerContentFragment;
 import com.xiaomai.zhuangba.fragment.base.BaseMasterEmployerFragment;
-import com.xiaomai.zhuangba.fragment.personal.PersonalFragment;
 import com.xiaomai.zhuangba.fragment.personal.employer.EmployerPersonalFragment;
 import com.xiaomai.zhuangba.http.ServiceUrl;
-import com.xiaomai.zhuangba.weight.dialog.ServiceDialog;
 
 import java.util.ArrayList;
 import java.util.List;

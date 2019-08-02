@@ -47,6 +47,9 @@ public class BaseHttpZipRxObserver {
                 .subscribe(new Consumer<Object>() {
                     @Override
                     public void accept(Object object) {
+                        if (mContext != null) {
+                            DialogUtil.tipLoadingDismiss();
+                        }
                         baseCallback.onSuccess(object);
                     }
                 }, new Consumer<Throwable>() {

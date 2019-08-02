@@ -69,11 +69,6 @@ public interface ILoginRegisteredView extends IVerificationCodeView {
 
 
     /**
-     * 去认证
-     */
-    void startAuthentication();
-
-    /**
      * 密码修改成功
      */
     void forgetPasswordSuccess();
@@ -82,4 +77,14 @@ public interface ILoginRegisteredView extends IVerificationCodeView {
      * 登出
      */
     void logoutSuccess();
+
+    /**
+     * 师傅端 去认证
+     */
+    void startMasterAuthentication();
+
+    /**
+     * 雇主端 去认证
+     */
+    void startEmployerAuthentication();
 }

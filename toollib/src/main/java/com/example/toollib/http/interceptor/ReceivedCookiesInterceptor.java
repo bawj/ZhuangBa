@@ -2,8 +2,11 @@ package com.example.toollib.http.interceptor;
 
 
 import android.support.annotation.NonNull;
+import android.text.TextUtils;
 
-import com.example.toollib.util.SPUtils;
+import com.example.toollib.util.Log;
+import com.example.toollib.util.spf.SPUtils;
+import com.example.toollib.util.spf.SpfConst;
 
 import java.io.IOException;
 
@@ -17,6 +20,8 @@ import okhttp3.Response;
  */
 public class ReceivedCookiesInterceptor implements Interceptor {
 
+    private static final String TOKEN_KEY = "Authorization";
+
     @Override
     public Response intercept(@NonNull Chain chain) throws IOException {
         Request request = chain.request();
@@ -27,6 +32,11 @@ public class ReceivedCookiesInterceptor implements Interceptor {
             if (cookie != null){
                 SPUtils.getInstance().put("cookie" , cookie);
             }
+        }
+        String token = response.header(TOKEN_KEY);
+        if (!TextUtils.isEmpty(token)) {
+            assert token != null;
+            SPUtils.getInstance().put(SpfConst.TOKEN , token);
         }
         return response;
     }

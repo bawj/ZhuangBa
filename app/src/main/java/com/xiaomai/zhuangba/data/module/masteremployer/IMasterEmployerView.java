@@ -1,9 +1,9 @@
 package com.xiaomai.zhuangba.data.module.masteremployer;
 
 import com.example.toollib.data.base.IBaseView;
-import com.xiaomai.zhuangba.data.OngoingOrdersList;
-import com.xiaomai.zhuangba.data.OrderStatistics;
-import com.xiaomai.zhuangba.data.StatisticsData;
+import com.xiaomai.zhuangba.data.bean.OngoingOrdersList;
+import com.xiaomai.zhuangba.data.bean.OrderStatistics;
+import com.xiaomai.zhuangba.data.bean.StatisticsData;
 
 import java.util.List;
 

@@ -9,7 +9,7 @@ import com.example.toollib.manager.GlideManager;
 import com.example.toollib.util.DensityUtils;
 import com.xiaomai.zhuangba.R;
 import com.xiaomai.zhuangba.ShopCarDataDao;
-import com.xiaomai.zhuangba.data.ShopCarData;
+import com.xiaomai.zhuangba.data.bean.ShopCarData;
 import com.xiaomai.zhuangba.data.db.DBHelper;
 import com.xiaomai.zhuangba.data.module.IOnAddDelListeners;
 import com.xiaomai.zhuangba.weight.AnimShopsButton;

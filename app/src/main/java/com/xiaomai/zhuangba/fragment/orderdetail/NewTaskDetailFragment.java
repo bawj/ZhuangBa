@@ -6,7 +6,7 @@ import android.widget.TextView;
 
 import com.qmuiteam.qmui.widget.QMUITopBarLayout;
 import com.xiaomai.zhuangba.R;
-import com.xiaomai.zhuangba.data.OngoingOrdersList;
+import com.xiaomai.zhuangba.data.bean.OngoingOrdersList;
 
 import butterknife.BindView;
 

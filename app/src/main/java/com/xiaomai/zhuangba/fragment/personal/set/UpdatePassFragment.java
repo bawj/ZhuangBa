@@ -9,7 +9,7 @@ import com.example.toollib.http.HttpResult;
 import com.example.toollib.http.observer.BaseHttpRxObserver;
 import com.example.toollib.http.util.RxUtils;
 import com.xiaomai.zhuangba.R;
-import com.xiaomai.zhuangba.data.UserInfo;
+import com.xiaomai.zhuangba.data.bean.UserInfo;
 import com.xiaomai.zhuangba.data.db.DBHelper;
 import com.xiaomai.zhuangba.enums.StringTypeExplain;
 import com.xiaomai.zhuangba.http.ServiceUrl;

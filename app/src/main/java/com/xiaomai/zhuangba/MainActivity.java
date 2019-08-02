@@ -7,21 +7,24 @@ import com.example.toollib.base.BaseActivity;
 import com.example.toollib.http.version.MessageEvent;
 import com.example.toollib.http.version.Version;
 import com.example.toollib.http.version.VersionEnums;
-import com.example.toollib.util.SPUtils;
+import com.example.toollib.util.spf.SPUtils;
 import com.example.toollib.util.ToastUtil;
 import com.example.toollib.weight.dialog.CommonlyDialog;
 import com.qmuiteam.qmui.arch.QMUIFragment;
-import com.xiaomai.zhuangba.data.UserInfo;
+import com.xiaomai.zhuangba.data.bean.UserInfo;
 import com.xiaomai.zhuangba.data.db.DBHelper;
 import com.xiaomai.zhuangba.enums.StaticExplain;
 import com.xiaomai.zhuangba.fragment.authentication.AuthenticationFragment;
 import com.xiaomai.zhuangba.fragment.authentication.RoleSelectionFragment;
+import com.xiaomai.zhuangba.fragment.authentication.employer.EmployerAuthenticationFragment;
+import com.xiaomai.zhuangba.fragment.authentication.master.CertificationSuccessfulFragment;
+import com.xiaomai.zhuangba.fragment.authentication.master.MasterAuthenticationFragment;
 import com.xiaomai.zhuangba.fragment.employer.EmployerFragment;
 import com.xiaomai.zhuangba.fragment.guide.GuidePageFragment;
 import com.xiaomai.zhuangba.fragment.login.LoginFragment;
 import com.xiaomai.zhuangba.fragment.masterworker.MasterWorkerFragment;
 import com.xiaomai.zhuangba.fragment.personal.wallet.detailed.WalletDetailFragment;
-import com.xiaomai.zhuangba.spf.SpfConst;
+import com.example.toollib.util.spf.SpfConst;
 import com.xiaomai.zhuangba.weight.dialog.UpdateVersionDialog;
 import com.xiaomai.zhuangba.weight.dialog.VersionDialog;
 
@@ -92,7 +95,12 @@ public class MainActivity extends BaseActivity {
             init(qmuiFragment);
         } else {
             //未认证
-            init(AuthenticationFragment.newInstance());
+            String role = userInfo.getRole();
+            if (role.equals(String.valueOf(StaticExplain.EMPLOYER.getCode()))){
+                init(EmployerAuthenticationFragment.newInstance());
+            }else if (role.equals(String.valueOf(StaticExplain.FU_FU_SHI.getCode()))){
+                init(MasterAuthenticationFragment.newInstance());
+            }
         }
     }
 
@@ -168,7 +176,7 @@ public class MainActivity extends BaseActivity {
         QMUIFragment currentFragment = getCurrentFragment();
         if (currentFragment instanceof LoginFragment || currentFragment instanceof MasterWorkerFragment
                 || currentFragment instanceof EmployerFragment || currentFragment instanceof AuthenticationFragment
-                || currentFragment instanceof WalletDetailFragment) {
+                || currentFragment instanceof WalletDetailFragment || currentFragment instanceof CertificationSuccessfulFragment) {
             if (System.currentTimeMillis() - touchTime < WAIT_TIME) {
                 finish();
             } else {

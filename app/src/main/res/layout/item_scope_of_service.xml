@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center">
+
+    <TextView
+        android:id="@+id/tvItemScopeOfService"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/tool_lib_10dp"
+        android:layout_marginBottom="@dimen/tool_lib_6dp"
+        android:layout_weight="1"
+        android:layout_marginRight="@dimen/tool_lib_12dp"
+        android:layout_marginEnd="@dimen/tool_lib_12dp"
+        android:background="@drawable/gray_scope_of_ervice_bg"
+        android:gravity="center"
+        android:paddingLeft="@dimen/tool_lib_3dp"
+        android:paddingTop="@dimen/tool_lib_13dp"
+        android:paddingRight="@dimen/tool_lib_3dp"
+        android:paddingBottom="@dimen/tool_lib_13dp"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/tool_lib_14sp"
+        tools:text="UPS不间断电源" />
+
+</LinearLayout>

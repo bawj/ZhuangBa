@@ -6,7 +6,7 @@ import android.widget.TextView;
 
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.xiaomai.zhuangba.R;
-import com.xiaomai.zhuangba.data.OrderStatistics;
+import com.xiaomai.zhuangba.data.bean.OrderStatistics;
 import com.xiaomai.zhuangba.fragment.base.BaseMasterEmployerContentFragment;
 import com.xiaomai.zhuangba.fragment.base.BaseMasterEmployerFragment;
 import com.xiaomai.zhuangba.fragment.personal.master.MasterPersonalFragment;

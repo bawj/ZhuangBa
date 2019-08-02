@@ -4,7 +4,7 @@ import android.content.Context;
 
 import com.example.toollib.data.IBaseModule;
 import com.example.toollib.data.base.BaseCallback;
-import com.xiaomai.zhuangba.data.PayData;
+import com.xiaomai.zhuangba.data.bean.PayData;
 
 /**
  * @author Administrator

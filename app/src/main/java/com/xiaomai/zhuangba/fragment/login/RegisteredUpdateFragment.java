@@ -10,6 +10,8 @@ import com.xiaomai.zhuangba.data.module.login.LoginRegisteredModule;
 import com.xiaomai.zhuangba.enums.StringTypeExplain;
 import com.xiaomai.zhuangba.fragment.authentication.AuthenticationFragment;
 import com.xiaomai.zhuangba.fragment.authentication.RoleSelectionFragment;
+import com.xiaomai.zhuangba.fragment.authentication.employer.EmployerAuthenticationFragment;
+import com.xiaomai.zhuangba.fragment.authentication.master.MasterAuthenticationFragment;
 import com.xiaomai.zhuangba.fragment.employer.EmployerFragment;
 import com.xiaomai.zhuangba.fragment.masterworker.MasterWorkerFragment;
 
@@ -48,7 +50,6 @@ public class RegisteredUpdateFragment extends BaseLoginRegisteredFragment{
 
     @Override
     public void initView() {
-        statusBarBlack();
         if (getType().equals(StringTypeExplain.REGISTERED_REGISTER.getCode())){
             //注册成功
             tvTip.setText(getString(R.string.registered_success));
@@ -104,10 +105,15 @@ public class RegisteredUpdateFragment extends BaseLoginRegisteredFragment{
     }
 
     @Override
-    public void startAuthentication() {
-        //去认证
-        startFragment(AuthenticationFragment.newInstance());
+    public void startMasterAuthentication() {
+        startFragmentAndDestroyCurrent(MasterAuthenticationFragment.newInstance());
     }
+
+    @Override
+    public void startEmployerAuthentication() {
+        startFragmentAndDestroyCurrent(EmployerAuthenticationFragment.newInstance());
+    }
+
 
     @Override
     public int getContentView() {

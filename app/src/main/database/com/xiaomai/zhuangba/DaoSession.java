@@ -8,9 +8,9 @@ import org.greenrobot.greendao.database.Database;
 import org.greenrobot.greendao.identityscope.IdentityScopeType;
 import org.greenrobot.greendao.internal.DaoConfig;
 
-import com.xiaomai.zhuangba.data.PushNotificationDB;
-import com.xiaomai.zhuangba.data.ShopCarData;
-import com.xiaomai.zhuangba.data.UserInfo;
+import com.xiaomai.zhuangba.data.bean.PushNotificationDB;
+import com.xiaomai.zhuangba.data.bean.ShopCarData;
+import com.xiaomai.zhuangba.data.bean.UserInfo;
 
 import com.xiaomai.zhuangba.PushNotificationDBDao;
 import com.xiaomai.zhuangba.ShopCarDataDao;

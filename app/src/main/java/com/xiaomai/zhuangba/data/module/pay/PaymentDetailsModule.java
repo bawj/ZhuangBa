@@ -3,10 +3,8 @@ package com.xiaomai.zhuangba.data.module.pay;
 import android.annotation.SuppressLint;
 import android.text.TextUtils;
 
-import com.example.toollib.data.BaseModule;
 import com.example.toollib.data.base.BaseCallback;
 import com.example.toollib.http.HttpResult;
-import com.example.toollib.http.exception.ApiException;
 import com.example.toollib.http.function.BaseHttpConsumer;
 import com.example.toollib.http.observer.BaseHttpRxObserver;
 import com.example.toollib.http.util.RxUtils;
@@ -14,10 +12,10 @@ import com.example.toollib.util.AmountUtil;
 import com.example.toollib.util.DensityUtils;
 import com.example.toollib.util.Log;
 import com.google.gson.Gson;
-import com.xiaomai.zhuangba.data.OrderServicesBean;
-import com.xiaomai.zhuangba.data.PayData;
-import com.xiaomai.zhuangba.data.PlayModule;
-import com.xiaomai.zhuangba.data.SubmissionOrder;
+import com.xiaomai.zhuangba.data.bean.OrderServicesBean;
+import com.xiaomai.zhuangba.data.bean.PayData;
+import com.xiaomai.zhuangba.data.bean.PlayModule;
+import com.xiaomai.zhuangba.data.bean.SubmissionOrder;
 import com.xiaomai.zhuangba.enums.StringTypeExplain;
 import com.xiaomai.zhuangba.http.ServiceUrl;
 

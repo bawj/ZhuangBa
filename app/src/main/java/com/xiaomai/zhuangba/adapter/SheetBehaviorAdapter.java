@@ -1,13 +1,12 @@
 package com.xiaomai.zhuangba.adapter;
 
-import android.view.View;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.toollib.util.DensityUtils;
 import com.xiaomai.zhuangba.R;
-import com.xiaomai.zhuangba.data.ShopCarData;
+import com.xiaomai.zhuangba.data.bean.ShopCarData;
 import com.xiaomai.zhuangba.data.module.IOnAddDelListeners;
 import com.xiaomai.zhuangba.util.ShopCarUtil;
 import com.xiaomai.zhuangba.weight.AnimShopsButton;

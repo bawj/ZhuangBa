@@ -15,10 +15,10 @@ import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.example.toollib.util.SPUtils;
+import com.example.toollib.util.spf.SPUtils;
 import com.xiaomai.zhuangba.R;
 import com.xiaomai.zhuangba.data.db.DBHelper;
-import com.xiaomai.zhuangba.spf.SpfConst;
+import com.example.toollib.util.spf.SpfConst;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -149,5 +149,22 @@ public class Util {
         } else {
             return true;
         }
+    }
+
+    public static String[] getValDate(String valDate) {
+        if (!TextUtils.isEmpty(valDate) && valDate.contains("-")) {
+            return valDate.split("-");
+        }
+        return null;
+    }
+
+    public static String getDate(String date) {
+        if (!TextUtils.isEmpty(date) && date.length() >= 8) {
+            String substring = date.substring(0, 4);
+            String substring1 = date.substring(4, 6);
+            String substring2 = date.substring(6, 8);
+            return substring + "-" + substring1 + "-" + substring2;
+        }
+        return "";
     }
 }

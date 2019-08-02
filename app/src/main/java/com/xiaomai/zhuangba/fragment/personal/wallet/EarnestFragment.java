@@ -9,7 +9,7 @@ import com.example.toollib.http.HttpResult;
 import com.example.toollib.http.observer.BaseHttpRxObserver;
 import com.example.toollib.http.util.RxUtils;
 import com.xiaomai.zhuangba.R;
-import com.xiaomai.zhuangba.data.EarnestBean;
+import com.xiaomai.zhuangba.data.bean.EarnestBean;
 import com.xiaomai.zhuangba.http.ServiceUrl;
 
 import butterknife.BindView;
@@ -49,29 +49,9 @@ public class EarnestFragment extends BaseFragment {
     }
 
     public void earnestSuccess(EarnestBean bean) {
-        try {
-            tvEarnestMoney.setText(getString(R.string.content_money, bean.getAmount()));
-            StringBuilder builder = new StringBuilder();
-            String[] strs = bean.getTimes().split("T");
-            String[] ds = strs[0].split("-");
-            String[] hs = strs[1].split("\\.");
-            hs = hs[0].split(":");
-            builder.append(ds[0])
-                    .append("年")
-                    .append(ds[1])
-                    .append("月")
-                    .append(ds[2])
-                    .append("日")
-                    .append(hs[0])
-                    .append("点")
-                    .append(hs[1])
-                    .append("分");
-            tvEarnestHint.setText(String.format(getString(R.string.wallet_earnest_return_hint),
-                    builder.toString(),
-                    bean.getAmount()));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        tvEarnestMoney.setText(getString(R.string.content_money, bean.getAmount()));
+        tvEarnestHint.setText(String.format(getString(R.string.wallet_earnest_return_hint),
+                bean.getTimes(), bean.getAmount()));
     }
 
     @OnClick(R.id.tvReturn)

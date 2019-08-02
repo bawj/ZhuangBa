@@ -3,8 +3,8 @@ package com.xiaomai.zhuangba.util;
 import com.example.toollib.util.AmountUtil;
 import com.example.toollib.util.DensityUtils;
 import com.xiaomai.zhuangba.ShopCarDataDao;
-import com.xiaomai.zhuangba.data.ServiceSubcategoryProject;
-import com.xiaomai.zhuangba.data.ShopCarData;
+import com.xiaomai.zhuangba.data.bean.ServiceSubcategoryProject;
+import com.xiaomai.zhuangba.data.bean.ShopCarData;
 import com.xiaomai.zhuangba.data.db.DBHelper;
 
 import java.util.List;

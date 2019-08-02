@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tool="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingLeft="@dimen/tool_lib_16dp"
+    android:paddingRight="@dimen/tool_lib_16dp">
+
+    <TextView
+        android:id="@+id/tvProvincialName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/tool_lib_12dp"
+        android:paddingBottom="@dimen/tool_lib_12dp"
+        android:textSize="@dimen/tool_lib_14sp"
+        tool:text="浙江省" />
+
+    <ImageView
+        android:layout_width="@dimen/tool_lib_18dp"
+        android:layout_height="@dimen/tool_lib_18dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:src="@drawable/ic_right_black" />
+</RelativeLayout>

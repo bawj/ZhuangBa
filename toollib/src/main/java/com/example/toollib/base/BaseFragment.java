@@ -13,6 +13,7 @@ import com.example.toollib.R;
 import com.example.toollib.data.IBaseModule;
 import com.example.toollib.data.base.IBaseView;
 import com.example.toollib.util.ToastUtil;
+import com.qmuiteam.qmui.alpha.QMUIAlphaImageButton;
 import com.qmuiteam.qmui.util.QMUIStatusBarHelper;
 import com.qmuiteam.qmui.util.QMUIViewHelper;
 import com.qmuiteam.qmui.widget.QMUITopBarLayout;
@@ -30,10 +31,9 @@ public abstract class BaseFragment<M extends IBaseModule> extends BaseRxFragment
     public M iModule;
     private Unbinder bind;
     private QMUITopBarLayout topBarBase;
-
+    public View view;
     @Override
     protected View onCreateView() {
-        View view;
         if (isCustomView()) {
             view = LayoutInflater.from(getActivity()).inflate(R.layout.tool_lib_fragment_base, null);
             FrameLayout layBase = view.findViewById(R.id.flayBase);
@@ -47,6 +47,8 @@ public abstract class BaseFragment<M extends IBaseModule> extends BaseRxFragment
         if (iModule != null) {
             iModule.attachView(this, getActivity());
         }
+        //默认黑色字体
+        statusBarBlack();
         //返回箭头
         setBackArrow();
         //标题
@@ -116,10 +118,14 @@ public abstract class BaseFragment<M extends IBaseModule> extends BaseRxFragment
                     .setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            popBackStack();
+                            leftBackClick();
                         }
                     });
         }
+    }
+
+    public void leftBackClick() {
+        popBackStack();
     }
 
     public int getLeftIcon() {
@@ -140,8 +146,8 @@ public abstract class BaseFragment<M extends IBaseModule> extends BaseRxFragment
     private void setRightIcon() {
         int icon = getRightIcon();
         if (topBarBase != null && icon != 0) {
-            topBarBase.addRightImageButton(icon, R.id.topbar_right_about_button)
-                    .setOnClickListener(new View.OnClickListener() {
+            QMUIAlphaImageButton qmuiAlphaImageButton = topBarBase.addRightImageButton(icon, R.id.topbar_right_about_button);
+            qmuiAlphaImageButton.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
                             rightIconClick(view);

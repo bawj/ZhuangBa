@@ -8,7 +8,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.toollib.manager.GlideManager;
 import com.xiaomai.zhuangba.R;
-import com.xiaomai.zhuangba.data.ServiceData;
+import com.xiaomai.zhuangba.data.bean.ServiceData;
 
 import java.util.List;
 

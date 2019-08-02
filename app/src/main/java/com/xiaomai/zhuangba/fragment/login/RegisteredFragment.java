@@ -46,7 +46,6 @@ public class RegisteredFragment extends BaseLoginRegisteredFragment{
 
     @Override
     public void initView() {
-        statusBarBlack();
         BtnToEditListenerUtils.getInstance()
                 .addEditView(editUserNumber)
                 .addEditView(editVerificationCode)

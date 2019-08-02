@@ -3,6 +3,8 @@ package com.xiaomai.zhuangba.fragment.login;
 import com.example.toollib.base.BaseFragment;
 import com.xiaomai.zhuangba.data.module.login.ILoginRegisteredModule;
 import com.xiaomai.zhuangba.data.module.login.ILoginRegisteredView;
+import com.xiaomai.zhuangba.fragment.authentication.employer.EmployerAuthenticationFragment;
+import com.xiaomai.zhuangba.fragment.authentication.master.MasterAuthenticationFragment;
 
 /**
  * @author Administrator
@@ -77,9 +79,13 @@ public abstract class BaseLoginRegisteredFragment extends  BaseFragment<ILoginRe
     }
 
     @Override
-    public void startAuthentication() {
-        //去认证
+    public void startMasterAuthentication() {
     }
+
+    @Override
+    public void startEmployerAuthentication() {
+    }
+
 
     @Override
     public void logoutSuccess() {

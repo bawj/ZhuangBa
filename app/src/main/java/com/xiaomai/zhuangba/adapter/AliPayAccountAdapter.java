@@ -5,7 +5,7 @@ import android.support.annotation.Nullable;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.xiaomai.zhuangba.R;
-import com.xiaomai.zhuangba.data.AliPayAccountBean;
+import com.xiaomai.zhuangba.data.bean.AliPayAccountBean;
 
 import java.util.List;
 

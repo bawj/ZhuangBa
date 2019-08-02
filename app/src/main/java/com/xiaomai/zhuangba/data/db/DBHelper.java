@@ -5,7 +5,6 @@ import com.xiaomai.zhuangba.DaoSession;
 import com.xiaomai.zhuangba.PushNotificationDBDao;
 import com.xiaomai.zhuangba.ShopCarDataDao;
 import com.xiaomai.zhuangba.UserInfoDao;
-import com.xiaomai.zhuangba.data.ShopCarData;
 
 /**
  * DB帮助类

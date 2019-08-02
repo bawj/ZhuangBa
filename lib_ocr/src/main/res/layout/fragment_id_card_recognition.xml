@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <lib.kalu.ocr.OcrSurfaceView
+        android:id="@+id/surface"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center" />
+
+    <lib.kalu.ocr.CaptureView
+        android:id="@+id/captuer_scan"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/transparent"
+        android:visibility="gone" />
+
+    <ImageView
+        android:id="@+id/ivBack"
+        android:layout_width="@dimen/tool_lib_24dp"
+        android:layout_height="@dimen/tool_lib_24dp"
+        android:layout_marginStart="@dimen/tool_lib_24dp"
+        android:layout_marginLeft="@dimen/tool_lib_24dp"
+        android:layout_marginTop="@dimen/tool_lib_35dp"
+        android:layout_marginEnd="@dimen/tool_lib_24dp"
+        android:layout_marginRight="@dimen/tool_lib_16dp"
+        android:src="@drawable/ocr_ic_back_white" />
+
+    <TextView
+        android:id="@+id/text"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/tool_lib_20sp"
+        android:textStyle="bold" />
+
+    <RelativeLayout
+        android:id="@+id/capture_crop_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="@dimen/tool_lib_145dp"
+        android:layout_marginTop="@dimen/tool_lib_24dp"
+        android:layout_marginRight="@dimen/tool_lib_145dp"
+        android:layout_marginBottom="@dimen/tool_lib_24dp"
+        android:background="@drawable/orc_ic_scan_frame"
+        android:gravity="center">
+
+        <ImageView
+            android:id="@+id/capture_scan_line"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/tool_lib_81dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/ocr_ic_scan_line" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:text="@string/ocr_id_card_tip"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/tool_lib_14sp" />
+    </RelativeLayout>
+</FrameLayout>

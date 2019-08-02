@@ -17,7 +17,7 @@ import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
 import com.xiaomai.zhuangba.R;
 import com.xiaomai.zhuangba.adapter.grouping.WalletDetailAdapter;
-import com.xiaomai.zhuangba.data.WalletDetailBean;
+import com.xiaomai.zhuangba.data.bean.WalletDetailBean;
 import com.xiaomai.zhuangba.enums.StaticExplain;
 import com.xiaomai.zhuangba.enums.WalletOrderTypeEnum;
 import com.xiaomai.zhuangba.fragment.base.BaseListFragment;

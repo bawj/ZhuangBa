@@ -8,7 +8,7 @@ import android.widget.TextView;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.xiaomai.zhuangba.R;
-import com.xiaomai.zhuangba.data.ServiceSubcategory;
+import com.xiaomai.zhuangba.data.bean.ServiceSubcategory;
 
 /**
  * @author Administrator

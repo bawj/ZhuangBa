@@ -1,7 +1,7 @@
 package com.xiaomai.zhuangba.data.module.pay;
 
 import com.example.toollib.data.base.IBaseView;
-import com.xiaomai.zhuangba.data.SubmissionOrder;
+import com.xiaomai.zhuangba.data.bean.SubmissionOrder;
 
 /**
  * @author Administrator

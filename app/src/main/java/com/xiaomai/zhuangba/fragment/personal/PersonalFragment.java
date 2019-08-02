@@ -8,8 +8,8 @@ import android.widget.TextView;
 
 import com.example.toollib.manager.GlideManager;
 import com.xiaomai.zhuangba.R;
-import com.xiaomai.zhuangba.data.MessageEvent;
-import com.xiaomai.zhuangba.data.UserInfo;
+import com.xiaomai.zhuangba.data.bean.MessageEvent;
+import com.xiaomai.zhuangba.data.bean.UserInfo;
 import com.xiaomai.zhuangba.data.db.DBHelper;
 import com.xiaomai.zhuangba.data.module.login.ILoginRegisteredModule;
 import com.xiaomai.zhuangba.data.module.login.LoginRegisteredModule;

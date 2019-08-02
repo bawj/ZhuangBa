@@ -10,7 +10,7 @@ import com.example.toollib.http.util.RxUtils;
 import com.example.toollib.util.ToastUtil;
 import com.google.gson.Gson;
 import com.xiaomai.zhuangba.R;
-import com.xiaomai.zhuangba.data.MessageEvent;
+import com.xiaomai.zhuangba.data.bean.MessageEvent;
 import com.xiaomai.zhuangba.enums.EventBusEnum;
 import com.xiaomai.zhuangba.fragment.SuccessFragment;
 import com.xiaomai.zhuangba.http.ServiceUrl;

@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/tool_lib_gray_F5F8FA"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/tool_lib_12dp"
+            android:layout_marginLeft="@dimen/tool_lib_12dp"
+            android:layout_marginTop="@dimen/tool_lib_20dp"
+            android:text="@string/dispatch_note"
+            android:textColor="@color/tool_lib_gray_222222"
+            android:textSize="@dimen/tool_lib_12sp" />
+
+        <RelativeLayout
+            android:id="@+id/relScopeServiceSkillsAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/tool_lib_10dp"
+            android:background="@color/white"
+            android:paddingLeft="@dimen/tool_lib_12dp"
+            android:paddingRight="@dimen/tool_lib_12dp">
+
+            <TextView
+                android:id="@+id/tvScopeServiceSkillsServiceAddress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/tool_lib_20dp"
+                android:layout_marginBottom="@dimen/tool_lib_20dp"
+                android:gravity="center_vertical"
+                android:text="@string/service_address"
+                android:textColor="@color/tool_lib_gray_222222"
+                android:textSize="@dimen/tool_lib_14sp" />
+
+            <TextView
+                android:id="@+id/tvScopeServiceSkillsClickServiceAddress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/tool_lib_20dp"
+                android:layout_marginLeft="@dimen/tool_lib_20dp"
+                android:layout_marginEnd="@dimen/tool_lib_20dp"
+                android:layout_marginRight="@dimen/tool_lib_20dp"
+                android:layout_toEndOf="@+id/tvScopeServiceSkillsServiceAddress"
+                android:layout_toRightOf="@+id/tvScopeServiceSkillsServiceAddress"
+                android:background="@null"
+                android:gravity="center_vertical"
+                android:hint="@string/click_select_scope_of_service"
+                android:maxLength="30"
+                android:padding="@dimen/tool_lib_3dp"
+                android:textColor="@color/tool_lib_gray_B1B1B1"
+                android:textSize="@dimen/tool_lib_14sp" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/tool_lib_10dp"
+            android:background="@color/white"
+            android:paddingLeft="@dimen/tool_lib_12dp"
+            android:paddingRight="@dimen/tool_lib_12dp">
+
+            <TextView
+                android:id="@+id/tvAddressDetail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/tool_lib_20dp"
+                android:layout_marginBottom="@dimen/tool_lib_20dp"
+                android:gravity="center_vertical"
+                android:text="@string/detailed_street"
+                android:textColor="@color/tool_lib_gray_222222"
+                android:textSize="@dimen/tool_lib_14sp" />
+
+            <EditText
+                android:id="@+id/editAddressDetail"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/tool_lib_20dp"
+                android:layout_marginLeft="@dimen/tool_lib_20dp"
+                android:layout_marginEnd="@dimen/tool_lib_20dp"
+                android:layout_marginRight="@dimen/tool_lib_20dp"
+                android:layout_toEndOf="@+id/tvAddressDetail"
+                android:layout_toRightOf="@+id/tvAddressDetail"
+                android:background="@null"
+                android:gravity="center_vertical"
+                android:hint="@string/please_input_detail_address"
+                android:maxLength="30"
+                android:padding="@dimen/tool_lib_3dp"
+                android:textColor="@color/tool_lib_gray_B1B1B1"
+                android:textSize="@dimen/tool_lib_14sp" />
+
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/tool_lib_12dp"
+            android:layout_marginLeft="@dimen/tool_lib_12dp"
+            android:layout_marginTop="@dimen/tool_lib_20dp"
+            android:text="@string/click_select_scope_of_service_tip"
+            android:textColor="@color/tool_lib_gray_222222"
+            android:textSize="@dimen/tool_lib_12sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/tool_lib_10dp"
+            android:background="@color/white"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/tool_lib_12dp"
+            android:paddingRight="@dimen/tool_lib_12dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/tool_lib_20dp"
+                android:layout_marginBottom="@dimen/tool_lib_20dp"
+                android:gravity="center_vertical"
+                android:text="@string/selection_skills"
+                android:textColor="@color/tool_lib_gray_222222"
+                android:textSize="@dimen/tool_lib_14sp" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerScopeServiceSkills"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/tool_lib_6dp" />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btnScopeServiceUpload"
+            style="@style/base_btn"
+            android:layout_marginLeft="@dimen/tool_lib_16dp"
+            android:layout_marginTop="@dimen/tool_lib_30dp"
+            android:layout_marginRight="@dimen/tool_lib_16dp"
+            android:text="@string/upload" />
+    </LinearLayout>
+</android.support.v4.widget.NestedScrollView>

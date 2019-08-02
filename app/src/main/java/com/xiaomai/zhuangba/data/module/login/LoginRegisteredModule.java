@@ -5,15 +5,16 @@ import android.text.TextUtils;
 import com.example.toollib.http.HttpResult;
 import com.example.toollib.http.observer.BaseHttpRxObserver;
 import com.example.toollib.http.util.RxUtils;
-import com.example.toollib.util.SPUtils;
+import com.example.toollib.util.Log;
+import com.example.toollib.util.spf.SPUtils;
 import com.xiaomai.zhuangba.R;
 import com.xiaomai.zhuangba.appilcation.PretendApplication;
-import com.xiaomai.zhuangba.data.UserInfo;
+import com.xiaomai.zhuangba.data.bean.UserInfo;
 import com.xiaomai.zhuangba.data.module.verification.VerificationCodeModule;
 import com.xiaomai.zhuangba.data.db.DBHelper;
 import com.xiaomai.zhuangba.enums.StaticExplain;
 import com.xiaomai.zhuangba.http.ServiceUrl;
-import com.xiaomai.zhuangba.spf.SpfConst;
+import com.example.toollib.util.spf.SpfConst;
 import com.xiaomai.zhuangba.util.UMengUtil;
 import com.xiaomai.zhuangba.util.Util;
 
@@ -95,7 +96,9 @@ public class LoginRegisteredModule extends VerificationCodeModule<ILoginRegister
                             DBHelper.getInstance().getUserInfoDao().deleteAll();
                             DBHelper.getInstance().getUserInfoDao().insert(userInfo);
                             String token = userInfo.getToken();
-                            SPUtils.getInstance().put(SpfConst.TOKEN, token);
+                            if (!TextUtils.isEmpty(token)){
+                                SPUtils.getInstance().put(SpfConst.TOKEN, token);
+                            }
                             UMengUtil.alias(userInfo.getPhoneNumber());
 
                             int status = StaticExplain.CERTIFIED.getCode();
@@ -107,13 +110,13 @@ public class LoginRegisteredModule extends VerificationCodeModule<ILoginRegister
                                 mViewRef.get().startRoleSelection();
                             } else if (role.equals(String.valueOf(StaticExplain.FU_FU_SHI.getCode())) && authenticationStatue != status) {
                                 //师傅端 未认证
-                                mViewRef.get().startAuthentication();
+                                mViewRef.get().startMasterAuthentication();
                             } else if (userInfo.getRole().equals(String.valueOf(StaticExplain.FU_FU_SHI.getCode()))) {
                                 //师傅端
                                 mViewRef.get().startMasterWorker();
                             } else if (role.equals(String.valueOf(StaticExplain.EMPLOYER.getCode())) && authenticationStatue != status) {
                                 //雇主端 未认证
-                                mViewRef.get().startAuthentication();
+                                mViewRef.get().startEmployerAuthentication();
                             } else if (userInfo.getRole().equals(String.valueOf(StaticExplain.EMPLOYER.getCode()))) {
                                 //雇主端
                                 mViewRef.get().startEmployer();
@@ -133,16 +136,18 @@ public class LoginRegisteredModule extends VerificationCodeModule<ILoginRegister
                     @Override
                     protected void onSuccess(UserInfo userInfo) {
                         String token = userInfo.getToken();
-                        SPUtils.getInstance().put(SpfConst.TOKEN, token);
+                        if (!TextUtils.isEmpty(token)){
+                            SPUtils.getInstance().put(SpfConst.TOKEN, token);
+                        }
                         DBHelper.getInstance().getUserInfoDao().deleteAll();
                         DBHelper.getInstance().getUserInfoDao().insert(userInfo);
                         //角色选择成功
                         if (userInfo.getRole().equals(String.valueOf(StaticExplain.FU_FU_SHI.getCode()))) {
                             //师傅端 去认证
-                            mViewRef.get().startAuthentication();
+                            mViewRef.get().startMasterAuthentication();
                         } else if (userInfo.getRole().equals(String.valueOf(StaticExplain.EMPLOYER.getCode()))) {
                             //雇主端 去认证
-                            mViewRef.get().startAuthentication();
+                            mViewRef.get().startEmployerAuthentication();
                         }
                     }
                 });

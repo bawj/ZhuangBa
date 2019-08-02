@@ -19,10 +19,10 @@ import com.xiaomai.zhuangba.R;
 import com.xiaomai.zhuangba.adapter.PagerFragmentAdapter;
 import com.xiaomai.zhuangba.adapter.TabCommonGoneNavigator;
 import com.xiaomai.zhuangba.adapter.TabCommonNavigator;
-import com.xiaomai.zhuangba.data.OngoingOrdersList;
-import com.xiaomai.zhuangba.data.OrderStatistics;
-import com.xiaomai.zhuangba.data.StatisticsData;
-import com.xiaomai.zhuangba.data.UserInfo;
+import com.xiaomai.zhuangba.data.bean.OngoingOrdersList;
+import com.xiaomai.zhuangba.data.bean.OrderStatistics;
+import com.xiaomai.zhuangba.data.bean.StatisticsData;
+import com.xiaomai.zhuangba.data.bean.UserInfo;
 import com.xiaomai.zhuangba.data.db.DBHelper;
 import com.xiaomai.zhuangba.data.module.masteremployer.IMasterEmployerModule;
 import com.xiaomai.zhuangba.data.module.masteremployer.IMasterEmployerView;
@@ -87,7 +87,6 @@ public class BaseMasterEmployerFragment extends BaseFragment<IMasterEmployerModu
 
     @Override
     public void initView() {
-        statusBarBlack();
         refreshBaseList.setEnableLoadMore(false);
         refreshBaseList.setOnRefreshListener(this);
 

@@ -11,11 +11,11 @@ import com.tencent.mm.opensdk.modelbase.BaseResp;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.IWXAPIEventHandler;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
-import com.xiaomai.zhuangba.data.MessageEvent;
+import com.xiaomai.zhuangba.data.bean.MessageEvent;
 
 import org.greenrobot.eventbus.EventBus;
 
-import static com.xiaomai.zhuangba.data.PlayModule.WE_CHAT_APP_ID;
+import static com.xiaomai.zhuangba.data.bean.PlayModule.WE_CHAT_APP_ID;
 
 
 /**

@@ -5,10 +5,10 @@ import com.example.toollib.http.HttpResult;
 import com.example.toollib.http.exception.ApiException;
 import com.example.toollib.http.observer.BaseHttpRxObserver;
 import com.example.toollib.http.util.RxUtils;
-import com.xiaomai.zhuangba.data.OngoingOrdersList;
-import com.xiaomai.zhuangba.data.OrderStatistics;
-import com.xiaomai.zhuangba.data.Orders;
-import com.xiaomai.zhuangba.data.StatisticsData;
+import com.xiaomai.zhuangba.data.bean.OngoingOrdersList;
+import com.xiaomai.zhuangba.data.bean.OrderStatistics;
+import com.xiaomai.zhuangba.data.bean.Orders;
+import com.xiaomai.zhuangba.data.bean.StatisticsData;
 import com.xiaomai.zhuangba.enums.StaticExplain;
 import com.xiaomai.zhuangba.http.ServiceUrl;
 

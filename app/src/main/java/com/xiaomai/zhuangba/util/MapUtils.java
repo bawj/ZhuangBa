@@ -34,7 +34,7 @@ import com.example.toollib.util.AmountUtil;
 import com.example.toollib.util.ToastUtil;
 import com.qmuiteam.qmui.widget.dialog.QMUIBottomSheet;
 import com.xiaomai.zhuangba.R;
-import com.xiaomai.zhuangba.data.LocationSearch;
+import com.xiaomai.zhuangba.data.bean.LocationSearch;
 import com.xiaomai.zhuangba.enums.StringTypeExplain;
 import com.zaaach.citypicker.db.DBManager;
 import com.zaaach.citypicker.model.City;
