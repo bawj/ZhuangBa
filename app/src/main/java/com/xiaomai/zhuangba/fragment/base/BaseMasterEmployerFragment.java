@@ -32,6 +32,7 @@ import com.xiaomai.zhuangba.data.observable.Observer;
 import com.xiaomai.zhuangba.enums.StaticExplain;
 import com.xiaomai.zhuangba.enums.StringTypeExplain;
 import com.xiaomai.zhuangba.fragment.personal.MessageFragment;
+import com.xiaomai.zhuangba.fragment.personal.PricingSheetFragment;
 
 import net.lucode.hackware.magicindicator.MagicIndicator;
 import net.lucode.hackware.magicindicator.ViewPagerHelper;
@@ -73,7 +74,8 @@ public class BaseMasterEmployerFragment extends BaseFragment<IMasterEmployerModu
     /**
      * 观察者管理
      */
-    private EventManager eventManager;
+    public EventManager eventManager;
+    public String message = "";
     private List<BaseMasterEmployerContentFragment> listFragment;
     /**
      * 判断某个fragment 是否 刷新了
@@ -89,7 +91,7 @@ public class BaseMasterEmployerFragment extends BaseFragment<IMasterEmployerModu
     public void initView() {
         refreshBaseList.setEnableLoadMore(false);
         refreshBaseList.setOnRefreshListener(this);
-
+        refreshBaseList.setHeaderInsetStart(76);
         UserInfo unique = getUserInfo();
         if (unique != null) {
             GlideManager.loadCircleImage(getActivity(), unique.getBareHeadedPhotoUrl(), ivUserHead);
@@ -118,14 +120,17 @@ public class BaseMasterEmployerFragment extends BaseFragment<IMasterEmployerModu
 
                 @Override
                 public void onPageSelected(int i) {
+                    if (i == 0) {
+                        roundButtonCheckCountryIsVisible(View.VISIBLE);
+                    } else {
+                        roundButtonCheckCountryIsVisible(View.GONE);
+                    }
                 }
 
                 @Override
                 public void onPageScrollStateChanged(int i) {
                 }
             });
-
-            statusBarWhite();
         }
 
         appBar.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
@@ -146,7 +151,7 @@ public class BaseMasterEmployerFragment extends BaseFragment<IMasterEmployerModu
         }
     }
 
-    @OnClick({R.id.ivUserHead, R.id.ivMessage})
+    @OnClick({R.id.ivUserHead, R.id.ivMessage,R.id.btnRectangle})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.ivUserHead:
@@ -157,6 +162,9 @@ public class BaseMasterEmployerFragment extends BaseFragment<IMasterEmployerModu
                 //消息
                 startFragment(MessageFragment.newInstance());
                 break;
+            case R.id.btnRectangle:
+                startFragment(PricingSheetFragment.newInstance());
+                break;
             default:
         }
     }
@@ -164,14 +172,13 @@ public class BaseMasterEmployerFragment extends BaseFragment<IMasterEmployerModu
     @Override
     public void onRefresh(@NonNull RefreshLayout refreshLayout) {
         int currentItem = mViewPager.getCurrentItem();
-        String message = "";
         if (currentItem == 0) {
             message = StringTypeExplain.REFRESH_NEW_TASK_FRAGMENT.getCode();
         } else if (currentItem == 1) {
             message = StringTypeExplain.REFRESH_NEED_DEAL_WITH_FRAGMENT.getCode();
         }
         Log.e("refresh currentItem = " + currentItem);
-        eventManager.notifyObservers(message, handler);
+        eventManager.notifyObservers(message, getAddress(), handler);
 
         //请求 师傅 或 雇主 的统计
         iModule.requestOrderStatistics();
@@ -228,6 +235,22 @@ public class BaseMasterEmployerFragment extends BaseFragment<IMasterEmployerModu
         tvTaskAmount.setText(String.valueOf(statisticsData.getTotalAmount()));
     }
 
+
+    @Override
+    public String getAddress() {
+        return "";
+    }
+
+    @Override
+    public String getStatus() {
+        return null;
+    }
+
+    @Override
+    public void workingStateSwitchingSuccess() {
+
+    }
+
     @Override
     public void orderStatisticsSuccess(OrderStatistics orderStatistics) {
 
@@ -263,6 +286,10 @@ public class BaseMasterEmployerFragment extends BaseFragment<IMasterEmployerModu
 
     @Override
     public void loadMoreComplete() {
+    }
+
+    public void roundButtonCheckCountryIsVisible(int visible) {
+        //item 切换
     }
 
     @Override

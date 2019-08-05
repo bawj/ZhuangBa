@@ -1,11 +1,11 @@
 package com.xiaomai.zhuangba.fragment.orderdetail;
 
 import android.support.annotation.NonNull;
-import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -29,6 +29,7 @@ import com.xiaomai.zhuangba.data.module.orderdetail.IOrderDetailView;
 import com.xiaomai.zhuangba.data.module.orderdetail.OrderDetailModule;
 import com.xiaomai.zhuangba.enums.StaticExplain;
 import com.xiaomai.zhuangba.fragment.service.ServiceDetailFragment;
+import com.xiaomai.zhuangba.util.ConstantUtil;
 import com.xiaomai.zhuangba.util.MapUtils;
 import com.xiaomai.zhuangba.util.OrderStatusUtil;
 
@@ -43,7 +44,8 @@ import butterknife.OnClick;
  * <p>
  * base 订单详情
  */
-public class BaseOrderDetailFragment extends BaseFragment<IOrderDetailModule> implements OnRefreshListener, IOrderDetailView , BaseQuickAdapter.OnItemClickListener {
+public class BaseOrderDetailFragment<T extends IOrderDetailModule> extends BaseFragment<T>
+        implements OnRefreshListener, IOrderDetailView , BaseQuickAdapter.OnItemClickListener {
 
     /**
      * 服务大类
@@ -104,8 +106,8 @@ public class BaseOrderDetailFragment extends BaseFragment<IOrderDetailModule> im
     @BindView(R.id.refreshBaseList)
     SmartRefreshLayout refreshBaseList;
 
-    @BindView(R.id.nestedScrollView)
-    NestedScrollView nestedScrollView;
+    @BindView(R.id.layBaseOrderDetail)
+    RelativeLayout layBaseOrderDetail;
 
     private float latitude , longitude;
     /** 服务项目 */
@@ -114,13 +116,13 @@ public class BaseOrderDetailFragment extends BaseFragment<IOrderDetailModule> im
     private OrderDateListAdapter orderDateListAdapter;
 
     @Override
-    protected IOrderDetailModule initModule() {
-        return new OrderDetailModule();
+    protected T initModule() {
+        return (T) new OrderDetailModule();
     }
 
     @Override
     public void initView() {
-        nestedScrollView.setVisibility(View.GONE);
+        layBaseOrderDetail.setVisibility(View.GONE);
         refreshBaseList.setOnRefreshListener(this);
         //默认刷新
         refreshBaseList.autoRefresh();
@@ -151,15 +153,19 @@ public class BaseOrderDetailFragment extends BaseFragment<IOrderDetailModule> im
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.relBaseOrderDetailLocation:
-                MapUtils.mapNavigation(getActivity() , latitude , longitude);
+                startMap();
                 break;
             default:
         }
     }
 
+    public void startMap() {
+        MapUtils.mapNavigation(getActivity() , latitude , longitude);
+    }
+
     @Override
     public void requestOrderDetailSuccess(Object object) {
-        nestedScrollView.setVisibility(View.VISIBLE);
+        layBaseOrderDetail.setVisibility(View.VISIBLE);
         OrderServiceDate orderServiceDate = (OrderServiceDate) object;
         OngoingOrdersList ongoingOrdersList = orderServiceDate.getOngoingOrdersList();
         if (ongoingOrdersList != null) {
@@ -174,17 +180,15 @@ public class BaseOrderDetailFragment extends BaseFragment<IOrderDetailModule> im
             orderDateListsSuccess(orderDateLists);
         }
         List<DeliveryContent> deliveryContents = orderServiceDate.getDeliveryContents();
-        if (deliveryContents != null && !deliveryContents.isEmpty()) {
-            deliveryContentsSuccess(deliveryContents);
+        if (deliveryContents != null && !deliveryContents.isEmpty()){
+            orderDateListsDeliveryContent(deliveryContents);
         }
     }
 
-    public void deliveryContentsSuccess(List<DeliveryContent> deliveryContents) {
-        //任务开始前的现场照 和 任务完成后的现场照 雇主评价
-    }
 
     public void orderDateListsSuccess(List<OrderDateList> orderDateLists) {
         //订单时间信息
+        orderDateLists.add(0, new OrderDateList(getOrderCode() == null ? "" : getOrderCode(), "", getString(R.string.order_code)));
         orderDateListAdapter.setNewData(orderDateLists);
     }
 
@@ -197,6 +201,10 @@ public class BaseOrderDetailFragment extends BaseFragment<IOrderDetailModule> im
         //服务项目 itemClick
         OrderServiceItem orderServiceItem = (OrderServiceItem) view.findViewById(R.id.tvItemServiceTotalMoney).getTag();
         startFragment(ServiceDetailFragment.newInstance(orderServiceItem.getServiceText() , orderServiceItem.getServiceStandard()));
+    }
+
+    public void orderDateListsDeliveryContent(List<DeliveryContent> deliveryContents) {
+        //师傅提交的信息
     }
 
     public void ongoingOrdersListSuccess(OngoingOrdersList ongoingOrdersList) {
@@ -233,7 +241,6 @@ public class BaseOrderDetailFragment extends BaseFragment<IOrderDetailModule> im
 
     public void employerOngoingOrdersListSuccess(OngoingOrdersList ongoingOrdersList) {
 
-
     }
 
     @Override
@@ -243,7 +250,10 @@ public class BaseOrderDetailFragment extends BaseFragment<IOrderDetailModule> im
 
     @Override
     public String getOrderCode() {
-        return null;
+        if (getArguments() != null){
+            return getArguments().getString(ConstantUtil.ORDER_CODE);
+        }
+        return "";
     }
 
     @Override

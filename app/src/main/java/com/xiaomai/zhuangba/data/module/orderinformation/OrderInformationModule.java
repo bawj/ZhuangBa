@@ -14,6 +14,7 @@ import com.xiaomai.zhuangba.R;
 import com.xiaomai.zhuangba.data.bean.OrderServicesBean;
 import com.xiaomai.zhuangba.data.bean.ShopCarData;
 import com.xiaomai.zhuangba.data.db.DBHelper;
+import com.xiaomai.zhuangba.enums.OrdersEnum;
 import com.xiaomai.zhuangba.http.ServiceUrl;
 import com.xiaomai.zhuangba.util.DateUtil;
 
@@ -43,13 +44,79 @@ public class OrderInformationModule extends BaseModule<IOrderInformationView> im
                     .subscribe(new BaseHttpRxObserver<String>(mContext.get()) {
                         @Override
                         protected void onSuccess(String orderCode) {
-                            hashMap.put("orderCode" , orderCode);
+                            hashMap.put("orderCode", orderCode);
                             mViewRef.get().placeOrderSuccess(new Gson().toJson(hashMap));
                         }
                     });
         }
     }
 
+    @Override
+    public void requestUpdateOrder() {
+        HashMap<String, Object> hashMap = new HashMap<>();
+        String userText = mViewRef.get().getUserName();
+        if (TextUtils.isEmpty(userText)) {
+            mViewRef.get().showToast(mContext.get().getString(R.string.please_input_name));
+            return;
+        }
+        hashMap.put("name", userText);
+        //电话
+        String phoneNumber = mViewRef.get().getPhoneNumber();
+        if (TextUtils.isEmpty(phoneNumber)) {
+            mViewRef.get().showToast(mContext.get().getString(R.string.please_input_telephone));
+            return;
+        } else if (!RegexUtils.isMobileSimple(phoneNumber)) {
+            mViewRef.get().showToast(mContext.get().getString(R.string.incorrect_format_of_mobile_phone_number));
+            return;
+        }
+        hashMap.put("telephone", phoneNumber);
+        //地址
+        String address = mViewRef.get().getAddress();
+        //详细地址
+        String addressDetail = mViewRef.get().getAddressDetail();
+        if (TextUtils.isEmpty(address)) {
+            mViewRef.get().showToast(mContext.get().getString(R.string.please_input_address));
+            return;
+        }
+        hashMap.put("address", address + addressDetail);
+        //预约时间
+        String appointmentTime = mViewRef.get().getAppointmentTime();
+        if (TextUtils.isEmpty(appointmentTime)) {
+            mViewRef.get().showToast(mContext.get().getString(R.string.please_input_appointment_time));
+            return;
+        }
+        String date = DateUtil.dateToStr(appointmentTime, "yyyy-MM-dd HH:mm:ss");
+        Long aLong = DateUtil.dateToCurrentTimeMillis(date, "yyyy-MM-dd HH:mm:ss");
+        if (!dateCompare(aLong)) {
+            mViewRef.get().showToast(mContext.get().getString(R.string.reservation_time_prompt));
+            return;
+        }
+        hashMap.put("appointmentTime", date);
+        //经纬度
+        String longitude = mViewRef.get().getLongitude();
+        String latitude = mViewRef.get().getLatitude();
+        hashMap.put("longitude", DensityUtils.stringTypeFloat(longitude));
+        hashMap.put("latitude", DensityUtils.stringTypeFloat(latitude));
+        //订单编号
+        hashMap.put("orderCode", mViewRef.get().getOrderCode());
+        String s = new Gson().toJson(hashMap);
+        RequestBody requestBody = RequestBody.create(MediaType.parse("application/json;charset=utf-8"), s);
+        Observable<HttpResult<String>> httpResultObservable = ServiceUrl.getUserApi().updateOrderAddress(requestBody);
+        RxUtils.getObservable(httpResultObservable)
+                .compose(mViewRef.get().<HttpResult<String>>bindLifecycle())
+                .subscribe(new BaseHttpRxObserver<String>(mContext.get()) {
+                    @Override
+                    protected void onSuccess(String response) {
+                        mViewRef.get().updateOrderSuccess();
+                    }
+                });
+    }
+
+    /**
+     * 提交订单
+     *
+     * @return hashMap
+     */
     private HashMap<String, Object> getSubmissionOrder() {
         //任务总数量
         int number = 0;
@@ -81,7 +148,7 @@ public class OrderInformationModule extends BaseModule<IOrderInformationView> im
         if (TextUtils.isEmpty(phoneNumber)) {
             mViewRef.get().showToast(mContext.get().getString(R.string.please_input_telephone));
             return null;
-        }else if (!RegexUtils.isMobileSimple(phoneNumber)){
+        } else if (!RegexUtils.isMobileSimple(phoneNumber)) {
             mViewRef.get().showToast(mContext.get().getString(R.string.incorrect_format_of_mobile_phone_number));
             return null;
         }
@@ -101,8 +168,8 @@ public class OrderInformationModule extends BaseModule<IOrderInformationView> im
             mViewRef.get().showToast(mContext.get().getString(R.string.please_input_appointment_time));
             return null;
         }
-        String date = DateUtil.dateToStr(appointmentTime , "yyyy-MM-dd HH:mm:ss");
-        Long aLong = DateUtil.dateToCurrentTimeMillis(date , "yyyy-MM-dd HH:mm:ss");
+        String date = DateUtil.dateToStr(appointmentTime, "yyyy-MM-dd HH:mm:ss");
+        Long aLong = DateUtil.dateToCurrentTimeMillis(date, "yyyy-MM-dd HH:mm:ss");
         if (!dateCompare(aLong)) {
             mViewRef.get().showToast(mContext.get().getString(R.string.reservation_time_prompt));
             return null;
@@ -144,7 +211,9 @@ public class OrderInformationModule extends BaseModule<IOrderInformationView> im
 
     private boolean dateCompare(Long appointmentTime) {
         long l = System.currentTimeMillis();
-        if (appointmentTime - l > 7200000) {
+        String date2String = DateUtil.getDate2String(l, "yyyy-MM-dd HH");
+        Long aLong = DateUtil.dateToCurrentTimeMilli(date2String, "yyyy-MM-dd HH");
+        if (appointmentTime - aLong >= 7200000) {
             return true;
         }
         return false;

@@ -46,6 +46,8 @@ public class OngoingOrdersList implements Parcelable{
     /** 师傅端的部分字段 */
     /**  */
     private String masterOrderAmount;
+    /** 是否确认时间 */
+    private String confirmationTime;
     /** 修改时间 */
     private String modifyTime;
     /** 已超时 订单状态 = 7 已过期  内容 18:22 */
@@ -222,7 +224,7 @@ public class OngoingOrdersList implements Parcelable{
     }
 
     public String getBareheadedPhotoUrl() {
-        return bareheadedPhotoUrl;
+        return TextUtils.isEmpty(bareheadedPhotoUrl) ? "" : bareheadedPhotoUrl;
     }
 
     public void setBareheadedPhotoUrl(String bareheadedPhotoUrl) {
@@ -243,6 +245,14 @@ public class OngoingOrdersList implements Parcelable{
 
     public void setExpireTime(String expireTime) {
         this.expireTime = expireTime;
+    }
+
+    public String getConfirmationTime() {
+        return TextUtils.isEmpty(confirmationTime) ? "" : confirmationTime;
+    }
+
+    public void setConfirmationTime(String confirmationTime) {
+        this.confirmationTime = confirmationTime;
     }
 
     @Override

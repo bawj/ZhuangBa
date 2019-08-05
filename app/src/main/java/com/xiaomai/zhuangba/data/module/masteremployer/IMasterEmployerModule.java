@@ -36,4 +36,10 @@ public interface IMasterEmployerModule extends IBaseModule<IMasterEmployerView> 
      */
     void requestStatisticsData();
 
+
+    /**
+     * 开工中 和 休息中切换
+     */
+    void requestWorkingStateSwitching();
+
 }

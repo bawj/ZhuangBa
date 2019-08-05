@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/tool_lib_gray_F5F6FA"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/tool_lib_12dp"
+    android:paddingRight="@dimen/tool_lib_12dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvBaseAutographImgTip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/tool_lib_30dp"
+            android:textColor="@color/tool_lib_gray_222222"
+            android:textSize="@dimen/tool_lib_12sp"
+            tools:text="请上传开始前工作现场的照片" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerBeforeInstallation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/tool_lib_9dp" />
+
+        <TextView
+            android:id="@+id/tvBaseAutographServiceTip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/tool_lib_15dp"
+            android:textColor="@color/tool_lib_gray_222222"
+            android:textSize="@dimen/tool_lib_12sp"
+            tools:text="服务内容无异议，同意开工。" />
+
+        <RelativeLayout
+            android:id="@+id/relAcceptanceDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/tool_lib_12dp">
+
+            <ImageView
+                android:id="@+id/ivSubmitDescription"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/tool_lib_110dp"
+                android:background="@drawable/whit_bg"
+                android:gravity="center"
+                android:lineSpacingExtra="@dimen/tool_lib_1dp"
+                android:padding="@dimen/tool_lib_6dp" />
+
+            <TextView
+                android:id="@+id/tvSubmitAcceptanceDescriptionContent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:lineSpacingExtra="@dimen/tool_lib_1dp"
+                android:padding="@dimen/tool_lib_6dp"
+                android:text="@string/click_signature_by_the_person_in_charge"
+                android:textColor="@color/tool_lib_gray_B1B1B1"
+                android:textSize="@dimen/tool_lib_16sp" />
+        </RelativeLayout>
+
+
+        <com.qmuiteam.qmui.layout.QMUIButton
+            android:id="@+id/btnBeforeInstallation"
+            style="@style/base_btn"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="@dimen/tool_lib_24dp"
+            android:layout_marginRight="0dp"
+            android:layout_marginBottom="@dimen/tool_lib_12dp"
+            android:text="@string/construction_submission" />
+    </LinearLayout>
+</android.support.v4.widget.NestedScrollView>

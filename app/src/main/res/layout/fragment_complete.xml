@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/tool_lib_gray_F5F8FA">
+
+    <ImageView
+        android:id="@+id/ivComplete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/tool_lib_43dp"
+        tools:src="@drawable/bg_success" />
+
+    <TextView
+        android:id="@+id/tvCompleteTip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ivComplete"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/tool_lib_4dp"
+        android:textColor="@color/tool_lib_gray_303343"
+        android:textSize="@dimen/tool_lib_17sp"
+        tools:text="接单成功" />
+
+    <Button
+        android:id="@+id/btnCompleteMissionDetails"
+        style="@style/base_btn"
+        android:layout_below="@+id/tvCompleteTip"
+        android:layout_marginLeft="@dimen/tool_lib_16dp"
+        android:layout_marginTop="@dimen/tool_lib_30dp"
+        android:layout_marginRight="@dimen/tool_lib_16dp"
+        android:text="@string/view_mission_details" />
+
+    <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
+        android:id="@+id/btnCompleteBackHome"
+        style="@style/base_btn"
+        android:layout_below="@+id/btnCompleteMissionDetails"
+        android:layout_marginLeft="@dimen/tool_lib_16dp"
+        android:layout_marginTop="@dimen/tool_lib_10dp"
+        android:layout_marginRight="@dimen/tool_lib_16dp"
+        android:text="@string/back_to_home_page"
+        android:textColor="@color/tool_lib_gray_333333"
+        app:qmui_backgroundColor="@android:color/white" />
+</RelativeLayout>

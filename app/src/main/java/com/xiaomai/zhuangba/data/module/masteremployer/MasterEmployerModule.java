@@ -5,14 +5,21 @@ import com.example.toollib.http.HttpResult;
 import com.example.toollib.http.exception.ApiException;
 import com.example.toollib.http.observer.BaseHttpRxObserver;
 import com.example.toollib.http.util.RxUtils;
+import com.example.toollib.util.DensityUtils;
+import com.xiaomai.zhuangba.R;
+import com.xiaomai.zhuangba.UserInfoDao;
 import com.xiaomai.zhuangba.data.bean.OngoingOrdersList;
 import com.xiaomai.zhuangba.data.bean.OrderStatistics;
 import com.xiaomai.zhuangba.data.bean.Orders;
 import com.xiaomai.zhuangba.data.bean.StatisticsData;
+import com.xiaomai.zhuangba.data.bean.UserInfo;
+import com.xiaomai.zhuangba.data.db.DBHelper;
 import com.xiaomai.zhuangba.enums.StaticExplain;
 import com.xiaomai.zhuangba.http.ServiceUrl;
 
 import java.util.List;
+
+import io.reactivex.Observable;
 
 /**
  * @author Administrator
@@ -35,15 +42,17 @@ public class MasterEmployerModule extends BaseModule<IMasterEmployerView> implem
 
     @Override
     public void requestMasterNewTaskOrderList() {
-        //新任务
+        //订单池
         final int page = mViewRef.get().getPage();
-        RxUtils.getObservable(ServiceUrl.getUserApi().getMasterOrderList(String.valueOf(page)
-                , String.valueOf(StaticExplain.PAGE_NUM.getCode())))
+        String address = mViewRef.get().getAddress();
+        address = address.equals(mContext.get().getString(R.string.whole_country)) ? "" : address;
+        RxUtils.getObservable(ServiceUrl.getUserApi().getMasterSelectOrder(String.valueOf(page)
+                , String.valueOf(StaticExplain.PAGE_NUM.getCode()) , address))
                 .compose(mViewRef.get().<HttpResult<Orders>>bindLifecycle())
                 .subscribe(new BaseHttpRxObserver<Orders>() {
                     @Override
                     protected void onSuccess(Orders response) {
-                        if (response != null){
+                        if (response != null) {
                             success(response, page);
                         }
                     }
@@ -65,10 +74,11 @@ public class MasterEmployerModule extends BaseModule<IMasterEmployerView> implem
                 .subscribe(new BaseHttpRxObserver<Orders>() {
                     @Override
                     protected void onSuccess(Orders response) {
-                        if (response != null){
+                        if (response != null) {
                             success(response, page);
                         }
                     }
+
                     @Override
                     public void onError(ApiException e) {
                         super.onError(e);
@@ -81,15 +91,16 @@ public class MasterEmployerModule extends BaseModule<IMasterEmployerView> implem
     public void employerOrderList() {
         final int page = mViewRef.get().getPage();
         RxUtils.getObservable(ServiceUrl.getUserApi().getOrderList(
-                 String.valueOf(page),String.valueOf(StaticExplain.PAGE_NUM.getCode())))
+                String.valueOf(page), String.valueOf(StaticExplain.PAGE_NUM.getCode())))
                 .compose(mViewRef.get().<HttpResult<Orders>>bindLifecycle())
                 .subscribe(new BaseHttpRxObserver<Orders>() {
                     @Override
                     protected void onSuccess(Orders orders) {
-                        if (orders != null){
+                        if (orders != null) {
                             success(orders, page);
                         }
                     }
+
                     @Override
                     public void onError(ApiException e) {
                         super.onError(e);
@@ -111,21 +122,41 @@ public class MasterEmployerModule extends BaseModule<IMasterEmployerView> implem
 
     }
 
+
     private void success(Orders response, int page) {
         List<OngoingOrdersList> ordersLists = response.getList();
-        if (page == 1){
+        if (page == StaticExplain.PAGE_NUMBER.getCode()) {
             //刷新
             mViewRef.get().refreshSuccess(ordersLists);
-        }else{
+        } else {
             //加载
             mViewRef.get().loadMoreSuccess(ordersLists);
         }
-        if (ordersLists.size() < StaticExplain.PAGE_NUM.getCode()){
+        if (ordersLists.size() < StaticExplain.PAGE_NUM.getCode()) {
             //加载结束
             mViewRef.get().loadMoreEnd();
-        }else {
+        } else {
             //加载完成
             mViewRef.get().loadMoreComplete();
         }
     }
+
+    @Override
+    public void requestWorkingStateSwitching() {
+        final String status = mViewRef.get().getStatus();
+        Observable<HttpResult<Object>> observable = ServiceUrl.getUserApi().updateStatus(status);
+        RxUtils.getObservable(observable)
+                .compose(mViewRef.get().<HttpResult<Object>>bindLifecycle())
+                .subscribe(new BaseHttpRxObserver<Object>(mContext.get()) {
+                    @Override
+                    protected void onSuccess(Object response) {
+                        UserInfoDao userInfoDao = DBHelper.getInstance().getUserInfoDao();
+                        UserInfo unique = userInfoDao.queryBuilder().unique();
+                        unique.setStartFlag(DensityUtils.stringTypeInteger(status));
+                        userInfoDao.update(unique);
+                        mViewRef.get().workingStateSwitchingSuccess();
+                    }
+                });
+    }
+
 }

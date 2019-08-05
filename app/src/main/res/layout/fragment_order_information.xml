@@ -276,6 +276,6 @@
             android:layout_marginTop="@dimen/tool_lib_35dp"
             android:layout_marginRight="@dimen/tool_lib_16dp"
             android:layout_marginBottom="@dimen/tool_lib_16dp"
-            tools:text="下一步" />
+            android:text="@string/submit" />
     </RelativeLayout>
 </android.support.v4.widget.NestedScrollView>

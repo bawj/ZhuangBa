@@ -167,5 +167,14 @@ public class DateUtil {
     }
 
 
-
+    public static Long dateToCurrentTimeMilli(String date , String pattern){
+        try {
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern, Locale.UK);
+            Date parse = simpleDateFormat.parse(date);
+            return parse.getTime();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return 0L;
+    }
 }

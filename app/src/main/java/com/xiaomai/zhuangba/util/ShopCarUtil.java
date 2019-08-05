@@ -7,6 +7,7 @@ import com.xiaomai.zhuangba.data.bean.ServiceSubcategoryProject;
 import com.xiaomai.zhuangba.data.bean.ShopCarData;
 import com.xiaomai.zhuangba.data.db.DBHelper;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -99,10 +100,39 @@ public class ShopCarUtil {
         ShopCarDataDao shopCarDataDao = DBHelper.getInstance().getShopCarDataDao();
         List<ShopCarData> list = shopCarDataDao.queryBuilder().list();
         for (ShopCarData shopCarData : list) {
-            double money = DensityUtils.stringTypeDouble(shopCarData.getMoney()) * DensityUtils.stringTypeDouble(shopCarData.getNumber());
-            totalMoney = AmountUtil.add(totalMoney, money, 2);
+            //商品数量
+            String number = shopCarData.getNumber();
+            //单个商品总价
+            double singleMoney = 0.0;
+            for (int i = 0; i < DensityUtils.stringTypeInteger(number); i++) {
+                if (i == 0){
+                    singleMoney += DensityUtils.stringTypeDouble(shopCarData.getMoney());
+                }else if (i == 1){
+                    singleMoney += DensityUtils.stringTypeDouble(shopCarData.getMoney2());
+                }else if (i == 2){
+                    singleMoney += DensityUtils.stringTypeDouble(shopCarData.getMoney3());
+                }else{
+                    singleMoney += DensityUtils.stringTypeDouble(shopCarData.getMoney3());
+                }
+            }
+            totalMoney = AmountUtil.add(totalMoney, singleMoney, 2);
         }
         return totalMoney;
     }
 
+    public static Double getTotalMoneys(int number , double price , double price1 , double price2){
+        Double priceNumber = 0.0;
+        for (int i = 0; i < number; i++) {
+            if (i == 0){
+                priceNumber += price;
+            }else if (i == 1){
+                priceNumber += price1;
+            }else if (i == 2){
+                priceNumber += price2;
+            }else{
+                priceNumber += price2;
+            }
+        }
+        return new BigDecimal(priceNumber).setScale(2,   BigDecimal.ROUND_HALF_UP).doubleValue();
+    }
 }

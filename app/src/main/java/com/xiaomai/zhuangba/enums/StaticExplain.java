@@ -18,7 +18,7 @@ public enum  StaticExplain {
     REJECT_AUDIT(3 , "已驳回 审核不通过"),
     STOP_REFRESH(1 , "停止刷新 handler"),
     PAGE_NUMBER(1,"加载 page  默认 1"),
-    PAGE_NUM(15 , "刷新加载一次加载15条数据"),
+    PAGE_NUM(20 , "刷新加载一次加载15条数据"),
     NEW_TASK(1,"新任务"),
     NEED_DEAL_WITH(2, "需处理"),
     ONGOING_ORDERS(3 , "进行中的订单"),

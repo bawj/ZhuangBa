@@ -56,4 +56,5 @@ dependencies {
     api libs["joda-time"]
     api libs["rxpermissions"]
     api libs["pickerView"]
+    api libs["photoView"]
 }

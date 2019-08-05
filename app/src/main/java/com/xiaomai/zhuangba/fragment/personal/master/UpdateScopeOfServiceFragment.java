@@ -40,11 +40,6 @@ public class UpdateScopeOfServiceFragment extends ScopeOfServiceFragment {
     }
 
     @Override
-    public void initView() {
-
-    }
-
-    @Override
     public void submission() {
         final String address = getAddress() + editAddressDetail.getText().toString();
         List<SkillList> skillLists = getSkillList();
@@ -57,13 +52,14 @@ public class UpdateScopeOfServiceFragment extends ScopeOfServiceFragment {
         Observable<HttpResult<Object>> httpResultObservable = ServiceUrl.getUserApi().userAuthenticationAddress(requestBody);
         RxUtils.getObservable(httpResultObservable)
                 .compose(this.<HttpResult<Object>>bindToLifecycle())
-                .subscribe(new BaseHttpRxObserver<Object>() {
+                .subscribe(new BaseHttpRxObserver<Object>(getActivity()) {
                     @Override
                     protected void onSuccess(Object response) {
                         UserInfo unique = DBHelper.getInstance().getUserInfoDao().queryBuilder().unique();
                         unique.setAddress(address);
                         DBHelper.getInstance().getUserInfoDao().update(unique);
                         ToastUtil.showShort(getString(R.string.update_success));
+                        getBaseFragmentActivity().popBackStack();
                     }
                 });
     }

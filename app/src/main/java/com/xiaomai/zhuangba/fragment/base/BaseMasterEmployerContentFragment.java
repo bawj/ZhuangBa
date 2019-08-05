@@ -9,6 +9,7 @@ import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.toollib.base.BaseFragment;
+import com.example.toollib.util.Log;
 import com.xiaomai.zhuangba.R;
 import com.xiaomai.zhuangba.adapter.OrderListAdapter;
 import com.xiaomai.zhuangba.data.bean.OngoingOrdersList;
@@ -19,10 +20,12 @@ import com.xiaomai.zhuangba.data.module.masteremployer.IMasterEmployerView;
 import com.xiaomai.zhuangba.data.module.masteremployer.MasterEmployerModule;
 import com.xiaomai.zhuangba.data.observable.Observer;
 import com.xiaomai.zhuangba.enums.StaticExplain;
+import com.xiaomai.zhuangba.fragment.personal.PricingSheetFragment;
 
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 /**
  * @author Administrator
@@ -31,14 +34,14 @@ import butterknife.BindView;
  * 首页 内容fragment
  */
 public class BaseMasterEmployerContentFragment extends BaseFragment<IMasterEmployerModule> implements IMasterEmployerView,
-        BaseQuickAdapter.OnItemClickListener, Observer {
+        BaseQuickAdapter.OnItemClickListener, Observer, BaseQuickAdapter.RequestLoadMoreListener {
 
     @BindView(R.id.rvBaseList)
     RecyclerView rvBaseList;
 
-    private int page = 1;
+    private int page = StaticExplain.PAGE_NUMBER.getCode();
     public Handler handler;
-    private OrderListAdapter orderListAdapter;
+    private BaseQuickAdapter orderListAdapter;
 
     public static BaseMasterEmployerContentFragment newInstance() {
         Bundle args = new Bundle();
@@ -60,22 +63,18 @@ public class BaseMasterEmployerContentFragment extends BaseFragment<IMasterEmplo
     @Override
     public void initView() {
         rvBaseList.setLayoutManager(new LinearLayoutManager(getActivity()));
-        orderListAdapter = new OrderListAdapter();
-        rvBaseList.setAdapter(orderListAdapter);
-        orderListAdapter.setEmptyView(R.layout.item_not_data, rvBaseList);
-        orderListAdapter.setOnItemClickListener(this);
-        orderListAdapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
-            @Override
-            public void onLoadMoreRequested() {
-                //上拉加载
-                page++;
-                onBaseLoadMoreRequested();
-            }
-        }, rvBaseList);
+        orderListAdapter = getBaseOrderAdapter();
+        if (orderListAdapter != null) {
+            orderListAdapter.setEmptyView(getEmptyView(), rvBaseList);
+            orderListAdapter.setOnItemClickListener(this);
+            rvBaseList.setAdapter(orderListAdapter);
+            orderListAdapter.setOnLoadMoreListener(this, rvBaseList);
+        }
+        statusBarWhite();
     }
 
     @Override
-    public void update(String message, Handler handler) {
+    public void update(String message, String address, Handler handler) {
         this.handler = handler;
         page = 1;
         //刷新时 禁止上拉加载
@@ -89,6 +88,14 @@ public class BaseMasterEmployerContentFragment extends BaseFragment<IMasterEmplo
         orderListAdapter.setNewData(ordersLists);
         //刷新完成 可以上拉加载
         orderListAdapter.setEnableLoadMore(true);
+    }
+
+    @Override
+    public void onLoadMoreRequested() {
+        //上拉加载
+        page++;
+        Log.d("onLoadMoreRequested 上拉加载" + page);
+        onBaseLoadMoreRequested();
     }
 
     @Override
@@ -108,11 +115,18 @@ public class BaseMasterEmployerContentFragment extends BaseFragment<IMasterEmplo
         orderListAdapter.addData(ongoingOrdersLists);
     }
 
+    public int getEmptyView() {
+        return R.layout.item_not_data;
+    }
+
     @Override
     public void loadMoreComplete() {
         orderListAdapter.loadMoreComplete();
     }
 
+    public BaseQuickAdapter getBaseOrderAdapter() {
+        return null;
+    }
 
     /**
      * 停止刷新
@@ -139,6 +153,7 @@ public class BaseMasterEmployerContentFragment extends BaseFragment<IMasterEmplo
 
     public void onBaseLoadMoreRequested() {
         //上拉加载
+        Log.e("onLoadMoreRequested 上拉加载");
     }
 
     @Override
@@ -155,6 +170,22 @@ public class BaseMasterEmployerContentFragment extends BaseFragment<IMasterEmplo
     public void statisticsSuccess(StatisticsData statisticsData) {
 
     }
+
+    @Override
+    public String getStatus() {
+        return null;
+    }
+
+    @Override
+    public void workingStateSwitchingSuccess() {
+
+    }
+
+    @Override
+    public String getAddress() {
+        return null;
+    }
+
     @Override
     protected String getActivityTitle() {
         return null;
@@ -175,5 +206,4 @@ public class BaseMasterEmployerContentFragment extends BaseFragment<IMasterEmplo
         super.onDestroy();
         handler = null;
     }
-
 }

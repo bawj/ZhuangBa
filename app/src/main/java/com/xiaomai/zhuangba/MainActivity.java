@@ -23,6 +23,7 @@ import com.xiaomai.zhuangba.fragment.employer.EmployerFragment;
 import com.xiaomai.zhuangba.fragment.guide.GuidePageFragment;
 import com.xiaomai.zhuangba.fragment.login.LoginFragment;
 import com.xiaomai.zhuangba.fragment.masterworker.MasterWorkerFragment;
+import com.xiaomai.zhuangba.fragment.orderdetail.CompleteFragment;
 import com.xiaomai.zhuangba.fragment.personal.wallet.detailed.WalletDetailFragment;
 import com.example.toollib.util.spf.SpfConst;
 import com.xiaomai.zhuangba.weight.dialog.UpdateVersionDialog;
@@ -183,7 +184,9 @@ public class MainActivity extends BaseActivity {
                 touchTime = System.currentTimeMillis();
                 ToastUtil.showShort(getString(R.string.press_again_exit));
             }
-        } else {
+        }/* else if (currentFragment instanceof MasterCompleteFragment){
+
+        }*/else {
             super.onBackPressed();
         }
     }

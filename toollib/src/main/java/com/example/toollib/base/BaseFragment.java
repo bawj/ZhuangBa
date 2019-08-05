@@ -3,7 +3,6 @@ package com.example.toollib.base;
 import android.graphics.Color;
 import android.support.annotation.LayoutRes;
 import android.text.TextUtils;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -223,16 +222,8 @@ public abstract class BaseFragment<M extends IBaseModule> extends BaseRxFragment
         QMUIStatusBarHelper.setStatusBarDarkMode(getBaseFragmentActivity());
     }
 
-    /**
-     * 退出界面之前把状态栏还原为白色字体与图标
-     */
-    public void onStatusBarDarkMode() {
-        QMUIStatusBarHelper.setStatusBarDarkMode(getBaseFragmentActivity());
-    }
-
     @Override
     public void showToast(String message) {
-        ToastUtil.setGravity(Gravity.CENTER, 0, 0);
         ToastUtil.showShort(message);
     }
 

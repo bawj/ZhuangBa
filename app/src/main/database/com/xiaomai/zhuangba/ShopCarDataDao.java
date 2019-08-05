@@ -26,11 +26,13 @@ public class ShopCarDataDao extends AbstractDao<ShopCarData, Long> {
     public static class Properties {
         public final static Property Id = new Property(0, Long.class, "id", true, "_id");
         public final static Property Money = new Property(1, String.class, "money", false, "MONEY");
-        public final static Property Text = new Property(2, String.class, "text", false, "TEXT");
-        public final static Property Icon = new Property(3, String.class, "icon", false, "ICON");
-        public final static Property Number = new Property(4, String.class, "number", false, "NUMBER");
-        public final static Property ServiceId = new Property(5, String.class, "serviceId", false, "SERVICE_ID");
-        public final static Property ParentServiceId = new Property(6, String.class, "parentServiceId", false, "PARENT_SERVICE_ID");
+        public final static Property Money2 = new Property(2, String.class, "money2", false, "MONEY2");
+        public final static Property Money3 = new Property(3, String.class, "money3", false, "MONEY3");
+        public final static Property Text = new Property(4, String.class, "text", false, "TEXT");
+        public final static Property Icon = new Property(5, String.class, "icon", false, "ICON");
+        public final static Property Number = new Property(6, String.class, "number", false, "NUMBER");
+        public final static Property ServiceId = new Property(7, String.class, "serviceId", false, "SERVICE_ID");
+        public final static Property ParentServiceId = new Property(8, String.class, "parentServiceId", false, "PARENT_SERVICE_ID");
     }
 
 
@@ -48,11 +50,13 @@ public class ShopCarDataDao extends AbstractDao<ShopCarData, Long> {
         db.execSQL("CREATE TABLE " + constraint + "\"SHOP_CAR_DATA\" (" + //
                 "\"_id\" INTEGER PRIMARY KEY ," + // 0: id
                 "\"MONEY\" TEXT," + // 1: money
-                "\"TEXT\" TEXT," + // 2: text
-                "\"ICON\" TEXT," + // 3: icon
-                "\"NUMBER\" TEXT," + // 4: number
-                "\"SERVICE_ID\" TEXT," + // 5: serviceId
-                "\"PARENT_SERVICE_ID\" TEXT);"); // 6: parentServiceId
+                "\"MONEY2\" TEXT," + // 2: money2
+                "\"MONEY3\" TEXT," + // 3: money3
+                "\"TEXT\" TEXT," + // 4: text
+                "\"ICON\" TEXT," + // 5: icon
+                "\"NUMBER\" TEXT," + // 6: number
+                "\"SERVICE_ID\" TEXT," + // 7: serviceId
+                "\"PARENT_SERVICE_ID\" TEXT);"); // 8: parentServiceId
     }
 
     /** Drops the underlying database table. */
@@ -75,29 +79,39 @@ public class ShopCarDataDao extends AbstractDao<ShopCarData, Long> {
             stmt.bindString(2, money);
         }
  
+        String money2 = entity.getMoney2();
+        if (money2 != null) {
+            stmt.bindString(3, money2);
+        }
+ 
+        String money3 = entity.getMoney3();
+        if (money3 != null) {
+            stmt.bindString(4, money3);
+        }
+ 
         String text = entity.getText();
         if (text != null) {
-            stmt.bindString(3, text);
+            stmt.bindString(5, text);
         }
  
         String icon = entity.getIcon();
         if (icon != null) {
-            stmt.bindString(4, icon);
+            stmt.bindString(6, icon);
         }
  
         String number = entity.getNumber();
         if (number != null) {
-            stmt.bindString(5, number);
+            stmt.bindString(7, number);
         }
  
         String serviceId = entity.getServiceId();
         if (serviceId != null) {
-            stmt.bindString(6, serviceId);
+            stmt.bindString(8, serviceId);
         }
  
         String parentServiceId = entity.getParentServiceId();
         if (parentServiceId != null) {
-            stmt.bindString(7, parentServiceId);
+            stmt.bindString(9, parentServiceId);
         }
     }
 
@@ -115,29 +129,39 @@ public class ShopCarDataDao extends AbstractDao<ShopCarData, Long> {
             stmt.bindString(2, money);
         }
  
+        String money2 = entity.getMoney2();
+        if (money2 != null) {
+            stmt.bindString(3, money2);
+        }
+ 
+        String money3 = entity.getMoney3();
+        if (money3 != null) {
+            stmt.bindString(4, money3);
+        }
+ 
         String text = entity.getText();
         if (text != null) {
-            stmt.bindString(3, text);
+            stmt.bindString(5, text);
         }
  
         String icon = entity.getIcon();
         if (icon != null) {
-            stmt.bindString(4, icon);
+            stmt.bindString(6, icon);
         }
  
         String number = entity.getNumber();
         if (number != null) {
-            stmt.bindString(5, number);
+            stmt.bindString(7, number);
         }
  
         String serviceId = entity.getServiceId();
         if (serviceId != null) {
-            stmt.bindString(6, serviceId);
+            stmt.bindString(8, serviceId);
         }
  
         String parentServiceId = entity.getParentServiceId();
         if (parentServiceId != null) {
-            stmt.bindString(7, parentServiceId);
+            stmt.bindString(9, parentServiceId);
         }
     }
 
@@ -151,11 +175,13 @@ public class ShopCarDataDao extends AbstractDao<ShopCarData, Long> {
         ShopCarData entity = new ShopCarData( //
             cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
             cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // money
-            cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // text
-            cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // icon
-            cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4), // number
-            cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5), // serviceId
-            cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6) // parentServiceId
+            cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // money2
+            cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // money3
+            cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4), // text
+            cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5), // icon
+            cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6), // number
+            cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7), // serviceId
+            cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8) // parentServiceId
         );
         return entity;
     }
@@ -164,11 +190,13 @@ public class ShopCarDataDao extends AbstractDao<ShopCarData, Long> {
     public void readEntity(Cursor cursor, ShopCarData entity, int offset) {
         entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
         entity.setMoney(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
-        entity.setText(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
-        entity.setIcon(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
-        entity.setNumber(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
-        entity.setServiceId(cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5));
-        entity.setParentServiceId(cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6));
+        entity.setMoney2(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
+        entity.setMoney3(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
+        entity.setText(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
+        entity.setIcon(cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5));
+        entity.setNumber(cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6));
+        entity.setServiceId(cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7));
+        entity.setParentServiceId(cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8));
      }
     
     @Override

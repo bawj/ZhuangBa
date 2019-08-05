@@ -83,4 +83,9 @@ public interface IOrderInformationView extends IBaseView {
      */
     void placeOrderSuccess(String requestBodyString);
 
+
+    /**
+     * 修改成功
+     */
+    void updateOrderSuccess();
 }

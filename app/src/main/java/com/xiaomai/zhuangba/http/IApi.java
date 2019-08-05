@@ -23,12 +23,15 @@ import com.xiaomai.zhuangba.data.bean.WalletDetailBean;
 import java.util.List;
 
 import io.reactivex.Observable;
+import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.Part;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
@@ -152,6 +155,17 @@ public interface IApi {
     Observable<HttpResult<Orders>> getMasterOrderList(@Query("pageNum") String pageNum, @Query("pageSize") String pageSize);
 
     /**
+     * 订单池
+     *
+     * @param pageNum  页码
+     * @param pageSize 一页显示多少条
+     * @param address  地址
+     * @return Observable
+     */
+    @GET("order/selectOrder")
+    Observable<HttpResult<Orders>> getMasterSelectOrder(@Query("pageNum") String pageNum, @Query("pageSize") String pageSize , @Query("address") String address);
+
+    /**
      * 师傅需处理订单首页
      *
      * @param pageNum  页码
@@ -172,6 +186,14 @@ public interface IApi {
     Observable<HttpResult<OngoingOrdersList>> getOrderDetails(@Path("orderCode") String orderCode);
 
     /**
+     * 订单池详情
+     * @param orderCode 订单编号
+     * @return observable
+     */
+    @GET("order/getOrderByOrderCode")
+    Observable<HttpResult<OngoingOrdersList>> getOrderByOrderCode(@Query("orderCode") String orderCode);
+
+    /**
      * 查询服务项目
      *
      * @param orderCode 订单code
@@ -188,6 +210,7 @@ public interface IApi {
      */
     @GET("order/getOrderDateList/{orderCode}")
     Observable<HttpResult<List<OrderDateList>>> getOrderDateList(@Path("orderCode") String orderCode);
+
 
 
     /**
@@ -431,6 +454,16 @@ public interface IApi {
     Observable<HttpResult<Object>> uploadFile(@Body RequestBody body);
 
     /**
+     * 多图上传
+     *
+     * @param parts parts
+     * @return Observable
+     */
+    @Multipart
+    @POST("ftp/uploadFiles")
+    Observable<HttpResult<Object>> uploadFiles(@Part() List<MultipartBody.Part> parts);
+
+    /**
      * 技能列表
      *
      * @return observable
@@ -465,4 +498,94 @@ public interface IApi {
      */
     @POST("user/userAuthenticationAddress")
     Observable<HttpResult<Object>> userAuthenticationAddress(@Body RequestBody requestBody);
+
+    /**
+     * 修改开工中和休息中
+     *
+     * @param status 状态 1 工作 2 休息
+     * @return observable
+     */
+    @GET("user/updateStatus")
+    Observable<HttpResult<Object>> updateStatus(@Query("status") String status);
+
+
+    /**
+     * 师傅取消任务
+     *
+     * @param orderCode        订单编号
+     * @param cancellationCauses 取消说明
+     * @return observable
+     */
+    @GET("order/masterCancelOrder/{orderCode}")
+    Observable<HttpResult<Object>> masterCancelOrder(@Path("orderCode") String orderCode, @Query("cancellationCauses") String cancellationCauses);
+
+    /**
+     * 雇主取消任务
+     *
+     * @param orderCode        订单编号
+     * @return observable
+     */
+    @GET("order/cancelOrder/{orderCode}")
+    Observable<HttpResult<Object>> cancelOrder(@Path("orderCode") String orderCode);
+
+    /**
+     * 修改订单 地址
+     *
+     * @param body body
+     * @return observable
+     */
+    @POST("order/updateOrderAddress")
+    Observable<HttpResult<String>> updateOrderAddress(@Body RequestBody body);
+
+
+    /**
+     * 师傅接受任务
+     *
+     * @param orderCode        订单编号
+     * @return observable
+     */
+    @GET("order/acceptOrder/{orderCode}")
+    Observable<HttpResult<Object>> acceptOrder(@Path("orderCode") String orderCode);
+
+
+    /**
+     * 师傅确认订单时间
+     *
+     * @param orderCode    订单编号
+     * @param confirmationTime 时间
+     * @return observable
+     */
+    @GET("order/confirmationOrder/{orderCode}")
+    Observable<HttpResult<Object>> getConfirmationOrder(@Path("orderCode") String orderCode, @Query("confirmationTime") String confirmationTime);
+
+
+    /**
+     * 现在出发
+     *
+     * @param orderCode 订单编号
+     * @return observable
+     */
+    @GET("order/nowWeLeave/{orderCode}")
+    Observable<HttpResult<Object>> nowWeLeave(@Path("orderCode") String orderCode);
+
+
+    /**
+     * 开始施工
+     * @param orderCode 订单编号
+     * @param beforePicturesUrl 多图
+     * @param electronicSignature 单图
+     * @return observable
+     */
+    @GET("order/startTaskOrder/{orderCode}")
+    Observable<HttpResult<Object>> startTaskOrder(@Path("orderCode") String orderCode,
+                                                  @Query("beforePicturesUrl") String beforePicturesUrl, @Query("electronicSignature") String electronicSignature);
+
+    /**
+     * 师傅提交验证
+     *
+     * @param requestBody body
+     * @return observable
+     */
+    @POST("order/submitValidation")
+    Observable<HttpResult<Object>> submitValidation(@Body RequestBody requestBody);
 }

@@ -51,6 +51,7 @@ public class EmployerFragment extends BaseMasterEmployerFragment {
     @Override
     public void initView() {
         super.initView();
+        statusBarWhite();
     }
 
     @OnClick(R.id.relEmployerRelease)

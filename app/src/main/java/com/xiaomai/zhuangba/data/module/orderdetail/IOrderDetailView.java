@@ -26,4 +26,9 @@ public interface IOrderDetailView extends IBaseView {
      * @return string
      */
     String getOrderCode();
+
+//    /**
+//     * 取消任务成功
+//     */
+//    void cancelOrderSuccess();
 }

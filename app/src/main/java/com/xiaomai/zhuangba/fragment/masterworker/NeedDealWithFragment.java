@@ -4,13 +4,18 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.toollib.util.Log;
+import com.qmuiteam.qmui.arch.QMUIFragmentActivity;
 import com.xiaomai.zhuangba.R;
+import com.xiaomai.zhuangba.adapter.NeedDealWithAdapter;
+import com.xiaomai.zhuangba.adapter.OrderListAdapter;
 import com.xiaomai.zhuangba.data.bean.OngoingOrdersList;
 import com.xiaomai.zhuangba.enums.OrdersEnum;
 import com.xiaomai.zhuangba.enums.StringTypeExplain;
 import com.xiaomai.zhuangba.fragment.base.BaseMasterEmployerContentFragment;
 import com.xiaomai.zhuangba.fragment.orderdetail.ProcessedDetailFragment;
+import com.xiaomai.zhuangba.util.OrderStatusUtil;
 
 import java.util.List;
 
@@ -51,8 +56,8 @@ public class NeedDealWithFragment extends BaseMasterEmployerContentFragment {
     }
 
     @Override
-    public void update(String code , Handler handler) {
-        super.update(code , handler);
+    public void update(String code ,String address, Handler handler) {
+        super.update(code ,address, handler);
         if (StringTypeExplain.REFRESH_NEED_DEAL_WITH_FRAGMENT.getCode().equals(code)){
             iModule.requestOngoingOrders();
         }
@@ -61,16 +66,19 @@ public class NeedDealWithFragment extends BaseMasterEmployerContentFragment {
     @Override
     public void onMItemClick(View view, int position) {
         OngoingOrdersList ongoingOrdersList = (OngoingOrdersList) view.findViewById(R.id.tvItemOrdersTitle).getTag();
-        if (ongoingOrdersList.getOrderStatus() == OrdersEnum.MASTER_PENDING_DISPOSAL.getCode()){
-            //待处理
-            startFragment(ProcessedDetailFragment.newInstance(ongoingOrdersList.getOrderCode()));
-        }
+        OrderStatusUtil.startMasterOrderDetail(getBaseFragmentActivity() , ongoingOrdersList.getOrderCode() ,
+                ongoingOrdersList.getOrderStatus() , ongoingOrdersList.getExpireTime());
     }
 
     @Override
     public void onBaseLoadMoreRequested() {
-        super.onBaseLoadMoreRequested();
+        Log.e("NeedDealWithFragment 上拉加载" );
         iModule.requestOngoingOrders();
+    }
+
+    @Override
+    public BaseQuickAdapter getBaseOrderAdapter() {
+        return new NeedDealWithAdapter();
     }
 
     @Override

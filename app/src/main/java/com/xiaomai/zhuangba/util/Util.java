@@ -2,8 +2,10 @@ package com.xiaomai.zhuangba.util;
 
 import android.app.ActivityManager;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.support.v4.content.ContextCompat;
 import android.text.InputFilter;
 import android.text.SpannableString;
@@ -16,10 +18,18 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.toollib.util.spf.SPUtils;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.xiaomai.zhuangba.R;
+import com.xiaomai.zhuangba.data.bean.ProvinceBean;
+import com.xiaomai.zhuangba.data.bean.ProvincialData;
 import com.xiaomai.zhuangba.data.db.DBHelper;
 import com.example.toollib.util.spf.SpfConst;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -167,4 +177,71 @@ public class Util {
         }
         return "";
     }
+
+    public static void getProvincialAssemble(Context mContext, ArrayList<ProvinceBean> options1Items
+            , ArrayList<ArrayList<String>> options2Items) {
+        List<ProvincialData> provincialData = Util.getProvincialData(mContext);
+        for (int i = 0; i < provincialData.size(); i++) {
+            ProvincialData provincialData1 = provincialData.get(i);
+            options1Items.add(new ProvinceBean(i, provincialData1.getName(), "描述部分", "其他数据"));
+            List<ProvincialData.ChildBean> child = provincialData1.getChild();
+            ArrayList<String> optionsItem = new ArrayList<>();
+            for (ProvincialData.ChildBean childBean : child) {
+                optionsItem.add(childBean.getName());
+            }
+            options2Items.add(optionsItem);
+        }
+
+    }
+
+    public static List<ProvincialData> getProvincialData(Context mContext) {
+        StringBuilder newstringBuilder = new StringBuilder();
+        InputStream inputStream = null;
+        try {
+            inputStream = mContext.getResources().getAssets().open("ProvincialData.json");
+            InputStreamReader isr = new InputStreamReader(inputStream);
+            BufferedReader reader = new BufferedReader(isr);
+            String jsonLine;
+            while ((jsonLine = reader.readLine()) != null) {
+                newstringBuilder.append(jsonLine);
+            }
+            reader.close();
+            isr.close();
+            inputStream.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        String result = newstringBuilder.toString();
+        return new Gson().fromJson(result, new TypeToken<List<ProvincialData>>() {
+        }.getType());
+    }
+
+    /**
+     * 拨打电话（跳转到拨号界面，用户手动点击拨打）
+     *
+     * @param phoneNum 电话号码
+     */
+    public static void callPhone(Context mContext ,String phoneNum) {
+        try {
+            Intent intent = new Intent(Intent.ACTION_DIAL);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            Uri data = Uri.parse("tel:" + phoneNum);
+            intent.setData(data);
+            mContext.startActivity(intent);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+    public static List<String> getList(String s) {
+        List<String> urlList;
+        try {
+            urlList = new Gson().fromJson(s, new TypeToken<List<String>>() {
+            }.getType());
+        } catch (Exception e) {
+            urlList = new ArrayList<>();
+        }
+        return urlList;
+    }
+
+
 }

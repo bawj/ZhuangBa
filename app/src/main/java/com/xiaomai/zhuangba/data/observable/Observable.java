@@ -13,6 +13,6 @@ public interface Observable {
 
     void removeObserver(Observer observer);
 
-    void notifyObservers(String message , Handler handler);
+    void notifyObservers(String message ,String address, Handler handler);
 
 }

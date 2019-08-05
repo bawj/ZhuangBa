@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.qmuiteam.qmui.widget.QMUIWindowInsetLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -20,15 +20,15 @@
             android:layout_height="wrap_content" />
 
         <RelativeLayout
+            android:id="@+id/layBaseOrderDetail"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:background="@color/tool_lib_gray_F5F6FA"
+            android:orientation="vertical">
 
             <ScrollView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/tool_lib_gray_F5F6FA"
-                android:focusableInTouchMode="true"
-                android:orientation="vertical">
+                android:layout_height="wrap_content">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -74,13 +74,6 @@
                             android:layout_marginRight="@dimen/tool_lib_46dp"
                             android:layout_marginBottom="@dimen/tool_lib_16dp"
                             android:src="@drawable/bg_new_task_order_detail" />
-
-                        <com.qmuiteam.qmui.widget.QMUITopBarLayout
-                            android:id="@+id/topNewTaskTitle"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:fitsSystemWindows="true"
-                            app:qmui_topbar_need_separator="false" />
 
                     </RelativeLayout>
 
@@ -320,10 +313,11 @@
                     android:text="@string/cancel_the_order"
                     android:textColor="@color/tool_lib_gray_777777"
                     android:textSize="@dimen/tool_lib_14sp"
+                    app:qmui_backgroundColor="@android:color/white"
                     app:qmui_borderColor="@color/tool_lib_gray_E8E8E8"
                     app:qmui_borderWidth="@dimen/tool_lib_1dp" />
 
-                <Button
+                <com.qmuiteam.qmui.layout.QMUIButton
                     android:id="@+id/btnNewTaskReceipt"
                     style="@style/base_btn"
                     android:layout_width="@dimen/tool_lib_90dp"
@@ -334,10 +328,18 @@
                     android:layout_marginEnd="@dimen/tool_lib_16dp"
                     android:layout_marginRight="@dimen/tool_lib_16dp"
                     android:text="@string/receipt" />
-
             </RelativeLayout>
+
         </RelativeLayout>
 
     </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 
-</RelativeLayout>
+    <com.qmuiteam.qmui.widget.QMUITopBarLayout
+        android:id="@+id/topNewTaskTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="true"
+        app:qmui_layout_collapseMode="pin"
+        app:qmui_topbar_bg_color="@color/qmui_config_color_transparent"
+        app:qmui_topbar_need_separator="false" />
+</com.qmuiteam.qmui.widget.QMUIWindowInsetLayout>

@@ -13,4 +13,8 @@ public interface IOrderInformationModule extends IBaseModule<IOrderInformationVi
      */
     void submitOrder();
 
+    /**
+     * 修改订单
+     */
+    void requestUpdateOrder();
 }

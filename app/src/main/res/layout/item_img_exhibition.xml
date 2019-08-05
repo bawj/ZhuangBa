@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <ImageView
+        android:id="@+id/ivItemImgExhibition"
+        tools:src="@drawable/bg_guide_one"
+        android:scaleType="centerCrop"
+        android:layout_width="@dimen/tool_lib_76dp"
+        android:layout_height="@dimen/tool_lib_76dp"
+        android:layout_centerInParent="true" />
+
+</RelativeLayout>

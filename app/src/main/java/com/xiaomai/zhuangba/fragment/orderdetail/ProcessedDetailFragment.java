@@ -3,6 +3,7 @@ package com.xiaomai.zhuangba.fragment.orderdetail;
 import android.os.Bundle;
 
 import com.xiaomai.zhuangba.R;
+import com.xiaomai.zhuangba.fragment.orderdetail.master.base.BaseMasterOrderDetailFragment;
 import com.xiaomai.zhuangba.util.ConstantUtil;
 
 /**

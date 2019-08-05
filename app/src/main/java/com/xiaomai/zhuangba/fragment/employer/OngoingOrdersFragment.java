@@ -4,10 +4,13 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.xiaomai.zhuangba.R;
+import com.xiaomai.zhuangba.adapter.OngoingOrdersAdapter;
 import com.xiaomai.zhuangba.data.bean.OngoingOrdersList;
 import com.xiaomai.zhuangba.enums.StringTypeExplain;
 import com.xiaomai.zhuangba.fragment.base.BaseMasterEmployerContentFragment;
+import com.xiaomai.zhuangba.util.OrderStatusUtil;
 
 import java.util.List;
 
@@ -32,8 +35,8 @@ public class OngoingOrdersFragment extends BaseMasterEmployerContentFragment {
     }
 
     @Override
-    public void update(String code, Handler handler) {
-        super.update(code, handler);
+    public void update(String code, String address, Handler handler) {
+        super.update(code, address, handler);
         if (code.equals(StringTypeExplain.REFRESH_NEW_TASK_FRAGMENT.getCode())) {
             iModule.employerOrderList();
         }
@@ -43,6 +46,9 @@ public class OngoingOrdersFragment extends BaseMasterEmployerContentFragment {
     public void onMItemClick(View view, int position) {
         super.onMItemClick(view, position);
         //进入 订单详情
+        OngoingOrdersList ongoingOrdersList = (OngoingOrdersList) view.findViewById(R.id.tvItemOrdersTitle).getTag();
+        OrderStatusUtil.startEmployerOrderDetail(getBaseFragmentActivity(), ongoingOrdersList.getOrderCode(),
+                ongoingOrdersList.getOrderStatus());
     }
 
     @Override
@@ -53,6 +59,11 @@ public class OngoingOrdersFragment extends BaseMasterEmployerContentFragment {
     @Override
     public int getContentView() {
         return R.layout.fragment_ongoing_orders;
+    }
+
+    @Override
+    public BaseQuickAdapter getBaseOrderAdapter() {
+        return new OngoingOrdersAdapter();
     }
 
     @Override

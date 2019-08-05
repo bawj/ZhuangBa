@@ -20,6 +20,7 @@ import com.xiaomai.zhuangba.enums.OrdersEnum;
 import com.xiaomai.zhuangba.enums.StaticExplain;
 import com.xiaomai.zhuangba.fragment.base.BaseListFragment;
 import com.xiaomai.zhuangba.http.ServiceUrl;
+import com.xiaomai.zhuangba.util.OrderStatusUtil;
 
 import io.reactivex.Observable;
 
@@ -58,19 +59,11 @@ public class HistoricalOrderFragment extends BaseListFragment<HistoricalAdapter>
                 view.findViewById(R.id.tvItemHistoricalOrdersMoney).getTag();
         UserInfo unique = DBHelper.getInstance().getUserInfoDao().queryBuilder().unique();
         if (unique.getRole().equals(String.valueOf(StaticExplain.FU_FU_SHI.getCode()))) {
-            //已过期 和 已取消的 不能进
-            int orderStatus = ordersList.getOrderStatus();
-            if (orderStatus == OrdersEnum.MASTER_EXPIRED.getCode()) {
-                showToast(getString(R.string.order_expired));
-            } else if (orderStatus == OrdersEnum.MASTER_CANCELLED.getCode()) {
-                showToast(getString(R.string.order_cancelled));
-            } else if (orderStatus == OrdersEnum.EMPLOYER_COMPLETED_CANCEL.getCode()) {
-                showToast(getString(R.string.order_cancelled));
-            } else {
-                // TODO: 2019/7/19 0019 跳转到  师傅端 已完成 详情
-            }
+            OrderStatusUtil.startMasterOrderDetail(getBaseFragmentActivity() , ordersList.getOrderCode() ,
+                    ordersList.getOrderStatus());
         } else if (unique.getRole().equals(String.valueOf(StaticExplain.EMPLOYER.getCode()))) {
-            // TODO: 2019/7/19 0019  跳转 雇主端 已取消 和 已完成 详情
+            OrderStatusUtil.startEmployerOrderDetail(getBaseFragmentActivity() , ordersList.getOrderCode() ,
+                    ordersList.getOrderStatus());
         }
     }
 

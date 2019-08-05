@@ -109,6 +109,7 @@ public class PersonalFragment extends BaseLoginRegisteredFragment {
 
     @Override
     public void onDestroy() {
+        statusBarBlack();
         EventBus.getDefault().unregister(this);
         super.onDestroy();
     }

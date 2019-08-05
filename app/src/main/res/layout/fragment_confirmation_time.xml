@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/tool_lib_gray_F5F8FA"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/tool_lib_10dp"
+        android:background="@android:color/white"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/tool_lib_16dp"
+        android:paddingRight="@dimen/tool_lib_16dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/tool_lib_10dp"
+            android:text="@string/confirmation_time_tip"
+            android:textColor="@color/tool_lib_red_EF2B2B"
+            android:textSize="@dimen/tool_lib_12sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/tool_lib_56dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/customer_name"
+                android:textColor="@color/tool_lib_gray_888888"
+                android:textSize="@dimen/tool_lib_14sp" />
+
+
+            <TextView
+                android:id="@+id/tvName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/tool_lib_34dp"
+                android:layout_marginLeft="@dimen/tool_lib_34dp"
+                android:textColor="@color/tool_lib_gray_222222"
+                android:textSize="@dimen/tool_lib_14dp"
+                tools:text="常威" />
+        </LinearLayout>
+
+        <View style="@style/tool_lib_horizontal_line" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/tool_lib_56dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/contact_information"
+                android:textColor="@color/tool_lib_gray_888888"
+                android:textSize="@dimen/tool_lib_14sp" />
+
+            <TextView
+                android:id="@+id/tvPhone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/tool_lib_34dp"
+                android:layout_marginLeft="@dimen/tool_lib_34dp"
+                android:drawableEnd="@drawable/ic_shape"
+                android:drawableRight="@drawable/ic_shape"
+                android:drawablePadding="@dimen/tool_lib_12dp"
+                android:textColor="@color/tool_lib_blue_287CDF"
+                android:textSize="@dimen/tool_lib_14sp"
+                tools:text="15657263566" />
+
+
+        </LinearLayout>
+
+        <View style="@style/tool_lib_horizontal_line" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/tool_lib_56dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/contact_address"
+                android:textColor="@color/tool_lib_gray_888888"
+                android:textSize="@dimen/tool_lib_14sp" />
+
+
+            <TextView
+                android:id="@+id/tvAddress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/tool_lib_34dp"
+                android:layout_marginLeft="@dimen/tool_lib_34dp"
+                android:textColor="@color/tool_lib_gray_222222"
+                android:textSize="@dimen/tool_lib_14sp"
+                tools:text="常威" />
+        </LinearLayout>
+
+        <View
+            style="@style/tool_lib_horizontal_line"
+            android:visibility="gone" />
+
+
+        <View style="@style/tool_lib_horizontal_line" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/tool_lib_12dp"
+                android:text="@string/specific_travel_time"
+                android:textColor="@color/tool_lib_gray_888888"
+                android:textSize="@dimen/tool_lib_14sp" />
+
+            <RelativeLayout
+                android:id="@+id/relTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/tool_lib_12dp"
+                android:layout_marginBottom="@dimen/tool_lib_12dp"
+                android:background="@drawable/gray_radius_bg">
+
+                <TextView
+                    android:id="@+id/tvDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/tool_lib_20dp"
+                    android:layout_marginRight="@dimen/tool_lib_20dp"
+                    android:drawableEnd="@drawable/ic_down"
+                    android:drawableRight="@drawable/ic_down"
+                    android:drawablePadding="@dimen/tool_lib_12dp"
+                    android:paddingLeft="@dimen/tool_lib_20dp"
+                    android:paddingTop="@dimen/tool_lib_12dp"
+                    android:paddingRight="@dimen/tool_lib_20dp"
+                    android:paddingBottom="@dimen/tool_lib_12dp"
+                    android:textColor="@color/tool_lib_gray_222222"
+                    android:textSize="@dimen/tool_lib_14sp"
+                    tools:text="2019-07-09 17:00" />
+
+            </RelativeLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <com.qmuiteam.qmui.layout.QMUIButton
+        android:id="@+id/btnData"
+        style="@style/base_btn"
+        android:layout_height="@dimen/tool_lib_46dp"
+        android:layout_marginLeft="@dimen/tool_lib_16dp"
+        android:layout_marginTop="@dimen/tool_lib_30dp"
+        android:layout_marginRight="@dimen/tool_lib_16dp"
+        android:text="@string/confirmation_time"
+        android:textSize="@dimen/tool_lib_14sp" />
+
+</LinearLayout>

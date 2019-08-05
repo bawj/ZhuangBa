@@ -1,4 +1,4 @@
-package com.xiaomai.zhuangba.fragment.orderdetail;
+package com.xiaomai.zhuangba.fragment.orderdetail.master.base;
 
 import android.widget.TextView;
 
@@ -6,6 +6,17 @@ import com.example.toollib.util.AmountUtil;
 import com.example.toollib.util.DensityUtils;
 import com.xiaomai.zhuangba.R;
 import com.xiaomai.zhuangba.data.bean.OngoingOrdersList;
+import com.xiaomai.zhuangba.data.module.orderdetail.IOrderDetailModule;
+import com.xiaomai.zhuangba.data.module.orderdetail.OrderDetailModule;
+import com.xiaomai.zhuangba.enums.OrdersEnum;
+import com.xiaomai.zhuangba.enums.StaticExplain;
+import com.xiaomai.zhuangba.enums.StringTypeExplain;
+import com.xiaomai.zhuangba.fragment.masterworker.MasterWorkerFragment;
+import com.xiaomai.zhuangba.fragment.orderdetail.BaseOrderDetailFragment;
+import com.xiaomai.zhuangba.fragment.orderdetail.CompleteFragment;
+import com.xiaomai.zhuangba.fragment.orderdetail.master.module.IMasterOrderDetailModule;
+import com.xiaomai.zhuangba.fragment.orderdetail.master.module.IMasterOrderDetailView;
+import com.xiaomai.zhuangba.fragment.orderdetail.master.module.MasterOrderDetailModule;
 
 import butterknife.BindView;
 
@@ -15,7 +26,7 @@ import butterknife.BindView;
  *
  * 师傅端订单详情 base
  */
-public class BaseMasterOrderDetailFragment extends BaseOrderDetailFragment{
+public class BaseMasterOrderDetailFragment extends BaseOrderDetailFragment<IMasterOrderDetailModule> implements IMasterOrderDetailView {
 
     /**
      * 订单中总金额¥4000.00，您当前分成比例为80% 只有师傅端显示
@@ -44,5 +55,20 @@ public class BaseMasterOrderDetailFragment extends BaseOrderDetailFragment{
         tvBaseOrderDetailDivideIntoColumns.setText(s);
     }
 
+    @Override
+    protected IMasterOrderDetailModule initModule() {
+        return new MasterOrderDetailModule();
+    }
 
+    @Override
+    public void cancelOrderSuccess() {
+        //取消订单
+        startFragment(MasterWorkerFragment.newInstance());
+    }
+
+    @Override
+    public void receiptOrderSuccess() {
+        //接单成功
+        startFragment(CompleteFragment.newInstance(getOrderCode()));
+    }
 }

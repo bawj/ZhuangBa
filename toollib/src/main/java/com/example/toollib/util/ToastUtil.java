@@ -242,6 +242,7 @@ public class ToastUtil {
      * @param text 文本
      */
     public static void showShort(CharSequence text) {
+        setGravity(Gravity.CENTER, 0, 0);
         show(text, Toast.LENGTH_SHORT);
     }
 

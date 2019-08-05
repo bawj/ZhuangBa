@@ -278,4 +278,9 @@ public class BaseOrderInformationFragment extends BaseFragment<IOrderInformation
     public void placeOrderSuccess(String requestBodyString) {
 
     }
+
+    @Override
+    public void updateOrderSuccess() {
+
+    }
 }

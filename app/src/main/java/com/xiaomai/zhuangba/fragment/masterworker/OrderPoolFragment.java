@@ -3,16 +3,17 @@ package com.xiaomai.zhuangba.fragment.masterworker;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.TextUtils;
 import android.view.View;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.toollib.util.Log;
 import com.xiaomai.zhuangba.R;
+import com.xiaomai.zhuangba.adapter.NewTaskAdapter;
 import com.xiaomai.zhuangba.data.bean.OngoingOrdersList;
-import com.xiaomai.zhuangba.enums.ForResultCode;
-import com.xiaomai.zhuangba.enums.OrdersEnum;
 import com.xiaomai.zhuangba.enums.StringTypeExplain;
 import com.xiaomai.zhuangba.fragment.base.BaseMasterEmployerContentFragment;
-import com.xiaomai.zhuangba.fragment.orderdetail.NewTaskDetailFragment;
+import com.xiaomai.zhuangba.fragment.orderdetail.master.OrderPoolDetailFragment;
 
 import java.util.List;
 
@@ -20,11 +21,13 @@ import java.util.List;
  * @author Administrator
  * @date 2019/7/6 0006
  */
-public class NewTaskFragment extends BaseMasterEmployerContentFragment{
+public class OrderPoolFragment extends BaseMasterEmployerContentFragment {
 
-    public static NewTaskFragment newInstance() {
+    private String address;
+
+    public static OrderPoolFragment newInstance() {
         Bundle args = new Bundle();
-        NewTaskFragment fragment = new NewTaskFragment();
+        OrderPoolFragment fragment = new OrderPoolFragment();
         fragment.setArguments(args);
         return fragment;
     }
@@ -37,7 +40,7 @@ public class NewTaskFragment extends BaseMasterEmployerContentFragment{
 
     @Override
     public int getContentView() {
-        return R.layout.fragment_new_task;
+        return R.layout.fragment_order_pool;
     }
 
     @Override
@@ -51,17 +54,19 @@ public class NewTaskFragment extends BaseMasterEmployerContentFragment{
     }
 
     @Override
-    public void update(String code , Handler handler) {
-        super.update(code , handler);
+    public void update(String code, String address, Handler handler) {
+        super.update(code, address, handler);
+        this.address = address;
+        Log.d("筛选 = " + address + "-- page = " + getPage());
         //下拉刷新
-        if (StringTypeExplain.REFRESH_NEW_TASK_FRAGMENT.getCode().equals(code)){
+        if (StringTypeExplain.REFRESH_NEW_TASK_FRAGMENT.getCode().equals(code)) {
             iModule.requestMasterNewTaskOrderList();
         }
     }
 
     @Override
     public void onBaseLoadMoreRequested() {
-        super.onBaseLoadMoreRequested();
+        Log.d("OrderPoolFragment 上拉加载  page = " + getPage());
         //上拉加载
         iModule.requestMasterNewTaskOrderList();
     }
@@ -72,24 +77,34 @@ public class NewTaskFragment extends BaseMasterEmployerContentFragment{
     }
 
     @Override
+    public BaseQuickAdapter getBaseOrderAdapter() {
+        return new NewTaskAdapter();
+    }
+
+    @Override
+    public int getEmptyView() {
+        return R.layout.item_new_task_not_null;
+    }
+
+    @Override
     public void onMItemClick(View view, int position) {
         OngoingOrdersList ongoingOrdersList = (OngoingOrdersList)
                 view.findViewById(R.id.tvItemOrdersTitle).getTag();
-        int orderStatus = ongoingOrdersList.getOrderStatus();
-        if (orderStatus == OrdersEnum.MASTER_EXPIRED.getCode()) {
-            showToast(getString(R.string.order_expired));
-        } else if (orderStatus == OrdersEnum.MASTER_CANCELLED.getCode()) {
-            showToast(getString(R.string.order_cancelled));
-        } else {
-            //新任务详情
-            startFragmentForResult(NewTaskDetailFragment.newInstance() , ForResultCode.START_FOR_RESULT_CODE.getCode());
-        }
+        //新任务详情
+//        startFragmentForResult(NewTaskDetailFragment.newInstance(ongoingOrdersList.getOrderCode()),
+//                ForResultCode.START_FOR_RESULT_CODE.getCode());
+
+        startFragment(OrderPoolDetailFragment.newInstance(ongoingOrdersList.getOrderCode()));
     }
 
     @Override
     protected void onFragmentResult(int requestCode, int resultCode, Intent data) {
         super.onFragmentResult(requestCode, resultCode, data);
-        Log.e("onFragmentResult requestCode = " + requestCode + "-- resultCode = " + resultCode);
+        Log.d("onFragmentResult requestCode = " + requestCode + "-- resultCode = " + resultCode);
+    }
 
+    @Override
+    public String getAddress() {
+        return TextUtils.isEmpty(address) ? "" : address;
     }
 }

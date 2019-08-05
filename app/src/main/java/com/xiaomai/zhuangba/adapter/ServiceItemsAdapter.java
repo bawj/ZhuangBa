@@ -8,6 +8,7 @@ import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.toollib.manager.GlideManager;
 import com.xiaomai.zhuangba.R;
 import com.xiaomai.zhuangba.data.bean.OrderServiceItem;
+import com.xiaomai.zhuangba.util.ShopCarUtil;
 
 /**
  * @author Administrator
@@ -35,7 +36,8 @@ public class ServiceItemsAdapter extends BaseQuickAdapter<OrderServiceItem , Bas
         //项目数量
         tvServiceItemNumber.setText(mContext.getString(R.string.number , String.valueOf(orderServiceItem.getNumber())));
         //项目总金额
-        double multiply = orderServiceItem.getNumber() * orderServiceItem.getAmount();
+        double multiply = ShopCarUtil.getTotalMoneys(orderServiceItem.getNumber() ,
+                orderServiceItem.getAmount() , orderServiceItem.getPrice2() , orderServiceItem.getPrice3());
         tvItemServiceTotalMoney.setText(mContext.getString(R.string.content_money , String.valueOf(multiply)));
         tvItemServiceTotalMoney.setTag(orderServiceItem);
     }

@@ -31,9 +31,9 @@ public class EventManager implements Observable{
     }
 
     @Override
-    public void notifyObservers(String message , Handler handler) {
+    public void notifyObservers(String message ,String address, Handler handler) {
         for (Observer o : observers) {
-            o.update(message , handler);
+            o.update(message ,address, handler);
         }
     }
 }

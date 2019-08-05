@@ -21,7 +21,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
@@ -83,6 +83,13 @@
                                             android:layout_toRightOf="@+id/ivUserHead"
                                             tools:text="康师傅" />
 
+                                        <ToggleButton
+                                            android:id="@+id/toggleButton"
+                                            style="@style/MySwitch"
+                                            android:layout_alignBottom="@+id/tvUserName"
+                                            android:layout_toEndOf="@+id/tvUserName"
+                                            android:layout_toRightOf="@+id/tvUserName" />
+
                                         <ImageView
                                             android:id="@+id/ivMessage"
                                             android:layout_width="@dimen/tool_lib_26dp"
@@ -123,13 +130,43 @@
                     android:orientation="vertical"
                     app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-                    <net.lucode.hackware.magicindicator.MagicIndicator
-                        android:id="@+id/magicIndicator"
+                    <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/tool_lib_40dp"
-                        android:layout_marginLeft="@dimen/tool_lib_12dp"
-                        android:layout_marginTop="@dimen/tool_lib_14dp"
-                        android:layout_marginRight="@dimen/tool_lib_12dp" />
+                        android:layout_height="@dimen/tool_lib_56dp"
+                        android:layout_marginTop="@dimen/tool_lib_10dp">
+
+                        <net.lucode.hackware.magicindicator.MagicIndicator
+                            android:id="@+id/magicIndicator"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/tool_lib_40dp"
+                            android:layout_centerVertical="true"
+                            android:paddingLeft="@dimen/tool_lib_8dp"
+                            android:paddingRight="@dimen/tool_lib_8dp" />
+
+                        <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
+                            android:id="@+id/roundButtonCheckCountry"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginEnd="@dimen/tool_lib_16dp"
+                            android:layout_marginRight="@dimen/tool_lib_16dp"
+                            android:drawableEnd="@drawable/ic_down"
+                            android:drawableRight="@drawable/ic_down"
+                            android:drawablePadding="@dimen/tool_lib_5dp"
+                            android:paddingLeft="@dimen/tool_lib_16dp"
+                            android:paddingTop="@dimen/tool_lib_8dp"
+                            android:paddingRight="@dimen/tool_lib_16dp"
+                            android:paddingBottom="@dimen/tool_lib_8dp"
+                            android:text="@string/whole_country"
+                            android:textColor="@color/tool_lib_gray_777777"
+                            android:textSize="@dimen/tool_lib_12sp"
+                            app:qmui_backgroundColor="@android:color/white"
+                            app:qmui_borderColor="@android:color/white"
+                            app:qmui_isRadiusAdjustBounds="true"
+                            tools:ignore="RelativeOverlap" />
+                    </RelativeLayout>
 
                     <android.support.v4.view.ViewPager
                         android:id="@+id/viewPager"
@@ -140,6 +177,29 @@
                         android:layout_marginRight="@dimen/tool_lib_16dp" />
                 </LinearLayout>
             </android.support.design.widget.CoordinatorLayout>
-        </LinearLayout>
+
+            <RelativeLayout
+                android:id="@+id/btnRectangle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:background="@drawable/bg_rectangle"
+                android:textColor="@android:color/white" />
+
+            <com.qmuiteam.qmui.layout.QMUIButton
+                android:id="@+id/btnMasterApply"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginRight="@dimen/tool_lib_16dp"
+                android:layout_marginEnd="@dimen/tool_lib_16dp"
+                android:layout_toEndOf="@+id/btnRectangle"
+                android:layout_toRightOf="@+id/btnRectangle"
+                android:background="@drawable/ic_master_rectangle"
+                android:gravity="center_horizontal"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/tool_lib_14sp" />
+        </RelativeLayout>
     </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 </LinearLayout>

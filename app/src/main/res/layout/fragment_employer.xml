@@ -29,7 +29,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
@@ -148,9 +148,18 @@
                             android:layout_marginRight="@dimen/tool_lib_16dp" />
                     </LinearLayout>
                 </android.support.design.widget.CoordinatorLayout>
-            </LinearLayout>
+
+            </RelativeLayout>
         </com.scwang.smartrefresh.layout.SmartRefreshLayout>
     </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/btnRectangle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/bg_rectangle"
+        android:textColor="@android:color/white" />
 
     <RelativeLayout
         android:id="@+id/relEmployerRelease"

@@ -63,4 +63,21 @@ public interface IMasterEmployerView extends IBaseView {
      * @param statisticsData  data
      */
     void statisticsSuccess(StatisticsData statisticsData);
+
+    /**
+     * 1 工作 2 休息
+     * @return string
+     */
+    String getStatus();
+
+    /**
+     * 修改成功
+     */
+    void workingStateSwitchingSuccess();
+
+    /**
+     * 订单池查询地址
+     * @return string
+     */
+    String getAddress();
 }

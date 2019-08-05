@@ -52,6 +52,7 @@ public abstract class BaseHttpRxObserver<T> implements Observer<HttpResult<T>>, 
             tipLoading = new QMUITipDialog.Builder(mContext.get()).setIconType(QMUITipDialog.Builder.ICON_TYPE_LOADING)
                     .setTipWord(loadingTip != null ? loadingTip.get() : "")
                     .create();
+            tipLoading.setOnDismissListener(this);
             tipLoading.show();
         }
         this.disposable = d;
@@ -114,7 +115,6 @@ public abstract class BaseHttpRxObserver<T> implements Observer<HttpResult<T>>, 
      * @param e 错误信息
      */
     public void onError(ApiException e) {
-        ToastUtil.setGravity(Gravity.CENTER, 0, 0);
         ToastUtil.showShort(e.getMsg());
     }
 

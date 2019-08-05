@@ -80,6 +80,7 @@ public class MasterAuthenticationModule extends BaseModule<IMasterAuthentication
                         RequestBody.create(MediaType.parse("multipart/form-data"), file));
 
                 Observable<HttpResult<Object>> httpResultObservableBack = ServiceUrl.getUserApi().uploadFile(builderBack.build());
+
                 Observable<Object> zip = Observable.zip(httpResultObservable, httpResultObservableBack
                         , new BiFunction<HttpResult<Object>, HttpResult<Object>, Object>() {
                             @Override

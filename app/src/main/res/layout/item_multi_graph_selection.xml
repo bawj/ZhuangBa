@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="@dimen/tool_lib_76dp"
+    android:layout_height="@dimen/tool_lib_76dp"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/relItemMultiGraph"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/tool_lib_6dp"
+        android:layout_marginEnd="@dimen/tool_lib_6dp"
+        android:layout_marginRight="@dimen/tool_lib_6dp"
+        android:background="@drawable/item_multi_graph_selection_bg">
+
+        <ImageView
+            android:id="@+id/ivItemMultiGraphMediaAdd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_margin="@dimen/tool_lib_5dp"
+            android:src="@drawable/ic_whit_add" />
+
+        <ImageView
+            android:id="@+id/ivItemMultiGraphMedia"
+            android:layout_width="@dimen/tool_lib_76dp"
+            android:layout_height="@dimen/tool_lib_76dp"
+            android:layout_centerInParent="true"
+            android:scaleType="centerCrop"
+            android:visibility="gone"
+            android:layout_margin="@dimen/tool_lib_5dp"
+            tools:src="@drawable/bg_successful_payment" />
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/ivItemMultiGraphSelectionDelete"
+        android:layout_width="@dimen/tool_lib_18dp"
+        android:layout_height="@dimen/tool_lib_18dp"
+        android:layout_alignParentEnd="true"
+        android:visibility="gone"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/ic_delete" />
+</RelativeLayout>

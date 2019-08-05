@@ -23,6 +23,8 @@ public class OrderServiceItem {
     private String serviceText;
     private int number;
     private double amount;
+    private double price2;
+    private double price3;
     private String iconUrl;
     private String serviceStandard;
 
@@ -82,4 +84,19 @@ public class OrderServiceItem {
         this.serviceStandard = serviceStandard;
     }
 
+    public double getPrice2() {
+        return price2;
+    }
+
+    public void setPrice2(double price2) {
+        this.price2 = price2;
+    }
+
+    public double getPrice3() {
+        return price3;
+    }
+
+    public void setPrice3(double price3) {
+        this.price3 = price3;
+    }
 }

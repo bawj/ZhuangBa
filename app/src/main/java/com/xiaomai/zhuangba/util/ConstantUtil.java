@@ -6,6 +6,9 @@ package com.xiaomai.zhuangba.util;
  */
 public class ConstantUtil {
 
+    /**
+     * 订单编号 传递 key
+     */
     public static final String ORDER_CODE = "order_code";
 
     /**

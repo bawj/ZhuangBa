@@ -19,6 +19,14 @@ public class ShopCarData {
      */
     private String money;
     /**
+     * 2台单价
+     */
+    private String money2;
+    /**
+     * 3台单价
+     */
+    private String money3;
+    /**
      * 名称
      */
     private String text;
@@ -40,11 +48,14 @@ public class ShopCarData {
      */
     private String parentServiceId;
 
-    @Generated(hash = 902570041)
-    public ShopCarData(Long id, String money, String text, String icon,
-                       String number, String serviceId, String parentServiceId) {
+    @Generated(hash = 1075300189)
+    public ShopCarData(Long id, String money, String money2, String money3,
+            String text, String icon, String number, String serviceId,
+            String parentServiceId) {
         this.id = id;
         this.money = money;
+        this.money2 = money2;
+        this.money3 = money3;
         this.text = text;
         this.icon = icon;
         this.number = number;
@@ -112,5 +123,19 @@ public class ShopCarData {
         this.parentServiceId = parentServiceId;
     }
 
+    public String getMoney2() {
+        return money2;
+    }
 
+    public void setMoney2(String money2) {
+        this.money2 = money2;
+    }
+
+    public String getMoney3() {
+        return money3;
+    }
+
+    public void setMoney3(String money3) {
+        this.money3 = money3;
+    }
 }
