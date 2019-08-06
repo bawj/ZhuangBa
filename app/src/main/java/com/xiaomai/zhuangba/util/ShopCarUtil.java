@@ -45,6 +45,8 @@ public class ShopCarUtil {
             shopCarData.setText(item.getServiceText());
             shopCarData.setIcon(item.getIconUrl());
             shopCarData.setMoney(String.valueOf(item.getPrice()));
+            shopCarData.setMoney2(String.valueOf(item.getPrice2()));
+            shopCarData.setMoney3(String.valueOf(item.getPrice3()));
             shopCarData.setNumber(String.valueOf(count));
             shopCarData.setServiceId(String.valueOf(item.getServiceId()));
             shopCarData.setParentServiceId(String.valueOf(item.getParentServiceId()));
@@ -68,6 +70,8 @@ public class ShopCarUtil {
             shopCarData.setText(shopCar.getText());
             shopCarData.setIcon(shopCar.getIcon());
             shopCarData.setMoney(String.valueOf(shopCar.getMoney()));
+            shopCarData.setMoney2(String.valueOf(shopCar.getMoney2()));
+            shopCarData.setMoney3(String.valueOf(shopCar.getMoney3()));
             shopCarData.setNumber(String.valueOf(count));
             shopCarData.setServiceId(String.valueOf(shopCar.getServiceId()));
             shopCarData.setParentServiceId(String.valueOf(shopCar.getParentServiceId()));

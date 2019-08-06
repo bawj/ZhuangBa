@@ -7,6 +7,7 @@ import com.example.toollib.base.BaseActivity;
 import com.example.toollib.http.version.MessageEvent;
 import com.example.toollib.http.version.Version;
 import com.example.toollib.http.version.VersionEnums;
+import com.example.toollib.util.Log;
 import com.example.toollib.util.spf.SPUtils;
 import com.example.toollib.util.ToastUtil;
 import com.example.toollib.weight.dialog.CommonlyDialog;
@@ -26,6 +27,8 @@ import com.xiaomai.zhuangba.fragment.masterworker.MasterWorkerFragment;
 import com.xiaomai.zhuangba.fragment.orderdetail.CompleteFragment;
 import com.xiaomai.zhuangba.fragment.personal.wallet.detailed.WalletDetailFragment;
 import com.example.toollib.util.spf.SpfConst;
+import com.xiaomai.zhuangba.util.UMengUtil;
+import com.xiaomai.zhuangba.util.Util;
 import com.xiaomai.zhuangba.weight.dialog.UpdateVersionDialog;
 import com.xiaomai.zhuangba.weight.dialog.VersionDialog;
 
@@ -114,32 +117,42 @@ public class MainActivity extends BaseActivity {
                 .commit();
     }
 
+    private CommonlyDialog commonlyDialog;
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onWeChatSuccess(MessageEvent messageEvent) {
-        if (messageEvent.getErrCode() == VersionEnums.LOGIN_STATUS.getCode()
-                || messageEvent.getErrCode() == VersionEnums.LOGIN_STATUS_.getCode()) {
-            //您的登录 信息已过期重新登录
-            CommonlyDialog.getInstance().initView(this)
-                    .setTvDialogCommonlyContent(getString(R.string.re_login_tip))
+        Log.e("code = " + messageEvent.getErrCode());
+        //您的登录 信息已过期重新登录 防止dialog 重复 弹出
+        boolean isTokenOverdueDialog = (messageEvent.getErrCode() == VersionEnums.LOGIN_STATUS.getCode()
+                || messageEvent.getErrCode() == VersionEnums.LOGIN_STATUS_.getCode()) ;
+
+        //防止dialog 重复 弹出
+        boolean isTokenOverdueDialogs = false;
+        if (commonlyDialog != null){
+            isTokenOverdueDialogs = commonlyDialog.isShow();
+        }
+        //您的账号在其它手机登录
+        boolean isOtherMobileLogin = (messageEvent.getErrCode() == VersionEnums.LOGIN_OTHER_STATUS.getCode());
+        if (isTokenOverdueDialog && !isTokenOverdueDialogs) {
+            commonlyDialog = CommonlyDialog.getInstance().initView(this);
+            commonlyDialog.setTvDialogCommonlyContent(getString(R.string.re_login_tip))
                     .isVisibleClose(false)
                     .isCancelable()
                     .setICallBase(new CommonlyDialog.BaseCallback() {
                         @Override
                         public void sure() {
-                            startFragment(LoginFragment.newInstance());
+                            logout();
                         }
                     }).showDialog();
-        } else if (messageEvent.getErrCode() == VersionEnums.LOGIN_OTHER_STATUS.getCode()) {
-            //您的账号在其它手机登录
-            CommonlyDialog.getInstance().initView(MainActivity.this)
-                    .setTvDialogCommonlyContent(getString(R.string.re_login_tip_))
+        } else if (isOtherMobileLogin && !isTokenOverdueDialogs) {
+            commonlyDialog = CommonlyDialog.getInstance().initView(this);
+            commonlyDialog.setTvDialogCommonlyContent(getString(R.string.re_login_tip_))
                     .isVisibleClose(false)
                     .isCancelable()
                     .setICallBase(new CommonlyDialog.BaseCallback() {
                         @Override
                         public void sure() {
-                            startFragment(LoginFragment.newInstance());
+                            logout();
                         }
                     }).showDialog();
         } else if (messageEvent.getErrCode() == VersionEnums.APP_UPDATE.getCode()) {
@@ -156,6 +169,11 @@ public class MainActivity extends BaseActivity {
                         }).showDialog();
             }
         }
+    }
+
+    private void logout() {
+        Util.logout();
+        startFragment(LoginFragment.newInstance());
     }
 
     private void startUpdateVersion(String downLoadUrl) {
@@ -184,9 +202,7 @@ public class MainActivity extends BaseActivity {
                 touchTime = System.currentTimeMillis();
                 ToastUtil.showShort(getString(R.string.press_again_exit));
             }
-        }/* else if (currentFragment instanceof MasterCompleteFragment){
-
-        }*/else {
+        }else {
             super.onBackPressed();
         }
     }

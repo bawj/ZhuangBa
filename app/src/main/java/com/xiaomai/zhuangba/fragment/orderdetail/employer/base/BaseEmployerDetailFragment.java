@@ -14,6 +14,11 @@ import com.xiaomai.zhuangba.fragment.orderdetail.employer.module.IEmployerOrderD
 public class BaseEmployerDetailFragment extends BaseOrderDetailFragment<IEmployerOrderDetailModule> implements IEmployerOrderDetailView {
 
     @Override
+    public int getContentView() {
+        return R.layout.fragment_base_employer_detail;
+    }
+
+    @Override
     protected IEmployerOrderDetailModule initModule() {
         return new EmployerOrderDetailModule();
     }

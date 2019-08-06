@@ -25,6 +25,8 @@ public class ServiceSubcategoryProject {
     private String serviceText;
     private String parentServiceId;
     private Double price;
+    private Double price2;
+    private Double price3;
     private String serviceStandard;
     private String iconUrl;
     private List<Object> servicePoolList;
@@ -83,5 +85,21 @@ public class ServiceSubcategoryProject {
 
     public void setServicePoolList(List<Object> servicePoolList) {
         this.servicePoolList = servicePoolList;
+    }
+
+    public Double getPrice2() {
+        return price2;
+    }
+
+    public void setPrice2(Double price2) {
+        this.price2 = price2;
+    }
+
+    public Double getPrice3() {
+        return price3;
+    }
+
+    public void setPrice3(Double price3) {
+        this.price3 = price3;
     }
 }

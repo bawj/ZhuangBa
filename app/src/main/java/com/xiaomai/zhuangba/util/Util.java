@@ -18,13 +18,14 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.toollib.util.spf.SPUtils;
+import com.example.toollib.util.spf.SpfConst;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.xiaomai.zhuangba.R;
 import com.xiaomai.zhuangba.data.bean.ProvinceBean;
 import com.xiaomai.zhuangba.data.bean.ProvincialData;
+import com.xiaomai.zhuangba.data.bean.UserInfo;
 import com.xiaomai.zhuangba.data.db.DBHelper;
-import com.example.toollib.util.spf.SpfConst;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -42,6 +43,10 @@ import java.util.regex.Pattern;
 public class Util {
 
     public static void logout() {
+        UserInfo unique = DBHelper.getInstance().getUserInfoDao().queryBuilder().unique();
+        if (unique != null){
+            UMengUtil.deleteAlias(unique.getPhoneNumber());
+        }
         DBHelper.getInstance().getUserInfoDao().deleteAll();
         SPUtils.getInstance().put(SpfConst.TOKEN , "");
     }

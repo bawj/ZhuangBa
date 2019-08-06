@@ -8,6 +8,7 @@ import com.example.toollib.http.exception.ApiException;
 import com.example.toollib.http.exception.ExceptionHandle;
 import com.example.toollib.http.function.HttpResultFunction;
 import com.example.toollib.http.util.DialogUtil;
+import com.example.toollib.util.LoginInterceptor;
 
 import java.lang.ref.WeakReference;
 import java.util.concurrent.TimeUnit;
@@ -62,6 +63,7 @@ public class BaseHttpZipRxObserver {
                         String msg = apiException.getMsg();
                         baseCallback.onFail(msg);
                         // TODO: 2019/7/9 0009 重新登录
+                        LoginInterceptor.tokenReLogin(apiException);
                     }
                 });
     }

@@ -160,8 +160,6 @@ public class LoginRegisteredModule extends VerificationCodeModule<ILoginRegister
                 .subscribe(new BaseHttpRxObserver<String>(mContext.get()) {
                     @Override
                     protected void onSuccess(String response) {
-                        UserInfo unique = DBHelper.getInstance().getUserInfoDao().queryBuilder().unique();
-                        UMengUtil.deleteAlias(unique.getPhoneNumber());
                         Util.logout();
                         mViewRef.get().logoutSuccess();
                     }

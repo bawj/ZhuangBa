@@ -29,4 +29,10 @@ public class EmployerPersonalFragment extends PersonalFragment {
                 getString(R.string.fabricating_user_service_protocol)));
     }
 
+    @Override
+    public boolean isInSwipeBack() {
+        statusBarWhite();
+        return super.isInSwipeBack();
+    }
+
 }

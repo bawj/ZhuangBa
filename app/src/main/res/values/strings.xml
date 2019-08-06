@@ -352,4 +352,5 @@
     <string name="add_order">新增订单</string>
     <string name="start_up_confirmation">现场开工确认</string>
     <string name="completion_of_construction">施工完成确认</string>
+    <string name="maintenance">维保</string>
 </resources>

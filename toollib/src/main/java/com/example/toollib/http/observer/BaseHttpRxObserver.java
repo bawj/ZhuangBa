@@ -10,6 +10,7 @@ import com.example.toollib.http.version.Version;
 import com.example.toollib.http.exception.ApiException;
 import com.example.toollib.http.exception.HttpError;
 import com.example.toollib.http.version.VersionEnums;
+import com.example.toollib.util.LoginInterceptor;
 import com.example.toollib.util.ToastUtil;
 import com.qmuiteam.qmui.widget.dialog.QMUITipDialog;
 
@@ -69,6 +70,8 @@ public abstract class BaseHttpRxObserver<T> implements Observer<HttpResult<T>>, 
             onError(new ApiException(Integer.parseInt(httpResult.getCode()), httpResult.getMsg(),
                     httpResult.getData() == null ? "" : httpResult.getData().toString()));
             // TODO: 2019/7/9 0009 判断code 是否需要 重新登录
+            LoginInterceptor.tokenReLogin(new ApiException(Integer.parseInt(httpResult.getCode()), httpResult.getMsg(),
+                    httpResult.getData() == null ? "" : httpResult.getData().toString()));
         } else {
             T data = httpResult.getData();
             if (data != null){

@@ -43,6 +43,8 @@ import butterknife.OnClick;
 /**
  * @author Administrator
  * @date 2019/7/9 0009
+ *
+ * 选择服务
  */
 public class SelectServiceFragment extends BaseListFragment implements ServiceContentAdapter.IServiceContentOnAddDelListener,
         BaseQuickAdapter.OnItemClickListener , SheetBehaviorAdapter.ISheetBehaviorListener {

@@ -40,10 +40,14 @@ public class OngoingOrdersAdapter extends BaseQuickAdapter<OngoingOrdersList, Ba
         tvItemOrdersNumber.setText(mContext.getString(R.string.task_number, String.valueOf(ongoingOrders.getNumber())));
         tvItemOrdersMoney.setText(String.valueOf(mContext.getString(R.string.content_money, String.valueOf(ongoingOrders.getOrderAmount()))));
 
+        TextView tvMaintenance = helper.getView(R.id.tvMaintenance);
+        // TODO: 2019/8/6 0006 是否显示维保
+
         tvItemOrdersTitle.setTag(ongoingOrders);
         //order status
         int orderStatus = ongoingOrders.getOrderStatus();
         //雇主端
         OrderStatusUtil.employerStatus(mContext, orderStatus, tvItemOrdersType);
+
     }
 }

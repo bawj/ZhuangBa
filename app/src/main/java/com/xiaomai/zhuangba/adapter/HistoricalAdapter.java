@@ -46,6 +46,10 @@ public class HistoricalAdapter extends BaseQuickAdapter<OngoingOrdersList, BaseV
         tvItemHistoricalOrdersNumber.setText(mContext.getString(R.string.task_number, String.valueOf(ordersList.getNumber())));
         tvItemHistoricalOrdersMoney.setText(mContext.getString(R.string.content_money, String.valueOf(ordersList.getOrderAmount())));
         tvItemHistoricalOrdersMoney.setTag(ordersList);
+
+        // TODO: 2019/8/6 0006 是否显示维保
+        TextView tvHistoricalMaintenance = helper.getView(R.id.tvHistoricalMaintenance);
+        
         //order status
         int orderStatus = ordersList.getOrderStatus();
         UserInfo userInfo = DBHelper.getInstance().getUserInfoDao().queryBuilder().unique();

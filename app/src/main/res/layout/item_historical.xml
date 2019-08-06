@@ -20,36 +20,61 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/tvItemHistoricalOrdersTitle"
-            style="@style/item_text_title"
-            android:textStyle="normal"
-            tools:text="公共安全" />
+        <RelativeLayout
+            android:id="@+id/relHistorical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/tvItemHistoricalOrdersType"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_marginTop="@dimen/tool_lib_12dp"
-            android:background="@drawable/distribution_half_fillet_bg"
-            android:padding="@dimen/tool_lib_5dp"
-            android:textColor="@android:color/white"
-            android:textSize="@dimen/tool_lib_12sp"
-            tools:text="分配中" />
+            <TextView
+                android:id="@+id/tvItemHistoricalOrdersTitle"
+                style="@style/item_text_title"
+                android:layout_centerVertical="true"
+                android:textStyle="normal"
+                tools:text="公共安全" />
+
+            <TextView
+                android:id="@+id/tvHistoricalMaintenance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/tool_lib_6dp"
+                android:layout_marginLeft="@dimen/tool_lib_6dp"
+                android:layout_toEndOf="@+id/tvItemHistoricalOrdersTitle"
+                android:layout_toRightOf="@+id/tvItemHistoricalOrdersTitle"
+                android:background="@drawable/green_radius_bg"
+                android:padding="@dimen/tool_lib_6dp"
+                android:textColor="@color/tool_lib_color_199898"
+                android:textSize="@dimen/tool_lib_12sp"
+                android:visibility="gone"
+                tools:text="@string/maintenance" />
+
+            <TextView
+                android:id="@+id/tvItemHistoricalOrdersType"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginTop="@dimen/tool_lib_12dp"
+                android:background="@drawable/distribution_half_fillet_bg"
+                android:padding="@dimen/tool_lib_5dp"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/tool_lib_12sp"
+                tools:text="分配中" />
+
+        </RelativeLayout>
 
 
         <ImageView
             android:id="@+id/ivItemHistoricalOrdersLocation"
             style="@style/item_ic"
-            android:layout_below="@+id/tvItemHistoricalOrdersTitle"
+            android:layout_below="@+id/relHistorical"
             android:src="@drawable/ic_location" />
 
         <TextView
             android:id="@+id/tvItemHistoricalOrdersLocation"
             style="@style/item_text_content"
-            android:layout_below="@+id/tvItemHistoricalOrdersTitle"
+            android:layout_below="@+id/relHistorical"
             android:layout_alignBottom="@+id/ivItemHistoricalOrdersLocation"
             android:layout_toEndOf="@+id/ivItemHistoricalOrdersLocation"
             android:layout_toRightOf="@+id/ivItemHistoricalOrdersLocation"

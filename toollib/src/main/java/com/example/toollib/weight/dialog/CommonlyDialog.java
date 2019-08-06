@@ -40,7 +40,7 @@ public class CommonlyDialog {
             @Override
             public void onClick(View v) {
                 alertDialog.dismiss();
-                if (baseCallback != null){
+                if (baseCallback != null) {
                     baseCallback.sure();
                 }
             }
@@ -76,22 +76,36 @@ public class CommonlyDialog {
         return this;
     }
 
-    public CommonlyDialog isVisibleClose(boolean flag){
+    public CommonlyDialog isVisibleClose(boolean flag) {
         tvDialogCommonlyClose.setVisibility(flag ? View.VISIBLE : View.GONE);
         return this;
     }
 
-    /** 点击外部 不消失 */
-    public CommonlyDialog isCancelable(){
+    /**
+     * 点击外部 不消失
+     */
+    public CommonlyDialog isCancelable() {
         alertDialog.setCancelable(false);
         return this;
     }
 
+    /**
+     * dialog  是否显示
+     *
+     * @return boolean
+     */
+    public boolean isShow() {
+        if (alertDialog != null) {
+            return alertDialog.isShowing();
+        }
+        return false;
+    }
+
     public void showDialog() {
-        if (alertDialog != null){
+        if (alertDialog != null) {
             alertDialog.show();
             Window window = alertDialog.getWindow();
-            if (window != null){
+            if (window != null) {
                 //window.requestFeature(Window.FEATURE_NO_TITLE);
                 //window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
                 window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
@@ -100,14 +114,14 @@ public class CommonlyDialog {
         }
     }
 
-    public interface BaseCallback{
+    public interface BaseCallback {
         /**
          * 确定
          */
         void sure();
     }
 
-    public CommonlyDialog setICallBase (BaseCallback baseCallback){
+    public CommonlyDialog setICallBase(BaseCallback baseCallback) {
         this.baseCallback = baseCallback;
         return this;
     }

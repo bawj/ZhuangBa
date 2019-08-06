@@ -47,5 +47,8 @@
 
     <color name="tool_lib_color_F0D8AD">#F0D8AD</color>
     <color name="tool_lib_color_3AB960">#3AB960</color>
+    <color name="tool_lib_color_199898">#199898</color>
+    <color name="tool_lib_color_35BBBB">#35BBBB</color>
+    <color name="tool_lib_color_E9FFFF">#E9FFFF</color>
 
 </resources>
