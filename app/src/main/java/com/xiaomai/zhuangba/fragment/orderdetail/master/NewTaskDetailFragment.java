@@ -106,4 +106,10 @@ public class NewTaskDetailFragment extends BaseMasterOrderDetailFragment {
             default:
         }
     }
+
+    @Override
+    public boolean isInSwipeBack() {
+        statusBarWhite();
+        return super.isInSwipeBack();
+    }
 }

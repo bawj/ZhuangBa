@@ -7,6 +7,7 @@ import android.widget.TextView;
 import com.example.toollib.http.HttpResult;
 import com.example.toollib.http.observer.BaseHttpRxObserver;
 import com.example.toollib.http.util.RxUtils;
+import com.example.toollib.util.Log;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.xiaomai.zhuangba.R;
 import com.xiaomai.zhuangba.data.bean.OrderStatistics;
@@ -46,12 +47,6 @@ public class EmployerFragment extends BaseMasterEmployerFragment {
     @Override
     public int getContentView() {
         return R.layout.fragment_employer;
-    }
-
-    @Override
-    public void initView() {
-        super.initView();
-        statusBarWhite();
     }
 
     @OnClick(R.id.relEmployerRelease)

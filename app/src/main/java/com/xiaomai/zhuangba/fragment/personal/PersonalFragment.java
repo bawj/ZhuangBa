@@ -106,10 +106,14 @@ public class PersonalFragment extends BaseLoginRegisteredFragment {
         return getString(R.string.my);
     }
 
+    @Override
+    public boolean isInSwipeBack() {
+        statusBarWhite();
+        return super.isInSwipeBack();
+    }
 
     @Override
     public void onDestroy() {
-        statusBarBlack();
         EventBus.getDefault().unregister(this);
         super.onDestroy();
     }

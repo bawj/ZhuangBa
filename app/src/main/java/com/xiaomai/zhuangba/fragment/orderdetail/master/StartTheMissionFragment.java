@@ -137,4 +137,10 @@ public class StartTheMissionFragment extends BaseMasterOrderDetailFragment {
             }
         }
     }
+
+    @Override
+    public boolean isInSwipeBack() {
+        statusBarWhite();
+        return super.isInSwipeBack();
+    }
 }

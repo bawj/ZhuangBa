@@ -149,6 +149,8 @@ public class BaseMasterEmployerFragment extends BaseFragment<IMasterEmployerModu
         for (BaseMasterEmployerContentFragment baseMasterEmployerContentFragment : listFragment) {
             eventManager.registerObserver(baseMasterEmployerContentFragment);
         }
+
+        statusBarWhite();
     }
 
     @OnClick({R.id.ivUserHead, R.id.ivMessage,R.id.btnRectangle})

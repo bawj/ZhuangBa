@@ -260,5 +260,6 @@ public class BaseOrderDetailFragment<T extends IOrderDetailModule> extends BaseF
     protected String getActivityTitle() {
         return null;
     }
+
 }
 

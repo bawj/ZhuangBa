@@ -45,9 +45,8 @@ public class OrderPoolDetailFragment extends BaseMasterOrderDetailFragment {
     }
 
     @Override
-    public void onDestroyView() {
-        //恢复状态栏颜色
+    public boolean isInSwipeBack() {
         statusBarWhite();
-        super.onDestroyView();
+        return super.isInSwipeBack();
     }
 }

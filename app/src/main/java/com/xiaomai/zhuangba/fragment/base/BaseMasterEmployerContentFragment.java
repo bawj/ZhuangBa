@@ -201,6 +201,7 @@ public class BaseMasterEmployerContentFragment extends BaseFragment<IMasterEmplo
         return page;
     }
 
+
     @Override
     public void onDestroy() {
         super.onDestroy();

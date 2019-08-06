@@ -18,9 +18,7 @@ import com.xiaomai.zhuangba.fragment.SelectServiceFragment;
 import com.xiaomai.zhuangba.fragment.orderdetail.employer.base.BaseEmployerDetailFragment;
 import com.xiaomai.zhuangba.http.ServiceUrl;
 import com.xiaomai.zhuangba.util.ConstantUtil;
-
 import java.util.List;
-
 import butterknife.BindView;
 import butterknife.OnClick;
 import io.reactivex.Observable;
@@ -101,7 +99,12 @@ public class EmployerHavingSetOutFragment extends BaseEmployerDetailFragment {
                 break;
             default:
         }
+    }
 
+    @Override
+    public boolean isInSwipeBack() {
+        statusBarWhite();
+        return super.isInSwipeBack();
     }
 
 }
