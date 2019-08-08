@@ -48,10 +48,18 @@ public class ShopCarData {
      */
     private String parentServiceId;
 
-    @Generated(hash = 1075300189)
+    /** 维保价格 */
+    private String maintenanceMoney;
+    /** 维保 id */
+    private int maintenanceId;
+    /** 维保时间 */
+    private String maintenanceTime;
+
+    @Generated(hash = 1756493303)
     public ShopCarData(Long id, String money, String money2, String money3,
             String text, String icon, String number, String serviceId,
-            String parentServiceId) {
+            String parentServiceId, String maintenanceMoney, int maintenanceId,
+            String maintenanceTime) {
         this.id = id;
         this.money = money;
         this.money2 = money2;
@@ -61,6 +69,9 @@ public class ShopCarData {
         this.number = number;
         this.serviceId = serviceId;
         this.parentServiceId = parentServiceId;
+        this.maintenanceMoney = maintenanceMoney;
+        this.maintenanceId = maintenanceId;
+        this.maintenanceTime = maintenanceTime;
     }
 
     @Generated(hash = 786737547)
@@ -137,5 +148,29 @@ public class ShopCarData {
 
     public void setMoney3(String money3) {
         this.money3 = money3;
+    }
+
+    public String getMaintenanceMoney() {
+        return maintenanceMoney;
+    }
+
+    public void setMaintenanceMoney(String maintenanceMoney) {
+        this.maintenanceMoney = maintenanceMoney;
+    }
+
+    public int getMaintenanceId() {
+        return maintenanceId;
+    }
+
+    public void setMaintenanceId(int maintenanceId) {
+        this.maintenanceId = maintenanceId;
+    }
+
+    public String getMaintenanceTime() {
+        return maintenanceTime;
+    }
+
+    public void setMaintenanceTime(String maintenanceTime) {
+        this.maintenanceTime = maintenanceTime;
     }
 }

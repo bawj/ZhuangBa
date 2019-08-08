@@ -124,10 +124,10 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="@dimen/tool_lib_3dp"
                     android:layout_marginRight="@dimen/tool_lib_3dp"
-                    android:layout_toStartOf="@+id/ivPaymentRight"
-                    android:layout_toLeftOf="@+id/ivPaymentRight"
                     android:layout_toEndOf="@+id/ivPaymentLocation"
                     android:layout_toRightOf="@+id/ivPaymentLocation"
+                    android:layout_toLeftOf="@+id/ivPaymentReplace"
+                    android:layout_toStartOf="@+id/ivPaymentReplace"
                     android:maxLines="1"
                     android:singleLine="true"
                     android:textColor="@color/tool_lib_gray_222222"
@@ -135,7 +135,7 @@
                     tools:text="杭州市余杭区西溪北苑西区38幢3单元1502" />
 
                 <TextView
-                    android:id="@+id/ivPaymentRight"
+                    android:id="@+id/ivPaymentReplace"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
@@ -143,8 +143,7 @@
                     android:layout_marginEnd="@dimen/tool_lib_12dp"
                     android:layout_marginRight="@dimen/tool_lib_12dp"
                     android:text="@string/replace"
-                    android:textColor="@color/tool_lib_blue_0091FF"
-                    android:visibility="gone" />
+                    android:textColor="@color/tool_lib_blue_0091FF" />
             </RelativeLayout>
         </RelativeLayout>
 
@@ -188,6 +187,42 @@
                 style="@style/item_text_title"
                 android:text="@string/payment_method" />
 
+            <!--钱包-->
+            <RelativeLayout
+                android:id="@+id/relPaymentWallet"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/tool_lib_12dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="@dimen/tool_lib_12dp"
+                    android:layout_marginLeft="@dimen/tool_lib_12dp"
+                    android:text="@string/wallet"
+                    android:textColor="@color/tool_lib_gray_222222"
+                    android:textSize="@dimen/tool_lib_14sp" />
+
+                <RadioButton
+                    android:id="@+id/chkPaymentWallet"
+                    style="@style/CustomCheckBoxTheme"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginTop="@dimen/tool_lib_12dp"
+                    android:layout_marginEnd="@dimen/tool_lib_12dp"
+                    android:layout_marginRight="@dimen/tool_lib_12dp"
+                    android:layout_marginBottom="@dimen/tool_lib_12dp" />
+            </RelativeLayout>
+
+            <View
+                style="@style/tool_lib_horizontal_line"
+                android:layout_marginLeft="@dimen/tool_lib_14dp"
+                android:layout_marginRight="@dimen/tool_lib_14dp" />
+
             <!--微信-->
             <RelativeLayout
                 android:id="@+id/relPaymentWeChat"
@@ -223,6 +258,7 @@
                 style="@style/tool_lib_horizontal_line"
                 android:layout_marginLeft="@dimen/tool_lib_14dp"
                 android:layout_marginRight="@dimen/tool_lib_14dp" />
+
             <!--支付宝-->
             <RelativeLayout
                 android:id="@+id/relPaymentPlay"

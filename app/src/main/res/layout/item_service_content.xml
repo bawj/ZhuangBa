@@ -50,15 +50,35 @@
         android:textColor="@color/tool_lib_gray_777777"
         android:textSize="@dimen/tool_lib_14sp" />
 
-    <com.xiaomai.zhuangba.weight.AnimShopsButton
-        android:id="@+id/animShop"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="@dimen/tool_lib_16dp"
-        android:layout_marginLeft="@dimen/tool_lib_16dp"
+    <RelativeLayout
+        android:layout_width="@dimen/tool_lib_56dp"
+        android:layout_height="@dimen/tool_lib_32dp"
         android:layout_alignBottom="@+id/ivServiceContentIcon"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        tools:ignore="RelativeOverlap" />
+        android:layout_marginLeft="@dimen/tool_lib_16dp"
+        android:layout_marginRight="@dimen/tool_lib_16dp">
 
+        <com.qmuiteam.qmui.layout.QMUIButton
+            android:id="@+id/btnServiceContent"
+            style="@style/base_btn"
+            android:layout_width="@dimen/tool_lib_56dp"
+            android:layout_height="@dimen/tool_lib_24dp"
+            android:layout_alignParentBottom="true"
+            android:text="@string/selection_of_specifications"
+            android:textSize="@dimen/tool_lib_11sp"
+            tools:ignore="RelativeOverlap" />
+
+        <TextView
+            android:id="@+id/tvServiceContentNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/circular"
+            android:gravity="center"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:textColor="@color/tool_lib_color_E74C3C"
+            android:textSize="@dimen/tool_lib_11sp"
+            tools:text="1" />
+    </RelativeLayout>
 </RelativeLayout>

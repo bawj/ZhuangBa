@@ -90,5 +90,5 @@ dependencies {
     implementation project(':toollib')
     implementation project(':citypicker')
     implementation project(':calendarview')
-    implementation project(':lib_ocr')
+//    implementation project(':lib_ocr')
 }

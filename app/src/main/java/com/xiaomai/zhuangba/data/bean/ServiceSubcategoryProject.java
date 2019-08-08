@@ -1,5 +1,7 @@
 package com.xiaomai.zhuangba.data.bean;
 
+import android.text.TextUtils;
+
 import java.util.List;
 
 /**
@@ -40,7 +42,7 @@ public class ServiceSubcategoryProject {
     }
 
     public String getServiceText() {
-        return serviceText;
+        return TextUtils.isEmpty(serviceText) ? "" : serviceText;
     }
 
     public void setServiceText(String serviceText) {

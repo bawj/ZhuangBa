@@ -106,5 +106,10 @@ public class EmployerHavingSetOutFragment extends BaseEmployerDetailFragment {
         statusBarWhite();
         return super.isInSwipeBack();
     }
+    @Override
+    public void leftBackClick() {
+        statusBarWhite();
+        super.leftBackClick();
+    }
 
 }

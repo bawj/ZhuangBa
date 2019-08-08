@@ -16,6 +16,11 @@ public class OrderServicesBean {
     /** 服务项目名称 */
     private String serviceText;
 
+    /** 维保时间 单位 (月) */
+    private int monthNumber;
+    /** 维保金额 */
+    private double maintenanceAmount;
+
     public Double getAmount() {
         return amount;
     }
@@ -54,5 +59,21 @@ public class OrderServicesBean {
 
     public void setServiceText(String serviceText) {
         this.serviceText = serviceText;
+    }
+
+    public int getMonthNumber() {
+        return monthNumber;
+    }
+
+    public void setMonthNumber(int monthNumber) {
+        this.monthNumber = monthNumber;
+    }
+
+    public double getMaintenanceAmount() {
+        return maintenanceAmount;
+    }
+
+    public void setMaintenanceAmount(double maintenanceAmount) {
+        this.maintenanceAmount = maintenanceAmount;
     }
 }

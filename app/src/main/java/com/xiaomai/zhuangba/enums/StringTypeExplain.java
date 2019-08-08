@@ -15,6 +15,7 @@ public enum StringTypeExplain {
     A_MAP_BAI_DU_PACKAGE_NAME("com.baidu.BaiduMap" , "百度地图包名"),
     A_ALIPAY_PAYMENT("1" , "支付宝支付"),
     WE_CHAT_PAYMENT("2" , "微信支付"),
+    WE_WALLET("3" , "钱包支付"),
     RECEIPT_ORDER_SUCCESS("1" , "接单成功"),
     ;
 

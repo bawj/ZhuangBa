@@ -121,4 +121,9 @@ public class EmployerUnderConstructionFragment extends BaseEmployerDetailFragmen
         statusBarWhite();
         return super.isInSwipeBack();
     }
+    @Override
+    public void leftBackClick() {
+        statusBarWhite();
+        super.leftBackClick();
+    }
 }

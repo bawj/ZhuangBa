@@ -22,7 +22,7 @@ import io.reactivex.annotations.Nullable;
  * @author Administrator
  * @date 2019/7/9 0009
  */
-public class BaseListFragment<T extends BaseQuickAdapter> extends BaseFragment implements OnRefreshListener, IBaseListView,
+public class BaseListFragment<M extends IBaseModule,T extends BaseQuickAdapter> extends BaseFragment<M> implements OnRefreshListener, IBaseListView,
         BaseQuickAdapter.OnItemClickListener , BaseQuickAdapter.RequestLoadMoreListener {
 
     @BindView(R.id.refreshBaseList)
@@ -147,7 +147,7 @@ public class BaseListFragment<T extends BaseQuickAdapter> extends BaseFragment i
     }
 
     @Override
-    protected IBaseModule initModule() {
+    protected M initModule() {
         return null;
     }
 

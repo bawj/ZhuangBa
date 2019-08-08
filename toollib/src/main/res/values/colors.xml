@@ -50,5 +50,8 @@
     <color name="tool_lib_color_199898">#199898</color>
     <color name="tool_lib_color_35BBBB">#35BBBB</color>
     <color name="tool_lib_color_E9FFFF">#E9FFFF</color>
+    <color name="tool_lib_color_E74C3C">#E74C3C</color>
+    <color name="tool_lib_color_F4F9FF">#F4F9FF</color>
+    <color name="tool_lib_color_CCCED3">#CCCED3</color>
 
 </resources>

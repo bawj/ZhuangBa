@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.util.Base64;
 import android.view.View;
 import android.widget.Button;
@@ -16,7 +15,6 @@ import android.widget.TextView;
 
 import com.example.toollib.base.BaseFragment;
 import com.example.toollib.data.base.BaseCallback;
-import com.example.toollib.util.ToastUtil;
 import com.google.gson.Gson;
 import com.xiaomai.zhuangba.R;
 import com.xiaomai.zhuangba.appilcation.PretendApplication;
@@ -29,14 +27,8 @@ import com.xiaomai.zhuangba.enums.ForResultCode;
 import com.xiaomai.zhuangba.util.FileUtil;
 import com.xiaomai.zhuangba.util.RxPermissionsUtils;
 import com.xiaomai.zhuangba.util.Util;
-
-import activity.IDCardRecognitionActivity;
 import butterknife.BindView;
 import butterknife.OnClick;
-import exocr.exocrengine.EXOCRModel;
-
-import static fragment.IdCardRecognitionFragment.RESULT;
-import static fragment.IdCardRecognitionFragment.RESULT_CODE;
 
 /**
  * @author Administrator
@@ -101,10 +93,10 @@ public class RealAuthenticationFragment extends BaseFragment<IMasterAuthenticati
                 RxPermissionsUtils.applyPermission(getActivity(), new BaseCallback<String>() {
                     @Override
                     public void onSuccess(String obj) {
-                        //lib_ocr
-                        Intent scanIntent = new Intent(getActivity(), IDCardRecognitionActivity.class);
-                        scanIntent.putExtra(IDCardRecognitionActivity.FRONT, true);
-                        startActivityForResult(scanIntent, ForResultCode.START_FOR_RESULT_CODE.getCode());
+                        //lib_ocr // TODO: 2019/8/7 0007 放开注释
+//                        Intent scanIntent = new Intent(getActivity(), IDCardRecognitionActivity.class);
+//                        scanIntent.putExtra(IDCardRecognitionActivity.FRONT, true);
+//                        startActivityForResult(scanIntent, ForResultCode.START_FOR_RESULT_CODE.getCode());
                     }
 
                     @Override
@@ -117,10 +109,10 @@ public class RealAuthenticationFragment extends BaseFragment<IMasterAuthenticati
                 RxPermissionsUtils.applyPermission(getActivity(), new BaseCallback<String>() {
                     @Override
                     public void onSuccess(String obj) {
-                        //lib_ocr
-                        Intent scanIntent = new Intent(getActivity(), IDCardRecognitionActivity.class);
-                        scanIntent.putExtra(IDCardRecognitionActivity.FRONT, false);
-                        startActivityForResult(scanIntent, ForResultCode.START_FOR_RESULT_CODE_.getCode());
+                        //lib_ocr// TODO: 2019/8/7 0007 放开注释
+//                        Intent scanIntent = new Intent(getActivity(), IDCardRecognitionActivity.class);
+//                        scanIntent.putExtra(IDCardRecognitionActivity.FRONT, false);
+//                        startActivityForResult(scanIntent, ForResultCode.START_FOR_RESULT_CODE_.getCode());
                     }
 
                     @Override
@@ -139,35 +131,36 @@ public class RealAuthenticationFragment extends BaseFragment<IMasterAuthenticati
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == RESULT_CODE) {
-            if (requestCode == ForResultCode.START_FOR_RESULT_CODE.getCode() && null != data) {
-                final EXOCRModel result = (EXOCRModel) data.getSerializableExtra(RESULT);
-                editAuthenticationName.setText(result.name);
-                editAuthenticationIdCard.setText(result.cardnum);
-
-                String absolutePath = FileUtil.getSaveFile(PretendApplication.getInstance()).getAbsolutePath();
-
-                byte[] decode = Base64.decode(result.base64bitmap, Base64.DEFAULT);
-                Bitmap bitmap = BitmapFactory.decodeByteArray(decode, 0, decode.length);
-                FileUtil.saveBitmap(absolutePath, bitmap);
-                this.absolutePath = absolutePath;
-                ivAuthenticationFont.setImageBitmap(bitmap);
-
-            } else if (requestCode == ForResultCode.START_FOR_RESULT_CODE_.getCode() && null != data) {
-                final EXOCRModel result = (EXOCRModel) data.getSerializableExtra(RESULT);
-                byte[] decode = Base64.decode(result.base64bitmap, Base64.DEFAULT);
-                Bitmap bitmap = BitmapFactory.decodeByteArray(decode, 0, decode.length);
-                String absolutePath = FileUtil.getSaveFile(PretendApplication.getInstance()).getAbsolutePath();
-                FileUtil.saveBitmap(absolutePath, bitmap);
-                absoluteBlackPath = absolutePath;
-                ivAuthenticationBack.setImageBitmap(bitmap);
-                String[] valDate = Util.getValDate(result.validdate);
-                if (valDate != null && valDate.length > 1) {
-                    String string = getString(R.string.id_card_date, Util.getDate(valDate[0]), Util.getDate(valDate[1]));
-                    tvAuthenticationTermOfValidity.setText(string);
-                }
-            }
-        }
+        // TODO: 2019/8/7 0007 放开注释
+//        if (resultCode == RESULT_CODE) {
+//            if (requestCode == ForResultCode.START_FOR_RESULT_CODE.getCode() && null != data) {
+//                final EXOCRModel result = (EXOCRModel) data.getSerializableExtra(RESULT);
+//                editAuthenticationName.setText(result.name);
+//                editAuthenticationIdCard.setText(result.cardnum);
+//
+//                String absolutePath = FileUtil.getSaveFile(PretendApplication.getInstance()).getAbsolutePath();
+//
+//                byte[] decode = Base64.decode(result.base64bitmap, Base64.DEFAULT);
+//                Bitmap bitmap = BitmapFactory.decodeByteArray(decode, 0, decode.length);
+//                FileUtil.saveBitmap(absolutePath, bitmap);
+//                this.absolutePath = absolutePath;
+//                ivAuthenticationFont.setImageBitmap(bitmap);
+//
+//            } else if (requestCode == ForResultCode.START_FOR_RESULT_CODE_.getCode() && null != data) {
+//                final EXOCRModel result = (EXOCRModel) data.getSerializableExtra(RESULT);
+//                byte[] decode = Base64.decode(result.base64bitmap, Base64.DEFAULT);
+//                Bitmap bitmap = BitmapFactory.decodeByteArray(decode, 0, decode.length);
+//                String absolutePath = FileUtil.getSaveFile(PretendApplication.getInstance()).getAbsolutePath();
+//                FileUtil.saveBitmap(absolutePath, bitmap);
+//                absoluteBlackPath = absolutePath;
+//                ivAuthenticationBack.setImageBitmap(bitmap);
+//                String[] valDate = Util.getValDate(result.validdate);
+//                if (valDate != null && valDate.length > 1) {
+//                    String string = getString(R.string.id_card_date, Util.getDate(valDate[0]), Util.getDate(valDate[1]));
+//                    tvAuthenticationTermOfValidity.setText(string);
+//                }
+//            }
+//        }
     }
 
     @Override

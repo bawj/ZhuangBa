@@ -1,15 +1,17 @@
 package com.xiaomai.zhuangba.fragment.service;
 
+import android.Manifest;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
 import com.example.toollib.base.BaseFragment;
-import com.example.toollib.util.AmountUtil;
-import com.example.toollib.util.DensityUtils;
+import com.example.toollib.data.base.BaseCallback;
 import com.google.gson.Gson;
 import com.xiaomai.zhuangba.R;
 import com.xiaomai.zhuangba.adapter.PaymentDetailsAdapter;
@@ -20,7 +22,12 @@ import com.xiaomai.zhuangba.data.db.DBHelper;
 import com.xiaomai.zhuangba.data.module.pay.IPaymentDetailView;
 import com.xiaomai.zhuangba.data.module.pay.IPaymentDetailsModule;
 import com.xiaomai.zhuangba.data.module.pay.PaymentDetailsModule;
-import com.xiaomai.zhuangba.weight.MonitorPayCheckBox;
+import com.xiaomai.zhuangba.enums.ForResultCode;
+import com.xiaomai.zhuangba.util.RxPermissionsUtils;
+import com.xiaomai.zhuangba.util.ShopCarUtil;
+import com.xiaomai.zhuangba.weight.PayPassView;
+import com.xiaomai.zhuangba.weight.ShopPayCheckBox;
+import com.xiaomai.zhuangba.weight.dialog.PayPassDialog;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -35,7 +42,7 @@ import butterknife.OnClick;
  * @author Administrator
  * @date 2019/7/12 0012
  */
-public class PaymentDetailsFragment extends BaseFragment<IPaymentDetailsModule> implements PaymentDetailsAdapter.BaseCallBack, IPaymentDetailView {
+public class PaymentDetailsFragment extends BaseFragment<IPaymentDetailsModule> implements IPaymentDetailView {
 
 
     @BindView(R.id.tvPaymentItemOrdersTitle)
@@ -60,15 +67,13 @@ public class PaymentDetailsFragment extends BaseFragment<IPaymentDetailsModule> 
     RadioButton chkPaymentWeChat;
     @BindView(R.id.chkPaymentPlay)
     RadioButton chkPaymentPlay;
+    @BindView(R.id.chkPaymentWallet)
+    RadioButton chkPaymentWallet;
 
     /**
-     * 总价
+     * 支付密码
      */
-    private Double money = 0.0;
-    /**
-     * 数量
-     */
-    private Integer taskQuantity = 0;
+    private String password;
     private static final String ORDER_DATA = "order_data";
 
     public static PaymentDetailsFragment newInstance(String orderGson) {
@@ -90,22 +95,16 @@ public class PaymentDetailsFragment extends BaseFragment<IPaymentDetailsModule> 
     public void initView() {
         //服务项目
         List<ShopCarData> shopCarDataList = DBHelper.getInstance().getShopCarDataDao().queryBuilder().list();
-        //总价
-        for (ShopCarData shopCarData : shopCarDataList) {
-            Double price = DensityUtils.stringTypeDouble(shopCarData.getMoney()) * DensityUtils.stringTypeInteger(shopCarData.getNumber());
-            money = AmountUtil.add(price, money, 2);
-        }
-        tvPaymentMonty.setText(String.valueOf(money));
+        tvPaymentMonty.setText(String.valueOf(ShopCarUtil.getTotalMoney()));
         recyclerServiceItems.setLayoutManager(new LinearLayoutManager(getActivity()));
         PaymentDetailsAdapter paymentDetailsAdapter = new PaymentDetailsAdapter();
         paymentDetailsAdapter.setNewData(shopCarDataList);
-        paymentDetailsAdapter.setBaseCallback(this);
         recyclerServiceItems.setAdapter(paymentDetailsAdapter);
         String orderData = getOrderData();
         if (orderData != null) {
             SubmissionOrder submissionOrder = new Gson().fromJson(orderData, SubmissionOrder.class);
             if (submissionOrder != null) {
-                taskQuantity = submissionOrder.getNumber();
+                Integer taskQuantity = submissionOrder.getNumber();
                 //服务项目
                 tvPaymentItemOrdersTitle.setText(submissionOrder.getServiceText());
                 //数量
@@ -123,33 +122,52 @@ public class PaymentDetailsFragment extends BaseFragment<IPaymentDetailsModule> 
                 tvPaymentTaskOrderCode.setText(submissionOrder.getOrderCode());
             }
         }
-        new MonitorPayCheckBox().setChkWeChatBalance(chkPaymentWeChat).setChkAlipayBalance(chkPaymentPlay);
+
+        new ShopPayCheckBox()
+                .setChkWeChatBalance(chkPaymentWeChat)
+                .setChkAlipayBalance(chkPaymentPlay)
+                .setChkWalletBanlance(chkPaymentWallet);
+    }
+
+    @OnClick({R.id.btnGoPayment, R.id.ivPaymentReplace})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.btnGoPayment:
+                //去支付 先调用修改订单 修改成功后调用 支付
+                if (chkPaymentWallet.isChecked()){
+                    inputPassword();
+                }else {
+                    iModule.goOrderPay();
+                }
+                break;
+            case R.id.ivPaymentReplace:
+                RxPermissionsUtils.applyPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION, new BaseCallback<String>() {
+                    @Override
+                    public void onSuccess(String obj) {
+                        startFragmentForResult(LocationFragment.newInstance(), ForResultCode.START_FOR_RESULT_CODE.getCode());
+                    }
+
+                    @Override
+                    public void onFail(Object obj) {
+                        super.onFail(obj);
+                        showToast(getString(R.string.positioning_authority_tip));
+                    }
+                });
+                break;
+            default:
+        }
     }
 
     @Override
-    public void onAddSuccess(Double price) {
-        //重新计算价格
-        money = AmountUtil.add(price, money, 2);
-        //重新计算任务数量
-        taskQuantity = taskQuantity + 1;
-        tvPaymentTaskQuantity.setText(String.valueOf(taskQuantity));
-        tvPaymentMonty.setText(String.valueOf(money));
-    }
-
-    @Override
-    public void onDelSuccess(Double price) {
-        //重新计算价格
-        money = AmountUtil.subtract(money, price, 2);
-        //重新计算任务数量
-        taskQuantity = taskQuantity - 1;
-        tvPaymentTaskQuantity.setText(String.valueOf(taskQuantity));
-        tvPaymentMonty.setText(String.valueOf(money));
-    }
-
-    @OnClick(R.id.btnGoPayment)
-    public void onViewClicked() {
-        //去支付 先调用修改订单 修改成功后调用 支付
-        iModule.goOrderPay();
+    protected void onFragmentResult(int requestCode, int resultCode, Intent data) {
+        super.onFragmentResult(requestCode, resultCode, data);
+        if (resultCode == ForResultCode.RESULT_OK.getCode()) {
+            if (requestCode == ForResultCode.START_FOR_RESULT_CODE.getCode()) {
+                //地址选择成功返回
+                String name = data.getStringExtra(ForResultCode.RESULT_KEY.getExplain());
+                tvPaymentLocation.setText(name);
+            }
+        }
     }
 
     @Override
@@ -179,7 +197,9 @@ public class PaymentDetailsFragment extends BaseFragment<IPaymentDetailsModule> 
     public SubmissionOrder getSubmissionOrder() {
         String orderData = getOrderData();
         if (getOrderData() != null) {
-            return new Gson().fromJson(orderData, SubmissionOrder.class);
+            SubmissionOrder submissionOrder = new Gson().fromJson(orderData, SubmissionOrder.class);
+            submissionOrder.setAddress(tvPaymentLocation.getText().toString());
+            return submissionOrder;
         }
         return null;
     }
@@ -192,6 +212,37 @@ public class PaymentDetailsFragment extends BaseFragment<IPaymentDetailsModule> 
     @Override
     public boolean getChkPaymentPlay() {
         return chkPaymentPlay.isChecked();
+    }
+
+    @Override
+    public boolean getChkPaymentWallet() {
+        return chkPaymentWallet.isChecked();
+    }
+
+    @Override
+    public String getWalletPassword() {
+        return password;
+    }
+
+    public void inputPassword() {
+        final PayPassDialog dialog=new PayPassDialog(getActivity());
+        dialog.getPayViewPass()
+                .setPayClickListener(new PayPassView.OnPayClickListener() {
+                    @Override
+                    public void onPassFinish(String passContent) {
+                        dialog.dismiss();
+                        password = passContent;
+                        iModule.goOrderPay();
+                    }
+                    @Override
+                    public void onPayClose() {
+                        dialog.dismiss();
+                    }
+                    @Override
+                    public void onPayForget() {
+                        dialog.dismiss();
+                    }
+                });
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
@@ -213,7 +264,8 @@ public class PaymentDetailsFragment extends BaseFragment<IPaymentDetailsModule> 
         String telephone = submissionOrder.getTelephone();
         String name = submissionOrder.getName();
         String orderCode = submissionOrder.getOrderCode();
-        startFragment(SuccessfulPaymentFragment.newInstance(name , telephone , address , String.valueOf(money) ,orderCode));
+        Double money = ShopCarUtil.getTotalMoney();
+        startFragment(SuccessfulPaymentFragment.newInstance(name, telephone, address, String.valueOf(money), orderCode));
     }
 
     @Override

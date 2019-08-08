@@ -6,7 +6,7 @@ import android.view.View;
 import android.widget.ExpandableListView;
 import android.widget.LinearLayout;
 
-import com.example.toollib.data.IBaseModule;
+import com.example.toollib.data.BaseModule;
 import com.example.toollib.http.HttpResult;
 import com.example.toollib.http.exception.ApiException;
 import com.example.toollib.http.observer.BaseHttpRxObserver;
@@ -64,7 +64,7 @@ public class BaseWalletDetailedFragment extends BaseListFragment implements Expa
     }
 
     @Override
-    protected IBaseModule initModule() {
+    protected BaseModule initModule() {
         return null;
     }
 

@@ -100,6 +100,7 @@
     <string name="proportion">订单中总金额¥%1$s，您当前分成比例为%2$s</string>
     <string name="select_service">选择服务</string>
     <string name="individual">/个</string>
+    <string name="individual_">x%1$s</string>
     <string name="service_acceptance_criteria">服务内容及验收标准</string>
     <string name="total">总计：</string>
     <string name="new_task_number">任务数%1$s个</string>
@@ -313,6 +314,7 @@
     <string name="where_address">所在地址</string>
     <string name="click_to_select_the_address">点击选择所在地址</string>
     <string name="confirmation_information">请确认身份信息，如有误请修改</string>
+    <string name="confirmation_information_">确认信息</string>
     <string name="please_input_phone">请输入紧急联系电话</string>
     <string name="update_success">修改成功</string>
     <string name="set_success">设置成功</string>
@@ -353,4 +355,18 @@
     <string name="start_up_confirmation">现场开工确认</string>
     <string name="completion_of_construction">施工完成确认</string>
     <string name="maintenance">维保</string>
+    <string name="selection_of_specifications">选规格</string>
+    <string name="check_number">选择数量：</string>
+    <string name="choosing_maintenance_services">选择维保服务：</string>
+    <string name="add">添加</string>
+    <string name="not_choosing_maintenance">暂不选择维保</string>
+    <string name="not_choosing_maintenance_">(暂不选择维保)</string>
+    <string name="choosing_maintenance">%1$s个月维保：¥%2$s</string>
+    <string name="maintenance_date">(%1$s个月维保)</string>
+    <string name="quantity_selection">数量选择</string>
+    <string name="maintenance_service_choice">维保服务选择</string>
+    <string name="shop_car_money">¥%1$s/个</string>
+    <string name="shop_car_maintenance">%1$s个月维保：¥%2$s</string>
+    <string name="no_maintenance">暂无维保</string>
+    <string name="please_input_pay_password">请输入支付密码</string>
 </resources>

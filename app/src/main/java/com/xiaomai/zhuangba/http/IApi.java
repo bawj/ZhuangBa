@@ -4,6 +4,7 @@ import com.example.toollib.http.HttpResult;
 import com.xiaomai.zhuangba.data.bean.AliPayAccountBean;
 import com.xiaomai.zhuangba.data.bean.DeliveryContent;
 import com.xiaomai.zhuangba.data.bean.EarnestBean;
+import com.xiaomai.zhuangba.data.bean.Maintenance;
 import com.xiaomai.zhuangba.data.bean.OngoingOrdersList;
 import com.xiaomai.zhuangba.data.bean.OrderDateList;
 import com.xiaomai.zhuangba.data.bean.OrderServiceItem;
@@ -271,11 +272,12 @@ public interface IApi {
      *
      * @param orderCode 订单编号
      * @param payType   支付类型
+     * @param code      钱包支付密码
      * @return observable
      */
     @FormUrlEncoded
     @POST("order/orderPay")
-    Observable<HttpResult<PayData>> orderPay(@Field("orderCode") String orderCode, @Field("payType") String payType);
+    Observable<HttpResult<PayData>> orderPay(@Field("orderCode") String orderCode, @Field("payType") String payType , @Field("code") String code);
 
 
     /**
@@ -588,4 +590,15 @@ public interface IApi {
      */
     @POST("order/submitValidation")
     Observable<HttpResult<Object>> submitValidation(@Body RequestBody requestBody);
+
+
+    /**
+     * 根据服务项目查询维保信息
+     *
+     * @param serviceId 小类服务ID
+     * @return observable
+     */
+    @FormUrlEncoded
+    @POST("maintenance/getMaintenance")
+    Observable<HttpResult<List<Maintenance>>> getMaintenance(@Field("serviceId") String serviceId);
 }

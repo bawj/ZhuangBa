@@ -27,6 +27,17 @@ public interface IPaymentDetailView extends IBaseView {
      */
     boolean getChkPaymentPlay();
 
+    /**
+     * 钱包支付
+     * @return boolean
+     */
+    boolean getChkPaymentWallet();
+
+    /**
+     * 钱包支付密码
+     * @return string
+     */
+    String getWalletPassword();
 
     /**
      * 支付成功

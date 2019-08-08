@@ -102,5 +102,10 @@ public class BeUnderConstructionFragment extends BaseMasterOrderDetailFragment {
         statusBarWhite();
         return super.isInSwipeBack();
     }
+    @Override
+    public void leftBackClick() {
+        statusBarWhite();
+        super.leftBackClick();
+    }
 
 }

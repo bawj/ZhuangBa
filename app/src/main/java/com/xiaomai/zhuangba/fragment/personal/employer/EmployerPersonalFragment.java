@@ -30,6 +30,12 @@ public class EmployerPersonalFragment extends PersonalFragment {
     }
 
     @Override
+    public void leftBackClick() {
+        statusBarWhite();
+        super.leftBackClick();
+    }
+
+    @Override
     public boolean isInSwipeBack() {
         statusBarWhite();
         return super.isInSwipeBack();

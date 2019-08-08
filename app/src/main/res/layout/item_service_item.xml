@@ -12,19 +12,41 @@
         android:layout_height="@dimen/tool_lib_60dp"
         tools:src="@drawable/bg_employer" />
 
-    <TextView
-        android:id="@+id/tvItemServiceName"
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/ivItemServiceLogo"
-        android:layout_marginStart="@dimen/tool_lib_12dp"
-        android:layout_marginLeft="@dimen/tool_lib_12dp"
         android:layout_toEndOf="@+id/ivItemServiceLogo"
-        android:layout_toRightOf="@+id/ivItemServiceLogo"
-        android:maxLength="15"
-        android:textColor="@color/tool_lib_gray_222222"
-        android:textSize="@dimen/tool_lib_14sp"
-        tools:text="智能通讯座调试" />
+        android:layout_toRightOf="@+id/ivItemServiceLogo">
+
+        <TextView
+            android:id="@+id/tvItemServiceName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/tool_lib_12dp"
+            android:layout_marginLeft="@dimen/tool_lib_12dp"
+            android:maxLength="15"
+            android:textColor="@color/tool_lib_gray_222222"
+            android:textSize="@dimen/tool_lib_14sp"
+            tools:text="智能通讯座调试" />
+
+        <TextView
+            android:id="@+id/tvOrderDetailMaintenance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/green_radius_bg"
+            android:paddingLeft="@dimen/tool_lib_21dp"
+            android:paddingTop="@dimen/tool_lib_4dp"
+            android:paddingRight="@dimen/tool_lib_21dp"
+            android:paddingBottom="@dimen/tool_lib_4dp"
+            android:textColor="@color/tool_lib_color_199898"
+            android:textSize="12sp"
+            tools:text="36个月维保：¥1290" />
+    </RelativeLayout>
+
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -64,9 +86,9 @@
             android:layout_centerVertical="true"
             android:layout_marginEnd="@dimen/tool_lib_12dp"
             android:layout_marginRight="@dimen/tool_lib_12dp"
-            android:textColor="@color/tool_lib_red_EF2B2B"
-            android:layout_toLeftOf="@+id/ivServiceItemRight"
             android:layout_toStartOf="@+id/ivServiceItemRight"
+            android:layout_toLeftOf="@+id/ivServiceItemRight"
+            android:textColor="@color/tool_lib_red_EF2B2B"
             android:textSize="@dimen/tool_lib_14sp"
             tools:text="¥160.00" />
 

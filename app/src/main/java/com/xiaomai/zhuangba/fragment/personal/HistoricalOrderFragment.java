@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.example.toollib.data.IBaseModule;
 import com.example.toollib.http.HttpResult;
 import com.example.toollib.http.exception.ApiException;
 import com.example.toollib.http.observer.BaseHttpRxObserver;
@@ -28,7 +29,7 @@ import io.reactivex.Observable;
  * @author Administrator
  * @date 2019/7/19 0019
  */
-public class HistoricalOrderFragment extends BaseListFragment<HistoricalAdapter> {
+public class HistoricalOrderFragment extends BaseListFragment<IBaseModule,HistoricalAdapter> {
 
     private HistoricalAdapter historicalAdapter;
 

@@ -106,8 +106,6 @@ public class CommonlyDialog {
             alertDialog.show();
             Window window = alertDialog.getWindow();
             if (window != null) {
-                //window.requestFeature(Window.FEATURE_NO_TITLE);
-                //window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
                 window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 window.getDecorView().setPadding(DensityUtil.dp2px(32), 0, DensityUtil.dp2px(32), 0);
             }

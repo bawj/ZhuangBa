@@ -33,6 +33,9 @@ public class ShopCarDataDao extends AbstractDao<ShopCarData, Long> {
         public final static Property Number = new Property(6, String.class, "number", false, "NUMBER");
         public final static Property ServiceId = new Property(7, String.class, "serviceId", false, "SERVICE_ID");
         public final static Property ParentServiceId = new Property(8, String.class, "parentServiceId", false, "PARENT_SERVICE_ID");
+        public final static Property MaintenanceMoney = new Property(9, String.class, "maintenanceMoney", false, "MAINTENANCE_MONEY");
+        public final static Property MaintenanceId = new Property(10, int.class, "maintenanceId", false, "MAINTENANCE_ID");
+        public final static Property MaintenanceTime = new Property(11, String.class, "maintenanceTime", false, "MAINTENANCE_TIME");
     }
 
 
@@ -56,7 +59,10 @@ public class ShopCarDataDao extends AbstractDao<ShopCarData, Long> {
                 "\"ICON\" TEXT," + // 5: icon
                 "\"NUMBER\" TEXT," + // 6: number
                 "\"SERVICE_ID\" TEXT," + // 7: serviceId
-                "\"PARENT_SERVICE_ID\" TEXT);"); // 8: parentServiceId
+                "\"PARENT_SERVICE_ID\" TEXT," + // 8: parentServiceId
+                "\"MAINTENANCE_MONEY\" TEXT," + // 9: maintenanceMoney
+                "\"MAINTENANCE_ID\" INTEGER NOT NULL ," + // 10: maintenanceId
+                "\"MAINTENANCE_TIME\" TEXT);"); // 11: maintenanceTime
     }
 
     /** Drops the underlying database table. */
@@ -113,6 +119,17 @@ public class ShopCarDataDao extends AbstractDao<ShopCarData, Long> {
         if (parentServiceId != null) {
             stmt.bindString(9, parentServiceId);
         }
+ 
+        String maintenanceMoney = entity.getMaintenanceMoney();
+        if (maintenanceMoney != null) {
+            stmt.bindString(10, maintenanceMoney);
+        }
+        stmt.bindLong(11, entity.getMaintenanceId());
+ 
+        String maintenanceTime = entity.getMaintenanceTime();
+        if (maintenanceTime != null) {
+            stmt.bindString(12, maintenanceTime);
+        }
     }
 
     @Override
@@ -163,6 +180,17 @@ public class ShopCarDataDao extends AbstractDao<ShopCarData, Long> {
         if (parentServiceId != null) {
             stmt.bindString(9, parentServiceId);
         }
+ 
+        String maintenanceMoney = entity.getMaintenanceMoney();
+        if (maintenanceMoney != null) {
+            stmt.bindString(10, maintenanceMoney);
+        }
+        stmt.bindLong(11, entity.getMaintenanceId());
+ 
+        String maintenanceTime = entity.getMaintenanceTime();
+        if (maintenanceTime != null) {
+            stmt.bindString(12, maintenanceTime);
+        }
     }
 
     @Override
@@ -181,7 +209,10 @@ public class ShopCarDataDao extends AbstractDao<ShopCarData, Long> {
             cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5), // icon
             cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6), // number
             cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7), // serviceId
-            cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8) // parentServiceId
+            cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8), // parentServiceId
+            cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9), // maintenanceMoney
+            cursor.getInt(offset + 10), // maintenanceId
+            cursor.isNull(offset + 11) ? null : cursor.getString(offset + 11) // maintenanceTime
         );
         return entity;
     }
@@ -197,6 +228,9 @@ public class ShopCarDataDao extends AbstractDao<ShopCarData, Long> {
         entity.setNumber(cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6));
         entity.setServiceId(cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7));
         entity.setParentServiceId(cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8));
+        entity.setMaintenanceMoney(cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9));
+        entity.setMaintenanceId(cursor.getInt(offset + 10));
+        entity.setMaintenanceTime(cursor.isNull(offset + 11) ? null : cursor.getString(offset + 11));
      }
     
     @Override

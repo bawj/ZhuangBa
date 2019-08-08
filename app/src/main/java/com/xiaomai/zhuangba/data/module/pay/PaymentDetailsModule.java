@@ -5,6 +5,7 @@ import android.text.TextUtils;
 
 import com.example.toollib.data.base.BaseCallback;
 import com.example.toollib.http.HttpResult;
+import com.example.toollib.http.exception.ApiException;
 import com.example.toollib.http.function.BaseHttpConsumer;
 import com.example.toollib.http.observer.BaseHttpRxObserver;
 import com.example.toollib.http.util.RxUtils;
@@ -60,18 +61,26 @@ public class PaymentDetailsModule extends PlayModule<IPaymentDetailView> impleme
         submissionOrder.setOrderServices(orderServicesBeans);
         boolean isChkPaymentWeChat = mViewRef.get().getChkPaymentWeChat();
         boolean isChkPaymentPlay = mViewRef.get().getChkPaymentPlay();
+        boolean isChkPaymentWallet = mViewRef.get().getChkPaymentWallet();
         String orderData = getOrderData(submissionOrder);
         if (!TextUtils.isEmpty(orderData)) {
+            // TODO: 2019/8/7 0007 串联请求
             RequestBody requestBody = RequestBody.create(MediaType.parse("application/json;charset=utf-8"), orderData);
             //修改订单
             final Observable<HttpResult<Object>> updateOrder = ServiceUrl.getUserApi().updateOrder(requestBody);
-            //支付
             if (isChkPaymentPlay) {
+                //支付宝支付
                 observablePay = RxUtils.getObservable(ServiceUrl.getUserApi()
-                        .orderPay(submissionOrder.getOrderCode(), StringTypeExplain.A_ALIPAY_PAYMENT.getCode()));
+                        .orderPay(submissionOrder.getOrderCode(), StringTypeExplain.A_ALIPAY_PAYMENT.getCode(), ""));
             } else if (isChkPaymentWeChat) {
+                //微信支付
                 observablePay = RxUtils.getObservable(ServiceUrl.getUserApi()
-                        .orderPay(submissionOrder.getOrderCode(), StringTypeExplain.WE_CHAT_PAYMENT.getCode()));
+                        .orderPay(submissionOrder.getOrderCode(), StringTypeExplain.WE_CHAT_PAYMENT.getCode(), ""));
+            } else if (isChkPaymentWallet) {
+                String walletPassword = mViewRef.get().getWalletPassword();
+                //钱包支付
+                observablePay = RxUtils.getObservable(ServiceUrl.getUserApi()
+                        .orderPay(submissionOrder.getOrderCode(), StringTypeExplain.WE_WALLET.getCode(), walletPassword));
             }
             RxUtils.getObservable(updateOrder)
                     .compose(mViewRef.get().<HttpResult<Object>>bindLifecycle())
@@ -81,9 +90,9 @@ public class PaymentDetailsModule extends PlayModule<IPaymentDetailView> impleme
                             Log.e("httpConsumerAccept httpResult = " + httpResult.toString());
                         }
                     })
-                    .concatMap(new Function<HttpResult<Object>, ObservableSource<?>>() {
+                    .concatMap(new Function<HttpResult<Object>, ObservableSource<HttpResult<PayData>>>() {
                         @Override
-                        public ObservableSource<?> apply(HttpResult<Object> httpResult) throws Exception {
+                        public ObservableSource<HttpResult<PayData>> apply(HttpResult<Object> httpResult) throws Exception {
                             Log.e("flatMap 1 " + httpResult.toString());
                             return observablePay;
                         }
@@ -109,6 +118,7 @@ public class PaymentDetailsModule extends PlayModule<IPaymentDetailView> impleme
                     });
         }
     }
+
 
     private String getOrderData(SubmissionOrder submissionOrder) {
         HashMap<String, Object> hashMap = new HashMap<>();

@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/tool_lib_gray_F5F6FA">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/tool_lib_10dp"
+        android:background="@android:color/white"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/tool_lib_16dp"
+        android:paddingRight="@dimen/tool_lib_16dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/tool_lib_14dp">
+
+            <TextView
+                android:id="@+id/tvShopCarName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:maxLength="15"
+                android:textColor="@color/tool_lib_gray_222222"
+                android:textSize="@dimen/tool_lib_16sp"
+                tools:text="智能通讯座调试" />
+
+            <TextView
+                android:id="@+id/tvShopMoney"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/tool_lib_6dp"
+                android:layout_marginLeft="@dimen/tool_lib_6dp"
+                android:layout_toStartOf="@+id/tvShopCarTallMoney"
+                android:layout_toLeftOf="@+id/tvShopCarTallMoney"
+                android:layout_toEndOf="@+id/tvShopCarName"
+                android:layout_toRightOf="@+id/tvShopCarName"
+                android:textColor="@color/tool_lib_gray_777777"
+                android:textSize="@dimen/tool_lib_14sp"
+                tools:text="¥80.00/个" />
+
+            <TextView
+                android:id="@+id/tvShopCarTallMoney"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:textColor="@color/tool_lib_red_EF2B2B"
+                android:textSize="@dimen/tool_lib_14sp"
+                tools:text="¥80.00" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/tool_lib_12dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="@string/quantity_selection"
+                android:textColor="@color/tool_lib_gray_777777"
+                android:textSize="@dimen/tool_lib_14sp" />
+
+            <com.xiaomai.zhuangba.weight.AnimShopsButton
+                android:id="@+id/animShopCar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/tool_lib_12dp"
+            android:layout_marginBottom="@dimen/tool_lib_12dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="@string/maintenance_service_choice"
+                android:textColor="@color/tool_lib_gray_777777"
+                android:textSize="@dimen/tool_lib_14sp" />
+
+
+            <LinearLayout
+                android:id="@+id/layShopCarMaintenance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/gray_radius_bg">
+
+                <TextView
+                    android:id="@+id/tvShopCarMaintenance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="center"
+                    android:paddingLeft="@dimen/tool_lib_10dp"
+                    android:paddingTop="@dimen/tool_lib_6dp"
+                    android:paddingRight="@dimen/tool_lib_10dp"
+                    android:paddingBottom="@dimen/tool_lib_6dp"
+                    android:textColor="@color/tool_lib_gray_B1B1B1"
+                    android:textSize="@dimen/tool_lib_12sp"
+                    tools:text="36个月维保：¥1290" />
+
+                <ImageView
+                    android:id="@+id/ivShopCarRight"
+                    android:layout_width="@dimen/tool_lib_10dp"
+                    android:layout_height="@dimen/tool_lib_12dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginEnd="@dimen/tool_lib_10dp"
+                    android:layout_marginRight="@dimen/tool_lib_10dp"
+                    tools:src="@drawable/ic_right_black" />
+
+            </LinearLayout>
+        </RelativeLayout>
+    </LinearLayout>
+
+
+</RelativeLayout>

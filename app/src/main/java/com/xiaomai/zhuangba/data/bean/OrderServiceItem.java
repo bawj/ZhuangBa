@@ -28,6 +28,12 @@ public class OrderServiceItem {
     private String iconUrl;
     private String serviceStandard;
 
+    /** 维保时间 单位（月） */
+    private int monthNumber;
+
+    /** 维保的金额 */
+    private double maintenanceAmount;
+
     public String getOrderCode() {
         return orderCode;
     }
@@ -98,5 +104,21 @@ public class OrderServiceItem {
 
     public void setPrice3(double price3) {
         this.price3 = price3;
+    }
+
+    public int getMonthNumber() {
+        return monthNumber;
+    }
+
+    public void setMonthNumber(int monthNumber) {
+        this.monthNumber = monthNumber;
+    }
+
+    public double getMaintenanceAmount() {
+        return maintenanceAmount;
+    }
+
+    public void setMaintenanceAmount(double maintenanceAmount) {
+        this.maintenanceAmount = maintenanceAmount;
     }
 }

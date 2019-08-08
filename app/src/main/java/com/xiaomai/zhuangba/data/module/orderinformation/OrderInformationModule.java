@@ -11,12 +11,15 @@ import com.example.toollib.util.DensityUtils;
 import com.example.toollib.util.RegexUtils;
 import com.google.gson.Gson;
 import com.xiaomai.zhuangba.R;
+import com.xiaomai.zhuangba.ShopCarDataDao;
 import com.xiaomai.zhuangba.data.bean.OrderServicesBean;
 import com.xiaomai.zhuangba.data.bean.ShopCarData;
 import com.xiaomai.zhuangba.data.db.DBHelper;
 import com.xiaomai.zhuangba.enums.OrdersEnum;
 import com.xiaomai.zhuangba.http.ServiceUrl;
+import com.xiaomai.zhuangba.util.ConstantUtil;
 import com.xiaomai.zhuangba.util.DateUtil;
+import com.xiaomai.zhuangba.util.ShopCarUtil;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -87,7 +90,7 @@ public class OrderInformationModule extends BaseModule<IOrderInformationView> im
         }
         String date = DateUtil.dateToStr(appointmentTime, "yyyy-MM-dd HH:mm:ss");
         Long aLong = DateUtil.dateToCurrentTimeMillis(date, "yyyy-MM-dd HH:mm:ss");
-        if (!dateCompare(aLong)) {
+        if (!isDateCompare(aLong)) {
             mViewRef.get().showToast(mContext.get().getString(R.string.reservation_time_prompt));
             return;
         }
@@ -170,7 +173,7 @@ public class OrderInformationModule extends BaseModule<IOrderInformationView> im
         }
         String date = DateUtil.dateToStr(appointmentTime, "yyyy-MM-dd HH:mm:ss");
         Long aLong = DateUtil.dateToCurrentTimeMillis(date, "yyyy-MM-dd HH:mm:ss");
-        if (!dateCompare(aLong)) {
+        if (!isDateCompare(aLong)) {
             mViewRef.get().showToast(mContext.get().getString(R.string.reservation_time_prompt));
             return null;
         }
@@ -180,6 +183,18 @@ public class OrderInformationModule extends BaseModule<IOrderInformationView> im
         String latitude = mViewRef.get().getLatitude();
         hashMap.put("longitude", DensityUtils.stringTypeFloat(longitude));
         hashMap.put("latitude", DensityUtils.stringTypeFloat(latitude));
+        //是否有维保 0：没有维保；1：有维保
+        List<ShopCarData> list = DBHelper.getInstance().getShopCarDataDao().queryBuilder()
+                .where(ShopCarDataDao.Properties.MaintenanceId.notEq(String.valueOf(ConstantUtil.DEF_MAINTENANCE)))
+                .list();
+        int maintenanceFlag = list.isEmpty() ? 0 : 1;
+        hashMap.put("maintenanceFlag" , maintenanceFlag);
+        //计算 维保总金额
+        Double maintenanceMoney = 0d;
+        for (ShopCarData shopCarData : list) {
+            maintenanceMoney += DensityUtils.stringTypeDouble(shopCarData.getMaintenanceMoney());
+        }
+        hashMap.put("maintenanceAmount" , maintenanceMoney);
         //服务项目信息
         hashMap.put("orderServices", orderServicesBeans);
         return hashMap;
@@ -195,27 +210,30 @@ public class OrderInformationModule extends BaseModule<IOrderInformationView> im
             //任务总数量
             int number = DensityUtils.stringTypeInteger(shopCarData.getNumber());
             //订单总金额
-            double orderAmount = DensityUtils.stringTypeDouble(String.valueOf(number)) * DensityUtils.stringTypeDouble(shopCarData.getMoney());
+            double orderAmount = ShopCarUtil.getTotalMoneys(number , DensityUtils.stringTypeDouble(shopCarData.getMoney())
+                    , DensityUtils.stringTypeDouble(shopCarData.getMoney2()) , DensityUtils.stringTypeDouble(shopCarData.getMoney3())
+                    , DensityUtils.stringTypeDouble(shopCarData.getMaintenanceMoney()));
             //订单服务项目
             OrderServicesBean orderServicesBean = new OrderServicesBean();
             //服务项目ID
             orderServicesBean.setServiceId(shopCarData.getServiceId());
             //服务项目数量
-            orderServicesBean.setNumber(DensityUtils.stringTypeInteger(shopCarData.getNumber()));
+            orderServicesBean.setNumber(number);
             //服务项目总金额
             orderServicesBean.setAmount(orderAmount);
+            //维保时间 单位（月）
+            orderServicesBean.setMonthNumber(DensityUtils.stringTypeInteger(shopCarData.getNumber()));
+            //维保 金额
+            orderServicesBean.setMaintenanceAmount(DensityUtils.stringTypeDouble(shopCarData.getMaintenanceMoney()));
             orderServicesBeans.add(orderServicesBean);
         }
         return orderServicesBeans;
     }
 
-    private boolean dateCompare(Long appointmentTime) {
+    private boolean isDateCompare(Long appointmentTime) {
         long l = System.currentTimeMillis();
         String date2String = DateUtil.getDate2String(l, "yyyy-MM-dd HH");
         Long aLong = DateUtil.dateToCurrentTimeMilli(date2String, "yyyy-MM-dd HH");
-        if (appointmentTime - aLong >= 7200000) {
-            return true;
-        }
-        return false;
+        return appointmentTime - aLong >= 7200000;
     }
 }

@@ -1,5 +1,6 @@
 package com.xiaomai.zhuangba.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomSheetBehavior;
@@ -11,11 +12,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.example.toollib.data.IBaseModule;
-import com.example.toollib.http.HttpResult;
-import com.example.toollib.http.exception.ApiException;
-import com.example.toollib.http.observer.BaseHttpRxObserver;
-import com.example.toollib.http.util.RxUtils;
 import com.example.toollib.util.Log;
 import com.qmuiteam.qmui.layout.QMUILinearLayout;
 import com.qmuiteam.qmui.widget.QMUITopBarLayout;
@@ -24,16 +20,21 @@ import com.xiaomai.zhuangba.R;
 import com.xiaomai.zhuangba.adapter.ServiceContentAdapter;
 import com.xiaomai.zhuangba.adapter.ServiceTitleAdapter;
 import com.xiaomai.zhuangba.adapter.SheetBehaviorAdapter;
+import com.xiaomai.zhuangba.data.bean.Maintenance;
 import com.xiaomai.zhuangba.data.bean.ServiceSubcategory;
 import com.xiaomai.zhuangba.data.bean.ServiceSubcategoryProject;
 import com.xiaomai.zhuangba.data.db.DBHelper;
+import com.xiaomai.zhuangba.data.module.selectservice.ISelectServiceModule;
+import com.xiaomai.zhuangba.data.module.selectservice.ISelectServiceView;
+import com.xiaomai.zhuangba.data.module.selectservice.SelectServiceModule;
+import com.xiaomai.zhuangba.enums.ForResultCode;
 import com.xiaomai.zhuangba.fragment.base.BaseListFragment;
 import com.xiaomai.zhuangba.fragment.service.ServiceDetailFragment;
-import com.xiaomai.zhuangba.fragment.service.SubmitOrderInformationFragment;
-import com.xiaomai.zhuangba.http.ServiceUrl;
+import com.xiaomai.zhuangba.fragment.service.ShopCarFragment;
 import com.xiaomai.zhuangba.util.SheetBehaviorUtil;
 import com.xiaomai.zhuangba.util.ShopCarUtil;
 import com.xiaomai.zhuangba.util.TopBarLayoutUtil;
+import com.xiaomai.zhuangba.weight.dialog.ChoosingGoodsDialog;
 
 import java.util.List;
 
@@ -43,11 +44,12 @@ import butterknife.OnClick;
 /**
  * @author Administrator
  * @date 2019/7/9 0009
- *
+ * <p>
  * 选择服务
  */
-public class SelectServiceFragment extends BaseListFragment implements ServiceContentAdapter.IServiceContentOnAddDelListener,
-        BaseQuickAdapter.OnItemClickListener , SheetBehaviorAdapter.ISheetBehaviorListener {
+public class SelectServiceFragment extends BaseListFragment<ISelectServiceModule, ServiceTitleAdapter>
+        implements ServiceContentAdapter.IServiceContentOnAddDelListener, BaseQuickAdapter.OnItemClickListener,
+        SheetBehaviorAdapter.ISheetBehaviorListener, ISelectServiceView {
 
     /**
      * 大类ID
@@ -104,7 +106,6 @@ public class SelectServiceFragment extends BaseListFragment implements ServiceCo
      * 服务 内容
      */
     private ServiceContentAdapter serviceContentAdapter;
-    private List<ServiceSubcategory> serviceSubcategoryList;
     private BottomSheetBehavior bottomSheetBehavior;
     private SheetBehaviorAdapter sheetBehaviorAdapter;
 
@@ -147,65 +148,47 @@ public class SelectServiceFragment extends BaseListFragment implements ServiceCo
 
         //默认清除购物车(也可以不清除)
         DBHelper.getInstance().getShopCarDataDao().deleteAll();
-        onAddOrDelSuccess();
+        updateUi();
     }
 
     @Override
     public void onRefresh(@NonNull RefreshLayout refreshLayout) {
         super.onRefresh(refreshLayout);
-        requestServiceData();
-    }
-
-    private void requestServiceData() {
-        RxUtils.getObservable(ServiceUrl.getUserApi().getServiceSubcategory(getServiceId()))
-                .compose(this.<HttpResult<List<ServiceSubcategory>>>bindToLifecycle())
-                .subscribe(new BaseHttpRxObserver<List<ServiceSubcategory>>() {
-                    @Override
-                    protected void onSuccess(List<ServiceSubcategory> serviceSubcategories) {
-                        finishRefresh();
-                        initData(serviceSubcategories);
-                        laySelectService.setVisibility(View.VISIBLE);
-                        itemSelectServiceLayoutFor.setVisibility(View.VISIBLE);
-                    }
-
-                    @Override
-                    public void onError(ApiException e) {
-                        super.onError(e);
-                        finishRefresh();
-                    }
-                });
-    }
-
-    /**
-     * 刷新
-     */
-    private void initData(List<ServiceSubcategory> serviceSubcategories) {
-        serviceSubcategoryList = serviceSubcategories;
-        serviceTitleAdapter.setNewData(serviceSubcategoryList);
-        if (serviceSubcategoryList != null && !serviceSubcategoryList.isEmpty()) {
-            ServiceSubcategory serviceSubcategory = serviceSubcategoryList.get(serviceTitlePosition);
-            if (TextUtils.isEmpty(serviceText)) {
-                serviceText = serviceSubcategory.getServiceText();
-            }
-            tvServiceContentTitle.setText(serviceText);
-            serviceTitleAdapter.setItemChecked(serviceText);
-            serviceContentAdapter.setNewData(serviceSubcategory.getServicePoolList());
-        }
+        iModule.requestServiceData();
     }
 
     @Override
-    public void onAddOrDelSuccess() {
-        int totalNumber = ShopCarUtil.getTotalNumber();
-        double totalMoney = ShopCarUtil.getTotalMoney();
-        tvSelectServiceTaskNumber.setText(getString(R.string.new_task_number, String.valueOf(totalNumber)));
-        tvSelectServiceMonty.setText(getString(R.string.content_money, String.valueOf(totalMoney)));
+    public void onAddOrDelSuccess(ServiceSubcategoryProject item) {
+        //选择规格  查询 维保类型
+        iModule.requestMaintenance(item);
+    }
+
+    @Override
+    public void requestMaintenance(final ServiceSubcategoryProject serviceSubcategoryProject, List<Maintenance> maintenanceList) {
+        ChoosingGoodsDialog
+                .getInstance()
+                .initView(serviceSubcategoryProject,getActivity())
+                .setTvChoosingGoodsName(serviceSubcategoryProject.getServiceText())
+                .setRvChoosingGoods(getActivity(),serviceSubcategoryProject,maintenanceList)
+                .setICallBase(new ChoosingGoodsDialog.BaseCallback() {
+                    @Override
+                    public void sure(Maintenance maintenance,int count) {
+                        Log.e("添加数量 = " + count);
+                        //确定 添加
+                        if (count > 0) {
+                            ShopCarUtil.saveShopCar(serviceSubcategoryProject,maintenance, count);
+                            sheetBehaviorUpdate();
+                        }
+                    }
+                })
+                .showDialog();
     }
 
     @Override
     public void sheetBehaviorUpdate() {
         serviceContentAdapter.notifyDataSetChanged();
         sheetBehaviorAdapter.setNewData(DBHelper.getInstance().getShopCarDataDao().queryBuilder().list());
-        onAddOrDelSuccess();
+        updateUi();
     }
 
     @Override
@@ -243,8 +226,8 @@ public class SelectServiceFragment extends BaseListFragment implements ServiceCo
             case R.id.btnSelectServiceNext:
                 Log.e("btnSelectServiceNext 点击下一步");
                 Integer totalNumber = ShopCarUtil.getTotalNumber();
-                if (totalNumber != 0){
-                    startFragment(SubmitOrderInformationFragment.newInstance(getServiceId() , getServiceText()));
+                if (totalNumber != 0) {
+                    startFragmentForResult(ShopCarFragment.newInstance(getServiceId() , getServiceText()) , ForResultCode.START_FOR_RESULT_CODE_.getCode());
                 }
                 break;
             case R.id.tvShopCarEmpty:
@@ -256,6 +239,40 @@ public class SelectServiceFragment extends BaseListFragment implements ServiceCo
         }
     }
 
+    @Override
+    public void requestServiceDataSuccess(List<ServiceSubcategory> serviceSubcategories) {
+        serviceTitleAdapter.setNewData(serviceSubcategories);
+        if (serviceSubcategories != null && !serviceSubcategories.isEmpty()) {
+            ServiceSubcategory serviceSubcategory = serviceSubcategories.get(serviceTitlePosition);
+            if (TextUtils.isEmpty(serviceText)) {
+                serviceText = serviceSubcategory.getServiceText();
+            }
+            tvServiceContentTitle.setText(serviceText);
+            serviceTitleAdapter.setItemChecked(serviceText);
+            serviceContentAdapter.setNewData(serviceSubcategory.getServicePoolList());
+        }
+        laySelectService.setVisibility(View.VISIBLE);
+        itemSelectServiceLayoutFor.setVisibility(View.VISIBLE);
+    }
+
+
+    @Override
+    protected void onFragmentResult(int requestCode, int resultCode, Intent data) {
+        super.onFragmentResult(requestCode, resultCode, data);
+        sheetBehaviorUpdate();
+    }
+
+    /**
+     * 更新 任务数量 和 总价格
+     */
+    public void updateUi() {
+        int totalNumber = ShopCarUtil.getTotalNumber();
+        double totalMoney = ShopCarUtil.getTotalMoney();
+        tvSelectServiceTaskNumber.setText(getString(R.string.new_task_number, String.valueOf(totalNumber)));
+        tvSelectServiceMonty.setText(getString(R.string.content_money, String.valueOf(totalMoney)));
+    }
+
+    @Override
     public String getServiceId() {
         if (getArguments() != null) {
             return getArguments().getString(SERVICE_ID);
@@ -281,8 +298,8 @@ public class SelectServiceFragment extends BaseListFragment implements ServiceCo
     }
 
     @Override
-    protected IBaseModule initModule() {
-        return null;
+    protected ISelectServiceModule initModule() {
+        return new SelectServiceModule();
     }
 
     @Override
