@@ -87,6 +87,7 @@ public class EmployerWalletFragment extends BaseListFragment {
                     @Override
                     public void onClick(View v) {
                         //明细
+                        startFragment(EmployerWalletDetailFragment.newInstance());
                     }
                 });
         //设置字体白色
@@ -99,14 +100,16 @@ public class EmployerWalletFragment extends BaseListFragment {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btnRecharge:
-                //充值  // TODO: 2019/8/8 0008 未测试 充值
+                //充值
                 startFragment(EmployerRechargeFragment.newInstance());
                 break;
             case R.id.rlRechargeRecord:
                 //充值记录
+                startFragment(RechargeRecordFragment.newInstance());
                 break;
             case R.id.rlRecordsOfConsumption:
                 //消费记录
+                startFragment(RecordsOfConsumptionFragment.newInstance());
                 break;
             case R.id.rlAccountSecurity:
                 //账户安全

@@ -13,6 +13,7 @@ public enum StringTypeExplain {
     REFRESH_NEED_DEAL_WITH_FRAGMENT("1" , "首页 刷新 第二个fragment"),
     A_MAP_PACKAGE_NAME("com.autonavi.minimap" , "高德地图包名"),
     A_MAP_BAI_DU_PACKAGE_NAME("com.baidu.BaiduMap" , "百度地图包名"),
+    ORDER_STATUS("2" , "推送状态 = 2 跳转到订单详情"),
     A_ALIPAY_PAYMENT("1" , "支付宝支付"),
     WE_CHAT_PAYMENT("2" , "微信支付"),
     WE_WALLET("3" , "钱包支付"),

@@ -80,16 +80,19 @@ public class UserInfo {
     /** 超管1   管理员2   员工3 */
     private int roleId;
 
+    /** 团队 */
+    private String team;
+
     @Transient
     private List<SkillList> skills;
 
-    @Generated(hash = 1110975873)
+    @Generated(hash = 1109220330)
     public UserInfo(Long id, String phoneNumber, String userText, String password, int lockFlag, String invitationCode,
             String token, String role, String registrationTime, String identityCard, String validityDataStart,
             String validityDataEnd, String idCardFrontPhoto, String idCardBackPhoto, String validityData,
             String bareHeadedPhotoUrl, int authenticationStatue, String authenticationTime, String address,
             double longitude, double latitude, String businessLicense, String emergencyContact, String contactAddress,
-            int startFlag, int payFlag, String masterRankId, String masterRankName, int roleId) {
+            int startFlag, int payFlag, String masterRankId, String masterRankName, int roleId, String team) {
         this.id = id;
         this.phoneNumber = phoneNumber;
         this.userText = userText;
@@ -119,6 +122,7 @@ public class UserInfo {
         this.masterRankId = masterRankId;
         this.masterRankName = masterRankName;
         this.roleId = roleId;
+        this.team = team;
     }
 
     @Generated(hash = 1279772520)
@@ -374,5 +378,13 @@ public class UserInfo {
 
     public void setRoleId(int roleId) {
         this.roleId = roleId;
+    }
+
+    public String getTeam() {
+        return team;
+    }
+
+    public void setTeam(String team) {
+        this.team = team;
     }
 }

@@ -392,4 +392,13 @@
     <string name="end">已结束</string>
     <string name="have_in_hand">进行中</string>
     <string name="confirmation_of_payment">确认支付</string>
+    <string name="choose_payment_method">选择支付方式</string>
+    <string name="add_maintenance">新增维保</string>
+    <string name="system_notification">系统通知</string>
+    <string name="not_message">暂无消息</string>
+    <string name="customer_service_news">客服消息</string>
+    <string name="message">消息</string>
+    <string name="notification_message">通知消息</string>
+    <string name="income">+¥%1$s</string>
+    <string name="expenditure">-¥%1$s</string>
 </resources>

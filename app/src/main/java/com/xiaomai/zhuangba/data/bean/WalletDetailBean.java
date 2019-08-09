@@ -2,6 +2,8 @@ package com.xiaomai.zhuangba.data.bean;
 
 import android.text.TextUtils;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -112,6 +114,11 @@ public class WalletDetailBean {
         private String accountNumber;
         private String times;
 
+
+        private String phoneNumber;
+        private String externalAccountNumber;
+        private String team;
+
         public String getOrderCode() {
             return TextUtils.isEmpty(orderCode) ? "" : orderCode;
         }
@@ -188,8 +195,33 @@ public class WalletDetailBean {
             return TextUtils.isEmpty(times) ? "" : times;
         }
 
+        public String getExternalAccountNumber() {
+            return externalAccountNumber;
+        }
+
+        public void setExternalAccountNumber(String externalAccountNumber) {
+            this.externalAccountNumber = externalAccountNumber;
+        }
+
         public void setTimes(String times) {
             this.times = times;
+        }
+
+        public String getPhoneNumber() {
+            return phoneNumber;
+        }
+
+        public void setPhoneNumber(String phoneNumber) {
+            this.phoneNumber = phoneNumber;
+        }
+
+
+        public String getTeam() {
+            return team;
+        }
+
+        public void setTeam(String team) {
+            this.team = team;
         }
     }
 }

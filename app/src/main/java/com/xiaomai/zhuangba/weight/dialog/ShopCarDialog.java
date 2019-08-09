@@ -79,6 +79,7 @@ public class ShopCarDialog {
             if (shopCarData.getMaintenanceId() == ConstantUtil.DEF_MAINTENANCE) {
                 //选择了 商品 没有选择维保
                 maintenance.setId(-1);
+                maintenance.setServiceId(DensityUtils.stringTypeInteger(shopCarData.getServiceId()));
                 maintenance.setNotChoosingMaintenance(mContext.getString(R.string.not_choosing_maintenance));
             } else {
                 maintenance.setServiceId(DensityUtils.stringTypeInteger(shopCarData.getServiceId()));
@@ -105,6 +106,9 @@ public class ShopCarDialog {
     public ShopCarDialog setRvChoosingGoods(final Context mContext, final List<Maintenance> maintenanceList) {
         Maintenance defMaintenance = new Maintenance();
         defMaintenance.setId(ConstantUtil.DEF_MAINTENANCE);
+        if (!maintenanceList.isEmpty()){
+            defMaintenance.setServiceId(maintenanceList.get(0).getServiceId());
+        }
         maintenanceList.add(0, defMaintenance);
         final DialogRVChoosingAdapter dialogRVChoosingAdapter = new DialogRVChoosingAdapter();
         dialogRVChoosingAdapter.setNewData(maintenanceList);

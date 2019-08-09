@@ -59,6 +59,8 @@ public class OngoingOrdersList implements Parcelable{
     /** 接受方头像 */
     private String bareheadedPhotoUrl;
 
+    /** 是否有维保 */
+    private int maintenanceFlag;
     public OngoingOrdersList() {
     }
 
@@ -253,6 +255,14 @@ public class OngoingOrdersList implements Parcelable{
 
     public void setConfirmationTime(String confirmationTime) {
         this.confirmationTime = confirmationTime;
+    }
+
+    public int getMaintenanceFlag() {
+        return maintenanceFlag;
+    }
+
+    public void setMaintenanceFlag(int maintenanceFlag) {
+        this.maintenanceFlag = maintenanceFlag;
     }
 
     @Override

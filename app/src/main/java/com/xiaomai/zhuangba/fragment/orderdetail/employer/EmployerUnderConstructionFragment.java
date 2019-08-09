@@ -4,18 +4,23 @@ import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.toollib.fragment.ImgPreviewFragment;
 import com.example.toollib.manager.GlideManager;
+import com.example.toollib.util.DensityUtils;
 import com.example.toollib.util.Log;
 import com.xiaomai.zhuangba.R;
 import com.xiaomai.zhuangba.adapter.ImgExhibitionAdapter;
 import com.xiaomai.zhuangba.data.bean.DeliveryContent;
 import com.xiaomai.zhuangba.data.bean.OngoingOrdersList;
+import com.xiaomai.zhuangba.data.bean.OrderServiceItem;
+import com.xiaomai.zhuangba.data.db.DBHelper;
 import com.xiaomai.zhuangba.fragment.orderdetail.employer.base.BaseEmployerDetailFragment;
 import com.xiaomai.zhuangba.util.ConstantUtil;
 import com.xiaomai.zhuangba.util.Util;
@@ -25,11 +30,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import butterknife.Unbinder;
 
 /**
  * @author Administrator
  * @date 2019/8/5 0005
- *
+ * <p>
  * 雇主 施工中
  */
 public class EmployerUnderConstructionFragment extends BaseEmployerDetailFragment {
@@ -56,11 +64,16 @@ public class EmployerUnderConstructionFragment extends BaseEmployerDetailFragmen
      */
     @BindView(R.id.ivEmployerStartConfirmation)
     ImageView ivEmployerStartConfirmation;
+
+    /**
+     * 服务项目
+     */
+    private List<OrderServiceItem> orderServiceItemList;
     private ImgExhibitionAdapter imgExhibitionAdapter;
-    
+
     public static EmployerUnderConstructionFragment newInstance(String orderCode) {
         Bundle args = new Bundle();
-        args.putString(ConstantUtil.ORDER_CODE , orderCode);
+        args.putString(ConstantUtil.ORDER_CODE, orderCode);
         EmployerUnderConstructionFragment fragment = new EmployerUnderConstructionFragment();
         fragment.setArguments(args);
         return fragment;
@@ -117,10 +130,34 @@ public class EmployerUnderConstructionFragment extends BaseEmployerDetailFragmen
     }
 
     @Override
+    public void orderServiceItemsSuccess(List<OrderServiceItem> orderServiceItems) {
+        super.orderServiceItemsSuccess(orderServiceItems);
+        //服务项目
+        this.orderServiceItemList = orderServiceItems;
+    }
+
+    @OnClick(R.id.btnAddMaintenance)
+    public void onViewClicked() {
+        DBHelper.getInstance().getOrderServiceItemDao().deleteAll();
+        //新增维保
+        List<OrderServiceItem> orderServiceItems = new ArrayList<>();
+        for (OrderServiceItem orderServiceItem : orderServiceItemList) {
+            if (orderServiceItem.getMonthNumber() == 0) {
+                orderServiceItems.add(orderServiceItem);
+            }
+        }
+        if (!orderServiceItems.isEmpty()) {
+            DBHelper.getInstance().getOrderServiceItemDao().insertInTx(orderServiceItems);
+            startFragment(AddMaintenanceFragment.newInstance());
+        }
+    }
+
+    @Override
     public boolean isInSwipeBack() {
         statusBarWhite();
         return super.isInSwipeBack();
     }
+
     @Override
     public void leftBackClick() {
         statusBarWhite();

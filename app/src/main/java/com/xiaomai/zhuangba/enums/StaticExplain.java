@@ -4,31 +4,43 @@ package com.xiaomai.zhuangba.enums;
  * @author Administrator
  * @date 2019/7/4 0004
  */
-public enum  StaticExplain {
+public enum StaticExplain {
 
-    /** 枚举状态 */
-    FU_FU_SHI(0 , "师傅端"),
-    EMPLOYER(1 , "雇主端"),
-    OBSERVER(1 , "观察员"),
-    INTERNSHIP(2 , "实习"),
-    FORMAL_MASTER(3 , "正式师傅"),
-    NO_CERTIFICATION(0 , "未认证"),
-    CERTIFIED(1 , "已认证"),
-    IN_AUDIT(2 , "审核中"),
-    REJECT_AUDIT(3 , "已驳回 审核不通过"),
-    STOP_REFRESH(1 , "停止刷新 handler"),
-    PAGE_NUMBER(1,"加载 page  默认 1"),
-    PAGE_NUM(20 , "刷新加载一次加载15条数据"),
-    NEW_TASK(1,"新任务"),
+    /**
+     * 枚举状态
+     */
+    FU_FU_SHI(0, "师傅端"),
+    EMPLOYER(1, "雇主端"),
+    OBSERVER(1, "观察员"),
+    INTERNSHIP(2, "实习"),
+    FORMAL_MASTER(3, "正式师傅"),
+    NO_CERTIFICATION(0, "未认证"),
+    CERTIFIED(1, "已认证"),
+    IN_AUDIT(2, "审核中"),
+    REJECT_AUDIT(3, "已驳回 审核不通过"),
+    STOP_REFRESH(1, "停止刷新 handler"),
+    PAGE_NUMBER(1, "加载 page  默认 1"),
+    PAGE_NUM(20, "刷新加载一次加载15条数据"),
+    NEW_TASK(1, "新任务"),
     NEED_DEAL_WITH(2, "需处理"),
-    ONGOING_ORDERS(3 , "进行中的订单"),
-    SUPER_ADMINISTRATOR(1,"超级管理员"),
-    ADMINISTRATOR(2,"管理员"),
-    ORDINARY_STAFF(3,"普通员工"),
+    ONGOING_ORDERS(3, "进行中的订单"),
+    SUPER_ADMINISTRATOR(1, "超级管理员"),
+    ADMINISTRATOR(2, "管理员"),
+    ORDINARY_STAFF(3, "普通员工"),
+    YES_MAINTENANCE(1, "有维保"),
+    NO_MAINTENANCE(0, "没有维保"),
+    INCOME(1, "收入"),
+    EXPENDITURE(2, "支出"),
+    RECHARGE_RECORD(7, "充值记录"),
+    RECORDS_OF_CONSUMPTION(8, "消费记录"),
     ;
-    /** 服务器状态码 或 自定义状态 */
+    /**
+     * 服务器状态码 或 自定义状态
+     */
     private int code;
-    /** code 说明 */
+    /**
+     * code 说明
+     */
     private String explain;
 
     StaticExplain(int code, String explain) {

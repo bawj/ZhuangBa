@@ -1,6 +1,7 @@
 package com.xiaomai.zhuangba.adapter;
 
 import android.text.TextUtils;
+import android.view.View;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -47,9 +48,14 @@ public class HistoricalAdapter extends BaseQuickAdapter<OngoingOrdersList, BaseV
         tvItemHistoricalOrdersMoney.setText(mContext.getString(R.string.content_money, String.valueOf(ordersList.getOrderAmount())));
         tvItemHistoricalOrdersMoney.setTag(ordersList);
 
-        // TODO: 2019/8/6 0006 是否显示维保
         TextView tvHistoricalMaintenance = helper.getView(R.id.tvHistoricalMaintenance);
-        
+        if (ordersList.getMaintenanceFlag() == StaticExplain.YES_MAINTENANCE.getCode()){
+            //有维保
+            tvHistoricalMaintenance.setVisibility(View.VISIBLE);
+        }else if (ordersList.getMaintenanceFlag() == StaticExplain.NO_MAINTENANCE.getCode()){
+            //没有维保
+            tvHistoricalMaintenance.setVisibility(View.GONE);
+        }
         //order status
         int orderStatus = ordersList.getOrderStatus();
         UserInfo userInfo = DBHelper.getInstance().getUserInfoDao().queryBuilder().unique();

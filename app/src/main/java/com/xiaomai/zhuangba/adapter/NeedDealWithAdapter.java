@@ -12,6 +12,7 @@ import com.qmuiteam.qmui.util.QMUIDisplayHelper;
 import com.xiaomai.zhuangba.R;
 import com.xiaomai.zhuangba.data.bean.OngoingOrdersList;
 import com.xiaomai.zhuangba.enums.OrdersEnum;
+import com.xiaomai.zhuangba.enums.StaticExplain;
 import com.xiaomai.zhuangba.util.OrderStatusUtil;
 
 import java.util.ArrayList;
@@ -49,7 +50,16 @@ public class NeedDealWithAdapter extends BaseQuickAdapter<OngoingOrdersList, Bas
         //type
         TextView tvItemOrdersType = helper.getView(R.id.tvItemOrdersType);
 
-        //雇主端不显示
+        //是否显示 维保
+        TextView tvMaintenance = helper.getView(R.id.tvMaintenance);
+        if (ongoingOrders.getMaintenanceFlag() == StaticExplain.YES_MAINTENANCE.getCode()){
+            //有维保
+            tvMaintenance.setVisibility(View.VISIBLE);
+        }else if (ongoingOrders.getMaintenanceFlag() == StaticExplain.NO_MAINTENANCE.getCode()){
+            //没有维保
+            tvMaintenance.setVisibility(View.GONE);
+        }
+
         ImageView ivItemOrdersIdentification = helper.getView(R.id.ivItemOrdersIdentification);
         TextView tvItemOrdersIdentification = helper.getView(R.id.tvItemOrdersIdentification);
 

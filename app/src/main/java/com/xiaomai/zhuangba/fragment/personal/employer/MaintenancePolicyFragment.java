@@ -93,6 +93,7 @@ public class MaintenancePolicyFragment extends BaseListFragment implements Maint
 
     @Override
     public void continuedMaintenance(MaintenancePolicyBean item) {
+        DBHelper.getInstance().getOrderServiceItemDao().deleteAll();
         //续维保
         List<OrderServiceItem> orderServiceItems = new ArrayList<>();
         OrderServiceItem orderServiceItem = new OrderServiceItem();
@@ -104,7 +105,6 @@ public class MaintenancePolicyFragment extends BaseListFragment implements Maint
         orderServiceItem.setMonthNumber(item.getNumber());
         orderServiceItem.setNumber(item.getServiceNumber());
         orderServiceItems.add(orderServiceItem);
-        DBHelper.getInstance().getOrderServiceItemDao().deleteAll();
         DBHelper.getInstance().getOrderServiceItemDao().insertInTx(orderServiceItems);
         startFragment(ContinuedMaintenanceFragment.newInstance());
     }
@@ -129,6 +129,11 @@ public class MaintenancePolicyFragment extends BaseListFragment implements Maint
     @Override
     public int getRightIcon() {
         return R.drawable.ic_question_mark;
+    }
+
+    @Override
+    public int getEmptyView() {
+        return R.layout.item_not_data_search_empty;
     }
 
     @Override

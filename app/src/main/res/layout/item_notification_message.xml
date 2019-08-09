@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/tvNotificationTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/tool_lib_10dp"
+        android:textColor="@color/tool_lib_gray_222222"
+        android:textSize="@dimen/tool_lib_14sp"
+        tools:text="订单通知" />
+
+    <TextView
+        android:id="@+id/tvNotificationDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/tvNotificationTitle"
+        android:layout_alignBottom="@+id/tvNotificationTitle"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:gravity="center_vertical"
+        android:textColor="@color/tool_lib_gray_999999"
+        android:textSize="@dimen/tool_lib_12sp"
+        tools:text="2019-05-07 17:03:09" />
+
+    <TextView
+        android:id="@+id/tvNotificationContent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvNotificationTitle"
+        android:layout_marginTop="@dimen/tool_lib_3dp"
+        android:layout_marginBottom="@dimen/tool_lib_10dp"
+        android:textColor="@color/tool_lib_gray_777777"
+        android:textSize="@dimen/tool_lib_12sp"
+        tools:text="又来新订单了，请在今天的23：44前处理。" />
+
+</RelativeLayout>

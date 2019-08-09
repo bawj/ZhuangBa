@@ -1,11 +1,13 @@
 package com.xiaomai.zhuangba.adapter;
 
+import android.view.View;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.xiaomai.zhuangba.R;
 import com.xiaomai.zhuangba.data.bean.OngoingOrdersList;
+import com.xiaomai.zhuangba.enums.StaticExplain;
 import com.xiaomai.zhuangba.util.OrderStatusUtil;
 
 /**
@@ -41,8 +43,13 @@ public class OngoingOrdersAdapter extends BaseQuickAdapter<OngoingOrdersList, Ba
         tvItemOrdersMoney.setText(String.valueOf(mContext.getString(R.string.content_money, String.valueOf(ongoingOrders.getOrderAmount()))));
 
         TextView tvMaintenance = helper.getView(R.id.tvMaintenance);
-        // TODO: 2019/8/6 0006 是否显示维保
-
+        if (ongoingOrders.getMaintenanceFlag() == StaticExplain.YES_MAINTENANCE.getCode()){
+            //有维保
+            tvMaintenance.setVisibility(View.VISIBLE);
+        }else if (ongoingOrders.getMaintenanceFlag() == StaticExplain.NO_MAINTENANCE.getCode()){
+            //没有维保
+            tvMaintenance.setVisibility(View.GONE);
+        }
         tvItemOrdersTitle.setTag(ongoingOrders);
         //order status
         int orderStatus = ongoingOrders.getOrderStatus();

@@ -14,7 +14,7 @@ import org.greenrobot.greendao.annotation.Id;
  * 服务项目
  */
 @Entity
-public class OrderServiceItem implements Parcelable {
+public class OrderServiceItem{
 
     /**
      * orderCode : 20190517124905903415
@@ -25,7 +25,7 @@ public class OrderServiceItem implements Parcelable {
      * iconUrl : https://zb.4000750222.com//zbimages/test/2019/5/14/2c90ef856ab3eef8016ab3eef89a0000.png
      */
     @Id(autoincrement = true)
-    private long id;
+    private Long id;
     private String orderCode;
     private int serviceId;
     private String serviceText;
@@ -67,8 +67,8 @@ public class OrderServiceItem implements Parcelable {
         maintenanceAmount = in.readDouble();
     }
 
-    @Generated(hash = 2147006204)
-    public OrderServiceItem(long id, String orderCode, int serviceId, String serviceText, int number,
+    @Generated(hash = 1429766044)
+    public OrderServiceItem(Long id, String orderCode, int serviceId, String serviceText, int number,
             double amount, double price2, double price3, String iconUrl, String serviceStandard, int monthNumber,
             double maintenanceAmount, int maintenanceId) {
         this.id = id;
@@ -85,18 +85,6 @@ public class OrderServiceItem implements Parcelable {
         this.maintenanceAmount = maintenanceAmount;
         this.maintenanceId = maintenanceId;
     }
-
-    public static final Creator<OrderServiceItem> CREATOR = new Creator<OrderServiceItem>() {
-        @Override
-        public OrderServiceItem createFromParcel(Parcel in) {
-            return new OrderServiceItem(in);
-        }
-
-        @Override
-        public OrderServiceItem[] newArray(int size) {
-            return new OrderServiceItem[size];
-        }
-    };
 
     public String getOrderCode() {
         return orderCode;
@@ -194,35 +182,12 @@ public class OrderServiceItem implements Parcelable {
         this.maintenanceId = maintenanceId;
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(orderCode);
-        dest.writeInt(serviceId);
-        dest.writeString(serviceText);
-        dest.writeInt(number);
-        dest.writeDouble(amount);
-        dest.writeDouble(price2);
-        dest.writeDouble(price3);
-        dest.writeString(iconUrl);
-        dest.writeString(serviceStandard);
-        dest.writeInt(monthNumber);
-        dest.writeDouble(maintenanceAmount);
-    }
 
     public Long getId() {
-        return this.id;
+        return id;
     }
 
     public void setId(Long id) {
-        this.id = id;
-    }
-
-    public void setId(long id) {
         this.id = id;
     }
 }

@@ -85,7 +85,7 @@ public class Maintenance {
     }
 
     public Integer getServiceId() {
-        return serviceId;
+        return serviceId == null ? 0 : serviceId;
     }
 
     public void setServiceId(Integer serviceId) {
@@ -93,7 +93,7 @@ public class Maintenance {
     }
 
     public Integer getNumber() {
-        return number;
+        return number == null  ? 0 : number;
     }
 
     public void setNumber(Integer number) {
@@ -101,7 +101,7 @@ public class Maintenance {
     }
 
     public Double getAmount() {
-        return amount;
+        return amount == null ? 0 : amount;
     }
 
     public void setAmount(Double amount) {

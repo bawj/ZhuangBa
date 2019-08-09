@@ -6,10 +6,10 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center_horizontal"
+    android:layout_marginBottom="@dimen/tool_lib_12dp"
     android:background="@color/qmui_config_color_white"
     android:gravity="center"
     android:orientation="vertical"
-    android:layout_marginBottom="@dimen/tool_lib_12dp"
     app:qmui_borderColor="?attr/qmui_config_color_separator"
     app:qmui_outerNormalColor="?attr/qmui_config_color_background"
     app:qmui_showBorderOnlyBeforeL="true">
@@ -18,34 +18,59 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/tvItemOrdersTitle"
-            style="@style/item_text_title"
-            tools:text="公共安全-视频监控" />
-
-        <TextView
-            android:id="@+id/tvItemOrdersType"
-            android:layout_width="wrap_content"
+        <RelativeLayout
+            android:id="@+id/relNeedDeal"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_marginTop="@dimen/tool_lib_12dp"
-            android:background="@drawable/distribution_half_fillet_bg"
-            android:padding="@dimen/tool_lib_5dp"
-            android:textColor="@android:color/white"
-            android:textSize="@dimen/tool_lib_12sp"
-            tools:text="分配中" />
+            android:layout_marginTop="@dimen/tool_lib_10dp">
+
+            <TextView
+                android:id="@+id/tvItemOrdersTitle"
+                style="@style/item_text_title"
+                android:layout_centerVertical="true"
+                android:layout_marginTop="0dp"
+                tools:text="公共安全-视频监控" />
+
+            <TextView
+                android:id="@+id/tvMaintenance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/tool_lib_6dp"
+                android:layout_marginLeft="@dimen/tool_lib_6dp"
+                android:layout_toEndOf="@+id/tvItemOrdersTitle"
+                android:layout_toRightOf="@+id/tvItemOrdersTitle"
+                android:background="@drawable/green_radius_bg"
+                android:padding="@dimen/tool_lib_6dp"
+                android:textColor="@color/tool_lib_color_199898"
+                android:textSize="@dimen/tool_lib_12sp"
+                android:visibility="gone"
+                tools:text="@string/maintenance" />
+
+            <TextView
+                android:id="@+id/tvItemOrdersType"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/distribution_half_fillet_bg"
+                android:padding="@dimen/tool_lib_5dp"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/tool_lib_12sp"
+                tools:text="分配中" />
+        </RelativeLayout>
 
         <ImageView
             android:id="@+id/ivItemOrdersIdentification"
             style="@style/item_ic"
-            android:layout_below="@+id/tvItemOrdersTitle"
+            android:layout_below="@+id/relNeedDeal"
             android:src="@drawable/ic_identification" />
 
         <TextView
             android:id="@+id/tvItemOrdersIdentification"
             style="@style/item_text_content"
-            android:layout_below="@+id/tvItemOrdersTitle"
+            android:layout_below="@+id/relNeedDeal"
             android:layout_alignBottom="@+id/ivItemOrdersIdentification"
             android:layout_toEndOf="@+id/ivItemOrdersIdentification"
             android:layout_toRightOf="@+id/ivItemOrdersIdentification"

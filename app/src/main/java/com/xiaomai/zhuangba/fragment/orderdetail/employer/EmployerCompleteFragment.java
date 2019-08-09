@@ -13,6 +13,8 @@ import com.example.toollib.manager.GlideManager;
 import com.xiaomai.zhuangba.R;
 import com.xiaomai.zhuangba.adapter.ImgExhibitionAdapter;
 import com.xiaomai.zhuangba.data.bean.DeliveryContent;
+import com.xiaomai.zhuangba.data.bean.OrderServiceItem;
+import com.xiaomai.zhuangba.data.db.DBHelper;
 import com.xiaomai.zhuangba.util.ConstantUtil;
 import com.xiaomai.zhuangba.util.Util;
 import com.xiaomai.zhuangba.weight.GridSpacingItemDecoration;
@@ -21,14 +23,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 /**
  * @author Administrator
  * @date 2019/8/6 0006
- *
+ * <p>
  * 雇主完成
  */
-public class EmployerCompleteFragment extends EmployerUnderConstructionFragment{
+public class EmployerCompleteFragment extends EmployerUnderConstructionFragment {
 
     /**
      * 交付后的图片
@@ -43,10 +46,14 @@ public class EmployerCompleteFragment extends EmployerUnderConstructionFragment{
      * 任务提交后的照片
      */
     private ImgExhibitionAdapter imgExhibitionAfterAdapter;
+    /**
+     * 服务项目
+     */
+    private List<OrderServiceItem> orderServiceItemList;
 
     public static EmployerCompleteFragment newInstance(String orderCode) {
         Bundle args = new Bundle();
-        args.putString(ConstantUtil.ORDER_CODE , orderCode);
+        args.putString(ConstantUtil.ORDER_CODE, orderCode);
         EmployerCompleteFragment fragment = new EmployerCompleteFragment();
         fragment.setArguments(args);
         return fragment;
@@ -86,6 +93,29 @@ public class EmployerCompleteFragment extends EmployerUnderConstructionFragment{
                 //负责人签名
                 GlideManager.loadImage(getActivity(), electronicSignature, ivEmployerSignature);
             }
+        }
+    }
+
+    @Override
+    public void orderServiceItemsSuccess(List<OrderServiceItem> orderServiceItems) {
+        super.orderServiceItemsSuccess(orderServiceItems);
+        //服务项目
+        this.orderServiceItemList = orderServiceItems;
+    }
+
+    @OnClick(R.id.btnAddMaintenance)
+    public void onViewEmployerCompleteClicked() {
+        DBHelper.getInstance().getOrderServiceItemDao().deleteAll();
+        //新增维保
+        List<OrderServiceItem> orderServiceItems = new ArrayList<>();
+        for (OrderServiceItem orderServiceItem : orderServiceItemList) {
+            if (orderServiceItem.getMonthNumber() == 0) {
+                orderServiceItems.add(orderServiceItem);
+            }
+        }
+        if (!orderServiceItems.isEmpty()) {
+            DBHelper.getInstance().getOrderServiceItemDao().insertInTx(orderServiceItems);
+            startFragment(AddMaintenanceFragment.newInstance());
         }
     }
 

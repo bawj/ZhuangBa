@@ -1,6 +1,127 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/tool_lib_gray_F5F8FA">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:id="@+id/relMessageSystem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/tool_lib_16dp"
+            android:layout_marginTop="@dimen/tool_lib_16dp"
+            android:layout_marginRight="@dimen/tool_lib_16dp">
+
+            <ImageView
+                android:id="@+id/ivMessageType"
+                android:layout_width="@dimen/tool_lib_46dp"
+                android:layout_height="@dimen/tool_lib_46dp"
+                android:src="@drawable/ic_notice" />
+
+            <TextView
+                android:id="@+id/tvMessageSystem"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/tool_lib_11dp"
+                android:layout_marginLeft="@dimen/tool_lib_11dp"
+                android:layout_toEndOf="@+id/ivMessageType"
+                android:layout_toRightOf="@+id/ivMessageType"
+                android:text="@string/system_notification"
+                android:textColor="@color/tool_lib_gray_222222"
+                android:textSize="@dimen/tool_lib_14sp" />
+
+            <TextView
+                android:id="@+id/tvMessageTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:textColor="@color/tool_lib_gray_999999"
+                android:textSize="@dimen/tool_lib_12sp"
+                tools:text="2019-05-07 17:03:09" />
+
+            <TextView
+                android:id="@+id/tvMessage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/ivMessageType"
+                android:layout_marginStart="@dimen/tool_lib_11dp"
+                android:layout_marginLeft="@dimen/tool_lib_11dp"
+                android:layout_toEndOf="@+id/ivMessageType"
+                android:layout_toRightOf="@+id/ivMessageType"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textColor="@color/tool_lib_gray_666666"
+                android:textSize="@dimen/tool_lib_12sp"
+                android:text="@string/not_message" />
+
+            <View
+                style="@style/tool_lib_horizontal_line"
+                android:layout_below="@+id/ivMessageType"
+                android:layout_marginStart="@dimen/tool_lib_11dp"
+                android:layout_marginLeft="@dimen/tool_lib_11dp"
+                android:layout_marginTop="@dimen/tool_lib_16dp"
+                android:layout_toEndOf="@+id/ivMessageType"
+                android:layout_toRightOf="@+id/ivMessageType" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/relMessageCustomerService"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/tool_lib_16dp">
+
+            <ImageView
+                android:id="@+id/ivMessageCustomerService"
+                android:layout_width="@dimen/tool_lib_46dp"
+                android:layout_height="@dimen/tool_lib_46dp"
+                android:src="@drawable/ic_customer" />
+
+            <TextView
+                android:id="@+id/tvMessageCustomerServiceNew"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/tool_lib_11dp"
+                android:layout_marginLeft="@dimen/tool_lib_11dp"
+                android:layout_toEndOf="@+id/ivMessageCustomerService"
+                android:layout_toRightOf="@+id/ivMessageCustomerService"
+                android:text="@string/customer_service_news"
+                android:textColor="@color/tool_lib_gray_222222"
+                android:textSize="@dimen/tool_lib_14sp" />
+
+            <TextView
+                android:id="@+id/tvMessageCustomerServiceTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:textColor="@color/tool_lib_gray_999999"
+                android:textSize="@dimen/tool_lib_12sp"
+                tools:text="2019-05-07 17:03:09" />
+
+            <TextView
+                android:id="@+id/tvMessageCustomerService"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/ivMessageCustomerService"
+                android:layout_marginStart="@dimen/tool_lib_11dp"
+                android:layout_marginLeft="@dimen/tool_lib_11dp"
+                android:layout_toEndOf="@+id/ivMessageCustomerService"
+                android:layout_toRightOf="@+id/ivMessageCustomerService"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textColor="@color/tool_lib_gray_666666"
+                android:textSize="@dimen/tool_lib_12sp"
+                android:text="@string/not_message"  />
+        </RelativeLayout>
+
+    </LinearLayout>
 
 </RelativeLayout>

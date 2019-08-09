@@ -181,7 +181,14 @@ public class BaseWalletDetailedFragment extends BaseListFragment implements Expa
             List<WalletDetailBean.ListBean> list = new ArrayList<>();
             for (int j = 0; j < listBean.size(); j++) {
                 WalletDetailBean.ListBean listBean1 = listBean.get(j);
-                String time = type == WalletOrderTypeEnum.DETAIL_OUT.getCode() ? listBean1.getTimes() : listBean1.getModifyTime();
+                String time;
+                if (type == WalletOrderTypeEnum.DETAIL_OUT.getCode()){
+                    time =  listBean1.getTimes();
+                }else if (type == WalletOrderTypeEnum.EMPLOYER_DETAIL_OUT.getCode()){
+                    time =  listBean1.getTimes();
+                }else {
+                    time = listBean1.getModifyTime();
+                }
                 if (time.contains(s)) {
                     list.add(listBean1);
                 }

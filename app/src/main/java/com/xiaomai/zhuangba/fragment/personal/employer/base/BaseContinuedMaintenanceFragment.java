@@ -18,7 +18,6 @@ import com.xiaomai.zhuangba.data.bean.OrderServiceItem;
 import com.xiaomai.zhuangba.data.bean.ShopCarData;
 import com.xiaomai.zhuangba.data.db.DBHelper;
 import com.xiaomai.zhuangba.http.ServiceUrl;
-import com.xiaomai.zhuangba.util.ConstantUtil;
 import com.xiaomai.zhuangba.weight.dialog.ShopCarDialog;
 
 import java.util.List;
@@ -34,7 +33,6 @@ import butterknife.OnClick;
  */
 public class BaseContinuedMaintenanceFragment extends BaseFragment implements BaseContinuedMaintenanceAdapter.IBaseContinuedAdapter {
 
-    public static final String ORDER_SERVICE_ITEM = "order_service_item";
     @BindView(R.id.rvShopCar)
     RecyclerView rvShopCar;
     @BindView(R.id.tvSelectServiceMonty)
@@ -46,6 +44,7 @@ public class BaseContinuedMaintenanceFragment extends BaseFragment implements Ba
     private Double totalPrice = 0d;
 
     private BaseContinuedMaintenanceAdapter baseContinuedMaintenanceAdapter;
+
     public static BaseContinuedMaintenanceFragment newInstance() {
         Bundle args = new Bundle();
         BaseContinuedMaintenanceFragment fragment = new BaseContinuedMaintenanceFragment();
@@ -63,23 +62,17 @@ public class BaseContinuedMaintenanceFragment extends BaseFragment implements Ba
         baseContinuedMaintenanceAdapter.setLayShopCarMaintenanceClick(this);
 
         //计算 总价格
-        totalPrice(orderServiceItems);
-    }
-
-    private void totalPrice(List<OrderServiceItem> orderServiceItems) {
-        for (OrderServiceItem orderServiceItem : orderServiceItems) {
-            int monthNumber = orderServiceItem.getMonthNumber();
-            double maintenanceAmount = orderServiceItem.getMaintenanceAmount();
-            totalPrice = totalPrice + (monthNumber * maintenanceAmount);
-        }
+        totalPrice = calculateThePrice();
         tvSelectServiceMonty.setText(getString(R.string.content_money, String.valueOf(totalPrice)));
     }
 
 
     @OnClick(R.id.btnConfirmationOfPayment)
     public void onViewClicked() {
-        //确认支付
-        confirmationOfPayment();
+        if (totalPrice > 0) {
+            //确认支付
+            confirmationOfPayment();
+        }
     }
 
     @Override
@@ -107,8 +100,8 @@ public class BaseContinuedMaintenanceFragment extends BaseFragment implements Ba
                 .setICallBase(new ShopCarDialog.BaseCallback() {
                     @Override
                     public void sure(Maintenance maintenance) {
-                        if (maintenance.getId() != ConstantUtil.DEF_MAINTENANCE) {
-                            Integer serviceId = maintenance.getServiceId();
+                        Integer serviceId = maintenance.getServiceId();
+                        if (serviceId != null && serviceId != 0) {
                             OrderServiceItem orderServiceItem = DBHelper.getInstance().getOrderServiceItemDao().queryBuilder()
                                     .where(OrderServiceItemDao.Properties.ServiceId.eq(serviceId))
                                     .unique();
@@ -122,18 +115,22 @@ public class BaseContinuedMaintenanceFragment extends BaseFragment implements Ba
                             orderServiceItem.setMonthNumber(maintenance.getNumber());
                             orderServiceItem.setMaintenanceAmount(maintenance.getAmount());
                             DBHelper.getInstance().getOrderServiceItemDao().insert(orderServiceItem);
+                            //计算价格
+                            double price = calculateThePrice();
+                            tvSelectServiceMonty.setText(getString(R.string.content_money, String.valueOf(price)));
+                            baseContinuedMaintenanceAdapter.setNewData(DBHelper.getInstance().getOrderServiceItemDao().queryBuilder().list());
                         }
-                        //计算价格
-                        calculateThePrice();
-                        baseContinuedMaintenanceAdapter.setNewData(DBHelper.getInstance().getOrderServiceItemDao().queryBuilder().list());
                     }
                 }).showDialog();
     }
 
-    private void calculateThePrice() {
+    /**
+     * 计算价格
+     * @return double
+     */
+    private Double calculateThePrice() {
         List<OrderServiceItem> maintenanceList = DBHelper.getInstance()
                 .getOrderServiceItemDao().queryBuilder().list();
-        Double totalPrice = 0d;
         for (OrderServiceItem orderServiceItem : maintenanceList) {
             //服务数量
             int number = orderServiceItem.getNumber();
@@ -141,9 +138,8 @@ public class BaseContinuedMaintenanceFragment extends BaseFragment implements Ba
             double maintenanceAmount = orderServiceItem.getMaintenanceAmount();
             totalPrice += number * maintenanceAmount;
         }
-        tvSelectServiceMonty.setText(getString(R.string.content_money, String.valueOf(totalPrice)));
+        return totalPrice;
     }
-
 
     private ShopCarData findShopCarDataList(Maintenance maintenance) {
         OrderServiceItem unique = DBHelper.getInstance().getOrderServiceItemDao().queryBuilder()

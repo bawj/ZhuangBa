@@ -11,6 +11,7 @@ public enum  WalletOrderTypeEnum {
     DETAIL_ALL(1 , "明细"),
     DETAIL_INCOME(2 , "收入"),
     DETAIL_OUT(3 , "已提现"),
+    EMPLOYER_DETAIL_OUT(4 , "雇主端 明细"),
     YES_PRESENTATION_PASSWORD(1 , "设置过交易密码"),
     NULL_PRESENTATION_PASSWORD(2 , "未设置交易密码"),
     ;

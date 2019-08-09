@@ -159,7 +159,7 @@ public abstract class BaseFragment<M extends IBaseModule> extends BaseRxFragment
         String rightTitle = getRightTitle();
         if (topBarBase != null && !TextUtils.isEmpty(rightTitle)) {
             Button button = topBarBase.addRightTextButton(rightTitle, QMUIViewHelper.generateViewId());
-            button.setTextColor(Color.BLACK);
+            button.setTextColor(getRightTitleColor());
             button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -168,6 +168,7 @@ public abstract class BaseFragment<M extends IBaseModule> extends BaseRxFragment
             });
         }
     }
+
 
     /**
      * bar 右侧图标
@@ -194,6 +195,15 @@ public abstract class BaseFragment<M extends IBaseModule> extends BaseRxFragment
      */
     public String getRightTitle() {
         return null;
+    }
+
+
+    /**
+     * 右侧标题颜色
+     * @return int
+     */
+    public int getRightTitleColor(){
+        return Color.BLACK;
     }
 
     /**

@@ -122,7 +122,7 @@ public class MainActivity extends BaseActivity {
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onWeChatSuccess(MessageEvent messageEvent) {
         Log.e("code = " + messageEvent.getErrCode());
-        //您的登录 信息已过期重新登录 防止dialog 重复 弹出
+        //您的登录 信息已过期重新登录
         boolean isTokenOverdueDialog = (messageEvent.getErrCode() == VersionEnums.LOGIN_STATUS.getCode()
                 || messageEvent.getErrCode() == VersionEnums.LOGIN_STATUS_.getCode()) ;
 

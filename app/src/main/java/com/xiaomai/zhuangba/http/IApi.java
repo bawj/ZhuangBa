@@ -5,9 +5,9 @@ import com.xiaomai.zhuangba.data.bean.AliPayAccountBean;
 import com.xiaomai.zhuangba.data.bean.DeliveryContent;
 import com.xiaomai.zhuangba.data.bean.EarnestBean;
 import com.xiaomai.zhuangba.data.bean.EmployerWalletBean;
+import com.xiaomai.zhuangba.data.bean.EmployerWalletDetailBean;
 import com.xiaomai.zhuangba.data.bean.Maintenance;
 import com.xiaomai.zhuangba.data.bean.MaintenanceBean;
-import com.xiaomai.zhuangba.data.bean.MaintenancePolicyBean;
 import com.xiaomai.zhuangba.data.bean.OngoingOrdersList;
 import com.xiaomai.zhuangba.data.bean.OrderDateList;
 import com.xiaomai.zhuangba.data.bean.OrderServiceItem;
@@ -656,6 +656,57 @@ public interface IApi {
     @GET("maintenance/selectEmployerMaintenance")
     Observable<HttpResult<MaintenanceBean>> selectEmployerMaintenance(@Query("phoneNumber") String phoneNumber
             , @Query("pageNum") int pageNum, @Query("pageSize") int pageSize);
+
+    /**
+     * 续维保
+     *
+     * @param requestBody body
+     * @return observable
+     */
+    @POST("maintenance/continuedMaintenance")
+    Observable<HttpResult<PayData>> continuedMaintenance(@Body RequestBody requestBody);
+
+    /**
+     * 新增维保
+     *
+     * @param requestBody body
+     * @return observable
+     */
+    @POST("maintenance/addMaintenance")
+    Observable<HttpResult<PayData>> addMaintenance(@Body RequestBody requestBody);
+
+    /**
+     * 雇主明细查询
+     *
+     * @param phoneNumber 手机号
+     * @param team        团队
+     * @param pageNum     当前页
+     * @param pageSize    一页数量
+     * @return observable
+     */
+    @FormUrlEncoded
+    @POST("wallet/getRunningAccountDetail")
+    Observable<HttpResult<EmployerWalletDetailBean>> getRunningAccountDetail(@Field("phoneNumber") String phoneNumber,
+                                                                                   @Field("team") String team, @Field("pageNum") int pageNum,
+                                                                                   @Field("pageSize") int pageSize);
+
+    /**
+     * 充值记录 和 消费记录
+     *
+     * @param phoneNumber 手机号
+     * @param team        团队
+     * @param wallerType  充值记录类型
+     * @param pageNum     当前页
+     * @param pageSize    一页数量
+     * @return observable
+     */
+    @FormUrlEncoded
+    @POST("wallet/rechargeRecord")
+    Observable<HttpResult<EmployerWalletDetailBean>> rechargeRecord(@Field("phoneNumber") String phoneNumber,
+                                                                          @Field("team") String team,
+                                                                          @Field("wallerType") String wallerType,
+                                                                          @Field("pageNum") int pageNum,
+                                                                          @Field("pageSize") int pageSize);
 
 
 }
