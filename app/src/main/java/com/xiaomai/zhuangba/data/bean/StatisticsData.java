@@ -9,7 +9,7 @@ public class StatisticsData {
     private double totalAmount;
     private int orderNumber;
     private int userNumber;
-
+    private int employerNumber;
 
     public double getTotalAmount() {
         return totalAmount;
@@ -33,5 +33,13 @@ public class StatisticsData {
 
     public void setUserNumber(int userNumber) {
         this.userNumber = userNumber;
+    }
+
+    public int getEmployerNumber() {
+        return employerNumber;
+    }
+
+    public void setEmployerNumber(int employerNumber) {
+        this.employerNumber = employerNumber;
     }
 }

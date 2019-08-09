@@ -79,12 +79,16 @@ public class MasterPersonalFragment extends PersonalFragment {
         }
     }
 
-    @OnClick({R.id.relWallet, R.id.relPersonalScopeOfService,R.id.relPlatformMaster})
+    @OnClick({R.id.relWallet, R.id.relPersonalScopeOfService,R.id.relPlatformMaster,R.id.relMasterMaintenance})
     public void onMasterViewClicked(View view) {
         switch (view.getId()) {
             case R.id.relWallet:
                 //钱包
                 startFragment(WalletFragment.newInstance());
+                break;
+            case R.id.relMasterMaintenance:
+                //我的维保单
+                startFragment(MasterMaintenancePolicyFragment.newInstance());
                 break;
             case R.id.relPersonalScopeOfService:
                 //修改服务范围

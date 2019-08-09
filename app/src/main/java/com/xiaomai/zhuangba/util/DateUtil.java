@@ -96,6 +96,23 @@ public class DateUtil {
     }
 
     /**
+     * 将 时间 转换 成指定格式
+     * @param date 时间
+     * @param pattern 格式
+     * @param formatPattern 转换的指定格式
+     * @return string
+     */
+    public static String dateToFormat(String date , String pattern , String formatPattern){
+        try {
+            Date date1 = strToDate_(date, pattern);
+            return dateToString(date1, formatPattern);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return "";
+    }
+
+    /**
      * 年份
      */
     public static Integer getYear() {

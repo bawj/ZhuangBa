@@ -48,6 +48,9 @@ public class MaintenancePolicyBean {
     /** 服务数量 */
     private int serviceNumber;
 
+    /** 入账金额 */
+    private double earningsMoney;
+
     public int getId() {
         return id;
     }
@@ -184,4 +187,11 @@ public class MaintenancePolicyBean {
         this.serviceNumber = serviceNumber;
     }
 
+    public double getEarningsMoney() {
+        return earningsMoney;
+    }
+
+    public void setEarningsMoney(double earningsMoney) {
+        this.earningsMoney = earningsMoney;
+    }
 }

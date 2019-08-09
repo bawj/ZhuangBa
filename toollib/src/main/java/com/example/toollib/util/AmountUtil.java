@@ -93,4 +93,16 @@ public class AmountUtil {
         numberFormat.setMaximumFractionDigits(2);
         return numberFormat.format(d / d1 * 100);
     }
+
+
+    /**
+     * 保留 newScale 位小数
+     * @param bigDecimal double
+     * @param newScale int
+     * @return double
+     */
+    public static double getDoubleValue(double bigDecimal , int newScale){
+        BigDecimal bg = new BigDecimal(bigDecimal);
+        return bg.setScale(newScale, BigDecimal.ROUND_HALF_UP).doubleValue();
+    }
 }

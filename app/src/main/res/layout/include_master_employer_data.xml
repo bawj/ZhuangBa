@@ -1,18 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="horizontal">
 
-    <LinearLayout
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/tool_lib_27dp"
-        android:layout_marginRight="@dimen/tool_lib_27dp"
-        android:layout_toStartOf="@+id/orderQuantity"
-        android:layout_toLeftOf="@+id/orderQuantity"
+        android:layout_weight="1"
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/tvNumberOfEmployers_"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/number_of_employers"
+            android:textColor="@color/tool_lib_gray_B1B1B1"
+            android:textSize="@dimen/tool_lib_11sp" />
+
+        <TextView
+            android:id="@+id/tvNumberOfEmployers"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvNumberOfEmployers_"
+            android:layout_marginTop="@dimen/tool_lib_3dp"
+            android:text="@string/zero"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/tool_lib_18sp" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvNumberOfTeachers_"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/number_of_teachers"
@@ -23,25 +48,23 @@
             android:id="@+id/tvNumberOfTeachers"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/tvNumberOfTeachers_"
             android:layout_marginTop="@dimen/tool_lib_3dp"
             android:text="@string/zero"
             android:textColor="@android:color/white"
-            android:textSize="@dimen/tool_lib_24sp" />
+            android:textSize="@dimen/tool_lib_18sp" />
 
-    </LinearLayout>
+    </RelativeLayout>
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/orderQuantity"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/tool_lib_27dp"
-        android:layout_marginRight="@dimen/tool_lib_27dp"
-        android:layout_toStartOf="@+id/layTaskAmount"
-        android:layout_toLeftOf="@+id/layTaskAmount"
-        android:gravity="center"
+        android:layout_weight="1"
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/tvOrderQuantity_"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/order_quantity"
@@ -52,25 +75,24 @@
             android:id="@+id/tvOrderQuantity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/tvOrderQuantity_"
             android:layout_marginTop="@dimen/tool_lib_3dp"
             android:text="@string/zero"
             android:textColor="@android:color/white"
-            android:textSize="@dimen/tool_lib_24sp" />
+            android:textSize="@dimen/tool_lib_18sp" />
 
-    </LinearLayout>
+    </RelativeLayout>
 
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/layTaskAmount"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginEnd="@dimen/tool_lib_16dp"
-        android:layout_marginRight="@dimen/tool_lib_16dp"
+        android:layout_weight="1"
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/tvTaskAmount_"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/task_amount"
@@ -81,9 +103,10 @@
             android:id="@+id/tvTaskAmount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/tvTaskAmount_"
             android:layout_marginTop="@dimen/tool_lib_3dp"
             android:text="@string/zero"
             android:textColor="@android:color/white"
-            android:textSize="@dimen/tool_lib_24sp" />
-    </LinearLayout>
-</RelativeLayout>
+            android:textSize="@dimen/tool_lib_18sp" />
+    </RelativeLayout>
+</LinearLayout>

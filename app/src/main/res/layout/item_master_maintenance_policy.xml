@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/card_view"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:foreground="?android:attr/selectableItemBackground"
+    card_view:cardBackgroundColor="@color/white"
+    card_view:cardCornerRadius="@dimen/tool_lib_5dp"
+    card_view:cardElevation="0dp"
+    card_view:cardUseCompatPadding="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/tool_lib_12dp"
+        android:layout_marginLeft="@dimen/tool_lib_12dp"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:id="@+id/relHistorical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/tool_lib_12dp">
+
+            <TextView
+                android:id="@+id/tvItemMaintenanceTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:textColor="@color/tool_lib_gray_222222"
+                android:textSize="@dimen/tool_lib_16sp"
+                tools:text="电视机维保" />
+
+            <TextView
+                android:id="@+id/tvItemMaintenanceType"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/distribution_half_fillet_bg"
+                android:padding="@dimen/tool_lib_5dp"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/tool_lib_12sp"
+                tools:text="进行中" />
+        </RelativeLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/tool_lib_10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/charge_maintenance"
+                android:textColor="@color/tool_lib_gray_777777"
+                android:textSize="@dimen/tool_lib_12sp" />
+
+            <TextView
+                android:id="@+id/tvChargeMaintenance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/tool_lib_gray_777777"
+                android:textSize="@dimen/tool_lib_12sp"
+                tools:text="一年零一个月" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/tool_lib_10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/customer_name_"
+                android:textColor="@color/tool_lib_gray_777777"
+                android:textSize="@dimen/tool_lib_12sp" />
+
+            <TextView
+                android:id="@+id/tvCustomerName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/tool_lib_gray_777777"
+                android:textSize="@dimen/tool_lib_12sp"
+                tools:text="张三" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/tool_lib_10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/contact_information_"
+                android:textColor="@color/tool_lib_gray_777777"
+                android:textSize="@dimen/tool_lib_12sp" />
+
+            <TextView
+                android:id="@+id/tvContactInformation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/tool_lib_gray_777777"
+                android:textSize="@dimen/tool_lib_12sp"
+                tools:text="15906676509" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/tool_lib_10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/ending_time"
+                android:textColor="@color/tool_lib_gray_777777"
+                android:textSize="@dimen/tool_lib_12sp" />
+
+            <TextView
+                android:id="@+id/tvEndingTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/tool_lib_gray_777777"
+                android:textSize="@dimen/tool_lib_12sp"
+                tools:text="2019/06/07" />
+        </LinearLayout>
+
+
+        <View
+            android:id="@+id/viewHorizontalLine"
+            style="@style/tool_lib_horizontal_line"
+            android:layout_marginTop="@dimen/tool_lib_14dp" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/tool_lib_14dp"
+            android:layout_marginBottom="@dimen/tool_lib_14dp">
+
+            <TextView
+                android:id="@+id/tvAccountingTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/tool_lib_20dp"
+                android:layout_marginRight="@dimen/tool_lib_20dp"
+                android:layout_toStartOf="@+id/tvAccountingAmount"
+                android:layout_toLeftOf="@+id/tvAccountingAmount"
+                android:textColor="@color/tool_lib_gray_222222"
+                android:textSize="@dimen/tool_lib_12sp"
+                tools:text="入账时间：每月01号" />
+
+            <TextView
+                android:id="@+id/tvAccountingAmount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginEnd="@dimen/tool_lib_12dp"
+                android:layout_marginRight="@dimen/tool_lib_12dp"
+                android:textColor="@color/tool_lib_gray_222222"
+                android:textSize="@dimen/tool_lib_12sp"
+                tools:text="入账金额：¥200/月" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</android.support.v7.widget.CardView>

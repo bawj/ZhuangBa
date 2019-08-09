@@ -1,32 +1,29 @@
 package com.xiaomai.zhuangba.adapter;
 
-import android.view.View;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
-import com.qmuiteam.qmui.layout.QMUIButton;
+import com.example.toollib.util.AmountUtil;
 import com.xiaomai.zhuangba.R;
 import com.xiaomai.zhuangba.data.bean.MaintenancePolicyBean;
 import com.xiaomai.zhuangba.util.DateUtil;
 import com.xiaomai.zhuangba.util.MaintenanceUtil;
 
+import org.joda.time.DateTime;
+
 /**
  * @author Administrator
- * @date 2019/8/8 0008
- * <p>
- * 维保单
+ * @date 2019/8/9 0009
  */
-public class MaintenancePolicyAdapter extends BaseQuickAdapter<MaintenancePolicyBean, BaseViewHolder> {
+public class MasterMaintenancePolicyAdapter extends BaseQuickAdapter<MaintenancePolicyBean, BaseViewHolder> {
 
-    private IMaintenance iMaintenance;
-
-    public MaintenancePolicyAdapter() {
-        super(R.layout.item_maintenance_policy, null);
+    public MasterMaintenancePolicyAdapter() {
+        super(R.layout.item_master_maintenance_policy, null);
     }
 
     @Override
-    protected void convert(BaseViewHolder helper, final MaintenancePolicyBean item) {
+    protected void convert(BaseViewHolder helper, MaintenancePolicyBean item) {
         //维保 名称
         TextView tvItemMaintenanceTitle = helper.getView(R.id.tvItemMaintenanceTitle);
         tvItemMaintenanceTitle.setText(item.getServiceName());
@@ -43,30 +40,20 @@ public class MaintenancePolicyAdapter extends BaseQuickAdapter<MaintenancePolicy
         TextView tvContactInformation = helper.getView(R.id.tvContactInformation);
         tvContactInformation.setText(item.getOvermanPhone());
         //结束时间
+        String endTime = item.getEndTime();
         TextView tvEndingTime = helper.getView(R.id.tvEndingTime);
-        tvEndingTime.setText(DateUtil.dateToFormat(item.getEndTime() , "yyyy-MM-dd" , "yyyy/MM/dd"));
-        //维保总价
-        TextView tvTotalMaintenancePrice = helper.getView(R.id.tvTotalMaintenancePrice);
-        tvTotalMaintenancePrice.setText(mContext.getString(R.string.total_maintenance_price, String.valueOf(item.getAmount())));
-        //续维保
-        QMUIButton btnContinuedMaintenance = helper.getView(R.id.btnContinuedMaintenance);
-        btnContinuedMaintenance.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (iMaintenance != null) {
-                    iMaintenance.continuedMaintenance(item);
-                }
-            }
-        });
+        tvEndingTime.setText(DateUtil.dateToFormat(endTime , "yyyy-MM-dd" , "yyyy/MM/dd"));
 
+        //入账时间
+        TextView tvAccountingTime = helper.getView(R.id.tvAccountingTime);
+        DateTime dateTime = DateUtil.strToDate(endTime, "yyyy-MM-dd");
+        //往后推两天 为入账时间
+        dateTime = dateTime.plusDays(2);
+        int dayOfYear = dateTime.getDayOfMonth();
+        tvAccountingTime.setText(mContext.getString(R.string.accounting_time , String.valueOf(dayOfYear)));
+        //入账金额
+        TextView tvAccountingAmount = helper.getView(R.id.tvAccountingAmount);
+        double earningsMoney = item.getEarningsMoney();
+        tvAccountingAmount.setText(mContext.getString(R.string.accounting_amount , String.valueOf(AmountUtil.getDoubleValue(earningsMoney , 2))));
     }
-
-    public interface IMaintenance {
-        void continuedMaintenance(MaintenancePolicyBean item);
-    }
-
-    public void setMaintenance(IMaintenance iMaintenance) {
-        this.iMaintenance = iMaintenance;
-    }
-
 }

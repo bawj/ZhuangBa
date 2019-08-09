@@ -401,4 +401,7 @@
     <string name="notification_message">通知消息</string>
     <string name="income">+¥%1$s</string>
     <string name="expenditure">-¥%1$s</string>
+    <string name="accounting_time">入账时间：每月%1$s号</string>
+    <string name="accounting_amount">入账金额：¥%1$s/月</string>
+    <string name="number_of_employers">雇主数量</string>
 </resources>

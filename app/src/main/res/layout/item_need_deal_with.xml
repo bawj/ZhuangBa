@@ -45,7 +45,7 @@
                 android:textColor="@color/tool_lib_color_199898"
                 android:textSize="@dimen/tool_lib_12sp"
                 android:visibility="gone"
-                tools:text="@string/maintenance" />
+                android:text="@string/maintenance" />
 
             <TextView
                 android:id="@+id/tvItemOrdersType"

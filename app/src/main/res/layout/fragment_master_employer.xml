@@ -97,10 +97,12 @@
                                 <!--数量 金额-->
                                 <include
                                     layout="@layout/include_master_employer_data"
-                                    android:layout_width="wrap_content"
+                                    android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_below="@+id/toolbarMasterWorker"
-                                    android:layout_marginTop="@dimen/tool_lib_21dp" />
+                                    android:layout_marginLeft="@dimen/tool_lib_30dp"
+                                    android:layout_marginTop="@dimen/tool_lib_21dp"
+                                    android:layout_marginRight="@dimen/tool_lib_30dp" />
                             </RelativeLayout>
 
                             <LinearLayout

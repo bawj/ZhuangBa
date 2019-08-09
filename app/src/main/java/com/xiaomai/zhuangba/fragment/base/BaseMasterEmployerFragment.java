@@ -71,6 +71,8 @@ public class BaseMasterEmployerFragment extends BaseFragment<IMasterEmployerModu
     TextView tvOrderQuantity;
     @BindView(R.id.tvTaskAmount)
     TextView tvTaskAmount;
+    @BindView(R.id.tvNumberOfEmployers)
+    TextView tvNumberOfEmployers;
     /**
      * 观察者管理
      */
@@ -235,6 +237,7 @@ public class BaseMasterEmployerFragment extends BaseFragment<IMasterEmployerModu
         tvNumberOfTeachers.setText(String.valueOf(statisticsData.getUserNumber()));
         tvOrderQuantity.setText(String.valueOf(statisticsData.getOrderNumber()));
         tvTaskAmount.setText(String.valueOf(statisticsData.getTotalAmount()));
+        tvNumberOfEmployers.setText(String.valueOf(statisticsData.getEmployerNumber()));
     }
 
 

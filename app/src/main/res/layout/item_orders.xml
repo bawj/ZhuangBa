@@ -35,7 +35,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/tool_lib_6dp"
                 android:layout_marginLeft="@dimen/tool_lib_6dp"
-                android:visibility="gone"
                 android:layout_centerVertical="true"
                 android:layout_toEndOf="@+id/tvItemOrdersTitle"
                 android:layout_toRightOf="@+id/tvItemOrdersTitle"
@@ -43,7 +42,7 @@
                 android:padding="@dimen/tool_lib_6dp"
                 android:textColor="@color/tool_lib_color_199898"
                 android:textSize="@dimen/tool_lib_12sp"
-                tools:text="@string/maintenance" />
+                android:text="@string/maintenance" />
 
 
             <TextView

@@ -646,7 +646,7 @@ public interface IApi {
 
 
     /**
-     * 维保查询
+     * 雇主维保查询
      *
      * @param phoneNumber 手机号
      * @param pageNum     当前页
@@ -655,6 +655,18 @@ public interface IApi {
      */
     @GET("maintenance/selectEmployerMaintenance")
     Observable<HttpResult<MaintenanceBean>> selectEmployerMaintenance(@Query("phoneNumber") String phoneNumber
+            , @Query("pageNum") int pageNum, @Query("pageSize") int pageSize);
+
+    /**
+     * 师傅维保查询
+     *
+     * @param phoneNumber 手机号
+     * @param pageNum     当前页
+     * @param pageSize    每页加载数量
+     * @return observable
+     */
+    @GET("maintenance/selectOvermanMaintenance")
+    Observable<HttpResult<MaintenanceBean>> selectOvermanMaintenance(@Query("phoneNumber") String phoneNumber
             , @Query("pageNum") int pageNum, @Query("pageSize") int pageSize);
 
     /**

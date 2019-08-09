@@ -67,6 +67,7 @@ public class NotificationMessageFragment extends BaseFragment {
             if (!pushNotificationDBList.isEmpty()) {
                 Collections.reverse(pushNotificationDBList);
                 notificationMessageAdapter.setNewData(pushNotificationDBList);
+                linSearchEmpty.setVisibility(View.GONE);
             } else {
                 linSearchEmpty.setVisibility(View.VISIBLE);
             }
