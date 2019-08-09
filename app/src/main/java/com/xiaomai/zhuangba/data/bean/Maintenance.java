@@ -1,6 +1,7 @@
 package com.xiaomai.zhuangba.data.bean;
 
-import android.text.TextUtils;
+import org.greenrobot.greendao.annotation.Entity;
+import org.greenrobot.greendao.annotation.Generated;
 
 /**
  * @author Administrator
@@ -50,6 +51,30 @@ public class Maintenance {
      * 暂不选中维保
      */
     private String notChoosingMaintenance;
+
+    @Generated(hash = 2115835481)
+    public Maintenance(Integer id, Integer serviceId, Integer number, Double amount,
+            Integer residualQuantity, Double residualAmount, String overmanName,
+            String overmanPhone, String serviceName, String startTime,
+            String endTime, String status, String notChoosingMaintenance) {
+        this.id = id;
+        this.serviceId = serviceId;
+        this.number = number;
+        this.amount = amount;
+        this.residualQuantity = residualQuantity;
+        this.residualAmount = residualAmount;
+        this.overmanName = overmanName;
+        this.overmanPhone = overmanPhone;
+        this.serviceName = serviceName;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.status = status;
+        this.notChoosingMaintenance = notChoosingMaintenance;
+    }
+
+    @Generated(hash = 1111935477)
+    public Maintenance() {
+    }
 
     public Integer getId() {
         return id;

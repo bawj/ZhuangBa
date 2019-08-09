@@ -4,7 +4,10 @@ import com.example.toollib.http.HttpResult;
 import com.xiaomai.zhuangba.data.bean.AliPayAccountBean;
 import com.xiaomai.zhuangba.data.bean.DeliveryContent;
 import com.xiaomai.zhuangba.data.bean.EarnestBean;
+import com.xiaomai.zhuangba.data.bean.EmployerWalletBean;
 import com.xiaomai.zhuangba.data.bean.Maintenance;
+import com.xiaomai.zhuangba.data.bean.MaintenanceBean;
+import com.xiaomai.zhuangba.data.bean.MaintenancePolicyBean;
 import com.xiaomai.zhuangba.data.bean.OngoingOrdersList;
 import com.xiaomai.zhuangba.data.bean.OrderDateList;
 import com.xiaomai.zhuangba.data.bean.OrderServiceItem;
@@ -164,7 +167,7 @@ public interface IApi {
      * @return Observable
      */
     @GET("order/selectOrder")
-    Observable<HttpResult<Orders>> getMasterSelectOrder(@Query("pageNum") String pageNum, @Query("pageSize") String pageSize , @Query("address") String address);
+    Observable<HttpResult<Orders>> getMasterSelectOrder(@Query("pageNum") String pageNum, @Query("pageSize") String pageSize, @Query("address") String address);
 
     /**
      * 师傅需处理订单首页
@@ -188,6 +191,7 @@ public interface IApi {
 
     /**
      * 订单池详情
+     *
      * @param orderCode 订单编号
      * @return observable
      */
@@ -211,7 +215,6 @@ public interface IApi {
      */
     @GET("order/getOrderDateList/{orderCode}")
     Observable<HttpResult<List<OrderDateList>>> getOrderDateList(@Path("orderCode") String orderCode);
-
 
 
     /**
@@ -277,7 +280,7 @@ public interface IApi {
      */
     @FormUrlEncoded
     @POST("order/orderPay")
-    Observable<HttpResult<PayData>> orderPay(@Field("orderCode") String orderCode, @Field("payType") String payType , @Field("code") String code);
+    Observable<HttpResult<PayData>> orderPay(@Field("orderCode") String orderCode, @Field("payType") String payType, @Field("code") String code);
 
 
     /**
@@ -310,10 +313,10 @@ public interface IApi {
     /**
      * 获取钱包明细
      *
-     * @param pageNum 每页显示数量
-     * @param pageSize 每页显示
+     * @param pageNum   每页显示数量
+     * @param pageSize  每页显示
      * @param startDate 开始时间
-     * @param endDate 结束时间
+     * @param endDate   结束时间
      * @return observable
      */
     @GET("wallet/getWalletDetailed")
@@ -323,10 +326,10 @@ public interface IApi {
     /**
      * 获取收入列表
      *
-     * @param pageNum 每页显示数量
-     * @param pageSize 每页显示
+     * @param pageNum   每页显示数量
+     * @param pageSize  每页显示
      * @param startDate 开始时间
-     * @param endDate 结束时间
+     * @param endDate   结束时间
      * @return observable
      */
     @GET("wallet/getIncomeList")
@@ -338,10 +341,10 @@ public interface IApi {
     /**
      * 获取已提现列表
      *
-     * @param pageNum 每页显示数量
-     * @param pageSize 每页显示
+     * @param pageNum   每页显示数量
+     * @param pageSize  每页显示
      * @param startDate 开始时间
-     * @param endDate 结束时间
+     * @param endDate   结束时间
      * @return observable
      */
     @GET("wallet/getHaveWithdrawal")
@@ -373,6 +376,7 @@ public interface IApi {
 
     /**
      * 获取支付宝账号
+     *
      * @return observable
      */
     @GET("wallet/getCashWithdrawalAccount")
@@ -400,6 +404,7 @@ public interface IApi {
 
     /**
      * 退押金
+     *
      * @param password 密码
      * @return observable
      */
@@ -439,6 +444,7 @@ public interface IApi {
 
     /**
      * 查询价目表
+     *
      * @param enumCode String
      * @return observable
      */
@@ -475,12 +481,13 @@ public interface IApi {
 
     /**
      * 请求省市区
+     *
      * @param parentId parentId
-     * @param level level
+     * @param level    level
      * @return observable
      */
     @GET("communal/getRegion")
-    Observable<HttpResult<List<ProvincialBean>>> getRegion(@Query("parentId") int parentId , @Query("level") int level);
+    Observable<HttpResult<List<ProvincialBean>>> getRegion(@Query("parentId") int parentId, @Query("level") int level);
 
 
     /**
@@ -495,6 +502,7 @@ public interface IApi {
 
     /**
      * 修改服务范围
+     *
      * @param requestBody body
      * @return observable
      */
@@ -514,7 +522,7 @@ public interface IApi {
     /**
      * 师傅取消任务
      *
-     * @param orderCode        订单编号
+     * @param orderCode          订单编号
      * @param cancellationCauses 取消说明
      * @return observable
      */
@@ -524,7 +532,7 @@ public interface IApi {
     /**
      * 雇主取消任务
      *
-     * @param orderCode        订单编号
+     * @param orderCode 订单编号
      * @return observable
      */
     @GET("order/cancelOrder/{orderCode}")
@@ -543,7 +551,7 @@ public interface IApi {
     /**
      * 师傅接受任务
      *
-     * @param orderCode        订单编号
+     * @param orderCode 订单编号
      * @return observable
      */
     @GET("order/acceptOrder/{orderCode}")
@@ -553,7 +561,7 @@ public interface IApi {
     /**
      * 师傅确认订单时间
      *
-     * @param orderCode    订单编号
+     * @param orderCode        订单编号
      * @param confirmationTime 时间
      * @return observable
      */
@@ -573,8 +581,9 @@ public interface IApi {
 
     /**
      * 开始施工
-     * @param orderCode 订单编号
-     * @param beforePicturesUrl 多图
+     *
+     * @param orderCode           订单编号
+     * @param beforePicturesUrl   多图
      * @param electronicSignature 单图
      * @return observable
      */
@@ -601,4 +610,52 @@ public interface IApi {
     @FormUrlEncoded
     @POST("maintenance/getMaintenance")
     Observable<HttpResult<List<Maintenance>>> getMaintenance(@Field("serviceId") String serviceId);
+
+
+    /**
+     * 雇主端 钱包查询
+     *
+     * @param phoneNumber 账号
+     * @return observable
+     */
+    @FormUrlEncoded
+    @POST("wallet/selectWalletBalance")
+    Observable<HttpResult<EmployerWalletBean>> selectWalletBalance(@Field("phoneNumber") String phoneNumber);
+
+
+    /**
+     * 雇主端 钱包查询
+     *
+     * @param money   充值金额
+     * @param payType 1 支付宝 2 微信
+     * @return observable
+     */
+    @FormUrlEncoded
+    @POST("wallet/walletPay")
+    Observable<HttpResult<PayData>> walletPay(@Field("money") String money, @Field("payType") String payType);
+
+    /**
+     * 雇主端 设置交易密码
+     *
+     * @param presentationPassword 交易密码
+     * @return observable
+     */
+    @FormUrlEncoded
+    @POST("wallet/updatePresentationPassword")
+    Observable<HttpResult<String>> updatePresentationPassword(@Field("presentationPassword") String presentationPassword);
+
+
+    /**
+     * 维保查询
+     *
+     * @param phoneNumber 手机号
+     * @param pageNum     当前页
+     * @param pageSize    每页加载数量
+     * @return observable
+     */
+    @GET("maintenance/selectEmployerMaintenance")
+    Observable<HttpResult<MaintenanceBean>> selectEmployerMaintenance(@Query("phoneNumber") String phoneNumber
+            , @Query("pageNum") int pageNum, @Query("pageSize") int pageSize);
+
+
 }

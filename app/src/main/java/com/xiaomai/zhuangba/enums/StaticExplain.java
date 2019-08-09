@@ -22,6 +22,9 @@ public enum  StaticExplain {
     NEW_TASK(1,"新任务"),
     NEED_DEAL_WITH(2, "需处理"),
     ONGOING_ORDERS(3 , "进行中的订单"),
+    SUPER_ADMINISTRATOR(1,"超级管理员"),
+    ADMINISTRATOR(2,"管理员"),
+    ORDINARY_STAFF(3,"普通员工"),
     ;
     /** 服务器状态码 或 自定义状态 */
     private int code;

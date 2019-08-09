@@ -24,6 +24,7 @@ public class DaoMaster extends AbstractDaoMaster {
         PushNotificationDBDao.createTable(db, ifNotExists);
         ShopCarDataDao.createTable(db, ifNotExists);
         UserInfoDao.createTable(db, ifNotExists);
+        OrderServiceItemDao.createTable(db, ifNotExists);
     }
 
     /** Drops underlying database table using DAOs. */
@@ -31,6 +32,7 @@ public class DaoMaster extends AbstractDaoMaster {
         PushNotificationDBDao.dropTable(db, ifExists);
         ShopCarDataDao.dropTable(db, ifExists);
         UserInfoDao.dropTable(db, ifExists);
+        OrderServiceItemDao.dropTable(db, ifExists);
     }
 
     /**
@@ -52,6 +54,7 @@ public class DaoMaster extends AbstractDaoMaster {
         registerDaoClass(PushNotificationDBDao.class);
         registerDaoClass(ShopCarDataDao.class);
         registerDaoClass(UserInfoDao.class);
+        registerDaoClass(OrderServiceItemDao.class);
     }
 
     public DaoSession newSession() {

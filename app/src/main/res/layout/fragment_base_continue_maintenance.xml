@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/tool_lib_gray_F5F6FA">
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rvShopCar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="@dimen/tool_lib_56dp" />
+
+    <!-- 底部 金额 下一步-->
+    <com.qmuiteam.qmui.layout.QMUILinearLayout
+        android:id="@+id/itemSelectServiceLayoutFor"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/tool_lib_56dp"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="bottom"
+        android:background="@color/qmui_config_color_white"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:gravity="bottom"
+        android:orientation="vertical"
+        app:qmui_showBorderOnlyBeforeL="true">
+
+        <RelativeLayout
+            android:id="@+id/relServiceTask"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_toStartOf="@+id/btnSelectServiceNext"
+            android:layout_toLeftOf="@+id/btnSelectServiceNext">
+
+            <TextView
+                android:id="@+id/tvSelectServiceTotal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toStartOf="@+id/tvSelectServiceMonty"
+                android:layout_toLeftOf="@+id/tvSelectServiceMonty"
+                android:text="@string/total"
+                android:textColor="@color/tool_lib_gray_222222"
+                android:textSize="@dimen/tool_lib_12sp" />
+
+            <TextView
+                android:id="@+id/tvSelectServiceMonty"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="@dimen/tool_lib_10dp"
+                android:layout_marginRight="@dimen/tool_lib_10dp"
+                android:layout_toStartOf="@+id/btnConfirmationOfPayment"
+                android:layout_toLeftOf="@+id/btnConfirmationOfPayment"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textColor="@color/tool_lib_red_EF2B2B"
+                android:textSize="@dimen/tool_lib_16sp"
+                tools:text="¥0.0000" />
+
+            <com.qmuiteam.qmui.layout.QMUIButton
+                android:id="@+id/btnConfirmationOfPayment"
+                style="@style/base_btn"
+                android:layout_width="@dimen/tool_lib_90dp"
+                android:layout_height="@dimen/tool_lib_40dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="@dimen/tool_lib_16dp"
+                android:layout_marginRight="@dimen/tool_lib_16dp"
+                android:text="@string/confirmation_of_payment" />
+        </RelativeLayout>
+    </com.qmuiteam.qmui.layout.QMUILinearLayout>
+</RelativeLayout>

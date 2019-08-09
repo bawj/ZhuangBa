@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/white">
+
+    <ImageView
+        android:id="@+id/ivServiceImg"
+        android:layout_width="@dimen/tool_lib_60dp"
+        android:layout_height="@dimen/tool_lib_60dp"
+        android:layout_margin="@dimen/tool_lib_16dp"
+        tools:src="@drawable/bg_master_employer" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/tool_lib_16dp"
+        android:layout_toEndOf="@+id/ivServiceImg"
+        android:layout_toRightOf="@+id/ivServiceImg"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvServiceName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/tool_lib_gray_222222"
+            android:textSize="@dimen/tool_lib_16sp"
+            tools:text="智能通讯座调试" />
+
+
+        <LinearLayout
+            android:id="@+id/layShopCarMaintenance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/tool_lib_6dp"
+            android:background="@drawable/gray_bg">
+
+            <TextView
+                android:id="@+id/tvShopCarMaintenance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:gravity="center"
+                android:paddingLeft="@dimen/tool_lib_10dp"
+                android:paddingTop="@dimen/tool_lib_6dp"
+                android:paddingRight="@dimen/tool_lib_10dp"
+                android:paddingBottom="@dimen/tool_lib_6dp"
+                android:textColor="@color/tool_lib_gray_222222"
+                android:textSize="@dimen/tool_lib_12sp"
+                tools:text="36个月维保：¥1290" />
+
+            <ImageView
+                android:id="@+id/ivShopCarRight"
+                android:layout_width="@dimen/tool_lib_10dp"
+                android:layout_height="@dimen/tool_lib_12dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginEnd="@dimen/tool_lib_10dp"
+                android:layout_marginRight="@dimen/tool_lib_10dp"
+                android:src="@drawable/ic_right_black" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+
+</RelativeLayout>

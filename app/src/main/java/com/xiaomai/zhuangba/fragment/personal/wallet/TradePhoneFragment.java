@@ -6,7 +6,6 @@ import android.widget.EditText;
 
 import com.example.toollib.base.BaseFragment;
 import com.example.toollib.http.HttpResult;
-import com.example.toollib.http.exception.ApiException;
 import com.example.toollib.http.observer.BaseHttpRxObserver;
 import com.example.toollib.http.util.RxUtils;
 import com.example.toollib.util.ToastUtil;
@@ -58,24 +57,22 @@ public class TradePhoneFragment extends BaseFragment {
         } else if (!userInfo.getPhoneNumber().equals(phone)) {
             ToastUtil.showShort(getString(R.string.wallet_update_trade_input_error));
         } else {
-            RxUtils.getObservable(ServiceUrl.getUserApi().getAuthenticationCode(edtPhone.getText().toString(),
-                    StringTypeExplain.REGISTERED_FORGET_PASSWORD.getCode())
-                    .compose(this.<HttpResult<Object>>bindLifecycle()))
-                    .subscribe(new BaseHttpRxObserver<Object>(getActivity()) {
-                        @Override
-                        protected void onSuccess(Object response) {
-                            if (response != null) {
-                                startFragmentAndDestroyCurrent(WalletUpdatePasswordFragment.newInstance(edtPhone.getText().toString(), response.toString()));
-                            }
-                        }
-
-                        @Override
-                        public void onError(ApiException e) {
-                            super.onError(e);
-                            ToastUtil.showShort(e.getMsg());
-                        }
-                    });
+            btnCodeClick();
         }
+    }
+
+    public void btnCodeClick() {
+        RxUtils.getObservable(ServiceUrl.getUserApi().getAuthenticationCode(edtPhone.getText().toString(),
+                StringTypeExplain.REGISTERED_FORGET_PASSWORD.getCode())
+                .compose(this.<HttpResult<Object>>bindToLifecycle()))
+                .subscribe(new BaseHttpRxObserver<Object>(getActivity()) {
+                    @Override
+                    protected void onSuccess(Object response) {
+                        if (response != null) {
+                            startFragmentAndDestroyCurrent(WalletUpdatePasswordFragment.newInstance(edtPhone.getText().toString(), response.toString()));
+                        }
+                    }
+                });
     }
 
 

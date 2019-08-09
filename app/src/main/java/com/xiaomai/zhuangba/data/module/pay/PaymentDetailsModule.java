@@ -61,7 +61,7 @@ public class PaymentDetailsModule extends PlayModule<IPaymentDetailView> impleme
         submissionOrder.setOrderServices(orderServicesBeans);
         boolean isChkPaymentWeChat = mViewRef.get().getChkPaymentWeChat();
         boolean isChkPaymentPlay = mViewRef.get().getChkPaymentPlay();
-        boolean isChkPaymentWallet = mViewRef.get().getChkPaymentWallet();
+        final boolean isChkPaymentWallet = mViewRef.get().getChkPaymentWallet();
         String orderData = getOrderData(submissionOrder);
         if (!TextUtils.isEmpty(orderData)) {
             // TODO: 2019/8/7 0007 串联请求
@@ -100,7 +100,10 @@ public class PaymentDetailsModule extends PlayModule<IPaymentDetailView> impleme
                     .subscribe(new BaseHttpRxObserver(mContext.get()) {
                         @Override
                         protected void onSuccess(Object response) {
-                            if (response != null) {
+                            if (response != null && isChkPaymentWallet){
+                                PayData payData = (PayData) response;
+                                mViewRef.get().paymentSuccess();
+                            }else if (response != null) {
                                 PayData payData = (PayData) response;
                                 Log.e("subscribe onSuccess = " + payData.toString());
                                 if (!TextUtils.isEmpty(payData.getAliPay())) {

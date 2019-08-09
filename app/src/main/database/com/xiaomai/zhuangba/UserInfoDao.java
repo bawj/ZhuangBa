@@ -52,6 +52,7 @@ public class UserInfoDao extends AbstractDao<UserInfo, Long> {
         public final static Property PayFlag = new Property(25, int.class, "payFlag", false, "PAY_FLAG");
         public final static Property MasterRankId = new Property(26, String.class, "masterRankId", false, "MASTER_RANK_ID");
         public final static Property MasterRankName = new Property(27, String.class, "masterRankName", false, "MASTER_RANK_NAME");
+        public final static Property RoleId = new Property(28, int.class, "roleId", false, "ROLE_ID");
     }
 
 
@@ -94,7 +95,8 @@ public class UserInfoDao extends AbstractDao<UserInfo, Long> {
                 "\"START_FLAG\" INTEGER NOT NULL ," + // 24: startFlag
                 "\"PAY_FLAG\" INTEGER NOT NULL ," + // 25: payFlag
                 "\"MASTER_RANK_ID\" TEXT," + // 26: masterRankId
-                "\"MASTER_RANK_NAME\" TEXT);"); // 27: masterRankName
+                "\"MASTER_RANK_NAME\" TEXT," + // 27: masterRankName
+                "\"ROLE_ID\" INTEGER NOT NULL );"); // 28: roleId
     }
 
     /** Drops the underlying database table. */
@@ -222,6 +224,7 @@ public class UserInfoDao extends AbstractDao<UserInfo, Long> {
         if (masterRankName != null) {
             stmt.bindString(28, masterRankName);
         }
+        stmt.bindLong(29, entity.getRoleId());
     }
 
     @Override
@@ -343,6 +346,7 @@ public class UserInfoDao extends AbstractDao<UserInfo, Long> {
         if (masterRankName != null) {
             stmt.bindString(28, masterRankName);
         }
+        stmt.bindLong(29, entity.getRoleId());
     }
 
     @Override
@@ -380,7 +384,8 @@ public class UserInfoDao extends AbstractDao<UserInfo, Long> {
             cursor.getInt(offset + 24), // startFlag
             cursor.getInt(offset + 25), // payFlag
             cursor.isNull(offset + 26) ? null : cursor.getString(offset + 26), // masterRankId
-            cursor.isNull(offset + 27) ? null : cursor.getString(offset + 27) // masterRankName
+            cursor.isNull(offset + 27) ? null : cursor.getString(offset + 27), // masterRankName
+            cursor.getInt(offset + 28) // roleId
         );
         return entity;
     }
@@ -415,6 +420,7 @@ public class UserInfoDao extends AbstractDao<UserInfo, Long> {
         entity.setPayFlag(cursor.getInt(offset + 25));
         entity.setMasterRankId(cursor.isNull(offset + 26) ? null : cursor.getString(offset + 26));
         entity.setMasterRankName(cursor.isNull(offset + 27) ? null : cursor.getString(offset + 27));
+        entity.setRoleId(cursor.getInt(offset + 28));
      }
     
     @Override

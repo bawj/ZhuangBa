@@ -1,6 +1,7 @@
 package com.example.toollib.http;
 
 import com.example.toollib.ToolLib;
+import com.example.toollib.http.converter.MyConverterFactory;
 import com.example.toollib.http.interceptor.CacheInterceptor;
 import com.example.toollib.http.interceptor.ReceivedCookiesInterceptor;
 import com.example.toollib.http.interceptor.SaveCookiesInterceptor;
@@ -44,6 +45,7 @@ public class RetrofitUtils {
         retrofitBuild = new Retrofit.Builder()
                 .client(okHttpBuilder.build())
                 .baseUrl(ToolLib.getInstance().getBaseUrl())
+                .addConverterFactory(MyConverterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build();

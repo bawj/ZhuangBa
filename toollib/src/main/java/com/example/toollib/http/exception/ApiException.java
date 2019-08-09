@@ -6,7 +6,7 @@ import android.text.TextUtils;
  * @author Administrator
  * @date 2019/5/7 0007
  */
-public class ApiException extends Exception {
+public class ApiException extends RuntimeException {
     /** 错误码 */
     private int code;
     /** 错误信息 */

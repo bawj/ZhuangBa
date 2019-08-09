@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/tool_lib_gray_F5F8FA"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:paddingLeft="@dimen/tool_lib_12dp"
+        android:paddingRight="@dimen/tool_lib_12dp">
+
+        <TextView
+            android:id="@+id/tvRechargeRechargeAmount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/tool_lib_12dp"
+            android:text="@string/recharge_amount"
+            android:textColor="@color/tool_lib_gray_222222"
+            android:textSize="@dimen/tool_lib_11sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvRechargeRechargeAmount"
+            android:layout_marginTop="@dimen/tool_lib_12dp"
+            android:layout_marginBottom="@dimen/tool_lib_22dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/money"
+                android:textColor="@color/tool_lib_gray_222222"
+                android:textSize="@dimen/tool_lib_18sp" />
+
+            <EditText
+                android:id="@+id/editRecharge"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:layout_marginStart="@dimen/tool_lib_20dp"
+                android:layout_marginLeft="@dimen/tool_lib_20dp"
+                android:background="@null"
+                android:hint="@string/please_input_recharge"
+                android:textColor="@color/tool_lib_gray_B1B1B1"
+                android:textSize="@dimen/tool_lib_14sp" />
+
+        </LinearLayout>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/tool_lib_12dp"
+        android:background="@android:color/white"
+        android:orientation="vertical">
+        <!--微信-->
+        <RelativeLayout
+            android:id="@+id/relPaymentWeChat"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/tool_lib_56dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/tool_lib_12dp"
+                android:layout_marginLeft="@dimen/tool_lib_12dp"
+                android:text="@string/we_chat"
+                android:textColor="@color/tool_lib_gray_222222"
+                android:textSize="@dimen/tool_lib_14sp" />
+
+            <RadioButton
+                android:id="@+id/chkPaymentWeChat"
+                style="@style/CustomCheckBoxTheme"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginTop="@dimen/tool_lib_12dp"
+                android:layout_marginEnd="@dimen/tool_lib_12dp"
+                android:layout_marginRight="@dimen/tool_lib_12dp"
+                android:layout_marginBottom="@dimen/tool_lib_12dp" />
+        </RelativeLayout>
+
+        <View
+            style="@style/tool_lib_horizontal_line"
+            android:layout_marginLeft="@dimen/tool_lib_14dp"
+            android:layout_marginRight="@dimen/tool_lib_14dp" />
+
+        <!--支付宝-->
+        <RelativeLayout
+            android:id="@+id/relPaymentPlay"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/tool_lib_56dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/tool_lib_12dp"
+                android:layout_marginLeft="@dimen/tool_lib_12dp"
+                android:text="@string/ali_pay"
+                android:textColor="@color/tool_lib_gray_222222"
+                android:textSize="@dimen/tool_lib_14sp" />
+
+            <RadioButton
+                android:id="@+id/chkPaymentPlay"
+                style="@style/CustomCheckBoxTheme"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginTop="@dimen/tool_lib_12dp"
+                android:layout_marginEnd="@dimen/tool_lib_12dp"
+                android:layout_marginRight="@dimen/tool_lib_12dp"
+                android:layout_marginBottom="@dimen/tool_lib_12dp"
+                android:checked="true" />
+        </RelativeLayout>
+    </LinearLayout>
+
+
+    <com.qmuiteam.qmui.layout.QMUIButton
+        android:id="@+id/btnEmployerConfirmationRecharge"
+        style="@style/base_btn"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/tool_lib_46dp"
+        android:layout_marginLeft="@dimen/tool_lib_12dp"
+        android:layout_marginTop="@dimen/tool_lib_30dp"
+        android:layout_marginRight="@dimen/tool_lib_12dp"
+        android:background="@drawable/login_login_btn"
+        android:text="@string/confirmation_of_recharge" />
+</LinearLayout>

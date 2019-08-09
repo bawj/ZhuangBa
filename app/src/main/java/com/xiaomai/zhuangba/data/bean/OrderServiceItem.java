@@ -1,13 +1,20 @@
 package com.xiaomai.zhuangba.data.bean;
 
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.text.TextUtils;
+
+import org.greenrobot.greendao.annotation.Entity;
+import org.greenrobot.greendao.annotation.Generated;
+import org.greenrobot.greendao.annotation.Id;
 
 /**
  * @author Administrator
  * @date 2019/7/9 0009
  * 服务项目
  */
-public class OrderServiceItem {
+@Entity
+public class OrderServiceItem implements Parcelable {
 
     /**
      * orderCode : 20190517124905903415
@@ -17,7 +24,8 @@ public class OrderServiceItem {
      * amount : 140.0
      * iconUrl : https://zb.4000750222.com//zbimages/test/2019/5/14/2c90ef856ab3eef8016ab3eef89a0000.png
      */
-
+    @Id(autoincrement = true)
+    private long id;
     private String orderCode;
     private int serviceId;
     private String serviceText;
@@ -28,11 +36,67 @@ public class OrderServiceItem {
     private String iconUrl;
     private String serviceStandard;
 
-    /** 维保时间 单位（月） */
+    /**
+     * 维保时间 单位（月）
+     */
     private int monthNumber;
 
-    /** 维保的金额 */
+    /**
+     * 维保的金额
+     */
     private double maintenanceAmount;
+
+
+    /** 维保选中ID */
+    private int maintenanceId;
+
+    public OrderServiceItem() {
+    }
+
+    protected OrderServiceItem(Parcel in) {
+        orderCode = in.readString();
+        serviceId = in.readInt();
+        serviceText = in.readString();
+        number = in.readInt();
+        amount = in.readDouble();
+        price2 = in.readDouble();
+        price3 = in.readDouble();
+        iconUrl = in.readString();
+        serviceStandard = in.readString();
+        monthNumber = in.readInt();
+        maintenanceAmount = in.readDouble();
+    }
+
+    @Generated(hash = 2147006204)
+    public OrderServiceItem(long id, String orderCode, int serviceId, String serviceText, int number,
+            double amount, double price2, double price3, String iconUrl, String serviceStandard, int monthNumber,
+            double maintenanceAmount, int maintenanceId) {
+        this.id = id;
+        this.orderCode = orderCode;
+        this.serviceId = serviceId;
+        this.serviceText = serviceText;
+        this.number = number;
+        this.amount = amount;
+        this.price2 = price2;
+        this.price3 = price3;
+        this.iconUrl = iconUrl;
+        this.serviceStandard = serviceStandard;
+        this.monthNumber = monthNumber;
+        this.maintenanceAmount = maintenanceAmount;
+        this.maintenanceId = maintenanceId;
+    }
+
+    public static final Creator<OrderServiceItem> CREATOR = new Creator<OrderServiceItem>() {
+        @Override
+        public OrderServiceItem createFromParcel(Parcel in) {
+            return new OrderServiceItem(in);
+        }
+
+        @Override
+        public OrderServiceItem[] newArray(int size) {
+            return new OrderServiceItem[size];
+        }
+    };
 
     public String getOrderCode() {
         return orderCode;
@@ -120,5 +184,45 @@ public class OrderServiceItem {
 
     public void setMaintenanceAmount(double maintenanceAmount) {
         this.maintenanceAmount = maintenanceAmount;
+    }
+
+    public int getMaintenanceId() {
+        return maintenanceId;
+    }
+
+    public void setMaintenanceId(int maintenanceId) {
+        this.maintenanceId = maintenanceId;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(orderCode);
+        dest.writeInt(serviceId);
+        dest.writeString(serviceText);
+        dest.writeInt(number);
+        dest.writeDouble(amount);
+        dest.writeDouble(price2);
+        dest.writeDouble(price3);
+        dest.writeString(iconUrl);
+        dest.writeString(serviceStandard);
+        dest.writeInt(monthNumber);
+        dest.writeDouble(maintenanceAmount);
+    }
+
+    public Long getId() {
+        return this.id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 }

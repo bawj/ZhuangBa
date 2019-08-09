@@ -129,16 +129,4 @@ public class MasterPersonalFragment extends PersonalFragment {
         }
         return "0";
     }
-
-    @Override
-    public void leftBackClick() {
-        statusBarWhite();
-        super.leftBackClick();
-    }
-
-    @Override
-    public boolean isInSwipeBack() {
-        statusBarWhite();
-        return super.isInSwipeBack();
-    }
 }

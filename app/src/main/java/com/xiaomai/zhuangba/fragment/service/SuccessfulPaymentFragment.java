@@ -155,8 +155,8 @@ public class SuccessfulPaymentFragment extends BaseFragment {
         return null;
     }
 
-
     @Override
-    protected void popBackStack() {
+    public boolean isInSwipeBack() {
+        return true;
     }
 }

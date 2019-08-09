@@ -81,6 +81,7 @@ public class ShopCarDialog {
                 maintenance.setId(-1);
                 maintenance.setNotChoosingMaintenance(mContext.getString(R.string.not_choosing_maintenance));
             } else {
+                maintenance.setServiceId(DensityUtils.stringTypeInteger(shopCarData.getServiceId()));
                 maintenance.setId(shopCarData.getMaintenanceId());
                 maintenance.setAmount(DensityUtils.stringTypeDouble(shopCarData.getMaintenanceMoney()));
                 maintenance.setNumber(DensityUtils.stringTypeInteger(shopCarData.getMaintenanceTime()));
@@ -89,7 +90,7 @@ public class ShopCarDialog {
             if (!TextUtils.isEmpty(shopCarData.getMaintenanceMoney()) && !shopCarData.getMaintenanceMoney().equals("null")){
                 maintenanceMoney = shopCarData.getMaintenanceMoney();
             }
-            tvChoosingMoney.setText(maintenanceMoney);
+            tvChoosingMoney.setText(mContext.getString(R.string.content_money , maintenanceMoney));
         } else {
             //没有选择维保
             maintenance.setId(-1);

@@ -113,6 +113,12 @@ public class PersonalFragment extends BaseLoginRegisteredFragment {
     }
 
     @Override
+    public void leftBackClick() {
+        statusBarWhite();
+        super.leftBackClick();
+    }
+
+    @Override
     public void onDestroy() {
         EventBus.getDefault().unregister(this);
         super.onDestroy();

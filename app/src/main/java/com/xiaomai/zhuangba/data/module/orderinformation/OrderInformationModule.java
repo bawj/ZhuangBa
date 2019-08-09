@@ -118,7 +118,7 @@ public class OrderInformationModule extends BaseModule<IOrderInformationView> im
     /**
      * 提交订单
      *
-     * @return hashMap
+     * @return hashMap hashMap
      */
     private HashMap<String, Object> getSubmissionOrder() {
         //任务总数量
@@ -135,6 +135,8 @@ public class OrderInformationModule extends BaseModule<IOrderInformationView> im
         //大类ID
         String largeClassServiceId = mViewRef.get().getLargeClassServiceId();
         hashMap.put("serviceId", largeClassServiceId);
+        //服务名称
+        hashMap.put("serviceText" , mViewRef.get().getLargeServiceText());
         //总数量
         hashMap.put("number", String.valueOf(number));
         //总金额

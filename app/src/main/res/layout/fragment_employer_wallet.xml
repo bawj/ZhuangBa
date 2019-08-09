@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.qmuiteam.qmui.widget.QMUIWindowInsetLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/tool_lib_gray_F5F8FA">
+
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:id="@+id/refreshBaseList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#F2F2F2"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        app:srlAccentColor="@android:color/white"
+        app:srlEnableHeaderTranslationContent="false"
+        app:srlEnableLoadMore="false"
+        app:srlPrimaryColor="@color/colorPrimary">
+
+        <com.scwang.smartrefresh.header.MaterialHeader
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/tool_lib_212dp"
+                android:background="@drawable/bg_money_bag"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:id="@+id/relEmployerWallet"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/tool_lib_88dp">
+
+                    <TextView
+                        android:id="@+id/tvEmployerMoney"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/tool_lib_30dp"
+                        android:layout_marginLeft="@dimen/tool_lib_30dp"
+                        android:text="@string/zero"
+                        android:textColor="@color/tool_lib_color_F0D8AD"
+                        android:textSize="@dimen/tool_lib_36sp" />
+
+                    <com.qmuiteam.qmui.layout.QMUIButton
+                        android:id="@+id/btnRecharge"
+                        android:layout_width="@dimen/tool_lib_100dp"
+                        android:layout_height="@dimen/tool_lib_36dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="@dimen/tool_lib_30dp"
+                        android:layout_marginRight="@dimen/tool_lib_30dp"
+                        android:background="@drawable/bg_withdraw"
+                        android:gravity="center"
+                        android:text="@string/recharge"
+                        android:textColor="@color/tool_lib_red_7A591E"
+                        android:textSize="@dimen/tool_lib_16sp" />
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/tvTotalAccount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/relEmployerWallet"
+                    android:layout_marginStart="@dimen/tool_lib_30dp"
+                    android:layout_marginLeft="@dimen/tool_lib_30dp"
+                    android:text="@string/total_account"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/tool_lib_14sp" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/white"
+                android:orientation="vertical"
+                android:paddingLeft="@dimen/tool_lib_16dp"
+                android:paddingRight="@dimen/tool_lib_16dp">
+
+                <!--充值记录-->
+                <RelativeLayout
+                    android:id="@+id/rlRechargeRecord"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/tool_lib_82dp"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/recharge_record"
+                        android:textColor="@color/tool_lib_gray_222222"
+                        android:textSize="@dimen/tool_lib_16sp"
+                        android:textStyle="bold" />
+
+                    <ImageView
+                        android:id="@+id/iv_right1"
+                        android:layout_width="@dimen/tool_lib_16dp"
+                        android:layout_height="@dimen/tool_lib_16dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:src="@drawable/ic_right" />
+
+                </RelativeLayout>
+
+                <View style="@style/tool_lib_horizontal_line" />
+
+                <RelativeLayout
+                    android:id="@+id/rlRecordsOfConsumption"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/tool_lib_82dp"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/records_of_consumption"
+                        android:textColor="@color/tool_lib_gray_222222"
+                        android:textSize="@dimen/tool_lib_16sp"
+                        android:textStyle="bold" />
+
+                    <ImageView
+                        android:id="@+id/iv_right2"
+                        android:layout_width="@dimen/tool_lib_16dp"
+                        android:layout_height="@dimen/tool_lib_16dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:src="@drawable/ic_right" />
+
+                </RelativeLayout>
+            </LinearLayout>
+
+            <RelativeLayout
+                android:id="@+id/rlAccountSecurity"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/tool_lib_82dp"
+                android:layout_marginTop="@dimen/tool_lib_10dp"
+                android:background="@android:color/white"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/tool_lib_16dp"
+                android:paddingRight="@dimen/tool_lib_16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/account_security"
+                    android:textColor="@color/tool_lib_gray_222222"
+                    android:textSize="@dimen/tool_lib_16sp"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:id="@+id/iv_right3"
+                    android:layout_width="@dimen/tool_lib_16dp"
+                    android:layout_height="@dimen/tool_lib_16dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:src="@drawable/ic_right" />
+
+            </RelativeLayout>
+        </LinearLayout>
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
+    <com.qmuiteam.qmui.widget.QMUITopBarLayout
+        android:id="@+id/topBarBase"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="true"
+        app:qmui_layout_collapseMode="pin"
+        app:qmui_topbar_bg_color="@color/qmui_config_color_transparent"
+        app:qmui_topbar_need_separator="false" />
+
+</com.qmuiteam.qmui.widget.QMUIWindowInsetLayout>
