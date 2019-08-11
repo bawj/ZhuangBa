@@ -13,6 +13,15 @@ public class WalletBean {
     private String phoneNumber;
     private String presentationPassword;
     private double withDrawableCash;
+    private double freezeMoney;
+
+    public double getFreezeMoney() {
+        return freezeMoney;
+    }
+
+    public void setFreezeMoney(double freezeMoney) {
+        this.freezeMoney = freezeMoney;
+    }
 
     public double getBond() {
         return bond;

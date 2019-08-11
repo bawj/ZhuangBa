@@ -39,4 +39,16 @@ public class CashWithdrawalFragment extends BaseWalletDetailedFragment {
         return getString(R.string.wallet_detail_out);
     }
 
+
+    @Override
+    protected void popBackStack() {
+        statusBarWhite();
+        super.popBackStack();
+    }
+
+    @Override
+    public boolean isInSwipeBack() {
+        statusBarWhite();
+        return super.isInSwipeBack();
+    }
 }

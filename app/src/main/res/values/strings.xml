@@ -47,6 +47,7 @@
     <string name="down_load">下载中…</string>
     <string name="down_load_complete">下载完成</string>
     <string name="new_task">新任务</string>
+    <string name="order_pool">订单池</string>
     <string name="need_to_be_dealt_with">需处理</string>
     <string name="ongoing_orders">进行中的订单</string>
     <string name="today_flowing">今日流水（元）</string>
@@ -185,7 +186,7 @@
     <string name="wallet">钱包</string>
     <string name="wallet_detail">明细</string>
     <string name="wallet_total_title">账户总额（元）</string>
-    <string name="with_drawable_cash">可提现金额(元)：</string>
+    <string name="with_drawable_cash">可提现金额(元)</string>
     <string name="wallet_withdraw">提现</string>
     <string name="wallet_withdraw_account_manager">提现账号管理</string>
     <string name="wallet_withdraw_account_safe">账号安全</string>
@@ -404,4 +405,15 @@
     <string name="accounting_time">入账时间：每月%1$s号</string>
     <string name="accounting_amount">入账金额：¥%1$s/月</string>
     <string name="number_of_employers">雇主数量</string>
+    <string name="frozen_amount">冻结金额(元)</string>
+    <string name="data_details">数据详情</string>
+    <string name="same_day">当日</string>
+    <string name="this_week">本周</string>
+    <string name="this_month">本月</string>
+    <string name="this_quarter">本季度</string>
+    <string name="published_orders">已发布订单</string>
+    <string name="expenditure_amount">支出金额（元）</string>
+    <string name="installation_list">安装单</string>
+    <string name="installation_amount">安装金额（元）</string>
+    <string name="maintenance_amount">维保金额（元）</string>
 </resources>

@@ -73,4 +73,16 @@ public class EarnestFragment extends BaseFragment {
     protected IBaseModule initModule() {
         return null;
     }
+
+    @Override
+    protected void popBackStack() {
+        statusBarWhite();
+        super.popBackStack();
+    }
+
+    @Override
+    public boolean isInSwipeBack() {
+        statusBarWhite();
+        return super.isInSwipeBack();
+    }
 }

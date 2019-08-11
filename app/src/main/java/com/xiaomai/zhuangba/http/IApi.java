@@ -2,6 +2,7 @@ package com.xiaomai.zhuangba.http;
 
 import com.example.toollib.http.HttpResult;
 import com.xiaomai.zhuangba.data.bean.AliPayAccountBean;
+import com.xiaomai.zhuangba.data.bean.DataDetailsContent;
 import com.xiaomai.zhuangba.data.bean.DeliveryContent;
 import com.xiaomai.zhuangba.data.bean.EarnestBean;
 import com.xiaomai.zhuangba.data.bean.EmployerWalletBean;
@@ -719,6 +720,15 @@ public interface IApi {
                                                                           @Field("wallerType") String wallerType,
                                                                           @Field("pageNum") int pageNum,
                                                                           @Field("pageSize") int pageSize);
+
+    /**
+     * 订单首页统计详细信息
+     *
+     * @param type 类型 0:当日（默认）；1：本周；2:本月；3：本季度
+     * @return observable
+     */
+    @GET("order/getOrderStatisticsDetails")
+    Observable<HttpResult<DataDetailsContent>> getOrderStatisticsDetails(@Query("type") int type);
 
 
 }

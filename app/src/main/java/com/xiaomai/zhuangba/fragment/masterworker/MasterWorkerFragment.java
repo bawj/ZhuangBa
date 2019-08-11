@@ -193,7 +193,7 @@ public class MasterWorkerFragment extends BaseMasterEmployerFragment implements 
 
     @Override
     public String[] getTabTitle() {
-        return new String[]{getString(R.string.new_task), getString(R.string.need_to_be_dealt_with)};
+        return new String[]{getString(R.string.order_pool), getString(R.string.need_to_be_dealt_with)};
     }
 
     @Override

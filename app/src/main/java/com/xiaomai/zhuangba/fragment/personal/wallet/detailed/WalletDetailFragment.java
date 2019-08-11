@@ -41,4 +41,15 @@ public class WalletDetailFragment extends BaseWalletDetailedFragment{
         return getString(R.string.wallet_detail);
     }
 
+    @Override
+    protected void popBackStack() {
+        statusBarWhite();
+        super.popBackStack();
+    }
+
+    @Override
+    public boolean isInSwipeBack() {
+        statusBarWhite();
+        return super.isInSwipeBack();
+    }
 }

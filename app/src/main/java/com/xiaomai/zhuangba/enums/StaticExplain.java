@@ -33,9 +33,13 @@ public enum StaticExplain {
     EXPENDITURE(2, "支出"),
     RECHARGE_RECORD(7, "充值记录"),
     RECORDS_OF_CONSUMPTION(8, "消费记录"),
+    SAME_DAY(0, "当日"),
+    THIS_WEEK(1, "本周"),
+    THIS_MONTH(1, "本月"),
+    THIS_QUARTER(3, "本季度"),
     ;
     /**
-     * 服务器状态码 或 自定义状态
+     * 状态
      */
     private int code;
     /**

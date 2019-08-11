@@ -86,4 +86,16 @@ public class TradePhoneFragment extends BaseFragment {
         String str = getArguments().getString("password");
         return getString("2".equals(str) ? R.string.wallet_set_trade_password : R.string.wallet_update_trade_password);
     }
+
+    @Override
+    protected void popBackStack() {
+        statusBarWhite();
+        super.popBackStack();
+    }
+
+    @Override
+    public boolean isInSwipeBack() {
+        statusBarWhite();
+        return super.isInSwipeBack();
+    }
 }

@@ -59,6 +59,8 @@ public class WalletFragment extends BaseFragment implements OnRefreshListener {
     TextView tvIncome;
     @BindView(R.id.tvWasWithdraw)
     TextView tvWasWithdraw;
+    @BindView(R.id.tvFrozenAmount)
+    TextView tvFrozenAmount;
 
     private WalletBean walletBeans;
 
@@ -120,6 +122,8 @@ public class WalletFragment extends BaseFragment implements OnRefreshListener {
                                 String.valueOf(AmountUtil.add(walletBean.getCashAlreadyAvailable(), walletBean.getWithDrawableCash(), 2))));
                         //已提现
                         tvWasWithdraw.setText(getString(R.string.content_money, Util.getZero(walletBean.getCashAlreadyAvailable())));
+                        //冻结金额
+                        tvFrozenAmount.setText(Util.getZero(walletBean.getFreezeMoney()));
                         refreshLayout.finishRefresh();
                     }
 
@@ -131,7 +135,8 @@ public class WalletFragment extends BaseFragment implements OnRefreshListener {
                 });
     }
 
-    @OnClick({R.id.btnWithdraw, R.id.tvAccountManager, R.id.tvAccountSafe, R.id.rlEarNest,R.id.rlIncome, R.id.rlAlreadyWithdraw})
+    @OnClick({R.id.btnWithdraw, R.id.tvAccountManager, R.id.tvAccountSafe, R.id.rlEarNest
+            , R.id.rlIncome, R.id.rlAlreadyWithdraw , R.id.ivQuestionMark})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btnWithdraw:
@@ -160,6 +165,9 @@ public class WalletFragment extends BaseFragment implements OnRefreshListener {
                 //已提现
                 startFragment(CashWithdrawalFragment.newInstance());
                 break;
+            case R.id.ivQuestionMark:
+                // TODO: 2019/8/11 0011 问号
+                break;
             default:
         }
     }
@@ -174,7 +182,7 @@ public class WalletFragment extends BaseFragment implements OnRefreshListener {
                 ToastUtil.showShort(getString(R.string.wallet_earnest_zero));
             } else if (walletBeans.getPresentationPassword().equals("2")) {
                 ToastUtil.showShort(getString(R.string.please_wallet_set_trade_success));
-            }else {
+            } else {
                 startFragment(EarnestFragment.newInstance());
             }
         }
@@ -209,7 +217,7 @@ public class WalletFragment extends BaseFragment implements OnRefreshListener {
             if (walletBeans != null) {
                 walletBeans.setPresentationPassword(String.valueOf(WalletOrderTypeEnum.YES_PRESENTATION_PASSWORD.getCode()));
             }
-        }else if (messageEvent.getErrCode() == EventBusEnum.CASH_SUCCESS.getCode()){
+        } else if (messageEvent.getErrCode() == EventBusEnum.CASH_SUCCESS.getCode()) {
             refreshLayout.autoRefresh();
         }
     }
