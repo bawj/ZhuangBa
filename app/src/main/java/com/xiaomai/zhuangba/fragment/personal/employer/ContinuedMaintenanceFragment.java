@@ -146,7 +146,7 @@ public class ContinuedMaintenanceFragment extends BaseContinuedMaintenanceFragme
         hashMap.put("amount", String.valueOf(pay));
         //钱包密码
         hashMap.put("code", code);
-        //维保数量
+        //维保月份
         int monthNumber = orderServiceItem.getMonthNumber();
         hashMap.put("number", String.valueOf(monthNumber));
         //订单编号

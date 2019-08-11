@@ -155,7 +155,7 @@ public class AddMaintenanceFragment extends BaseContinuedMaintenanceFragment imp
             int monthNumber = orderServiceItem.getMonthNumber();
             maintenanceProjects.setNumber(monthNumber);
             //维保金额
-            maintenanceProjects.setAmout(maintenanceAmount);
+            maintenanceProjects.setAmout(number * maintenanceAmount);
             //服务项目ID
             maintenanceProjects.setServiceId(orderServiceItem.getServiceId());
             maintenanceProjectsList.add(maintenanceProjects);
