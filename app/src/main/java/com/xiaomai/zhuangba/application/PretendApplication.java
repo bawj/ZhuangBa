@@ -1,4 +1,4 @@
-package com.xiaomai.zhuangba.appilcation;
+package com.xiaomai.zhuangba.application;
 
 import android.app.Application;
 import android.content.Context;
@@ -8,6 +8,7 @@ import com.example.toollib.ToolLib;
 import com.example.toollib.util.Log;
 import com.google.gson.Gson;
 import com.qmuiteam.qmui.arch.QMUISwipeBackActivityManager;
+import com.tencent.bugly.Bugly;
 import com.umeng.commonsdk.UMConfigure;
 import com.umeng.message.IUmengRegisterCallback;
 import com.umeng.message.PushAgent;
@@ -33,12 +34,14 @@ import org.json.JSONObject;
  */
 public class PretendApplication extends Application {
 
+    public static final String BUG_LY_APP_ID = "a1fb987ca2";
     private final static String U_MENG_APP_KEY = "5ce354ba3fc195745e00067e";
     private final static String U_MENG_MESSAGE_SECRET = "8953a06a2bdd1eaf7a3b8ceeb616817a";
     private static PretendApplication pretendApplication;
 
+    public static final String BASE_URL = "http://kqpvrr.natappfree.cc/";
     //public static final String BASE_URL = "https://zb.4000750222.com/testZhuangBa/";
-    public static final String BASE_URL = "http://192.168.0.183:7961/";
+    //public static final String BASE_URL = "http://192.168.0.183:7961/";
     // public static final String BASE_URL = "https://zb.4000750222.com/zhuangBa/";
 
     public static PretendApplication getInstance() {
@@ -57,6 +60,9 @@ public class PretendApplication extends Application {
                 .setBaseUrl(BASE_URL);
 
         registerActivityLifecycleCallbacks(new LifecycleCallbacks());
+
+        Bugly.init(this, BUG_LY_APP_ID, false);
+
         PushAgent mPushAgent = PushAgent.getInstance(this);
         //友盟初始化
         initUMeng(mPushAgent);

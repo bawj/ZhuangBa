@@ -54,7 +54,7 @@ public class DataDetailsFragment extends BaseFragment implements BaseQuickAdapte
     @Override
     public void initView() {
         //标题
-        topBarBase.setTitle(getString(R.string.wallet));
+        topBarBase.setTitle(getString(R.string.data_details));
         //返回
         topBarBase.addLeftImageButton(R.drawable.ic_back_white,
                 com.example.toollib.R.id.qmui_topbar_item_left_back)

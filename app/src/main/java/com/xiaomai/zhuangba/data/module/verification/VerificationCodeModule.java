@@ -9,7 +9,7 @@ import com.example.toollib.http.observer.BaseHttpRxObserver;
 import com.example.toollib.http.util.RxUtils;
 import com.example.toollib.util.RegexUtils;
 import com.xiaomai.zhuangba.R;
-import com.xiaomai.zhuangba.appilcation.PretendApplication;
+import com.xiaomai.zhuangba.application.PretendApplication;
 import com.xiaomai.zhuangba.http.ServiceUrl;
 
 /**

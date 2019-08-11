@@ -62,7 +62,6 @@ public class BaseHttpZipRxObserver {
                         ApiException apiException = ExceptionHandle.handleException(throwable);
                         String msg = apiException.getMsg();
                         baseCallback.onFail(msg);
-                        // TODO: 2019/7/9 0009 重新登录
                         LoginInterceptor.tokenReLogin(apiException);
                     }
                 });

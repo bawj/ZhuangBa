@@ -21,6 +21,7 @@ import com.xiaomai.zhuangba.R;
 import com.xiaomai.zhuangba.adapter.DialogRVChoosingAdapter;
 import com.xiaomai.zhuangba.data.bean.Maintenance;
 import com.xiaomai.zhuangba.data.bean.ShopCarData;
+import com.xiaomai.zhuangba.data.db.DBHelper;
 import com.xiaomai.zhuangba.util.ConstantUtil;
 
 import java.util.List;

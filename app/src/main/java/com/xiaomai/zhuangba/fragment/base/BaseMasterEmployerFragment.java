@@ -236,7 +236,7 @@ public class BaseMasterEmployerFragment extends BaseFragment<IMasterEmployerModu
     public void statisticsSuccess(StatisticsData statisticsData) {
         tvNumberOfTeachers.setText(String.valueOf(statisticsData.getUserNumber()));
         tvOrderQuantity.setText(String.valueOf(statisticsData.getOrderNumber()));
-        tvTaskAmount.setText(String.valueOf(statisticsData.getTotalAmount()));
+        tvTaskAmount.setText(String.valueOf((int)Math.floor(statisticsData.getTotalAmount())));
         tvNumberOfEmployers.setText(String.valueOf(statisticsData.getEmployerNumber()));
     }
 

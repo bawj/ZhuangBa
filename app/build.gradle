@@ -71,7 +71,7 @@ static def buildTime() {
 
 greendao {
     //数据库
-    schemaVersion database.schemaVersion
+    schemaVersion 12
     targetGenDir database_url
     daoPackage config.applicationId
 }
@@ -86,9 +86,10 @@ dependencies {
     implementation libs["agentweb"]
     implementation libs["wechatPlay"]
     implementation libs["subsampling"]
+    implementation libs["bugly"]
     annotationProcessor libs["butterknife-compiler"]
     implementation project(':toollib')
     implementation project(':citypicker')
     implementation project(':calendarview')
-//    implementation project(':lib_ocr')
+    implementation project(':lib_ocr')
 }

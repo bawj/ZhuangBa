@@ -8,6 +8,7 @@ import com.qmuiteam.qmui.arch.QMUIFragmentActivity;
 import com.xiaomai.zhuangba.R;
 import com.xiaomai.zhuangba.enums.OrdersEnum;
 import com.xiaomai.zhuangba.fragment.orderdetail.employer.AcceptedOrdersFragment;
+import com.xiaomai.zhuangba.fragment.orderdetail.employer.EmployerCancelledFragment;
 import com.xiaomai.zhuangba.fragment.orderdetail.employer.EmployerCompleteFragment;
 import com.xiaomai.zhuangba.fragment.orderdetail.employer.EmployerDistributionFragment;
 import com.xiaomai.zhuangba.fragment.orderdetail.employer.EmployerHavingSetOutFragment;
@@ -173,7 +174,7 @@ public class OrderStatusUtil {
             qmuiFragment.startFragment(EmployerUnderConstructionFragment.newInstance(orderCode));
         } else if (orderStatus == OrdersEnum.EMPLOYER_COMPLETED.getCode()) {
             //已取消
-            ToastUtil.showShort(qmuiFragment.getString(R.string.order_cancelled));
+            qmuiFragment.startFragment(EmployerCancelledFragment.newInstance(orderCode));
         } else if (orderStatus == OrdersEnum.EMPLOYER_CANCELLED.getCode()) {
             //已完成
             qmuiFragment.startFragment(EmployerCompleteFragment.newInstance(orderCode));
@@ -181,7 +182,7 @@ public class OrderStatusUtil {
             //未支付
         } else if (orderStatus == OrdersEnum.EMPLOYER_COMPLETED_CANCEL.getCode()) {
             //师傅取消
-            ToastUtil.showShort(qmuiFragment.getString(R.string.order_cancelled));
+            qmuiFragment.startFragment(EmployerCancelledFragment.newInstance(orderCode));
         }
     }
 

@@ -35,7 +35,7 @@ public enum StaticExplain {
     RECORDS_OF_CONSUMPTION(8, "消费记录"),
     SAME_DAY(0, "当日"),
     THIS_WEEK(1, "本周"),
-    THIS_MONTH(1, "本月"),
+    THIS_MONTH(2, "本月"),
     THIS_QUARTER(3, "本季度"),
     ;
     /**

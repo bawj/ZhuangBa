@@ -49,4 +49,10 @@ public class OrderPoolDetailFragment extends BaseMasterOrderDetailFragment {
         statusBarWhite();
         return super.isInSwipeBack();
     }
+
+    @Override
+    protected void popBackStack() {
+        statusBarWhite();
+        super.popBackStack();
+    }
 }

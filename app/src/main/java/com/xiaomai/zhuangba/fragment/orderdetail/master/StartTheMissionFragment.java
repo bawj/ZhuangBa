@@ -16,7 +16,6 @@ import com.xiaomai.zhuangba.R;
 import com.xiaomai.zhuangba.data.bean.OngoingOrdersList;
 import com.xiaomai.zhuangba.data.bean.OrderServiceDate;
 import com.xiaomai.zhuangba.enums.ForResultCode;
-import com.xiaomai.zhuangba.fragment.masterworker.MasterWorkerFragment;
 import com.xiaomai.zhuangba.fragment.orderdetail.master.base.BaseMasterOrderDetailFragment;
 import com.xiaomai.zhuangba.http.ServiceUrl;
 import com.xiaomai.zhuangba.util.ConstantUtil;
@@ -96,8 +95,8 @@ public class StartTheMissionFragment extends BaseMasterOrderDetailFragment {
                 .subscribe(new BaseHttpRxObserver<Object>(getActivity()) {
                     @Override
                     protected void onSuccess(Object response) {
-                        //现在出发
-                        startFragment(MasterWorkerFragment.newInstance());
+                        //现在出发 -> 已出发
+                        startFragmentAndDestroyCurrent(HavingSetOutFragment.newInstance(getOrderCode()));
                     }
                 });
     }

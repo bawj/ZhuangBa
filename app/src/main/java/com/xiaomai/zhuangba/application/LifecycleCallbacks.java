@@ -1,4 +1,4 @@
-package com.xiaomai.zhuangba.appilcation;
+package com.xiaomai.zhuangba.application;
 
 import android.app.Activity;
 import android.app.Application;

@@ -223,10 +223,14 @@ public class OrderInformationModule extends BaseModule<IOrderInformationView> im
             orderServicesBean.setNumber(number);
             //服务项目总金额
             orderServicesBean.setAmount(orderAmount);
-            //维保时间 单位（月）
-            orderServicesBean.setMonthNumber(DensityUtils.stringTypeInteger(shopCarData.getNumber()));
-            //维保 金额
-            orderServicesBean.setMaintenanceAmount(DensityUtils.stringTypeDouble(shopCarData.getMaintenanceMoney()));
+
+            //如果有维保 则ID != -1
+          if (shopCarData.getMaintenanceId() != ConstantUtil.DEF_MAINTENANCE){
+                //维保时间 单位（月）
+                orderServicesBean.setMonthNumber(DensityUtils.stringTypeInteger(shopCarData.getNumber()));
+                //维保 金额
+                orderServicesBean.setMaintenanceAmount(DensityUtils.stringTypeDouble(shopCarData.getMaintenanceMoney()));
+            }
             orderServicesBeans.add(orderServicesBean);
         }
         return orderServicesBeans;

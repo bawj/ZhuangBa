@@ -39,7 +39,7 @@
                 android:id="@+id/editRecharge"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="number"
+                android:digits="0123456789."
                 android:layout_marginStart="@dimen/tool_lib_20dp"
                 android:layout_marginLeft="@dimen/tool_lib_20dp"
                 android:background="@null"

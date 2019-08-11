@@ -40,7 +40,6 @@ public class ResponseBodyConverter<T> implements Converter<ResponseBody, T> {
         HttpResult httpStatus = gson.fromJson(response, HttpResult.class);
         if (Integer.parseInt(httpStatus.getCode()) != HttpError.HTTP_SUCCESS.getCode()) {
             value.close();
-            // TODO: 2019/7/9 0009 判断code 是否需要 重新登录
             String data;
             if (httpStatus.getData() == null) {
                 data = "";

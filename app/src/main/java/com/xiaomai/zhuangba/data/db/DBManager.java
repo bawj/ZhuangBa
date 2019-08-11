@@ -4,7 +4,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.xiaomai.zhuangba.DaoMaster;
 import com.xiaomai.zhuangba.DaoSession;
-import com.xiaomai.zhuangba.appilcation.PretendApplication;
+import com.xiaomai.zhuangba.application.PretendApplication;
 
 /**
  * @author Administrator

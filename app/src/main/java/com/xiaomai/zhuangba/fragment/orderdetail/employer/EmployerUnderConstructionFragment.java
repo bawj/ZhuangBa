@@ -15,6 +15,7 @@ import com.example.toollib.fragment.ImgPreviewFragment;
 import com.example.toollib.manager.GlideManager;
 import com.example.toollib.util.DensityUtils;
 import com.example.toollib.util.Log;
+import com.qmuiteam.qmui.layout.QMUIButton;
 import com.xiaomai.zhuangba.R;
 import com.xiaomai.zhuangba.adapter.ImgExhibitionAdapter;
 import com.xiaomai.zhuangba.data.bean.DeliveryContent;
@@ -66,10 +67,16 @@ public class EmployerUnderConstructionFragment extends BaseEmployerDetailFragmen
     ImageView ivEmployerStartConfirmation;
 
     /**
+     * 新增维保
+     */
+    @BindView(R.id.btnAddMaintenance)
+    QMUIButton btnAddMaintenance;
+
+    /**
      * 服务项目
      */
-    private List<OrderServiceItem> orderServiceItemList;
     private ImgExhibitionAdapter imgExhibitionAdapter;
+    private List<OrderServiceItem> orderServiceItems = new ArrayList<>();
 
     public static EmployerUnderConstructionFragment newInstance(String orderCode) {
         Bundle args = new Bundle();
@@ -91,6 +98,8 @@ public class EmployerUnderConstructionFragment extends BaseEmployerDetailFragmen
         recyclerEmployerScenePhoto.setLayoutManager(new GridLayoutManager(getActivity(), 4));
         recyclerEmployerScenePhoto.addItemDecoration(new GridSpacingItemDecoration(4, 32, false));
         recyclerEmployerScenePhoto.setAdapter(imgExhibitionAdapter);
+
+
     }
 
     @Override
@@ -132,20 +141,20 @@ public class EmployerUnderConstructionFragment extends BaseEmployerDetailFragmen
     @Override
     public void orderServiceItemsSuccess(List<OrderServiceItem> orderServiceItems) {
         super.orderServiceItemsSuccess(orderServiceItems);
-        //服务项目
-        this.orderServiceItemList = orderServiceItems;
+        //是否显示 新增维保
+        for (OrderServiceItem orderServiceItem : orderServiceItems) {
+            if (orderServiceItem.getMonthNumber() == 0) {
+                this.orderServiceItems.add(orderServiceItem);
+            }
+        }
+        if (this.orderServiceItems.isEmpty()){
+            btnAddMaintenance.setVisibility(View.GONE);
+        }
     }
 
     @OnClick(R.id.btnAddMaintenance)
     public void onViewClicked() {
         DBHelper.getInstance().getOrderServiceItemDao().deleteAll();
-        //新增维保
-        List<OrderServiceItem> orderServiceItems = new ArrayList<>();
-        for (OrderServiceItem orderServiceItem : orderServiceItemList) {
-            if (orderServiceItem.getMonthNumber() == 0) {
-                orderServiceItems.add(orderServiceItem);
-            }
-        }
         if (!orderServiceItems.isEmpty()) {
             DBHelper.getInstance().getOrderServiceItemDao().insertInTx(orderServiceItems);
             startFragment(AddMaintenanceFragment.newInstance());

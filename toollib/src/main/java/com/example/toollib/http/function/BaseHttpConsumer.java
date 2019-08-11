@@ -18,7 +18,6 @@ public abstract class BaseHttpConsumer<T> implements Consumer<HttpResult<T>> {
     @Override
     public void accept(HttpResult<T> httpResult) throws Exception {
         if (Integer.parseInt(httpResult.getCode()) != HttpError.HTTP_SUCCESS.getCode()) {
-            // TODO: 2019/7/12 0012 判断code 是否需要重新登录
             LoginInterceptor.tokenReLogin(new ApiException(DensityUtils.stringTypeInteger(httpResult.getCode()),
                     httpResult.getMsg(), httpResult.getData().toString()));
             throw ExceptionHandle.handleException(new ApiException(DensityUtils.stringTypeInteger(httpResult.getCode())

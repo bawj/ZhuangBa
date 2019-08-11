@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:ignore="MissingDefaultResource">
+    android:background="@color/tool_lib_gray_F5F6FA">
 
     <com.scwang.smartrefresh.layout.SmartRefreshLayout
         android:id="@+id/refreshBaseList"
@@ -37,6 +37,7 @@
                     android:orientation="vertical">
 
                     <RelativeLayout
+                        android:id="@+id/relOrderInfo"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@android:color/white">
@@ -104,6 +105,7 @@
                             style="@style/order_text"
                             android:layout_width="@dimen/tool_lib_56dp"
                             android:layout_below="@+id/tvBaseOrderDetailName_"
+                            android:layout_marginBottom="@dimen/tool_lib_12dp"
                             android:text="@string/time_of_appointment_" />
 
                         <TextView
@@ -115,62 +117,10 @@
                             android:textColor="@color/tool_lib_gray_222222"
                             tools:text="2019-05-05 13:30" />
 
-                        <TextView
-                            android:id="@+id/tvBaseOrderConfirmationTime"
-                            style="@style/order_text"
-                            android:layout_width="@dimen/tool_lib_56dp"
-                            android:layout_below="@+id/tvBaseOrderDetailAppointment_"
-                            android:text="@string/confirmation_date"
-                            android:visibility="gone" />
-
-                        <TextView
-                            android:id="@+id/tvBaseOrderConfirmationTime_"
-                            style="@style/order_text"
-                            android:layout_below="@+id/tvBaseOrderDetailAppointment_"
-                            android:layout_toEndOf="@+id/tvBaseOrderDetailAppointment_"
-                            android:layout_toRightOf="@+id/tvBaseOrderDetailAppointment_"
-                            android:textColor="@color/tool_lib_gray_222222"
-                            android:visibility="gone"
-                            tools:text="2019-05-05 13:30" />
-
-                        <LinearLayout
-                            android:id="@+id/layBaseOrderDetailDivideIntoColumns"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@+id/tvBaseOrderConfirmationTime"
-                            android:layout_marginLeft="@dimen/tool_lib_14dp"
-                            android:layout_marginTop="@dimen/tool_lib_12dp"
-                            android:layout_marginRight="@dimen/tool_lib_14dp"
-                            android:layout_marginBottom="@dimen/tool_lib_12dp"
-                            android:background="@drawable/bg_divide_into_columns_bg"
-                            android:gravity="center_vertical"
-                            android:orientation="horizontal">
-
-                            <ImageView
-                                android:layout_width="@dimen/tool_lib_16dp"
-                                android:layout_height="@dimen/tool_lib_16dp"
-                                android:layout_marginStart="@dimen/tool_lib_8dp"
-                                android:layout_marginLeft="@dimen/tool_lib_8dp"
-                                android:layout_marginTop="@dimen/tool_lib_3dp"
-                                android:layout_marginBottom="@dimen/tool_lib_3dp"
-                                android:src="@drawable/ic_tip" />
-
-                            <TextView
-                                android:id="@+id/tvBaseOrderDetailDivideIntoColumns"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="@dimen/tool_lib_6dp"
-                                android:layout_marginLeft="@dimen/tool_lib_6dp"
-                                android:maxLength="30"
-                                android:textColor="@color/tool_lib_gray_C76900"
-                                android:textSize="@dimen/tool_lib_12sp"
-                                tools:text="订单中总金额¥4000.00，您当前分成比例为80%" />
-                        </LinearLayout>
-
                         <View
                             android:id="@+id/viewHorizontalLine"
                             style="@style/tool_lib_horizontal_line"
-                            android:layout_below="@+id/layBaseOrderDetailDivideIntoColumns"
+                            android:layout_below="@+id/tvBaseOrderDetailAppointment_"
                             android:layout_marginLeft="@dimen/tool_lib_12dp"
                             android:layout_marginRight="@dimen/tool_lib_12dp" />
 
@@ -222,6 +172,7 @@
                     </RelativeLayout>
 
                     <RelativeLayout
+                        android:id="@+id/relService"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/tool_lib_8dp"
@@ -247,6 +198,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/tool_lib_8dp"
+                        android:layout_marginBottom="@dimen/tool_lib_56dp"
                         android:background="@android:color/white">
 
                         <TextView
@@ -262,7 +214,7 @@
                             android:layout_marginLeft="@dimen/tool_lib_12dp"
                             android:layout_marginTop="@dimen/tool_lib_2dp"
                             android:layout_marginRight="@dimen/tool_lib_12dp"
-                            android:layout_marginBottom="@dimen/tool_lib_58dp"
+                            android:layout_marginBottom="@dimen/tool_lib_8dp"
                             android:descendantFocusability="blocksDescendants" />
                     </RelativeLayout>
                 </LinearLayout>
@@ -273,40 +225,40 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/tool_lib_56dp"
                 android:layout_alignParentBottom="true"
-                android:background="@android:color/white">
+                android:background="@android:color/white"
+                android:paddingLeft="@dimen/tool_lib_16dp"
+                android:paddingRight="@dimen/tool_lib_16dp">
 
-                <View style="@style/tool_lib_horizontal_line" />
 
-                <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
-                    android:id="@+id/btnNewTaskCancelTheOrder"
-                    android:layout_width="@dimen/tool_lib_90dp"
-                    android:layout_height="@dimen/tool_lib_40dp"
+                <ImageView
+                    android:id="@+id/ivEmployerDetailMasterHeader"
+                    android:layout_width="@dimen/tool_lib_34dp"
+                    android:layout_height="@dimen/tool_lib_34dp"
+                    android:layout_centerVertical="true" />
+
+                <ImageView
+                    android:id="@+id/ivEmployerDetailMasterLog"
+                    android:layout_width="@dimen/tool_lib_16dp"
+                    android:layout_height="@dimen/tool_lib_16dp"
+                    android:layout_alignBottom="@+id/ivEmployerDetailMasterHeader"
+                    android:layout_marginStart="@dimen/tool_lib_24dp"
+                    android:layout_marginLeft="@dimen/tool_lib_24dp"
+                    android:src="@drawable/ic_master_log" />
+
+                <TextView
+                    android:id="@+id/tvEmployerDetailMasterName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:layout_marginEnd="@dimen/tool_lib_16dp"
-                    android:layout_marginRight="@dimen/tool_lib_16dp"
-                    android:layout_toStartOf="@+id/btnConfirmationTime"
-                    android:layout_toLeftOf="@+id/btnConfirmationTime"
-                    android:text="@string/cancel_task"
-                    android:textColor="@color/tool_lib_gray_777777"
-                    android:textSize="@dimen/tool_lib_14sp"
-                    app:qmui_backgroundColor="@android:color/white"
-                    app:qmui_borderColor="@color/tool_lib_gray_E8E8E8"
-                    app:qmui_borderWidth="@dimen/tool_lib_1dp" />
-
-                <com.qmuiteam.qmui.layout.QMUIButton
-                    android:id="@+id/btnConfirmationTime"
-                    style="@style/base_btn"
-                    android:layout_width="@dimen/tool_lib_90dp"
-                    android:layout_height="@dimen/tool_lib_40dp"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginEnd="@dimen/tool_lib_16dp"
-                    android:layout_marginRight="@dimen/tool_lib_16dp"
-                    android:text="@string/confirmation_time" />
+                    android:layout_marginStart="@dimen/tool_lib_12dp"
+                    android:layout_marginLeft="@dimen/tool_lib_12dp"
+                    android:layout_toEndOf="@+id/ivEmployerDetailMasterHeader"
+                    android:layout_toRightOf="@+id/ivEmployerDetailMasterHeader"
+                    tools:text="康师傅" />
 
             </RelativeLayout>
         </RelativeLayout>
+
     </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 
 </RelativeLayout>

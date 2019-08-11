@@ -3,7 +3,7 @@ package com.xiaomai.zhuangba.util;
 import com.example.toollib.util.Log;
 import com.umeng.message.PushAgent;
 import com.umeng.message.UTrack;
-import com.xiaomai.zhuangba.appilcation.PretendApplication;
+import com.xiaomai.zhuangba.application.PretendApplication;
 
 /**
  * @author Administrator
