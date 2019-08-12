@@ -54,6 +54,12 @@ public class EmployerWalletFragment extends BaseListFragment {
     }
 
     @Override
+    public void onStart() {
+        super.onStart();
+        statusBarWhite();
+    }
+
+    @Override
     public void initView() {
         super.initView();
         UserInfo unique = DBHelper.getInstance().getUserInfoDao().queryBuilder().unique();
@@ -90,9 +96,6 @@ public class EmployerWalletFragment extends BaseListFragment {
                         startFragment(EmployerWalletDetailFragment.newInstance());
                     }
                 });
-        //设置字体白色
-        statusBarWhite();
-
         refreshLayout.setHeaderInsetStart(56);
     }
 
@@ -154,18 +157,6 @@ public class EmployerWalletFragment extends BaseListFragment {
     @Override
     public boolean isCustomView() {
         return false;
-    }
-
-    @Override
-    protected void popBackStack() {
-        statusBarBlack();
-        super.popBackStack();
-    }
-
-    @Override
-    public boolean isInSwipeBack() {
-        statusBarBlack();
-        return super.isInSwipeBack();
     }
 
     @Override

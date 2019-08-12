@@ -76,4 +76,9 @@ public class OngoingOrdersFragment extends BaseMasterEmployerContentFragment {
         return null;
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        statusBarWhite();
+    }
 }

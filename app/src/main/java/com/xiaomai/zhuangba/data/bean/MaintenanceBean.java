@@ -191,5 +191,4 @@ public class MaintenanceBean {
     public void setNavigatepageNums(List<Integer> navigatepageNums) {
         this.navigatepageNums = navigatepageNums;
     }
-
 }

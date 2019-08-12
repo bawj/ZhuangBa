@@ -90,6 +90,12 @@ public class BaseMasterEmployerFragment extends BaseFragment<IMasterEmployerModu
     }
 
     @Override
+    public void onStart() {
+        super.onStart();
+        statusBarWhite();
+    }
+
+    @Override
     public void initView() {
         refreshBaseList.setEnableLoadMore(false);
         refreshBaseList.setOnRefreshListener(this);
@@ -151,8 +157,6 @@ public class BaseMasterEmployerFragment extends BaseFragment<IMasterEmployerModu
         for (BaseMasterEmployerContentFragment baseMasterEmployerContentFragment : listFragment) {
             eventManager.registerObserver(baseMasterEmployerContentFragment);
         }
-
-        statusBarWhite();
     }
 
     @OnClick({R.id.ivUserHead, R.id.ivMessage,R.id.btnRectangle})

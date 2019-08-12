@@ -117,8 +117,8 @@ public class ScopeOfServiceFragment extends BaseFragment implements BaseQuickAda
                 userInfo.setIdCardFrontPhoto(masterAuthenticationInfo.getIdCardFrontPhoto());
                 userInfo.setIdCardBackPhoto(masterAuthenticationInfo.getIdCardBackPhoto());
                 userInfo.setBareHeadedPhotoUrl(masterAuthenticationInfo.getPhotoPath());
-                userInfo.setLongitude(masterAuthenticationInfo.getLongitude() == null ? 0.0 : masterAuthenticationInfo.getLongitude());
-                userInfo.setLatitude(masterAuthenticationInfo.getLatitude() == null ? 0.0 : masterAuthenticationInfo.getLatitude());
+                userInfo.setLongitude(masterAuthenticationInfo.getLongitude());
+                userInfo.setLatitude(masterAuthenticationInfo.getLatitude());
                 userInfo.setEmergencyContact(masterAuthenticationInfo.getEmergencyContact());
                 userInfo.setContactAddress(masterAuthenticationInfo.getContactAddress());
                 userInfo.setAddress(masterAuthenticationInfo.getAddress());

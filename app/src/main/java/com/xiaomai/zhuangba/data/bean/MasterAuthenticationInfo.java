@@ -24,9 +24,9 @@ public class MasterAuthenticationInfo {
     /** 服务地址 */
     private String address;
     /** longitude */
-    private Double longitude;
+    private double longitude;
     /** latitude */
-    private Double latitude;
+    private double latitude;
 
     private String emergencyContact;
     private String contactAddress;
@@ -88,19 +88,19 @@ public class MasterAuthenticationInfo {
         this.address = address;
     }
 
-    public Double getLongitude() {
+    public double getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(Double longitude) {
+    public void setLongitude(double longitude) {
         this.longitude = longitude;
     }
 
-    public Double getLatitude() {
+    public double getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(Double latitude) {
+    public void setLatitude(double latitude) {
         this.latitude = latitude;
     }
 

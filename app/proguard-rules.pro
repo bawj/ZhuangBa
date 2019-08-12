@@ -112,3 +112,16 @@
 }
 
 -keep class org.apache.**{*;}
+
+#greendao 混淆
+-keep class org.greenrobot.greendao.**{*;}
+-keep class com.example.rain.gen.**{ *; }
+-keep public interface org.greenrobot.greendao.**
+-keepclassmembers class * extends org.greenrobot.greendao.AbstractDao {
+public static java.lang.String TABLENAME;
+}
+-keep class **$Properties
+-keep class net.sqlcipher.database.**{*;}
+-keep public interface net.sqlcipher.database.**
+-dontwarn net.sqlcipher.database.**
+-dontwarn org.greenrobot.greendao.**

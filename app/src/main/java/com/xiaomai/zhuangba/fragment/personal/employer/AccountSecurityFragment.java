@@ -50,16 +50,4 @@ public class AccountSecurityFragment extends TradePhoneFragment {
     protected String getActivityTitle() {
         return getString(R.string.set_up_the_transaction_password);
     }
-
-    @Override
-    public boolean isInSwipeBack() {
-        statusBarWhite();
-        return super.isInSwipeBack();
-    }
-
-    @Override
-    protected void popBackStack() {
-        statusBarWhite();
-        super.popBackStack();
-    }
 }

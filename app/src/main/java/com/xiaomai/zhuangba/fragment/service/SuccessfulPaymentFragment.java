@@ -9,6 +9,7 @@ import com.example.toollib.data.IBaseModule;
 import com.xiaomai.zhuangba.R;
 import com.xiaomai.zhuangba.fragment.employer.EmployerFragment;
 import com.xiaomai.zhuangba.fragment.orderdetail.DistributionDetailFragment;
+import com.xiaomai.zhuangba.fragment.orderdetail.employer.EmployerDistributionFragment;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -49,6 +50,12 @@ public class SuccessfulPaymentFragment extends BaseFragment {
     }
 
     @Override
+    public void onStart() {
+        super.onStart();
+        statusBarWhite();
+    }
+
+    @Override
     public void initView() {
         tvPaymentName.setText(getName());
         tvSuccessfulPhone.setText(getPhone());
@@ -66,7 +73,7 @@ public class SuccessfulPaymentFragment extends BaseFragment {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btnSuccessfulMissionDetails:
-                startFragment(DistributionDetailFragment.newInstance());
+                startFragment(EmployerDistributionFragment.newInstance(getOrderCode()));
                 break;
             case R.id.btnSuccessfulBackHome:
                 startFragment(EmployerFragment.newInstance());

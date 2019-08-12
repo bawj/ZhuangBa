@@ -72,7 +72,6 @@ ext {
     ]
     //数据库框架
     database = [
-            "schemaVersion"     : 12,
             "greendao"          : 'org.greenrobot:greendao:3.2.0',
             "greendao-generator": 'org.greenrobot:greendao-generator:3.2.0',
     ]

@@ -55,6 +55,7 @@
                             android:id="@+id/tvConfirmationOfOrder"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:visibility="gone"
                             android:layout_below="@+id/tvConfirmationOfOrderStatus"
                             android:layout_marginStart="@dimen/tool_lib_46dp"
                             android:layout_marginLeft="@dimen/tool_lib_46dp"

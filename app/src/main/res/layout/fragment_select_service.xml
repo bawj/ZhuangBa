@@ -161,6 +161,7 @@
                 android:layout_marginStart="@dimen/tool_lib_16dp"
                 android:layout_marginLeft="@dimen/tool_lib_16dp"
                 android:gravity="center"
+                android:visibility="gone"
                 android:textColor="@color/tool_lib_gray_777777"
                 android:textSize="@dimen/tool_lib_14sp"
                 tools:text="任务个数0个" />
@@ -172,6 +173,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginStart="@dimen/tool_lib_3dp"
                 android:layout_marginLeft="@dimen/tool_lib_3dp"
+                android:visibility="gone"
                 android:layout_toEndOf="@+id/tvSelectServiceTaskNumber"
                 android:layout_toRightOf="@+id/tvSelectServiceTaskNumber"
                 android:src="@drawable/ic_up_arrow" />

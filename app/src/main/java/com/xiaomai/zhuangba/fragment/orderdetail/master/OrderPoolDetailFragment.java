@@ -43,16 +43,4 @@ public class OrderPoolDetailFragment extends BaseMasterOrderDetailFragment {
     protected String getActivityTitle() {
         return getString(R.string.order_detail);
     }
-
-    @Override
-    public boolean isInSwipeBack() {
-        statusBarWhite();
-        return super.isInSwipeBack();
-    }
-
-    @Override
-    protected void popBackStack() {
-        statusBarWhite();
-        super.popBackStack();
-    }
 }

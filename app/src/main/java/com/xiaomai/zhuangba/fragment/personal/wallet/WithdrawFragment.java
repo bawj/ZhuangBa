@@ -200,16 +200,4 @@ public class WithdrawFragment extends BaseFragment implements TextWatcher {
             e.printStackTrace();
         }
     }
-
-    @Override
-    protected void popBackStack() {
-        statusBarWhite();
-        super.popBackStack();
-    }
-
-    @Override
-    public boolean isInSwipeBack() {
-        statusBarWhite();
-        return super.isInSwipeBack();
-    }
 }

@@ -123,16 +123,4 @@ public class AliPayAccountFragment extends BaseFragment implements  BaseQuickAda
             popBackStack();
         }
     }
-
-    @Override
-    protected void popBackStack() {
-        statusBarWhite();
-        super.popBackStack();
-    }
-
-    @Override
-    public boolean isInSwipeBack() {
-        statusBarWhite();
-        return super.isInSwipeBack();
-    }
 }

@@ -57,14 +57,4 @@ public class HavingSetOutFragment extends BaseMasterOrderDetailFragment {
         return getString(R.string.order_detail);
     }
 
-    @Override
-    public boolean isInSwipeBack() {
-        statusBarWhite();
-        return super.isInSwipeBack();
-    }
-    @Override
-    public void leftBackClick() {
-        statusBarWhite();
-        super.leftBackClick();
-    }
 }

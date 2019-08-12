@@ -6,7 +6,7 @@ package com.xiaomai.zhuangba.data.bean;
  */
 public class OrderServicesBean {
     /** 项目金额 */
-    private Double amount;
+    private double amount;
     /** 数量 */
     private int number;
     /** 订单编号 */
@@ -21,11 +21,11 @@ public class OrderServicesBean {
     /** 维保金额 */
     private double maintenanceAmount;
 
-    public Double getAmount() {
+    public double getAmount() {
         return amount;
     }
 
-    public void setAmount(Double amount) {
+    public void setAmount(double amount) {
         this.amount = amount;
     }
 

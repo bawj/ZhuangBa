@@ -23,7 +23,7 @@ public class OngoingOrdersList implements Parcelable{
     /** 任务数量 */
     private int number;
     /** 订单金额 */
-    private Double orderAmount;
+    private double orderAmount;
     /** 订单状态  */
     private int orderStatus;
     /** 现场联系人姓名 */
@@ -127,11 +127,11 @@ public class OngoingOrdersList implements Parcelable{
         this.number = number;
     }
 
-    public Double getOrderAmount() {
+    public double getOrderAmount() {
         return orderAmount;
     }
 
-    public void setOrderAmount(Double orderAmount) {
+    public void setOrderAmount(double orderAmount) {
         this.orderAmount = orderAmount;
     }
 

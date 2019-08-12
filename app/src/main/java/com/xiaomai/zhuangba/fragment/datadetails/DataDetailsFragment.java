@@ -52,6 +52,12 @@ public class DataDetailsFragment extends BaseFragment implements BaseQuickAdapte
     }
 
     @Override
+    public void onStart() {
+        super.onStart();
+        statusBarWhite();
+    }
+
+    @Override
     public void initView() {
         //标题
         topBarBase.setTitle(getString(R.string.data_details));
@@ -64,8 +70,6 @@ public class DataDetailsFragment extends BaseFragment implements BaseQuickAdapte
                         popBackStack();
                     }
                 });
-        statusBarWhite();
-
         //标题
         tabDataDetailsTitleAdapter = new TabDataDetailsTitleAdapter();
         tabDataDetailsTitle.setLayoutManager(new GridLayoutManager(getActivity(), 4));

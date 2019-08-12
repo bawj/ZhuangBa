@@ -213,15 +213,16 @@ public class SelectServiceFragment extends BaseListFragment<ISelectServiceModule
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.itemSelectServiceLayoutFor:
+                // TODO: 2019/8/12 0012 暂时 不显示 购物车
                 //弹出 bottomSheetBehavior 根据状态不同显示隐藏
-                int state = bottomSheetBehavior.getState();
+                /*int state = bottomSheetBehavior.getState();
                 if (state == BottomSheetBehavior.STATE_COLLAPSED) {
                     bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
                     //显示 更新 bottomSheetBehavior
                     sheetBehaviorAdapter.setNewData(DBHelper.getInstance().getShopCarDataDao().queryBuilder().list());
                 } else {
                     bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
-                }
+                }*/
                 break;
             case R.id.btnSelectServiceNext:
                 Log.e("btnSelectServiceNext 点击下一步");

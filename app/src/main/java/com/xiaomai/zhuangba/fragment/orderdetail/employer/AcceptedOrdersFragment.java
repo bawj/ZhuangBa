@@ -72,15 +72,4 @@ public class AcceptedOrdersFragment extends BaseEmployerDetailFragment {
                     }
                 }).showDialog();
     }
-
-    @Override
-    public boolean isInSwipeBack() {
-        statusBarWhite();
-        return super.isInSwipeBack();
-    }
-    @Override
-    public void leftBackClick() {
-        statusBarWhite();
-        super.leftBackClick();
-    }
 }

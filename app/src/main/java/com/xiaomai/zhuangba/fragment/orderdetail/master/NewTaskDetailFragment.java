@@ -56,9 +56,14 @@ public class NewTaskDetailFragment extends BaseMasterOrderDetailFragment {
     }
 
     @Override
+    public void onStart() {
+        super.onStart();
+        statusBarWhite();
+    }
+
+    @Override
     public void initView() {
         super.initView();
-        statusBarWhite();
         topNewTaskTitle.setTitle(getString(R.string.order_detail));
         topNewTaskTitle.addLeftBackImageButton().setOnClickListener(new View.OnClickListener() {
             @Override
@@ -105,17 +110,5 @@ public class NewTaskDetailFragment extends BaseMasterOrderDetailFragment {
                 break;
             default:
         }
-    }
-
-    @Override
-    public boolean isInSwipeBack() {
-        statusBarWhite();
-        return super.isInSwipeBack();
-    }
-
-    @Override
-    public void leftBackClick() {
-        statusBarWhite();
-        super.leftBackClick();
     }
 }

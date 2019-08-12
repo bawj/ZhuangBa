@@ -100,16 +100,4 @@ public class EmployerHavingSetOutFragment extends BaseEmployerDetailFragment {
             default:
         }
     }
-
-    @Override
-    public boolean isInSwipeBack() {
-        statusBarWhite();
-        return super.isInSwipeBack();
-    }
-    @Override
-    public void leftBackClick() {
-        statusBarWhite();
-        super.leftBackClick();
-    }
-
 }

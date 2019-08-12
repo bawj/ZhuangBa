@@ -4,16 +4,13 @@ import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.toollib.fragment.ImgPreviewFragment;
 import com.example.toollib.manager.GlideManager;
-import com.example.toollib.util.DensityUtils;
 import com.example.toollib.util.Log;
 import com.qmuiteam.qmui.layout.QMUIButton;
 import com.xiaomai.zhuangba.R;
@@ -31,9 +28,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
-import butterknife.Unbinder;
 
 /**
  * @author Administrator
@@ -142,13 +137,17 @@ public class EmployerUnderConstructionFragment extends BaseEmployerDetailFragmen
     public void orderServiceItemsSuccess(List<OrderServiceItem> orderServiceItems) {
         super.orderServiceItemsSuccess(orderServiceItems);
         //是否显示 新增维保
+        List<OrderServiceItem> orderServiceItemList = new ArrayList<>();
         for (OrderServiceItem orderServiceItem : orderServiceItems) {
             if (orderServiceItem.getMonthNumber() == 0) {
-                this.orderServiceItems.add(orderServiceItem);
+                orderServiceItemList.add(orderServiceItem);
             }
         }
-        if (this.orderServiceItems.isEmpty()){
+        this.orderServiceItems = orderServiceItemList;
+        if (orderServiceItemList.isEmpty()) {
             btnAddMaintenance.setVisibility(View.GONE);
+        } else {
+            btnAddMaintenance.setVisibility(View.VISIBLE);
         }
     }
 
@@ -159,17 +158,5 @@ public class EmployerUnderConstructionFragment extends BaseEmployerDetailFragmen
             DBHelper.getInstance().getOrderServiceItemDao().insertInTx(orderServiceItems);
             startFragment(AddMaintenanceFragment.newInstance());
         }
-    }
-
-    @Override
-    public boolean isInSwipeBack() {
-        statusBarWhite();
-        return super.isInSwipeBack();
-    }
-
-    @Override
-    public void leftBackClick() {
-        statusBarWhite();
-        super.leftBackClick();
     }
 }

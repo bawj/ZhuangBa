@@ -30,8 +30,9 @@ public class DBManager {
     private SQLiteDatabase mDb;
 
     private DBManager() {
-        ///DaoMaster.DevOpenHelper devOpenHelper = new DaoMaster.DevOpenHelper(context,DB_NAME,null);
-        DaoMaster.OpenHelper devOpenHelper = new DBDevOpenHelper(PretendApplication.getInstance().getApplicationContext(), DB_NAME, null);
+        // TODO: 2019/8/12 0012 重新登录 更改了数据结构
+        DaoMaster.DevOpenHelper devOpenHelper = new DaoMaster.DevOpenHelper(PretendApplication.getInstance().getApplicationContext(), DB_NAME, null);
+//        DBDevOpenHelper devOpenHelper = new DBDevOpenHelper(PretendApplication.getInstance().getApplicationContext(), DB_NAME, null);
         mDb = devOpenHelper.getWritableDatabase();
         mDaoMaster = new DaoMaster(mDb);
         mDaoSession = mDaoMaster.newSession();

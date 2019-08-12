@@ -72,6 +72,13 @@ public class WalletFragment extends BaseFragment implements OnRefreshListener {
     }
 
     @Override
+    public void onStart() {
+        super.onStart();
+        statusBarWhite();
+    }
+
+
+    @Override
     public void initView() {
         EventBus.getDefault().register(this);
         //标题
@@ -94,9 +101,6 @@ public class WalletFragment extends BaseFragment implements OnRefreshListener {
                         startFragment(WalletDetailFragment.newInstance());
                     }
                 });
-        //设置字体白色
-        statusBarWhite();
-
         refreshLayout.setEnableRefresh(true);
         refreshLayout.setOnRefreshListener(this);
         refreshLayout.autoRefresh();

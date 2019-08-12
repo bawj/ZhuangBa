@@ -41,7 +41,7 @@ public class BaseContinuedMaintenanceFragment extends BaseFragment implements Ba
     /**
      * 维保总价格
      */
-    private Double totalPrice = 0d;
+    public Double totalPrice = 0d;
 
     private BaseContinuedMaintenanceAdapter baseContinuedMaintenanceAdapter;
 
@@ -128,7 +128,7 @@ public class BaseContinuedMaintenanceFragment extends BaseFragment implements Ba
      * 计算价格
      * @return double
      */
-    private Double calculateThePrice() {
+    public Double calculateThePrice() {
         List<OrderServiceItem> maintenanceList = DBHelper.getInstance()
                 .getOrderServiceItemDao().queryBuilder().list();
         for (OrderServiceItem orderServiceItem : maintenanceList) {

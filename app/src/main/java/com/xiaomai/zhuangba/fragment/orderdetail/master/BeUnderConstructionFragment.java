@@ -96,16 +96,4 @@ public class BeUnderConstructionFragment extends BaseMasterOrderDetailFragment {
     public int getContentView() {
         return R.layout.fragment_be_under_construction;
     }
-
-    @Override
-    public boolean isInSwipeBack() {
-        statusBarWhite();
-        return super.isInSwipeBack();
-    }
-    @Override
-    public void leftBackClick() {
-        statusBarWhite();
-        super.leftBackClick();
-    }
-
 }

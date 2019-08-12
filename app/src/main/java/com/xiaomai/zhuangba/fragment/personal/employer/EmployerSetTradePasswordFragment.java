@@ -36,16 +36,4 @@ public class EmployerSetTradePasswordFragment extends SetTradePasswordFragment {
                     }
                 });
     }
-
-    @Override
-    public boolean isInSwipeBack() {
-        statusBarWhite();
-        return super.isInSwipeBack();
-    }
-
-    @Override
-    protected void popBackStack() {
-        statusBarWhite();
-        super.popBackStack();
-    }
 }

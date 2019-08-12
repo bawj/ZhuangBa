@@ -98,16 +98,4 @@ public class BaseEmployerWalletDetailFragment extends BaseListFragment {
     public int getEmptyView() {
         return R.layout.item_not_data_search_empty;
     }
-
-    @Override
-    protected void popBackStack() {
-        statusBarWhite();
-        super.popBackStack();
-    }
-
-    @Override
-    public boolean isInSwipeBack() {
-        statusBarWhite();
-        return super.isInSwipeBack();
-    }
 }

@@ -157,7 +157,7 @@ public class ShopCarUtil {
                 totalMoney += DensityUtils.stringTypeDouble(maintenanceMoney) * DensityUtils.stringTypeInteger(number);
             }
         }
-        return totalMoney;
+        return new BigDecimal(totalMoney).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
     }
 
     public static Double getTotalMoneys(int number, double price, double price1, double price2, double maintenancePrice) {
@@ -173,8 +173,7 @@ public class ShopCarUtil {
                 priceNumber += price2;
             }
         }
-        double money = new BigDecimal(priceNumber).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
-        money += number * maintenancePrice;
-        return money;
+        priceNumber += number * maintenancePrice;
+        return new BigDecimal(priceNumber).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
     }
 }

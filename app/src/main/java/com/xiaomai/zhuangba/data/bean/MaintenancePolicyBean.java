@@ -29,11 +29,11 @@ public class MaintenancePolicyBean {
      * serviceImg : https://zb.4000750222.com//zbimages/test/2019/7/24/2c90ef856c21ec0e016c221ed8b00002.png
      */
 
-    private int id;
+    private String id;
     private String serviceId;
     private String orderCode;
     private int number;
-    private int amount;
+    private String amount;
     private String residualQuantity;
     private String residualAmount;
     private String overmanName;
@@ -51,11 +51,11 @@ public class MaintenancePolicyBean {
     /** 入账金额 */
     private double earningsMoney;
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -83,11 +83,11 @@ public class MaintenancePolicyBean {
         this.number = number;
     }
 
-    public int getAmount() {
+    public String getAmount() {
         return amount;
     }
 
-    public void setAmount(int amount) {
+    public void setAmount(String amount) {
         this.amount = amount;
     }
 

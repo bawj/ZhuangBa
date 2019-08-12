@@ -9,13 +9,13 @@ public class LocationSearch {
     private String name;
     private String address;
     private String distance;
-    private Double longitude;
-    private Double latitude;
+    private double longitude;
+    private double latitude;
 
     public LocationSearch() {
     }
 
-    public LocationSearch(String name, String address, String distance, Double longitude, Double latitude) {
+    public LocationSearch(String name, String address, String distance, double longitude, double latitude) {
         this.name = name;
         this.address = address;
         this.distance = distance;
@@ -47,19 +47,19 @@ public class LocationSearch {
         this.name = name;
     }
 
-    public Double getLongitude() {
+    public double getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(Double longitude) {
+    public void setLongitude(double longitude) {
         this.longitude = longitude;
     }
 
-    public Double getLatitude() {
+    public double getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(Double latitude) {
+    public void setLatitude(double latitude) {
         this.latitude = latitude;
     }
 

@@ -68,16 +68,21 @@ public class NeedDealWithAdapter extends BaseQuickAdapter<OngoingOrdersList, Bas
         String expireTime = ongoingOrders.getExpireTime();
         //师傅端
         OrderStatusUtil.masterStatus(mContext, orderStatus, tvItemOrdersType);
+
+
         if (orderStatus == OrdersEnum.MASTER_NEW_TASK.getCode()){
             tvItemOrdersIdentification.setText(mContext.getString(R.string.waiting_for_orders_, expireTime));
+            ivItemOrdersIdentification.setVisibility(View.VISIBLE);
+            ivItemOrdersIdentification.setVisibility(View.VISIBLE);
         }else if (orderStatus == OrdersEnum.MASTER_EXPIRED.getCode()){
             tvItemOrdersIdentification.setText(mContext.getString(R.string.expired,  expireTime));
-        }else if (orderStatus == OrdersEnum.MASTER_PENDING_DISPOSAL.getCode() && !TextUtils.isEmpty(expireTime)){
-            ivItemOrdersIdentification.setVisibility(View.GONE);
-            tvItemOrdersIdentification.setVisibility(View.GONE);
+            ivItemOrdersIdentification.setVisibility(View.VISIBLE);
+            ivItemOrdersIdentification.setVisibility(View.VISIBLE);
         }else {
             ivItemOrdersIdentification.setVisibility(View.GONE);
             tvItemOrdersIdentification.setVisibility(View.GONE);
         }
+        ivItemOrdersIdentification.setVisibility(View.GONE);
+        tvItemOrdersIdentification.setVisibility(View.GONE);
     }
 }

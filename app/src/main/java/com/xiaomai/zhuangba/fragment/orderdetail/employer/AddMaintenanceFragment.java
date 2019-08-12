@@ -65,6 +65,20 @@ public class AddMaintenanceFragment extends BaseContinuedMaintenanceFragment imp
     }
 
     @Override
+    public Double calculateThePrice() {
+        List<OrderServiceItem> maintenanceList = DBHelper.getInstance()
+                .getOrderServiceItemDao().queryBuilder().list();
+        for (OrderServiceItem orderServiceItem : maintenanceList) {
+            //服务数量
+            int number = orderServiceItem.getNumber();
+            //维保金额
+            double maintenanceAmount = orderServiceItem.getMaintenanceAmount();
+            totalPrice = number * maintenanceAmount;
+        }
+        return totalPrice;
+    }
+
+    @Override
     public void walletPay() {
         final PayPassDialog dialog = new PayPassDialog(getActivity());
         dialog.getPayViewPass()

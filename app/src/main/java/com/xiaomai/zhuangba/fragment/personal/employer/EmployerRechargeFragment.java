@@ -105,17 +105,4 @@ public class EmployerRechargeFragment extends BaseFragment {
     protected String getActivityTitle() {
         return getString(R.string.recharge);
     }
-
-    @Override
-    public boolean isInSwipeBack() {
-        statusBarWhite();
-        return super.isInSwipeBack();
-    }
-
-    @Override
-    protected void popBackStack() {
-        statusBarWhite();
-        super.popBackStack();
-    }
-
 }
