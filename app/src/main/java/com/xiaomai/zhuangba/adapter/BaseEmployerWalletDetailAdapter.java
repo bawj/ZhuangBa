@@ -25,11 +25,10 @@ public class BaseEmployerWalletDetailAdapter extends BaseQuickAdapter<EmployerWa
         TextView tvOrderTime = helper.getView(R.id.tvOrderTime);
         tvOrderTime.setText(item.getTimes());
         TextView tvOrderInfo = helper.getView(R.id.tvOrderInfo);
-        //收入：1，支出：2
-        if (item.getStreamType() == StaticExplain.INCOME.getCode()){
+        if (item.getStreamType() == StaticExplain.EXPENDITURE.getCode()){
             tvOrderInfo.setText(mContext.getString(R.string.income , String.valueOf(item.getAmount())));
             tvOrderInfo.setTextColor(mContext.getResources().getColor(R.color.tool_lib_color_3AB960));
-        }else if (item.getStreamType() == StaticExplain.EXPENDITURE.getCode()){
+        }else if (item.getStreamType() == StaticExplain.INCOME.getCode()){
             tvOrderInfo.setText(mContext.getString(R.string.expenditure , String.valueOf(item.getAmount())));
             tvOrderInfo.setTextColor(mContext.getResources().getColor(R.color.tool_lib_red_EF2B2B));
         }

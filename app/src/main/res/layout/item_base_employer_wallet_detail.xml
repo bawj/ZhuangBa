@@ -30,7 +30,7 @@
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:textColor="@color/tool_lib_color_3AB960"
-        android:textSize="@dimen/sp_12"
+        android:textSize="@dimen/tool_lib_12sp"
         tools:text="+￥300.00" />
 
 

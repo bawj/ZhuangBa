@@ -179,8 +179,10 @@ public class SelectServiceFragment extends BaseListFragment<ISelectServiceModule
                     public void sure(Maintenance maintenance, int count) {
                         Log.e("添加数量 = " + count);
                         //确定 添加
-                        ShopCarUtil.saveShopCar(serviceSubcategoryProject, maintenance, count);
-                        sheetBehaviorUpdate();
+                        if (maintenance != null){
+                            ShopCarUtil.saveShopCar(serviceSubcategoryProject, maintenance, count);
+                            sheetBehaviorUpdate();
+                        }
                     }
                 })
                 .showDialog();

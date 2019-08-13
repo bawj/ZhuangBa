@@ -95,14 +95,14 @@ public class NewTaskDetailFragment extends BaseMasterOrderDetailFragment {
         switch (view.getId()) {
             case R.id.btnNewTaskCancelTheOrder:
                 //取消接单
-                CommonlyDialog.getInstance().initView(getActivity())
-                        .setTvDialogCommonlyContent(getString(R.string.cancel_order_tip))
-                        .setICallBase(new CommonlyDialog.BaseCallback() {
-                            @Override
-                            public void sure() {
-                                iModule.requestCancelOrder();
-                            }
-                        }).showDialog();
+                iModule.requestCancelOrder();
+//                CommonlyDialog.getInstance().initView(getActivity())
+//                        .setTvDialogCommonlyContent(getString(R.string.cancel_order_tip))
+//                        .setICallBase(new CommonlyDialog.BaseCallback() {
+//                            @Override
+//                            public void sure() {
+//                            }
+//                        }).showDialog();
                 break;
             case R.id.btnNewTaskReceipt:
                 //接单

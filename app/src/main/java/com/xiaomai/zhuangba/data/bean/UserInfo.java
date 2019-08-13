@@ -2,9 +2,6 @@ package com.xiaomai.zhuangba.data.bean;
 
 import android.text.TextUtils;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Generated;
 import org.greenrobot.greendao.annotation.Id;
@@ -250,18 +247,7 @@ public class UserInfo {
     }
 
     public String getBareHeadedPhotoUrl() {
-        if (!TextUtils.isEmpty(bareHeadedPhotoUrl)){
-            try {
-                List<String> strings = new Gson().fromJson(bareHeadedPhotoUrl, new TypeToken<List<String>>() {
-                }.getType());
-                if (!strings.isEmpty()){
-                    return strings.get(0);
-                }
-            }catch (Exception e){
-                e.printStackTrace();
-            }
-        }
-        return bareHeadedPhotoUrl;
+        return TextUtils.isEmpty(bareHeadedPhotoUrl) ? "" : bareHeadedPhotoUrl;
     }
 
     public void setBareHeadedPhotoUrl(String bareHeadedPhotoUrl) {

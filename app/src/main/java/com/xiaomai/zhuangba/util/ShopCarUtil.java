@@ -40,7 +40,7 @@ public class ShopCarUtil {
     public static void saveShopCar(ServiceSubcategoryProject item, Maintenance maintenance, int count) {
         ShopCarDataDao shopCarDataDao = DBHelper.getInstance().getShopCarDataDao();
         ShopCarData unique = shopCarDataDao.queryBuilder().where(ShopCarDataDao.Properties.Id.eq(item.getServiceId())).unique();
-        if (unique != null || count == 0) {
+        if (unique != null) {
             shopCarDataDao.delete(unique);
         }
         if (count != 0) {
