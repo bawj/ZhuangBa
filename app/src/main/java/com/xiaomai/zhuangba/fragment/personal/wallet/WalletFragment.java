@@ -35,6 +35,8 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import java.math.BigDecimal;
+
 import butterknife.BindView;
 import butterknife.OnClick;
 
@@ -127,7 +129,9 @@ public class WalletFragment extends BaseFragment implements OnRefreshListener {
                         //已提现
                         tvWasWithdraw.setText(getString(R.string.content_money, Util.getZero(walletBean.getCashAlreadyAvailable())));
                         //冻结金额
-                        tvFrozenAmount.setText(Util.getZero(walletBean.getFreezeMoney()));
+                        double freezeMoney = new BigDecimal(Util.getZero(walletBean.getFreezeMoney()))
+                                .setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+                        tvFrozenAmount.setText(String.valueOf(freezeMoney));
                         refreshLayout.finishRefresh();
                     }
 

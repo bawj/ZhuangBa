@@ -31,46 +31,87 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-        <LinearLayout
-            android:id="@+id/laySelectService"
+        <RelativeLayout
+            android:id="@+id/relSelectService"
+            android:visibility="gone"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="@dimen/tool_lib_1dp"
-            android:layout_marginBottom="@dimen/tool_lib_56dp"
-            android:orientation="horizontal"
-            android:visibility="gone">
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/rvSelectServiceTitle"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1" />
+            android:layout_height="wrap_content">
 
             <LinearLayout
-                android:layout_width="0dp"
+                android:id="@+id/laySelectService"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="2.5"
-                android:background="@android:color/white"
-                android:orientation="vertical"
-                android:paddingLeft="@dimen/tool_lib_12dp"
-                android:paddingRight="@dimen/tool_lib_12dp">
-
-                <TextView
-                    android:id="@+id/tvServiceContentTitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/tool_lib_16dp"
-                    android:textColor="@color/tool_lib_gray_777777"
-                    android:textSize="@dimen/tool_lib_12sp"
-                    tools:text="电子巡更" />
+                android:layout_marginTop="@dimen/tool_lib_1dp"
+                android:layout_marginBottom="@dimen/tool_lib_56dp"
+                android:orientation="horizontal">
 
                 <android.support.v7.widget.RecyclerView
-                    android:id="@+id/rvSelectServiceContent"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+                    android:id="@+id/rvSelectServiceTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
 
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2.5"
+                    android:background="@android:color/white"
+                    android:orientation="vertical"
+                    android:paddingLeft="@dimen/tool_lib_12dp"
+                    android:paddingRight="@dimen/tool_lib_12dp">
+
+                    <TextView
+                        android:id="@+id/tvServiceContentTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/tool_lib_16dp"
+                        android:textColor="@color/tool_lib_gray_777777"
+                        android:textSize="@dimen/tool_lib_12sp"
+                        tools:text="电子巡更" />
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/rvSelectServiceContent"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+
+                </LinearLayout>
             </LinearLayout>
-        </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/laySelectServiceTip"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/laySelectService"
+                android:layout_marginStart="@dimen/tool_lib_14dp"
+                android:layout_marginLeft="@dimen/tool_lib_14dp"
+                android:layout_marginEnd="@dimen/tool_lib_106dp"
+                android:layout_marginRight="@dimen/tool_lib_106dp"
+                android:layout_marginBottom="@dimen/tool_lib_12dp"
+                android:background="@drawable/bg_divide_into_columns_bg"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="@dimen/tool_lib_16dp"
+                    android:layout_height="@dimen/tool_lib_16dp"
+                    android:layout_marginStart="@dimen/tool_lib_8dp"
+                    android:layout_marginLeft="@dimen/tool_lib_8dp"
+                    android:layout_marginTop="@dimen/tool_lib_3dp"
+                    android:layout_marginBottom="@dimen/tool_lib_3dp"
+                    android:src="@drawable/ic_tip" />
+
+                <TextView
+                    android:id="@+id/tvBaseOrderDetailDivideIntoColumns"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/tool_lib_6dp"
+                    android:layout_marginLeft="@dimen/tool_lib_6dp"
+                    android:maxLength="30"
+                    android:text="@string/service_tip"
+                    android:textColor="@color/tool_lib_gray_C76900"
+                    android:textSize="@dimen/tool_lib_12sp" />
+            </LinearLayout>
+        </RelativeLayout>
     </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 
     <!--弹出任务数量详情-->
@@ -132,6 +173,7 @@
 
     </LinearLayout>
 
+
     <!-- 底部 任务个数 和金额 下一步-->
     <com.qmuiteam.qmui.layout.QMUILinearLayout
         android:id="@+id/itemSelectServiceLayoutFor"
@@ -161,9 +203,9 @@
                 android:layout_marginStart="@dimen/tool_lib_16dp"
                 android:layout_marginLeft="@dimen/tool_lib_16dp"
                 android:gravity="center"
-                android:visibility="gone"
                 android:textColor="@color/tool_lib_gray_777777"
                 android:textSize="@dimen/tool_lib_14sp"
+                android:visibility="gone"
                 tools:text="任务个数0个" />
 
             <ImageView
@@ -173,10 +215,10 @@
                 android:layout_centerVertical="true"
                 android:layout_marginStart="@dimen/tool_lib_3dp"
                 android:layout_marginLeft="@dimen/tool_lib_3dp"
-                android:visibility="gone"
                 android:layout_toEndOf="@+id/tvSelectServiceTaskNumber"
                 android:layout_toRightOf="@+id/tvSelectServiceTaskNumber"
-                android:src="@drawable/ic_up_arrow" />
+                android:src="@drawable/ic_up_arrow"
+                android:visibility="gone" />
 
             <TextView
                 android:id="@+id/tvSelectServiceTotal"

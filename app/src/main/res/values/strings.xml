@@ -78,6 +78,7 @@
     <string name="expired">已在%1$s过期</string>
     <string name="timeout">已超时</string>
     <string name="not_data">新任务还在路上，\n请注意消息通知，以免错过接单时间哦</string>
+    <string name="be_fully_equipped_for">安装师傅已经整装待发啦，\n快快发起需求吧～</string>
     <string name="search_empty">搜寻不到任何结果哦～</string>
     <string name="not_data_"> 请注意消息通知，以免错过接单时间哦</string>
     <string name="order_expired">该任务已过期</string>
@@ -416,4 +417,5 @@
     <string name="installation_list">安装单</string>
     <string name="installation_amount">安装金额（元）</string>
     <string name="maintenance_amount">维保金额（元）</string>
+    <string name="service_tip">下单多件有优惠，具体查看价目单</string>
 </resources>

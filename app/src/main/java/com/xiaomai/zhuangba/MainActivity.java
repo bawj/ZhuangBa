@@ -134,6 +134,7 @@ public class MainActivity extends BaseActivity {
         //您的账号在其它手机登录
         boolean isOtherMobileLogin = (messageEvent.getErrCode() == VersionEnums.LOGIN_OTHER_STATUS.getCode());
         if (isTokenOverdueDialog && !isTokenOverdueDialogs) {
+            logout();
             commonlyDialog = CommonlyDialog.getInstance().initView(this);
             commonlyDialog.setTvDialogCommonlyContent(getString(R.string.re_login_tip))
                     .isVisibleClose(false)
@@ -141,10 +142,11 @@ public class MainActivity extends BaseActivity {
                     .setICallBase(new CommonlyDialog.BaseCallback() {
                         @Override
                         public void sure() {
-                            logout();
+                            startFragment(LoginFragment.newInstance());
                         }
                     }).showDialog();
         } else if (isOtherMobileLogin && !isTokenOverdueDialogs) {
+            logout();
             commonlyDialog = CommonlyDialog.getInstance().initView(this);
             commonlyDialog.setTvDialogCommonlyContent(getString(R.string.re_login_tip_))
                     .isVisibleClose(false)
@@ -152,7 +154,7 @@ public class MainActivity extends BaseActivity {
                     .setICallBase(new CommonlyDialog.BaseCallback() {
                         @Override
                         public void sure() {
-                            logout();
+                            startFragment(LoginFragment.newInstance());
                         }
                     }).showDialog();
         } else if (messageEvent.getErrCode() == VersionEnums.APP_UPDATE.getCode()) {
@@ -173,7 +175,6 @@ public class MainActivity extends BaseActivity {
 
     private void logout() {
         Util.logout();
-        startFragment(LoginFragment.newInstance());
     }
 
     private void startUpdateVersion(String downLoadUrl) {

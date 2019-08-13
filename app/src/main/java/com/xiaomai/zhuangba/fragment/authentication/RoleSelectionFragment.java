@@ -9,8 +9,10 @@ import com.xiaomai.zhuangba.data.module.login.LoginRegisteredModule;
 import com.xiaomai.zhuangba.enums.StaticExplain;
 import com.xiaomai.zhuangba.fragment.authentication.employer.EmployerAuthenticationFragment;
 import com.xiaomai.zhuangba.fragment.authentication.master.MasterAuthenticationFragment;
+import com.xiaomai.zhuangba.fragment.employer.EmployerFragment;
 import com.xiaomai.zhuangba.fragment.login.BaseLoginRegisteredFragment;
 import com.xiaomai.zhuangba.fragment.login.LoginFragment;
+import com.xiaomai.zhuangba.fragment.masterworker.MasterWorkerFragment;
 import com.xiaomai.zhuangba.util.UserInfoUtil;
 
 import butterknife.OnClick;
@@ -64,6 +66,16 @@ public class RoleSelectionFragment extends BaseLoginRegisteredFragment {
     @Override
     public void startEmployerAuthentication() {
         startFragmentAndDestroyCurrent(EmployerAuthenticationFragment.newInstance());
+    }
+
+    @Override
+    public void startMasterWorker() {
+        startFragmentAndDestroyCurrent(MasterWorkerFragment.newInstance());
+    }
+
+    @Override
+    public void startEmployer() {
+        startFragmentAndDestroyCurrent(EmployerFragment.newInstance());
     }
 
     @Override

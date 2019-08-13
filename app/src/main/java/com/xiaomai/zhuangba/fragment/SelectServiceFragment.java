@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -29,6 +30,7 @@ import com.xiaomai.zhuangba.data.module.selectservice.ISelectServiceView;
 import com.xiaomai.zhuangba.data.module.selectservice.SelectServiceModule;
 import com.xiaomai.zhuangba.enums.ForResultCode;
 import com.xiaomai.zhuangba.fragment.base.BaseListFragment;
+import com.xiaomai.zhuangba.fragment.personal.PricingSheetFragment;
 import com.xiaomai.zhuangba.fragment.service.ServiceDetailFragment;
 import com.xiaomai.zhuangba.fragment.service.ShopCarFragment;
 import com.xiaomai.zhuangba.util.SheetBehaviorUtil;
@@ -75,8 +77,8 @@ public class SelectServiceFragment extends BaseListFragment<ISelectServiceModule
      */
     @BindView(R.id.tvServiceContentTitle)
     TextView tvServiceContentTitle;
-    @BindView(R.id.laySelectService)
-    LinearLayout laySelectService;
+    @BindView(R.id.relSelectService)
+    RelativeLayout relSelectService;
     @BindView(R.id.tvSelectServiceTaskNumber)
     TextView tvSelectServiceTaskNumber;
     @BindView(R.id.tvSelectServiceMonty)
@@ -93,6 +95,8 @@ public class SelectServiceFragment extends BaseListFragment<ISelectServiceModule
     RecyclerView rvBottomSheetShop;
     @BindView(R.id.tvShopCarEmpty)
     TextView tvShopCarEmpty;
+    @BindView(R.id.laySelectServiceTip)
+    LinearLayout laySelectServiceTip;
     /**
      * 服务类名称
      */
@@ -167,18 +171,16 @@ public class SelectServiceFragment extends BaseListFragment<ISelectServiceModule
     public void requestMaintenance(final ServiceSubcategoryProject serviceSubcategoryProject, List<Maintenance> maintenanceList) {
         ChoosingGoodsDialog
                 .getInstance()
-                .initView(serviceSubcategoryProject,getActivity())
+                .initView(serviceSubcategoryProject, getActivity())
                 .setTvChoosingGoodsName(serviceSubcategoryProject.getServiceText())
-                .setRvChoosingGoods(getActivity(),serviceSubcategoryProject,maintenanceList)
+                .setRvChoosingGoods(getActivity(), serviceSubcategoryProject, maintenanceList)
                 .setICallBase(new ChoosingGoodsDialog.BaseCallback() {
                     @Override
-                    public void sure(Maintenance maintenance,int count) {
+                    public void sure(Maintenance maintenance, int count) {
                         Log.e("添加数量 = " + count);
                         //确定 添加
-                        if (count > 0) {
-                            ShopCarUtil.saveShopCar(serviceSubcategoryProject,maintenance, count);
-                            sheetBehaviorUpdate();
-                        }
+                        ShopCarUtil.saveShopCar(serviceSubcategoryProject, maintenance, count);
+                        sheetBehaviorUpdate();
                     }
                 })
                 .showDialog();
@@ -209,12 +211,12 @@ public class SelectServiceFragment extends BaseListFragment<ISelectServiceModule
         }
     }
 
-    @OnClick({R.id.itemSelectServiceLayoutFor, R.id.btnSelectServiceNext, R.id.tvShopCarEmpty})
+    @OnClick({R.id.itemSelectServiceLayoutFor, R.id.btnSelectServiceNext, R.id.tvShopCarEmpty, R.id.laySelectServiceTip})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.itemSelectServiceLayoutFor:
                 // TODO: 2019/8/12 0012 暂时 不显示 购物车
-                //弹出 bottomSheetBehavior 根据状态不同显示隐藏
+                ///弹出 bottomSheetBehavior 根据状态不同显示隐藏
                 /*int state = bottomSheetBehavior.getState();
                 if (state == BottomSheetBehavior.STATE_COLLAPSED) {
                     bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
@@ -228,13 +230,16 @@ public class SelectServiceFragment extends BaseListFragment<ISelectServiceModule
                 Log.e("btnSelectServiceNext 点击下一步");
                 Integer totalNumber = ShopCarUtil.getTotalNumber();
                 if (totalNumber != 0) {
-                    startFragmentForResult(ShopCarFragment.newInstance(getServiceId() , getServiceText()) , ForResultCode.START_FOR_RESULT_CODE_.getCode());
+                    startFragmentForResult(ShopCarFragment.newInstance(getServiceId(), getServiceText()), ForResultCode.START_FOR_RESULT_CODE_.getCode());
                 }
                 break;
             case R.id.tvShopCarEmpty:
                 //清空
                 DBHelper.getInstance().getShopCarDataDao().deleteAll();
                 sheetBehaviorUpdate();
+                break;
+            case R.id.laySelectServiceTip:
+                startFragment(PricingSheetFragment.newInstance());
                 break;
             default:
         }
@@ -252,7 +257,7 @@ public class SelectServiceFragment extends BaseListFragment<ISelectServiceModule
             serviceTitleAdapter.setItemChecked(serviceText);
             serviceContentAdapter.setNewData(serviceSubcategory.getServicePoolList());
         }
-        laySelectService.setVisibility(View.VISIBLE);
+        relSelectService.setVisibility(View.VISIBLE);
         itemSelectServiceLayoutFor.setVisibility(View.VISIBLE);
     }
 

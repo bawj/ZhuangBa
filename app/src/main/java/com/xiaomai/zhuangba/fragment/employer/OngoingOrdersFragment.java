@@ -62,6 +62,11 @@ public class OngoingOrdersFragment extends BaseMasterEmployerContentFragment {
     }
 
     @Override
+    public int getEmptyView() {
+        return R.layout.item_ongoing_not_data;
+    }
+
+    @Override
     public BaseQuickAdapter getBaseOrderAdapter() {
         return new OngoingOrdersAdapter();
     }

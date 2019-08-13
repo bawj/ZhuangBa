@@ -1,5 +1,7 @@
 package com.xiaomai.zhuangba.data.module.masteremployer;
 
+import android.text.TextUtils;
+
 import com.example.toollib.data.BaseModule;
 import com.example.toollib.http.HttpResult;
 import com.example.toollib.http.exception.ApiException;
@@ -111,7 +113,11 @@ public class MasterEmployerModule extends BaseModule<IMasterEmployerView> implem
 
     @Override
     public void requestStatisticsData() {
-        RxUtils.getObservable(ServiceUrl.getUserApi().getStatisticalData())
+        String address = mViewRef.get().getAddress();
+        if (!TextUtils.isEmpty(address) && address.equals("全国")){
+            address = "";
+        }
+        RxUtils.getObservable(ServiceUrl.getUserApi().getStatisticalData(TextUtils.isEmpty(address) ? "" : address))
                 .compose(mViewRef.get().<HttpResult<StatisticsData>>bindLifecycle())
                 .subscribe(new BaseHttpRxObserver<StatisticsData>() {
                     @Override

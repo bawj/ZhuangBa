@@ -45,6 +45,11 @@ public class BaseEmployerWalletDetailFragment extends BaseListFragment {
         requestRunningAccount();
     }
 
+    @Override
+    public void onBaseLoadMoreRequested() {
+        requestRunningAccount();
+    }
+
     private void requestRunningAccount() {
         Observable<HttpResult<EmployerWalletDetailBean>> runningAccountDetail = getObservable();
         RxUtils.getObservable(runningAccountDetail)

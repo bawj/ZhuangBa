@@ -300,7 +300,7 @@ public interface IApi {
      * @return observable
      */
     @GET("order/getStatisticalData")
-    Observable<HttpResult<StatisticsData>> getStatisticalData();
+    Observable<HttpResult<StatisticsData>> getStatisticalData(@Query("address") String address);
 
     /**
      * 获取钱包数据
@@ -718,7 +718,7 @@ public interface IApi {
     Observable<HttpResult<EmployerWalletDetailBean>> rechargeRecord(@Field("phoneNumber") String phoneNumber,
                                                                           @Field("team") String team,
                                                                           @Field("wallerType") String wallerType,
-                                                                          @Field("pageNum") int pageNum,
+                                                                          @Field("pageIndex") int pageNum,
                                                                           @Field("pageSize") int pageSize);
 
     /**

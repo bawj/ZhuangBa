@@ -601,4 +601,6 @@
 	<dimen name="tool_lib_297sp">1126.1250sp</dimen>
 	<dimen name="tool_lib_298sp">1129.9167sp</dimen>
 	<dimen name="tool_lib_299sp">1133.7083sp</dimen>
+	<dimen name="tool_lib_380dp">1440.8333dp</dimen>
+	<dimen name="tool_lib_390dp">1478.7500dp</dimen>
 </resources>

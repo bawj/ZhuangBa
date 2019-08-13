@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/relNotData"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+    <ImageView
+        android:id="@+id/ivNotData"
+        android:layout_width="@dimen/tool_lib_156dp"
+        android:layout_height="@dimen/tool_lib_156dp"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/bg_employer_not_null" />
+
+    <TextView
+        android:id="@+id/tvNotData"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ivNotData"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/tool_lib_10dp"
+        android:gravity="center"
+        android:lineSpacingExtra="@dimen/tool_lib_6dp"
+        android:text="@string/be_fully_equipped_for"
+        android:textColor="@color/tool_lib_gray_777777"
+        android:textSize="@dimen/tool_lib_14sp" />
+
+</RelativeLayout>

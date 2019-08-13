@@ -14,6 +14,8 @@ import com.xiaomai.zhuangba.R;
 import com.xiaomai.zhuangba.data.bean.UserInfo;
 import com.xiaomai.zhuangba.data.db.DBHelper;
 import com.xiaomai.zhuangba.enums.StaticExplain;
+import com.xiaomai.zhuangba.fragment.authentication.master.MasterAuthenticationFragment;
+import com.xiaomai.zhuangba.fragment.employer.EmployerFragment;
 import com.xiaomai.zhuangba.fragment.personal.PricingSheetFragment;
 import com.xiaomai.zhuangba.fragment.personal.employer.EmployerPersonalFragment;
 import com.xiaomai.zhuangba.fragment.personal.master.MasterPersonalFragment;
@@ -109,7 +111,7 @@ public class AuthenticationFragment extends BaseFragment {
     }
 
     public void findAuthenticationSuccess(UserInfo userInfo) {
-
+        startFragment(EmployerFragment.newInstance());
     }
 
 }
