@@ -73,7 +73,7 @@ public class ShopCarFragment extends BaseFragment implements ShopCarAdapter.ISho
         if (totalNumber > 0){
             startFragment(SubmitOrderInformationFragment.newInstance(getServiceId(), getServiceText()));
         }else {
-            // TODO: 2019/8/7 0007 可以 Toast
+            ToastUtil.showShort(getString(R.string.please_select_the_service_items));
         }
     }
 

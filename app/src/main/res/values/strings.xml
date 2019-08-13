@@ -418,4 +418,6 @@
     <string name="installation_amount">安装金额（元）</string>
     <string name="maintenance_amount">维保金额（元）</string>
     <string name="service_tip">下单多件有优惠，具体查看价目单</string>
+    <string name="please_choose_the_maintenance_time">请选择维保时长</string>
+    <string name="please_select_the_service_items">请选择服务项目</string>
 </resources>

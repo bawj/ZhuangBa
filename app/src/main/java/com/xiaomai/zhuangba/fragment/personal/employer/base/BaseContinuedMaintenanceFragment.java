@@ -10,6 +10,7 @@ import com.example.toollib.data.IBaseModule;
 import com.example.toollib.http.HttpResult;
 import com.example.toollib.http.observer.BaseHttpRxObserver;
 import com.example.toollib.http.util.RxUtils;
+import com.example.toollib.util.ToastUtil;
 import com.xiaomai.zhuangba.OrderServiceItemDao;
 import com.xiaomai.zhuangba.R;
 import com.xiaomai.zhuangba.adapter.BaseContinuedMaintenanceAdapter;
@@ -72,6 +73,8 @@ public class BaseContinuedMaintenanceFragment extends BaseFragment implements Ba
         if (totalPrice > 0) {
             //确认支付
             confirmationOfPayment();
+        }else {
+            ToastUtil.showShort(getString(R.string.please_choose_the_maintenance_time));
         }
     }
 
