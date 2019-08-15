@@ -38,6 +38,8 @@ public class MaintenancePolicyBean {
     private String residualAmount;
     private String overmanName;
     private String overmanPhone;
+    private String employerName;
+    private String employerPhone;
     private String serviceName;
     private String startTime;
     private String endTime;
@@ -109,6 +111,22 @@ public class MaintenancePolicyBean {
 
     public String getOvermanName() {
         return TextUtils.isEmpty(overmanName) ? "" : overmanName;
+    }
+
+    public String getEmployerName() {
+        return employerName;
+    }
+
+    public void setEmployerName(String employerName) {
+        this.employerName = employerName;
+    }
+
+    public String getEmployerPhone() {
+        return employerPhone;
+    }
+
+    public void setEmployerPhone(String employerPhone) {
+        this.employerPhone = employerPhone;
     }
 
     public void setOvermanName(String overmanName) {

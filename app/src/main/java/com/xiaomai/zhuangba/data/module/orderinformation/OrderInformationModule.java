@@ -68,10 +68,10 @@ public class OrderInformationModule extends BaseModule<IOrderInformationView> im
         if (TextUtils.isEmpty(phoneNumber)) {
             mViewRef.get().showToast(mContext.get().getString(R.string.please_input_telephone));
             return;
-        } else if (!RegexUtils.isMobileSimple(phoneNumber)) {
+        }/* else if (!RegexUtils.isMobileSimple(phoneNumber)) {
             mViewRef.get().showToast(mContext.get().getString(R.string.incorrect_format_of_mobile_phone_number));
             return;
-        }
+        }*/
         hashMap.put("telephone", phoneNumber);
         //地址
         String address = mViewRef.get().getAddress();
@@ -153,10 +153,10 @@ public class OrderInformationModule extends BaseModule<IOrderInformationView> im
         if (TextUtils.isEmpty(phoneNumber)) {
             mViewRef.get().showToast(mContext.get().getString(R.string.please_input_telephone));
             return null;
-        } else if (!RegexUtils.isMobileSimple(phoneNumber)) {
+        } /*else if (!RegexUtils.isMobileSimple(phoneNumber)) {
             mViewRef.get().showToast(mContext.get().getString(R.string.incorrect_format_of_mobile_phone_number));
             return null;
-        }
+        }*/
         hashMap.put("telephone", phoneNumber);
         //地址
         String address = mViewRef.get().getAddress();
@@ -194,7 +194,7 @@ public class OrderInformationModule extends BaseModule<IOrderInformationView> im
         //计算 维保总金额
         Double maintenanceMoney = 0d;
         for (ShopCarData shopCarData : list) {
-            maintenanceMoney += DensityUtils.stringTypeDouble(shopCarData.getMaintenanceMoney());
+            maintenanceMoney += (DensityUtils.stringTypeDouble(shopCarData.getMaintenanceMoney()) * DensityUtils.stringTypeInteger(shopCarData.getNumber()));
         }
         hashMap.put("maintenanceAmount" , maintenanceMoney);
         //服务项目信息
@@ -227,9 +227,11 @@ public class OrderInformationModule extends BaseModule<IOrderInformationView> im
             //如果有维保 则ID != -1
           if (shopCarData.getMaintenanceId() != ConstantUtil.DEF_MAINTENANCE){
                 //维保时间 单位（月）
-                orderServicesBean.setMonthNumber(DensityUtils.stringTypeInteger(shopCarData.getNumber()));
-                //维保 金额
-                orderServicesBean.setMaintenanceAmount(DensityUtils.stringTypeDouble(shopCarData.getMaintenanceMoney()));
+                orderServicesBean.setMonthNumber(DensityUtils.stringTypeInteger(shopCarData.getMaintenanceTime()));
+                //维保 金额 * 项目数量
+              double maintenanceAmount = DensityUtils.stringTypeDouble(shopCarData.getMaintenanceMoney())
+                      * DensityUtils.stringTypeInteger(shopCarData.getNumber());
+                orderServicesBean.setMaintenanceAmount(maintenanceAmount);
             }
             orderServicesBeans.add(orderServicesBean);
         }

@@ -10,7 +10,7 @@ import com.example.toollib.http.util.RxUtils;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.xiaomai.zhuangba.R;
-import com.xiaomai.zhuangba.adapter.BaseEmployerWalletDetailAdapter;
+import com.xiaomai.zhuangba.adapter.EmployerWalletDetailAdapter;
 import com.xiaomai.zhuangba.data.bean.EmployerWalletDetailBean;
 import com.xiaomai.zhuangba.enums.StaticExplain;
 import com.xiaomai.zhuangba.fragment.base.BaseListFragment;
@@ -24,12 +24,10 @@ import io.reactivex.Observable;
  * @author Administrator
  * @date 2019/8/9 0009
  */
-public class BaseEmployerWalletDetailFragment extends BaseListFragment {
+public class BaseEmployerWalletDetailFragment<T extends BaseQuickAdapter> extends BaseListFragment {
 
     @BindView(R.id.refreshBaseList)
     SmartRefreshLayout refreshLayout;
-
-    private BaseEmployerWalletDetailAdapter baseEmployerWalletDetailAdapter;
 
     public static BaseEmployerWalletDetailFragment newInstance() {
         Bundle args = new Bundle();
@@ -37,7 +35,6 @@ public class BaseEmployerWalletDetailFragment extends BaseListFragment {
         fragment.setArguments(args);
         return fragment;
     }
-
 
     @Override
     public void onBaseRefresh(RefreshLayout refreshLayout) {
@@ -60,10 +57,10 @@ public class BaseEmployerWalletDetailFragment extends BaseListFragment {
                         List<EmployerWalletDetailBean.ListBean> employerWalletDetailBeanListList = employerWalletDetailBeanList.getList();
                         if (getPage() != StaticExplain.PAGE_NUMBER.getCode()) {
                             //加载
-                            baseEmployerWalletDetailAdapter.addData(employerWalletDetailBeanListList);
+                            baseListAdapter.addData(employerWalletDetailBeanListList);
                         } else {
                             //刷新
-                            baseEmployerWalletDetailAdapter.setNewData(employerWalletDetailBeanListList);
+                            baseListAdapter.setNewData(employerWalletDetailBeanListList);
                             finishRefresh();
                         }
                         if (employerWalletDetailBeanListList.size() < StaticExplain.PAGE_NUM.getCode()) {
@@ -84,14 +81,13 @@ public class BaseEmployerWalletDetailFragment extends BaseListFragment {
                 });
     }
 
-    public Observable<HttpResult<EmployerWalletDetailBean>> getObservable() {
-        return null;
-    }
-
     @Override
     public BaseQuickAdapter getBaseListAdapter() {
-        baseEmployerWalletDetailAdapter = new BaseEmployerWalletDetailAdapter();
-        return baseEmployerWalletDetailAdapter;
+        return new EmployerWalletDetailAdapter();
+    }
+
+    public Observable<HttpResult<EmployerWalletDetailBean>> getObservable() {
+        return null;
     }
 
     @Override

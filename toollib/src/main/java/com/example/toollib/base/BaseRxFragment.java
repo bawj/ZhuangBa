@@ -78,26 +78,29 @@ public abstract class BaseRxFragment extends QMUIFragment implements LifecyclePr
 
     @Override
     public void onPause() {
-        Log.e("rxFragment onPause");
-        lifecycleSubject.onNext(FragmentEvent.PAUSE);
+       // lifecycleSubject.onNext(FragmentEvent.PAUSE);
         super.onPause();
     }
 
     @Override
     public void onStop() {
-        Log.e("rxFragment onStop");
-        lifecycleSubject.onNext(FragmentEvent.STOP);
+       // lifecycleSubject.onNext(FragmentEvent.STOP);
         super.onStop();
     }
 
     @Override
     public void onDestroyView() {
-        lifecycleSubject.onNext(FragmentEvent.DESTROY_VIEW);
+        Log.e("rxFragment onDestroyView");
+        //lifecycleSubject.onNext(FragmentEvent.DESTROY_VIEW);
         super.onDestroyView();
     }
 
     @Override
     public void onDestroy() {
+        Log.e("rxFragment onDestroy");
+        lifecycleSubject.onNext(FragmentEvent.PAUSE);
+        lifecycleSubject.onNext(FragmentEvent.STOP);
+        lifecycleSubject.onNext(FragmentEvent.DESTROY_VIEW);
         lifecycleSubject.onNext(FragmentEvent.DESTROY);
         super.onDestroy();
     }

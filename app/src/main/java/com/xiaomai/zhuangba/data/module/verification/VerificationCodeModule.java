@@ -24,9 +24,9 @@ public class VerificationCodeModule<V extends IVerificationCodeView> extends Bas
     public void getAuthenticationCode(final String phoneNumber, String type) {
         if (TextUtils.isEmpty(phoneNumber)) {
             mViewRef.get().showToast(PretendApplication.getInstance().getString(R.string.please_enter_your_cell_phone_number));
-        } else if (!RegexUtils.isMobileSimple(phoneNumber)) {
+        } /*else if (!RegexUtils.isMobileSimple(phoneNumber)) {
             mViewRef.get().showToast(PretendApplication.getInstance().getString(R.string.incorrect_format_of_mobile_phone_number));
-        } else {
+        } */else {
             //开始计时
             RxUtils.getObservable(ServiceUrl.getUserApi().getAuthenticationCode(phoneNumber, type)
                     .compose(mViewRef.get().<HttpResult<Object>>bindLifecycle()))

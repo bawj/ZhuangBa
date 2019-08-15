@@ -47,6 +47,7 @@
                             android:layout_marginStart="@dimen/tool_lib_46dp"
                             android:layout_marginLeft="@dimen/tool_lib_46dp"
                             android:layout_marginTop="@dimen/tool_lib_64dp"
+                            android:visibility="gone"
                             android:text="@string/waiting_for_orders"
                             android:textColor="@android:color/white"
                             android:textSize="@dimen/tool_lib_18sp" />

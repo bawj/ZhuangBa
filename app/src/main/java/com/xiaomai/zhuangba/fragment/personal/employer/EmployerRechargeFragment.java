@@ -11,15 +11,19 @@ import com.example.toollib.data.base.BaseCallback;
 import com.example.toollib.http.HttpResult;
 import com.example.toollib.http.observer.BaseHttpRxObserver;
 import com.example.toollib.http.util.RxUtils;
-import com.example.toollib.util.DensityUtils;
 import com.example.toollib.util.Log;
 import com.example.toollib.util.ToastUtil;
 import com.xiaomai.zhuangba.R;
+import com.xiaomai.zhuangba.data.bean.MessageEvent;
 import com.xiaomai.zhuangba.data.bean.PayData;
 import com.xiaomai.zhuangba.data.bean.PlayModule;
 import com.xiaomai.zhuangba.enums.StringTypeExplain;
 import com.xiaomai.zhuangba.http.ServiceUrl;
 import com.xiaomai.zhuangba.weight.MonitorPayCheckBox;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -54,6 +58,7 @@ public class EmployerRechargeFragment extends BaseFragment {
 
     @Override
     public void initView() {
+        EventBus.getDefault().register(this);
         new MonitorPayCheckBox()
                 .setChkWeChatBalance(chkPaymentWeChat)
                 .setChkAlipayBalance(chkPaymentPlay);
@@ -86,6 +91,7 @@ public class EmployerRechargeFragment extends BaseFragment {
                                     @Override
                                     public void onSuccess(Object obj) {
                                         //充值成功
+                                        successfulRecharge();
                                     }
                                 });
                             } else {
@@ -96,6 +102,22 @@ public class EmployerRechargeFragment extends BaseFragment {
         }
     }
 
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onWeChatSuccess(MessageEvent messageEvent) {
+        switch (messageEvent.getErrCode()) {
+            case 0:
+                //微信支付成功
+                showToast(getString(R.string.payment_success));
+                successfulRecharge();
+                break;
+            default:
+        }
+    }
+
+    private void successfulRecharge() {
+        popBackStack();
+    }
+
     @Override
     public int getContentView() {
         return R.layout.fragment_employer_recharge;
@@ -104,5 +126,11 @@ public class EmployerRechargeFragment extends BaseFragment {
     @Override
     protected String getActivityTitle() {
         return getString(R.string.recharge);
+    }
+
+    @Override
+    public void onDestroy() {
+        EventBus.getDefault().unregister(this);
+        super.onDestroy();
     }
 }

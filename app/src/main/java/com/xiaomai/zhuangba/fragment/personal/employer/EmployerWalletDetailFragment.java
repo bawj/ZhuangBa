@@ -2,8 +2,10 @@ package com.xiaomai.zhuangba.fragment.personal.employer;
 
 import android.os.Bundle;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.toollib.http.HttpResult;
 import com.xiaomai.zhuangba.R;
+import com.xiaomai.zhuangba.adapter.EmployerWalletDetailAdapter;
 import com.xiaomai.zhuangba.data.bean.EmployerWalletDetailBean;
 import com.xiaomai.zhuangba.data.bean.UserInfo;
 import com.xiaomai.zhuangba.data.db.DBHelper;
@@ -39,6 +41,11 @@ public class EmployerWalletDetailFragment extends BaseEmployerWalletDetailFragme
         String phoneNumber = unique.getPhoneNumber();
         String team = unique.getTeam();
         return ServiceUrl.getUserApi().getRunningAccountDetail(phoneNumber, team, getPage(), StaticExplain.PAGE_NUM.getCode());
+    }
+
+    @Override
+    public BaseQuickAdapter getBaseListAdapter() {
+        return new EmployerWalletDetailAdapter();
     }
 
     @Override

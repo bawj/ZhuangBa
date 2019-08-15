@@ -177,10 +177,18 @@ public class DateUtil {
      * @return 返回转化后的Date类型的时间
      */
     public static DateTime strToDate(String dateTimeStr, String formatStr) {
-        //根据时间表达式生成DateTimeFormatter对象
-        DateTimeFormatter fmt = DateTimeFormat.forPattern(formatStr);
-        //2019-10-28T10:23:12.000+08:00
-        return fmt.parseDateTime(dateTimeStr);
+        try {
+            if (TextUtils.isEmpty(dateTimeStr) || TextUtils.isEmpty(formatStr)){
+                return new DateTime();
+            }
+            //根据时间表达式生成DateTimeFormatter对象
+            DateTimeFormatter fmt = DateTimeFormat.forPattern(formatStr);
+            //2019-10-28T10:23:12.000+08:00
+            return fmt.parseDateTime(dateTimeStr);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return new DateTime();
     }
 
 

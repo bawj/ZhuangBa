@@ -36,7 +36,7 @@ public class BaseListFragment<M extends IBaseModule,T extends BaseQuickAdapter> 
      * page 默认值
      */
     private int page = StaticExplain.PAGE_NUMBER.getCode();
-    private T baseListAdapter;
+    public T baseListAdapter;
 
     @Override
     public void initView() {

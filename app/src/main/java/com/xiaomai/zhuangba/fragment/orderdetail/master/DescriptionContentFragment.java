@@ -7,11 +7,11 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Environment;
-import android.util.Log;
 import android.view.View;
 
 import com.example.toollib.base.BaseFragment;
 import com.example.toollib.data.IBaseModule;
+import com.example.toollib.util.Log;
 import com.xiaomai.zhuangba.R;
 import com.xiaomai.zhuangba.enums.ForResultCode;
 import com.xiaomai.zhuangba.weight.description.SignaturePad;
@@ -55,11 +55,15 @@ public class DescriptionContentFragment extends BaseFragment {
 
     @OnClick(R.id.btnDescriptionContent)
     public void onViewClicked() {
-        Bitmap signatureBitmap = mSignaturePad.getSignatureBitmap();
-        String photoPath = addJpgSignatureToGallery(signatureBitmap);
-        Intent bundle = new Intent();
-        bundle.putExtra(PHOTO_PATH , photoPath);
-        setFragmentResult(ForResultCode.RESULT_OK.getCode(), bundle);
+        boolean empty = mSignaturePad.isEmpty();
+        Log.e("签名是否为空" + empty);
+        if (!empty){
+            Bitmap signatureBitmap = mSignaturePad.getSignatureBitmap();
+            String photoPath = addJpgSignatureToGallery(signatureBitmap);
+            Intent bundle = new Intent();
+            bundle.putExtra(PHOTO_PATH , photoPath);
+            setFragmentResult(ForResultCode.RESULT_OK.getCode(), bundle);
+        }
         popBackStack();
     }
 
@@ -79,7 +83,7 @@ public class DescriptionContentFragment extends BaseFragment {
         File file = new File(Environment.getExternalStoragePublicDirectory(
                 Environment.DIRECTORY_PICTURES), albumName);
         if (!file.mkdirs()) {
-            Log.e("SignaturePad", "Directory not created");
+            Log.e("SignaturePad" + "Directory not created");
         }
         return file;
     }

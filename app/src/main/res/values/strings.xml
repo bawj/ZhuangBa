@@ -95,7 +95,7 @@
     <string name="successful_payment_tip">正在寻找合适的师傅接单&#8230;</string>
     <string name="receipt">确认接单</string>
     <string name="order_detail">订单详情</string>
-    <string name="change_information_restart">更改信息重新发起</string>
+    <string name="change_information_restart">修改订单</string>
     <string name="cancel_order_employer_msg">取消后系统将不会再分配该任务给师傅,确认取消任务？</string>
     <string name="cancel_order_employer_msg_">师傅已出发，此时取消订单将支付一定的补偿费用，详见协议 </string>
     <string name="cancel_the_order">取消接单</string>

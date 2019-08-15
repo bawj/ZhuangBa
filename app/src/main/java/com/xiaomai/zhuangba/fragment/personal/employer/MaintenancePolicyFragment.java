@@ -101,9 +101,9 @@ public class MaintenancePolicyFragment extends BaseListFragment implements Maint
         orderServiceItem.setServiceText(item.getServiceName());
         orderServiceItem.setAmount(DensityUtils.stringTypeDouble(item.getAmount()));
         orderServiceItem.setIconUrl(item.getServiceImg());
-        orderServiceItem.setMonthNumber(item.getNumber());
+        //orderServiceItem.setMonthNumber(item.getNumber());
         orderServiceItem.setNumber(item.getServiceNumber());
-        orderServiceItem.setMaintenanceAmount(DensityUtils.stringTypeDouble(item.getAmount()));
+        //orderServiceItem.setMaintenanceAmount(DensityUtils.stringTypeDouble(item.getAmount()));
         orderServiceItems.add(orderServiceItem);
         DBHelper.getInstance().getOrderServiceItemDao().insertInTx(orderServiceItems);
         startFragment(ContinuedMaintenanceFragment.newInstance());

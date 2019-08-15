@@ -1,5 +1,6 @@
 package com.xiaomai.zhuangba.adapter;
 
+import android.text.TextUtils;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -35,22 +36,25 @@ public class MasterMaintenancePolicyAdapter extends BaseQuickAdapter<Maintenance
         tvChargeMaintenance.setText(mContext.getString(R.string.maintenance_time, String.valueOf(item.getNumber())));
         //客户姓名
         TextView tvCustomerName = helper.getView(R.id.tvCustomerName);
-        tvCustomerName.setText(item.getOvermanName());
+        tvCustomerName.setText(item.getEmployerName());
         //联系方式
         TextView tvContactInformation = helper.getView(R.id.tvContactInformation);
-        tvContactInformation.setText(item.getOvermanPhone());
+        tvContactInformation.setText(item.getEmployerPhone());
         //结束时间
         String endTime = item.getEndTime();
-        TextView tvEndingTime = helper.getView(R.id.tvEndingTime);
-        tvEndingTime.setText(DateUtil.dateToFormat(endTime , "yyyy-MM-dd" , "yyyy/MM/dd"));
-
+        if (!TextUtils.isEmpty(endTime)){
+            TextView tvEndingTime = helper.getView(R.id.tvEndingTime);
+            tvEndingTime.setText(DateUtil.dateToFormat(endTime , "yyyy-MM-dd" , "yyyy/MM/dd"));
+        }
         //入账时间
         TextView tvAccountingTime = helper.getView(R.id.tvAccountingTime);
-        DateTime dateTime = DateUtil.strToDate(endTime, "yyyy-MM-dd");
-        //往后推两天 为入账时间
-        dateTime = dateTime.plusDays(2);
-        int dayOfYear = dateTime.getDayOfMonth();
-        tvAccountingTime.setText(mContext.getString(R.string.accounting_time , String.valueOf(dayOfYear)));
+        if (!TextUtils.isEmpty(endTime)){
+            DateTime dateTime = DateUtil.strToDate(endTime, "yyyy-MM-dd");
+            //往后推两天 为入账时间
+            dateTime = dateTime.plusDays(2);
+            int dayOfYear = dateTime.getDayOfMonth();
+            tvAccountingTime.setText(mContext.getString(R.string.accounting_time , String.valueOf(dayOfYear)));
+        }
         //入账金额
         TextView tvAccountingAmount = helper.getView(R.id.tvAccountingAmount);
         double earningsMoney = item.getEarningsMoney();

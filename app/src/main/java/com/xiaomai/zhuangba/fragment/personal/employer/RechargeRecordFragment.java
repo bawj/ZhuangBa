@@ -2,8 +2,10 @@ package com.xiaomai.zhuangba.fragment.personal.employer;
 
 import android.os.Bundle;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.toollib.http.HttpResult;
 import com.xiaomai.zhuangba.R;
+import com.xiaomai.zhuangba.adapter.RechargeRecordAdapter;
 import com.xiaomai.zhuangba.data.bean.EmployerWalletDetailBean;
 import com.xiaomai.zhuangba.data.bean.UserInfo;
 import com.xiaomai.zhuangba.data.db.DBHelper;
@@ -34,6 +36,11 @@ public class RechargeRecordFragment extends BaseEmployerWalletDetailFragment {
         String team = unique.getTeam();
         return ServiceUrl.getUserApi().rechargeRecord(phoneNumber, team, String.valueOf(StaticExplain.RECHARGE_RECORD.getCode())
                 , getPage(), StaticExplain.PAGE_NUM.getCode());
+    }
+
+    @Override
+    public BaseQuickAdapter getBaseListAdapter() {
+        return new RechargeRecordAdapter();
     }
 
     @Override

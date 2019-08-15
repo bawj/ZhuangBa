@@ -29,16 +29,15 @@ public enum StaticExplain {
     ORDINARY_STAFF(3, "普通员工"),
     YES_MAINTENANCE(1, "有维保"),
     NO_MAINTENANCE(0, "没有维保"),
-    INCOME(1, "支出"),
-    EXPENDITURE(2, "收入"),
+    EXPENDITURE(1, "收入"),
+    INCOME(2, "支出"),
     PAYMENT_OF_SERVICE_ITEMS(3, "雇主服务项目支付"),
     RECHARGE_RECORD(7, "充值记录"),
     RECORDS_OF_CONSUMPTION(8, "消费记录"),
     SAME_DAY(0, "当日"),
     THIS_WEEK(1, "本周"),
     THIS_MONTH(2, "本月"),
-    THIS_QUARTER(3, "本季度"),
-    ;
+    THIS_QUARTER(3, "本季度"),;
     /**
      * 状态
      */
