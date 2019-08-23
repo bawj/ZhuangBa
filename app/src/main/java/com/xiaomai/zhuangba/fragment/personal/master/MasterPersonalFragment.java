@@ -1,10 +1,13 @@
 package com.xiaomai.zhuangba.fragment.personal.master;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.example.toollib.manager.GlideManager;
 import com.xiaomai.zhuangba.R;
 import com.xiaomai.zhuangba.data.bean.UserInfo;
 import com.xiaomai.zhuangba.data.db.DBHelper;
@@ -26,6 +29,10 @@ import butterknife.OnClick;
  */
 public class MasterPersonalFragment extends PersonalFragment {
 
+    @BindView(R.id.ivUserHead)
+    ImageView ivUserHead;
+    @BindView(R.id.tvPersonalName)
+    TextView tvPersonalName;
     @BindView(R.id.tvPersonalTodayNumbers)
     TextView tvPersonalTodayNumbers;
     @BindView(R.id.tvPersonalTodayIncome)
@@ -77,9 +84,12 @@ public class MasterPersonalFragment extends PersonalFragment {
         } else if (masterRankId.equals(String.valueOf(StaticExplain.OBSERVER.getCode()))) {
             tvPersonalStatus.setText(getString(R.string.observer));
         }
+
+        tvPersonalName.setText(TextUtils.isEmpty(userInfo.getUserText()) ? getString(R.string.no_certification) : userInfo.getUserText());
+        GlideManager.loadCircleImage(getActivity(), userInfo.getBareHeadedPhotoUrl(), ivUserHead, R.drawable.bg_def_head);
     }
 
-    @OnClick({R.id.relWallet, R.id.relPersonalScopeOfService,R.id.relPlatformMaster,R.id.relMasterMaintenance})
+    @OnClick({R.id.relWallet, R.id.relPersonalScopeOfService, R.id.relPlatformMaster, R.id.relMasterMaintenance})
     public void onMasterViewClicked(View view) {
         switch (view.getId()) {
             case R.id.relWallet:

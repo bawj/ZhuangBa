@@ -39,7 +39,7 @@ import static com.xiaomai.zhuangba.weight.PhotoTool.GET_IMAGE_BY_CAMERA;
  * <p>
  * 拍照 和签名
  */
-public class BaseAutographFragment extends BaseFragment implements MultiGraphSelectionAdapter.OnMultiGraphClickListener{
+public class BaseAutographFragment extends BaseFragment implements MultiGraphSelectionAdapter.OnMultiGraphClickListener {
     @BindView(R.id.tvBaseAutographImgTip)
     TextView tvBaseAutographImgTip;
     @BindView(R.id.recyclerBeforeInstallation)
@@ -54,7 +54,9 @@ public class BaseAutographFragment extends BaseFragment implements MultiGraphSel
     @BindView(R.id.ivSubmitDescription)
     ImageView ivSubmitDescription;
 
-    /** 拍照图片保存 */
+    /**
+     * 拍照图片保存
+     */
     public List<Uri> mediaSelectorFiles = new ArrayList<>();
     private MultiGraphSelectionAdapter multiGraphSelectionAdapter;
     private Uri imageUriFromCamera;
@@ -107,6 +109,7 @@ public class BaseAutographFragment extends BaseFragment implements MultiGraphSel
                 intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUriFromCamera);
                 startActivityForResult(intent, GET_IMAGE_BY_CAMERA);
             }
+
             @Override
             public void onFail(Object obj) {
                 showToast(getString(R.string.please_open_permissions));

@@ -52,6 +52,7 @@ public class ChoosingGoodsDialog {
     public ChoosingGoodsDialog initView(final ServiceSubcategoryProject serviceSubcategoryProject, final Context mContext) {
         View view = LayoutInflater.from(mContext).inflate(R.layout.dialog_choosing_goods, null);
         alertDialog = new AlertDialog.Builder(mContext).create();
+
         //关闭
         ImageView ivChoosingGoodsClose = view.findViewById(R.id.ivChoosingGoodsClose);
         //添加 商品

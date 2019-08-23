@@ -1,30 +1,33 @@
 package com.xiaomai.zhuangba.fragment.personal.wallet.paydeposit;
 
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.LinearLayout;
 import android.widget.RadioButton;
-import android.widget.TextView;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.toollib.base.BaseFragment;
 import com.example.toollib.http.HttpResult;
 import com.example.toollib.http.observer.BaseHttpRxObserver;
 import com.example.toollib.http.util.RxUtils;
 import com.xiaomai.zhuangba.R;
+import com.xiaomai.zhuangba.adapter.PayDepositAdapter;
 import com.xiaomai.zhuangba.data.bean.MessageEvent;
+import com.xiaomai.zhuangba.data.bean.PayDepositBean;
 import com.xiaomai.zhuangba.data.bean.UserInfo;
 import com.xiaomai.zhuangba.data.db.DBHelper;
-import com.xiaomai.zhuangba.enums.StaticExplain;
 import com.xiaomai.zhuangba.fragment.personal.agreement.WebViewFragment;
 import com.xiaomai.zhuangba.fragment.personal.wallet.PaymentSuccessFragment;
 import com.xiaomai.zhuangba.http.ServiceUrl;
 import com.xiaomai.zhuangba.util.ConstantUtil;
 import com.xiaomai.zhuangba.weight.MonitorPayCheckBox;
-import com.xiaomai.zhuangba.weight.MonitorPayDepositCheckBox;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -34,35 +37,21 @@ import butterknife.OnClick;
  * @date 2019/8/1 0001
  * 缴纳保证金
  */
-public class PayDepositFragment extends BaseFragment<IPayDepositModule> implements IPayDepositView {
+public class PayDepositFragment extends BaseFragment<IPayDepositModule> implements IPayDepositView,
+        BaseQuickAdapter.OnItemClickListener, PayDepositAdapter.IPayDepositInterface {
 
     @BindView(R.id.chkPaymentWeChat)
     RadioButton chkPaymentWeChat;
     @BindView(R.id.chkPaymentPlay)
     RadioButton chkPaymentPlay;
-
-    @BindView(R.id.tvDepositTitle)
-    TextView tvDepositTitle;
-    @BindView(R.id.tvPayDepositMoney)
-    TextView tvPayDepositMoney;
-    @BindView(R.id.tvPayDepositMsg)
-    TextView tvPayDepositMsg;
-    @BindView(R.id.chkPayDepositMoney)
-    RadioButton chkPayDepositMoney;
-
-    @BindView(R.id.tvDepositTitleTwo)
-    TextView tvDepositTitleTwo;
-    @BindView(R.id.tvPayDepositMoneyTwo)
-    TextView tvPayDepositMoneyTwo;
-    @BindView(R.id.tvPayDepositMsgTwo)
-    TextView tvPayDepositMsgTwo;
-    @BindView(R.id.chkPayDepositMoneyTwo)
-    RadioButton chkPayDepositMoneyTwo;
-
-    @BindView(R.id.layPayDepositMoney)
-    LinearLayout layPayDepositMoney;
+    @BindView(R.id.rvPayDeposit)
+    RecyclerView rvPayDeposit;
 
     private UserInfo userInfo;
+    private String money = "";
+    private PayDepositBean payDepositBean;
+    private PayDepositAdapter payDepositAdapter;
+    private List<PayDepositBean> depositBeanList;
 
     public static PayDepositFragment newInstance() {
         Bundle args = new Bundle();
@@ -81,19 +70,41 @@ public class PayDepositFragment extends BaseFragment<IPayDepositModule> implemen
         EventBus.getDefault().register(this);
         userInfo = DBHelper.getInstance().getUserInfoDao().queryBuilder().unique();
 
+        rvPayDeposit.setLayoutManager(new LinearLayoutManager(getActivity()));
+        payDepositAdapter = new PayDepositAdapter();
+        payDepositAdapter.setOnItemClickListener(this);
+        payDepositAdapter.setCallBack(this);
+        rvPayDeposit.setAdapter(payDepositAdapter);
+
         new MonitorPayCheckBox()
                 .setChkWeChatBalance(chkPaymentWeChat)
                 .setChkAlipayBalance(chkPaymentPlay);
-        new MonitorPayDepositCheckBox()
-                .setPayDeposit(chkPayDepositMoney)
-                .setPayDepositTwo(chkPayDepositMoneyTwo);
 
-        if (userInfo.getMasterRankId().equals(String.valueOf(StaticExplain.INTERNSHIP.getCode()))) {
-            //实习师傅
-            layPayDepositMoney.setVisibility(View.GONE);
-            chkPayDepositMoneyTwo.setChecked(true);
-        }
         iModule.requestPayDeposit();
+    }
+
+    @Override
+    public void requestPayDeposit(List<PayDepositBean> depositBeanList) {
+        this.depositBeanList = depositBeanList;
+        payDepositAdapter.setNewData(depositBeanList);
+        if (!depositBeanList.isEmpty()) {
+            int masterRankId = depositBeanList.get(0).getMasterRankId();
+            payDepositBean = depositBeanList.get(0);
+            payDepositAdapter.notifyPayDeposit(masterRankId);
+        }
+    }
+
+    @Override
+    public void callBack(PayDepositBean item) {
+        payDepositBean = item;
+    }
+
+    @Override
+    public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+        if (!depositBeanList.isEmpty()) {
+            int masterRankId = depositBeanList.get(position).getMasterRankId();
+            payDepositAdapter.notifyPayDeposit(masterRankId);
+        }
     }
 
     @OnClick({R.id.btnDepositToPay, R.id.tvRule})
@@ -122,42 +133,9 @@ public class PayDepositFragment extends BaseFragment<IPayDepositModule> implemen
     }
 
     @Override
-    public void setTvPayDepositMoney(String s) {
-        tvPayDepositMoney.setText(s);
-    }
-
-    @Override
-    public void setTvDepositTitle(String masterRankName) {
-        tvDepositTitle.setText(masterRankName);
-    }
-
-    @Override
-    public void setTvPayDepositMsg(String explain) {
-        tvPayDepositMsg.setText(explain);
-    }
-
-    @Override
-    public void setTvPayDepositMoneyTwo(String bond) {
-        tvPayDepositMoneyTwo.setText(bond);
-    }
-
-    @Override
-    public void setTvDepositTitleTwo(String masterRankName) {
-        tvDepositTitleTwo.setText(masterRankName);
-    }
-
-    @Override
-    public void setTvPayDepositMsgTwo(String explain) {
-        tvPayDepositMsgTwo.setText(explain);
-    }
-
-    @Override
     public String getMoney() {
-        String money;
-        if (chkPayDepositMoney.isChecked()) {
-            money = tvPayDepositMoney.getText().toString();
-        } else {
-            money = tvPayDepositMoneyTwo.getText().toString();
+        if (payDepositBean != null) {
+            return String.valueOf(payDepositBean.getBond());
         }
         return money;
     }
@@ -185,7 +163,6 @@ public class PayDepositFragment extends BaseFragment<IPayDepositModule> implemen
                     }
                 });
     }
-
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onWeChatSuccess(MessageEvent messageEvent) {

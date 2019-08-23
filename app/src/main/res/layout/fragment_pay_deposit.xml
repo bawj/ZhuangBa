@@ -1,237 +1,124 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/tool_lib_gray_F5F8FA"
     android:orientation="vertical">
 
     <LinearLayout
-        android:id="@+id/layPayDepositMoney"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/tool_lib_10dp"
-        android:background="@android:color/white"
-        android:orientation="vertical"
-        android:paddingLeft="@dimen/tool_lib_16dp"
-        android:paddingRight="@dimen/tool_lib_16dp">
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/tool_lib_23dp">
-
-            <TextView
-                android:id="@+id/tvPayDepositMoney"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:textColor="@color/tool_lib_gray_222222"
-                android:textSize="@dimen/tool_lib_30sp"
-                android:text="@string/zero" />
-
-            <TextView
-                android:id="@+id/tvDepositTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="@dimen/tool_lib_12dp"
-                android:layout_marginLeft="@dimen/tool_lib_12dp"
-                android:layout_toEndOf="@+id/chkPayDepositMoney"
-                android:layout_toRightOf="@+id/chkPayDepositMoney"
-                android:textColor="@color/tool_lib_gray_222222"
-                android:textSize="@dimen/tool_lib_14sp"
-                android:text="@string/internship_master" />
-
-            <RadioButton
-                android:id="@+id/chkPayDepositMoney"
-                style="@style/CustomPayDepositMoney"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:checked="true" />
-        </RelativeLayout>
-
-        <View
-            style="@style/tool_lib_horizontal_line"
-            android:layout_marginTop="@dimen/tool_lib_19dp"
-            android:layout_marginBottom="@dimen/tool_lib_12dp" />
-
-        <TextView
-            android:id="@+id/tvPayDepositMsg"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/tool_lib_12dp"
-            android:textColor="@color/tool_lib_gray_777777"
-            android:textSize="@dimen/tool_lib_12sp"
-            tools:text="缴纳保证金后才能接收到任务哦，保证金可以随时退还！" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/tool_lib_8dp"
-        android:background="@android:color/white"
-        android:orientation="vertical"
-        android:paddingLeft="@dimen/tool_lib_16dp"
-        android:paddingRight="@dimen/tool_lib_16dp">
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/tool_lib_23dp">
-
-            <TextView
-                android:id="@+id/tvPayDepositMoneyTwo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:textColor="@color/tool_lib_gray_222222"
-                android:textSize="@dimen/tool_lib_30sp"
-                android:text="@string/zero" />
-
-            <TextView
-                android:id="@+id/tvDepositTitleTwo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/tool_lib_12dp"
-                android:layout_marginLeft="@dimen/tool_lib_12dp"
-                android:layout_toEndOf="@+id/chkPayDepositMoneyTwo"
-                android:layout_toRightOf="@+id/chkPayDepositMoneyTwo"
-                android:textColor="@color/tool_lib_gray_222222"
-                android:textSize="@dimen/tool_lib_14sp"
-                android:text="@string/formal_master" />
-
-            <RadioButton
-                android:id="@+id/chkPayDepositMoneyTwo"
-                style="@style/CustomPayDepositMoney"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-        </RelativeLayout>
-
-        <View
-            style="@style/tool_lib_horizontal_line"
-            android:layout_marginTop="@dimen/tool_lib_12dp" />
-
-        <TextView
-            android:id="@+id/tvPayDepositMsgTwo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/tool_lib_12dp"
-            android:layout_marginBottom="@dimen/tool_lib_12dp"
-            android:textColor="@color/tool_lib_gray_777777"
-            android:textSize="@dimen/tool_lib_12sp"
-            tools:text="缴纳保证金后才能接收到任务哦，保证金可以随时退还！" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/layPaymentDetails"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/tool_lib_8dp"
-        android:background="@android:color/white"
         android:orientation="vertical">
 
-        <!--微信-->
-        <RelativeLayout
-            android:id="@+id/relPaymentWeChat"
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rvPayDeposit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <LinearLayout
+            android:id="@+id/layPaymentDetails"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/tool_lib_12dp">
+            android:layout_marginTop="@dimen/tool_lib_8dp"
+            android:background="@android:color/white"
+            android:orientation="vertical">
+
+            <!--微信-->
+            <RelativeLayout
+                android:id="@+id/relPaymentWeChat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/tool_lib_12dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="@dimen/tool_lib_12dp"
+                    android:layout_marginLeft="@dimen/tool_lib_12dp"
+                    android:text="@string/we_chat"
+                    android:textColor="@color/tool_lib_gray_222222"
+                    android:textSize="@dimen/tool_lib_14sp" />
+
+                <RadioButton
+                    android:id="@+id/chkPaymentWeChat"
+                    style="@style/CustomCheckBoxTheme"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginTop="@dimen/tool_lib_12dp"
+                    android:layout_marginEnd="@dimen/tool_lib_12dp"
+                    android:layout_marginRight="@dimen/tool_lib_12dp"
+                    android:layout_marginBottom="@dimen/tool_lib_12dp" />
+            </RelativeLayout>
+
+            <View
+                style="@style/tool_lib_horizontal_line"
+                android:layout_marginLeft="@dimen/tool_lib_14dp"
+                android:layout_marginRight="@dimen/tool_lib_14dp" />
+            <!--支付宝-->
+            <RelativeLayout
+                android:id="@+id/relPaymentPlay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="@dimen/tool_lib_12dp"
+                    android:layout_marginLeft="@dimen/tool_lib_12dp"
+                    android:text="@string/ali_pay"
+                    android:textColor="@color/tool_lib_gray_222222"
+                    android:textSize="@dimen/tool_lib_14sp" />
+
+                <RadioButton
+                    android:id="@+id/chkPaymentPlay"
+                    style="@style/CustomCheckBoxTheme"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginTop="@dimen/tool_lib_12dp"
+                    android:layout_marginEnd="@dimen/tool_lib_12dp"
+                    android:layout_marginRight="@dimen/tool_lib_12dp"
+                    android:layout_marginBottom="@dimen/tool_lib_12dp"
+                    android:checked="true" />
+            </RelativeLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/relRule"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/tool_lib_30dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="@dimen/tool_lib_12dp"
-                android:layout_marginLeft="@dimen/tool_lib_12dp"
-                android:text="@string/we_chat"
-                android:textColor="@color/tool_lib_gray_222222"
-                android:textSize="@dimen/tool_lib_14sp" />
-
-            <RadioButton
-                android:id="@+id/chkPaymentWeChat"
-                style="@style/CustomCheckBoxTheme"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginTop="@dimen/tool_lib_12dp"
-                android:layout_marginEnd="@dimen/tool_lib_12dp"
-                android:layout_marginRight="@dimen/tool_lib_12dp"
-                android:layout_marginBottom="@dimen/tool_lib_12dp" />
-        </RelativeLayout>
-
-        <View
-            style="@style/tool_lib_horizontal_line"
-            android:layout_marginLeft="@dimen/tool_lib_14dp"
-            android:layout_marginRight="@dimen/tool_lib_14dp" />
-        <!--支付宝-->
-        <RelativeLayout
-            android:id="@+id/relPaymentPlay"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+                android:text="@string/i_have_read"
+                android:textColor="@color/tool_lib_gray_777777"
+                android:textSize="@dimen/tool_lib_11sp" />
 
             <TextView
+                android:id="@+id/tvRule"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="@dimen/tool_lib_12dp"
-                android:layout_marginLeft="@dimen/tool_lib_12dp"
-                android:text="@string/ali_pay"
-                android:textColor="@color/tool_lib_gray_222222"
-                android:textSize="@dimen/tool_lib_14sp" />
+                android:text="@string/platform_master_rules"
+                android:textColor="@color/tool_lib_blue_007CE6"
+                android:textSize="@dimen/tool_lib_11sp" />
+        </LinearLayout>
 
-            <RadioButton
-                android:id="@+id/chkPaymentPlay"
-                style="@style/CustomCheckBoxTheme"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginTop="@dimen/tool_lib_12dp"
-                android:layout_marginEnd="@dimen/tool_lib_12dp"
-                android:layout_marginRight="@dimen/tool_lib_12dp"
-                android:layout_marginBottom="@dimen/tool_lib_12dp"
-                android:checked="true" />
-        </RelativeLayout>
+        <Button
+            android:id="@+id/btnDepositToPay"
+            style="@style/base_btn"
+            android:layout_marginLeft="@dimen/tool_lib_16dp"
+            android:layout_marginTop="@dimen/tool_lib_10dp"
+            android:layout_marginRight="@dimen/tool_lib_16dp"
+            android:text="@string/go_pay" />
     </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/relRule"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/tool_lib_30dp"
-        android:layout_gravity="center_horizontal">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/i_have_read"
-            android:textColor="@color/tool_lib_gray_777777"
-            android:textSize="@dimen/tool_lib_11sp" />
-
-        <TextView
-            android:id="@+id/tvRule"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/platform_master_rules"
-            android:textColor="@color/tool_lib_blue_007CE6"
-            android:textSize="@dimen/tool_lib_11sp" />
-    </LinearLayout>
-
-    <Button
-        android:id="@+id/btnDepositToPay"
-        style="@style/base_btn"
-        android:layout_marginLeft="@dimen/tool_lib_16dp"
-        android:layout_marginTop="@dimen/tool_lib_10dp"
-        android:layout_marginRight="@dimen/tool_lib_16dp"
-        android:text="@string/go_pay" />
-
-</LinearLayout>
+</android.support.v4.widget.NestedScrollView>

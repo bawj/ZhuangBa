@@ -6,14 +6,14 @@ import com.example.toollib.http.HttpResult;
 import com.example.toollib.http.observer.BaseHttpRxObserver;
 import com.example.toollib.http.util.RxUtils;
 import com.example.toollib.util.spf.SPUtils;
+import com.example.toollib.util.spf.SpfConst;
 import com.xiaomai.zhuangba.R;
 import com.xiaomai.zhuangba.application.PretendApplication;
 import com.xiaomai.zhuangba.data.bean.UserInfo;
-import com.xiaomai.zhuangba.data.module.verification.VerificationCodeModule;
 import com.xiaomai.zhuangba.data.db.DBHelper;
+import com.xiaomai.zhuangba.data.module.verification.VerificationCodeModule;
 import com.xiaomai.zhuangba.enums.StaticExplain;
 import com.xiaomai.zhuangba.http.ServiceUrl;
-import com.example.toollib.util.spf.SpfConst;
 import com.xiaomai.zhuangba.util.UMengUtil;
 import com.xiaomai.zhuangba.util.Util;
 
@@ -99,26 +99,21 @@ public class LoginRegisteredModule extends VerificationCodeModule<ILoginRegister
                                 SPUtils.getInstance().put(SpfConst.TOKEN, token);
                             }
                             UMengUtil.alias(userInfo.getPhoneNumber());
-
-                            int status = StaticExplain.CERTIFIED.getCode();
                             int authenticationStatue = userInfo.getAuthenticationStatue();
                             String role = userInfo.getRole();
                             //判断是否 选择过 用师傅端  用户端
-                            if (TextUtils.isEmpty(role)) {
+                            if (authenticationStatue == StaticExplain.NO_CERTIFICATION.getCode()) {
                                 //未选择过 跳转到选择角色
                                 mViewRef.get().startRoleSelection();
-                            } else if (role.equals(String.valueOf(StaticExplain.FU_FU_SHI.getCode())) && authenticationStatue != status) {
-                                //师傅端 未认证
-                                mViewRef.get().startMasterAuthentication();
-                            } else if (userInfo.getRole().equals(String.valueOf(StaticExplain.FU_FU_SHI.getCode()))) {
-                                //师傅端
-                                mViewRef.get().startMasterWorker();
-                            } else if (role.equals(String.valueOf(StaticExplain.EMPLOYER.getCode())) && authenticationStatue != status) {
-                                //雇主端 未认证
-                                mViewRef.get().startEmployerAuthentication();
-                            } else if (userInfo.getRole().equals(String.valueOf(StaticExplain.EMPLOYER.getCode()))) {
-                                //雇主端
-                                mViewRef.get().startEmployer();
+                            }else {
+                                //已选择角色
+                                if (role.equals(String.valueOf(StaticExplain.EMPLOYER.getCode()))) {
+                                    //雇主端
+                                    mViewRef.get().startEmployer();
+                                } else if (role.equals(String.valueOf(StaticExplain.FU_FU_SHI.getCode()))) {
+                                    //师傅端
+                                    mViewRef.get().startMasterWorker();
+                                }
                             }
                         }
                     });

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/tool_lib_gray_F5F6FA">
 
-    <com.qmuiteam.qmui.widget.QMUIAnimationListView
+    <android.support.v7.widget.RecyclerView
         android:id="@+id/rvShopCar"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

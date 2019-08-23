@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/tool_lib_gray_F5F8FA"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:orientation="vertical"
+        android:paddingStart="@dimen/tool_lib_16dp"
+        android:paddingLeft="@dimen/tool_lib_16dp"
+        android:paddingEnd="@dimen/tool_lib_16dp"
+        android:paddingRight="@dimen/tool_lib_16dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/tool_lib_56dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="@string/name"
+                android:textColor="@color/tool_lib_gray_888888"
+                android:textSize="@dimen/tool_lib_14sp" />
+
+            <EditText
+                android:id="@+id/editAuthenticationName"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="@dimen/tool_lib_105dp"
+                android:layout_marginLeft="@dimen/tool_lib_105dp"
+                android:background="@null"
+                android:gravity="center_vertical"
+                android:hint="@string/please_enter_the_employer_name"
+                android:maxLength="8"
+                android:textColor="@color/tool_lib_gray_222222"
+                android:textSize="@dimen/tool_lib_14sp"
+                tools:text="常威" />
+        </RelativeLayout>
+
+        <View style="@style/tool_lib_horizontal_line" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/tool_lib_56dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="@string/emergency_contact"
+                android:textColor="@color/tool_lib_gray_888888"
+                android:textSize="@dimen/tool_lib_14sp" />
+
+            <EditText
+                android:id="@+id/editEmergencyContact"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="@dimen/tool_lib_105dp"
+                android:layout_marginLeft="@dimen/tool_lib_105dp"
+                android:background="@null"
+                android:hint="@string/please_fill_in_the_emergency_contact_number"
+                android:inputType="phone"
+                android:maxLength="11"
+                android:textColor="@color/tool_lib_gray_222222"
+                android:textSize="@dimen/tool_lib_14sp"
+                tools:text="15906676509" />
+        </RelativeLayout>
+
+        <View style="@style/tool_lib_horizontal_line" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/tool_lib_56dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="@string/address_"
+                android:textColor="@color/tool_lib_gray_888888"
+                android:textSize="@dimen/tool_lib_14sp" />
+
+            <EditText
+                android:id="@+id/editAddress"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="@dimen/tool_lib_105dp"
+                android:layout_marginLeft="@dimen/tool_lib_105dp"
+                android:background="@null"
+                android:hint="@string/please_fill_in_the_address"
+                android:textColor="@color/tool_lib_gray_222222"
+                android:textSize="@dimen/tool_lib_14sp"
+                tools:text="15906676509" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/tool_lib_16dp"
+        android:layout_marginTop="@dimen/tool_lib_12dp"
+        android:layout_marginRight="@dimen/tool_lib_16dp"
+        android:text="@string/identity_information_prompt"
+        android:textColor="@color/tool_lib_gray_777777"
+        android:textSize="@dimen/tool_lib_12sp" />
+
+    <com.qmuiteam.qmui.layout.QMUIButton
+        android:id="@+id/btnAuthenticationNext"
+        style="@style/base_btn"
+        android:layout_marginLeft="@dimen/tool_lib_16dp"
+        android:layout_marginTop="@dimen/tool_lib_30dp"
+        android:layout_marginRight="@dimen/tool_lib_16dp"
+        android:text="@string/next" />
+</LinearLayout>

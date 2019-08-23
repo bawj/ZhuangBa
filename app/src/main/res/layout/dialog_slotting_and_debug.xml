@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:foreground="?android:attr/selectableItemBackground"
+    app:cardBackgroundColor="@android:color/white"
+    app:cardCornerRadius="@dimen/tool_lib_8dp"
+    app:cardElevation="0dp">
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/tool_lib_12dp"
+                android:paddingRight="@dimen/tool_lib_12dp">
+
+                <TextView
+                    android:id="@+id/tvChoosingGoodsName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginTop="@dimen/tool_lib_12dp"
+                    android:layout_marginBottom="@dimen/tool_lib_12dp"
+                    android:layout_toStartOf="@+id/ivChoosingGoodsClose"
+                    android:layout_toLeftOf="@+id/ivChoosingGoodsClose"
+                    android:text="@string/required_options"
+                    android:textColor="@color/tool_lib_gray_222222"
+                    android:textSize="@dimen/tool_lib_14sp" />
+
+                <ImageView
+                    android:id="@+id/ivChoosingGoodsClose"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_combined_shape_close" />
+            </RelativeLayout>
+
+
+            <TextView
+                android:id="@+id/tvSelectionOfSlotLength"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/tool_lib_18dp"
+                android:paddingLeft="@dimen/tool_lib_12dp"
+                android:paddingRight="@dimen/tool_lib_12dp"
+                android:text="@string/selection_of_slot_length"
+                android:textColor="@color/tool_lib_gray_777777"
+                android:textSize="@dimen/tool_lib_12sp" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rvSelectionOfSlotLength"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/tool_lib_10dp"
+                android:paddingStart="@dimen/tool_lib_12dp"
+                android:paddingLeft="@dimen/tool_lib_12dp"
+                android:paddingEnd="@dimen/tool_lib_7dp"
+                android:paddingRight="@dimen/tool_lib_7dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/tool_lib_18dp"
+                android:paddingLeft="@dimen/tool_lib_12dp"
+                android:paddingRight="@dimen/tool_lib_12dp"
+                android:text="@string/select_debugging"
+                android:textColor="@color/tool_lib_gray_777777"
+                android:textSize="@dimen/tool_lib_12sp" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rvSelectDebugging"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/tool_lib_10dp"
+                android:paddingLeft="@dimen/tool_lib_12dp"
+                android:paddingRight="@dimen/tool_lib_12dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/tool_lib_18dp"
+                android:paddingLeft="@dimen/tool_lib_12dp"
+                android:paddingRight="@dimen/tool_lib_12dp"
+                android:text="@string/selection_of_auxiliary_materials"
+                android:textColor="@color/tool_lib_gray_777777"
+                android:textSize="@dimen/tool_lib_12sp" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rvAuxiliaryMaterials"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/tool_lib_10dp"
+                android:paddingLeft="@dimen/tool_lib_12dp"
+                android:paddingRight="@dimen/tool_lib_12dp" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/tool_lib_46dp"
+                android:layout_marginTop="@dimen/tool_lib_12dp"
+                android:background="@color/tool_lib_color_F4F9FF"
+                android:paddingLeft="@dimen/tool_lib_12dp"
+                android:paddingRight="@dimen/tool_lib_12dp">
+
+                <TextView
+                    android:id="@+id/tvSlottingMoney"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="@string/content_money"
+                    android:textColor="@color/tool_lib_red_EF2B2B"
+                    android:textSize="@dimen/tool_lib_14sp" />
+
+                <com.qmuiteam.qmui.layout.QMUIButton
+                    android:id="@+id/btnSlotting"
+                    android:layout_width="@dimen/tool_lib_80dp"
+                    android:layout_height="@dimen/tool_lib_28dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/login_login_btn"
+                    android:text="@string/ok"
+                    android:textColor="@android:color/white"
+                    tools:ignore="RelativeOverlap" />
+
+            </RelativeLayout>
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+</android.support.v7.widget.CardView>

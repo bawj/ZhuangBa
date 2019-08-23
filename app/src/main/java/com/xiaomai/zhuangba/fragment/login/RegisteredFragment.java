@@ -11,6 +11,8 @@ import com.xiaomai.zhuangba.R;
 import com.xiaomai.zhuangba.data.module.login.ILoginRegisteredModule;
 import com.xiaomai.zhuangba.data.module.login.LoginRegisteredModule;
 import com.xiaomai.zhuangba.enums.StringTypeExplain;
+import com.xiaomai.zhuangba.fragment.personal.agreement.WebViewFragment;
+import com.xiaomai.zhuangba.util.ConstantUtil;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -71,7 +73,7 @@ public class RegisteredFragment extends BaseLoginRegisteredFragment{
                 popBackStack();
                 break;
             case R.id.tvServiceAgreement:
-                // TODO: 2019/7/4 0004 服务协议
+                startFragment(WebViewFragment.newInstance(ConstantUtil.PRIVACY_PROTOCOL , getString(R.string.privacy_services)));
                 break;
             default:
         }

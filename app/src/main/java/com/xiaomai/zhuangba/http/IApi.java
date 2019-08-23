@@ -20,6 +20,7 @@ import com.xiaomai.zhuangba.data.bean.ProvincialBean;
 import com.xiaomai.zhuangba.data.bean.ServiceData;
 import com.xiaomai.zhuangba.data.bean.ServiceSubcategory;
 import com.xiaomai.zhuangba.data.bean.SkillList;
+import com.xiaomai.zhuangba.data.bean.Slotting;
 import com.xiaomai.zhuangba.data.bean.StatisticsData;
 import com.xiaomai.zhuangba.data.bean.UserInfo;
 import com.xiaomai.zhuangba.data.bean.WalletBean;
@@ -416,12 +417,10 @@ public interface IApi {
     /**
      * 查询保证金的金额
      *
-     * @param flag flag
      * @return observable
      */
-    @FormUrlEncoded
     @POST("user/getBond")
-    Observable<HttpResult<List<PayDepositBean>>> getBond(@Field("flag") String flag);
+    Observable<HttpResult<List<PayDepositBean>>> getBond();
 
     /**
      * 微信和支付宝支付
@@ -499,6 +498,7 @@ public interface IApi {
      */
     @POST("user/updateRegistrationInformation")
     Observable<HttpResult<UserInfo>> updateRegistrationInformation(@Body RequestBody requestBody);
+
 
 
     /**
@@ -731,4 +731,10 @@ public interface IApi {
     Observable<HttpResult<DataDetailsContent>> getOrderStatisticsDetails(@Query("type") int type);
 
 
+    /**
+     * 查询开槽、辅材和调试
+     * @return observable
+     */
+    @GET("/userRole/getSlottingAndDebug ")
+    Observable<HttpResult<Slotting>> getSlottingAndDebug();
 }

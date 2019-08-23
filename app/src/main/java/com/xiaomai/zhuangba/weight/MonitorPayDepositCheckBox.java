@@ -28,7 +28,7 @@ public class MonitorPayDepositCheckBox implements CompoundButton.OnCheckedChange
 
     @Override
     public void onCheckedChanged(CompoundButton compoundButton, boolean flag) {
-        switch (compoundButton.getId()) {
+        /*switch (compoundButton.getId()) {
             case R.id.chkPayDepositMoney:
                 if (flag) {
                     chkPayDepositMoneyTwo.setChecked(false);
@@ -40,6 +40,6 @@ public class MonitorPayDepositCheckBox implements CompoundButton.OnCheckedChange
                 }
                 break;
             default:
-        }
+        }*/
     }
 }

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/white"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/tool_lib_16dp"
+    android:paddingRight="@dimen/tool_lib_16dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/tool_lib_23dp">
+
+        <TextView
+            android:id="@+id/tvPayDepositMoney"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:text="@string/zero"
+            android:textColor="@color/tool_lib_gray_222222"
+            android:textSize="@dimen/tool_lib_30sp" />
+
+        <TextView
+            android:id="@+id/tvDepositTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/tool_lib_12dp"
+            android:layout_marginLeft="@dimen/tool_lib_12dp"
+            android:layout_toEndOf="@+id/ivPayDepositMoney"
+            android:layout_toRightOf="@+id/ivPayDepositMoney"
+            android:text="@string/formal_master"
+            android:textColor="@color/tool_lib_gray_222222"
+            android:textSize="@dimen/tool_lib_14sp" />
+
+        <ImageView
+            android:id="@+id/ivPayDepositMoney"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/checkbox_deposit_nor" />
+
+    </RelativeLayout>
+
+    <View
+        style="@style/tool_lib_horizontal_line"
+        android:layout_marginTop="@dimen/tool_lib_12dp" />
+
+    <TextView
+        android:id="@+id/tvPayDepositMsg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/tool_lib_12dp"
+        android:layout_marginBottom="@dimen/tool_lib_12dp"
+        android:textColor="@color/tool_lib_gray_777777"
+        android:textSize="@dimen/tool_lib_12sp"
+        tools:text="缴纳保证金后才能接收到任务哦，保证金可以随时退还！" />
+
+</LinearLayout>

@@ -2,7 +2,11 @@ package com.xiaomai.zhuangba.fragment.service;
 
 import android.Manifest;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,6 +18,7 @@ import com.bigkoo.pickerview.listener.OnTimeSelectListener;
 import com.example.toollib.base.BaseFragment;
 import com.example.toollib.data.base.BaseCallback;
 import com.xiaomai.zhuangba.R;
+import com.xiaomai.zhuangba.adapter.MultiGraphSelectionAdapter;
 import com.xiaomai.zhuangba.data.module.orderinformation.IOrderInformationModule;
 import com.xiaomai.zhuangba.data.module.orderinformation.IOrderInformationView;
 import com.xiaomai.zhuangba.data.module.orderinformation.OrderInformationModule;
@@ -21,14 +26,20 @@ import com.xiaomai.zhuangba.enums.ForResultCode;
 import com.xiaomai.zhuangba.util.DateUtil;
 import com.xiaomai.zhuangba.util.RxPermissionsUtils;
 import com.xiaomai.zhuangba.util.Util;
+import com.xiaomai.zhuangba.weight.GridSpacingItemDecoration;
+import com.xiaomai.zhuangba.weight.PhotoTool;
 
 import org.joda.time.DateTime;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+
+import static com.xiaomai.zhuangba.weight.PhotoTool.GET_IMAGE_BY_CAMERA;
 
 /**
  * @author Administrator
@@ -36,7 +47,7 @@ import butterknife.OnClick;
  * <p>
  * 添加详细信息 或修改信息
  */
-public class BaseOrderInformationFragment extends BaseFragment<IOrderInformationModule> implements IOrderInformationView {
+public class BaseOrderInformationFragment extends BaseFragment<IOrderInformationModule> implements IOrderInformationView , MultiGraphSelectionAdapter.OnMultiGraphClickListener{
 
     @BindView(R.id.editOrderInformationName)
     EditText editOrderInformationName;
@@ -53,6 +64,18 @@ public class BaseOrderInformationFragment extends BaseFragment<IOrderInformation
     @BindView(R.id.tvOrderInformationDate)
     TextView tvOrderInformationDate;
 
+    @BindView(R.id.recyclerNotes)
+    RecyclerView recyclerNotes;
+    @BindView(R.id.editInstallationNotes)
+    EditText editInstallationNotes;
+
+    /**
+     * 拍照图片保存
+     */
+    public List<Uri> mediaSelectorFiles = new ArrayList<>();
+    private MultiGraphSelectionAdapter multiGraphSelectionAdapter;
+    private Uri imageUriFromCamera;
+    public Uri resultUri = null;
 
     private Date selectionDate;
     private Double longitude;
@@ -70,6 +93,13 @@ public class BaseOrderInformationFragment extends BaseFragment<IOrderInformation
     public void initView() {
         Util.setEditTextInhibitInputSpaChat(editOrderInformationDetailedAddress , 30);
         Util.setEditTextInhibitInputSpaChat(editOrderInformationName , 8);
+
+        mediaSelectorFiles.add(null);
+        recyclerNotes.setLayoutManager(new GridLayoutManager(getActivity(), 4));
+        multiGraphSelectionAdapter = new MultiGraphSelectionAdapter(getActivity(), mediaSelectorFiles);
+        recyclerNotes.setAdapter(multiGraphSelectionAdapter);
+        multiGraphSelectionAdapter.setOnMultiGraphClickListener(this);
+        recyclerNotes.addItemDecoration(new GridSpacingItemDecoration(4, 32, false));
     }
 
 
@@ -100,6 +130,42 @@ public class BaseOrderInformationFragment extends BaseFragment<IOrderInformation
         }
     }
 
+    @Override
+    public void addImg() {
+        //权限
+        RxPermissionsUtils.applyPermission(getActivity(), new BaseCallback<String>() {
+            @Override
+            public void onSuccess(String obj) {
+                //拍照
+                imageUriFromCamera = PhotoTool.createImagePathUri(getActivity());
+                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUriFromCamera);
+                startActivityForResult(intent, GET_IMAGE_BY_CAMERA);
+            }
+
+            @Override
+            public void onFail(Object obj) {
+                showToast(getString(R.string.please_open_permissions));
+            }
+        }, Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode) {
+            case GET_IMAGE_BY_CAMERA:
+                //拍照之后的处理
+                if (resultCode == RESULT_OK && getActivity() != null) {
+                    resultUri = Uri.parse("file:///" + PhotoTool.getImageAbsolutePath(getActivity(), imageUriFromCamera));
+                    mediaSelectorFiles.add(0, resultUri);
+                    multiGraphSelectionAdapter.notifyDataSetChanged();
+                }
+                break;
+            default:
+                break;
+        }
+    }
 
     private void applyPermission() {
         RxPermissionsUtils.applyPermission(getActivity(),
@@ -282,5 +348,15 @@ public class BaseOrderInformationFragment extends BaseFragment<IOrderInformation
     @Override
     public void updateOrderSuccess() {
 
+    }
+
+    @Override
+    public List<Uri> getMediaSelectorFiles() {
+        return mediaSelectorFiles;
+    }
+
+    @Override
+    public String getEmployerDescribe() {
+        return editInstallationNotes.getText().toString();
     }
 }

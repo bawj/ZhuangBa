@@ -136,6 +136,61 @@
     </RelativeLayout>
 
     <RelativeLayout
+        android:id="@+id/relEmployerAdvertisingReplacement"
+        style="@style/personal_rel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/ivPersonalEmployerAdvertisingReplacement"
+            style="@style/personal_img"
+            android:src="@drawable/ic_advertising_replacement" />
+
+        <TextView
+            android:id="@+id/tvPersonalEmployerAdvertisingReplacement"
+            style="@style/personal_text"
+            android:layout_toEndOf="@+id/ivPersonalEmployerAdvertisingReplacement"
+            android:layout_toRightOf="@+id/ivPersonalEmployerAdvertisingReplacement"
+            android:text="@string/advertising_replacement" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_right" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/relEnterpriseCertification"
+        style="@style/personal_rel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/tool_lib_8dp">
+
+        <ImageView
+            android:id="@+id/ivPersonalEnterpriseCertification"
+            style="@style/personal_img"
+            android:src="@drawable/ic_enterprise_certification" />
+
+        <TextView
+            android:id="@+id/tvPersonalEnterpriseCertification"
+            style="@style/personal_text"
+            android:layout_toEndOf="@+id/ivPersonalEnterpriseCertification"
+            android:layout_toRightOf="@+id/ivPersonalEnterpriseCertification"
+            android:text="@string/enterprise_certification" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_right" />
+    </RelativeLayout>
+
+    <RelativeLayout
         android:id="@+id/relServiceAgreement"
         style="@style/personal_rel"
         android:layout_width="match_parent"
@@ -167,8 +222,7 @@
         android:id="@+id/relSetUp"
         style="@style/personal_rel"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/tool_lib_8dp">
+        android:layout_height="wrap_content">
 
         <ImageView
             android:id="@+id/ivPersonalSetUp"

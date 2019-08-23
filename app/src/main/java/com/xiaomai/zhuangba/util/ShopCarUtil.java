@@ -4,10 +4,15 @@ import android.text.TextUtils;
 
 import com.example.toollib.util.AmountUtil;
 import com.example.toollib.util.DensityUtils;
+import com.xiaomai.zhuangba.ShopAuxiliaryMaterialsDBDao;
 import com.xiaomai.zhuangba.ShopCarDataDao;
+import com.xiaomai.zhuangba.data.bean.Debugging;
 import com.xiaomai.zhuangba.data.bean.Maintenance;
 import com.xiaomai.zhuangba.data.bean.ServiceSubcategoryProject;
 import com.xiaomai.zhuangba.data.bean.ShopCarData;
+import com.xiaomai.zhuangba.data.bean.db.MaterialsListDB;
+import com.xiaomai.zhuangba.data.bean.db.ShopAuxiliaryMaterialsDB;
+import com.xiaomai.zhuangba.data.bean.db.SlottingListDB;
 import com.xiaomai.zhuangba.data.db.DBHelper;
 
 import java.math.BigDecimal;
@@ -97,7 +102,7 @@ public class ShopCarUtil {
     /**
      * 修改维保
      *
-     * @param shopCar 商品
+     * @param shopCar     商品
      * @param maintenance 维保
      */
     public static void updateShopCarDialog(ShopCarData shopCar, Maintenance maintenance) {
@@ -107,6 +112,99 @@ public class ShopCarUtil {
         unique.setMaintenanceTime(String.valueOf(maintenance.getNumber()));
         unique.setMaintenanceMoney(String.valueOf(maintenance.getAmount()));
         shopCarDataDao.update(unique);
+    }
+
+    /**
+     * 修改选择的开槽
+     *
+     * @param item 开槽长度
+     */
+    public static void updateSelectionSlotLength(SlottingListDB item) {
+        ShopAuxiliaryMaterialsDBDao shopAuxiliaryMaterialsDBDao = DBHelper.getInstance().getShopAuxiliaryMaterialsDBDao();
+        ShopAuxiliaryMaterialsDB unique = shopAuxiliaryMaterialsDBDao.queryBuilder().unique();
+        if (unique == null) {
+            unique = new ShopAuxiliaryMaterialsDB();
+            unique.setSlottingId(item.getId());
+            unique.setSlottingSlottingId(item.getSlottingId());
+            unique.setSlottingStartLength(item.getStartLength());
+            unique.setSlottingEndLength(item.getEndLength());
+            unique.setSlottingSlottingPrice(item.getSlottingPrice());
+            shopAuxiliaryMaterialsDBDao.insert(unique);
+        } else {
+            unique.setSlottingId(item.getId());
+            unique.setSlottingSlottingId(item.getSlottingId());
+            unique.setSlottingStartLength(item.getStartLength());
+            unique.setSlottingEndLength(item.getEndLength());
+            unique.setSlottingSlottingPrice(item.getSlottingPrice());
+            shopAuxiliaryMaterialsDBDao.update(unique);
+        }
+    }
+
+    /**
+     * 修改是否需要调试
+     *
+     * @param id    id
+     * @param price 调试价格
+     */
+    public static void updateSelectDebugging(int id,Double price) {
+        ShopAuxiliaryMaterialsDBDao shopAuxiliaryMaterialsDBDao = DBHelper.getInstance().getShopAuxiliaryMaterialsDBDao();
+        ShopAuxiliaryMaterialsDB unique = shopAuxiliaryMaterialsDBDao.queryBuilder().unique();
+        if (unique == null) {
+            unique = new ShopAuxiliaryMaterialsDB();
+            unique.setDebuggingPrice(price);
+            unique.setDebuggingId(id);
+            shopAuxiliaryMaterialsDBDao.insert(unique);
+        } else {
+            unique.setDebuggingPrice(price);
+            unique.setDebuggingId(id);
+            shopAuxiliaryMaterialsDBDao.update(unique);
+        }
+    }
+
+
+    /**
+     * 修改选择的辅材
+     *
+     * @param materialsListDB 开槽长度
+     */
+    public static void updateAuxiliaryMaterials(MaterialsListDB materialsListDB) {
+        ShopAuxiliaryMaterialsDBDao shopAuxiliaryMaterialsDBDao = DBHelper.getInstance().getShopAuxiliaryMaterialsDBDao();
+        ShopAuxiliaryMaterialsDB unique = shopAuxiliaryMaterialsDBDao.queryBuilder().unique();
+        if (unique == null) {
+            unique = new ShopAuxiliaryMaterialsDB();
+            unique.setMaterialsId(materialsListDB.getId());
+            unique.setMaterialsSlottingId(materialsListDB.getSlottingId());
+            unique.setMaterialsStartLength(materialsListDB.getStartLength());
+            unique.setMaterialsEndLength(materialsListDB.getEndLength());
+            unique.setMaterialsSlottingPrice(materialsListDB.getSlottingPrice());
+            shopAuxiliaryMaterialsDBDao.insert(unique);
+        } else {
+            unique.setMaterialsId(materialsListDB.getId());
+            unique.setMaterialsSlottingId(materialsListDB.getSlottingId());
+            unique.setMaterialsStartLength(materialsListDB.getStartLength());
+            unique.setMaterialsEndLength(materialsListDB.getEndLength());
+            unique.setMaterialsSlottingPrice(materialsListDB.getSlottingPrice());
+            shopAuxiliaryMaterialsDBDao.update(unique);
+        }
+    }
+
+    /**
+     * 计算 必选项 辅材 等的价格
+     *
+     * @return price
+     */
+    public static double getAuxiliaryMaterialsPrice() {
+        ShopAuxiliaryMaterialsDB unique = DBHelper.getInstance().getShopAuxiliaryMaterialsDBDao().queryBuilder().unique();
+        if (unique != null) {
+            //开槽价格
+            double slottingSlottingPrice = unique.getSlottingSlottingPrice();
+            //辅材价格
+            double materialsSlottingPrice = unique.getMaterialsSlottingPrice();
+            //调试价格
+            double debuggingPrice = unique.getDebuggingPrice();
+            return slottingSlottingPrice + materialsSlottingPrice + debuggingPrice;
+        }
+        return 0d;
     }
 
 
@@ -157,6 +255,9 @@ public class ShopCarUtil {
                 totalMoney += DensityUtils.stringTypeDouble(maintenanceMoney) * DensityUtils.stringTypeInteger(number);
             }
         }
+        //计算辅材价格
+        double price = ShopCarUtil.getAuxiliaryMaterialsPrice();
+        totalMoney = totalMoney + price;
         return new BigDecimal(totalMoney).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
     }
 

@@ -153,12 +153,12 @@
                     android:layout_toStartOf="@+id/ivOrderInformationLocation"
                     android:layout_toLeftOf="@+id/ivOrderInformationLocation"
                     android:background="@null"
-                    android:gravity="center_vertical"
-                    android:singleLine="true"
                     android:ellipsize="end"
+                    android:gravity="center_vertical"
                     android:hint="@string/click_check_address"
                     android:maxLength="30"
                     android:padding="@dimen/tool_lib_3dp"
+                    android:singleLine="true"
                     android:textColor="@color/tool_lib_gray_B1B1B1"
                     android:textSize="@dimen/tool_lib_14sp"
                     tools:text="武林广场21号杭州大厦购物中心" />
@@ -204,9 +204,9 @@
                 android:layout_toEndOf="@+id/tvOrderInformationDetailedAddress"
                 android:layout_toRightOf="@+id/tvOrderInformationDetailedAddress"
                 android:background="@null"
-                android:maxLength="30"
                 android:gravity="center_vertical"
                 android:hint="@string/click_input_detailed_address"
+                android:maxLength="30"
                 android:padding="@dimen/tool_lib_3dp"
                 android:textColor="@color/tool_lib_gray_B1B1B1"
                 android:textSize="@dimen/tool_lib_14sp"
@@ -268,10 +268,45 @@
                 android:src="@drawable/ic_right" />
         </RelativeLayout>
 
+        <TextView
+            android:id="@+id/tvOrderInformationInstallationNotes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/relOrderInformationTime"
+            android:layout_marginStart="@dimen/tool_lib_12dp"
+            android:layout_marginLeft="@dimen/tool_lib_12dp"
+            android:layout_marginTop="@dimen/tool_lib_12dp"
+            android:text="@string/installation_notes"
+            android:textColor="@color/tool_lib_gray_222222"
+            android:textSize="@dimen/tool_lib_12sp" />
+
+        <EditText
+            android:id="@+id/editInstallationNotes"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/tool_lib_140dp"
+            android:layout_below="@+id/tvOrderInformationInstallationNotes"
+            android:layout_marginTop="@dimen/tool_lib_10dp"
+            android:background="@android:color/white"
+            android:gravity="start"
+            android:hint="@string/please_enter_installation_notes"
+            android:padding="@dimen/tool_lib_16dp"
+            android:textSize="@dimen/tool_lib_14sp" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerNotes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/editInstallationNotes"
+            android:layout_marginStart="@dimen/tool_lib_12dp"
+            android:layout_marginLeft="@dimen/tool_lib_12dp"
+            android:layout_marginTop="@dimen/tool_lib_9dp"
+            android:layout_marginEnd="@dimen/tool_lib_5dp"
+            android:layout_marginRight="@dimen/tool_lib_5dp" />
+
         <Button
             android:id="@+id/btnOrderInformation"
             style="@style/base_btn"
-            android:layout_below="@+id/relOrderInformationTime"
+            android:layout_below="@+id/recyclerNotes"
             android:layout_marginLeft="@dimen/tool_lib_16dp"
             android:layout_marginTop="@dimen/tool_lib_35dp"
             android:layout_marginRight="@dimen/tool_lib_16dp"

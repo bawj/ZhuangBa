@@ -47,7 +47,7 @@ public class UserInfo {
     private String validityData;
     /** 免冠照地址 */
     private String bareHeadedPhotoUrl;
-    /** 认证状态:0:未认证;1:已认证;2:审核中 */
+    /** 认证状态:0:未认证;1:已认证;2:审核中 3 审核不通过 4 直接进入首页*/
     private int authenticationStatue;
     /** 认证时间 */
     private String authenticationTime;
@@ -80,16 +80,19 @@ public class UserInfo {
     /** 团队 */
     private String team;
 
+    /** 是否需要弹框；0：不要；1：要 */
+    private String push;
+
     @Transient
     private List<SkillList> skills;
 
-    @Generated(hash = 1109220330)
+    @Generated(hash = 826413739)
     public UserInfo(Long id, String phoneNumber, String userText, String password, int lockFlag, String invitationCode,
             String token, String role, String registrationTime, String identityCard, String validityDataStart,
             String validityDataEnd, String idCardFrontPhoto, String idCardBackPhoto, String validityData,
             String bareHeadedPhotoUrl, int authenticationStatue, String authenticationTime, String address,
             double longitude, double latitude, String businessLicense, String emergencyContact, String contactAddress,
-            int startFlag, int payFlag, String masterRankId, String masterRankName, int roleId, String team) {
+            int startFlag, int payFlag, String masterRankId, String masterRankName, int roleId, String team, String push) {
         this.id = id;
         this.phoneNumber = phoneNumber;
         this.userText = userText;
@@ -120,6 +123,7 @@ public class UserInfo {
         this.masterRankName = masterRankName;
         this.roleId = roleId;
         this.team = team;
+        this.push = push;
     }
 
     @Generated(hash = 1279772520)
@@ -367,10 +371,18 @@ public class UserInfo {
     }
 
     public String getTeam() {
-        return team;
+        return TextUtils.isEmpty(team) ? "" : team;
     }
 
     public void setTeam(String team) {
         this.team = team;
+    }
+
+    public String getPush() {
+        return push;
+    }
+
+    public void setPush(String push) {
+        this.push = push;
     }
 }

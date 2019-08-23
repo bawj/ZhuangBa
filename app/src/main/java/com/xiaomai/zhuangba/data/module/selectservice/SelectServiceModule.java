@@ -8,6 +8,8 @@ import com.example.toollib.http.util.RxUtils;
 import com.xiaomai.zhuangba.data.bean.Maintenance;
 import com.xiaomai.zhuangba.data.bean.ServiceSubcategory;
 import com.xiaomai.zhuangba.data.bean.ServiceSubcategoryProject;
+import com.xiaomai.zhuangba.data.bean.Slotting;
+import com.xiaomai.zhuangba.data.db.DBHelper;
 import com.xiaomai.zhuangba.http.ServiceUrl;
 
 import java.util.List;
@@ -47,6 +49,23 @@ public class SelectServiceModule extends BaseModule<ISelectServiceView> implemen
                     @Override
                     protected void onSuccess(List<Maintenance> maintenanceList) {
                         mViewRef.get().requestMaintenance(serviceSubcategoryProject,maintenanceList);
+                    }
+                });
+    }
+
+    @Override
+    public void requestSlottingAndDebug() {
+        RxUtils.getObservable(ServiceUrl.getUserApi().getSlottingAndDebug())
+                .compose(mViewRef.get().<HttpResult<Slotting>>bindLifecycle())
+                .subscribe(new BaseHttpRxObserver<Slotting>(mContext.get()) {
+                    @Override
+                    protected void onSuccess(Slotting slotting) {
+                        DBHelper instance = DBHelper.getInstance();
+                        instance.getSlottingListDBDao().deleteAll();
+                        instance.getMaterialsListDBDao().deleteAll();
+                        instance.getSlottingListDBDao().insertInTx(slotting.getSlottingList());
+                        instance.getMaterialsListDBDao().insertInTx(slotting.getMaterialsList());
+                        mViewRef.get().slottingAndDebugSuccess(slotting);
                     }
                 });
     }

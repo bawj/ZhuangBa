@@ -19,4 +19,10 @@ public interface ISelectServiceModule extends IBaseModule<ISelectServiceView> {
      * @param item content
      */
     void requestMaintenance(ServiceSubcategoryProject item);
+
+
+    /**
+     * 查询开槽、辅材和调试
+     */
+    void requestSlottingAndDebug();
 }

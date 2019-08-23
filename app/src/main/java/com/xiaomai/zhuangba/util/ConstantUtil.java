@@ -25,4 +25,10 @@ public class ConstantUtil {
      * 雇主 用户协议
      */
     public static final String EMPLOYER_FABRICATING_USER_SERVICE_PROTOCOL = "https://zb.4000750222.com/testZhuangBaManagerPage/guzhu";
+
+
+    /**
+     * 隐私协议
+     */
+    public static final String PRIVACY_PROTOCOL = "https://zb.4000750222.com/testZhuangBaManagerPage/yinsi";
 }

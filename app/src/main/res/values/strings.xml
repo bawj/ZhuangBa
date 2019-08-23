@@ -19,7 +19,7 @@
     <string name="login_immediately">有账号？</string>
     <string name="login_immediately_">立即登录</string>
     <string name="service_agreement">注册即表示您同意并遵守</string>
-    <string name="service_agreement_">装捌隐私协议、装捌服务协议</string>
+    <string name="service_agreement_">装捌隐私协议</string>
     <string name="agreement">服务协议</string>
     <string name="please_enter_your_cell_phone_number">请输入手机号</string>
     <string name="wallet_update_trade_input_error">当前输入手机号不是注册账号</string>
@@ -283,6 +283,7 @@
     <string name="emergency_contact">紧急联系</string>
     <string name="please_fill_in_the_emergency_contact_number">请填写紧急联系人电话</string>
     <string name="address">地址</string>
+    <string name="address_">紧急联系地址</string>
     <string name="please_fill_in_the_address">请填写地址</string>
     <string name="please_open_permissions">请在应用管理中打开相机和存储权限</string>
     <string name="user_name_null">姓名不能为空，请重新扫描</string>
@@ -420,4 +421,25 @@
     <string name="service_tip">下单多件有优惠，具体查看价目单</string>
     <string name="please_choose_the_maintenance_time">请选择维保时长</string>
     <string name="please_select_the_service_items">请选择服务项目</string>
+    <string name="privacy_services">装捌隐私服务</string>
+    <string name="required_options">必选项</string>
+    <string name="selection_of_slot_length">选择开槽长度：</string>
+    <string name="select_debugging">选择调试：</string>
+    <string name="selection_of_auxiliary_materials">选择辅材：</string>
+    <string name="slotting_start_end_length">%1$s-%2$s米</string>
+    <string name="no_debugging_required">无需调试</string>
+    <string name="need_debugging">需调试</string>
+    <string name="please_service">请选择服务项目</string>
+    <string name="cabling_slotting">布线开槽</string>
+    <string name="debugging">调试</string>
+    <string name="auxiliary_materials">辅材</string>
+    <string name="installation_notes">安装备注</string>
+    <string name="please_enter_installation_notes">请输入安装备注</string>
+    <string name="continues">继续</string>
+    <string name="selection_of_employer_account_number">您已选择雇主帐号</string>
+    <string name="do_you_want_to_continue">该帐号只能展示\n雇主功能是否继续？</string>
+    <string name="need_to_go_for_certification">需前往认证</string>
+    <string name="please_go_to_the_certification_office">您暂未认证企业账号无法发布需求，请前往认证</string>
+    <string name="advertising_replacement">广告更换</string>
+    <string name="enterprise_certification">企业认证</string>
 </resources>

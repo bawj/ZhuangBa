@@ -33,10 +33,6 @@ import butterknife.OnClick;
  */
 public class PersonalFragment extends BaseLoginRegisteredFragment {
 
-    @BindView(R.id.ivUserHead)
-    ImageView ivUserHead;
-    @BindView(R.id.tvPersonalName)
-    TextView tvPersonalName;
 
     public static PersonalFragment newInstance() {
         Bundle args = new Bundle();
@@ -53,11 +49,6 @@ public class PersonalFragment extends BaseLoginRegisteredFragment {
     @Override
     public void initView() {
         EventBus.getDefault().register(this);
-        UserInfo userInfo = DBHelper.getInstance().getUserInfoDao().queryBuilder().unique();
-        if (userInfo != null){
-            tvPersonalName.setText(TextUtils.isEmpty(userInfo.getUserText()) ? getString(R.string.no_certification) : userInfo.getUserText());
-            GlideManager.loadCircleImage(getActivity(),userInfo.getBareHeadedPhotoUrl(), ivUserHead);
-        }
     }
 
     @OnClick({R.id.relHistoricalOrder, R.id.relSetUp,R.id.relServiceAgreement, R.id.btnLogout})

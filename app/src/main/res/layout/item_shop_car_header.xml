@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/tool_lib_gray_F5F6FA">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/tool_lib_10dp"
+        android:background="@android:color/white"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/tool_lib_16dp"
+        android:paddingRight="@dimen/tool_lib_16dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/tool_lib_14dp">
+
+            <TextView
+                android:id="@+id/tvShopCarName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="@string/required_options"
+                android:textColor="@color/tool_lib_gray_222222"
+                android:textSize="@dimen/tool_lib_16sp" />
+
+            <TextView
+                android:id="@+id/tvAuxiliaryMaterialsMoney"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:textColor="@color/tool_lib_red_EF2B2B"
+                android:textSize="@dimen/tool_lib_14sp"
+                tools:text="¥80.00" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/tool_lib_12dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:textColor="@color/tool_lib_gray_777777"
+                android:textSize="@dimen/tool_lib_14sp"
+                android:text="@string/cabling_slotting" />
+
+
+            <RelativeLayout
+                android:id="@+id/layCablingSlotting"
+                android:layout_width="@dimen/tool_lib_150dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/gray_radius_bg">
+
+                <TextView
+                    android:id="@+id/tvCablingSlotting"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:paddingTop="@dimen/tool_lib_6dp"
+                    android:paddingBottom="@dimen/tool_lib_6dp"
+                    android:textColor="@color/tool_lib_gray_222222"
+                    android:textSize="@dimen/tool_lib_12sp"
+                    tools:text="0-5米" />
+
+                <ImageView
+                    android:id="@+id/ivShopCarCablingSlottingRight"
+                    android:layout_width="@dimen/tool_lib_10dp"
+                    android:layout_height="@dimen/tool_lib_12dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="@dimen/tool_lib_10dp"
+                    android:layout_marginRight="@dimen/tool_lib_10dp"
+                    android:src="@drawable/ic_right_black" />
+
+            </RelativeLayout>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/tool_lib_12dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:textColor="@color/tool_lib_gray_777777"
+                android:textSize="@dimen/tool_lib_14sp"
+                android:text="@string/debugging" />
+
+
+            <RelativeLayout
+                android:id="@+id/layDebugging"
+                android:layout_width="@dimen/tool_lib_150dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/gray_radius_bg">
+
+                <TextView
+                    android:id="@+id/tvShopCarMaintenance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:paddingTop="@dimen/tool_lib_6dp"
+                    android:paddingBottom="@dimen/tool_lib_6dp"
+                    android:textColor="@color/tool_lib_gray_222222"
+                    android:textSize="@dimen/tool_lib_12sp"
+                    tools:text="需要调试" />
+
+                <ImageView
+                    android:id="@+id/ivDebuggingRight"
+                    android:layout_width="@dimen/tool_lib_10dp"
+                    android:layout_height="@dimen/tool_lib_12dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="@dimen/tool_lib_10dp"
+                    android:layout_marginRight="@dimen/tool_lib_10dp"
+                    android:src="@drawable/ic_right_black" />
+
+            </RelativeLayout>
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/tool_lib_12dp"
+            android:layout_marginBottom="@dimen/tool_lib_12dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:textColor="@color/tool_lib_gray_777777"
+                android:textSize="@dimen/tool_lib_14sp"
+                android:text="@string/auxiliary_materials" />
+
+
+            <RelativeLayout
+                android:id="@+id/layAuxiliaryMaterials"
+                android:layout_width="@dimen/tool_lib_150dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/gray_radius_bg">
+
+                <TextView
+                    android:id="@+id/tvShopAuxiliaryMaterials"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:paddingTop="@dimen/tool_lib_6dp"
+                    android:paddingBottom="@dimen/tool_lib_6dp"
+                    android:textColor="@color/tool_lib_gray_222222"
+                    android:textSize="@dimen/tool_lib_12sp"
+                    tools:text="0-5米" />
+
+                <ImageView
+                    android:id="@+id/ivAuxiliaryMaterialsRight"
+                    android:layout_width="@dimen/tool_lib_10dp"
+                    android:layout_height="@dimen/tool_lib_12dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="@dimen/tool_lib_10dp"
+                    android:layout_marginRight="@dimen/tool_lib_10dp"
+                    android:src="@drawable/ic_right_black" />
+
+            </RelativeLayout>
+        </RelativeLayout>
+    </LinearLayout>
+</RelativeLayout>

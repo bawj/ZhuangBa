@@ -1,15 +1,15 @@
 package com.xiaomai.zhuangba;
 
 import android.os.Bundle;
-import android.text.TextUtils;
 
 import com.example.toollib.base.BaseActivity;
 import com.example.toollib.http.version.MessageEvent;
 import com.example.toollib.http.version.Version;
 import com.example.toollib.http.version.VersionEnums;
 import com.example.toollib.util.Log;
-import com.example.toollib.util.spf.SPUtils;
 import com.example.toollib.util.ToastUtil;
+import com.example.toollib.util.spf.SPUtils;
+import com.example.toollib.util.spf.SpfConst;
 import com.example.toollib.weight.dialog.CommonlyDialog;
 import com.qmuiteam.qmui.arch.QMUIFragment;
 import com.xiaomai.zhuangba.data.bean.UserInfo;
@@ -24,10 +24,6 @@ import com.xiaomai.zhuangba.fragment.employer.EmployerFragment;
 import com.xiaomai.zhuangba.fragment.guide.GuidePageFragment;
 import com.xiaomai.zhuangba.fragment.login.LoginFragment;
 import com.xiaomai.zhuangba.fragment.masterworker.MasterWorkerFragment;
-import com.xiaomai.zhuangba.fragment.orderdetail.CompleteFragment;
-import com.xiaomai.zhuangba.fragment.personal.wallet.detailed.WalletDetailFragment;
-import com.example.toollib.util.spf.SpfConst;
-import com.xiaomai.zhuangba.util.UMengUtil;
 import com.xiaomai.zhuangba.util.Util;
 import com.xiaomai.zhuangba.weight.dialog.UpdateVersionDialog;
 import com.xiaomai.zhuangba.weight.dialog.VersionDialog;
@@ -75,18 +71,21 @@ public class MainActivity extends BaseActivity {
      */
     private void yesLogin(UserInfo userInfo) {
         //角色;0:师傅;1:雇主
-        String role = userInfo.getRole();
-        if (TextUtils.isEmpty(role)) {
+        int authenticationStatue = userInfo.getAuthenticationStatue();
+        if (authenticationStatue == StaticExplain.NO_CERTIFICATION.getCode()) {
             //未选择角色
             startFragment(RoleSelectionFragment.newInstance());
         } else {
             //已选择角色
+            String role = userInfo.getRole();
             if (role.equals(String.valueOf(StaticExplain.EMPLOYER.getCode()))) {
                 //雇主端
-                authentication(userInfo, EmployerFragment.newInstance());
+                startFragment(EmployerFragment.newInstance());
+                ///authentication(userInfo, EmployerFragment.newInstance());
             } else if (role.equals(String.valueOf(StaticExplain.FU_FU_SHI.getCode()))) {
                 //师傅端
-                authentication(userInfo, MasterWorkerFragment.newInstance());
+                startFragment(MasterWorkerFragment.newInstance());
+                //authentication(userInfo, MasterWorkerFragment.newInstance());
             }
         }
     }
@@ -124,11 +123,11 @@ public class MainActivity extends BaseActivity {
         Log.e("code = " + messageEvent.getErrCode());
         //您的登录 信息已过期重新登录
         boolean isTokenOverdueDialog = (messageEvent.getErrCode() == VersionEnums.LOGIN_STATUS.getCode()
-                || messageEvent.getErrCode() == VersionEnums.LOGIN_STATUS_.getCode()) ;
+                || messageEvent.getErrCode() == VersionEnums.LOGIN_STATUS_.getCode());
 
         //防止dialog 重复 弹出
         boolean isTokenOverdueDialogs = false;
-        if (commonlyDialog != null){
+        if (commonlyDialog != null) {
             isTokenOverdueDialogs = commonlyDialog.isShow();
         }
         //您的账号在其它手机登录
@@ -203,7 +202,7 @@ public class MainActivity extends BaseActivity {
                 touchTime = System.currentTimeMillis();
                 ToastUtil.showShort(getString(R.string.press_again_exit));
             }
-        }else {
+        } else {
             super.onBackPressed();
         }
     }

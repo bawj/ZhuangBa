@@ -16,6 +16,7 @@ import com.qmuiteam.qmui.alpha.QMUIAlphaImageButton;
 import com.qmuiteam.qmui.util.QMUIStatusBarHelper;
 import com.qmuiteam.qmui.util.QMUIViewHelper;
 import com.qmuiteam.qmui.widget.QMUITopBarLayout;
+import com.trello.rxlifecycle2.android.FragmentEvent;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -239,7 +240,7 @@ public abstract class BaseFragment<M extends IBaseModule> extends BaseRxFragment
 
     @Override
     public ObservableTransformer bindLifecycle() {
-        return bindToLifecycle();
+        return bindUntilEvent(FragmentEvent.DESTROY);
     }
 
     @Override

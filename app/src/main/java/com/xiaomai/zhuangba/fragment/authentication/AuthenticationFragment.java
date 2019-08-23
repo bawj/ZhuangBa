@@ -46,8 +46,6 @@ public class AuthenticationFragment extends BaseFragment {
 
     @Override
     public void initView() {
-        UserInfo userInfo = DBHelper.getInstance().getUserInfoDao().queryBuilder().unique();
-        GlideManager.loadCircleImage(getActivity(), userInfo.getBareHeadedPhotoUrl(), ivUserHead);
     }
 
     @Override

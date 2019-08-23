@@ -92,6 +92,7 @@ public class BareheadedFragment extends BaseFragment {
                 break;
             case R.id.btnReUpload:
                 //重新上传
+                showUploadDialog();
                 break;
             default:
         }

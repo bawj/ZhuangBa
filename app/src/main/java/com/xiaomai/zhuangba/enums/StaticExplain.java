@@ -18,6 +18,7 @@ public enum StaticExplain {
     CERTIFIED(1, "已认证"),
     IN_AUDIT(2, "审核中"),
     REJECT_AUDIT(3, "已驳回 审核不通过"),
+    SELECTED_ROLES(4,"已选择角色"),
     STOP_REFRESH(1, "停止刷新 handler"),
     PAGE_NUMBER(1, "加载 page  默认 1"),
     PAGE_NUM(20, "刷新加载一次加载15条数据"),

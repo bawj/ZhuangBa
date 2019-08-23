@@ -40,13 +40,13 @@ import okhttp3.RequestBody;
 public class EmployerInformationFragment extends BaseFragment {
 
     @BindView(R.id.editPhone)
-    EditText editPhone;
+    public EditText editPhone;
     @BindView(R.id.editEmployerName)
-    EditText editEmployerName;
+    public EditText editEmployerName;
     @BindView(R.id.editAddress)
-    TextView editAddress;
+    public TextView editAddress;
     @BindView(R.id.editAddressDetail)
-    EditText editAddressDetail;
+    public EditText editAddressDetail;
 
     public static final String BUSINESS_LICENSE_URL = "business_license_url";
 
@@ -71,36 +71,39 @@ public class EmployerInformationFragment extends BaseFragment {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btnUpload:
-                UserInfo userInfo = new UserInfo();
-                userInfo.setUserText(editEmployerName.getText().toString());
-                userInfo.setEmergencyContact(editPhone.getText().toString());
-                userInfo.setRole(String.valueOf(StaticExplain.EMPLOYER.getCode()));
-                userInfo.setBusinessLicense(getBusinessLicenseUrl());
-                String address = editAddress.getText().toString() + editAddressDetail.getText().toString();
-                userInfo.setContactAddress(address);
-                RequestBody requestBody = RequestBody.create(MediaType.parse("application/json;charset=utf-8"), new Gson().toJson(userInfo));
-                Observable<HttpResult<UserInfo>> observable = ServiceUrl.getUserApi().updateRegistrationInformation(requestBody);
-                RxUtils.getObservable(observable)
-                        .compose(this.<HttpResult<UserInfo>>bindToLifecycle())
-                        .subscribe(new BaseHttpRxObserver<UserInfo>(getActivity()) {
-                            @Override
-                            protected void onSuccess(UserInfo userInfo) {
-                                String token = userInfo.getToken();
-                                if (!TextUtils.isEmpty(token)) {
-                                    SPUtils.getInstance().put(SpfConst.TOKEN, token);
-                                }
-                                DBHelper.getInstance().getUserInfoDao().deleteAll();
-                                DBHelper.getInstance().getUserInfoDao().insert(userInfo);
-                                startFragment(CertificationSuccessfulFragment.newInstance());
-                            }
-                        });
-
+                upload();
                 break;
             case R.id.relAddress:
                 applyPermission();
                 break;
             default:
         }
+    }
+
+    public void upload() {
+        UserInfo userInfo = new UserInfo();
+        userInfo.setUserText(editEmployerName.getText().toString());
+        userInfo.setEmergencyContact(editPhone.getText().toString());
+        userInfo.setRole(String.valueOf(StaticExplain.EMPLOYER.getCode()));
+        userInfo.setBusinessLicense(getBusinessLicenseUrl());
+        userInfo.setAddress(editAddress.getText().toString());
+        userInfo.setContactAddress(editAddressDetail.getText().toString());
+        RequestBody requestBody = RequestBody.create(MediaType.parse("application/json;charset=utf-8"), new Gson().toJson(userInfo));
+        Observable<HttpResult<UserInfo>> observable = ServiceUrl.getUserApi().updateRegistrationInformation(requestBody);
+        RxUtils.getObservable(observable)
+                .compose(this.<HttpResult<UserInfo>>bindToLifecycle())
+                .subscribe(new BaseHttpRxObserver<UserInfo>(getActivity()) {
+                    @Override
+                    protected void onSuccess(UserInfo userInfo) {
+                        String token = userInfo.getToken();
+                        if (!TextUtils.isEmpty(token)) {
+                            SPUtils.getInstance().put(SpfConst.TOKEN, token);
+                        }
+                        DBHelper.getInstance().getUserInfoDao().deleteAll();
+                        DBHelper.getInstance().getUserInfoDao().insert(userInfo);
+                        startFragment(CertificationSuccessfulFragment.newInstance());
+                    }
+                });
     }
 
     private void applyPermission() {

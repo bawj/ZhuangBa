@@ -1,6 +1,10 @@
 package com.xiaomai.zhuangba.data.module.orderinformation;
 
+import android.net.Uri;
+
 import com.example.toollib.data.base.IBaseView;
+
+import java.util.List;
 
 /**
  * @author Administrator
@@ -88,4 +92,17 @@ public interface IOrderInformationView extends IBaseView {
      * 修改成功
      */
     void updateOrderSuccess();
+
+    /**
+     * 提交安装备注
+     * @return list
+     */
+    List<Uri> getMediaSelectorFiles();
+
+
+    /**
+     * 雇主描述
+     * @return string
+     */
+    String getEmployerDescribe();
 }

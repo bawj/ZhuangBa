@@ -1,6 +1,8 @@
 package com.xiaomai.zhuangba.fragment.orderdetail.employer;
 
 import android.os.Bundle;
+import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
@@ -33,6 +35,12 @@ public class OrderInformationFragment extends BaseOrderInformationFragment {
     TextView tvOrderInformationClickServiceAddress;
     @BindView(R.id.tvOrderInformationDate)
     TextView tvOrderInformationDate;
+    @BindView(R.id.tvOrderInformationInstallationNotes)
+    TextView tvOrderInformationInstallationNotes;
+    @BindView(R.id.editInstallationNotes)
+    EditText editInstallationNotes;
+    @BindView(R.id.recyclerNotes)
+    RecyclerView recyclerNotes;
 
     public static final String NAME = "name";
     public static final String PHONE = "phone";
@@ -52,6 +60,10 @@ public class OrderInformationFragment extends BaseOrderInformationFragment {
         super.initView();
         editOrderInformationName.setText(getName());
         editOrderInformationPhone.setText(getPhone());
+
+        tvOrderInformationInstallationNotes.setVisibility(View.GONE);
+        editInstallationNotes.setVisibility(View.GONE);
+        recyclerNotes.setVisibility(View.GONE);
     }
 
     @Override

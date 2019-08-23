@@ -87,4 +87,6 @@ public class SubmitOrderInformationFragment extends BaseOrderInformationFragment
         //提交成功
         startFragment(PaymentDetailsFragment.newInstance(requestBodyString));
     }
+
+
 }

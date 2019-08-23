@@ -211,8 +211,6 @@ public class MasterWorkerFragment extends BaseMasterEmployerFragment implements 
         roundButtonCheckCountry.setVisibility(visible);
     }
 
-
-
     @Override
     public void workingStateSwitchingSuccess() {
         final QMUITipDialog tipDialog = new QMUITipDialog.CustomBuilder(getContext())

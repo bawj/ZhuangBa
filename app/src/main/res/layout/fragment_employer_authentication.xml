@@ -29,7 +29,7 @@
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:src="@drawable/bg_def_head" />
+            android:src="@drawable/ic_employer_head" />
 
     </RelativeLayout>
 

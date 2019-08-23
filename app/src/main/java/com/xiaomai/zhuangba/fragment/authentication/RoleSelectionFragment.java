@@ -8,7 +8,9 @@ import com.xiaomai.zhuangba.data.module.login.ILoginRegisteredModule;
 import com.xiaomai.zhuangba.data.module.login.LoginRegisteredModule;
 import com.xiaomai.zhuangba.enums.StaticExplain;
 import com.xiaomai.zhuangba.fragment.authentication.employer.EmployerAuthenticationFragment;
+import com.xiaomai.zhuangba.fragment.authentication.employer.EmployerRealNameAuthenticationFragment;
 import com.xiaomai.zhuangba.fragment.authentication.master.MasterAuthenticationFragment;
+import com.xiaomai.zhuangba.fragment.authentication.master.RealNameAuthenticationFragment;
 import com.xiaomai.zhuangba.fragment.employer.EmployerFragment;
 import com.xiaomai.zhuangba.fragment.login.BaseLoginRegisteredFragment;
 import com.xiaomai.zhuangba.fragment.login.LoginFragment;
@@ -60,12 +62,15 @@ public class RoleSelectionFragment extends BaseLoginRegisteredFragment {
 
     @Override
     public void startMasterAuthentication() {
-        startFragmentAndDestroyCurrent(MasterAuthenticationFragment.newInstance());
+        //师傅端 去认证
+        startFragment(RealNameAuthenticationFragment.newInstance());
+        //startFragmentAndDestroyCurrent(MasterAuthenticationFragment.newInstance());
     }
 
     @Override
     public void startEmployerAuthentication() {
-        startFragmentAndDestroyCurrent(EmployerAuthenticationFragment.newInstance());
+        startFragment(EmployerRealNameAuthenticationFragment.newInstance());
+        //startFragmentAndDestroyCurrent(EmployerAuthenticationFragment.newInstance());
     }
 
     @Override

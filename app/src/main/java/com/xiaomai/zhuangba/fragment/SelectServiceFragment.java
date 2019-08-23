@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.toollib.util.Log;
+import com.example.toollib.util.ToastUtil;
 import com.qmuiteam.qmui.layout.QMUILinearLayout;
 import com.qmuiteam.qmui.widget.QMUITopBarLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -24,6 +25,8 @@ import com.xiaomai.zhuangba.adapter.SheetBehaviorAdapter;
 import com.xiaomai.zhuangba.data.bean.Maintenance;
 import com.xiaomai.zhuangba.data.bean.ServiceSubcategory;
 import com.xiaomai.zhuangba.data.bean.ServiceSubcategoryProject;
+import com.xiaomai.zhuangba.data.bean.Slotting;
+import com.xiaomai.zhuangba.data.bean.db.ShopAuxiliaryMaterialsDB;
 import com.xiaomai.zhuangba.data.db.DBHelper;
 import com.xiaomai.zhuangba.data.module.selectservice.ISelectServiceModule;
 import com.xiaomai.zhuangba.data.module.selectservice.ISelectServiceView;
@@ -37,6 +40,7 @@ import com.xiaomai.zhuangba.util.SheetBehaviorUtil;
 import com.xiaomai.zhuangba.util.ShopCarUtil;
 import com.xiaomai.zhuangba.util.TopBarLayoutUtil;
 import com.xiaomai.zhuangba.weight.dialog.ChoosingGoodsDialog;
+import com.xiaomai.zhuangba.weight.dialog.SlottingAndDebugDialog;
 
 import java.util.List;
 
@@ -150,8 +154,9 @@ public class SelectServiceFragment extends BaseListFragment<ISelectServiceModule
         //设置返回
         TopBarLayoutUtil.addLeftImageBlackButton(topBarSelectService, getBaseFragmentActivity());
 
-        //默认清除购物车(也可以不清除)
+        //默认清除购物车
         DBHelper.getInstance().getShopCarDataDao().deleteAll();
+        DBHelper.getInstance().getShopAuxiliaryMaterialsDBDao().deleteAll();
         updateUi();
     }
 
@@ -179,13 +184,39 @@ public class SelectServiceFragment extends BaseListFragment<ISelectServiceModule
                     public void sure(Maintenance maintenance, int count) {
                         Log.e("添加数量 = " + count);
                         //确定 添加
-                        if (maintenance != null){
+                        if (maintenance != null) {
                             ShopCarUtil.saveShopCar(serviceSubcategoryProject, maintenance, count);
                             sheetBehaviorUpdate();
                         }
                     }
                 })
                 .showDialog();
+    }
+
+    @Override
+    public void slottingAndDebugSuccess(Slotting slotting) {
+        SlottingAndDebugDialog.getInstance().initView(getActivity(), slotting)
+                .setICallBase(new SlottingAndDebugDialog.BaseCallback() {
+                    @Override
+                    public void ok() {
+                        startShopCarFragment();
+                    }
+                    @Override
+                    public void calculationPrice() {
+                        updateUi();
+                    }
+                })
+                .showDialog();
+    }
+
+    private void startShopCarFragment() {
+        Integer totalNumber = ShopCarUtil.getTotalNumber();
+        if (totalNumber != 0) {
+            //是否选择了 服务
+            startFragmentForResult(ShopCarFragment.newInstance(getServiceId(), getServiceText()), ForResultCode.START_FOR_RESULT_CODE_.getCode());
+        } else {
+            ToastUtil.showShort(getString(R.string.please_service));
+        }
     }
 
     @Override
@@ -230,9 +261,16 @@ public class SelectServiceFragment extends BaseListFragment<ISelectServiceModule
                 break;
             case R.id.btnSelectServiceNext:
                 Log.e("btnSelectServiceNext 点击下一步");
-                Integer totalNumber = ShopCarUtil.getTotalNumber();
-                if (totalNumber != 0) {
-                    startFragmentForResult(ShopCarFragment.newInstance(getServiceId(), getServiceText()), ForResultCode.START_FOR_RESULT_CODE_.getCode());
+                //是否选了 必选项
+                ShopAuxiliaryMaterialsDB shopAuxiliaryMaterialsDB = DBHelper.getInstance().getShopAuxiliaryMaterialsDBDao().queryBuilder().unique();
+                if (shopAuxiliaryMaterialsDB == null) {
+                    iModule.requestSlottingAndDebug();
+                } else if (shopAuxiliaryMaterialsDB.getMaterialsSlottingId() == 0
+                        || shopAuxiliaryMaterialsDB.getSlottingSlottingId() == 0
+                        || shopAuxiliaryMaterialsDB.getDebuggingPrice() == 0f) {
+                    iModule.requestSlottingAndDebug();
+                } else {
+                    startShopCarFragment();
                 }
                 break;
             case R.id.tvShopCarEmpty:

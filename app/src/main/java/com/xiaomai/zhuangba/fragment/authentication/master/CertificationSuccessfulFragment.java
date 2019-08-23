@@ -9,6 +9,8 @@ import com.xiaomai.zhuangba.data.bean.UserInfo;
 import com.xiaomai.zhuangba.data.db.DBHelper;
 import com.xiaomai.zhuangba.enums.StaticExplain;
 import com.xiaomai.zhuangba.fragment.authentication.employer.EmployerAuthenticationFragment;
+import com.xiaomai.zhuangba.fragment.employer.EmployerFragment;
+import com.xiaomai.zhuangba.fragment.masterworker.MasterWorkerFragment;
 
 import butterknife.OnClick;
 
@@ -40,9 +42,9 @@ public class CertificationSuccessfulFragment extends BaseFragment {
         UserInfo unique = DBHelper.getInstance().getUserInfoDao().queryBuilder().unique();
         String role = unique.getRole();
         if (role.equals(String.valueOf(StaticExplain.FU_FU_SHI.getCode()))){
-            startFragment(MasterAuthenticationFragment.newInstance());
+            startFragment(MasterWorkerFragment.newInstance());
         }else if (role.equals(String.valueOf(StaticExplain.EMPLOYER.getCode()))){
-            startFragment(EmployerAuthenticationFragment.newInstance());
+            startFragment(EmployerFragment.newInstance());
         }
     }
 
