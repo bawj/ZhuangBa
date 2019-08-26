@@ -78,7 +78,7 @@ public class EmployerPersonalFragment extends PersonalFragment {
                 getString(R.string.fabricating_user_service_protocol)));
     }
 
-    @OnClick({R.id.relWallet , R.id.relEmployerMaintenance})
+    @OnClick({R.id.relWallet ,R.id.relEmployerMaintenance,R.id.relEmployerAdvertisingReplacement,R.id.relEnterpriseCertification})
     public void onViewEmployerClicked(View view) {
         switch (view.getId()) {
             case R.id.relWallet:
@@ -91,7 +91,7 @@ public class EmployerPersonalFragment extends PersonalFragment {
                 break;
             case R.id.relEmployerAdvertisingReplacement:
                 //广告更换
-                startFragment(AdvertisingReplacementFragment.newInstance());
+                startFragment(EmployerAdvertisingReplacementFragment.newInstance());
                 break;
             case R.id.relEnterpriseCertification:
                 //企业认证

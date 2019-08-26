@@ -33,100 +33,7 @@
                 android:textSize="@dimen/tool_lib_16sp"
                 tools:text="电视机维保" />
 
-            <TextView
-                android:id="@+id/tvItemAdvertisingReplacementType"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:background="@drawable/distribution_half_fillet_bg"
-                android:padding="@dimen/tool_lib_5dp"
-                android:textColor="@android:color/white"
-                android:textSize="@dimen/tool_lib_12sp"
-                tools:text="进行中" />
         </RelativeLayout>
-
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/tool_lib_10dp">
-
-            <ImageView
-                android:id="@+id/ivEquipmentNumber"
-                android:layout_width="@dimen/tool_lib_14dp"
-                android:layout_height="@dimen/tool_lib_14dp"
-                android:layout_centerVertical="true"
-                android:layout_gravity="center_vertical"
-                android:src="@drawable/ic_equipment_number" />
-
-            <TextView
-                android:id="@+id/tvEquipmentNumber_"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="@dimen/tool_lib_3dp"
-                android:layout_marginLeft="@dimen/tool_lib_3dp"
-                android:layout_toEndOf="@+id/ivEquipmentNumber"
-                android:layout_toRightOf="@+id/ivEquipmentNumber"
-                android:text="@string/equipment_number"
-                android:textColor="@color/tool_lib_gray_777777"
-                android:textSize="@dimen/tool_lib_12sp" />
-
-            <TextView
-                android:id="@+id/tvEquipmentNumber"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_toEndOf="@+id/tvEquipmentNumber_"
-                android:layout_toRightOf="@+id/tvEquipmentNumber_"
-                android:textColor="@color/tool_lib_gray_777777"
-                android:textSize="@dimen/tool_lib_12sp"
-                tools:text="KDKDFJFJ" />
-
-            <TextView
-                android:id="@+id/tvMoney"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="@dimen/tool_lib_12dp"
-                android:layout_marginEnd="@dimen/tool_lib_12dp"
-                android:textColor="@color/tool_lib_red_EF2B2B"
-                android:textSize="@dimen/tool_lib_16sp"
-                tools:text="¥3200.00" />
-        </RelativeLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/tool_lib_10dp">
-
-            <ImageView
-                android:layout_width="@dimen/tool_lib_14dp"
-                android:layout_height="@dimen/tool_lib_14dp"
-                android:layout_gravity="center_vertical"
-                android:src="@drawable/ic_equipment_number" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/tool_lib_3dp"
-                android:layout_marginLeft="@dimen/tool_lib_3dp"
-                android:text="@string/change_places"
-                android:textColor="@color/tool_lib_gray_777777"
-                android:textSize="@dimen/tool_lib_12sp" />
-
-            <TextView
-                android:id="@+id/tvChangePlaces"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/tool_lib_gray_777777"
-                android:textSize="@dimen/tool_lib_12sp"
-                tools:text="A面" />
-        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -166,6 +73,35 @@
                 android:layout_width="@dimen/tool_lib_14dp"
                 android:layout_height="@dimen/tool_lib_14dp"
                 android:layout_gravity="center_vertical"
+                android:src="@drawable/ic_order_number" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/tool_lib_3dp"
+                android:layout_marginLeft="@dimen/tool_lib_3dp"
+                android:text="@string/service_remarks"
+                android:textColor="@color/tool_lib_gray_777777"
+                android:textSize="@dimen/tool_lib_12sp" />
+
+            <TextView
+                android:id="@+id/tvServiceRemarks"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/tool_lib_gray_777777"
+                android:textSize="@dimen/tool_lib_12sp"
+                tools:text="将积极搭建的驾驶室进行举报和思念" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/tool_lib_10dp">
+
+            <ImageView
+                android:layout_width="@dimen/tool_lib_14dp"
+                android:layout_height="@dimen/tool_lib_14dp"
+                android:layout_gravity="center_vertical"
                 android:src="@drawable/ic_maintenance_date" />
 
             <TextView
@@ -173,12 +109,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/tool_lib_3dp"
                 android:layout_marginLeft="@dimen/tool_lib_3dp"
-                android:text="@string/ending_date"
+                android:text="@string/release_date"
                 android:textColor="@color/tool_lib_gray_777777"
                 android:textSize="@dimen/tool_lib_12sp" />
 
             <TextView
-                android:id="@+id/tvEndingTime"
+                android:id="@+id/tvReleaseDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/tool_lib_gray_777777"
@@ -193,50 +129,28 @@
 
             <ImageView
                 android:layout_width="@dimen/tool_lib_14dp"
-                android:layout_height="@dimen/tool_lib_18dp"
-                android:layout_gravity="center_vertical"
-                android:src="@drawable/ic_location" />
-
-            <TextView
-                android:id="@+id/tvLocation"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/tool_lib_3dp"
-                android:layout_marginLeft="@dimen/tool_lib_3dp"
-                android:textColor="@color/tool_lib_gray_777777"
-                android:textSize="@dimen/tool_lib_12sp"
-                tools:text="地址" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/tool_lib_10dp">
-
-            <ImageView
-                android:layout_width="@dimen/tool_lib_14dp"
                 android:layout_height="@dimen/tool_lib_14dp"
                 android:layout_gravity="center_vertical"
-                android:src="@drawable/ic_order_number" />
+                android:src="@drawable/ic_equipment_number" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/tool_lib_3dp"
                 android:layout_marginLeft="@dimen/tool_lib_3dp"
-                android:text="@string/order_number_"
+                android:text="@string/batch_number"
                 android:textColor="@color/tool_lib_gray_777777"
                 android:textSize="@dimen/tool_lib_12sp" />
 
             <TextView
-                android:id="@+id/tvOrderNumber"
+                android:id="@+id/tvBatchNumber"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/tool_lib_gray_777777"
                 android:textSize="@dimen/tool_lib_12sp"
-                tools:text="HZD12542152" />
+                tools:text="lkd5452151122255" />
         </LinearLayout>
+
 
         <View
             android:id="@+id/viewHorizontalLine"
@@ -250,29 +164,38 @@
             android:layout_marginBottom="@dimen/tool_lib_14dp">
 
             <TextView
-                android:id="@+id/tvAccountingTime"
+                android:id="@+id/tvNumber"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/tool_lib_20dp"
-                android:layout_marginRight="@dimen/tool_lib_20dp"
-                android:layout_toStartOf="@+id/tvAccountingAmount"
-                android:layout_toLeftOf="@+id/tvAccountingAmount"
-                android:textColor="@color/tool_lib_gray_222222"
+                android:layout_marginEnd="@dimen/tool_lib_12dp"
+                android:layout_marginRight="@dimen/tool_lib_12dp"
+                android:layout_toStartOf="@+id/tvAdvertisingMoney_"
+                android:layout_toLeftOf="@+id/tvAdvertisingMoney_"
+                android:textColor="@color/tool_lib_gray_777777"
                 android:textSize="@dimen/tool_lib_12sp"
-                tools:text="入账时间：每月01号" />
+                tools:text="共6项" />
 
             <TextView
-                android:id="@+id/tvAccountingAmount"
+                android:id="@+id/tvAdvertisingMoney_"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toStartOf="@+id/tvAdvertisingMoney"
+                android:layout_toLeftOf="@+id/tvAdvertisingMoney"
+                android:text="@string/total_project"
+                android:textColor="@color/tool_lib_gray_222222"
+                android:textSize="@dimen/tool_lib_12sp" />
+
+            <TextView
+                android:id="@+id/tvAdvertisingMoney"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
-                android:layout_marginEnd="@dimen/tool_lib_12dp"
-                android:layout_marginRight="@dimen/tool_lib_12dp"
-                android:textColor="@color/tool_lib_gray_222222"
-                android:textSize="@dimen/tool_lib_12sp"
-                tools:text="入账金额：¥200/月" />
-
+                android:layout_marginEnd="@dimen/tool_lib_16dp"
+                android:layout_marginRight="@dimen/tool_lib_16dp"
+                android:textColor="@color/tool_lib_red_EF2B2B"
+                android:textSize="@dimen/tool_lib_14sp"
+                tools:text="¥300.00" />
         </RelativeLayout>
 
     </LinearLayout>

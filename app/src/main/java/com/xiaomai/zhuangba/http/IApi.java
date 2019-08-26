@@ -3,10 +3,12 @@ package com.xiaomai.zhuangba.http;
 import com.example.toollib.http.HttpResult;
 import com.xiaomai.zhuangba.data.AdvertisingList;
 import com.xiaomai.zhuangba.data.bean.AdvertisingReplacementBean;
+import com.xiaomai.zhuangba.data.bean.AdvertisingReplacementDetailBean;
 import com.xiaomai.zhuangba.data.bean.AliPayAccountBean;
 import com.xiaomai.zhuangba.data.bean.DataDetailsContent;
 import com.xiaomai.zhuangba.data.bean.DeliveryContent;
 import com.xiaomai.zhuangba.data.bean.EarnestBean;
+import com.xiaomai.zhuangba.data.bean.EmployerAdvertisingReplacement;
 import com.xiaomai.zhuangba.data.bean.EmployerWalletBean;
 import com.xiaomai.zhuangba.data.bean.EmployerWalletDetailBean;
 import com.xiaomai.zhuangba.data.bean.Maintenance;
@@ -19,6 +21,7 @@ import com.xiaomai.zhuangba.data.bean.Orders;
 import com.xiaomai.zhuangba.data.bean.PayData;
 import com.xiaomai.zhuangba.data.bean.PayDepositBean;
 import com.xiaomai.zhuangba.data.bean.ProvincialBean;
+import com.xiaomai.zhuangba.data.bean.RefreshBaseList;
 import com.xiaomai.zhuangba.data.bean.ServiceData;
 import com.xiaomai.zhuangba.data.bean.ServiceSubcategory;
 import com.xiaomai.zhuangba.data.bean.SkillList;
@@ -760,5 +763,28 @@ public interface IApi {
     @FormUrlEncoded
     @POST("advertising/getAdvertisingList")
     Observable<HttpResult<AdvertisingReplacementBean>> getAdvertisingList(@Field("phone") String phoneNumber
+            , @Field("pageIndex") int pageNum, @Field("pageSize") int pageSize);
+
+    /**
+     * 雇主广告更换
+     * @param phoneNumber 手机号
+     * @param pageNum 页码
+     * @param pageSize 一页显示
+     * @return observable
+     */
+    @FormUrlEncoded
+    @POST("advertising/getAdvertisingElList")
+    Observable<HttpResult<RefreshBaseList<EmployerAdvertisingReplacement>>> getAdvertisingElList(@Field("phone") String phoneNumber
+            , @Field("pageIndex") int pageNum, @Field("pageSize") int pageSize);
+    /**
+     * 雇主广告更换详情
+     * @param batchCode 批量号
+     * @param pageNum 页码
+     * @param pageSize 一页显示
+     * @return observable
+     */
+    @FormUrlEncoded
+    @POST("advertising/getAdvertisingElDetails")
+    Observable<HttpResult<RefreshBaseList<AdvertisingReplacementDetailBean>>> getAdvertisingElDetails(@Field("batchCode") String batchCode
             , @Field("pageIndex") int pageNum, @Field("pageSize") int pageSize);
 }
