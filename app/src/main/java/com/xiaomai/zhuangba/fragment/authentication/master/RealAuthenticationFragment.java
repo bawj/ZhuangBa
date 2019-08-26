@@ -1,40 +1,21 @@
 package com.xiaomai.zhuangba.fragment.authentication.master;
 
-import android.Manifest;
-import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.util.Base64;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.FrameLayout;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.example.toollib.base.BaseFragment;
-import com.example.toollib.data.base.BaseCallback;
 import com.google.gson.Gson;
 import com.xiaomai.zhuangba.R;
-import com.xiaomai.zhuangba.application.PretendApplication;
-import com.xiaomai.zhuangba.data.bean.ImgUrl;
 import com.xiaomai.zhuangba.data.bean.MasterAuthenticationInfo;
 import com.xiaomai.zhuangba.data.module.authentication.IMasterAuthenticationModule;
 import com.xiaomai.zhuangba.data.module.authentication.IMasterAuthenticationView;
 import com.xiaomai.zhuangba.data.module.authentication.MasterAuthenticationModule;
-import com.xiaomai.zhuangba.enums.ForResultCode;
-import com.xiaomai.zhuangba.util.FileUtil;
-import com.xiaomai.zhuangba.util.RxPermissionsUtils;
-import com.xiaomai.zhuangba.util.Util;
+import com.xiaomai.zhuangba.fragment.masterworker.MasterWorkerFragment;
 
-import activity.IDCardRecognitionActivity;
 import butterknife.BindView;
 import butterknife.OnClick;
-import exocr.exocrengine.EXOCRModel;
-
-import static fragment.IdCardRecognitionFragment.RESULT;
-import static fragment.IdCardRecognitionFragment.RESULT_CODE;
 
 /**
  * @author Administrator
@@ -44,10 +25,6 @@ import static fragment.IdCardRecognitionFragment.RESULT_CODE;
  */
 public class RealAuthenticationFragment extends BaseFragment<IMasterAuthenticationModule> implements IMasterAuthenticationView {
 
-    @BindView(R.id.layClickIdCard)
-    FrameLayout layClickIdCard;
-    @BindView(R.id.layClickIdCardBack)
-    FrameLayout layClickIdCardBack;
     @BindView(R.id.editAuthenticationName)
     EditText editAuthenticationName;
     @BindView(R.id.editEmergencyContact)
@@ -56,26 +33,17 @@ public class RealAuthenticationFragment extends BaseFragment<IMasterAuthenticati
     EditText editAddress;
     @BindView(R.id.editAuthenticationIdCard)
     EditText editAuthenticationIdCard;
-    @BindView(R.id.tvAuthenticationTermOfValidity)
-    TextView tvAuthenticationTermOfValidity;
-    @BindView(R.id.ivAuthenticationFont)
-    ImageView ivAuthenticationFont;
-    @BindView(R.id.ivAuthenticationBack)
-    ImageView ivAuthenticationBack;
+    @BindView(R.id.editAuthenticationTermOfValidity)
+    EditText editAuthenticationTermOfValidity;
     @BindView(R.id.btnAuthenticationNext)
     Button btnAuthenticationNext;
 
-    /**
-     * 身份证正面
-     */
-    private String absolutePath;
-    /**
-     * 身份证反面
-     */
-    private String absoluteBlackPath;
+    private MasterAuthenticationInfo masterAuthenticationInfo;
+    public static final String MASTER_AUTHENTICATION_INFO = "master_authentication_info";
 
-    public static RealAuthenticationFragment newInstance() {
+    public static RealAuthenticationFragment newInstance(String masterAuthenticationInfo) {
         Bundle args = new Bundle();
+        args.putString(MASTER_AUTHENTICATION_INFO , masterAuthenticationInfo);
         RealAuthenticationFragment fragment = new RealAuthenticationFragment();
         fragment.setArguments(args);
         return fragment;
@@ -88,81 +56,23 @@ public class RealAuthenticationFragment extends BaseFragment<IMasterAuthenticati
 
     @Override
     public void initView() {
-
+        if (getArguments() != null){
+            String s = getArguments().getString(MASTER_AUTHENTICATION_INFO);
+            masterAuthenticationInfo = new Gson().fromJson(s , MasterAuthenticationInfo.class);
+            editAuthenticationName.setText(masterAuthenticationInfo.getUserText());
+            editAuthenticationIdCard.setText(masterAuthenticationInfo.getIdentityCard());
+            editAuthenticationTermOfValidity.setText(masterAuthenticationInfo.getValidityData());
+        }
     }
 
 
-    @OnClick({R.id.layClickIdCard, R.id.layClickIdCardBack, R.id.btnAuthenticationNext})
+    @OnClick({R.id.btnAuthenticationNext})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.layClickIdCard:
-                RxPermissionsUtils.applyPermission(getActivity(), new BaseCallback<String>() {
-                    @Override
-                    public void onSuccess(String obj) {
-                        Intent scanIntent = new Intent(getActivity(), IDCardRecognitionActivity.class);
-                        scanIntent.putExtra(IDCardRecognitionActivity.FRONT, true);
-                        startActivityForResult(scanIntent, ForResultCode.START_FOR_RESULT_CODE.getCode());
-                    }
-
-                    @Override
-                    public void onFail(Object obj) {
-                        showToast(getString(R.string.please_open_permissions));
-                    }
-                }, Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE);
-                break;
-            case R.id.layClickIdCardBack:
-                RxPermissionsUtils.applyPermission(getActivity(), new BaseCallback<String>() {
-                    @Override
-                    public void onSuccess(String obj) {
-                        Intent scanIntent = new Intent(getActivity(), IDCardRecognitionActivity.class);
-                        scanIntent.putExtra(IDCardRecognitionActivity.FRONT, false);
-                        startActivityForResult(scanIntent, ForResultCode.START_FOR_RESULT_CODE_.getCode());
-                    }
-
-                    @Override
-                    public void onFail(Object obj) {
-                        showToast(getString(R.string.please_open_permissions));
-                    }
-                }, Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE);
-                break;
             case R.id.btnAuthenticationNext:
                 iModule.requestIdCardImg();
                 break;
             default:
-        }
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == RESULT_CODE) {
-            if (requestCode == ForResultCode.START_FOR_RESULT_CODE.getCode() && null != data) {
-                final EXOCRModel result = (EXOCRModel) data.getSerializableExtra(RESULT);
-                editAuthenticationName.setText(result.name);
-                editAuthenticationIdCard.setText(result.cardnum);
-
-                String absolutePath = FileUtil.getSaveFile(PretendApplication.getInstance()).getAbsolutePath();
-
-                byte[] decode = Base64.decode(result.base64bitmap, Base64.DEFAULT);
-                Bitmap bitmap = BitmapFactory.decodeByteArray(decode, 0, decode.length);
-                FileUtil.saveBitmap(absolutePath, bitmap);
-                this.absolutePath = absolutePath;
-                ivAuthenticationFont.setImageBitmap(bitmap);
-
-            } else if (requestCode == ForResultCode.START_FOR_RESULT_CODE_.getCode() && null != data) {
-                final EXOCRModel result = (EXOCRModel) data.getSerializableExtra(RESULT);
-                byte[] decode = Base64.decode(result.base64bitmap, Base64.DEFAULT);
-                Bitmap bitmap = BitmapFactory.decodeByteArray(decode, 0, decode.length);
-                String absolutePath = FileUtil.getSaveFile(PretendApplication.getInstance()).getAbsolutePath();
-                FileUtil.saveBitmap(absolutePath, bitmap);
-                absoluteBlackPath = absolutePath;
-                ivAuthenticationBack.setImageBitmap(bitmap);
-                String[] valDate = Util.getValDate(result.validdate);
-                if (valDate != null && valDate.length > 1) {
-                    String string = getString(R.string.id_card_date, Util.getDate(valDate[0]), Util.getDate(valDate[1]));
-                    tvAuthenticationTermOfValidity.setText(string);
-                }
-            }
         }
     }
 
@@ -188,17 +98,23 @@ public class RealAuthenticationFragment extends BaseFragment<IMasterAuthenticati
 
     @Override
     public String getIdCardFrontPhoto() {
-        return absolutePath;
+        if (masterAuthenticationInfo != null){
+            return masterAuthenticationInfo.getIdCardFrontPhoto();
+        }
+        return null;
     }
 
     @Override
     public String getIdCardBackPhoto() {
-        return absoluteBlackPath;
+        if (masterAuthenticationInfo != null){
+            return masterAuthenticationInfo.getIdCardBackPhoto();
+        }
+        return null;
     }
 
     @Override
     public String getValidityData() {
-        return tvAuthenticationTermOfValidity.getText().toString();
+        return editAuthenticationTermOfValidity.getText().toString();
     }
 
     @Override
@@ -212,18 +128,8 @@ public class RealAuthenticationFragment extends BaseFragment<IMasterAuthenticati
     }
 
     @Override
-    public void uploadSuccess(ImgUrl imgUrl) {
-        MasterAuthenticationInfo masterAuthenticationInfo = new MasterAuthenticationInfo();
-        masterAuthenticationInfo.setUserText(getUserText());
-        masterAuthenticationInfo.setValidityData(getValidityData());
-        masterAuthenticationInfo.setIdentityCard(getIdentityCard());
-        masterAuthenticationInfo.setIdCardFrontPhoto(imgUrl.getFrontPhoto());
-        masterAuthenticationInfo.setIdCardBackPhoto(imgUrl.getIdCardBackPhoto());
-        String emergencyContact = editEmergencyContact.getText().toString();
-        String address = editAddress.getText().toString();
-        masterAuthenticationInfo.setEmergencyContact(emergencyContact);
-        masterAuthenticationInfo.setContactAddress(address);
-        startFragment(BareheadedFragment.newInstance(new Gson().toJson(masterAuthenticationInfo)));
+    public void uploadSuccess() {
+        startFragment(MasterWorkerFragment.newInstance());
     }
 
 }

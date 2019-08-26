@@ -442,4 +442,19 @@
     <string name="please_go_to_the_certification_office">您暂未认证企业账号无法发布需求，请前往认证</string>
     <string name="advertising_replacement">广告更换</string>
     <string name="enterprise_certification">企业认证</string>
+    <string name="in_the_process_of_auditing_tip">您的企业认证暂未通过，请耐心等待 我们将在3&#8211;5个工作日内审核通过！</string>
+    <string name="certification_has_been_passed">认证已通过</string>
+    <string name="certification_has_been_passed_tip">您的认证已通过，可以使用完整的雇主功能咯。前往发布需求！</string>
+    <string name="go_to">前往</string>
+    <string name="please_upload_id_card">请上传身份证</string>
+    <string name="continuous_income">持续收入</string>
+    <string name="equipment_number">设备编号：</string>
+    <string name="change_places">更换位置：</string>
+    <string name="maintenance_cycle">维护周期：</string>
+    <string name="ending_date">维护时间：</string>
+    <string name="order_number_">订单编号：</string>
+    <string name="single_service">单次服务</string>
+    <string name="continuous_service">持续服务</string>
+    <string name="live_photos">现场照片</string>
+    <string name="field_description">现场描述</string>
 </resources>

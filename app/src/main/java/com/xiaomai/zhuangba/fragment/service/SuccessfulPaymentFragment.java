@@ -10,6 +10,7 @@ import com.xiaomai.zhuangba.R;
 import com.xiaomai.zhuangba.fragment.employer.EmployerFragment;
 import com.xiaomai.zhuangba.fragment.orderdetail.DistributionDetailFragment;
 import com.xiaomai.zhuangba.fragment.orderdetail.employer.EmployerDistributionFragment;
+import com.xiaomai.zhuangba.util.ConstantUtil;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -34,16 +35,16 @@ public class SuccessfulPaymentFragment extends BaseFragment {
     public static final String PHONE = "phone";
     public static final String ADDRESS = "address";
     public static final String ORDER_AMOUNT = "order_amount";
-    public static final String ORDER_CODE = "order_code";
 
     public static SuccessfulPaymentFragment newInstance(String name, String phone, String address
-            , String orderAmount, String orderCode) {
+            , String orderAmount, String orderCode , String orderType) {
         Bundle args = new Bundle();
         args.putString(NAME, name);
         args.putString(PHONE, phone);
         args.putString(ADDRESS, address);
         args.putString(ORDER_AMOUNT, orderAmount);
-        args.putString(ORDER_CODE, orderCode);
+        args.putString(ConstantUtil.ORDER_CODE, orderCode);
+        args.putString(ConstantUtil.ORDER_TYPE , orderType);
         SuccessfulPaymentFragment fragment = new SuccessfulPaymentFragment();
         fragment.setArguments(args);
         return fragment;
@@ -73,7 +74,7 @@ public class SuccessfulPaymentFragment extends BaseFragment {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btnSuccessfulMissionDetails:
-                startFragment(EmployerDistributionFragment.newInstance(getOrderCode()));
+                startFragment(EmployerDistributionFragment.newInstance(getOrderCode() , getOrderType()));
                 break;
             case R.id.btnSuccessfulBackHome:
                 startFragment(EmployerFragment.newInstance());
@@ -137,7 +138,18 @@ public class SuccessfulPaymentFragment extends BaseFragment {
      */
     private String getOrderCode() {
         if (getArguments() != null) {
-            return getArguments().getString(ORDER_CODE);
+            return getArguments().getString(ConstantUtil.ORDER_CODE);
+        }
+        return "";
+    }
+    /**
+     * 订单编号
+     *
+     * @return string
+     */
+    private String getOrderType() {
+        if (getArguments() != null) {
+            return getArguments().getString(ConstantUtil.ORDER_TYPE);
         }
         return "";
     }

@@ -39,11 +39,6 @@ public class MasterMaintenancePolicyFragment extends BaseListFragment {
     }
 
     @Override
-    public void rightIconClick(View view) {
-        // TODO: 2019/8/8 0008 问号
-    }
-
-    @Override
     public void onBaseRefresh(RefreshLayout refreshLayout) {
         super.onBaseRefresh(refreshLayout);
         requestEmployerMaintenance();
@@ -101,13 +96,8 @@ public class MasterMaintenancePolicyFragment extends BaseListFragment {
     }
 
     @Override
-    protected String getActivityTitle() {
-        return getString(R.string.maintenance_policy_title);
-    }
-
-    @Override
-    public int getRightIcon() {
-        return R.drawable.ic_question_mark;
+    public boolean isCustomView() {
+        return false;
     }
 
     @Override

@@ -29,7 +29,7 @@ import io.reactivex.Observable;
  * @author Administrator
  * @date 2019/7/19 0019
  */
-public class HistoricalOrderFragment extends BaseListFragment<IBaseModule,HistoricalAdapter> {
+public class HistoricalOrderFragment extends BaseListFragment<IBaseModule, HistoricalAdapter> {
 
     private HistoricalAdapter historicalAdapter;
 
@@ -60,10 +60,10 @@ public class HistoricalOrderFragment extends BaseListFragment<IBaseModule,Histor
                 view.findViewById(R.id.tvItemHistoricalOrdersMoney).getTag();
         UserInfo unique = DBHelper.getInstance().getUserInfoDao().queryBuilder().unique();
         if (unique.getRole().equals(String.valueOf(StaticExplain.FU_FU_SHI.getCode()))) {
-            OrderStatusUtil.startMasterOrderDetail(getBaseFragmentActivity() , ordersList.getOrderCode() ,
+            OrderStatusUtil.startMasterOrderDetail(getBaseFragmentActivity(), ordersList.getOrderCode(), ordersList.getOrderType(),
                     ordersList.getOrderStatus());
         } else if (unique.getRole().equals(String.valueOf(StaticExplain.EMPLOYER.getCode()))) {
-            OrderStatusUtil.startEmployerOrderDetail(getBaseFragmentActivity() , ordersList.getOrderCode() ,
+            OrderStatusUtil.startEmployerOrderDetail(getBaseFragmentActivity(), ordersList.getOrderCode(), ordersList.getOrderType(),
                     ordersList.getOrderStatus());
         }
     }

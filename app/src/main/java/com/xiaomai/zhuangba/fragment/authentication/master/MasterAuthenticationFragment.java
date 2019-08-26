@@ -82,7 +82,7 @@ public class MasterAuthenticationFragment extends AuthenticationFragment {
         switch (view.getId()) {
             case R.id.btnGoAuthentication:
                 //去认证
-                startFragment(RealAuthenticationFragment.newInstance());
+                ///startFragment(RealAuthenticationFragment.newInstance());
                 break;
             default:
         }

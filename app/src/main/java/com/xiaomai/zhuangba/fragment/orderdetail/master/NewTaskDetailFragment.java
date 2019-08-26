@@ -41,9 +41,10 @@ public class NewTaskDetailFragment extends BaseMasterOrderDetailFragment {
      */
     public static final String EXPIRE_TIME = "expire_time";
 
-    public static NewTaskDetailFragment newInstance(String orderCode, String expireTime) {
+    public static NewTaskDetailFragment newInstance(String orderCode, String orderType, String expireTime) {
         Bundle args = new Bundle();
         args.putString(ConstantUtil.ORDER_CODE, orderCode);
+        args.putString(ConstantUtil.ORDER_TYPE, orderType);
         args.putString(EXPIRE_TIME, expireTime);
         NewTaskDetailFragment fragment = new NewTaskDetailFragment();
         fragment.setArguments(args);

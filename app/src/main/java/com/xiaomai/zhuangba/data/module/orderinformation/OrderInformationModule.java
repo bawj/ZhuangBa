@@ -22,6 +22,7 @@ import com.xiaomai.zhuangba.data.bean.ShopCarData;
 import com.xiaomai.zhuangba.data.bean.db.ShopAuxiliaryMaterialsDB;
 import com.xiaomai.zhuangba.data.db.DBHelper;
 import com.xiaomai.zhuangba.enums.OrdersEnum;
+import com.xiaomai.zhuangba.enums.StaticExplain;
 import com.xiaomai.zhuangba.http.ServiceUrl;
 import com.xiaomai.zhuangba.util.ConstantUtil;
 import com.xiaomai.zhuangba.util.DateUtil;
@@ -70,7 +71,7 @@ public class OrderInformationModule extends BaseModule<IOrderInformationView> im
         hashMap = getSubmissionOrder();
         if (hashMap != null && parts.isEmpty()) {
             postGenerateOrder();
-        } else if (hashMap != null){
+        } else if (hashMap != null) {
             postImgGenerateOrder(parts);
         }
     }
@@ -85,22 +86,23 @@ public class OrderInformationModule extends BaseModule<IOrderInformationView> im
                 .doOnNext(new BaseHttpConsumer<Object>() {
                     @Override
                     public void httpConsumerAccept(HttpResult<Object> httpResult) {
-                        hashMap.put("picturesUrl" , httpResult.getData().toString());
+                        hashMap.put("picturesUrl", httpResult.getData().toString());
                     }
                 })
                 .concatMap(new Function<HttpResult<Object>, ObservableSource<HttpResult<String>>>() {
                     @Override
-                    public ObservableSource<HttpResult<String>> apply(HttpResult<Object> httpResult){
+                    public ObservableSource<HttpResult<String>> apply(HttpResult<Object> httpResult) {
                         Log.e("flatMap 1 " + httpResult.toString());
                         String requestBodyString = new Gson().toJson(hashMap);
                         RequestBody requestBody = RequestBody.create(MediaType.parse("application/json;charset=utf-8"), requestBodyString);
-                        return ServiceUrl.getUserApi().postGenerateOrder(requestBody);
+                        return RxUtils.getObservable(ServiceUrl.getUserApi().postGenerateOrder(requestBody));
                     }
                 })
                 .subscribe(new BaseHttpRxObserver(mContext.get()) {
                     @Override
                     protected void onSuccess(Object response) {
                         hashMap.put("orderCode", response);
+                        hashMap.put("orderType", String.valueOf(StaticExplain.INSTALLATION_LIST.getCode()));
                         mViewRef.get().placeOrderSuccess(new Gson().toJson(hashMap));
                     }
                 });
@@ -119,6 +121,7 @@ public class OrderInformationModule extends BaseModule<IOrderInformationView> im
                         @Override
                         protected void onSuccess(String orderCode) {
                             hashMap.put("orderCode", orderCode);
+                            hashMap.put("orderType", String.valueOf(StaticExplain.INSTALLATION_LIST.getCode()));
                             mViewRef.get().placeOrderSuccess(new Gson().toJson(hashMap));
                         }
                     });
@@ -263,7 +266,7 @@ public class OrderInformationModule extends BaseModule<IOrderInformationView> im
         //服务项目信息
         hashMap.put("orderServices", orderServicesBeans);
         //雇主描述
-        hashMap.put("employerDescribe" , mViewRef.get().getEmployerDescribe());
+        hashMap.put("employerDescribe", mViewRef.get().getEmployerDescribe());
         setAuxiliaryMaterials(hashMap);
         return hashMap;
     }
@@ -272,16 +275,16 @@ public class OrderInformationModule extends BaseModule<IOrderInformationView> im
         //没有 添加图片 和 备注
         ShopAuxiliaryMaterialsDB unique = DBHelper.getInstance().getShopAuxiliaryMaterialsDBDao().queryBuilder().unique();
         //开槽
-        hashMap.put("slottingStartLength" , unique.getSlottingStartLength());
-        hashMap.put("slottingEndLength" , unique.getSlottingEndLength());
-        hashMap.put("slottingPrice" , unique.getSlottingSlottingPrice());
+        hashMap.put("slottingStartLength", unique.getSlottingStartLength());
+        hashMap.put("slottingEndLength", unique.getSlottingEndLength());
+        hashMap.put("slottingPrice", unique.getSlottingSlottingPrice());
         //是否调试 0 调试 1 不调试
-        hashMap.put("debugging" , unique.getDebuggingPrice() == 0 ? 0 : 1);
-        hashMap.put("debugPrice" , unique.getDebuggingPrice());
+        hashMap.put("debugging", unique.getDebuggingPrice() == 0 ? 0 : 1);
+        hashMap.put("debugPrice", unique.getDebuggingPrice());
         //辅材
-        hashMap.put("materialsStartLength" , unique.getMaterialsStartLength());
-        hashMap.put("materialsEndLength" , unique.getMaterialsEndLength());
-        hashMap.put("materialsPrice" , unique.getMaterialsSlottingPrice());
+        hashMap.put("materialsStartLength", unique.getMaterialsStartLength());
+        hashMap.put("materialsEndLength", unique.getMaterialsEndLength());
+        hashMap.put("materialsPrice", unique.getMaterialsSlottingPrice());
     }
 
 

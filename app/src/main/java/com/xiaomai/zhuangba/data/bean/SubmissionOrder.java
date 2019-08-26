@@ -33,6 +33,8 @@ public class SubmissionOrder {
     private double orderAmount;
     /** 订单编号 */
     private String orderCode;
+    /** 订单类型 */
+    private String orderType;
     /** 订单状态:雇主:0:分配中;1:已接单;2:处理中;3:去验收;4:已完成;5:已取消;师傅:0:新任务;1:待处理;2:处理中;3:验收中;4:已完成;5:已取消; */
     private int orderStatus;
     /** 发布方 */
@@ -140,6 +142,14 @@ public class SubmissionOrder {
 
     public void setOrderCode(String orderCode) {
         this.orderCode = orderCode;
+    }
+
+    public String getOrderType() {
+        return orderType;
+    }
+
+    public void setOrderType(String orderType) {
+        this.orderType = orderType;
     }
 
     public int getOrderStatus() {

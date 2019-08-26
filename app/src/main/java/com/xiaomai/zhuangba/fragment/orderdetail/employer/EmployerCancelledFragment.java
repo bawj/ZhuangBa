@@ -32,9 +32,10 @@ public class EmployerCancelledFragment extends BaseEmployerDetailFragment {
     @BindView(R.id.tvEmployerDetailMasterName)
     TextView tvEmployerDetailMasterName;
 
-    public static EmployerCancelledFragment newInstance(String orderCode) {
+    public static EmployerCancelledFragment newInstance(String orderCode , String orderType) {
         Bundle args = new Bundle();
         args.putString(ConstantUtil.ORDER_CODE, orderCode);
+        args.putString(ConstantUtil.ORDER_TYPE, orderType);
         EmployerCancelledFragment fragment = new EmployerCancelledFragment();
         fragment.setArguments(args);
         return fragment;

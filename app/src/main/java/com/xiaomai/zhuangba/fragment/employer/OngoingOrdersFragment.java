@@ -8,6 +8,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.xiaomai.zhuangba.R;
 import com.xiaomai.zhuangba.adapter.OngoingOrdersAdapter;
 import com.xiaomai.zhuangba.data.bean.OngoingOrdersList;
+import com.xiaomai.zhuangba.enums.StaticExplain;
 import com.xiaomai.zhuangba.enums.StringTypeExplain;
 import com.xiaomai.zhuangba.fragment.base.BaseMasterEmployerContentFragment;
 import com.xiaomai.zhuangba.util.OrderStatusUtil;
@@ -47,8 +48,14 @@ public class OngoingOrdersFragment extends BaseMasterEmployerContentFragment {
         super.onMItemClick(view, position);
         //进入 订单详情
         OngoingOrdersList ongoingOrdersList = (OngoingOrdersList) view.findViewById(R.id.tvItemOrdersTitle).getTag();
-        OrderStatusUtil.startEmployerOrderDetail(getBaseFragmentActivity(), ongoingOrdersList.getOrderCode(),
-                ongoingOrdersList.getOrderStatus());
+        if (ongoingOrdersList.getOrderType().equals(String.valueOf(StaticExplain.INSTALLATION_LIST.getCode()))) {
+            OrderStatusUtil.startEmployerOrderDetail(getBaseFragmentActivity(), ongoingOrdersList.getOrderCode()
+                    , ongoingOrdersList.getOrderType(), ongoingOrdersList.getOrderStatus());
+        } else {
+            //广告单
+            OrderStatusUtil.startEmployerAdvertisingBills(getBaseFragmentActivity(), ongoingOrdersList.getOrderCode(),
+                    ongoingOrdersList.getOrderStatus());
+        }
     }
 
     @Override

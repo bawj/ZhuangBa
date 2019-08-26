@@ -18,9 +18,10 @@ import butterknife.OnClick;
  */
 public class HavingSetOutFragment extends BaseMasterOrderDetailFragment {
 
-    public static HavingSetOutFragment newInstance(String orderCode) {
+    public static HavingSetOutFragment newInstance(String orderCode , String orderType) {
         Bundle args = new Bundle();
         args.putString(ConstantUtil.ORDER_CODE, orderCode);
+        args.putString(ConstantUtil.ORDER_TYPE, orderType);
         HavingSetOutFragment fragment = new HavingSetOutFragment();
         fragment.setArguments(args);
         return fragment;
@@ -46,7 +47,7 @@ public class HavingSetOutFragment extends BaseMasterOrderDetailFragment {
                 break;
             case R.id.btnStartConstruction:
                 //开始施工 签名 拍照
-                startFragment(StartConstructionFragment.newInstance(getOrderCode()));
+                startFragment(StartConstructionFragment.newInstance(getOrderCode(),getOrderType()));
                 break;
             default:
         }

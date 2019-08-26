@@ -73,9 +73,10 @@ public class EmployerUnderConstructionFragment extends BaseEmployerDetailFragmen
     private ImgExhibitionAdapter imgExhibitionAdapter;
     private List<OrderServiceItem> orderServiceItems = new ArrayList<>();
 
-    public static EmployerUnderConstructionFragment newInstance(String orderCode) {
+    public static EmployerUnderConstructionFragment newInstance(String orderCode , String orderType) {
         Bundle args = new Bundle();
         args.putString(ConstantUtil.ORDER_CODE, orderCode);
+        args.putString(ConstantUtil.ORDER_TYPE, orderType);
         EmployerUnderConstructionFragment fragment = new EmployerUnderConstructionFragment();
         fragment.setArguments(args);
         return fragment;
@@ -93,8 +94,6 @@ public class EmployerUnderConstructionFragment extends BaseEmployerDetailFragmen
         recyclerEmployerScenePhoto.setLayoutManager(new GridLayoutManager(getActivity(), 4));
         recyclerEmployerScenePhoto.addItemDecoration(new GridSpacingItemDecoration(4, 32, false));
         recyclerEmployerScenePhoto.setAdapter(imgExhibitionAdapter);
-
-
     }
 
     @Override

@@ -11,6 +11,7 @@ public enum StaticExplain {
      */
     FU_FU_SHI(0, "师傅端"),
     EMPLOYER(1, "雇主端"),
+    OBSERVER_(0, "显示申请成为师傅"),
     OBSERVER(1, "观察员"),
     INTERNSHIP(2, "实习"),
     FORMAL_MASTER(3, "正式师傅"),
@@ -19,6 +20,7 @@ public enum StaticExplain {
     IN_AUDIT(2, "审核中"),
     REJECT_AUDIT(3, "已驳回 审核不通过"),
     SELECTED_ROLES(4,"已选择角色"),
+    ONE_SELECTED_ROLES(5,"第一次审核通过"),
     STOP_REFRESH(1, "停止刷新 handler"),
     PAGE_NUMBER(1, "加载 page  默认 1"),
     PAGE_NUM(20, "刷新加载一次加载15条数据"),
@@ -38,7 +40,14 @@ public enum StaticExplain {
     SAME_DAY(0, "当日"),
     THIS_WEEK(1, "本周"),
     THIS_MONTH(2, "本月"),
-    THIS_QUARTER(3, "本季度"),;
+    THIS_QUARTER(3, "本季度"),
+    INSTALLATION_LIST(1, "安装单"),
+    ADVERTISING_BILLS(2, "广告单"),
+    DEBUGGING(0, "需要调试"),
+    NOT_DEBUGGING(1, "不需要调试"),
+    SINGLE_SERVICE(0, "单次服务"),
+    CONTINUOUS_SERVICE(1, "持续服务"),
+    ;
     /**
      * 状态
      */

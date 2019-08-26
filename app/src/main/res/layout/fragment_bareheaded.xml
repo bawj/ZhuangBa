@@ -22,14 +22,26 @@
             android:textColor="@color/tool_lib_gray_777777"
             android:textSize="@dimen/tool_lib_12sp" />
 
-        <ImageView
-            android:id="@+id/ivBareheaded"
-            android:layout_width="@dimen/tool_lib_180dp"
-            android:layout_height="@dimen/tool_lib_180dp"
+        <RelativeLayout
+            android:layout_width="@dimen/tool_lib_150dp"
+            android:layout_height="@dimen/tool_lib_150dp"
             android:layout_gravity="center"
-            android:layout_marginTop="@dimen/tool_lib_30dp"
-            android:src="@drawable/ic_sample_head" />
+            android:layout_marginTop="@dimen/tool_lib_30dp">
 
+            <ImageView
+                android:id="@+id/ivBareheaded"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_sample_head" />
+
+            <ImageView
+                android:layout_width="@dimen/tool_lib_40dp"
+                android:layout_height="@dimen/tool_lib_40dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
+                android:src="@drawable/ic_photo" />
+        </RelativeLayout>
 
         <com.qmuiteam.qmui.layout.QMUIButton
             android:id="@+id/btnBareheaded"
@@ -41,10 +53,10 @@
 
         <com.qmuiteam.qmui.layout.QMUIButton
             android:id="@+id/btnReUpload"
-            android:visibility="gone"
             style="@style/base_gray_btn"
             android:layout_marginTop="@dimen/tool_lib_16dp"
-            android:text="@string/re_upload" />
+            android:text="@string/re_upload"
+            android:visibility="gone" />
 
     </LinearLayout>
 

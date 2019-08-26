@@ -6,10 +6,16 @@ import android.text.TextUtils;
 import com.example.toollib.data.BaseModule;
 import com.example.toollib.data.base.BaseCallback;
 import com.example.toollib.http.HttpResult;
+import com.example.toollib.http.observer.BaseHttpRxObserver;
 import com.example.toollib.http.observer.BaseHttpZipRxObserver;
+import com.example.toollib.http.util.RxUtils;
 import com.example.toollib.util.ToastUtil;
+import com.google.gson.Gson;
 import com.xiaomai.zhuangba.R;
 import com.xiaomai.zhuangba.data.bean.ImgUrl;
+import com.xiaomai.zhuangba.data.bean.UserInfo;
+import com.xiaomai.zhuangba.data.db.DBHelper;
+import com.xiaomai.zhuangba.enums.StaticExplain;
 import com.xiaomai.zhuangba.http.ServiceUrl;
 
 import java.io.File;
@@ -61,48 +67,28 @@ public class MasterAuthenticationModule extends BaseModule<IMasterAuthentication
         } else if (TextUtils.isEmpty(address)) {
             ToastUtil.showShort(mContext.get().getString(R.string.please_input_address));
         } else {
-            //上传正面图片
-            try {
-                //身份证正面
-                Uri parse = Uri.parse("file:///" + idCardFrontPhoto);
-                MultipartBody.Builder builder = new MultipartBody.Builder().setType(MultipartBody.FORM);
-                File file = new File(new URI(parse.toString()));
-                builder.addFormDataPart("file", file.getName(),
-                        RequestBody.create(MediaType.parse("multipart/form-data"), file));
-                Observable<HttpResult<Object>> httpResultObservable = ServiceUrl.getUserApi().uploadFile(builder.build());
+            UserInfo userInfo = new UserInfo();
+            userInfo.setUserText(userText);
+            userInfo.setIdentityCard(identityCard);
+            userInfo.setValidityData(validityData);
+            userInfo.setEmergencyContact(emergencyContact);
+            userInfo.setAddress(address);
+            userInfo.setRole(String.valueOf(StaticExplain.EMPLOYER.getCode()));
 
+            userInfo.setIdCardFrontPhoto(idCardFrontPhoto);
+            userInfo.setIdCardBackPhoto(idCardBackPhoto);
+            RequestBody requestBody = RequestBody.create(MediaType.parse("application/json;charset=utf-8"), new Gson().toJson(userInfo));
+            RxUtils.getObservable(ServiceUrl.getUserApi().certification(requestBody))
+                    .compose(mViewRef.get().<HttpResult<UserInfo>>bindLifecycle())
+                    .subscribe(new BaseHttpRxObserver<UserInfo>() {
+                        @Override
+                        protected void onSuccess(UserInfo userInfo1) {
+                            DBHelper.getInstance().getUserInfoDao().deleteAll();
+                            DBHelper.getInstance().getUserInfoDao().insert(userInfo1);
+                            mViewRef.get().uploadSuccess();
+                        }
+                    });
 
-                //身份证反面
-                Uri back = Uri.parse("file:///" + idCardBackPhoto);
-                MultipartBody.Builder builderBack = new MultipartBody.Builder().setType(MultipartBody.FORM);
-                File fileBack = new File(new URI(back.toString()));
-                builderBack.addFormDataPart("file", fileBack.getName(),
-                        RequestBody.create(MediaType.parse("multipart/form-data"), file));
-
-                Observable<HttpResult<Object>> httpResultObservableBack = ServiceUrl.getUserApi().uploadFile(builderBack.build());
-
-                Observable<Object> zip = Observable.zip(httpResultObservable, httpResultObservableBack
-                        , new BiFunction<HttpResult<Object>, HttpResult<Object>, Object>() {
-                            @Override
-                            public Object apply(HttpResult<Object> httpResult, HttpResult<Object> httpResult2) throws Exception {
-                                ImgUrl imgUrl = new ImgUrl();
-                                imgUrl.setFrontPhoto(httpResult.getData().toString());
-                                imgUrl.setIdCardBackPhoto(httpResult2.getData().toString());
-                                return imgUrl;
-                            }
-                        }).compose(mViewRef.get().bindLifecycle());
-                BaseHttpZipRxObserver instance = BaseHttpZipRxObserver.getInstance();
-                instance.setContext(mContext.get());
-                instance.httpZipObserver(zip, new BaseCallback() {
-                    @Override
-                    public void onSuccess(Object obj) {
-                        ImgUrl imgUrl = (ImgUrl) obj;
-                        mViewRef.get().uploadSuccess(imgUrl);
-                    }
-                });
-            } catch (URISyntaxException e) {
-                e.printStackTrace();
-            }
         }
     }
 }

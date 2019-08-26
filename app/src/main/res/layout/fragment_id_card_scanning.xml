@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/tool_lib_gray_F5F8FA"
+        android:orientation="vertical">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/tool_lib_10dp"
+            android:background="@android:color/white"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/tool_lib_28dp"
+                android:text="@string/positive_upload_of_id_card"
+                android:textColor="@color/tool_lib_gray_777777"
+                android:textSize="@dimen/tool_lib_14sp" />
+
+            <FrameLayout
+                android:id="@+id/layClickIdCard"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/tool_lib_169dp"
+                android:layout_marginTop="@dimen/tool_lib_10dp">
+
+                <ImageView
+                    android:id="@+id/ivAuthenticationFont"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/ic_id_card" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="@dimen/tool_lib_65dp"
+                        android:layout_height="@dimen/tool_lib_65dp"
+                        android:src="@drawable/ic_photo" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/tool_lib_6dp"
+                        android:text="@string/click_start_photo"
+                        android:textColor="@color/tool_lib_gray_666666"
+                        android:textSize="@dimen/tool_lib_20sp" />
+                </LinearLayout>
+            </FrameLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/tool_lib_28dp"
+                android:text="@string/upload_the_reverse_of_id_card"
+                android:textColor="@color/tool_lib_gray_777777"
+                android:textSize="@dimen/tool_lib_14sp" />
+
+            <FrameLayout
+                android:id="@+id/layClickIdCardBack"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/tool_lib_170dp"
+                android:layout_marginTop="@dimen/tool_lib_10dp"
+                android:layout_marginBottom="@dimen/tool_lib_20dp"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/ivAuthenticationBack"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/ic_id_card_back" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="@dimen/tool_lib_65dp"
+                        android:layout_height="@dimen/tool_lib_65dp"
+                        android:src="@drawable/ic_photo" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/tool_lib_6dp"
+                        android:text="@string/click_start_photo"
+                        android:textColor="@color/tool_lib_gray_666666"
+                        android:textSize="@dimen/tool_lib_20sp" />
+                </LinearLayout>
+            </FrameLayout>
+        </LinearLayout>
+
+        <com.qmuiteam.qmui.layout.QMUIButton
+            android:id="@+id/btnAuthenticationNext"
+            style="@style/base_btn"
+            android:layout_marginLeft="@dimen/tool_lib_16dp"
+            android:layout_marginTop="@dimen/tool_lib_30dp"
+            android:layout_marginRight="@dimen/tool_lib_16dp"
+            android:text="@string/next" />
+    </LinearLayout>
+</android.support.v4.widget.NestedScrollView>

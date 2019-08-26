@@ -1,6 +1,8 @@
 package com.xiaomai.zhuangba.http;
 
 import com.example.toollib.http.HttpResult;
+import com.xiaomai.zhuangba.data.AdvertisingList;
+import com.xiaomai.zhuangba.data.bean.AdvertisingReplacementBean;
 import com.xiaomai.zhuangba.data.bean.AliPayAccountBean;
 import com.xiaomai.zhuangba.data.bean.DataDetailsContent;
 import com.xiaomai.zhuangba.data.bean.DeliveryContent;
@@ -43,7 +45,6 @@ import retrofit2.http.Query;
 
 /**
  * @author Administrator
- * @date 2019/5/7 0007
  */
 public interface IApi {
 
@@ -141,7 +142,6 @@ public interface IApi {
     @GET("userRole/getServiceCategory")
     Observable<HttpResult<List<ServiceData>>> getServiceCategory();
 
-
     /**
      * 订单首页统计雇主和师傅
      *
@@ -186,10 +186,11 @@ public interface IApi {
      * 订单详情
      *
      * @param orderCode 订单code
+     * @param orderType 订单类型 1 安装单 2 广告单
      * @return observable
      */
     @GET("order/getOrderDetails/{orderCode}")
-    Observable<HttpResult<OngoingOrdersList>> getOrderDetails(@Path("orderCode") String orderCode);
+    Observable<HttpResult<OngoingOrdersList>> getOrderDetails(@Path("orderCode") String orderCode, @Query("orderType") String orderType);
 
     /**
      * 订单池详情
@@ -499,6 +500,16 @@ public interface IApi {
     @POST("user/updateRegistrationInformation")
     Observable<HttpResult<UserInfo>> updateRegistrationInformation(@Body RequestBody requestBody);
 
+    /**
+     * 企业认证
+     *
+     * @param requestBody body
+     * @return observable
+     */
+    @POST("user/certification")
+    Observable<HttpResult<UserInfo>> certification(@Body RequestBody requestBody);
+
+
 
 
     /**
@@ -735,6 +746,19 @@ public interface IApi {
      * 查询开槽、辅材和调试
      * @return observable
      */
-    @GET("/userRole/getSlottingAndDebug ")
+    @GET("userRole/getSlottingAndDebug")
     Observable<HttpResult<Slotting>> getSlottingAndDebug();
+
+
+    /**
+     * 广告更换
+     * @param phoneNumber 手机号
+     * @param pageNum 页码
+     * @param pageSize 一页显示
+     * @return observable
+     */
+    @FormUrlEncoded
+    @POST("advertising/getAdvertisingList")
+    Observable<HttpResult<AdvertisingReplacementBean>> getAdvertisingList(@Field("phone") String phoneNumber
+            , @Field("pageIndex") int pageNum, @Field("pageSize") int pageSize);
 }

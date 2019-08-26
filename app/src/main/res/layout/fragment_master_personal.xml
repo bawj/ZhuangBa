@@ -254,14 +254,14 @@
             <ImageView
                 android:id="@+id/ivPersonalMasterMaintenance"
                 style="@style/personal_img"
-                android:src="@drawable/ic_maintenance" />
+                android:src="@drawable/ic_master_income" />
 
             <TextView
                 android:id="@+id/tvPersonalMasterMaintenance"
                 style="@style/personal_text"
                 android:layout_toEndOf="@+id/ivPersonalMasterMaintenance"
                 android:layout_toRightOf="@+id/ivPersonalMasterMaintenance"
-                android:text="@string/maintenance_policy" />
+                android:text="@string/continuous_income" />
 
             <ImageView
                 android:layout_width="wrap_content"

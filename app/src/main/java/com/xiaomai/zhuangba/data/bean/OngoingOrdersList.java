@@ -61,6 +61,15 @@ public class OngoingOrdersList implements Parcelable{
 
     /** 是否有维保 */
     private int maintenanceFlag;
+
+    /** 开槽  如果是广告单 则是 预约时间 */
+    private String slottingStartLength;
+    private String slottingEndLength;
+    private String debugging;
+    private String materialsStartLength;
+    private String materialsEndLength;
+    /** 1安装单 2 广告单 */
+    private String orderType;
     public OngoingOrdersList() {
     }
 
@@ -105,6 +114,38 @@ public class OngoingOrdersList implements Parcelable{
 
     public int getServiceId() {
         return serviceId;
+    }
+
+    public String getSlottingStartLength() {
+        return TextUtils.isEmpty(slottingStartLength) ? "" : slottingStartLength;
+    }
+
+    public void setSlottingStartLength(String slottingStartLength) {
+        this.slottingStartLength = slottingStartLength;
+    }
+
+    public String getSlottingEndLength() {
+        return TextUtils.isEmpty(slottingEndLength) ? "" : slottingEndLength;
+    }
+
+    public void setSlottingEndLength(String slottingEndLength) {
+        this.slottingEndLength = slottingEndLength;
+    }
+
+    public String getMaterialsStartLength() {
+        return materialsStartLength;
+    }
+
+    public void setMaterialsStartLength(String materialsStartLength) {
+        this.materialsStartLength = materialsStartLength;
+    }
+
+    public String getMaterialsEndLength() {
+        return materialsEndLength;
+    }
+
+    public void setMaterialsEndLength(String materialsEndLength) {
+        this.materialsEndLength = materialsEndLength;
     }
 
     public void setServiceId(int serviceId) {
@@ -205,6 +246,14 @@ public class OngoingOrdersList implements Parcelable{
         return TextUtils.isEmpty(masterOrderAmount) ? "" : masterOrderAmount;
     }
 
+    public String getDebugging() {
+        return debugging;
+    }
+
+    public void setDebugging(String debugging) {
+        this.debugging = debugging;
+    }
+
     public void setMasterOrderAmount(String masterOrderAmount) {
         this.masterOrderAmount = masterOrderAmount;
     }
@@ -263,6 +312,14 @@ public class OngoingOrdersList implements Parcelable{
 
     public void setMaintenanceFlag(int maintenanceFlag) {
         this.maintenanceFlag = maintenanceFlag;
+    }
+
+    public String getOrderType() {
+        return TextUtils.isEmpty(orderType) ? "" : orderType;
+    }
+
+    public void setOrderType(String orderType) {
+        this.orderType = orderType;
     }
 
     @Override

@@ -87,9 +87,9 @@ public class NotificationMessageFragment extends BaseFragment {
                         int orderStatus = ongoingOrdersList.getOrderStatus();
                         String expireTime = ongoingOrdersList.getExpireTime();
                         if (role.equals(String.valueOf(StaticExplain.FU_FU_SHI.getCode()))) {
-                            OrderStatusUtil.startMasterOrderDetail(getBaseFragmentActivity(), orderCode, orderStatus, expireTime);
+                            OrderStatusUtil.startMasterOrderDetail(getBaseFragmentActivity(), orderCode, ongoingOrdersList.getOrderType(), orderStatus, expireTime);
                         } else if (role.equals(String.valueOf(StaticExplain.EMPLOYER.getCode()))) {
-                            OrderStatusUtil.startEmployerOrderDetail(getBaseFragmentActivity(), orderCode, orderStatus);
+                            OrderStatusUtil.startEmployerOrderDetail(getBaseFragmentActivity(), orderCode, ongoingOrdersList.getOrderType(), orderStatus);
                         }
                     }
                 }

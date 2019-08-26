@@ -136,25 +136,12 @@ public class LoginRegisteredModule extends VerificationCodeModule<ILoginRegister
                         DBHelper.getInstance().getUserInfoDao().deleteAll();
                         DBHelper.getInstance().getUserInfoDao().insert(userInfo);
                         //角色选择成功
-                        int authenticationStatue = userInfo.getAuthenticationStatue();
                         if (userInfo.getRole().equals(String.valueOf(StaticExplain.FU_FU_SHI.getCode()))) {
-                            //判断是否认证了
-                            if (authenticationStatue != StaticExplain.CERTIFIED.getCode()){
-                                //未认证
-                                mViewRef.get().startMasterAuthentication();
-                            }else{
-                                //师傅端
-                                mViewRef.get().startMasterWorker();
-                            }
+                            //师傅端
+                            mViewRef.get().startMasterAuthentication();
                         } else if (userInfo.getRole().equals(String.valueOf(StaticExplain.EMPLOYER.getCode()))) {
-                            //判断是否认证了
-                            if (authenticationStatue != StaticExplain.CERTIFIED.getCode()){
-                                //未认证
-                                mViewRef.get().startEmployerAuthentication();
-                            }else{
-                                //雇主端
-                                mViewRef.get().startEmployer();
-                            }
+                            //雇主端
+                            mViewRef.get().startEmployerAuthentication();
                         }
                     }
                 });

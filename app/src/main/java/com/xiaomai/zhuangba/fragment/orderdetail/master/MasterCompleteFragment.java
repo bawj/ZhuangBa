@@ -40,9 +40,10 @@ public class MasterCompleteFragment extends BeUnderConstructionFragment {
      */
     private ImgExhibitionAdapter imgExhibitionAfterAdapter;
 
-    public static MasterCompleteFragment newInstance(String orderCode) {
+    public static MasterCompleteFragment newInstance(String orderCode , String orderType) {
         Bundle args = new Bundle();
-        args.putString(ConstantUtil.ORDER_CODE , orderCode);
+        args.putString(ConstantUtil.ORDER_CODE, orderCode);
+        args.putString(ConstantUtil.ORDER_TYPE, orderType);
         MasterCompleteFragment fragment = new MasterCompleteFragment();
         fragment.setArguments(args);
         return fragment;

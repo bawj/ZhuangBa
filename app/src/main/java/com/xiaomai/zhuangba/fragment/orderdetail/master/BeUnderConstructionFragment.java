@@ -41,9 +41,10 @@ public class BeUnderConstructionFragment extends BaseMasterOrderDetailFragment {
      */
     private ImgExhibitionAdapter imgExhibitionAdapter;
 
-    public static BeUnderConstructionFragment newInstance(String orderCode) {
+    public static BeUnderConstructionFragment newInstance(String orderCode , String orderType) {
         Bundle args = new Bundle();
         args.putString(ConstantUtil.ORDER_CODE, orderCode);
+        args.putString(ConstantUtil.ORDER_TYPE, orderType);
         BeUnderConstructionFragment fragment = new BeUnderConstructionFragment();
         fragment.setArguments(args);
         return fragment;

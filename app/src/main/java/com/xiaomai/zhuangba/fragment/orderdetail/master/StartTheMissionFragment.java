@@ -42,9 +42,10 @@ public class StartTheMissionFragment extends BaseMasterOrderDetailFragment {
     TextView tvBaseOrderConfirmationTime_;
     private OngoingOrdersList ongoingOrdersList;
 
-    public static StartTheMissionFragment newInstance(String orderCode) {
+    public static StartTheMissionFragment newInstance(String orderCode , String orderType) {
         Bundle args = new Bundle();
         args.putString(ConstantUtil.ORDER_CODE, orderCode);
+        args.putString(ConstantUtil.ORDER_TYPE, orderType);
         StartTheMissionFragment fragment = new StartTheMissionFragment();
         fragment.setArguments(args);
         return fragment;
@@ -96,7 +97,7 @@ public class StartTheMissionFragment extends BaseMasterOrderDetailFragment {
                     @Override
                     protected void onSuccess(Object response) {
                         //现在出发 -> 已出发
-                        startFragmentAndDestroyCurrent(HavingSetOutFragment.newInstance(getOrderCode()));
+                        startFragmentAndDestroyCurrent(HavingSetOutFragment.newInstance(getOrderCode(),getOrderType()));
                     }
                 });
     }

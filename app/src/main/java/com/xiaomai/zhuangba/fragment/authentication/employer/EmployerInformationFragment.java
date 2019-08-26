@@ -89,7 +89,7 @@ public class EmployerInformationFragment extends BaseFragment {
         userInfo.setAddress(editAddress.getText().toString());
         userInfo.setContactAddress(editAddressDetail.getText().toString());
         RequestBody requestBody = RequestBody.create(MediaType.parse("application/json;charset=utf-8"), new Gson().toJson(userInfo));
-        Observable<HttpResult<UserInfo>> observable = ServiceUrl.getUserApi().updateRegistrationInformation(requestBody);
+        Observable<HttpResult<UserInfo>> observable = ServiceUrl.getUserApi().certification(requestBody);
         RxUtils.getObservable(observable)
                 .compose(this.<HttpResult<UserInfo>>bindToLifecycle())
                 .subscribe(new BaseHttpRxObserver<UserInfo>(getActivity()) {

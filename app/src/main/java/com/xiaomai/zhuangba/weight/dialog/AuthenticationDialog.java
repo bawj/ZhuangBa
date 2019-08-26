@@ -85,8 +85,8 @@ public class AuthenticationDialog implements View.OnClickListener {
                 qmuiDialog.dismiss();
                 break;
             case R.id.tvDialogVersionOk:
+                qmuiDialog.dismiss();
                 if (baseCallback != null) {
-                    qmuiDialog.dismiss();
                     baseCallback.ok();
                 }
                 break;

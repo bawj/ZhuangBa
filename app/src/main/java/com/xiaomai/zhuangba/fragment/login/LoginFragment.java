@@ -10,8 +10,6 @@ import com.xiaomai.zhuangba.R;
 import com.xiaomai.zhuangba.data.module.login.ILoginRegisteredModule;
 import com.xiaomai.zhuangba.data.module.login.LoginRegisteredModule;
 import com.xiaomai.zhuangba.fragment.authentication.RoleSelectionFragment;
-import com.xiaomai.zhuangba.fragment.authentication.employer.EmployerAuthenticationFragment;
-import com.xiaomai.zhuangba.fragment.authentication.master.MasterAuthenticationFragment;
 import com.xiaomai.zhuangba.fragment.employer.EmployerFragment;
 import com.xiaomai.zhuangba.fragment.masterworker.MasterWorkerFragment;
 
@@ -98,16 +96,6 @@ public class LoginFragment extends BaseLoginRegisteredFragment{
     public void startEmployer() {
         //雇主端
         startFragmentAndDestroyCurrent(EmployerFragment.newInstance());
-    }
-
-    @Override
-    public void startMasterAuthentication() {
-        startFragmentAndDestroyCurrent(MasterAuthenticationFragment.newInstance());
-    }
-
-    @Override
-    public void startEmployerAuthentication() {
-        startFragmentAndDestroyCurrent(EmployerAuthenticationFragment.newInstance());
     }
 
     @Override

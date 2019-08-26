@@ -10,6 +10,10 @@ public class ConstantUtil {
      * 订单编号 传递 key
      */
     public static final String ORDER_CODE = "order_code";
+    /**
+     * 安装类型 传递 key
+     */
+    public static final String ORDER_TYPE = "order_type";
 
     /**
      * 选择 服务 dialog 默认选中

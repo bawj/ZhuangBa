@@ -56,5 +56,11 @@
     <color name="tool_lib_color_2D3141">#2D3141</color>
     <color name="tool_lib_color_404352">#404352</color>
     <color name="tool_lib_color_BBBCC1">#BBBCC1</color>
+    <color name="tool_lib_color_D1D1D1">#D1D1D1</color>
+    <color name="tool_lib_color_287CDF">#287CDF</color>
+    <color name="tool_lib_color_E9F3FF">#E9F3FF</color>
+    <color name="tool_lib_color_542BE9">#542BE9</color>
+    <color name="tool_lib_color_EFEBFF">#EFEBFF</color>
+    <color name="tool_lib_color_F5F6F7">#F5F6F7</color>
 
 </resources>

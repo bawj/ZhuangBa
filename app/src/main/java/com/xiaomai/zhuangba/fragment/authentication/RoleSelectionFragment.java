@@ -64,23 +64,11 @@ public class RoleSelectionFragment extends BaseLoginRegisteredFragment {
     public void startMasterAuthentication() {
         //师傅端 去认证
         startFragment(RealNameAuthenticationFragment.newInstance());
-        //startFragmentAndDestroyCurrent(MasterAuthenticationFragment.newInstance());
     }
 
     @Override
     public void startEmployerAuthentication() {
         startFragment(EmployerRealNameAuthenticationFragment.newInstance());
-        //startFragmentAndDestroyCurrent(EmployerAuthenticationFragment.newInstance());
-    }
-
-    @Override
-    public void startMasterWorker() {
-        startFragmentAndDestroyCurrent(MasterWorkerFragment.newInstance());
-    }
-
-    @Override
-    public void startEmployer() {
-        startFragmentAndDestroyCurrent(EmployerFragment.newInstance());
     }
 
     @Override

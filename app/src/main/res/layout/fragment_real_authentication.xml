@@ -21,119 +21,6 @@
             android:paddingTop="@dimen/tool_lib_16dp"
             android:paddingRight="@dimen/tool_lib_16dp">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginEnd="@dimen/tool_lib_8dp"
-                    android:layout_marginRight="@dimen/tool_lib_8dp"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/positive_upload_of_id_card"
-                        android:textColor="@color/tool_lib_gray_777777"
-                        android:textSize="@dimen/tool_lib_12sp" />
-
-                    <FrameLayout
-                        android:id="@+id/layClickIdCard"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/tool_lib_105dp"
-                        android:layout_marginTop="@dimen/tool_lib_10dp">
-
-                        <ImageView
-                            android:id="@+id/ivAuthenticationFont"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:src="@drawable/ic_id_card" />
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:gravity="center"
-                            android:orientation="vertical">
-
-                            <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:src="@drawable/ic_photo" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/tool_lib_6dp"
-                                android:text="@string/click_start_photo"
-                                android:textColor="@color/tool_lib_gray_666666"
-                                android:textSize="@dimen/tool_lib_12sp" />
-                        </LinearLayout>
-
-                    </FrameLayout>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="@dimen/tool_lib_8dp"
-                    android:layout_marginLeft="@dimen/tool_lib_8dp"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/upload_the_reverse_of_id_card"
-                        android:textColor="@color/tool_lib_gray_777777"
-                        android:textSize="@dimen/tool_lib_12sp" />
-
-                    <FrameLayout
-                        android:id="@+id/layClickIdCardBack"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/tool_lib_105dp"
-                        android:layout_marginTop="@dimen/tool_lib_10dp"
-                        android:orientation="vertical">
-
-                        <ImageView
-                            android:id="@+id/ivAuthenticationBack"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:src="@drawable/ic_id_card_back" />
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:gravity="center"
-                            android:orientation="vertical">
-
-                            <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:src="@drawable/ic_photo" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/tool_lib_6dp"
-                                android:text="@string/click_start_photo"
-                                android:textColor="@color/tool_lib_gray_666666"
-                                android:textSize="@dimen/tool_lib_12sp" />
-                        </LinearLayout>
-                    </FrameLayout>
-                </LinearLayout>
-
-            </LinearLayout>
-
-            <View
-                style="@style/tool_lib_horizontal_line"
-                android:layout_marginTop="@dimen/tool_lib_30dp" />
-
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/tool_lib_56dp">
@@ -203,12 +90,13 @@
                     android:textColor="@color/tool_lib_gray_888888"
                     android:textSize="@dimen/tool_lib_14sp" />
 
-                <TextView
-                    android:id="@+id/tvAuthenticationTermOfValidity"
+                <EditText
+                    android:id="@+id/editAuthenticationTermOfValidity"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/tool_lib_105dp"
                     android:layout_marginLeft="@dimen/tool_lib_105dp"
+                    android:background="@null"
                     android:textColor="@color/tool_lib_gray_222222"
                     android:textSize="@dimen/tool_lib_14sp"
                     tools:text="2019-05-09 ~ 2029-05-09" />

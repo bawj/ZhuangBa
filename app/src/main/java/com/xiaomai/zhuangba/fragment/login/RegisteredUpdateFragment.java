@@ -105,17 +105,6 @@ public class RegisteredUpdateFragment extends BaseLoginRegisteredFragment{
     }
 
     @Override
-    public void startMasterAuthentication() {
-        startFragmentAndDestroyCurrent(MasterAuthenticationFragment.newInstance());
-    }
-
-    @Override
-    public void startEmployerAuthentication() {
-        startFragmentAndDestroyCurrent(EmployerAuthenticationFragment.newInstance());
-    }
-
-
-    @Override
     public int getContentView() {
         return R.layout.fragment_registered_update;
     }

@@ -26,9 +26,10 @@ public class CompleteFragment extends BaseFragment {
     @BindView(R.id.tvCompleteTip)
     TextView tvCompleteTip;
 
-    public static CompleteFragment newInstance(String orderCode) {
+    public static CompleteFragment newInstance(String orderCode , String orderType) {
         Bundle args = new Bundle();
         args.putString(ConstantUtil.ORDER_CODE , orderCode);
+        args.putString(ConstantUtil.ORDER_TYPE , orderType);
         CompleteFragment fragment = new CompleteFragment();
         fragment.setArguments(args);
         return fragment;
@@ -61,7 +62,7 @@ public class CompleteFragment extends BaseFragment {
     }
 
     public void startOrderDetail() {
-        startFragment(StartTheMissionFragment.newInstance(getOrderCode()));
+        startFragment(StartTheMissionFragment.newInstance(getOrderCode() , getOrderType()));
     }
 
     @Override
@@ -86,6 +87,13 @@ public class CompleteFragment extends BaseFragment {
     public String getOrderCode(){
         if (getArguments() != null){
             return getArguments().getString(ConstantUtil.ORDER_CODE);
+        }
+        return "";
+    }
+
+    public String getOrderType(){
+        if (getArguments() != null){
+            return getArguments().getString(ConstantUtil.ORDER_TYPE);
         }
         return "";
     }

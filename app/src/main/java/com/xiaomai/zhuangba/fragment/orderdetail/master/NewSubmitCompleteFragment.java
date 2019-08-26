@@ -23,7 +23,7 @@ public class NewSubmitCompleteFragment extends CompleteFragment {
     @Override
     public void startOrderDetail() {
         //到 完成 详情
-        startFragment(MasterCompleteFragment.newInstance(getOrderCode()));
+        startFragment(MasterCompleteFragment.newInstance(getOrderCode() , getOrderType()));
     }
 
     @Override

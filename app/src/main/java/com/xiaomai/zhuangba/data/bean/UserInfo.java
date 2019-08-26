@@ -147,7 +147,7 @@ public class UserInfo {
     }
 
     public String getUserText() {
-        return userText;
+        return TextUtils.isEmpty(userText) ? "" : userText;
     }
 
     public void setUserText(String userText) {
@@ -339,7 +339,7 @@ public class UserInfo {
     }
 
     public String getMasterRankName() {
-        return masterRankName;
+        return TextUtils.isEmpty(masterRankName) ? "" : masterRankName;
     }
 
     public void setMasterRankName(String masterRankName) {

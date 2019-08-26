@@ -14,7 +14,7 @@ public class ConstructionCompleteFragment extends CompleteFragment {
 
     public static ConstructionCompleteFragment newInstance(String orderCode) {
         Bundle args = new Bundle();
-        args.putString(ConstantUtil.ORDER_CODE , orderCode);
+        args.putString(ConstantUtil.ORDER_CODE, orderCode);
         ConstructionCompleteFragment fragment = new ConstructionCompleteFragment();
         fragment.setArguments(args);
         return fragment;
@@ -23,7 +23,7 @@ public class ConstructionCompleteFragment extends CompleteFragment {
     @Override
     public void startOrderDetail() {
         //到 施工中
-        startFragment(BeUnderConstructionFragment.newInstance(getOrderCode()));
+        startFragment(BeUnderConstructionFragment.newInstance(getOrderCode(), getOrderType()));
     }
 
     @Override

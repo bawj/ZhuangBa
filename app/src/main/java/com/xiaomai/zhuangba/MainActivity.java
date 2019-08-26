@@ -90,24 +90,6 @@ public class MainActivity extends BaseActivity {
         }
     }
 
-    private void authentication(UserInfo userInfo, QMUIFragment qmuiFragment) {
-        //认证状态:0:未认证;1:已认证;2:审核中
-        int authenticationStatue = userInfo.getAuthenticationStatue();
-        if (authenticationStatue == StaticExplain.CERTIFIED.getCode()) {
-            //已认证
-            init(qmuiFragment);
-        } else {
-            //未认证
-            String role = userInfo.getRole();
-            if (role.equals(String.valueOf(StaticExplain.EMPLOYER.getCode()))) {
-                init(EmployerAuthenticationFragment.newInstance());
-            } else if (role.equals(String.valueOf(StaticExplain.FU_FU_SHI.getCode()))) {
-                init(MasterAuthenticationFragment.newInstance());
-            }
-        }
-    }
-
-
     private void init(QMUIFragment qmuiFragment) {
         getSupportFragmentManager()
                 .beginTransaction()

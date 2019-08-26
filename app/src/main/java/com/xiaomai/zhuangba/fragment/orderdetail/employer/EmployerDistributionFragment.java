@@ -25,9 +25,10 @@ public class EmployerDistributionFragment extends BaseEmployerDetailFragment {
     @BindView(R.id.tvBaseOrderDetailPhone)
     TextView tvBaseOrderDetailPhone;
 
-    public static EmployerDistributionFragment newInstance(String orderCode) {
+    public static EmployerDistributionFragment newInstance(String orderCode , String orderType) {
         Bundle args = new Bundle();
         args.putString(ConstantUtil.ORDER_CODE, orderCode);
+        args.putString(ConstantUtil.ORDER_TYPE, orderType);
         EmployerDistributionFragment fragment = new EmployerDistributionFragment();
         fragment.setArguments(args);
         return fragment;

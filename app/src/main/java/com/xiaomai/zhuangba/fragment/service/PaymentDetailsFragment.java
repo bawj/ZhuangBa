@@ -264,8 +264,9 @@ public class PaymentDetailsFragment extends BaseFragment<IPaymentDetailsModule> 
         String telephone = submissionOrder.getTelephone();
         String name = submissionOrder.getName();
         String orderCode = submissionOrder.getOrderCode();
+        String orderType = submissionOrder.getOrderType();
         Double money = ShopCarUtil.getTotalMoney();
-        startFragment(SuccessfulPaymentFragment.newInstance(name, telephone, address, String.valueOf(money), orderCode));
+        startFragment(SuccessfulPaymentFragment.newInstance(name, telephone, address, String.valueOf(money), orderCode ,orderType));
     }
 
     @Override

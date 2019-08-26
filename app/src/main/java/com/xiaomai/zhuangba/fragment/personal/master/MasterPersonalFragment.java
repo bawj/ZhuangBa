@@ -1,7 +1,6 @@
 package com.xiaomai.zhuangba.fragment.personal.master;
 
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -12,6 +11,8 @@ import com.xiaomai.zhuangba.R;
 import com.xiaomai.zhuangba.data.bean.UserInfo;
 import com.xiaomai.zhuangba.data.db.DBHelper;
 import com.xiaomai.zhuangba.enums.StaticExplain;
+import com.xiaomai.zhuangba.fragment.authentication.master.IDCardScanningFragment;
+import com.xiaomai.zhuangba.fragment.authentication.master.RealAuthenticationFragment;
 import com.xiaomai.zhuangba.fragment.personal.PersonalFragment;
 import com.xiaomai.zhuangba.fragment.personal.agreement.WebViewFragment;
 import com.xiaomai.zhuangba.fragment.personal.wallet.WalletFragment;
@@ -74,18 +75,8 @@ public class MasterPersonalFragment extends PersonalFragment {
                 || authenticationStatue == StaticExplain.REJECT_AUDIT.getCode()) {
             relPlatformMaster.setVisibility(View.GONE);
         }
-        String masterRankId = userInfo.getMasterRankId();
-        if (masterRankId.equals(String.valueOf(StaticExplain.FORMAL_MASTER.getCode()))) {
-            //正式师傅隐藏
-            relPlatformMaster.setVisibility(View.GONE);
-            tvPersonalStatus.setText(getString(R.string.formal_master));
-        } else if (masterRankId.equals(String.valueOf(StaticExplain.INTERNSHIP.getCode()))) {
-            tvPersonalStatus.setText(getString(R.string.internship_master));
-        } else if (masterRankId.equals(String.valueOf(StaticExplain.OBSERVER.getCode()))) {
-            tvPersonalStatus.setText(getString(R.string.observer));
-        }
-
-        tvPersonalName.setText(TextUtils.isEmpty(userInfo.getUserText()) ? getString(R.string.no_certification) : userInfo.getUserText());
+        tvPersonalStatus.setText(userInfo.getMasterRankName());
+        tvPersonalName.setText(userInfo.getUserText());
         GlideManager.loadCircleImage(getActivity(), userInfo.getBareHeadedPhotoUrl(), ivUserHead, R.drawable.bg_def_head);
     }
 
@@ -98,7 +89,8 @@ public class MasterPersonalFragment extends PersonalFragment {
                 break;
             case R.id.relMasterMaintenance:
                 //我的维保单
-                startFragment(MasterMaintenancePolicyFragment.newInstance());
+                ///startFragment(MasterMaintenancePolicyFragment.newInstance());
+                startFragment(ContinuousIncomeFragment.newInstance());
                 break;
             case R.id.relPersonalScopeOfService:
                 //修改服务范围
@@ -106,7 +98,12 @@ public class MasterPersonalFragment extends PersonalFragment {
                 break;
             case R.id.relPlatformMaster:
                 //缴纳保证金
-                startFragment(PayDepositFragment.newInstance());
+                UserInfo unique = DBHelper.getInstance().getUserInfoDao().queryBuilder().unique();
+                if (unique.getAuthenticationStatue() == StaticExplain.CERTIFIED.getCode()){
+                    startFragment(PayDepositFragment.newInstance());
+                }else {
+                    startFragment(IDCardScanningFragment.newInstance());
+                }
                 break;
             default:
         }

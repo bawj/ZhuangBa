@@ -21,6 +21,7 @@ import com.xiaomai.zhuangba.data.bean.ShopCarData;
 import com.xiaomai.zhuangba.data.bean.Slotting;
 import com.xiaomai.zhuangba.data.bean.db.ShopAuxiliaryMaterialsDB;
 import com.xiaomai.zhuangba.data.db.DBHelper;
+import com.xiaomai.zhuangba.enums.StaticExplain;
 import com.xiaomai.zhuangba.http.ServiceUrl;
 import com.xiaomai.zhuangba.util.ShopCarUtil;
 import com.xiaomai.zhuangba.weight.dialog.ShopCarDialog;
@@ -87,7 +88,7 @@ public class ShopCarFragment extends BaseFragment implements ShopCarAdapter.ISho
         RelativeLayout layDebugging = view.findViewById(R.id.layDebugging);
         TextView tvShopCarMaintenance = view.findViewById(R.id.tvShopCarMaintenance);
         layDebugging.setOnClickListener(this);
-        tvShopCarMaintenance.setText(shopAuxiliaryMaterialsDB.getDebuggingPrice() == 0 ?
+        tvShopCarMaintenance.setText(shopAuxiliaryMaterialsDB.getDebuggingPrice() == StaticExplain.DEBUGGING.getCode() ?
                 getString(R.string.no_debugging_required) : getString(R.string.need_debugging));
 
         RelativeLayout layAuxiliaryMaterials = view.findViewById(R.id.layAuxiliaryMaterials);

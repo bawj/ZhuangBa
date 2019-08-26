@@ -4,10 +4,13 @@ import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.view.animation.Animation;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.toollib.base.BaseFragment;
 import com.example.toollib.data.IBaseModule;
+import com.example.toollib.util.Log;
+import com.liulishuo.filedownloader.i.IFileDownloadIPCCallback;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
@@ -22,8 +25,8 @@ import io.reactivex.annotations.Nullable;
  * @author Administrator
  * @date 2019/7/9 0009
  */
-public class BaseListFragment<M extends IBaseModule,T extends BaseQuickAdapter> extends BaseFragment<M> implements OnRefreshListener, IBaseListView,
-        BaseQuickAdapter.OnItemClickListener , BaseQuickAdapter.RequestLoadMoreListener {
+public class BaseListFragment<M extends IBaseModule, T extends BaseQuickAdapter> extends BaseFragment<M> implements OnRefreshListener, IBaseListView,
+        BaseQuickAdapter.OnItemClickListener, BaseQuickAdapter.RequestLoadMoreListener {
 
     @BindView(R.id.refreshBaseList)
     SmartRefreshLayout refreshLayout;
@@ -42,8 +45,7 @@ public class BaseListFragment<M extends IBaseModule,T extends BaseQuickAdapter> 
     public void initView() {
         refreshLayout.setEnableRefresh(true);
         refreshLayout.setOnRefreshListener(this);
-        refreshLayout.autoRefresh();
-        if (rvBaseList != null){
+        if (rvBaseList != null) {
             rvBaseList.setLayoutManager(new LinearLayoutManager(getActivity()));
             baseListAdapter = getBaseListAdapter();
             if (baseListAdapter != null) {
@@ -53,8 +55,8 @@ public class BaseListFragment<M extends IBaseModule,T extends BaseQuickAdapter> 
                 baseListAdapter.setOnLoadMoreListener(this, rvBaseList);
             }
         }
+        refreshLayout.autoRefresh();
     }
-
 
     public T getBaseListAdapter() {
         return null;
@@ -74,7 +76,7 @@ public class BaseListFragment<M extends IBaseModule,T extends BaseQuickAdapter> 
     public void onRefresh(@NonNull RefreshLayout refreshLayout) {
         //刷新
         page = 1;
-        if (baseListAdapter != null){
+        if (baseListAdapter != null) {
             baseListAdapter.setEnableLoadMore(false);
         }
         onBaseRefresh(refreshLayout);
@@ -100,7 +102,7 @@ public class BaseListFragment<M extends IBaseModule,T extends BaseQuickAdapter> 
     @Override
     public void finishRefresh() {
         //刷新完成 可以上拉加载
-        if (baseListAdapter != null){
+        if (baseListAdapter != null) {
             baseListAdapter.setEnableLoadMore(true);
         }
         refreshLayout.finishRefresh();
@@ -118,7 +120,7 @@ public class BaseListFragment<M extends IBaseModule,T extends BaseQuickAdapter> 
     @Override
     public void loadMoreEnd() {
         //加载完成 可以刷新
-        if (baseListAdapter != null){
+        if (baseListAdapter != null) {
             baseListAdapter.loadMoreEnd();
         }
         refreshLayout.setEnableRefresh(true);
@@ -126,7 +128,7 @@ public class BaseListFragment<M extends IBaseModule,T extends BaseQuickAdapter> 
 
     @Override
     public void loadMoreComplete() {
-        if (baseListAdapter != null){
+        if (baseListAdapter != null) {
             baseListAdapter.loadMoreComplete();
         }
         refreshLayout.setEnableRefresh(true);

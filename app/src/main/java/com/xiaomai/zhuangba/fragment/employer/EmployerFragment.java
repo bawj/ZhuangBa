@@ -1,25 +1,22 @@
 package com.xiaomai.zhuangba.fragment.employer;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.view.View;
 import android.widget.TextView;
 
 import com.example.toollib.http.HttpResult;
 import com.example.toollib.http.observer.BaseHttpRxObserver;
 import com.example.toollib.http.util.RxUtils;
-import com.example.toollib.manager.GlideManager;
-import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.example.toollib.util.DensityUtils;
 import com.xiaomai.zhuangba.R;
 import com.xiaomai.zhuangba.data.bean.OrderStatistics;
 import com.xiaomai.zhuangba.data.bean.ServiceData;
-import com.xiaomai.zhuangba.data.bean.UserInfo;
-import com.xiaomai.zhuangba.data.db.DBHelper;
 import com.xiaomai.zhuangba.enums.StaticExplain;
-import com.xiaomai.zhuangba.fragment.datadetails.DataDetailsFragment;
 import com.xiaomai.zhuangba.fragment.SelectServiceFragment;
+import com.xiaomai.zhuangba.fragment.authentication.employer.BusinessLicenseFragment;
 import com.xiaomai.zhuangba.fragment.base.BaseMasterEmployerContentFragment;
 import com.xiaomai.zhuangba.fragment.base.BaseMasterEmployerFragment;
+import com.xiaomai.zhuangba.fragment.datadetails.DataDetailsFragment;
 import com.xiaomai.zhuangba.fragment.personal.employer.EmployerPersonalFragment;
 import com.xiaomai.zhuangba.http.ServiceUrl;
 import com.xiaomai.zhuangba.weight.dialog.AuthenticationDialog;
@@ -29,7 +26,6 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import io.reactivex.Observable;
 
 /**
  * @author Administrator
@@ -64,8 +60,12 @@ public class EmployerFragment extends BaseMasterEmployerFragment {
                         .compose(this.<HttpResult<List<ServiceData>>>bindToLifecycle())
                         .subscribe(new BaseHttpRxObserver<List<ServiceData>>(getActivity()) {
                             @Override
+                            public void onNext(HttpResult<List<ServiceData>> httpResult) {
+                                super.onNext(httpResult);
+                                serviceCategorySuccess(httpResult);
+                            }
+                            @Override
                             protected void onSuccess(List<ServiceData> serviceDataList) {
-                                serviceCategorySuccess(serviceDataList);
                             }
                         });
                 break;
@@ -76,50 +76,62 @@ public class EmployerFragment extends BaseMasterEmployerFragment {
         }
     }
 
-    public void serviceCategorySuccess(List<ServiceData> serviceDataList) {
+    public void serviceCategorySuccess(HttpResult<List<ServiceData>> httpResult) {
+        String msg = httpResult.getMsg();
+        if (!msg.equals(String.valueOf(StaticExplain.CERTIFIED.getCode()))) {
+            showDialog(httpResult);
+        } else {
+            List<ServiceData> serviceDataList = httpResult.getData();
+            startSelectService(serviceDataList);
+        }
+    }
+
+    private void startSelectService(List<ServiceData> serviceDataList) {
         if (serviceDataList != null && !serviceDataList.isEmpty()) {
             ServiceData serviceData = serviceDataList.get(0);
             startFragment(SelectServiceFragment.newInstance(String.valueOf(serviceData.getServiceId()), serviceData.getServiceText()));
         }
     }
 
-    @Override
-    public void onRefresh(@NonNull RefreshLayout refreshLayout) {
-        super.onRefresh(refreshLayout);
-        /*UserInfo unique = DBHelper.getInstance().getUserInfoDao().queryBuilder().unique();
-        if (unique.getAuthenticationStatue() != StaticExplain.CERTIFIED.getCode()){
-            Observable<HttpResult<UserInfo>> userObservable = ServiceUrl.getUserApi().getUser();
-            RxUtils.getObservable(userObservable)
-                    .compose(this.<HttpResult<UserInfo>>bindToLifecycle())
-                    .subscribe(new BaseHttpRxObserver<UserInfo>(getActivity()) {
-                        @Override
-                        protected void onSuccess(UserInfo userInfo) {
-                            DBHelper.getInstance().getUserInfoDao().deleteAll();
-                            DBHelper.getInstance().getUserInfoDao().insert(userInfo);
-                            showDialog(userInfo);
-                        }
-                    });
-        }*/
-    }
-
-    private void showDialog(UserInfo userInfo) {
+    private void showDialog(final HttpResult<List<ServiceData>> httpResult) {
+        String msg = httpResult.getMsg();
+        //0 || 4 || 3 去认证   2审核中  5认证已通过
         AuthenticationDialog instance = AuthenticationDialog.getInstance();
         instance.initView(getActivity());
-        if (userInfo.getAuthenticationStatue() == StaticExplain.NO_CERTIFICATION.getCode()) {
+        if (DensityUtils.stringTypeInteger(msg) == StaticExplain.NO_CERTIFICATION.getCode()
+                || DensityUtils.stringTypeInteger(msg) == StaticExplain.SELECTED_ROLES.getCode()
+                || DensityUtils.stringTypeInteger(msg) == StaticExplain.REJECT_AUDIT.getCode()) {
             //未认证
-            instance.setTvAuthenticationTitle(getString(R.string.need_to_go_for_certification));
-            instance.setTvAuthenticationContent(getString(R.string.please_go_to_the_certification_office));
-            instance.setICallBase(new AuthenticationDialog.BaseCallback() {
+            instance.setTvAuthenticationTitle(getString(R.string.need_to_go_for_certification))
+                    .setTvAuthenticationContent(getString(R.string.please_go_to_the_certification_office))
+                    .setIvAuthenticationLog(R.drawable.ic_shape_log)
+                    .setICallBase(new AuthenticationDialog.BaseCallback() {
+                @Override
+                public void ok() {
+                    startFragment(BusinessLicenseFragment.newInstance());
+                }
+            }).showDialog();
+        } else if (DensityUtils.stringTypeInteger(msg) == StaticExplain.IN_AUDIT.getCode()) {
+            //审核中
+            instance.setTvAuthenticationTitle(getString(R.string.audit_in_progress))
+                    .setTvAuthenticationContent(getString(R.string.in_the_process_of_auditing_tip))
+                    .setIvAuthenticationLog(R.drawable.ic_shape_log)
+                    .setTvDialogVersionOk(getString(R.string.ok))
+                    .isTvDialogVersionClose()
+                    .showDialog();
+        } else if (DensityUtils.stringTypeInteger(msg) == StaticExplain.ONE_SELECTED_ROLES.getCode()) {
+            //审核通过 第一次进入
+            instance.setTvAuthenticationTitle(getString(R.string.certification_has_been_passed))
+                    .setTvAuthenticationContent(getString(R.string.certification_has_been_passed_tip))
+                    .setIvAuthenticationLog(R.drawable.ic_green_complete)
+                    .setTvDialogVersionOk(getString(R.string.go_to))
+                    .isTvDialogVersionClose()
+                    .setICallBase(new AuthenticationDialog.BaseCallback() {
                         @Override
                         public void ok() {
+                            startSelectService(httpResult.getData());
                         }
                     }).showDialog();
-        } else if (userInfo.getAuthenticationStatue() == StaticExplain.IN_AUDIT.getCode()) {
-            //审核中
-        } else if (userInfo.getAuthenticationStatue() == StaticExplain.REJECT_AUDIT.getCode()) {
-            //审核不通过
-        } else if (userInfo.getAuthenticationStatue() == StaticExplain.SELECTED_ROLES.getCode()) {
-            //审核通过
         }
     }
 

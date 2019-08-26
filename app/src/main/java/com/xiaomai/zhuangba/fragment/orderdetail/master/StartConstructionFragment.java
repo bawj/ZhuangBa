@@ -39,9 +39,10 @@ import okhttp3.RequestBody;
  */
 public class StartConstructionFragment extends BaseAutographFragment {
 
-    public static StartConstructionFragment newInstance(String orderCode) {
+    public static StartConstructionFragment newInstance(String orderCode , String orderType) {
         Bundle args = new Bundle();
         args.putString(ConstantUtil.ORDER_CODE, orderCode);
+        args.putString(ConstantUtil.ORDER_TYPE, orderType);
         StartConstructionFragment fragment = new StartConstructionFragment();
         fragment.setArguments(args);
         return fragment;
@@ -117,7 +118,7 @@ public class StartConstructionFragment extends BaseAutographFragment {
                     @Override
                     protected void onSuccess(Object response) {
                         DialogUtil.tipLoadingDismiss();
-                        startFragment(ConstructionCompleteFragment.newInstance(getOrderCode()));
+                        startFragment(ConstructionCompleteFragment.newInstance(getOrderCode() , getOrderType()));
                     }
                     @Override
                     public void onError(ApiException e) {
@@ -130,6 +131,13 @@ public class StartConstructionFragment extends BaseAutographFragment {
     private String getOrderCode() {
         if (getArguments() != null) {
             return getArguments().getString(ConstantUtil.ORDER_CODE);
+        }
+        return "";
+    }
+
+    private String getOrderType() {
+        if (getArguments() != null) {
+            return getArguments().getString(ConstantUtil.ORDER_TYPE);
         }
         return "";
     }

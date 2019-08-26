@@ -51,9 +51,10 @@ public class EmployerCompleteFragment extends EmployerUnderConstructionFragment 
      */
     private List<OrderServiceItem> orderServiceItemList;
 
-    public static EmployerCompleteFragment newInstance(String orderCode) {
+    public static EmployerCompleteFragment newInstance(String orderCode , String orderType) {
         Bundle args = new Bundle();
         args.putString(ConstantUtil.ORDER_CODE, orderCode);
+        args.putString(ConstantUtil.ORDER_TYPE, orderType);
         EmployerCompleteFragment fragment = new EmployerCompleteFragment();
         fragment.setArguments(args);
         return fragment;

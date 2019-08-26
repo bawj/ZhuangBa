@@ -219,6 +219,56 @@
                             android:lineSpacingExtra="@dimen/tool_lib_1dp"
                             android:padding="@dimen/tool_lib_6dp" />
                     </RelativeLayout>
+                    <!--现场照片-->
+                    <RelativeLayout
+                        android:id="@+id/relLivePhotos"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/tool_lib_8dp"
+                        android:background="@android:color/white">
+
+                        <TextView
+                            android:id="@+id/tvLivePhotos"
+                            style="@style/item_text_title"
+                            android:text="@string/live_photos" />
+
+                        <android.support.v7.widget.RecyclerView
+                            android:id="@+id/recyclerLivePhotos"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/tvLivePhotos"
+                            android:layout_marginLeft="@dimen/tool_lib_12dp"
+                            android:layout_marginTop="@dimen/tool_lib_8dp"
+                            android:layout_marginRight="@dimen/tool_lib_12dp"
+                            android:descendantFocusability="blocksDescendants" />
+                    </RelativeLayout>
+                    <!--现场描述-->
+                    <RelativeLayout
+                        android:id="@+id/relFieldDescription"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/tool_lib_8dp"
+                        android:background="@android:color/white">
+
+                        <TextView
+                            android:id="@+id/tvFiledDescription_"
+                            style="@style/item_text_title"
+                            android:text="@string/field_description" />
+
+                        <TextView
+                            android:id="@+id/tvFiledDescription"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/tool_lib_110dp"
+                            android:layout_below="@+id/tvFiledDescription_"
+                            android:layout_marginLeft="@dimen/tool_lib_16dp"
+                            android:layout_marginTop="@dimen/tool_lib_8dp"
+                            android:layout_marginRight="@dimen/tool_lib_16dp"
+                            android:background="@drawable/gray_field_description_bg"
+                            android:ellipsize="end"
+                            android:maxLines="6"
+                            android:padding="@dimen/tool_lib_8dp"
+                            tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. " />
+                    </RelativeLayout>
 
                     <RelativeLayout
                         android:id="@+id/relService"

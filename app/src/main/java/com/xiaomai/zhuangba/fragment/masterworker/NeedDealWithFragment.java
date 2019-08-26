@@ -66,7 +66,7 @@ public class NeedDealWithFragment extends BaseMasterEmployerContentFragment {
     @Override
     public void onMItemClick(View view, int position) {
         OngoingOrdersList ongoingOrdersList = (OngoingOrdersList) view.findViewById(R.id.tvItemOrdersTitle).getTag();
-        OrderStatusUtil.startMasterOrderDetail(getBaseFragmentActivity() , ongoingOrdersList.getOrderCode() ,
+        OrderStatusUtil.startMasterOrderDetail(getBaseFragmentActivity() , ongoingOrdersList.getOrderCode() , ongoingOrdersList.getOrderType(),
                 ongoingOrdersList.getOrderStatus() , ongoingOrdersList.getExpireTime());
     }
 

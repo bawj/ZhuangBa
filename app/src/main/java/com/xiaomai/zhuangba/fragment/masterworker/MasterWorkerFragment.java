@@ -12,6 +12,9 @@ import com.bigkoo.pickerview.builder.OptionsPickerBuilder;
 import com.bigkoo.pickerview.listener.OnOptionsSelectChangeListener;
 import com.bigkoo.pickerview.listener.OnOptionsSelectListener;
 import com.bigkoo.pickerview.view.OptionsPickerView;
+import com.example.toollib.http.HttpResult;
+import com.example.toollib.http.observer.BaseHttpRxObserver;
+import com.example.toollib.http.util.RxUtils;
 import com.qmuiteam.qmui.layout.QMUIButton;
 import com.qmuiteam.qmui.widget.dialog.QMUITipDialog;
 import com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton;
@@ -24,10 +27,12 @@ import com.xiaomai.zhuangba.data.bean.UserInfo;
 import com.xiaomai.zhuangba.data.db.DBHelper;
 import com.xiaomai.zhuangba.enums.OrdersEnum;
 import com.xiaomai.zhuangba.enums.StaticExplain;
+import com.xiaomai.zhuangba.fragment.authentication.master.IDCardScanningFragment;
+import com.xiaomai.zhuangba.fragment.authentication.master.RealAuthenticationFragment;
 import com.xiaomai.zhuangba.fragment.base.BaseMasterEmployerContentFragment;
 import com.xiaomai.zhuangba.fragment.base.BaseMasterEmployerFragment;
 import com.xiaomai.zhuangba.fragment.personal.master.MasterPersonalFragment;
-import com.xiaomai.zhuangba.fragment.personal.wallet.paydeposit.PayDepositFragment;
+import com.xiaomai.zhuangba.http.ServiceUrl;
 import com.xiaomai.zhuangba.util.Util;
 
 import java.util.ArrayList;
@@ -92,10 +97,10 @@ public class MasterWorkerFragment extends BaseMasterEmployerFragment implements 
 
     private void isBtnMasterApplyVisible(UserInfo userInfo) {
         //是否显示 申请成为师傅 缴纳保证金
-        if (!userInfo.getMasterRankId().equals(String.valueOf(StaticExplain.OBSERVER.getCode()))) {
-            btnMasterApply.setVisibility(View.GONE);
-        } else {
+        if (userInfo.getAuthenticationStatue() != StaticExplain.CERTIFIED.getCode()) {
             btnMasterApply.setVisibility(View.VISIBLE);
+        } else {
+            btnMasterApply.setVisibility(View.GONE);
         }
     }
 
@@ -106,7 +111,8 @@ public class MasterWorkerFragment extends BaseMasterEmployerFragment implements 
                 showAddress();
                 break;
             case R.id.btnMasterApply:
-                startFragment(PayDepositFragment.newInstance());
+                //去认证
+                startFragment(IDCardScanningFragment.newInstance());
                 break;
             default:
         }
@@ -163,6 +169,15 @@ public class MasterWorkerFragment extends BaseMasterEmployerFragment implements 
     @Override
     public void onRefresh(@NonNull RefreshLayout refreshLayout) {
         super.onRefresh(refreshLayout);
+        RxUtils.getObservable(ServiceUrl.getUserApi().getUser())
+                .compose(this.<HttpResult<UserInfo>>bindToLifecycle())
+                .subscribe(new BaseHttpRxObserver<UserInfo>() {
+                    @Override
+                    protected void onSuccess(UserInfo userInfo) {
+                        DBHelper.getInstance().getUserInfoDao().deleteAll();
+                        DBHelper.getInstance().getUserInfoDao().insert(userInfo);
+                    }
+                });
     }
 
     @Override
@@ -172,7 +187,6 @@ public class MasterWorkerFragment extends BaseMasterEmployerFragment implements 
             tvOrderToday.setText(String.valueOf(orderStatistics.getPendingDisposal()));
             tvFinishToday.setText(String.valueOf(orderStatistics.getComplete()));
         }
-
         isBtnMasterApplyVisible(DBHelper.getInstance().getUserInfoDao().queryBuilder().unique());
     }
 

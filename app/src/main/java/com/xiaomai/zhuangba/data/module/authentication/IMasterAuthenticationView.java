@@ -1,7 +1,6 @@
 package com.xiaomai.zhuangba.data.module.authentication;
 
 import com.example.toollib.data.base.IBaseView;
-import com.xiaomai.zhuangba.data.bean.ImgUrl;
 
 /**
  * @author Administrator
@@ -41,9 +40,8 @@ public interface IMasterAuthenticationView extends IBaseView {
 
     /**
      * 身份证上传成功
-     * @param imgUrl img
      */
-    void uploadSuccess(ImgUrl imgUrl);
+    void uploadSuccess();
 
     /**
      * 紧急联系地址

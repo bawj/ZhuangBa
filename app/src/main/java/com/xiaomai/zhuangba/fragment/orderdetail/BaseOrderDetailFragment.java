@@ -1,8 +1,10 @@
 package com.xiaomai.zhuangba.fragment.orderdetail;
 
 import android.support.annotation.NonNull;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -11,10 +13,13 @@ import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.toollib.base.BaseFragment;
+import com.example.toollib.fragment.ImgPreviewFragment;
+import com.example.toollib.manager.GlideManager;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.xiaomai.zhuangba.R;
+import com.xiaomai.zhuangba.adapter.ImgExhibitionAdapter;
 import com.xiaomai.zhuangba.adapter.OrderDateListAdapter;
 import com.xiaomai.zhuangba.adapter.ServiceItemsAdapter;
 import com.xiaomai.zhuangba.data.bean.DeliveryContent;
@@ -32,7 +37,10 @@ import com.xiaomai.zhuangba.fragment.service.ServiceDetailFragment;
 import com.xiaomai.zhuangba.util.ConstantUtil;
 import com.xiaomai.zhuangba.util.MapUtils;
 import com.xiaomai.zhuangba.util.OrderStatusUtil;
+import com.xiaomai.zhuangba.util.Util;
+import com.xiaomai.zhuangba.weight.GridSpacingItemDecoration;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -109,6 +117,18 @@ public class BaseOrderDetailFragment<T extends IOrderDetailModule> extends BaseF
     @BindView(R.id.layBaseOrderDetail)
     RelativeLayout layBaseOrderDetail;
 
+    /** 现场照片 */
+    @BindView(R.id.relLivePhotos)
+    RelativeLayout relLivePhotos;
+    @BindView(R.id.recyclerLivePhotos)
+    RecyclerView recyclerLivePhotos;
+    private ImgExhibitionAdapter imgExhibitionAdapter;
+    /** 现场描述 */
+    @BindView(R.id.relFieldDescription)
+    RelativeLayout relFieldDescription;
+    @BindView(R.id.tvFiledDescription)
+    TextView tvFiledDescription;
+
     private float latitude , longitude;
     /** 服务项目 */
     private ServiceItemsAdapter serviceItemsAdapter;
@@ -137,6 +157,11 @@ public class BaseOrderDetailFragment<T extends IOrderDetailModule> extends BaseF
         recyclerOrderInformation.setLayoutManager(new LinearLayoutManager(getActivity()));
         orderDateListAdapter = new OrderDateListAdapter();
         recyclerOrderInformation.setAdapter(orderDateListAdapter);
+
+        imgExhibitionAdapter = new ImgExhibitionAdapter();
+        recyclerLivePhotos.setLayoutManager(new GridLayoutManager(getActivity(), 4));
+        recyclerLivePhotos.addItemDecoration(new GridSpacingItemDecoration(4, 32, false));
+        recyclerLivePhotos.setAdapter(imgExhibitionAdapter);
     }
 
     @Override
@@ -183,8 +208,47 @@ public class BaseOrderDetailFragment<T extends IOrderDetailModule> extends BaseF
         if (deliveryContents != null && !deliveryContents.isEmpty()){
             orderDateListsDeliveryContent(deliveryContents);
         }
+        ///现场照片 和 描述
+        if (deliveryContents != null){
+            setFieldDescription(deliveryContents);
+        }
     }
 
+
+    /**
+     * 现场照片 和 描述
+     * @param deliveryContents list
+     */
+    private void setFieldDescription(List<DeliveryContent> deliveryContents){
+        if (!deliveryContents.isEmpty() && deliveryContents.size() >= 3) {
+            DeliveryContent deliveryContent = deliveryContents.get(2);
+            String picturesUrl = deliveryContent.getPicturesUrl();
+            if (!TextUtils.isEmpty(picturesUrl)) {
+                final List<String> urlList = Util.getList(picturesUrl);
+                imgExhibitionAdapter.setNewData(urlList);
+                imgExhibitionAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                        ArrayList<String> url = (ArrayList<String>) urlList;
+                        if (url != null) {
+                            startFragment(ImgPreviewFragment.newInstance(position, url));
+                        }
+                    }
+                });
+            }else {
+                relLivePhotos.setVisibility(View.GONE);
+            }
+            String electronicSignature = deliveryContent.getElectronicSignature();
+            if (!TextUtils.isEmpty(electronicSignature)){
+                tvFiledDescription.setText(electronicSignature);
+            }else {
+                relFieldDescription.setVisibility(View.GONE);
+            }
+        }else {
+            relLivePhotos.setVisibility(View.GONE);
+            relFieldDescription.setVisibility(View.GONE);
+        }
+    }
 
     public void orderDateListsSuccess(List<OrderDateList> orderDateLists) {
         //订单时间信息
@@ -252,6 +316,14 @@ public class BaseOrderDetailFragment<T extends IOrderDetailModule> extends BaseF
     public String getOrderCode() {
         if (getArguments() != null){
             return getArguments().getString(ConstantUtil.ORDER_CODE);
+        }
+        return "";
+    }
+
+    @Override
+    public String getOrderType() {
+        if (getArguments() != null){
+            return getArguments().getString(ConstantUtil.ORDER_TYPE);
         }
         return "";
     }

@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/card_view"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:foreground="?android:attr/selectableItemBackground"
+    card_view:cardBackgroundColor="@color/white"
+    card_view:cardCornerRadius="@dimen/tool_lib_5dp"
+    card_view:cardElevation="0dp"
+    card_view:cardUseCompatPadding="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/tool_lib_12dp"
+        android:layout_marginLeft="@dimen/tool_lib_12dp"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:id="@+id/relHistorical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/tool_lib_12dp">
+
+            <TextView
+                android:id="@+id/tvItemAdvertisingReplacementTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:textColor="@color/tool_lib_gray_222222"
+                android:textSize="@dimen/tool_lib_16sp"
+                tools:text="电视机维保" />
+
+            <TextView
+                android:id="@+id/tvItemAdvertisingReplacementType"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/distribution_half_fillet_bg"
+                android:padding="@dimen/tool_lib_5dp"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/tool_lib_12sp"
+                tools:text="进行中" />
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/tool_lib_10dp">
+
+            <ImageView
+                android:id="@+id/ivEquipmentNumber"
+                android:layout_width="@dimen/tool_lib_14dp"
+                android:layout_height="@dimen/tool_lib_14dp"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/ic_equipment_number" />
+
+            <TextView
+                android:id="@+id/tvEquipmentNumber_"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/tool_lib_3dp"
+                android:layout_marginLeft="@dimen/tool_lib_3dp"
+                android:layout_toEndOf="@+id/ivEquipmentNumber"
+                android:layout_toRightOf="@+id/ivEquipmentNumber"
+                android:text="@string/equipment_number"
+                android:textColor="@color/tool_lib_gray_777777"
+                android:textSize="@dimen/tool_lib_12sp" />
+
+            <TextView
+                android:id="@+id/tvEquipmentNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/tvEquipmentNumber_"
+                android:layout_toRightOf="@+id/tvEquipmentNumber_"
+                android:textColor="@color/tool_lib_gray_777777"
+                android:textSize="@dimen/tool_lib_12sp"
+                tools:text="KDKDFJFJ" />
+
+            <TextView
+                android:id="@+id/tvMoney"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginStart="@dimen/tool_lib_12dp"
+                android:layout_marginEnd="@dimen/tool_lib_12dp"
+                android:textColor="@color/tool_lib_red_EF2B2B"
+                android:textSize="@dimen/tool_lib_16sp"
+                tools:text="¥3200.00" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/tool_lib_10dp">
+
+            <ImageView
+                android:layout_width="@dimen/tool_lib_14dp"
+                android:layout_height="@dimen/tool_lib_14dp"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/ic_equipment_number" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/tool_lib_3dp"
+                android:layout_marginLeft="@dimen/tool_lib_3dp"
+                android:text="@string/change_places"
+                android:textColor="@color/tool_lib_gray_777777"
+                android:textSize="@dimen/tool_lib_12sp" />
+
+            <TextView
+                android:id="@+id/tvChangePlaces"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/tool_lib_gray_777777"
+                android:textSize="@dimen/tool_lib_12sp"
+                tools:text="A面" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/tool_lib_10dp">
+
+            <ImageView
+                android:layout_width="@dimen/tool_lib_14dp"
+                android:layout_height="@dimen/tool_lib_14dp"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/ic_maintenance_cycle" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/tool_lib_3dp"
+                android:layout_marginLeft="@dimen/tool_lib_3dp"
+                android:text="@string/maintenance_cycle"
+                android:textColor="@color/tool_lib_gray_777777"
+                android:textSize="@dimen/tool_lib_12sp" />
+
+            <TextView
+                android:id="@+id/tvMaintenanceCycle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/tool_lib_gray_777777"
+                android:textSize="@dimen/tool_lib_12sp"
+                tools:text="一年" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/tool_lib_10dp">
+
+            <ImageView
+                android:layout_width="@dimen/tool_lib_14dp"
+                android:layout_height="@dimen/tool_lib_14dp"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/ic_maintenance_date" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/tool_lib_3dp"
+                android:layout_marginLeft="@dimen/tool_lib_3dp"
+                android:text="@string/ending_date"
+                android:textColor="@color/tool_lib_gray_777777"
+                android:textSize="@dimen/tool_lib_12sp" />
+
+            <TextView
+                android:id="@+id/tvEndingTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/tool_lib_gray_777777"
+                android:textSize="@dimen/tool_lib_12sp"
+                tools:text="2019/06/07 13:00" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/tool_lib_10dp">
+
+            <ImageView
+                android:layout_width="@dimen/tool_lib_14dp"
+                android:layout_height="@dimen/tool_lib_18dp"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/ic_location" />
+
+            <TextView
+                android:id="@+id/tvLocation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/tool_lib_3dp"
+                android:layout_marginLeft="@dimen/tool_lib_3dp"
+                android:textColor="@color/tool_lib_gray_777777"
+                android:textSize="@dimen/tool_lib_12sp"
+                tools:text="地址" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/tool_lib_10dp">
+
+            <ImageView
+                android:layout_width="@dimen/tool_lib_14dp"
+                android:layout_height="@dimen/tool_lib_14dp"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/ic_order_number" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/tool_lib_3dp"
+                android:layout_marginLeft="@dimen/tool_lib_3dp"
+                android:text="@string/order_number_"
+                android:textColor="@color/tool_lib_gray_777777"
+                android:textSize="@dimen/tool_lib_12sp" />
+
+            <TextView
+                android:id="@+id/tvOrderNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/tool_lib_gray_777777"
+                android:textSize="@dimen/tool_lib_12sp"
+                tools:text="HZD12542152" />
+        </LinearLayout>
+
+        <View
+            android:id="@+id/viewHorizontalLine"
+            style="@style/tool_lib_horizontal_line"
+            android:layout_marginTop="@dimen/tool_lib_14dp" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/tool_lib_14dp"
+            android:layout_marginBottom="@dimen/tool_lib_14dp">
+
+            <TextView
+                android:id="@+id/tvAccountingTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/tool_lib_20dp"
+                android:layout_marginRight="@dimen/tool_lib_20dp"
+                android:layout_toStartOf="@+id/tvAccountingAmount"
+                android:layout_toLeftOf="@+id/tvAccountingAmount"
+                android:textColor="@color/tool_lib_gray_222222"
+                android:textSize="@dimen/tool_lib_12sp"
+                tools:text="入账时间：每月01号" />
+
+            <TextView
+                android:id="@+id/tvAccountingAmount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginEnd="@dimen/tool_lib_12dp"
+                android:layout_marginRight="@dimen/tool_lib_12dp"
+                android:textColor="@color/tool_lib_gray_222222"
+                android:textSize="@dimen/tool_lib_12sp"
+                tools:text="入账金额：¥200/月" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</android.support.v7.widget.CardView>

@@ -27,6 +27,12 @@ public interface IOrderDetailView extends IBaseView {
      */
     String getOrderCode();
 
+    /**
+     * 1 安装单 2 广告单
+     * @return 安装类型
+     */
+    String getOrderType();
+
 //    /**
 //     * 取消任务成功
 //     */
