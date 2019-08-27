@@ -70,6 +70,12 @@ public class OngoingOrdersList implements Parcelable{
     private String materialsEndLength;
     /** 1安装单 2 广告单 */
     private String orderType;
+
+    /** 备注说明 */
+    private String employerDescribe;
+    /** 广告图 */
+    private String picturesUrl;
+
     public OngoingOrdersList() {
     }
 
@@ -133,7 +139,7 @@ public class OngoingOrdersList implements Parcelable{
     }
 
     public String getMaterialsStartLength() {
-        return materialsStartLength;
+        return TextUtils.isEmpty(materialsStartLength) ? "" : materialsStartLength;
     }
 
     public void setMaterialsStartLength(String materialsStartLength) {
@@ -206,6 +212,14 @@ public class OngoingOrdersList implements Parcelable{
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public String getEmployerDescribe() {
+        return TextUtils.isEmpty(employerDescribe) ? "" : employerDescribe;
+    }
+
+    public void setEmployerDescribe(String employerDescribe) {
+        this.employerDescribe = employerDescribe;
     }
 
     /** 格式化预约时间 */
@@ -304,6 +318,14 @@ public class OngoingOrdersList implements Parcelable{
 
     public void setConfirmationTime(String confirmationTime) {
         this.confirmationTime = confirmationTime;
+    }
+
+    public String getPicturesUrl() {
+        return TextUtils.isEmpty(picturesUrl) ? "" : picturesUrl;
+    }
+
+    public void setPicturesUrl(String picturesUrl) {
+        this.picturesUrl = picturesUrl;
     }
 
     public int getMaintenanceFlag() {

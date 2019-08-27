@@ -7,6 +7,11 @@ import com.example.toollib.util.ToastUtil;
 import com.qmuiteam.qmui.arch.QMUIFragmentActivity;
 import com.xiaomai.zhuangba.R;
 import com.xiaomai.zhuangba.enums.OrdersEnum;
+import com.xiaomai.zhuangba.fragment.advertisement.employer.EmployerAdvertisementAcceptanceFragment;
+import com.xiaomai.zhuangba.fragment.advertisement.employer.EmployerAdvertisementAcceptedOrdersFragment;
+import com.xiaomai.zhuangba.fragment.advertisement.employer.EmployerAdvertisementDistributionFragment;
+import com.xiaomai.zhuangba.fragment.advertisement.employer.EmployerAdvertisementHavingSetOutFragment;
+import com.xiaomai.zhuangba.fragment.advertisement.employer.EmployerAdvertisementUnderConstructionFragment;
 import com.xiaomai.zhuangba.fragment.orderdetail.employer.AcceptedOrdersFragment;
 import com.xiaomai.zhuangba.fragment.orderdetail.employer.EmployerCancelledFragment;
 import com.xiaomai.zhuangba.fragment.orderdetail.employer.EmployerCompleteFragment;
@@ -119,29 +124,29 @@ public class OrderStatusUtil {
      * @param orderStatus  订单状态
      * @param expireTime   最晚确认接单时间
      */
-    public static void startMasterOrderDetail(QMUIFragmentActivity qmuiFragment, String orderCode,String orderType, int orderStatus, String... expireTime) {
+    public static void startMasterOrderDetail(QMUIFragmentActivity qmuiFragment, String orderCode, String orderType, int orderStatus, String... expireTime) {
         if (orderStatus == OrdersEnum.MASTER_NEW_TASK.getCode()) {
             String expireDate = "";
             if (expireTime != null && expireTime.length > 0) {
                 expireDate = expireTime[0];
             }
             //新任务
-            qmuiFragment.startFragment(NewTaskDetailFragment.newInstance(orderCode,orderType, expireDate));
+            qmuiFragment.startFragment(NewTaskDetailFragment.newInstance(orderCode, orderType, expireDate));
         } else if (orderStatus == OrdersEnum.MASTER_PENDING_DISPOSAL.getCode()) {
             //已接单
-            qmuiFragment.startFragment(StartTheMissionFragment.newInstance(orderCode,orderType));
+            qmuiFragment.startFragment(StartTheMissionFragment.newInstance(orderCode, orderType));
         } else if (orderStatus == OrdersEnum.MASTER_IN_PROCESSING.getCode()) {
             //已出发
-            qmuiFragment.startFragment(HavingSetOutFragment.newInstance(orderCode,orderType));
+            qmuiFragment.startFragment(HavingSetOutFragment.newInstance(orderCode, orderType));
         } else if (orderStatus == OrdersEnum.MASTER_ACCEPTANCE.getCode()) {
             //施工中
-            qmuiFragment.startFragment(BeUnderConstructionFragment.newInstance(orderCode,orderType));
+            qmuiFragment.startFragment(BeUnderConstructionFragment.newInstance(orderCode, orderType));
         } else if (orderStatus == OrdersEnum.MASTER_COMPLETED.getCode()) {
             //雇主取消
             ToastUtil.showShort(qmuiFragment.getString(R.string.order_cancelled));
         } else if (orderStatus == OrdersEnum.MASTER_CANCELLED.getCode()) {
             //已完成
-            qmuiFragment.startFragment(MasterCompleteFragment.newInstance(orderCode,orderType));
+            qmuiFragment.startFragment(MasterCompleteFragment.newInstance(orderCode, orderType));
         } else if (orderStatus == OrdersEnum.MASTER_EXPIRED.getCode()) {
             //已过期
             ToastUtil.showShort(qmuiFragment.getString(R.string.order_expired));
@@ -160,30 +165,30 @@ public class OrderStatusUtil {
      * @param orderType    安装状态
      * @param orderStatus  订单状态
      */
-    public static void startEmployerOrderDetail(QMUIFragmentActivity qmuiFragment, String orderCode,String orderType, int orderStatus) {
+    public static void startEmployerOrderDetail(QMUIFragmentActivity qmuiFragment, String orderCode, String orderType, int orderStatus) {
         if (orderStatus == OrdersEnum.EMPLOYER_IN_DISTRIBUTION.getCode()) {
             //分配中
-            qmuiFragment.startFragment(EmployerDistributionFragment.newInstance(orderCode , orderType));
+            qmuiFragment.startFragment(EmployerDistributionFragment.newInstance(orderCode, orderType));
         } else if (orderStatus == OrdersEnum.EMPLOYER_RECEIVED_ORDERS.getCode()) {
             //已接单
-            qmuiFragment.startFragment(AcceptedOrdersFragment.newInstance(orderCode , orderType));
+            qmuiFragment.startFragment(AcceptedOrdersFragment.newInstance(orderCode, orderType));
         } else if (orderStatus == OrdersEnum.EMPLOYER_IN_PROCESSING.getCode()) {
             //已出发
-            qmuiFragment.startFragment(EmployerHavingSetOutFragment.newInstance(orderCode , orderType));
+            qmuiFragment.startFragment(EmployerHavingSetOutFragment.newInstance(orderCode, orderType));
         } else if (orderStatus == OrdersEnum.EMPLOYER_CHECK_AND_ACCEPT.getCode()) {
             //施工中
-            qmuiFragment.startFragment(EmployerUnderConstructionFragment.newInstance(orderCode , orderType));
+            qmuiFragment.startFragment(EmployerUnderConstructionFragment.newInstance(orderCode, orderType));
         } else if (orderStatus == OrdersEnum.EMPLOYER_COMPLETED.getCode()) {
             //已取消
-            qmuiFragment.startFragment(EmployerCancelledFragment.newInstance(orderCode , orderType));
+            qmuiFragment.startFragment(EmployerCancelledFragment.newInstance(orderCode, orderType));
         } else if (orderStatus == OrdersEnum.EMPLOYER_CANCELLED.getCode()) {
             //已完成
-            qmuiFragment.startFragment(EmployerCompleteFragment.newInstance(orderCode , orderType));
+            qmuiFragment.startFragment(EmployerCompleteFragment.newInstance(orderCode, orderType));
         } else if (orderStatus == OrdersEnum.EMPLOYER_UNPAID.getCode()) {
             //未支付
         } else if (orderStatus == OrdersEnum.EMPLOYER_COMPLETED_CANCEL.getCode()) {
             //师傅取消
-            qmuiFragment.startFragment(EmployerCancelledFragment.newInstance(orderCode , orderType));
+            qmuiFragment.startFragment(EmployerCancelledFragment.newInstance(orderCode, orderType));
         }
     }
 
@@ -191,11 +196,35 @@ public class OrderStatusUtil {
     /**
      * 雇主
      * 跳转到广告单详情
-     * @param qmuiFragmentActivity fragment
-     * @param orderCode 订单编号
-     * @param orderStatus 订单状态
+     *
+     * @param qmuiFragment fragment
+     * @param orderCode    订单编号
+     * @param orderStatus  订单状态
      */
-    public static void startEmployerAdvertisingBills(QMUIFragmentActivity qmuiFragmentActivity, String orderCode, int orderStatus) {
-
+    public static void startEmployerAdvertisingBills(QMUIFragmentActivity qmuiFragment, String orderCode, String orderType, int orderStatus) {
+        if (orderStatus == OrdersEnum.EMPLOYER_IN_DISTRIBUTION.getCode()) {
+            //分配中
+            qmuiFragment.startFragment(EmployerAdvertisementDistributionFragment.newInstance(orderCode, orderType));
+        } else if (orderStatus == OrdersEnum.EMPLOYER_RECEIVED_ORDERS.getCode()) {
+            //已接单
+            qmuiFragment.startFragment(EmployerAdvertisementAcceptedOrdersFragment.newInstance(orderCode, orderType));
+        } else if (orderStatus == OrdersEnum.EMPLOYER_IN_PROCESSING.getCode()) {
+            //已出发
+            qmuiFragment.startFragment(EmployerAdvertisementHavingSetOutFragment.newInstance(orderCode, orderType));
+        } else if (orderStatus == OrdersEnum.EMPLOYER_CHECK_AND_ACCEPT.getCode()) {
+            //施工中
+            qmuiFragment.startFragment(EmployerAdvertisementUnderConstructionFragment.newInstance(orderCode, orderType));
+        } else if (orderStatus == OrdersEnum.EMPLOYER_ACCEPTANCE.getCode()) {
+            //验收中
+            qmuiFragment.startFragment(EmployerAdvertisementAcceptanceFragment.newInstance(orderCode, orderType));
+        } else if (orderStatus == OrdersEnum.EMPLOYER_COMPLETED.getCode()) {
+            //已取消
+        } else if (orderStatus == OrdersEnum.EMPLOYER_CANCELLED.getCode()) {
+            //已完成
+        } else if (orderStatus == OrdersEnum.EMPLOYER_UNPAID.getCode()) {
+            //未支付
+        } else if (orderStatus == OrdersEnum.EMPLOYER_COMPLETED_CANCEL.getCode()) {
+            //师傅取消
+        }
     }
 }

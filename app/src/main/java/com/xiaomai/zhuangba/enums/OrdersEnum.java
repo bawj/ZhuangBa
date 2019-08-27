@@ -18,6 +18,10 @@ public enum OrdersEnum {
     EMPLOYER_CANCELLED(5, "已完成"),
     EMPLOYER_UNPAID(6, "雇主端 未支付"),
     EMPLOYER_COMPLETED_CANCEL(10, "师傅取消订单"),
+
+    /** 广告单状态 */
+    EMPLOYER_ACCEPTANCE(9 , "验收中"),
+
     /**
      * 师傅
      */

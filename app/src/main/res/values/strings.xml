@@ -461,9 +461,17 @@
     <string name="service_remarks">服务备注：</string>
     <string name="release_date">发布时间：</string>
     <string name="batch_number">批量编号：</string>
+    <string name="batch_query_number">批量查询号：</string>
     <string name="several_items">共%1$s项</string>
     <string name="order_number">订单号：</string>
     <string name="replacement_positioning">更换定位：</string>
     <string name="date_of_appointment_">预约时间：</string>
+    <string name="service_cycle">服务周期：</string>
+    <string name="notes">备注说明：</string>
+    <string name="replacement_of_advertising_drawings">更换广告图</string>
     <string name="symbol">%1$s~%2$s</string>
+    <string name="pre_construction_photos">施工前照片</string>
+    <string name="post_construction_photos">施工后照片</string>
+    <string name="acceptance_and_approval">验收通过</string>
+    <string name="no_passage">不通过</string>
 </resources>

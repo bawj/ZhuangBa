@@ -53,8 +53,8 @@ public class OngoingOrdersFragment extends BaseMasterEmployerContentFragment {
                     , ongoingOrdersList.getOrderType(), ongoingOrdersList.getOrderStatus());
         } else {
             //广告单
-            OrderStatusUtil.startEmployerAdvertisingBills(getBaseFragmentActivity(), ongoingOrdersList.getOrderCode(),
-                    ongoingOrdersList.getOrderStatus());
+            OrderStatusUtil.startEmployerAdvertisingBills(getBaseFragmentActivity(), ongoingOrdersList.getOrderCode()
+                    ,ongoingOrdersList.getOrderType(), ongoingOrdersList.getOrderStatus());
         }
     }
 

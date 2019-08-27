@@ -232,7 +232,7 @@ public interface IApi {
      * @return observable
      */
     @GET("order/getOrderValidation/{orderCode}")
-    Observable<HttpResult<List<DeliveryContent>>> getOrderValidation(@Path("orderCode") String orderCode);
+    Observable<HttpResult<List<DeliveryContent>>> getOrderValidation(@Path("orderCode") String orderCode , @Query("orderType") String orderType);
 
 
     /**
@@ -776,6 +776,7 @@ public interface IApi {
     @POST("advertising/getAdvertisingElList")
     Observable<HttpResult<RefreshBaseList<EmployerAdvertisingReplacement>>> getAdvertisingElList(@Field("phone") String phoneNumber
             , @Field("pageIndex") int pageNum, @Field("pageSize") int pageSize);
+
     /**
      * 雇主广告更换详情
      * @param batchCode 批量号
@@ -787,4 +788,14 @@ public interface IApi {
     @POST("advertising/getAdvertisingElDetails")
     Observable<HttpResult<RefreshBaseList<AdvertisingReplacementDetailBean>>> getAdvertisingElDetails(@Field("batchCode") String batchCode
             , @Field("pageIndex") int pageNum, @Field("pageSize") int pageSize);
+
+
+    /**
+     * 雇主取消广告单
+     *
+     * @param orderCode 订单编号
+     * @return observable
+     */
+    @GET("order/cancelAdvertisingOrderOrder/{orderCode}")
+    Observable<HttpResult<Object>> cancelAdvertisingOrderOrder(@Path("orderCode") String orderCode);
 }

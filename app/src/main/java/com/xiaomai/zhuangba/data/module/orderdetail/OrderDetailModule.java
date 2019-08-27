@@ -49,7 +49,7 @@ public class OrderDetailModule<V extends IOrderDetailView> extends BaseModule<V>
 
         //师傅提交的信息
         Observable<HttpResult<List<DeliveryContent>>> observableZip = RxUtils.getObservableZip(
-                ServiceUrl.getUserApi().getOrderValidation(orderCode).subscribeOn(Schedulers.io()));
+                ServiceUrl.getUserApi().getOrderValidation(orderCode, orderType).subscribeOn(Schedulers.io()));
 
         Observable<Object> zip = Observable.zip(orderDetailsZip, orderServiceListZip, orderDateListZip,
                 observableZip, new Function4<HttpResult<OngoingOrdersList>, HttpResult<List<OrderServiceItem>>,
