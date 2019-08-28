@@ -13,6 +13,7 @@ import com.xiaomai.zhuangba.R;
 import com.xiaomai.zhuangba.data.bean.OngoingOrdersList;
 import com.xiaomai.zhuangba.enums.OrdersEnum;
 import com.xiaomai.zhuangba.enums.StaticExplain;
+import com.xiaomai.zhuangba.util.AdvertisingStatusUtil;
 import com.xiaomai.zhuangba.util.OrderStatusUtil;
 
 import java.util.ArrayList;
@@ -66,8 +67,6 @@ public class NeedDealWithAdapter extends BaseQuickAdapter<OngoingOrdersList, Bas
         tvItemOrdersTitle.setTag(ongoingOrders);
         int orderStatus = ongoingOrders.getOrderStatus();
         String expireTime = ongoingOrders.getExpireTime();
-        //师傅端
-        OrderStatusUtil.masterStatus(mContext, orderStatus, tvItemOrdersType);
 
         if (orderStatus == OrdersEnum.MASTER_NEW_TASK.getCode()){
             tvItemOrdersIdentification.setText(mContext.getString(R.string.waiting_for_orders_, expireTime));
@@ -145,6 +144,11 @@ public class NeedDealWithAdapter extends BaseQuickAdapter<OngoingOrdersList, Bas
             tvSlotting.setVisibility(View.GONE);
             tvDebugging.setVisibility(View.GONE);
             tvAuxiliaryMaterials.setVisibility(View.GONE);
+        }
+        if (orderType.equals(String.valueOf(StaticExplain.INSTALLATION_LIST.getCode()))){
+            OrderStatusUtil.masterStatus(mContext, orderStatus, tvItemOrdersType);
+        }else if (orderType.equals(String.valueOf(StaticExplain.ADVERTISING_BILLS.getCode()))){
+            AdvertisingStatusUtil.masterStatus(mContext , orderStatus , tvItemOrdersType);
         }
     }
 }

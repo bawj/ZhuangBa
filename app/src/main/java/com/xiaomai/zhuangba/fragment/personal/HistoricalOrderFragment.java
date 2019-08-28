@@ -21,6 +21,7 @@ import com.xiaomai.zhuangba.enums.OrdersEnum;
 import com.xiaomai.zhuangba.enums.StaticExplain;
 import com.xiaomai.zhuangba.fragment.base.BaseListFragment;
 import com.xiaomai.zhuangba.http.ServiceUrl;
+import com.xiaomai.zhuangba.util.AdvertisingStatusUtil;
 import com.xiaomai.zhuangba.util.OrderStatusUtil;
 
 import io.reactivex.Observable;
@@ -56,15 +57,31 @@ public class HistoricalOrderFragment extends BaseListFragment<IBaseModule, Histo
     @Override
     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
         super.onItemClick(adapter, view, position);
-        OngoingOrdersList ordersList = (OngoingOrdersList)
+        OngoingOrdersList ongoingOrdersList = (OngoingOrdersList)
                 view.findViewById(R.id.tvItemHistoricalOrdersMoney).getTag();
         UserInfo unique = DBHelper.getInstance().getUserInfoDao().queryBuilder().unique();
+        String orderType = ongoingOrdersList.getOrderType();
         if (unique.getRole().equals(String.valueOf(StaticExplain.FU_FU_SHI.getCode()))) {
-            OrderStatusUtil.startMasterOrderDetail(getBaseFragmentActivity(), ordersList.getOrderCode(), ordersList.getOrderType(),
-                    ordersList.getOrderStatus());
+            // 安装单
+            if (ongoingOrdersList.getOrderType().equals(String.valueOf(StaticExplain.INSTALLATION_LIST.getCode()))) {
+                OrderStatusUtil.startEmployerOrderDetail(getBaseFragmentActivity(), ongoingOrdersList.getOrderCode()
+                        , ongoingOrdersList.getOrderType(), ongoingOrdersList.getOrderStatus());
+            } else if (orderType.equals(String.valueOf(StaticExplain.ADVERTISING_BILLS.getCode()))) {
+                //广告单
+                AdvertisingStatusUtil.startEmployerAdvertisingBills(getBaseFragmentActivity(), ongoingOrdersList.getOrderCode()
+                        ,ongoingOrdersList.getOrderType(), ongoingOrdersList.getOrderStatus());
+            }
+            //师傅端
         } else if (unique.getRole().equals(String.valueOf(StaticExplain.EMPLOYER.getCode()))) {
-            OrderStatusUtil.startEmployerOrderDetail(getBaseFragmentActivity(), ordersList.getOrderCode(), ordersList.getOrderType(),
-                    ordersList.getOrderStatus());
+            // 安装单
+            if (orderType.equals(String.valueOf(StaticExplain.INSTALLATION_LIST.getCode()))){
+                OrderStatusUtil.startMasterOrderDetail(getBaseFragmentActivity() , ongoingOrdersList.getOrderCode() , ongoingOrdersList.getOrderType(),
+                        ongoingOrdersList.getOrderStatus() , ongoingOrdersList.getExpireTime());
+                //广告单
+            }else if (orderType.equals(String.valueOf(StaticExplain.ADVERTISING_BILLS.getCode()))){
+                AdvertisingStatusUtil.startMasterOrderDetail(getBaseFragmentActivity() ,ongoingOrdersList.getOrderCode() , ongoingOrdersList.getOrderType(),
+                        ongoingOrdersList.getOrderStatus() );
+            }
         }
     }
 

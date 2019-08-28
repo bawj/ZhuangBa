@@ -25,8 +25,8 @@ import com.xiaomai.zhuangba.data.module.advertisement.BaseAdvertisementModule;
 import com.xiaomai.zhuangba.data.module.advertisement.IBaseAdvertisementModule;
 import com.xiaomai.zhuangba.data.module.advertisement.IBaseAdvertisementView;
 import com.xiaomai.zhuangba.enums.StaticExplain;
+import com.xiaomai.zhuangba.util.AdvertisingStatusUtil;
 import com.xiaomai.zhuangba.util.ConstantUtil;
-import com.xiaomai.zhuangba.util.OrderStatusUtil;
 
 import java.util.List;
 
@@ -106,10 +106,10 @@ public class BaseAdvertisementFragment extends BaseFragment<IBaseAdvertisementMo
         UserInfo unique = DBHelper.getInstance().getUserInfoDao().queryBuilder().unique();
         if (unique.getRole().equals(String.valueOf(StaticExplain.FU_FU_SHI.getCode()))) {
             //师傅端
-            OrderStatusUtil.masterStatus(getActivity(), ongoingOrdersList.getOrderStatus(), tvBaseOrderDetailItemOrdersType);
+            AdvertisingStatusUtil.masterStatus(getActivity(), ongoingOrdersList.getOrderStatus(), tvBaseOrderDetailItemOrdersType);
         }else if (unique.getRole().equals(String.valueOf(StaticExplain.EMPLOYER.getCode()))) {
             //雇主端
-            OrderStatusUtil.employerStatus(getActivity(), ongoingOrdersList.getOrderStatus(), tvBaseOrderDetailItemOrdersType);
+            AdvertisingStatusUtil.employerStatus(getActivity(), ongoingOrdersList.getOrderStatus(), tvBaseOrderDetailItemOrdersType);
         }
         //设备编号
         tvBaseEquipmentNumber.setText(ongoingOrdersList.getName());
@@ -118,7 +118,7 @@ public class BaseAdvertisementFragment extends BaseFragment<IBaseAdvertisementMo
         //批量查询号
         tvBaseAdvertisementBatchQueryNumber.setText(ongoingOrdersList.getMaterialsStartLength());
         //预约时间
-        tvBaseAdvertisementDateOfAppointment.setText(ongoingOrdersList.getSlottingEndLength());
+        tvBaseAdvertisementDateOfAppointment.setText(ongoingOrdersList.getSlottingStartLength());
         //服务周期
         tvBaseAdvertisementServiceCycle.setText(ongoingOrdersList.getExpireTime());
         //备注

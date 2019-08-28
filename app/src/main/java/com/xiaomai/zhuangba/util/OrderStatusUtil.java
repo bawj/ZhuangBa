@@ -7,11 +7,6 @@ import com.example.toollib.util.ToastUtil;
 import com.qmuiteam.qmui.arch.QMUIFragmentActivity;
 import com.xiaomai.zhuangba.R;
 import com.xiaomai.zhuangba.enums.OrdersEnum;
-import com.xiaomai.zhuangba.fragment.advertisement.employer.EmployerAdvertisementAcceptanceFragment;
-import com.xiaomai.zhuangba.fragment.advertisement.employer.EmployerAdvertisementAcceptedOrdersFragment;
-import com.xiaomai.zhuangba.fragment.advertisement.employer.EmployerAdvertisementDistributionFragment;
-import com.xiaomai.zhuangba.fragment.advertisement.employer.EmployerAdvertisementHavingSetOutFragment;
-import com.xiaomai.zhuangba.fragment.advertisement.employer.EmployerAdvertisementUnderConstructionFragment;
 import com.xiaomai.zhuangba.fragment.orderdetail.employer.AcceptedOrdersFragment;
 import com.xiaomai.zhuangba.fragment.orderdetail.employer.EmployerCancelledFragment;
 import com.xiaomai.zhuangba.fragment.orderdetail.employer.EmployerCompleteFragment;
@@ -189,42 +184,6 @@ public class OrderStatusUtil {
         } else if (orderStatus == OrdersEnum.EMPLOYER_COMPLETED_CANCEL.getCode()) {
             //师傅取消
             qmuiFragment.startFragment(EmployerCancelledFragment.newInstance(orderCode, orderType));
-        }
-    }
-
-
-    /**
-     * 雇主
-     * 跳转到广告单详情
-     *
-     * @param qmuiFragment fragment
-     * @param orderCode    订单编号
-     * @param orderStatus  订单状态
-     */
-    public static void startEmployerAdvertisingBills(QMUIFragmentActivity qmuiFragment, String orderCode, String orderType, int orderStatus) {
-        if (orderStatus == OrdersEnum.EMPLOYER_IN_DISTRIBUTION.getCode()) {
-            //分配中
-            qmuiFragment.startFragment(EmployerAdvertisementDistributionFragment.newInstance(orderCode, orderType));
-        } else if (orderStatus == OrdersEnum.EMPLOYER_RECEIVED_ORDERS.getCode()) {
-            //已接单
-            qmuiFragment.startFragment(EmployerAdvertisementAcceptedOrdersFragment.newInstance(orderCode, orderType));
-        } else if (orderStatus == OrdersEnum.EMPLOYER_IN_PROCESSING.getCode()) {
-            //已出发
-            qmuiFragment.startFragment(EmployerAdvertisementHavingSetOutFragment.newInstance(orderCode, orderType));
-        } else if (orderStatus == OrdersEnum.EMPLOYER_CHECK_AND_ACCEPT.getCode()) {
-            //施工中
-            qmuiFragment.startFragment(EmployerAdvertisementUnderConstructionFragment.newInstance(orderCode, orderType));
-        } else if (orderStatus == OrdersEnum.EMPLOYER_ACCEPTANCE.getCode()) {
-            //验收中
-            qmuiFragment.startFragment(EmployerAdvertisementAcceptanceFragment.newInstance(orderCode, orderType));
-        } else if (orderStatus == OrdersEnum.EMPLOYER_COMPLETED.getCode()) {
-            //已取消
-        } else if (orderStatus == OrdersEnum.EMPLOYER_CANCELLED.getCode()) {
-            //已完成
-        } else if (orderStatus == OrdersEnum.EMPLOYER_UNPAID.getCode()) {
-            //未支付
-        } else if (orderStatus == OrdersEnum.EMPLOYER_COMPLETED_CANCEL.getCode()) {
-            //师傅取消
         }
     }
 }

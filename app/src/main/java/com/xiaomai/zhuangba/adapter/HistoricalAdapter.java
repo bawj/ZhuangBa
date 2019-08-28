@@ -59,6 +59,8 @@ public class HistoricalAdapter extends BaseQuickAdapter<OngoingOrdersList, BaseV
         //order status
         int orderStatus = ordersList.getOrderStatus();
         UserInfo userInfo = DBHelper.getInstance().getUserInfoDao().queryBuilder().unique();
+
+        // TODO: 2019/8/28 0028 广告单判断 没有改
         if (userInfo.getRole().equals(String.valueOf(StaticExplain.FU_FU_SHI.getCode()))) {
             //师傅端
             OrderStatusUtil.masterStatus(mContext, orderStatus, tvItemHistoricalOrdersType);

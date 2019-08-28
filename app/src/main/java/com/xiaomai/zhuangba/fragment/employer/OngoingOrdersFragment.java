@@ -1,5 +1,6 @@
 package com.xiaomai.zhuangba.fragment.employer;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -8,9 +9,11 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.xiaomai.zhuangba.R;
 import com.xiaomai.zhuangba.adapter.OngoingOrdersAdapter;
 import com.xiaomai.zhuangba.data.bean.OngoingOrdersList;
+import com.xiaomai.zhuangba.enums.ForResultCode;
 import com.xiaomai.zhuangba.enums.StaticExplain;
 import com.xiaomai.zhuangba.enums.StringTypeExplain;
 import com.xiaomai.zhuangba.fragment.base.BaseMasterEmployerContentFragment;
+import com.xiaomai.zhuangba.util.AdvertisingStatusUtil;
 import com.xiaomai.zhuangba.util.OrderStatusUtil;
 
 import java.util.List;
@@ -53,7 +56,7 @@ public class OngoingOrdersFragment extends BaseMasterEmployerContentFragment {
                     , ongoingOrdersList.getOrderType(), ongoingOrdersList.getOrderStatus());
         } else {
             //广告单
-            OrderStatusUtil.startEmployerAdvertisingBills(getBaseFragmentActivity(), ongoingOrdersList.getOrderCode()
+            AdvertisingStatusUtil.startEmployerAdvertisingBills(getBaseFragmentActivity(), ongoingOrdersList.getOrderCode()
                     ,ongoingOrdersList.getOrderType(), ongoingOrdersList.getOrderStatus());
         }
     }

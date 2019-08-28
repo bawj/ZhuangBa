@@ -419,33 +419,6 @@
                     android:layout_toRightOf="@+id/ivEmployerDetailMasterHeader"
                     tools:text="康师傅" />
 
-                <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
-                    android:id="@+id/btnNoPassage"
-                    android:layout_width="@dimen/tool_lib_90dp"
-                    android:layout_height="@dimen/tool_lib_40dp"
-                    android:layout_centerVertical="true"
-                    android:layout_marginEnd="@dimen/tool_lib_16dp"
-                    android:layout_marginRight="@dimen/tool_lib_16dp"
-                    android:layout_toStartOf="@+id/btnAcceptanceAndApproval"
-                    android:layout_toLeftOf="@+id/btnAcceptanceAndApproval"
-                    android:text="@string/no_passage"
-                    android:textColor="@color/tool_lib_gray_777777"
-                    android:textSize="@dimen/tool_lib_14sp"
-                    app:qmui_backgroundColor="@android:color/white"
-                    app:qmui_borderColor="@color/tool_lib_gray_E8E8E8"
-                    app:qmui_borderWidth="@dimen/tool_lib_1dp" />
-
-                <com.qmuiteam.qmui.layout.QMUIButton
-                    android:id="@+id/btnAcceptanceAndApproval"
-                    style="@style/base_btn"
-                    android:layout_width="@dimen/tool_lib_90dp"
-                    android:layout_height="@dimen/tool_lib_40dp"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginEnd="@dimen/tool_lib_16dp"
-                    android:layout_marginRight="@dimen/tool_lib_16dp"
-                    android:text="@string/acceptance_and_approval" />
             </RelativeLayout>
         </RelativeLayout>
     </com.scwang.smartrefresh.layout.SmartRefreshLayout>

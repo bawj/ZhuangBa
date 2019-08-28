@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/tool_lib_42dp"
+    android:foreground="?android:attr/selectableItemBackground"
+    app:cardBackgroundColor="@color/white"
+    app:cardCornerRadius="@dimen/tool_lib_8dp"
+    app:cardElevation="0dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/tool_lib_12dp"
+            android:text="@string/input_reason"
+            android:textColor="@color/tool_lib_gray_222222"
+            android:textSize="@dimen/tool_lib_14sp" />
+
+        <EditText
+            android:id="@+id/editDialogContent"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/tool_lib_128dp"
+            android:layout_marginLeft="@dimen/tool_lib_16dp"
+            android:layout_marginTop="@dimen/tool_lib_12dp"
+            android:layout_marginRight="@dimen/tool_lib_16dp"
+            android:layout_marginBottom="@dimen/tool_lib_20dp"
+            android:background="@drawable/gray_scope_of_ervice_bg"
+            android:gravity="start"
+            android:hint="@string/input_reason"
+            android:maxLength="50"
+            android:padding="@dimen/tool_lib_5dp"
+            android:textColor="@color/tool_lib_gray_222222"
+            android:textSize="@dimen/tool_lib_12sp" />
+
+        <View style="@style/tool_lib_horizontal_line" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/tool_lib_43dp">
+
+            <TextView
+                android:id="@+id/tvDialogOk"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/ok"
+                android:textColor="@color/tool_lib_red_EF2B2B"
+                android:textSize="@dimen/tool_lib_14sp" />
+
+            <View style="@style/tool_lib_vertical_line" />
+
+            <TextView
+                android:id="@+id/tvDialogClose"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/close"
+                android:textColor="@color/tool_lib_gray_222222"
+                android:textSize="@dimen/tool_lib_14sp" />
+
+        </LinearLayout>
+    </LinearLayout>
+</android.support.v7.widget.CardView>

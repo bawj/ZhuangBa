@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.example.toollib.base.BaseFragment;
 import com.example.toollib.manager.GlideManager;
+import com.example.toollib.util.AmountUtil;
 import com.example.toollib.util.Log;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -38,6 +39,7 @@ import net.lucode.hackware.magicindicator.MagicIndicator;
 import net.lucode.hackware.magicindicator.ViewPagerHelper;
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.CommonNavigator;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -69,6 +71,8 @@ public class BaseMasterEmployerFragment extends BaseFragment<IMasterEmployerModu
     TextView tvNumberOfTeachers;
     @BindView(R.id.tvOrderQuantity)
     TextView tvOrderQuantity;
+    @BindView(R.id.tvTaskAmount_)
+    TextView tvTaskAmount_;
     @BindView(R.id.tvTaskAmount)
     TextView tvTaskAmount;
     @BindView(R.id.tvNumberOfEmployers)
@@ -240,10 +244,17 @@ public class BaseMasterEmployerFragment extends BaseFragment<IMasterEmployerModu
     public void statisticsSuccess(StatisticsData statisticsData) {
         tvNumberOfTeachers.setText(String.valueOf(statisticsData.getUserNumber()));
         tvOrderQuantity.setText(String.valueOf(statisticsData.getOrderNumber()));
-        tvTaskAmount.setText(String.valueOf((int)Math.floor(statisticsData.getTotalAmount())));
+
+        double totalAmount = statisticsData.getTotalAmount();
+        if (totalAmount > 999999){
+            double div = AmountUtil.div(totalAmount, 10000, 2);
+            tvTaskAmount.setText(String.valueOf(div));
+            tvTaskAmount_.setText(getString(R.string.task_amount_));
+        }else {
+            tvTaskAmount.setText(String.valueOf((int)Math.floor(statisticsData.getTotalAmount())));
+        }
         tvNumberOfEmployers.setText(String.valueOf(statisticsData.getEmployerNumber()));
     }
-
 
     @Override
     public String getAddress() {

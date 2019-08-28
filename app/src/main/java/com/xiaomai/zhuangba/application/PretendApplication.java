@@ -42,7 +42,7 @@ public class PretendApplication extends Application {
 //    public static final String BASE_URL = "https://zb.4000750222.com/testZhuangBa/";
 //    public static final String BASE_URL = "http://v8y57q.natappfree.cc/";
 //    public static final String BASE_URL = "http://2m4179200z.qicp.vip:19033/";
-    public static final String BASE_URL = "http://192.168.0.116:7961/";
+    public static final String BASE_URL = "http://192.168.0.158:7961/";
 //    public static final String BASE_URL = "http://192.168.0.194:7963/";
 //     public static final String BASE_URL = "https://zb.4000750222.com/zhuangBa/";
 
@@ -88,7 +88,7 @@ public class PretendApplication extends Application {
                     PushNotification.PayloadBean.ExtraBean extra = pushNotification.getExtra();
                     if (extra != null) {
                         pushNotificationDB.setOrderCode(extra.getCode());
-                        pushNotificationDB.setOrderType(extra.getType());
+                        pushNotificationDB.setOrderType(extra.getOrderType());
                         pushNotificationDB.setTime(extra.getTime());
                     }
                     PushNotification.PayloadBean.BodyBean body = pushNotification.getBody();

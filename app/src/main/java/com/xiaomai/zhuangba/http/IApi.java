@@ -615,7 +615,6 @@ public interface IApi {
     @POST("order/submitValidation")
     Observable<HttpResult<Object>> submitValidation(@Body RequestBody requestBody);
 
-
     /**
      * 根据服务项目查询维保信息
      *
@@ -798,4 +797,71 @@ public interface IApi {
      */
     @GET("order/cancelAdvertisingOrderOrder/{orderCode}")
     Observable<HttpResult<Object>> cancelAdvertisingOrderOrder(@Path("orderCode") String orderCode);
+
+    /**
+     * 广告单验收不通过
+     *
+     * @param orderCode 订单编号
+     * @param employerDescribe 验收不通过理由
+     * @return observable
+     */
+    @GET("order/notPassedAdvertisingOrder/{orderCode}")
+    Observable<HttpResult<Object>> notPassedAdvertisingOrder(@Path("orderCode") String orderCode , @Query("employerDescribe") String employerDescribe);
+
+    /**
+     * 广告单验收通过
+     *
+     * @param orderCode 订单编号
+     * @return observable
+     */
+    @GET("order/passedAdvertisingOrder/{orderCode}")
+    Observable<HttpResult<Object>> passedAdvertisingOrder(@Path("orderCode") String orderCode);
+
+
+    /**
+     * 广告单 师傅取消任务
+     *
+     * @param orderCode 订单编号
+     * @return observable
+     */
+    @GET("order/masterCancelAdvertisingOrder/{orderCode}")
+    Observable<HttpResult<Object>> masterCancelAdvertisingOrder(@Path("orderCode") String orderCode);
+
+    /**
+     * 广告单 师傅接受任务
+     *
+     * @param orderCode 订单编号
+     * @return observable
+     */
+    @GET("order/acceptAdvertisingOrder/{orderCode}")
+    Observable<HttpResult<Object>> acceptAdvertisingOrder(@Path("orderCode") String orderCode);
+
+    /**
+     * 广告单 师傅 现在出发
+     *
+     * @param orderCode 订单编号
+     * @return observable
+     */
+    @GET("order/nowWeLeaveAdvertising/{orderCode}")
+    Observable<HttpResult<Object>> nowWeLeaveAdvertising(@Path("orderCode") String orderCode);
+
+
+    /**
+     * 广告单 师傅 开始施工
+     *
+     * @param orderCode 订单编号
+     * @param beforePicturesUrl 开始施工前的照片
+     * @return observable
+     */
+    @GET("order/startTaskAdvertisingOrder/{orderCode}")
+    Observable<HttpResult<Object>> startTaskAdvertisingOrder(@Path("orderCode") String orderCode , @Query("beforePicturesUrl") String beforePicturesUrl);
+
+    /**
+     * 广告单 师傅 完成提交
+     *
+     * @param requestBody body
+     * @return observable
+     */
+    @POST("order/submitAdvertisingValidation")
+    Observable<HttpResult<Object>> submitAdvertisingValidation(@Body RequestBody requestBody);
 }

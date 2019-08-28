@@ -10,9 +10,6 @@ import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.toollib.fragment.ImgPreviewFragment;
-import com.example.toollib.http.HttpResult;
-import com.example.toollib.http.observer.BaseHttpRxObserver;
-import com.example.toollib.http.util.RxUtils;
 import com.example.toollib.manager.GlideManager;
 import com.xiaomai.zhuangba.R;
 import com.xiaomai.zhuangba.adapter.ImgExhibitionAdapter;
@@ -20,26 +17,20 @@ import com.xiaomai.zhuangba.data.bean.DeliveryContent;
 import com.xiaomai.zhuangba.data.bean.OngoingOrdersList;
 import com.xiaomai.zhuangba.data.bean.OrderDateList;
 import com.xiaomai.zhuangba.fragment.advertisement.base.BaseAdvertisementFragment;
-import com.xiaomai.zhuangba.fragment.employer.EmployerFragment;
-import com.xiaomai.zhuangba.http.ServiceUrl;
 import com.xiaomai.zhuangba.util.ConstantUtil;
 import com.xiaomai.zhuangba.util.Util;
 import com.xiaomai.zhuangba.weight.GridSpacingItemDecoration;
-import com.xiaomai.zhuangba.weight.dialog.EditTextDialogBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.OnClick;
 
 /**
  * @author Administrator
- * @date 2019/8/27 0027
- * <p>
- * 广告单 验收中
+ * @date 2019/8/28 0028
  */
-public class EmployerAdvertisementAcceptanceFragment extends BaseAdvertisementFragment {
+public class EmployerAdvertisementNoPassageFragment extends BaseAdvertisementFragment {
 
     @BindView(R.id.ivEmployerDetailMasterHeader)
     ImageView ivEmployerDetailMasterHeader;
@@ -59,11 +50,11 @@ public class EmployerAdvertisementAcceptanceFragment extends BaseAdvertisementFr
      */
     private ImgExhibitionAdapter imgExhibitionAfterAdapter;
 
-    public static EmployerAdvertisementAcceptanceFragment newInstance(String orderCode, String orderType) {
+    public static EmployerAdvertisementNoPassageFragment newInstance(String orderCode, String orderType) {
         Bundle args = new Bundle();
         args.putString(ConstantUtil.ORDER_CODE, orderCode);
         args.putString(ConstantUtil.ORDER_TYPE, orderType);
-        EmployerAdvertisementAcceptanceFragment fragment = new EmployerAdvertisementAcceptanceFragment();
+        EmployerAdvertisementNoPassageFragment fragment = new EmployerAdvertisementNoPassageFragment();
         fragment.setArguments(args);
         return fragment;
     }
@@ -80,57 +71,6 @@ public class EmployerAdvertisementAcceptanceFragment extends BaseAdvertisementFr
         recyclerEmployerPostConstruction.setLayoutManager(new GridLayoutManager(getActivity(), 4));
         recyclerEmployerPostConstruction.addItemDecoration(new GridSpacingItemDecoration(4, 32, false));
         recyclerEmployerPostConstruction.setAdapter(imgExhibitionAfterAdapter);
-    }
-
-    @OnClick({R.id.btnNoPassage, R.id.btnAcceptanceAndApproval})
-    public void onViewEmployerAcceptanceClicked(View view) {
-        switch (view.getId()) {
-            case R.id.btnNoPassage:
-                //不通过
-                //验收不通过
-                EditTextDialogBuilder.getInstance().initView(getActivity()).setICallBase(new EditTextDialogBuilder.BaseCallback() {
-                    @Override
-                    public void ok(String content) {
-                        obtainNotPassedOrder(content);
-                    }
-                }).showDialog();
-                break;
-            case R.id.btnAcceptanceAndApproval:
-                //验收通过
-                acceptanceAndApproval();
-                break;
-            default:
-        }
-    }
-
-    /**
-     * 验收通过
-     */
-    private void acceptanceAndApproval() {
-        RxUtils.getObservable(ServiceUrl.getUserApi().passedAdvertisingOrder(getOrderCode()))
-                .compose(this.<HttpResult<Object>>bindToLifecycle())
-                .subscribe(new BaseHttpRxObserver<Object>(getActivity()) {
-                    @Override
-                    protected void onSuccess(Object response) {
-                        startFragment(EmployerFragment.newInstance());
-                    }
-                });
-    }
-
-    /**
-     * 验收不通过
-     *
-     * @param content 不通过原因
-     */
-    private void obtainNotPassedOrder(String content) {
-        RxUtils.getObservable(ServiceUrl.getUserApi().notPassedAdvertisingOrder(getOrderCode(), content))
-                .compose(this.<HttpResult<Object>>bindToLifecycle())
-                .subscribe(new BaseHttpRxObserver<Object>(getActivity()) {
-                    @Override
-                    protected void onSuccess(Object response) {
-                        startFragment(EmployerFragment.newInstance());
-                    }
-                });
     }
 
     @Override
@@ -183,6 +123,7 @@ public class EmployerAdvertisementAcceptanceFragment extends BaseAdvertisementFr
 
     @Override
     public int getContentView() {
-        return R.layout.fragment_employer_advertisement_acceptance;
+        return R.layout.fragment_employer_advertisement_no_passage;
     }
+
 }

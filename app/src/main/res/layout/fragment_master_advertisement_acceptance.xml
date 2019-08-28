@@ -22,9 +22,9 @@
 
         <RelativeLayout
             android:id="@+id/layBaseOrderDetail"
+            android:visibility="gone"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:visibility="gone">
+            android:layout_height="wrap_content">
 
             <ScrollView
                 android:layout_width="match_parent"
@@ -264,7 +264,7 @@
                             android:text="@string/post_construction_photos" />
 
                         <android.support.v7.widget.RecyclerView
-                            android:id="@+id/recyclerEmployerPostConstruction"
+                            android:id="@+id/recyclerPostConstruction"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/tvEmployerDeliveryContent_"
@@ -288,7 +288,7 @@
                             android:text="@string/pre_construction_photos" />
 
                         <android.support.v7.widget.RecyclerView
-                            android:id="@+id/recyclerEmployerScenePhoto"
+                            android:id="@+id/recyclerScenePhoto"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/tvMasterWorkerScenePhoto"
@@ -339,7 +339,7 @@
                             android:layout_marginLeft="@dimen/tool_lib_12dp"
                             android:layout_marginTop="@dimen/tool_lib_2dp"
                             android:layout_marginRight="@dimen/tool_lib_12dp"
-                            android:layout_marginBottom="@dimen/tool_lib_56dp"
+                            android:layout_marginBottom="@dimen/tool_lib_8dp"
                             android:descendantFocusability="blocksDescendants" />
                     </RelativeLayout>
 
@@ -383,70 +383,6 @@
 
             </ScrollView>
 
-            <RelativeLayout
-                android:id="@+id/relNewTaskOrderDetailBottom"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/tool_lib_56dp"
-                android:layout_alignParentBottom="true"
-                android:background="@android:color/white"
-                android:paddingLeft="@dimen/tool_lib_16dp"
-                android:paddingRight="@dimen/tool_lib_16dp">
-
-
-                <ImageView
-                    android:id="@+id/ivEmployerDetailMasterHeader"
-                    android:layout_width="@dimen/tool_lib_34dp"
-                    android:layout_height="@dimen/tool_lib_34dp"
-                    android:layout_centerVertical="true" />
-
-                <ImageView
-                    android:id="@+id/ivEmployerDetailMasterLog"
-                    android:layout_width="@dimen/tool_lib_16dp"
-                    android:layout_height="@dimen/tool_lib_16dp"
-                    android:layout_alignBottom="@+id/ivEmployerDetailMasterHeader"
-                    android:layout_marginStart="@dimen/tool_lib_24dp"
-                    android:layout_marginLeft="@dimen/tool_lib_24dp"
-                    android:src="@drawable/ic_master_log" />
-
-                <TextView
-                    android:id="@+id/tvEmployerDetailMasterName"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="@dimen/tool_lib_12dp"
-                    android:layout_marginLeft="@dimen/tool_lib_12dp"
-                    android:layout_toEndOf="@+id/ivEmployerDetailMasterHeader"
-                    android:layout_toRightOf="@+id/ivEmployerDetailMasterHeader"
-                    tools:text="康师傅" />
-
-                <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
-                    android:id="@+id/btnNoPassage"
-                    android:layout_width="@dimen/tool_lib_90dp"
-                    android:layout_height="@dimen/tool_lib_40dp"
-                    android:layout_centerVertical="true"
-                    android:layout_marginEnd="@dimen/tool_lib_16dp"
-                    android:layout_marginRight="@dimen/tool_lib_16dp"
-                    android:layout_toStartOf="@+id/btnAcceptanceAndApproval"
-                    android:layout_toLeftOf="@+id/btnAcceptanceAndApproval"
-                    android:text="@string/no_passage"
-                    android:textColor="@color/tool_lib_gray_777777"
-                    android:textSize="@dimen/tool_lib_14sp"
-                    app:qmui_backgroundColor="@android:color/white"
-                    app:qmui_borderColor="@color/tool_lib_gray_E8E8E8"
-                    app:qmui_borderWidth="@dimen/tool_lib_1dp" />
-
-                <com.qmuiteam.qmui.layout.QMUIButton
-                    android:id="@+id/btnAcceptanceAndApproval"
-                    style="@style/base_btn"
-                    android:layout_width="@dimen/tool_lib_90dp"
-                    android:layout_height="@dimen/tool_lib_40dp"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginEnd="@dimen/tool_lib_16dp"
-                    android:layout_marginRight="@dimen/tool_lib_16dp"
-                    android:text="@string/acceptance_and_approval" />
-            </RelativeLayout>
         </RelativeLayout>
     </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 

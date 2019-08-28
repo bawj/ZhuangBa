@@ -125,6 +125,9 @@ public class PushNotification {
             private String type;
             /** 时间 */
             private String time;
+            /** 1安装单 2 广告单 */
+            private String orderType;
+
             public String getCode() {
                 return TextUtils.isEmpty(code) ? "" : code;
             }
@@ -147,6 +150,14 @@ public class PushNotification {
 
             public void setTime(String time) {
                 this.time = time;
+            }
+
+            public String getOrderType() {
+                return orderType;
+            }
+
+            public void setOrderType(String orderType) {
+                this.orderType = orderType;
             }
         }
 

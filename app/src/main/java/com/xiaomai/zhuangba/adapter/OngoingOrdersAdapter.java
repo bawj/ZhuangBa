@@ -9,6 +9,7 @@ import com.example.toollib.util.DensityUtils;
 import com.xiaomai.zhuangba.R;
 import com.xiaomai.zhuangba.data.bean.OngoingOrdersList;
 import com.xiaomai.zhuangba.enums.StaticExplain;
+import com.xiaomai.zhuangba.util.AdvertisingStatusUtil;
 import com.xiaomai.zhuangba.util.OrderStatusUtil;
 
 /**
@@ -109,7 +110,10 @@ public class OngoingOrdersAdapter extends BaseQuickAdapter<OngoingOrdersList, Ba
         tvItemOrdersTitle.setTag(ongoingOrders);
         //order status
         int orderStatus = ongoingOrders.getOrderStatus();
-        //雇主端
-        OrderStatusUtil.employerStatus(mContext, orderStatus, tvItemOrdersType);
+        if (orderType.equals(String.valueOf(StaticExplain.ADVERTISING_BILLS.getCode()))){
+            AdvertisingStatusUtil.employerStatus(mContext, orderStatus, tvItemOrdersType);
+        }else if (orderType.equals(String.valueOf(StaticExplain.INSTALLATION_LIST.getCode()))){
+            OrderStatusUtil.employerStatus(mContext, orderStatus, tvItemOrdersType);
+        }
     }
 }

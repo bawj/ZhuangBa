@@ -20,6 +20,7 @@ import com.xiaomai.zhuangba.data.bean.UserInfo;
 import com.xiaomai.zhuangba.data.db.DBHelper;
 import com.xiaomai.zhuangba.enums.StaticExplain;
 import com.xiaomai.zhuangba.enums.StringTypeExplain;
+import com.xiaomai.zhuangba.util.AdvertisingStatusUtil;
 import com.xiaomai.zhuangba.util.OrderStatusUtil;
 
 import java.util.Collections;
@@ -84,12 +85,33 @@ public class NotificationMessageFragment extends BaseFragment {
                         String role = unique.getRole();
 
                         String orderCode = ongoingOrdersList.getOrderCode();
+                        String orderType = ongoingOrdersList.getOrderType();
                         int orderStatus = ongoingOrdersList.getOrderStatus();
                         String expireTime = ongoingOrdersList.getExpireTime();
+                        //师傅端
                         if (role.equals(String.valueOf(StaticExplain.FU_FU_SHI.getCode()))) {
-                            OrderStatusUtil.startMasterOrderDetail(getBaseFragmentActivity(), orderCode, ongoingOrdersList.getOrderType(), orderStatus, expireTime);
+
+                            // 安装单
+                            if (orderType.equals(String.valueOf(StaticExplain.INSTALLATION_LIST.getCode()))){
+                                OrderStatusUtil.startMasterOrderDetail(getBaseFragmentActivity() , orderCode , orderType,
+                                        orderStatus , expireTime);
+                                //广告单
+                            }else if (orderType.equals(String.valueOf(StaticExplain.ADVERTISING_BILLS.getCode()))){
+                                AdvertisingStatusUtil.startMasterOrderDetail(getBaseFragmentActivity() ,orderCode , orderType,
+                                        orderStatus );
+                            }
+
                         } else if (role.equals(String.valueOf(StaticExplain.EMPLOYER.getCode()))) {
-                            OrderStatusUtil.startEmployerOrderDetail(getBaseFragmentActivity(), orderCode, ongoingOrdersList.getOrderType(), orderStatus);
+
+                            // 安装单
+                            if (orderType.equals(String.valueOf(StaticExplain.INSTALLATION_LIST.getCode()))) {
+                                OrderStatusUtil.startEmployerOrderDetail(getBaseFragmentActivity(), orderCode
+                                        , orderType, orderStatus);
+                            } else if (orderType.equals(String.valueOf(StaticExplain.ADVERTISING_BILLS.getCode()))){
+                                //广告单
+                                AdvertisingStatusUtil.startEmployerAdvertisingBills(getBaseFragmentActivity(), orderCode
+                                        ,orderType, orderStatus);
+                            }
                         }
                     }
                 }

@@ -198,6 +198,7 @@
     <string name="number_of_teachers">师傅数量</string>
     <string name="order_quantity">订单数量</string>
     <string name="task_amount">任务金额(元)</string>
+    <string name="task_amount_">任务金额(万元)</string>
     <string name="wallet_detail_query">自定义查询</string>
     <string name="has_been_proposed">已提现</string>
     <string name="wallet_withdraw_detail">提现详情</string>
@@ -343,7 +344,7 @@
     <string name="construction_submission">确认提交</string>
     <string name="electronic_signature">电子签名</string>
     <string name="clear">清除</string>
-    <string name="job_site_img">请上传开始前工作现场的照片</string>
+    <string name="job_site_img">请上传开始后工作现场的照片</string>
     <string name="job_site_font_installation_img">请上传开始前工作现场的照片</string>
     <string name="agree_to_start_work">服务内容无异议，同意开工。</string>
     <string name="please_sign_electronically">请进行电子签名</string>
@@ -474,4 +475,11 @@
     <string name="post_construction_photos">施工后照片</string>
     <string name="acceptance_and_approval">验收通过</string>
     <string name="no_passage">不通过</string>
+    <string name="acceptance_is_not">验收不通过</string>
+    <string name="cancellation_under_way">正在取消</string>
+    <string name="input_reason">输入原因</string>
+    <string name="please_input_content">请输入不通过原因</string>
+    <string name="task_Acceptance">接任务</string>
+    <string name="advertisement_start_construction">请上传完成图片 注：务必上传高清照片</string>
+    <string name="advertisement_start_construction_tip">注：务必上传高清照片</string>
 </resources>
