@@ -16,9 +16,10 @@ import com.xiaomai.zhuangba.util.ConstantUtil;
  */
 public class OrderPoolDetailFragment extends BaseMasterOrderDetailFragment {
 
-    public static OrderPoolDetailFragment newInstance(String orderCode) {
+    public static OrderPoolDetailFragment newInstance(String orderCode , String orderType) {
         Bundle args = new Bundle();
         args.putString(ConstantUtil.ORDER_CODE , orderCode);
+        args.putString(ConstantUtil.ORDER_TYPE , orderType);
         OrderPoolDetailFragment fragment = new OrderPoolDetailFragment();
         fragment.setArguments(args);
         return fragment;

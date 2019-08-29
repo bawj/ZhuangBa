@@ -87,9 +87,10 @@ public class OrderDetailModule<V extends IOrderDetailView> extends BaseModule<V>
     @Override
     public void requestOrderPoolOrderDetail() {
         String orderCode = mViewRef.get().getOrderCode();
+        String orderType = mViewRef.get().getOrderType();
         //订单详情
         Observable<HttpResult<OngoingOrdersList>> orderDetailsZip = RxUtils.getObservableZip(
-                ServiceUrl.getUserApi().getOrderByOrderCode(orderCode).subscribeOn(Schedulers.io()));
+                ServiceUrl.getUserApi().getOrderByOrderCode(orderCode , orderType).subscribeOn(Schedulers.io()));
         //服务项目
         Observable<HttpResult<List<OrderServiceItem>>> orderServiceListZip = RxUtils.getObservableZip(
                 ServiceUrl.getUserApi().getOrderServiceList(orderCode).subscribeOn(Schedulers.io()));

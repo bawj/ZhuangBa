@@ -11,7 +11,9 @@ import com.example.toollib.util.Log;
 import com.xiaomai.zhuangba.R;
 import com.xiaomai.zhuangba.adapter.NewTaskAdapter;
 import com.xiaomai.zhuangba.data.bean.OngoingOrdersList;
+import com.xiaomai.zhuangba.enums.StaticExplain;
 import com.xiaomai.zhuangba.enums.StringTypeExplain;
+import com.xiaomai.zhuangba.fragment.advertisement.master.MasterAdvertisementOrderPoolAdDetailFragment;
 import com.xiaomai.zhuangba.fragment.base.BaseMasterEmployerContentFragment;
 import com.xiaomai.zhuangba.fragment.orderdetail.master.OrderPoolDetailFragment;
 
@@ -30,12 +32,6 @@ public class OrderPoolFragment extends BaseMasterEmployerContentFragment {
         OrderPoolFragment fragment = new OrderPoolFragment();
         fragment.setArguments(args);
         return fragment;
-    }
-
-    @Override
-    public void initView() {
-        super.initView();
-        Log.e("新任务 initView");
     }
 
     @Override
@@ -90,11 +86,12 @@ public class OrderPoolFragment extends BaseMasterEmployerContentFragment {
     public void onMItemClick(View view, int position) {
         OngoingOrdersList ongoingOrdersList = (OngoingOrdersList)
                 view.findViewById(R.id.tvItemOrdersTitle).getTag();
-        //新任务详情
-//        startFragmentForResult(NewTaskDetailFragment.newInstance(ongoingOrdersList.getOrderCode()),
-//                ForResultCode.START_FOR_RESULT_CODE.getCode());
-
-        startFragment(OrderPoolDetailFragment.newInstance(ongoingOrdersList.getOrderCode()));
+        String orderType = ongoingOrdersList.getOrderType();
+        if (orderType.equals(String.valueOf(StaticExplain.INSTALLATION_LIST.getCode()))){
+            startFragment(OrderPoolDetailFragment.newInstance(ongoingOrdersList.getOrderCode() , ongoingOrdersList.getOrderType()));
+        }else {
+            startFragment(MasterAdvertisementOrderPoolAdDetailFragment.newInstance(ongoingOrdersList.getOrderCode() , ongoingOrdersList.getOrderType()));
+        }
     }
 
     @Override

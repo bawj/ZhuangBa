@@ -1,5 +1,7 @@
 package com.xiaomai.zhuangba.data.bean;
 
+import android.text.TextUtils;
+
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.Generated;
@@ -53,11 +55,12 @@ public class PushNotificationDB {
      * 通知标题
      */
     private String title;
+
     @Generated(hash = 501428101)
     public PushNotificationDB(Long id, String phone, String aliasType, String alias,
-            String description, String appkey, String type, String productionMode,
-            String time, String displayType, String orderCode, String orderType,
-            String afterOpen, String ticker, String text, String title) {
+                              String description, String appkey, String type, String productionMode,
+                              String time, String displayType, String orderCode, String orderType,
+                              String afterOpen, String ticker, String text, String title) {
         this.id = id;
         this.phone = phone;
         this.aliasType = aliasType;
@@ -75,102 +78,135 @@ public class PushNotificationDB {
         this.text = text;
         this.title = title;
     }
+
     @Generated(hash = 13020160)
     public PushNotificationDB() {
     }
+
     public Long getId() {
         return this.id;
     }
+
     public void setId(Long id) {
         this.id = id;
     }
+
     public String getPhone() {
         return this.phone;
     }
+
     public void setPhone(String phone) {
         this.phone = phone;
     }
+
     public String getAliasType() {
         return this.aliasType;
     }
+
     public void setAliasType(String aliasType) {
         this.aliasType = aliasType;
     }
+
     public String getAlias() {
         return this.alias;
     }
+
     public void setAlias(String alias) {
         this.alias = alias;
     }
+
     public String getDescription() {
         return this.description;
     }
+
     public void setDescription(String description) {
         this.description = description;
     }
+
     public String getAppkey() {
         return this.appkey;
     }
+
     public void setAppkey(String appkey) {
         this.appkey = appkey;
     }
+
     public String getType() {
         return this.type;
     }
+
     public void setType(String type) {
         this.type = type;
     }
+
     public String getProductionMode() {
         return this.productionMode;
     }
+
     public void setProductionMode(String productionMode) {
         this.productionMode = productionMode;
     }
+
     public String getTime() {
         return this.time;
     }
+
     public void setTime(String time) {
         this.time = time;
     }
+
     public String getDisplayType() {
         return this.displayType;
     }
+
     public void setDisplayType(String displayType) {
         this.displayType = displayType;
     }
+
     public String getOrderCode() {
-        return this.orderCode;
+        return TextUtils.isEmpty(this.orderCode) ? "" : this.orderCode;
     }
+
     public void setOrderCode(String orderCode) {
         this.orderCode = orderCode;
     }
+
     public String getOrderType() {
-        return this.orderType;
+        return TextUtils.isEmpty(this.orderType) ? "" : this.orderType;
     }
+
     public void setOrderType(String orderType) {
         this.orderType = orderType;
     }
+
     public String getAfterOpen() {
         return this.afterOpen;
     }
+
     public void setAfterOpen(String afterOpen) {
         this.afterOpen = afterOpen;
     }
+
     public String getTicker() {
         return this.ticker;
     }
+
     public void setTicker(String ticker) {
         this.ticker = ticker;
     }
+
     public String getText() {
         return this.text;
     }
+
     public void setText(String text) {
         this.text = text;
     }
+
     public String getTitle() {
         return this.title;
     }
+
     public void setTitle(String title) {
         this.title = title;
     }

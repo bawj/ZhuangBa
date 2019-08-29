@@ -51,7 +51,7 @@ import butterknife.OnClick;
  * base 订单详情
  */
 public class BaseOrderDetailFragment<T extends IOrderDetailModule> extends BaseFragment<T>
-        implements OnRefreshListener, IOrderDetailView , BaseQuickAdapter.OnItemClickListener {
+        implements OnRefreshListener, IOrderDetailView, BaseQuickAdapter.OnItemClickListener {
 
     /**
      * 服务大类
@@ -115,22 +115,30 @@ public class BaseOrderDetailFragment<T extends IOrderDetailModule> extends BaseF
     @BindView(R.id.layBaseOrderDetail)
     RelativeLayout layBaseOrderDetail;
 
-    /** 现场照片 */
+    /**
+     * 现场照片
+     */
     @BindView(R.id.relLivePhotos)
     RelativeLayout relLivePhotos;
     @BindView(R.id.recyclerLivePhotos)
     RecyclerView recyclerLivePhotos;
     private ImgExhibitionAdapter imgExhibitionAdapter;
-    /** 现场描述 */
+    /**
+     * 现场描述
+     */
     @BindView(R.id.relFieldDescription)
     RelativeLayout relFieldDescription;
     @BindView(R.id.tvFiledDescription)
     TextView tvFiledDescription;
 
-    private float latitude , longitude;
-    /** 服务项目 */
+    private float latitude, longitude;
+    /**
+     * 服务项目
+     */
     private ServiceItemsAdapter serviceItemsAdapter;
-    /** 订单详细信息 */
+    /**
+     * 订单详细信息
+     */
     private OrderDateListAdapter orderDateListAdapter;
 
     @Override
@@ -183,7 +191,7 @@ public class BaseOrderDetailFragment<T extends IOrderDetailModule> extends BaseF
     }
 
     public void startMap() {
-        MapUtils.mapNavigation(getActivity() , latitude , longitude);
+        MapUtils.mapNavigation(getActivity(), latitude, longitude);
     }
 
     @Override
@@ -203,47 +211,46 @@ public class BaseOrderDetailFragment<T extends IOrderDetailModule> extends BaseF
             orderDateListsSuccess(orderDateLists);
         }
         List<DeliveryContent> deliveryContents = orderServiceDate.getDeliveryContents();
-        if (deliveryContents != null && !deliveryContents.isEmpty()){
+        if (deliveryContents != null && !deliveryContents.isEmpty()) {
             orderDateListsDeliveryContent(deliveryContents);
         }
         ///现场照片 和 描述
-        if (deliveryContents != null){
+        if (deliveryContents != null && deliveryContents.size() >= 3) {
             setFieldDescription(deliveryContents);
+        } else {
+            relLivePhotos.setVisibility(View.GONE);
+            relFieldDescription.setVisibility(View.GONE);
         }
     }
 
 
     /**
      * 现场照片 和 描述
+     *
      * @param deliveryContents list
      */
-    private void setFieldDescription(List<DeliveryContent> deliveryContents){
-        if (!deliveryContents.isEmpty() && deliveryContents.size() >= 3) {
-            DeliveryContent deliveryContent = deliveryContents.get(2);
-            String picturesUrl = deliveryContent.getPicturesUrl();
-            if (!TextUtils.isEmpty(picturesUrl)) {
-                final List<String> urlList = Util.getList(picturesUrl);
-                imgExhibitionAdapter.setNewData(urlList);
-                imgExhibitionAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                        ArrayList<String> url = (ArrayList<String>) urlList;
-                        if (url != null) {
-                            startFragment(ImgPreviewFragment.newInstance(position, url));
-                        }
+    private void setFieldDescription(List<DeliveryContent> deliveryContents) {
+        DeliveryContent deliveryContent = deliveryContents.get(2);
+        String picturesUrl = deliveryContent.getPicturesUrl();
+        if (!TextUtils.isEmpty(picturesUrl)) {
+            final List<String> urlList = Util.getList(picturesUrl);
+            imgExhibitionAdapter.setNewData(urlList);
+            imgExhibitionAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+                @Override
+                public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                    ArrayList<String> url = (ArrayList<String>) urlList;
+                    if (url != null) {
+                        startFragment(ImgPreviewFragment.newInstance(position, url));
                     }
-                });
-            }else {
-                relLivePhotos.setVisibility(View.GONE);
-            }
-            String electronicSignature = deliveryContent.getElectronicSignature();
-            if (!TextUtils.isEmpty(electronicSignature)){
-                tvFiledDescription.setText(electronicSignature);
-            }else {
-                relFieldDescription.setVisibility(View.GONE);
-            }
-        }else {
+                }
+            });
+        } else {
             relLivePhotos.setVisibility(View.GONE);
+        }
+        String electronicSignature = deliveryContent.getElectronicSignature();
+        if (!TextUtils.isEmpty(electronicSignature)) {
+            tvFiledDescription.setText(electronicSignature);
+        } else {
             relFieldDescription.setVisibility(View.GONE);
         }
     }
@@ -258,11 +265,13 @@ public class BaseOrderDetailFragment<T extends IOrderDetailModule> extends BaseF
         //服务项目
         serviceItemsAdapter.setNewData(orderServiceItems);
     }
+
     @Override
     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
         //服务项目 itemClick
         OrderServiceItem orderServiceItem = (OrderServiceItem) view.findViewById(R.id.tvItemServiceTotalMoney).getTag();
-        startFragment(ServiceDetailFragment.newInstance(orderServiceItem.getServiceText() , orderServiceItem.getServiceStandard()));
+        startFragment(ServiceDetailFragment.newInstance(orderServiceItem.getServiceText(),
+                orderServiceItem.getServiceStandard(), orderServiceItem.getVideo() , orderServiceItem.getIconUrl()));
     }
 
     public void orderDateListsDeliveryContent(List<DeliveryContent> deliveryContents) {
@@ -290,7 +299,7 @@ public class BaseOrderDetailFragment<T extends IOrderDetailModule> extends BaseF
             //师傅端
             masterOngoingOrdersListSuccess(ongoingOrdersList);
             OrderStatusUtil.masterStatus(getActivity(), ongoingOrdersList.getOrderStatus(), tvBaseOrderDetailItemOrdersType);
-        }else if (unique.getRole().equals(String.valueOf(StaticExplain.EMPLOYER.getCode()))) {
+        } else if (unique.getRole().equals(String.valueOf(StaticExplain.EMPLOYER.getCode()))) {
             //雇主端
             employerOngoingOrdersListSuccess(ongoingOrdersList);
             OrderStatusUtil.employerStatus(getActivity(), ongoingOrdersList.getOrderStatus(), tvBaseOrderDetailItemOrdersType);
@@ -312,7 +321,7 @@ public class BaseOrderDetailFragment<T extends IOrderDetailModule> extends BaseF
 
     @Override
     public String getOrderCode() {
-        if (getArguments() != null){
+        if (getArguments() != null) {
             return getArguments().getString(ConstantUtil.ORDER_CODE);
         }
         return "";
@@ -320,7 +329,7 @@ public class BaseOrderDetailFragment<T extends IOrderDetailModule> extends BaseF
 
     @Override
     public String getOrderType() {
-        if (getArguments() != null){
+        if (getArguments() != null) {
             return getArguments().getString(ConstantUtil.ORDER_TYPE);
         }
         return "";

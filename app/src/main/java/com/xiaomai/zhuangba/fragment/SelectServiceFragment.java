@@ -240,7 +240,7 @@ public class SelectServiceFragment extends BaseListFragment<ISelectServiceModule
             ServiceSubcategoryProject serviceSubcategoryProject = (ServiceSubcategoryProject)
                     view.findViewById(R.id.tvServiceContentMoney).getTag();
             startFragment(ServiceDetailFragment.newInstance(serviceSubcategoryProject.getServiceText(),
-                    serviceSubcategoryProject.getServiceStandard()));
+                    serviceSubcategoryProject.getServiceStandard() , serviceSubcategoryProject.getVideo() , serviceSubcategoryProject.getIconUrl()));
         }
     }
 

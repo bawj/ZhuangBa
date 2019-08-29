@@ -482,4 +482,5 @@
     <string name="task_Acceptance">接任务</string>
     <string name="advertisement_start_construction">请上传完成图片 注：务必上传高清照片</string>
     <string name="advertisement_start_construction_tip">注：务必上传高清照片</string>
+    <string name="acceptance_rules">验收规则</string>
 </resources>

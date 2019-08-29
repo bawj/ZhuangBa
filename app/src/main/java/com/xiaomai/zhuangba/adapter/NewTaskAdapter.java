@@ -31,7 +31,7 @@ public class NewTaskAdapter extends BaseQuickAdapter<OngoingOrdersList, BaseView
         tvItemOrdersTitle.setText(ongoingOrders.getServiceText());
         //time
         TextView tvItemOrdersTime = helper.getView(R.id.tvItemOrdersTime);
-        tvItemOrdersTime.setText(mContext.getString(R.string.time, ongoingOrders.getAppointmentTime()));
+        tvItemOrdersTime.setText(mContext.getString(R.string.time, ongoingOrders.getSlottingStartLength()));
         //location
         TextView tvItemOrdersLocation = helper.getView(R.id.tvItemOrdersLocation);
         tvItemOrdersLocation.setText(ongoingOrders.getAddress());

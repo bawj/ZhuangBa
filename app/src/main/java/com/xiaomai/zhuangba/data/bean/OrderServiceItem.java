@@ -35,6 +35,7 @@ public class OrderServiceItem{
     private double price3;
     private String iconUrl;
     private String serviceStandard;
+    private String video;
 
     /**
      * 维保时间 单位（月）
@@ -67,10 +68,10 @@ public class OrderServiceItem{
         maintenanceAmount = in.readDouble();
     }
 
-    @Generated(hash = 1429766044)
+    @Generated(hash = 1388843075)
     public OrderServiceItem(Long id, String orderCode, int serviceId, String serviceText, int number,
-            double amount, double price2, double price3, String iconUrl, String serviceStandard, int monthNumber,
-            double maintenanceAmount, int maintenanceId) {
+            double amount, double price2, double price3, String iconUrl, String serviceStandard, String video,
+            int monthNumber, double maintenanceAmount, int maintenanceId) {
         this.id = id;
         this.orderCode = orderCode;
         this.serviceId = serviceId;
@@ -81,6 +82,7 @@ public class OrderServiceItem{
         this.price3 = price3;
         this.iconUrl = iconUrl;
         this.serviceStandard = serviceStandard;
+        this.video = video;
         this.monthNumber = monthNumber;
         this.maintenanceAmount = maintenanceAmount;
         this.maintenanceId = maintenanceId;
@@ -189,5 +191,13 @@ public class OrderServiceItem{
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getVideo() {
+        return video;
+    }
+
+    public void setVideo(String video) {
+        this.video = video;
     }
 }

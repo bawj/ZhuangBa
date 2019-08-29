@@ -199,10 +199,11 @@ public interface IApi {
      * 订单池详情
      *
      * @param orderCode 订单编号
+     * @param orderType 订单类型 1安装单 2 广告单
      * @return observable
      */
     @GET("order/getOrderByOrderCode")
-    Observable<HttpResult<OngoingOrdersList>> getOrderByOrderCode(@Query("orderCode") String orderCode);
+    Observable<HttpResult<OngoingOrdersList>> getOrderByOrderCode(@Query("orderCode") String orderCode, @Query("orderType") String orderType);
 
     /**
      * 查询服务项目

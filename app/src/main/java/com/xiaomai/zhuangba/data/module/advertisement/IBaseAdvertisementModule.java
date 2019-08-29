@@ -13,4 +13,8 @@ public interface IBaseAdvertisementModule extends IBaseModule<IBaseAdvertisement
      */
     void requestAdvertisementDetail();
 
+    /**
+     * 订单池详情
+     */
+    void requestAdvertisementOrderPoolOrderDetail();
 }

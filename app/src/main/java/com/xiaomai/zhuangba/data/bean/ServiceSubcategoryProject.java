@@ -32,6 +32,9 @@ public class ServiceSubcategoryProject {
     private String serviceStandard;
     private String iconUrl;
     private List<Object> servicePoolList;
+    /** 视频链接 */
+    private String video;
+
 
     public int getServiceId() {
         return serviceId;
@@ -103,5 +106,13 @@ public class ServiceSubcategoryProject {
 
     public void setPrice3(double price3) {
         this.price3 = price3;
+    }
+
+    public String getVideo() {
+        return TextUtils.isEmpty(video) ? "" : video;
+    }
+
+    public void setVideo(String video) {
+        this.video = video;
     }
 }
