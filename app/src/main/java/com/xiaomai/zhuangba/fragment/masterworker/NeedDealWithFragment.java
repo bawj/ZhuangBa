@@ -25,7 +25,7 @@ import java.util.List;
  * @author Administrator
  * @date 2019/7/6 0006
  *
- * 需处理
+ * 安装单
  */
 public class NeedDealWithFragment extends BaseMasterEmployerContentFragment {
 
@@ -39,7 +39,6 @@ public class NeedDealWithFragment extends BaseMasterEmployerContentFragment {
     @Override
     public void initView() {
         super.initView();
-        Log.e("需处理 initView");
     }
 
     @Override

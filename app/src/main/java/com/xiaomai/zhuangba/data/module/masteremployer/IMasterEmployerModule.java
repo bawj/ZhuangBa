@@ -42,4 +42,9 @@ public interface IMasterEmployerModule extends IBaseModule<IMasterEmployerView> 
      */
     void requestWorkingStateSwitching();
 
+
+    /**
+     * 广告单
+     */
+    void requestAdvertisingBills();
 }

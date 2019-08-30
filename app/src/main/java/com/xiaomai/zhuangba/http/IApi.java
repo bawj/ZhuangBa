@@ -1,6 +1,7 @@
 package com.xiaomai.zhuangba.http;
 
 import com.example.toollib.http.HttpResult;
+import com.xiaomai.zhuangba.data.AdvertisingBillsBean;
 import com.xiaomai.zhuangba.data.AdvertisingList;
 import com.xiaomai.zhuangba.data.bean.AdvertisingReplacementBean;
 import com.xiaomai.zhuangba.data.bean.AdvertisingReplacementDetailBean;
@@ -865,4 +866,23 @@ public interface IApi {
      */
     @POST("order/submitAdvertisingValidation")
     Observable<HttpResult<Object>> submitAdvertisingValidation(@Body RequestBody requestBody);
+
+    /**
+     * 广告单 分类
+     *
+     * @param requestBody body
+     * @return observable
+     */
+    @POST("order/getMasterHandleAdvertisingOrderList")
+    Observable<HttpResult<RefreshBaseList<OngoingOrdersList>>> getMasterHandleAdvertisingOrderList(@Body RequestBody requestBody);
+
+    /**
+     * 广告单 师傅 完成提交
+     *
+     * @param pageNum  页码
+     * @param pageSize 一页显示行数
+     * @return observable
+     */
+    @GET("order/getMasterHandleOrder")
+    Observable<HttpResult<RefreshBaseList<AdvertisingBillsBean>>> getMasterHandleOrder(@Query("pageNum") int pageNum, @Query("pageSize") int pageSize);
 }

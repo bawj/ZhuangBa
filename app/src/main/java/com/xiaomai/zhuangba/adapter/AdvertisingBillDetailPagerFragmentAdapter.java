@@ -4,20 +4,20 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.xiaomai.zhuangba.fragment.base.BaseMasterEmployerContentFragment;
+import com.xiaomai.zhuangba.fragment.masterworker.advertising.WholeAdvertisingFragment;
 
 import java.util.List;
 
 /**
  * @author Administrator
- * @date 2019/7/6 0006
+ * @date 2019/8/30 0030
  */
-public class PagerFragmentAdapter extends FragmentPagerAdapter {
+public class AdvertisingBillDetailPagerFragmentAdapter extends FragmentPagerAdapter {
 
-    private List<BaseMasterEmployerContentFragment> listFragment;
+    private List<WholeAdvertisingFragment> listFragment;
     private String[] mTitles;
 
-    public PagerFragmentAdapter(FragmentManager fm, List<BaseMasterEmployerContentFragment> listFragment, String[] titles) {
+    public AdvertisingBillDetailPagerFragmentAdapter(FragmentManager fm, List<WholeAdvertisingFragment> listFragment, String[] titles) {
         super(fm);
         this.mTitles = titles;
         this.listFragment = listFragment;
@@ -37,6 +37,5 @@ public class PagerFragmentAdapter extends FragmentPagerAdapter {
     public CharSequence getPageTitle(int position) {
         return mTitles[position];
     }
-
 
 }

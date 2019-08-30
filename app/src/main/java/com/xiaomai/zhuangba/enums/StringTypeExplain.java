@@ -11,6 +11,7 @@ public enum StringTypeExplain {
     REGISTERED_FORGET_PASSWORD("forgetPassword","忘记密码 获取验证码时的type "),
     REFRESH_NEW_TASK_FRAGMENT("0" , "首页 刷新 第一个fragment"),
     REFRESH_NEED_DEAL_WITH_FRAGMENT("1" , "首页 刷新 第二个fragment"),
+    REFRESH_ADVERTISING_BILLS_FRAGMENT("2" , "首页 刷新 第三个fragment"),
     A_MAP_PACKAGE_NAME("com.autonavi.minimap" , "高德地图包名"),
     A_MAP_BAI_DU_PACKAGE_NAME("com.baidu.BaiduMap" , "百度地图包名"),
     ORDER_STATUS("2" , "推送状态 = 2 跳转到订单详情"),

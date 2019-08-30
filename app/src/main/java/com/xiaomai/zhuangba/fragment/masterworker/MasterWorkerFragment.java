@@ -12,6 +12,7 @@ import com.bigkoo.pickerview.builder.OptionsPickerBuilder;
 import com.bigkoo.pickerview.listener.OnOptionsSelectChangeListener;
 import com.bigkoo.pickerview.listener.OnOptionsSelectListener;
 import com.bigkoo.pickerview.view.OptionsPickerView;
+import com.example.toollib.base.BaseFragment;
 import com.example.toollib.http.HttpResult;
 import com.example.toollib.http.observer.BaseHttpRxObserver;
 import com.example.toollib.http.util.RxUtils;
@@ -202,12 +203,13 @@ public class MasterWorkerFragment extends BaseMasterEmployerFragment implements 
         List<BaseMasterEmployerContentFragment> fragmentList = new ArrayList<>();
         fragmentList.add(OrderPoolFragment.newInstance());
         fragmentList.add(NeedDealWithFragment.newInstance());
+        fragmentList.add(AdvertisingBillsFragment.newInstance());
         return fragmentList;
     }
 
     @Override
     public String[] getTabTitle() {
-        return new String[]{getString(R.string.order_pool), getString(R.string.need_to_be_dealt_with)};
+        return new String[]{getString(R.string.order_pool), getString(R.string.need_to_be_dealt_with) , getString(R.string.advertising_bills)};
     }
 
     @Override

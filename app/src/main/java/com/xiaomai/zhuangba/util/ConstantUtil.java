@@ -2,7 +2,6 @@ package com.xiaomai.zhuangba.util;
 
 /**
  * @author Administrator
- * @date 2019/7/16 0016
  */
 public class ConstantUtil {
 
@@ -14,6 +13,16 @@ public class ConstantUtil {
      * 安装类型 传递 key
      */
     public static final String ORDER_TYPE = "order_type";
+
+    /**
+     * 广告单
+     */
+    public static final String ADVERTISING_BILLS = "advertising_bills";
+
+    /**
+     * 广告单 状态
+     */
+    public static final String ADVERTISING_STATUS = "advertising_status";
 
     /**
      * 选择 服务 dialog 默认选中

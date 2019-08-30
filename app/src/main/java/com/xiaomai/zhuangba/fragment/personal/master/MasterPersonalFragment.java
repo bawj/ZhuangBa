@@ -89,7 +89,6 @@ public class MasterPersonalFragment extends PersonalFragment {
                 break;
             case R.id.relMasterMaintenance:
                 //我的维保单
-                ///startFragment(MasterMaintenancePolicyFragment.newInstance());
                 startFragment(ContinuousIncomeFragment.newInstance());
                 break;
             case R.id.relPersonalScopeOfService:

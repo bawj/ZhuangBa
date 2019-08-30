@@ -55,6 +55,10 @@ public class BaseListFragment<M extends IBaseModule, T extends BaseQuickAdapter>
                 baseListAdapter.setOnLoadMoreListener(this, rvBaseList);
             }
         }
+        refresh();
+    }
+
+    public void refresh() {
         refreshLayout.autoRefresh();
     }
 

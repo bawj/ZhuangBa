@@ -20,6 +20,7 @@ import com.xiaomai.zhuangba.R;
 import com.xiaomai.zhuangba.adapter.PagerFragmentAdapter;
 import com.xiaomai.zhuangba.adapter.TabCommonGoneNavigator;
 import com.xiaomai.zhuangba.adapter.TabCommonNavigator;
+import com.xiaomai.zhuangba.data.AdvertisingBillsBean;
 import com.xiaomai.zhuangba.data.bean.OngoingOrdersList;
 import com.xiaomai.zhuangba.data.bean.OrderStatistics;
 import com.xiaomai.zhuangba.data.bean.StatisticsData;
@@ -32,6 +33,9 @@ import com.xiaomai.zhuangba.data.observable.EventManager;
 import com.xiaomai.zhuangba.data.observable.Observer;
 import com.xiaomai.zhuangba.enums.StaticExplain;
 import com.xiaomai.zhuangba.enums.StringTypeExplain;
+import com.xiaomai.zhuangba.fragment.masterworker.AdvertisingBillsFragment;
+import com.xiaomai.zhuangba.fragment.masterworker.NeedDealWithFragment;
+import com.xiaomai.zhuangba.fragment.masterworker.OrderPoolFragment;
 import com.xiaomai.zhuangba.fragment.personal.MessageFragment;
 import com.xiaomai.zhuangba.fragment.personal.PricingSheetFragment;
 
@@ -39,7 +43,6 @@ import net.lucode.hackware.magicindicator.MagicIndicator;
 import net.lucode.hackware.magicindicator.ViewPagerHelper;
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.CommonNavigator;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -82,11 +85,11 @@ public class BaseMasterEmployerFragment extends BaseFragment<IMasterEmployerModu
      */
     public EventManager eventManager;
     public String message = "";
-    private List<BaseMasterEmployerContentFragment> listFragment;
     /**
      * 判断某个fragment 是否 刷新了
      */
-    private Map<String, Integer> isRefreshFragment = new HashMap<>();
+    private Map<Integer, Integer> isRefreshFragment = new HashMap<>();
+    private List<BaseMasterEmployerContentFragment> listFragment;
 
     @Override
     protected IMasterEmployerModule initModule() {
@@ -101,6 +104,8 @@ public class BaseMasterEmployerFragment extends BaseFragment<IMasterEmployerModu
 
     @Override
     public void initView() {
+        listFragment = getListFragment();
+
         refreshBaseList.setEnableLoadMore(false);
         refreshBaseList.setOnRefreshListener(this);
         refreshBaseList.setHeaderInsetStart(76);
@@ -110,40 +115,7 @@ public class BaseMasterEmployerFragment extends BaseFragment<IMasterEmployerModu
             tvUserName.setText(unique.getUserText());
         }
 
-        listFragment = getListFragment();
-        if (!listFragment.isEmpty() && getTabTitle().length > 0) {
-            mViewPager.setAdapter(new PagerFragmentAdapter(getChildFragmentManager(), listFragment, getTabTitle()));
-            CommonNavigator commonNavigator = new CommonNavigator(getActivity());
-            if (getTabTitle() != null && getTabTitle().length == 1) {
-                commonNavigator.setAdapter(new TabCommonGoneNavigator(getTabTitle(), mViewPager));
-            } else {
-                commonNavigator.setAdapter(new TabCommonNavigator(getTabTitle(), mViewPager));
-            }
-            magicIndicator.setNavigator(commonNavigator);
-            ViewPagerHelper.bind(magicIndicator, mViewPager);
-            mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-                @Override
-                public void onPageScrolled(int i, float v, int i1) {
-                    if (isRefreshFragment.get(String.valueOf(i)) == null) {
-                        refreshBaseList.autoRefresh();
-                        isRefreshFragment.put(String.valueOf(i), i);
-                    }
-                }
-
-                @Override
-                public void onPageSelected(int i) {
-                    if (i == 0) {
-                        roundButtonCheckCountryIsVisible(View.VISIBLE);
-                    } else {
-                        roundButtonCheckCountryIsVisible(View.GONE);
-                    }
-                }
-
-                @Override
-                public void onPageScrollStateChanged(int i) {
-                }
-            });
-        }
+        setFragment();
 
         appBar.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
             @Override
@@ -161,9 +133,53 @@ public class BaseMasterEmployerFragment extends BaseFragment<IMasterEmployerModu
         for (BaseMasterEmployerContentFragment baseMasterEmployerContentFragment : listFragment) {
             eventManager.registerObserver(baseMasterEmployerContentFragment);
         }
+
+        refresh(0);
     }
 
-    @OnClick({R.id.ivUserHead, R.id.ivMessage,R.id.btnRectangle})
+    private void setFragment() {
+        String[] tabTitle = getTabTitle();
+        if (tabTitle != null && tabTitle.length > 0) {
+            mViewPager.setAdapter(new PagerFragmentAdapter(getChildFragmentManager(), listFragment, tabTitle));
+            CommonNavigator commonNavigator = new CommonNavigator(getActivity());
+            if (tabTitle.length == 1) {
+                //tab 只有一个 没有下划线
+                commonNavigator.setAdapter(new TabCommonGoneNavigator(tabTitle, mViewPager));
+            } else {
+                commonNavigator.setAdapter(new TabCommonNavigator(tabTitle, mViewPager));
+            }
+            magicIndicator.setNavigator(commonNavigator);
+            ViewPagerHelper.bind(magicIndicator, mViewPager);
+            mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+                @Override
+                public void onPageScrolled(int i, float v, int i1) {
+                }
+
+                @Override
+                public void onPageSelected(int i) {
+                    if (i == 0) {
+                        roundButtonCheckCountryIsVisible(View.VISIBLE);
+                    } else {
+                        roundButtonCheckCountryIsVisible(View.GONE);
+                    }
+                    refresh(i);
+                }
+
+                @Override
+                public void onPageScrollStateChanged(int i) {
+                }
+            });
+        }
+    }
+
+    private void refresh(int i) {
+        if (isRefreshFragment.get(i) == null) {
+            refreshBaseList.autoRefresh();
+            isRefreshFragment.put(i, i);
+        }
+    }
+
+    @OnClick({R.id.ivUserHead, R.id.ivMessage, R.id.btnRectangle})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.ivUserHead:
@@ -184,12 +200,14 @@ public class BaseMasterEmployerFragment extends BaseFragment<IMasterEmployerModu
     @Override
     public void onRefresh(@NonNull RefreshLayout refreshLayout) {
         int currentItem = mViewPager.getCurrentItem();
+        Log.e("currentItem = " + currentItem);
         if (currentItem == 0) {
             message = StringTypeExplain.REFRESH_NEW_TASK_FRAGMENT.getCode();
         } else if (currentItem == 1) {
             message = StringTypeExplain.REFRESH_NEED_DEAL_WITH_FRAGMENT.getCode();
+        } else if (currentItem == 2) {
+            message = StringTypeExplain.REFRESH_ADVERTISING_BILLS_FRAGMENT.getCode();
         }
-        Log.e("refresh currentItem = " + currentItem);
         eventManager.notifyObservers(message, getAddress(), handler);
 
         //请求 师傅 或 雇主 的统计
@@ -201,6 +219,7 @@ public class BaseMasterEmployerFragment extends BaseFragment<IMasterEmployerModu
     public Handler handler = new Handler(new Handler.Callback() {
         @Override
         public boolean handleMessage(Message msg) {
+            Log.e("handleMessage = " + msg);
             if (msg.what == StaticExplain.STOP_REFRESH.getCode()) {
                 refreshBaseList.finishRefresh();
             }
@@ -246,12 +265,12 @@ public class BaseMasterEmployerFragment extends BaseFragment<IMasterEmployerModu
         tvOrderQuantity.setText(String.valueOf(statisticsData.getOrderNumber()));
 
         double totalAmount = statisticsData.getTotalAmount();
-        if (totalAmount > 999999){
+        if (totalAmount > 999999) {
             double div = AmountUtil.div(totalAmount, 10000, 2);
             tvTaskAmount.setText(String.valueOf(div));
             tvTaskAmount_.setText(getString(R.string.task_amount_));
-        }else {
-            tvTaskAmount.setText(String.valueOf((int)Math.floor(statisticsData.getTotalAmount())));
+        } else {
+            tvTaskAmount.setText(String.valueOf((int) Math.floor(statisticsData.getTotalAmount())));
         }
         tvNumberOfEmployers.setText(String.valueOf(statisticsData.getEmployerNumber()));
     }
@@ -259,6 +278,16 @@ public class BaseMasterEmployerFragment extends BaseFragment<IMasterEmployerModu
     @Override
     public String getAddress() {
         return "";
+    }
+
+    @Override
+    public void refreshAdvertisingSuccess(List<AdvertisingBillsBean> advertisingBillsBeans) {
+
+    }
+
+    @Override
+    public void loadMoreAdvertisingSuccess(List<AdvertisingBillsBean> advertisingBillsBeans) {
+
     }
 
     @Override
@@ -318,5 +347,6 @@ public class BaseMasterEmployerFragment extends BaseFragment<IMasterEmployerModu
         for (BaseMasterEmployerContentFragment baseMasterEmployerContentFragment : listFragment) {
             eventManager.removeObserver(baseMasterEmployerContentFragment);
         }
+        isRefreshFragment.clear();
     }
 }

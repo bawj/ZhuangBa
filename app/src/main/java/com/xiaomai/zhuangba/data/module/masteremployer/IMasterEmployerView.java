@@ -1,6 +1,7 @@
 package com.xiaomai.zhuangba.data.module.masteremployer;
 
 import com.example.toollib.data.base.IBaseView;
+import com.xiaomai.zhuangba.data.AdvertisingBillsBean;
 import com.xiaomai.zhuangba.data.bean.OngoingOrdersList;
 import com.xiaomai.zhuangba.data.bean.OrderStatistics;
 import com.xiaomai.zhuangba.data.bean.StatisticsData;
@@ -80,4 +81,18 @@ public interface IMasterEmployerView extends IBaseView {
      * @return string
      */
     String getAddress();
+
+    /**
+     * 刷新成功
+     *
+     * @param advertisingBillsBeans list
+     */
+    void refreshAdvertisingSuccess(List<AdvertisingBillsBean> advertisingBillsBeans);
+
+    /**
+     * 加载成功
+     *
+     * @param advertisingBillsBeans list
+     */
+    void loadMoreAdvertisingSuccess(List<AdvertisingBillsBean> advertisingBillsBeans);
 }

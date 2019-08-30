@@ -11,7 +11,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.toollib.base.BaseFragment;
 import com.example.toollib.util.Log;
 import com.xiaomai.zhuangba.R;
-import com.xiaomai.zhuangba.adapter.OrderListAdapter;
+import com.xiaomai.zhuangba.data.AdvertisingBillsBean;
 import com.xiaomai.zhuangba.data.bean.OngoingOrdersList;
 import com.xiaomai.zhuangba.data.bean.OrderStatistics;
 import com.xiaomai.zhuangba.data.bean.StatisticsData;
@@ -20,12 +20,10 @@ import com.xiaomai.zhuangba.data.module.masteremployer.IMasterEmployerView;
 import com.xiaomai.zhuangba.data.module.masteremployer.MasterEmployerModule;
 import com.xiaomai.zhuangba.data.observable.Observer;
 import com.xiaomai.zhuangba.enums.StaticExplain;
-import com.xiaomai.zhuangba.fragment.personal.PricingSheetFragment;
 
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.OnClick;
 
 /**
  * @author Administrator
@@ -41,14 +39,7 @@ public class BaseMasterEmployerContentFragment extends BaseFragment<IMasterEmplo
 
     private int page = StaticExplain.PAGE_NUMBER.getCode();
     public Handler handler;
-    private BaseQuickAdapter orderListAdapter;
-
-    public static BaseMasterEmployerContentFragment newInstance() {
-        Bundle args = new Bundle();
-        BaseMasterEmployerContentFragment fragment = new BaseMasterEmployerContentFragment();
-        fragment.setArguments(args);
-        return fragment;
-    }
+    public BaseQuickAdapter orderListAdapter;
 
     @Override
     protected IMasterEmployerModule initModule() {
@@ -62,6 +53,7 @@ public class BaseMasterEmployerContentFragment extends BaseFragment<IMasterEmplo
 
     @Override
     public void initView() {
+        Log.d("initView 执行");
         rvBaseList.setLayoutManager(new LinearLayoutManager(getActivity()));
         orderListAdapter = getBaseOrderAdapter();
         if (orderListAdapter != null) {
@@ -75,19 +67,24 @@ public class BaseMasterEmployerContentFragment extends BaseFragment<IMasterEmplo
 
     @Override
     public void update(String message, String address, Handler handler) {
+        Log.d("update 执行");
         this.handler = handler;
         page = 1;
         //刷新时 禁止上拉加载
-        orderListAdapter.setEnableLoadMore(false);
+        if (orderListAdapter != null) {
+            orderListAdapter.setEnableLoadMore(false);
+        }
     }
 
     @Override
     public void refreshSuccess(List<OngoingOrdersList> ordersLists) {
         //刷新成功
         stopRefresh();
-        orderListAdapter.setNewData(ordersLists);
-        //刷新完成 可以上拉加载
-        orderListAdapter.setEnableLoadMore(true);
+        if (orderListAdapter != null) {
+            orderListAdapter.setNewData(ordersLists);
+            //刷新完成 可以上拉加载
+            orderListAdapter.setEnableLoadMore(true);
+        }
     }
 
     @Override
@@ -107,12 +104,16 @@ public class BaseMasterEmployerContentFragment extends BaseFragment<IMasterEmplo
 
     @Override
     public void loadMoreEnd() {
-        orderListAdapter.loadMoreEnd();
+        if (orderListAdapter != null) {
+            orderListAdapter.loadMoreEnd();
+        }
     }
 
     @Override
     public void loadMoreSuccess(List<OngoingOrdersList> ongoingOrdersLists) {
-        orderListAdapter.addData(ongoingOrdersLists);
+        if (orderListAdapter != null) {
+            orderListAdapter.addData(ongoingOrdersLists);
+        }
     }
 
     public int getEmptyView() {
@@ -121,7 +122,9 @@ public class BaseMasterEmployerContentFragment extends BaseFragment<IMasterEmplo
 
     @Override
     public void loadMoreComplete() {
-        orderListAdapter.loadMoreComplete();
+        if (orderListAdapter != null) {
+            orderListAdapter.loadMoreComplete();
+        }
     }
 
     public BaseQuickAdapter getBaseOrderAdapter() {
@@ -184,6 +187,17 @@ public class BaseMasterEmployerContentFragment extends BaseFragment<IMasterEmplo
     @Override
     public String getAddress() {
         return null;
+    }
+
+    @Override
+    public void refreshAdvertisingSuccess(List<AdvertisingBillsBean> advertisingBillsBeans) {
+        //刷新成功
+        stopRefresh();
+    }
+
+    @Override
+    public void loadMoreAdvertisingSuccess(List<AdvertisingBillsBean> advertisingBillsBeans) {
+
     }
 
     @Override

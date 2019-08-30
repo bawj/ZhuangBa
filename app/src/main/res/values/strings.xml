@@ -48,7 +48,7 @@
     <string name="down_load_complete">下载完成</string>
     <string name="new_task">新任务</string>
     <string name="order_pool">订单池</string>
-    <string name="need_to_be_dealt_with">需处理</string>
+    <string name="need_to_be_dealt_with">安装单</string>
     <string name="ongoing_orders">进行中的订单</string>
     <string name="today_flowing">今日流水（元）</string>
     <string name="order_today">今日接单</string>
@@ -59,6 +59,7 @@
     <string name="task_number">共%1$s项</string>
     <string name="content_money">¥%1$s</string>
     <string name="number">x%1$s</string>
+    <string name="task_number_">数量：%1$s</string>
     <string name="in_distribution">分配中</string>
     <string name="received_orders">已接单</string>
     <string name="in_processing">处理中</string>
@@ -284,6 +285,7 @@
     <string name="emergency_contact">紧急联系</string>
     <string name="please_fill_in_the_emergency_contact_number">请填写紧急联系人电话</string>
     <string name="address">地址</string>
+    <string name="advertising_address">地址：%1$s</string>
     <string name="address_">紧急联系地址</string>
     <string name="please_fill_in_the_address">请填写地址</string>
     <string name="please_open_permissions">请在应用管理中打开相机和存储权限</string>
@@ -325,6 +327,7 @@
     <string name="update_success">修改成功</string>
     <string name="set_success">设置成功</string>
     <string name="whole_country">全国</string>
+    <string name="whole">全部</string>
     <string name="not_order">此区域暂无订单哦</string>
     <string name="bond_tips">提示信息</string>
     <string name="cancel_order_tip">如因自身原因取消订单给客户带来损失您将有可能承担违约费用，详见详见“个人中心——→用户协议”</string>
@@ -483,4 +486,5 @@
     <string name="advertisement_start_construction">请上传完成图片 注：务必上传高清照片</string>
     <string name="advertisement_start_construction_tip">注：务必上传高清照片</string>
     <string name="acceptance_rules">验收规则</string>
+    <string name="advertising_bills">广告单</string>
 </resources>

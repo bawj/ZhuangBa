@@ -53,10 +53,10 @@ public class NeedDealWithAdapter extends BaseQuickAdapter<OngoingOrdersList, Bas
 
         //是否显示 维保
         TextView tvMaintenance = helper.getView(R.id.tvMaintenance);
-        if (ongoingOrders.getMaintenanceFlag() == StaticExplain.YES_MAINTENANCE.getCode()){
+        if (ongoingOrders.getMaintenanceFlag() == StaticExplain.YES_MAINTENANCE.getCode()) {
             //有维保
             tvMaintenance.setVisibility(View.VISIBLE);
-        }else if (ongoingOrders.getMaintenanceFlag() == StaticExplain.NO_MAINTENANCE.getCode()){
+        } else if (ongoingOrders.getMaintenanceFlag() == StaticExplain.NO_MAINTENANCE.getCode()) {
             //没有维保
             tvMaintenance.setVisibility(View.GONE);
         }
@@ -68,15 +68,15 @@ public class NeedDealWithAdapter extends BaseQuickAdapter<OngoingOrdersList, Bas
         int orderStatus = ongoingOrders.getOrderStatus();
         String expireTime = ongoingOrders.getExpireTime();
 
-        if (orderStatus == OrdersEnum.MASTER_NEW_TASK.getCode()){
+        if (orderStatus == OrdersEnum.MASTER_NEW_TASK.getCode()) {
             tvItemOrdersIdentification.setText(mContext.getString(R.string.waiting_for_orders_, expireTime));
             ivItemOrdersIdentification.setVisibility(View.VISIBLE);
             ivItemOrdersIdentification.setVisibility(View.VISIBLE);
-        }else if (orderStatus == OrdersEnum.MASTER_EXPIRED.getCode()){
-            tvItemOrdersIdentification.setText(mContext.getString(R.string.expired,  expireTime));
+        } else if (orderStatus == OrdersEnum.MASTER_EXPIRED.getCode()) {
+            tvItemOrdersIdentification.setText(mContext.getString(R.string.expired, expireTime));
             ivItemOrdersIdentification.setVisibility(View.VISIBLE);
             ivItemOrdersIdentification.setVisibility(View.VISIBLE);
-        }else {
+        } else {
             ivItemOrdersIdentification.setVisibility(View.GONE);
             tvItemOrdersIdentification.setVisibility(View.GONE);
         }
@@ -90,44 +90,43 @@ public class NeedDealWithAdapter extends BaseQuickAdapter<OngoingOrdersList, Bas
         TextView tvAuxiliaryMaterials = helper.getView(R.id.tvAuxiliaryMaterials);
         String orderType = ongoingOrders.getOrderType();
         //安装单
-        if (orderType.equals(String.valueOf(StaticExplain.INSTALLATION_LIST.getCode()))) {
-            tvItemOrdersTime.setText(mContext.getString(R.string.time, ongoingOrders.getAppointmentTime()));
-            if (ongoingOrders.getMaintenanceFlag() == StaticExplain.YES_MAINTENANCE.getCode()) {
-                //有维保
-                tvMaintenance.setText(mContext.getString(R.string.maintenance));
-                tvMaintenance.setBackgroundResource(R.drawable.green_radius_bg);
-                tvMaintenance.setTextColor(mContext.getResources().getColor(R.color.tool_lib_color_199898));
-                tvMaintenance.setVisibility(View.VISIBLE);
-            } else if (ongoingOrders.getMaintenanceFlag() == StaticExplain.NO_MAINTENANCE.getCode()) {
-                //没有维保
-                tvMaintenance.setVisibility(View.GONE);
-            }
-            // slottingStartLength 开槽  slottingEndLength
-            if (DensityUtils.stringTypeInteger(ongoingOrders.getSlottingEndLength()) > 0) {
-                tvSlotting.setVisibility(View.VISIBLE);
-                tvSlotting.setText(mContext.getString(R.string.slotting_start_end_length,
-                        ongoingOrders.getSlottingStartLength(), ongoingOrders.getSlottingEndLength()));
-            } else {
-                tvSlotting.setVisibility(View.GONE);
-            }
-            //debugging 调试
-            String debugging = ongoingOrders.getDebugging();
-            if (debugging.equals(String.valueOf(StaticExplain.DEBUGGING.getCode()))) {
-                tvDebugging.setText(mContext.getString(R.string.debugging));
-                tvDebugging.setVisibility(View.VISIBLE);
-            } else {
-                tvDebugging.setVisibility(View.GONE);
-            }
-            String materialsEndLength = ongoingOrders.getMaterialsEndLength();
-            if (DensityUtils.stringTypeInteger(materialsEndLength) > 0) {
-                tvAuxiliaryMaterials.setVisibility(View.VISIBLE);
-                tvSlotting.setText(mContext.getString(R.string.slotting_start_end_length,
-                        ongoingOrders.getMaterialsStartLength(), ongoingOrders.getMaterialsEndLength()));
-            } else {
-                tvAuxiliaryMaterials.setVisibility(View.GONE);
-            }
-            //广告单
-        } else if (orderType.equals(String.valueOf(StaticExplain.ADVERTISING_BILLS.getCode()))) {
+        tvItemOrdersTime.setText(mContext.getString(R.string.time, ongoingOrders.getAppointmentTime()));
+        if (ongoingOrders.getMaintenanceFlag() == StaticExplain.YES_MAINTENANCE.getCode()) {
+            //有维保
+            tvMaintenance.setText(mContext.getString(R.string.maintenance));
+            tvMaintenance.setBackgroundResource(R.drawable.green_radius_bg);
+            tvMaintenance.setTextColor(mContext.getResources().getColor(R.color.tool_lib_color_199898));
+            tvMaintenance.setVisibility(View.VISIBLE);
+        } else if (ongoingOrders.getMaintenanceFlag() == StaticExplain.NO_MAINTENANCE.getCode()) {
+            //没有维保
+            tvMaintenance.setVisibility(View.GONE);
+        }
+        // slottingStartLength 开槽  slottingEndLength
+        if (DensityUtils.stringTypeInteger(ongoingOrders.getSlottingEndLength()) > 0) {
+            tvSlotting.setVisibility(View.VISIBLE);
+            tvSlotting.setText(mContext.getString(R.string.slotting_start_end_length,
+                    ongoingOrders.getSlottingStartLength(), ongoingOrders.getSlottingEndLength()));
+        } else {
+            tvSlotting.setVisibility(View.GONE);
+        }
+        //debugging 调试
+        String debugging = ongoingOrders.getDebugging();
+        if (debugging.equals(String.valueOf(StaticExplain.DEBUGGING.getCode()))) {
+            tvDebugging.setText(mContext.getString(R.string.debugging));
+            tvDebugging.setVisibility(View.VISIBLE);
+        } else {
+            tvDebugging.setVisibility(View.GONE);
+        }
+        String materialsEndLength = ongoingOrders.getMaterialsEndLength();
+        if (DensityUtils.stringTypeInteger(materialsEndLength) > 0) {
+            tvAuxiliaryMaterials.setVisibility(View.VISIBLE);
+            tvSlotting.setText(mContext.getString(R.string.slotting_start_end_length,
+                    ongoingOrders.getMaterialsStartLength(), ongoingOrders.getMaterialsEndLength()));
+        } else {
+            tvAuxiliaryMaterials.setVisibility(View.GONE);
+        }
+        ///广告单
+         /*else if (orderType.equals(String.valueOf(StaticExplain.ADVERTISING_BILLS.getCode()))) {
             tvMaintenance.setVisibility(View.VISIBLE);
             tvItemOrdersTime.setText(mContext.getString(R.string.time, ongoingOrders.getSlottingStartLength()));
             //如果是广告单  maintenanceFlag  0 单次 1 持续
@@ -144,11 +143,7 @@ public class NeedDealWithAdapter extends BaseQuickAdapter<OngoingOrdersList, Bas
             tvSlotting.setVisibility(View.GONE);
             tvDebugging.setVisibility(View.GONE);
             tvAuxiliaryMaterials.setVisibility(View.GONE);
-        }
-        if (orderType.equals(String.valueOf(StaticExplain.INSTALLATION_LIST.getCode()))){
-            OrderStatusUtil.masterStatus(mContext, orderStatus, tvItemOrdersType);
-        }else if (orderType.equals(String.valueOf(StaticExplain.ADVERTISING_BILLS.getCode()))){
-            AdvertisingStatusUtil.masterStatus(mContext , orderStatus , tvItemOrdersType);
-        }
+        }*/
+        OrderStatusUtil.masterStatus(mContext, orderStatus, tvItemOrdersType);
     }
 }
