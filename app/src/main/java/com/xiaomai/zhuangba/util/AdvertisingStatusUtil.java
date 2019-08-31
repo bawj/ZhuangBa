@@ -12,6 +12,7 @@ import com.xiaomai.zhuangba.fragment.SelectServiceFragment;
 import com.xiaomai.zhuangba.fragment.advertisement.employer.EmployerAdvertisementAcceptanceFragment;
 import com.xiaomai.zhuangba.fragment.advertisement.employer.EmployerAdvertisementAcceptedOrdersFragment;
 import com.xiaomai.zhuangba.fragment.advertisement.employer.EmployerAdvertisementCancelledFragment;
+import com.xiaomai.zhuangba.fragment.advertisement.employer.EmployerAdvertisementCompleteFragment;
 import com.xiaomai.zhuangba.fragment.advertisement.employer.EmployerAdvertisementDistributionFragment;
 import com.xiaomai.zhuangba.fragment.advertisement.employer.EmployerAdvertisementHavingSetOutFragment;
 import com.xiaomai.zhuangba.fragment.advertisement.employer.EmployerAdvertisementNoPassageFragment;
@@ -160,6 +161,7 @@ public class AdvertisingStatusUtil {
             qmuiFragment.startFragment(EmployerAdvertisementCancelledFragment.newInstance(orderCode, orderType));
         } else if (orderStatus == AdvertisingEnum.EMPLOYER_CANCELLED.getCode()) {
             //已完成
+            qmuiFragment.startFragment(EmployerAdvertisementCompleteFragment.newInstance(orderCode , orderType));
         } else if (orderStatus == AdvertisingEnum.EMPLOYER_UNPAID.getCode()) {
             //未支付
         } else if (orderStatus == AdvertisingEnum.EMPLOYER_ACCEPTANCE.getCode()) {

@@ -72,12 +72,18 @@ public class PricingSheetFragment extends BaseFragment {
                                             int sWidth = BitmapFactory.decodeFile(resource.getAbsolutePath()).getWidth();
                                             int sHeight = BitmapFactory.decodeFile(resource.getAbsolutePath()).getHeight();
                                             WindowManager wm = (WindowManager) getActivity().getSystemService(Context.WINDOW_SERVICE);
-                                            int height = wm.getDefaultDisplay().getHeight();
-                                            if (sHeight >= height
-                                                    && sHeight / sWidth >= 3) {
-                                                subsamplingScaleImageView.setMinimumScaleType(SubsamplingScaleImageView.SCALE_TYPE_CENTER_CROP);
-                                                subsamplingScaleImageView.setImage(ImageSource.uri(Uri.fromFile(resource)), new ImageViewState(1.0F, new PointF(0, 0), 0));
-                                            } else {
+                                            if (wm != null) {
+                                                int height = wm.getDefaultDisplay().getHeight();
+                                                if (sHeight >= height
+                                                        && sHeight / sWidth >= 3) {
+                                                    subsamplingScaleImageView.setMinimumScaleType(SubsamplingScaleImageView.SCALE_TYPE_CENTER_CROP);
+                                                    subsamplingScaleImageView.setImage(ImageSource.uri(Uri.fromFile(resource)), new ImageViewState(1.0F, new PointF(0, 0), 0));
+                                                } else {
+                                                    subsamplingScaleImageView.setMinimumScaleType(SubsamplingScaleImageView.SCALE_TYPE_CUSTOM);
+                                                    subsamplingScaleImageView.setImage(ImageSource.uri(Uri.fromFile(resource)));
+                                                    subsamplingScaleImageView.setDoubleTapZoomStyle(ZOOM_FOCUS_CENTER_IMMEDIATE);
+                                                }
+                                            }else {
                                                 subsamplingScaleImageView.setMinimumScaleType(SubsamplingScaleImageView.SCALE_TYPE_CUSTOM);
                                                 subsamplingScaleImageView.setImage(ImageSource.uri(Uri.fromFile(resource)));
                                                 subsamplingScaleImageView.setDoubleTapZoomStyle(ZOOM_FOCUS_CENTER_IMMEDIATE);

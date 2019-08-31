@@ -13,6 +13,7 @@ import com.xiaomai.zhuangba.data.bean.OngoingOrdersList;
 import com.xiaomai.zhuangba.data.bean.UserInfo;
 import com.xiaomai.zhuangba.data.db.DBHelper;
 import com.xiaomai.zhuangba.enums.StaticExplain;
+import com.xiaomai.zhuangba.util.AdvertisingStatusUtil;
 import com.xiaomai.zhuangba.util.OrderStatusUtil;
 
 /**
@@ -49,24 +50,52 @@ public class HistoricalAdapter extends BaseQuickAdapter<OngoingOrdersList, BaseV
         tvItemHistoricalOrdersMoney.setTag(ordersList);
 
         TextView tvHistoricalMaintenance = helper.getView(R.id.tvHistoricalMaintenance);
-        if (ordersList.getMaintenanceFlag() == StaticExplain.YES_MAINTENANCE.getCode()){
-            //有维保
-            tvHistoricalMaintenance.setVisibility(View.VISIBLE);
-        }else if (ordersList.getMaintenanceFlag() == StaticExplain.NO_MAINTENANCE.getCode()){
-            //没有维保
-            tvHistoricalMaintenance.setVisibility(View.GONE);
-        }
+
         //order status
         int orderStatus = ordersList.getOrderStatus();
         UserInfo userInfo = DBHelper.getInstance().getUserInfoDao().queryBuilder().unique();
 
-        // TODO: 2019/8/28 0028 广告单判断 没有改
-        if (userInfo.getRole().equals(String.valueOf(StaticExplain.FU_FU_SHI.getCode()))) {
-            //师傅端
-            OrderStatusUtil.masterStatus(mContext, orderStatus, tvItemHistoricalOrdersType);
-        } else if (userInfo.getRole().equals(String.valueOf(StaticExplain.EMPLOYER.getCode()))) {
-            //雇主端
-            OrderStatusUtil.employerStatus(mContext, orderStatus, tvItemHistoricalOrdersType);
+        String orderType = ordersList.getOrderType();
+        //安装单
+        if (orderType.equals(String.valueOf(StaticExplain.INSTALLATION_LIST.getCode()))){
+            //师傅 安装单
+            if (userInfo.getRole().equals(String.valueOf(StaticExplain.FU_FU_SHI.getCode()))) {
+                OrderStatusUtil.masterStatus(mContext, orderStatus, tvItemHistoricalOrdersType);
+            } else if (userInfo.getRole().equals(String.valueOf(StaticExplain.EMPLOYER.getCode()))) {
+                //雇主 安装单
+                OrderStatusUtil.employerStatus(mContext, orderStatus, tvItemHistoricalOrdersType);
+            }
+            if (ordersList.getMaintenanceFlag() == StaticExplain.YES_MAINTENANCE.getCode()){
+                //有维保
+                tvHistoricalMaintenance.setText(mContext.getString(R.string.maintenance));
+                tvHistoricalMaintenance.setBackgroundResource(R.drawable.green_radius_bg);
+                tvHistoricalMaintenance.setTextColor(mContext.getResources().getColor(R.color.tool_lib_color_199898));
+                tvHistoricalMaintenance.setVisibility(View.VISIBLE);
+            }else if (ordersList.getMaintenanceFlag() == StaticExplain.NO_MAINTENANCE.getCode()){
+                //没有维保
+                tvHistoricalMaintenance.setVisibility(View.GONE);
+            }
+            //广告单
+        }else if (orderType.equals(String.valueOf(StaticExplain.ADVERTISING_BILLS.getCode()))){
+            //师傅
+            if (userInfo.getRole().equals(String.valueOf(StaticExplain.FU_FU_SHI.getCode()))) {
+                AdvertisingStatusUtil.masterStatus(mContext , orderStatus , tvItemHistoricalOrdersType);
+            }else if (userInfo.getRole().equals(String.valueOf(StaticExplain.EMPLOYER.getCode()))) {
+                //雇主
+                AdvertisingStatusUtil.employerStatus(mContext , orderStatus , tvItemHistoricalOrdersType);
+            }
+            tvHistoricalMaintenance.setVisibility(View.VISIBLE);
+            // maintenanceFlag  0 单次 1 持续
+            int maintenanceFlag = ordersList.getMaintenanceFlag();
+            if (maintenanceFlag == StaticExplain.SINGLE_SERVICE.getCode()) {
+                tvHistoricalMaintenance.setText(mContext.getString(R.string.single_service));
+                tvHistoricalMaintenance.setBackgroundResource(R.drawable.blue_radius_bg);
+                tvHistoricalMaintenance.setTextColor(mContext.getResources().getColor(R.color.tool_lib_color_287CDF));
+            } else {
+                tvHistoricalMaintenance.setText(mContext.getString(R.string.continuous_service));
+                tvHistoricalMaintenance.setBackgroundResource(R.drawable.violet_radius_bg);
+                tvHistoricalMaintenance.setTextColor(mContext.getResources().getColor(R.color.tool_lib_color_542BE9));
+            }
         }
     }
 }

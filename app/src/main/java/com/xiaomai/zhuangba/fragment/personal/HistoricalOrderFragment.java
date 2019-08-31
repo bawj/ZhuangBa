@@ -61,7 +61,7 @@ public class HistoricalOrderFragment extends BaseListFragment<IBaseModule, Histo
                 view.findViewById(R.id.tvItemHistoricalOrdersMoney).getTag();
         UserInfo unique = DBHelper.getInstance().getUserInfoDao().queryBuilder().unique();
         String orderType = ongoingOrdersList.getOrderType();
-        if (unique.getRole().equals(String.valueOf(StaticExplain.FU_FU_SHI.getCode()))) {
+        if (unique.getRole().equals(String.valueOf(StaticExplain.EMPLOYER.getCode()))) {
             // 安装单
             if (ongoingOrdersList.getOrderType().equals(String.valueOf(StaticExplain.INSTALLATION_LIST.getCode()))) {
                 OrderStatusUtil.startEmployerOrderDetail(getBaseFragmentActivity(), ongoingOrdersList.getOrderCode()
@@ -72,7 +72,7 @@ public class HistoricalOrderFragment extends BaseListFragment<IBaseModule, Histo
                         ,ongoingOrdersList.getOrderType(), ongoingOrdersList.getOrderStatus());
             }
             //师傅端
-        } else if (unique.getRole().equals(String.valueOf(StaticExplain.EMPLOYER.getCode()))) {
+        } else if (unique.getRole().equals(String.valueOf(StaticExplain.FU_FU_SHI.getCode()))) {
             // 安装单
             if (orderType.equals(String.valueOf(StaticExplain.INSTALLATION_LIST.getCode()))){
                 OrderStatusUtil.startMasterOrderDetail(getBaseFragmentActivity() , ongoingOrdersList.getOrderCode() , ongoingOrdersList.getOrderType(),

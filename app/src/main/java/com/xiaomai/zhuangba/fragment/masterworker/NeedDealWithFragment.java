@@ -6,17 +6,11 @@ import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.toollib.util.Log;
-import com.qmuiteam.qmui.arch.QMUIFragmentActivity;
 import com.xiaomai.zhuangba.R;
 import com.xiaomai.zhuangba.adapter.NeedDealWithAdapter;
-import com.xiaomai.zhuangba.adapter.OrderListAdapter;
 import com.xiaomai.zhuangba.data.bean.OngoingOrdersList;
-import com.xiaomai.zhuangba.enums.OrdersEnum;
-import com.xiaomai.zhuangba.enums.StaticExplain;
 import com.xiaomai.zhuangba.enums.StringTypeExplain;
 import com.xiaomai.zhuangba.fragment.base.BaseMasterEmployerContentFragment;
-import com.xiaomai.zhuangba.fragment.orderdetail.ProcessedDetailFragment;
-import com.xiaomai.zhuangba.util.AdvertisingStatusUtil;
 import com.xiaomai.zhuangba.util.OrderStatusUtil;
 
 import java.util.List;
@@ -67,14 +61,8 @@ public class NeedDealWithFragment extends BaseMasterEmployerContentFragment {
     @Override
     public void onMItemClick(View view, int position) {
         OngoingOrdersList ongoingOrdersList = (OngoingOrdersList) view.findViewById(R.id.tvItemOrdersTitle).getTag();
-        String orderType = ongoingOrdersList.getOrderType();
-        if (orderType.equals(String.valueOf(StaticExplain.INSTALLATION_LIST.getCode()))){
-            OrderStatusUtil.startMasterOrderDetail(getBaseFragmentActivity() , ongoingOrdersList.getOrderCode() , ongoingOrdersList.getOrderType(),
-                    ongoingOrdersList.getOrderStatus() , ongoingOrdersList.getExpireTime());
-        }else if (orderType.equals(String.valueOf(StaticExplain.ADVERTISING_BILLS.getCode()))){
-            AdvertisingStatusUtil.startMasterOrderDetail(getBaseFragmentActivity() ,ongoingOrdersList.getOrderCode() , ongoingOrdersList.getOrderType(),
-                    ongoingOrdersList.getOrderStatus() );
-        }
+        OrderStatusUtil.startMasterOrderDetail(getBaseFragmentActivity() , ongoingOrdersList.getOrderCode() , ongoingOrdersList.getOrderType(),
+                ongoingOrdersList.getOrderStatus() , ongoingOrdersList.getExpireTime());
     }
 
     @Override

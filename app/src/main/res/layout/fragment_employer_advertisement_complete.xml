@@ -22,9 +22,9 @@
 
         <RelativeLayout
             android:id="@+id/layBaseOrderDetail"
-            android:visibility="gone"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:visibility="gone">
 
             <ScrollView
                 android:layout_width="match_parent"
@@ -252,27 +252,51 @@
                     </LinearLayout>
 
                     <RelativeLayout
+                        android:id="@+id/relEmployerDeliveryContent"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/tool_lib_8dp"
+                        android:background="@android:color/white">
+
+                        <TextView
+                            android:id="@+id/tvEmployerDeliveryContent_"
+                            style="@style/item_text_title"
+                            android:text="@string/post_construction_photos" />
+
+                        <android.support.v7.widget.RecyclerView
+                            android:id="@+id/recyclerEmployerPostConstruction"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/tvEmployerDeliveryContent_"
+                            android:layout_marginLeft="@dimen/tool_lib_12dp"
+                            android:layout_marginTop="@dimen/tool_lib_8dp"
+                            android:layout_marginRight="@dimen/tool_lib_12dp"
+                            android:layout_marginBottom="@dimen/tool_lib_8dp"
+                            android:descendantFocusability="blocksDescendants" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
                         android:id="@+id/relEmployerScenePhoto"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/tool_lib_8dp"
                         android:background="@android:color/white">
 
-                    <TextView
-                        android:id="@+id/tvMasterWorkerScenePhoto"
-                        style="@style/item_text_title"
-                        android:text="@string/pre_construction_photos" />
+                        <TextView
+                            android:id="@+id/tvMasterWorkerScenePhoto"
+                            style="@style/item_text_title"
+                            android:text="@string/pre_construction_photos" />
 
-                    <android.support.v7.widget.RecyclerView
-                        android:id="@+id/recyclerEmployerScenePhoto"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/tvMasterWorkerScenePhoto"
-                        android:layout_marginLeft="@dimen/tool_lib_12dp"
-                        android:layout_marginTop="@dimen/tool_lib_8dp"
-                        android:layout_marginRight="@dimen/tool_lib_12dp"
-                        android:layout_marginBottom="@dimen/tool_lib_8dp"
-                        android:descendantFocusability="blocksDescendants" />
+                        <android.support.v7.widget.RecyclerView
+                            android:id="@+id/recyclerEmployerScenePhoto"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/tvMasterWorkerScenePhoto"
+                            android:layout_marginLeft="@dimen/tool_lib_12dp"
+                            android:layout_marginTop="@dimen/tool_lib_8dp"
+                            android:layout_marginRight="@dimen/tool_lib_12dp"
+                            android:layout_marginBottom="@dimen/tool_lib_8dp"
+                            android:descendantFocusability="blocksDescendants" />
                     </RelativeLayout>
 
                     <RelativeLayout

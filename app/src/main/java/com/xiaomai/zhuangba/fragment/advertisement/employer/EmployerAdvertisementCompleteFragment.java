@@ -28,11 +28,9 @@ import butterknife.BindView;
 
 /**
  * @author Administrator
- * @date 2019/8/27 0027
- *
- * 广告单施工中
+ * @date 2019/8/31 0031
  */
-public class EmployerAdvertisementUnderConstructionFragment extends BaseAdvertisementFragment {
+public class EmployerAdvertisementCompleteFragment extends BaseAdvertisementFragment {
 
     @BindView(R.id.ivEmployerDetailMasterHeader)
     ImageView ivEmployerDetailMasterHeader;
@@ -40,8 +38,18 @@ public class EmployerAdvertisementUnderConstructionFragment extends BaseAdvertis
     TextView tvEmployerDetailMasterName;
     @BindView(R.id.recyclerEmployerScenePhoto)
     RecyclerView recyclerEmployerScenePhoto;
+    @BindView(R.id.recyclerEmployerPostConstruction)
+    RecyclerView recyclerEmployerPostConstruction;
 
+    /**
+     * 任务提交前的照片
+     */
     private ImgExhibitionAdapter imgExhibitionAdapter;
+    /**
+     * 任务提交后的照片
+     */
+    private ImgExhibitionAdapter imgExhibitionAfterAdapter;
+
 
     public static EmployerAdvertisementUnderConstructionFragment newInstance(String orderCode, String orderType) {
         Bundle args = new Bundle();
@@ -59,6 +67,11 @@ public class EmployerAdvertisementUnderConstructionFragment extends BaseAdvertis
         recyclerEmployerScenePhoto.setLayoutManager(new GridLayoutManager(getActivity(), 4));
         recyclerEmployerScenePhoto.addItemDecoration(new GridSpacingItemDecoration(4, 32, false));
         recyclerEmployerScenePhoto.setAdapter(imgExhibitionAdapter);
+
+        imgExhibitionAfterAdapter = new ImgExhibitionAdapter();
+        recyclerEmployerPostConstruction.setLayoutManager(new GridLayoutManager(getActivity(), 4));
+        recyclerEmployerPostConstruction.addItemDecoration(new GridSpacingItemDecoration(4, 32, false));
+        recyclerEmployerPostConstruction.setAdapter(imgExhibitionAfterAdapter);
     }
 
     @Override
@@ -88,12 +101,30 @@ public class EmployerAdvertisementUnderConstructionFragment extends BaseAdvertis
                 });
             }
         }
+
+        if (!deliveryContents.isEmpty() && deliveryContents.size() > 1) {
+            DeliveryContent deliveryContent = deliveryContents.get(1);
+            //交付后的内容
+            String picturesUrl = deliveryContent.getPicturesUrl();
+            if (!TextUtils.isEmpty(picturesUrl)) {
+                final List<String> urlList = Util.getList(picturesUrl);
+                imgExhibitionAfterAdapter.setNewData(urlList);
+                imgExhibitionAfterAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                        ArrayList<String> url = (ArrayList<String>) urlList;
+                        if (url != null) {
+                            startFragment(ImgPreviewFragment.newInstance(position, url));
+                        }
+                    }
+                });
+            }
+        }
     }
 
     @Override
     public int getContentView() {
-        return R.layout.fragment_employer_advertisement_under_construction;
+        return R.layout.fragment_employer_advertisement_complete;
     }
-
 
 }
