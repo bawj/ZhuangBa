@@ -148,6 +148,7 @@ public class BaseMasterEmployerContentFragment extends BaseFragment<IMasterEmplo
             //加载失败 page -1
             page--;
         }
+        loadMoreComplete();
     }
 
     public void onMItemClick(View view, int position) {

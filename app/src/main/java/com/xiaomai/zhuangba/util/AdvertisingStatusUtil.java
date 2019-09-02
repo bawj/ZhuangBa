@@ -50,7 +50,7 @@ public class AdvertisingStatusUtil {
             //已出发
             tvItemOrdersType.setText(mContext.getString(R.string.having_set_out));
             tvItemOrdersType.setBackgroundResource(R.drawable.having_set_out_bg);
-        } else if (orderStatus == AdvertisingEnum.MASTER_ACCEPTANCE.getCode()) {
+        } else if (orderStatus == AdvertisingEnum.MASTER_BE_UNDER_CONSTRUCTION.getCode()) {
             //施工中
             tvItemOrdersType.setText(mContext.getString(R.string.be_under_construction));
             tvItemOrdersType.setBackgroundResource(R.drawable.distribution_half_fillet_bg);
@@ -70,7 +70,7 @@ public class AdvertisingStatusUtil {
             //师傅取消
             tvItemOrdersType.setText(mContext.getString(R.string.cancelled));
             tvItemOrdersType.setBackgroundResource(R.drawable.expired_half_fillet_bg);
-        } else if (orderStatus == AdvertisingEnum.EMPLOYER_ACCEPTANCE.getCode()) {
+        } else if (orderStatus == AdvertisingEnum.MASTER_ACCEPTANCE.getCode()) {
             //验收中
             tvItemOrdersType.setText(mContext.getString(R.string.acceptance));
             tvItemOrdersType.setBackgroundResource(R.drawable.distribution_half_fillet_bg);

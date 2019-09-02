@@ -15,6 +15,7 @@ import com.example.toollib.util.ToastUtil;
 import com.google.gson.Gson;
 import com.xiaomai.zhuangba.R;
 import com.xiaomai.zhuangba.data.bean.StartConstructionBean;
+import com.xiaomai.zhuangba.enums.OrdersEnum;
 import com.xiaomai.zhuangba.fragment.orderdetail.master.base.BaseAutographFragment;
 import com.xiaomai.zhuangba.http.ServiceUrl;
 import com.xiaomai.zhuangba.util.ConstantUtil;
@@ -41,9 +42,10 @@ import okhttp3.RequestBody;
  */
 public class NewSubmitAcceptanceFragment extends BaseAutographFragment {
 
-    public static NewSubmitAcceptanceFragment newInstance(String orderCode) {
+    public static NewSubmitAcceptanceFragment newInstance(String orderCode, String orderType) {
         Bundle args = new Bundle();
         args.putString(ConstantUtil.ORDER_CODE, orderCode);
+        args.putString(ConstantUtil.ORDER_TYPE, orderType);
         NewSubmitAcceptanceFragment fragment = new NewSubmitAcceptanceFragment();
         fragment.setArguments(args);
         return fragment;
@@ -126,7 +128,7 @@ public class NewSubmitAcceptanceFragment extends BaseAutographFragment {
                     @Override
                     protected void onSuccess(Object response) {
                         DialogUtil.tipLoadingDismiss();
-                        startFragment(NewSubmitCompleteFragment.newInstance(getOrderCode()));
+                        startFragment(NewSubmitCompleteFragment.newInstance(getOrderCode(), getOrderType(), String.valueOf(OrdersEnum.MASTER_ACCEPTANCE.getCode())));
                     }
 
                     @Override
@@ -140,6 +142,13 @@ public class NewSubmitAcceptanceFragment extends BaseAutographFragment {
     private String getOrderCode() {
         if (getArguments() != null) {
             return getArguments().getString(ConstantUtil.ORDER_CODE);
+        }
+        return "";
+    }
+
+    private String getOrderType() {
+        if (getArguments() != null) {
+            return getArguments().getString(ConstantUtil.ORDER_TYPE);
         }
         return "";
     }

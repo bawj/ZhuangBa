@@ -15,6 +15,11 @@ public class ConstantUtil {
     public static final String ORDER_TYPE = "order_type";
 
     /**
+     * 订单状态
+     */
+    public static final String ORDER_STATUS = "ORDER_STATUS";
+
+    /**
      * 广告单
      */
     public static final String ADVERTISING_BILLS = "advertising_bills";

@@ -1,6 +1,5 @@
 package com.xiaomai.zhuangba.fragment.employer;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -9,7 +8,6 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.xiaomai.zhuangba.R;
 import com.xiaomai.zhuangba.adapter.OngoingOrdersAdapter;
 import com.xiaomai.zhuangba.data.bean.OngoingOrdersList;
-import com.xiaomai.zhuangba.enums.ForResultCode;
 import com.xiaomai.zhuangba.enums.StaticExplain;
 import com.xiaomai.zhuangba.enums.StringTypeExplain;
 import com.xiaomai.zhuangba.fragment.base.BaseMasterEmployerContentFragment;
@@ -44,6 +42,11 @@ public class OngoingOrdersFragment extends BaseMasterEmployerContentFragment {
         if (code.equals(StringTypeExplain.REFRESH_NEW_TASK_FRAGMENT.getCode())) {
             iModule.employerOrderList();
         }
+    }
+
+    @Override
+    public void onBaseLoadMoreRequested() {
+        iModule.employerOrderList();
     }
 
     @Override

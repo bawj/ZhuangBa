@@ -18,6 +18,7 @@ public enum OrdersEnum {
     EMPLOYER_CANCELLED(5, "已完成"),
     EMPLOYER_UNPAID(6, "雇主端 未支付"),
     EMPLOYER_COMPLETED_CANCEL(10, "师傅取消订单"),
+    EMPLOYER_CANCELLATION_UNDER_WAY(11, "正在取消"),
 
     /**
      * 师傅
@@ -25,11 +26,13 @@ public enum OrdersEnum {
     MASTER_NEW_TASK(0, "师傅端 新任务"),
     MASTER_PENDING_DISPOSAL(1, "已接单"),
     MASTER_IN_PROCESSING(2, "已出发"),
-    MASTER_ACCEPTANCE(3, "施工中"),
+    MASTER_CHECK_AND_ACCEPT(3, "施工中"),
     MASTER_COMPLETED(4, "雇主取消"),
     MASTER_CANCELLED(5, "已完成"),
     MASTER_EXPIRED(7, "已过期"),
     MASTER_ACCEPTANCE_IS_NOT_ACCEPTABLE(8, "师傅取消"),
+    MASTER_ACCEPTANCE(9, "验收中"),
+    MASTER_CANCELLATION_UNDER_WAY(11, "正在取消"),
 
     MASTER_REST(2 , "休息中"),
     MASTER_WORK(1 , "工作中"),

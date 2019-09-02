@@ -110,25 +110,21 @@ public class EmployerUnderConstructionFragment extends BaseEmployerDetailFragmen
     }
 
     @Override
-    public void orderDateListsDeliveryContent(List<DeliveryContent> deliveryContentList) {
-        super.orderDateListsDeliveryContent(deliveryContentList);
-        if (!deliveryContentList.isEmpty()) {
-            DeliveryContent deliveryContent = deliveryContentList.get(0);
-            GlideManager.loadImage(getActivity(), deliveryContent.getElectronicSignature(), ivEmployerStartConfirmation);
-            String picturesUrl = deliveryContent.getPicturesUrl();
-            if (!TextUtils.isEmpty(picturesUrl)) {
-                final List<String> urlList = Util.getList(picturesUrl);
-                imgExhibitionAdapter.setNewData(urlList);
-                imgExhibitionAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                        ArrayList<String> url = (ArrayList<String>) urlList;
-                        if (url != null) {
-                            startFragment(ImgPreviewFragment.newInstance(position, url));
-                        }
+    public void masterScenePhoto(DeliveryContent deliveryContent) {
+        GlideManager.loadImage(getActivity(), deliveryContent.getElectronicSignature(), ivEmployerStartConfirmation);
+        String picturesUrl = deliveryContent.getPicturesUrl();
+        if (!TextUtils.isEmpty(picturesUrl)) {
+            final List<String> urlList = Util.getList(picturesUrl);
+            imgExhibitionAdapter.setNewData(urlList);
+            imgExhibitionAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+                @Override
+                public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                    ArrayList<String> url = (ArrayList<String>) urlList;
+                    if (url != null) {
+                        startFragment(ImgPreviewFragment.newInstance(position, url));
                     }
-                });
-            }
+                }
+            });
         }
     }
 

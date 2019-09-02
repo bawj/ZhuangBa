@@ -1,5 +1,7 @@
 package com.xiaomai.zhuangba.data.bean;
 
+import android.text.TextUtils;
+
 /**
  * @author Administrator
  * @date 2019/7/9 0009
@@ -21,7 +23,7 @@ public class DeliveryContent {
     private String opinionRating;
     /** 订单编号 */
     private String orderCode;
-    /** 图片类型:1:开始前的图片地址;2:完成后的图片地址; */
+    /** 图片类型:1:开始前的图片地址;2:完成后的图片地址;3:雇主提交的现场照片 */
     private String picturesType;
     /** 图片地址 */
     private String picturesUrl;
@@ -77,7 +79,7 @@ public class DeliveryContent {
     }
 
     public String getPicturesType() {
-        return picturesType;
+        return TextUtils.isEmpty(picturesType) ? "" : picturesType;
     }
 
     public void setPicturesType(String picturesType) {
@@ -92,12 +94,6 @@ public class DeliveryContent {
         this.picturesUrl = picturesUrl;
     }
 
-    public String getValidation() {
-        return validation;
-    }
 
-    public void setValidation(String validation) {
-        this.validation = validation;
-    }
 }
 

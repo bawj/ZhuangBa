@@ -47,6 +47,9 @@ public enum StaticExplain {
     NOT_DEBUGGING(1, "不需要调试"),
     SINGLE_SERVICE(0, "单次服务"),
     CONTINUOUS_SERVICE(1, "持续服务"),
+    BEFORE_THE_BEGINNING(1, "开始前的图片地址"),
+    UPON_COMPLETION(2, "完成后的图片地址"),
+    EMPLOYER_LIVE_PHOTOS(3, "雇主提交的现场照片"),
     ;
     /**
      * 状态

@@ -7,10 +7,12 @@ import android.widget.TextView;
 
 import com.example.toollib.base.BaseFragment;
 import com.example.toollib.data.IBaseModule;
+import com.example.toollib.util.DensityUtils;
 import com.xiaomai.zhuangba.R;
 import com.xiaomai.zhuangba.fragment.masterworker.MasterWorkerFragment;
 import com.xiaomai.zhuangba.fragment.orderdetail.master.StartTheMissionFragment;
 import com.xiaomai.zhuangba.util.ConstantUtil;
+import com.xiaomai.zhuangba.util.OrderStatusUtil;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -26,10 +28,11 @@ public class CompleteFragment extends BaseFragment {
     @BindView(R.id.tvCompleteTip)
     TextView tvCompleteTip;
 
-    public static CompleteFragment newInstance(String orderCode , String orderType) {
+    public static CompleteFragment newInstance(String orderCode , String orderType , String orderStatus) {
         Bundle args = new Bundle();
         args.putString(ConstantUtil.ORDER_CODE , orderCode);
         args.putString(ConstantUtil.ORDER_TYPE , orderType);
+        args.putString(ConstantUtil.ORDER_STATUS , orderStatus);
         CompleteFragment fragment = new CompleteFragment();
         fragment.setArguments(args);
         return fragment;
@@ -62,6 +65,7 @@ public class CompleteFragment extends BaseFragment {
     }
 
     public void startOrderDetail() {
+        OrderStatusUtil.startMasterOrderDetail(getBaseFragmentActivity() ,getOrderCode() , getOrderType() , DensityUtils.stringTypeInteger(getOrderStatus()));
         startFragment(StartTheMissionFragment.newInstance(getOrderCode() , getOrderType()));
     }
 
@@ -94,6 +98,13 @@ public class CompleteFragment extends BaseFragment {
     public String getOrderType(){
         if (getArguments() != null){
             return getArguments().getString(ConstantUtil.ORDER_TYPE);
+        }
+        return "";
+    }
+
+    public String getOrderStatus(){
+        if (getArguments() != null){
+            return getArguments().getString(ConstantUtil.ORDER_STATUS);
         }
         return "";
     }

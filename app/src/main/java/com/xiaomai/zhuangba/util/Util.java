@@ -20,6 +20,9 @@ import android.widget.TextView;
 import com.example.toollib.util.spf.SPUtils;
 import com.example.toollib.util.spf.SpfConst;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
 import com.xiaomai.zhuangba.R;
 import com.xiaomai.zhuangba.data.bean.ProvinceBean;
@@ -240,7 +243,10 @@ public class Util {
     public static List<String> getList(String s) {
         List<String> urlList;
         try {
-            urlList = new Gson().fromJson(s, new TypeToken<List<String>>() {
+            Gson gson = new GsonBuilder().setPrettyPrinting().create();
+            JsonParser parser = new JsonParser();
+            JsonElement je = parser.parse(s);
+            urlList = gson.fromJson(je, new TypeToken<List<String>>() {
             }.getType());
         } catch (Exception e) {
             urlList = new ArrayList<>();

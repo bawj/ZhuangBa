@@ -14,6 +14,7 @@ import com.example.toollib.http.util.RxUtils;
 import com.example.toollib.util.ToastUtil;
 import com.xiaomai.zhuangba.R;
 import com.xiaomai.zhuangba.data.bean.StartConstructionBean;
+import com.xiaomai.zhuangba.enums.OrdersEnum;
 import com.xiaomai.zhuangba.fragment.orderdetail.master.base.BaseAutographFragment;
 import com.xiaomai.zhuangba.http.ServiceUrl;
 import com.xiaomai.zhuangba.util.ConstantUtil;
@@ -118,7 +119,8 @@ public class StartConstructionFragment extends BaseAutographFragment {
                     @Override
                     protected void onSuccess(Object response) {
                         DialogUtil.tipLoadingDismiss();
-                        startFragment(ConstructionCompleteFragment.newInstance(getOrderCode() , getOrderType()));
+                        startFragment(ConstructionCompleteFragment.newInstance(getOrderCode()
+                                , getOrderType() , String.valueOf(OrdersEnum.MASTER_CHECK_AND_ACCEPT.getCode())));
                     }
                     @Override
                     public void onError(ApiException e) {

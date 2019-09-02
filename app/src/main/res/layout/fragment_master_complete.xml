@@ -224,6 +224,7 @@
                         android:id="@+id/relLivePhotos"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:visibility="gone"
                         android:layout_marginTop="@dimen/tool_lib_8dp"
                         android:background="@android:color/white">
 
@@ -248,6 +249,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/tool_lib_8dp"
+                        android:visibility="gone"
                         android:background="@android:color/white">
 
                         <TextView

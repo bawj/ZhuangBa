@@ -480,6 +480,7 @@
     <string name="no_passage">不通过</string>
     <string name="acceptance_is_not">验收不通过</string>
     <string name="cancellation_under_way">正在取消</string>
+    <string name="order_cancellation_under_way">该订单正在取消</string>
     <string name="input_reason">输入原因</string>
     <string name="please_input_content">请输入不通过原因</string>
     <string name="task_Acceptance">接任务</string>

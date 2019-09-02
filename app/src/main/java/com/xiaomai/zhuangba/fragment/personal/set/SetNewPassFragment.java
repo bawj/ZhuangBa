@@ -59,7 +59,7 @@ public class SetNewPassFragment extends BaseFragment {
             ToastUtil.showShort(getString(R.string.please_input_pass));
         } else if (!passwordOne.equals(passwordTwo)) {
             ToastUtil.showShort(getString(R.string.password_mismatch_entered_twice));
-        } else if (passwordOne.length() < 7) {
+        } else if (passwordOne.length() < 6) {
             ToastUtil.showShort(getString(R.string.min_pass_length));
         } else if (passwordOne.length() > 20) {
             ToastUtil.showShort(getString(R.string.max_pass_length));

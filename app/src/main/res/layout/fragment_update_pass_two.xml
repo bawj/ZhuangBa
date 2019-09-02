@@ -34,6 +34,7 @@
         app:backColor="@android:color/white"
         app:checkedColor="@color/tool_lib_gray_E8E8E8"
         app:circle="@dimen/tool_lib_6dp"
+        app:isPwd="false"
         app:defaultColor="@color/tool_lib_gray_E8E8E8"
         app:round="0dp"
         app:space="0dp"

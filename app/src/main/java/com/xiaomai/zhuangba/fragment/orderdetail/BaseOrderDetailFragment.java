@@ -211,26 +211,27 @@ public class BaseOrderDetailFragment<T extends IOrderDetailModule> extends BaseF
             orderDateListsSuccess(orderDateLists);
         }
         List<DeliveryContent> deliveryContents = orderServiceDate.getDeliveryContents();
-        if (deliveryContents != null && !deliveryContents.isEmpty()) {
-            orderDateListsDeliveryContent(deliveryContents);
-        }
-        ///现场照片 和 描述
-        if (deliveryContents != null && deliveryContents.size() >= 3) {
-            setFieldDescription(deliveryContents);
-        } else {
-            relLivePhotos.setVisibility(View.GONE);
-            relFieldDescription.setVisibility(View.GONE);
+        for (DeliveryContent deliveryContent : deliveryContents) {
+            //雇主提交的现场照片
+            if (deliveryContent.getPicturesType().equals(String.valueOf(StaticExplain.EMPLOYER_LIVE_PHOTOS.getCode()))){
+                livePhotos(deliveryContent);
+            }
+            //施工前照片
+            if (deliveryContent.getPicturesType().equals(String.valueOf(StaticExplain.BEFORE_THE_BEGINNING.getCode()))){
+                masterScenePhoto(deliveryContent);
+            }
+            //施工后照片
+            if (deliveryContent.getPicturesType().equals(String.valueOf(StaticExplain.UPON_COMPLETION.getCode()))){
+                masterDeliveryContent(deliveryContent);
+            }
         }
     }
 
-
     /**
      * 现场照片 和 描述
-     *
-     * @param deliveryContents list
+     * @param deliveryContent list
      */
-    private void setFieldDescription(List<DeliveryContent> deliveryContents) {
-        DeliveryContent deliveryContent = deliveryContents.get(2);
+    public void livePhotos(DeliveryContent deliveryContent) {
         String picturesUrl = deliveryContent.getPicturesUrl();
         if (!TextUtils.isEmpty(picturesUrl)) {
             final List<String> urlList = Util.getList(picturesUrl);
@@ -244,16 +245,19 @@ public class BaseOrderDetailFragment<T extends IOrderDetailModule> extends BaseF
                     }
                 }
             });
+            relLivePhotos.setVisibility(View.VISIBLE);
         } else {
             relLivePhotos.setVisibility(View.GONE);
         }
         String electronicSignature = deliveryContent.getElectronicSignature();
         if (!TextUtils.isEmpty(electronicSignature)) {
+            relFieldDescription.setVisibility(View.VISIBLE);
             tvFiledDescription.setText(electronicSignature);
         } else {
             relFieldDescription.setVisibility(View.GONE);
         }
     }
+
 
     public void orderDateListsSuccess(List<OrderDateList> orderDateLists) {
         //订单时间信息
@@ -274,8 +278,10 @@ public class BaseOrderDetailFragment<T extends IOrderDetailModule> extends BaseF
                 orderServiceItem.getServiceStandard(), orderServiceItem.getVideo() , orderServiceItem.getIconUrl()));
     }
 
-    public void orderDateListsDeliveryContent(List<DeliveryContent> deliveryContents) {
-        //师傅提交的信息
+    public void masterDeliveryContent(DeliveryContent deliveryContent) {
+    }
+
+    public void masterScenePhoto(DeliveryContent deliveryContent) {
     }
 
     public void ongoingOrdersListSuccess(OngoingOrdersList ongoingOrdersList) {

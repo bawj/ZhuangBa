@@ -47,22 +47,22 @@
                             android:layout_marginStart="@dimen/tool_lib_46dp"
                             android:layout_marginLeft="@dimen/tool_lib_46dp"
                             android:layout_marginTop="@dimen/tool_lib_64dp"
-                            android:visibility="gone"
                             android:text="@string/waiting_for_orders"
                             android:textColor="@android:color/white"
-                            android:textSize="@dimen/tool_lib_18sp" />
+                            android:textSize="@dimen/tool_lib_18sp"
+                            android:visibility="gone" />
 
                         <TextView
                             android:id="@+id/tvConfirmationOfOrder"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:visibility="gone"
                             android:layout_below="@+id/tvConfirmationOfOrderStatus"
                             android:layout_marginStart="@dimen/tool_lib_46dp"
                             android:layout_marginLeft="@dimen/tool_lib_46dp"
                             android:layout_marginTop="@dimen/tool_lib_8dp"
                             android:textColor="@android:color/white"
                             android:textSize="@dimen/tool_lib_12sp"
+                            android:visibility="gone"
                             tools:text="请在13:50前确认订单" />
 
                         <ImageView
@@ -252,7 +252,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/tool_lib_8dp"
-                        android:background="@android:color/white">
+                        android:background="@android:color/white"
+                        android:visibility="gone">
 
                         <TextView
                             android:id="@+id/tvLivePhotos"
@@ -275,7 +276,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/tool_lib_8dp"
-                        android:background="@android:color/white">
+                        android:background="@android:color/white"
+                        android:visibility="gone">
 
                         <TextView
                             android:id="@+id/tvFiledDescription_"

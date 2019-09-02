@@ -1,5 +1,6 @@
 package com.xiaomai.zhuangba.data.bean;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -37,7 +38,7 @@ public class OrderServiceDate {
     }
 
     public List<DeliveryContent> getDeliveryContents() {
-        return deliveryContents;
+        return deliveryContents == null ? new ArrayList<DeliveryContent>() : deliveryContents;
     }
 
     public void setDeliveryContents(List<DeliveryContent> deliveryContents) {

@@ -61,31 +61,26 @@ public class BeUnderConstructionFragment extends BaseMasterOrderDetailFragment {
     }
 
     @Override
-    public void orderDateListsDeliveryContent(List<DeliveryContent> deliveryContents) {
-        for (int i = 0; i < deliveryContents.size(); i++) {
-            if (i == 0) {
-                DeliveryContent deliveryContent = deliveryContents.get(0);
-                String picturesUrl = deliveryContent.getPicturesUrl();
-                final List<String> urlList = Util.getList(picturesUrl);
-                imgExhibitionAdapter.setNewData(urlList);
-                imgExhibitionAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                        ArrayList<String> url = (ArrayList<String>) urlList;
-                        if (url != null) {
-                            startFragment(ImgPreviewFragment.newInstance(position, url));
-                        }
-                    }
-                });
-                GlideManager.loadImage(getActivity(), deliveryContent.getElectronicSignature(), ivMasterConfirmation);
+    public void masterScenePhoto(DeliveryContent deliveryContent) {
+        String picturesUrl = deliveryContent.getPicturesUrl();
+        final List<String> urlList = Util.getList(picturesUrl);
+        imgExhibitionAdapter.setNewData(urlList);
+        imgExhibitionAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                ArrayList<String> url = (ArrayList<String>) urlList;
+                if (url != null) {
+                    startFragment(ImgPreviewFragment.newInstance(position, url));
+                }
             }
-        }
+        });
+        GlideManager.loadImage(getActivity(), deliveryContent.getElectronicSignature(), ivMasterConfirmation);
     }
 
     @OnClick(R.id.btnSubmitForAcceptance)
     public void onViewBeUnderConstructionClicked() {
         //提交验收
-        startFragment(NewSubmitAcceptanceFragment.newInstance(getOrderCode()));
+        startFragment(NewSubmitAcceptanceFragment.newInstance(getOrderCode() , getOrderType()));
     }
 
     @Override

@@ -18,7 +18,6 @@ import com.xiaomai.zhuangba.util.Util;
 import com.xiaomai.zhuangba.weight.GridSpacingItemDecoration;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.BindView;
 
@@ -60,30 +59,25 @@ public class MasterCompleteFragment extends BeUnderConstructionFragment {
     }
 
     @Override
-    public void orderDateListsDeliveryContent(List<DeliveryContent> deliveryContents) {
-        super.orderDateListsDeliveryContent(deliveryContents);
-        if (deliveryContents.size() >= 2){
-            DeliveryContent deliveryContent = deliveryContents.get(1);
-
-            //交付后的内容
-            String picturesUrl = deliveryContent.getPicturesUrl();
-            if (!TextUtils.isEmpty(picturesUrl)) {
-                final ArrayList<String> urlList = (ArrayList<String>) Util.getList(picturesUrl);
-                imgExhibitionAfterAdapter.setNewData(urlList);
-                imgExhibitionAfterAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                        if (urlList != null) {
-                            startFragment(ImgPreviewFragment.newInstance(position, urlList));
-                        }
+    public void masterScenePhoto(DeliveryContent deliveryContent) {
+        //交付后的内容
+        String picturesUrl = deliveryContent.getPicturesUrl();
+        if (!TextUtils.isEmpty(picturesUrl)) {
+            final ArrayList<String> urlList = (ArrayList<String>) Util.getList(picturesUrl);
+            imgExhibitionAfterAdapter.setNewData(urlList);
+            imgExhibitionAfterAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+                @Override
+                public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                    if (urlList != null) {
+                        startFragment(ImgPreviewFragment.newInstance(position, urlList));
                     }
-                });
-            }
-            String electronicSignature = deliveryContent.getElectronicSignature();
-            if (!TextUtils.isEmpty(electronicSignature)) {
-                //负责人签名
-                GlideManager.loadImage(getActivity(), electronicSignature, ivMasterWorkerSignature);
-            }
+                }
+            });
+        }
+        String electronicSignature = deliveryContent.getElectronicSignature();
+        if (!TextUtils.isEmpty(electronicSignature)) {
+            //负责人签名
+            GlideManager.loadImage(getActivity(), electronicSignature, ivMasterWorkerSignature);
         }
     }
 

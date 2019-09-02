@@ -6,6 +6,7 @@ import com.example.toollib.util.AmountUtil;
 import com.example.toollib.util.DensityUtils;
 import com.xiaomai.zhuangba.R;
 import com.xiaomai.zhuangba.data.bean.OngoingOrdersList;
+import com.xiaomai.zhuangba.enums.OrdersEnum;
 import com.xiaomai.zhuangba.fragment.masterworker.MasterWorkerFragment;
 import com.xiaomai.zhuangba.fragment.orderdetail.BaseOrderDetailFragment;
 import com.xiaomai.zhuangba.fragment.orderdetail.CompleteFragment;
@@ -64,6 +65,6 @@ public class BaseMasterOrderDetailFragment extends BaseOrderDetailFragment<IMast
     @Override
     public void receiptOrderSuccess() {
         //接单成功
-        startFragment(CompleteFragment.newInstance(getOrderCode() , getOrderType()));
+        startFragment(CompleteFragment.newInstance(getOrderCode() , getOrderType() , String.valueOf(OrdersEnum.MASTER_PENDING_DISPOSAL.getCode())));
     }
 }

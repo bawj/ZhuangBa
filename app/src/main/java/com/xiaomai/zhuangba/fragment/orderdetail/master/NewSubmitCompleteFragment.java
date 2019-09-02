@@ -12,9 +12,11 @@ import com.xiaomai.zhuangba.util.ConstantUtil;
  */
 public class NewSubmitCompleteFragment extends CompleteFragment {
 
-    public static NewSubmitCompleteFragment newInstance(String orderCode) {
+    public static NewSubmitCompleteFragment  newInstance(String orderCode , String orderType , String orderStatus) {
         Bundle args = new Bundle();
         args.putString(ConstantUtil.ORDER_CODE , orderCode);
+        args.putString(ConstantUtil.ORDER_TYPE , orderType);
+        args.putString(ConstantUtil.ORDER_STATUS , orderStatus);
         NewSubmitCompleteFragment fragment = new NewSubmitCompleteFragment();
         fragment.setArguments(args);
         return fragment;

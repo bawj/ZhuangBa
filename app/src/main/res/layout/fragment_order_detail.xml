@@ -171,7 +171,8 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/relOrderInfo"
                     android:layout_marginTop="@dimen/tool_lib_8dp"
-                    android:background="@android:color/white">
+                    android:background="@android:color/white"
+                    android:visibility="gone">
 
                     <TextView
                         android:id="@+id/tvLivePhotos"
@@ -195,7 +196,8 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/relLivePhotos"
                     android:layout_marginTop="@dimen/tool_lib_8dp"
-                    android:background="@android:color/white">
+                    android:background="@android:color/white"
+                    android:visibility="gone">
 
                     <TextView
                         android:id="@+id/tvFiledDescription_"
