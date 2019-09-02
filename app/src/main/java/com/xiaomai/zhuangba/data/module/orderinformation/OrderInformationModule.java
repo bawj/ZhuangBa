@@ -4,7 +4,6 @@ import android.net.Uri;
 import android.text.TextUtils;
 
 import com.example.toollib.data.BaseModule;
-import com.example.toollib.data.base.BaseCallback;
 import com.example.toollib.http.HttpResult;
 import com.example.toollib.http.function.BaseHttpConsumer;
 import com.example.toollib.http.observer.BaseHttpRxObserver;
@@ -12,16 +11,13 @@ import com.example.toollib.http.util.RxUtils;
 import com.example.toollib.util.AmountUtil;
 import com.example.toollib.util.DensityUtils;
 import com.example.toollib.util.Log;
-import com.example.toollib.util.RegexUtils;
 import com.google.gson.Gson;
 import com.xiaomai.zhuangba.R;
 import com.xiaomai.zhuangba.ShopCarDataDao;
 import com.xiaomai.zhuangba.data.bean.OrderServicesBean;
-import com.xiaomai.zhuangba.data.bean.PayData;
 import com.xiaomai.zhuangba.data.bean.ShopCarData;
 import com.xiaomai.zhuangba.data.bean.db.ShopAuxiliaryMaterialsDB;
 import com.xiaomai.zhuangba.data.db.DBHelper;
-import com.xiaomai.zhuangba.enums.OrdersEnum;
 import com.xiaomai.zhuangba.enums.StaticExplain;
 import com.xiaomai.zhuangba.http.ServiceUrl;
 import com.xiaomai.zhuangba.util.ConstantUtil;
@@ -211,8 +207,6 @@ public class OrderInformationModule extends BaseModule<IOrderInformationView> im
         hashMap.put("serviceText", mViewRef.get().getLargeServiceText());
         //总数量
         hashMap.put("number", String.valueOf(number));
-        //总金额
-        hashMap.put("orderAmount", String.valueOf(orderAmount));
         //姓名
         String userText = mViewRef.get().getUserName();
         if (TextUtils.isEmpty(userText)) {
@@ -268,6 +262,12 @@ public class OrderInformationModule extends BaseModule<IOrderInformationView> im
         //雇主描述
         hashMap.put("employerDescribe", mViewRef.get().getEmployerDescribe());
         setAuxiliaryMaterials(hashMap);
+        //总金额
+        double slottingPrice = (double) hashMap.get("slottingPrice");
+        double debugPrice = (double) hashMap.get("debugPrice");
+        double materialsPrice = (double) hashMap.get("materialsPrice");
+        double money = slottingPrice + debugPrice + materialsPrice;
+        hashMap.put("orderAmount", String.valueOf(orderAmount  + money));
         return hashMap;
     }
 

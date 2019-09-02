@@ -139,6 +139,18 @@ public class ShopCarUtil {
             shopAuxiliaryMaterialsDBDao.update(unique);
         }
     }
+    public static SlottingListDB getSelectionSlotLength() {
+        ShopAuxiliaryMaterialsDBDao shopAuxiliaryMaterialsDBDao = DBHelper.getInstance().getShopAuxiliaryMaterialsDBDao();
+        ShopAuxiliaryMaterialsDB unique = shopAuxiliaryMaterialsDBDao.queryBuilder().unique();
+
+        SlottingListDB slottingListDB = new SlottingListDB();
+        slottingListDB.setId(unique.getSlottingId());
+        slottingListDB.setStartLength(unique.getSlottingStartLength());
+        slottingListDB.setEndLength(unique.getSlottingEndLength());
+        slottingListDB.setSlottingPrice(unique.getSlottingSlottingPrice());
+
+        return slottingListDB;
+    }
 
     /**
      * 修改是否需要调试
@@ -161,6 +173,14 @@ public class ShopCarUtil {
         }
     }
 
+    public static Debugging getSelectDebugging() {
+        ShopAuxiliaryMaterialsDBDao shopAuxiliaryMaterialsDBDao = DBHelper.getInstance().getShopAuxiliaryMaterialsDBDao();
+        ShopAuxiliaryMaterialsDB unique = shopAuxiliaryMaterialsDBDao.queryBuilder().unique();
+        Debugging debugging = new Debugging();
+        debugging.setId(unique.getDebuggingId());
+        debugging.setPrice(unique.getDebuggingPrice());
+        return debugging;
+    }
 
     /**
      * 修改选择的辅材
@@ -186,6 +206,18 @@ public class ShopCarUtil {
             unique.setMaterialsSlottingPrice(materialsListDB.getSlottingPrice());
             shopAuxiliaryMaterialsDBDao.update(unique);
         }
+    }
+
+    public static MaterialsListDB getAuxiliaryMaterials(){
+        ShopAuxiliaryMaterialsDBDao shopAuxiliaryMaterialsDBDao = DBHelper.getInstance().getShopAuxiliaryMaterialsDBDao();
+        ShopAuxiliaryMaterialsDB unique = shopAuxiliaryMaterialsDBDao.queryBuilder().unique();
+        MaterialsListDB materialsListDB = new MaterialsListDB();
+        materialsListDB.setId(unique.getMaterialsId());
+        materialsListDB.setSlottingId(unique.getMaterialsSlottingId());
+        materialsListDB.setStartLength(unique.getMaterialsStartLength());
+        materialsListDB.setEndLength(unique.getMaterialsEndLength());
+        materialsListDB.setSlottingPrice(unique.getMaterialsSlottingPrice());
+        return materialsListDB;
     }
 
     /**

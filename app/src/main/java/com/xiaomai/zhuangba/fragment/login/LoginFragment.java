@@ -89,13 +89,13 @@ public class LoginFragment extends BaseLoginRegisteredFragment{
     @Override
     public void startMasterWorker() {
         //师傅端
-        startFragmentAndDestroyCurrent(MasterWorkerFragment.newInstance());
+        startFragment(MasterWorkerFragment.newInstance());
     }
 
     @Override
     public void startEmployer() {
         //雇主端
-        startFragmentAndDestroyCurrent(EmployerFragment.newInstance());
+        startFragment(EmployerFragment.newInstance());
     }
 
     @Override

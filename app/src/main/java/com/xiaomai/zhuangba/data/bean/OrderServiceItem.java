@@ -37,6 +37,11 @@ public class OrderServiceItem{
     private String serviceStandard;
     private String video;
 
+    private String slottingStartLength;
+    private String slottingEndLength;
+    private String debugging;
+    private String materialsStartLength;
+    private String materialsEndLength;
     /**
      * 维保时间 单位（月）
      */
@@ -68,10 +73,11 @@ public class OrderServiceItem{
         maintenanceAmount = in.readDouble();
     }
 
-    @Generated(hash = 1388843075)
+    @Generated(hash = 412746038)
     public OrderServiceItem(Long id, String orderCode, int serviceId, String serviceText, int number,
             double amount, double price2, double price3, String iconUrl, String serviceStandard, String video,
-            int monthNumber, double maintenanceAmount, int maintenanceId) {
+            String slottingStartLength, String slottingEndLength, String debugging, String materialsStartLength,
+            String materialsEndLength, int monthNumber, double maintenanceAmount, int maintenanceId) {
         this.id = id;
         this.orderCode = orderCode;
         this.serviceId = serviceId;
@@ -83,6 +89,11 @@ public class OrderServiceItem{
         this.iconUrl = iconUrl;
         this.serviceStandard = serviceStandard;
         this.video = video;
+        this.slottingStartLength = slottingStartLength;
+        this.slottingEndLength = slottingEndLength;
+        this.debugging = debugging;
+        this.materialsStartLength = materialsStartLength;
+        this.materialsEndLength = materialsEndLength;
         this.monthNumber = monthNumber;
         this.maintenanceAmount = maintenanceAmount;
         this.maintenanceId = maintenanceId;
@@ -199,5 +210,45 @@ public class OrderServiceItem{
 
     public void setVideo(String video) {
         this.video = video;
+    }
+
+    public String getSlottingStartLength() {
+        return slottingStartLength == null ? "" : slottingStartLength;
+    }
+
+    public void setSlottingStartLength(String slottingStartLength) {
+        this.slottingStartLength = slottingStartLength;
+    }
+
+    public String getSlottingEndLength() {
+        return slottingEndLength == null ? "" : slottingEndLength;
+    }
+
+    public void setSlottingEndLength(String slottingEndLength) {
+        this.slottingEndLength = slottingEndLength;
+    }
+
+    public String getDebugging() {
+        return debugging == null ? "" : debugging;
+    }
+
+    public void setDebugging(String debugging) {
+        this.debugging = debugging;
+    }
+
+    public String getMaterialsStartLength() {
+        return materialsStartLength == null ? "" : materialsStartLength;
+    }
+
+    public void setMaterialsStartLength(String materialsStartLength) {
+        this.materialsStartLength = materialsStartLength;
+    }
+
+    public String getMaterialsEndLength() {
+        return materialsEndLength == null ? "" : materialsEndLength;
+    }
+
+    public void setMaterialsEndLength(String materialsEndLength) {
+        this.materialsEndLength = materialsEndLength;
     }
 }

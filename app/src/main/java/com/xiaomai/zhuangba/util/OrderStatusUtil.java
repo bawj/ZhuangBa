@@ -104,6 +104,10 @@ public class OrderStatusUtil {
             //已取消
             tvItemOrdersType.setText(mContext.getString(R.string.cancelled));
             tvItemOrdersType.setBackgroundResource(R.drawable.expired_half_fillet_bg);
+        } else if (orderStatus == OrdersEnum.EMPLOYER_ACCEPTANCE.getCode()){
+            //验收中
+            tvItemOrdersType.setText(mContext.getString(R.string.acceptance));
+            tvItemOrdersType.setBackgroundResource(R.drawable.distribution_half_fillet_bg);
         } else if (orderStatus == OrdersEnum.EMPLOYER_CANCELLED.getCode()) {
             //已完成
             tvItemOrdersType.setText(mContext.getString(R.string.completed));
@@ -188,6 +192,9 @@ public class OrderStatusUtil {
         } else if (orderStatus == OrdersEnum.EMPLOYER_CHECK_AND_ACCEPT.getCode()) {
             //施工中
             qmuiFragment.startFragment(EmployerUnderConstructionFragment.newInstance(orderCode, orderType));
+        }  else if (orderStatus == OrdersEnum.EMPLOYER_ACCEPTANCE.getCode()) {
+            //验收中
+            qmuiFragment.startFragment(EmployerCompleteFragment.newInstance(orderCode, orderType));
         } else if (orderStatus == OrdersEnum.EMPLOYER_COMPLETED.getCode()) {
             //已取消
             qmuiFragment.startFragment(EmployerCancelledFragment.newInstance(orderCode, orderType));

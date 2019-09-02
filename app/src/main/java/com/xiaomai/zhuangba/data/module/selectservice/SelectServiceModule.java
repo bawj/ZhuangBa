@@ -9,7 +9,6 @@ import com.xiaomai.zhuangba.data.bean.Maintenance;
 import com.xiaomai.zhuangba.data.bean.ServiceSubcategory;
 import com.xiaomai.zhuangba.data.bean.ServiceSubcategoryProject;
 import com.xiaomai.zhuangba.data.bean.Slotting;
-import com.xiaomai.zhuangba.data.db.DBHelper;
 import com.xiaomai.zhuangba.http.ServiceUrl;
 
 import java.util.List;
@@ -60,11 +59,6 @@ public class SelectServiceModule extends BaseModule<ISelectServiceView> implemen
                 .subscribe(new BaseHttpRxObserver<Slotting>(mContext.get()) {
                     @Override
                     protected void onSuccess(Slotting slotting) {
-                        DBHelper instance = DBHelper.getInstance();
-                        instance.getSlottingListDBDao().deleteAll();
-                        instance.getMaterialsListDBDao().deleteAll();
-                        instance.getSlottingListDBDao().insertInTx(slotting.getSlottingList());
-                        instance.getMaterialsListDBDao().insertInTx(slotting.getMaterialsList());
                         mViewRef.get().slottingAndDebugSuccess(slotting);
                     }
                 });

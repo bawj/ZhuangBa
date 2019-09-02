@@ -96,6 +96,10 @@ public class SlottingAndDebugDialog implements BaseQuickAdapter.OnItemClickListe
             slottingSlottingPrice = shopAuxiliaryMaterialsDB.getSlottingSlottingPrice();
             debuggingPrice = shopAuxiliaryMaterialsDB.getDebuggingPrice();
             materialsSlottingPrice = shopAuxiliaryMaterialsDB.getMaterialsSlottingPrice();
+
+            item = ShopCarUtil.getSelectionSlotLength();
+            debugging = ShopCarUtil.getSelectDebugging();
+            materialsListDB = ShopCarUtil.getAuxiliaryMaterials();
         }
 
         tvSlottingMoney = qmuiDialog.findViewById(R.id.tvSlottingMoney);
@@ -105,20 +109,18 @@ public class SlottingAndDebugDialog implements BaseQuickAdapter.OnItemClickListe
                 qmuiDialog.dismiss();
             }
         });
+
+
         qmuiDialog.findViewById(R.id.btnSlotting).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                qmuiDialog.dismiss();
-                if (item != null) {
+                if (item != null && debugging != null && materialsListDB != null) {
                     ShopCarUtil.updateSelectionSlotLength(item);
-                }
-                if (debugging != null) {
                     ShopCarUtil.updateSelectDebugging(debugging.getId(), debugging.getPrice());
-                }
-                if (materialsListDB != null) {
                     ShopCarUtil.updateAuxiliaryMaterials(materialsListDB);
+                    qmuiDialog.dismiss();
+                    baseCallback.ok();
                 }
-                baseCallback.ok();
             }
         });
         calculationPrice();

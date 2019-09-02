@@ -5,7 +5,7 @@ package com.xiaomai.zhuangba.data.bean;
  * @date 2019/7/11 0011
  */
 public class OrderServicesBean {
-    /** 项目金额 */
+    /** 项目金额 包含维保金额*/
     private double amount;
     /** 数量 */
     private int number;

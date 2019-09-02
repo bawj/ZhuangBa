@@ -10,7 +10,6 @@ import com.example.toollib.data.IBaseModule;
 import com.example.toollib.util.DensityUtils;
 import com.xiaomai.zhuangba.R;
 import com.xiaomai.zhuangba.fragment.masterworker.MasterWorkerFragment;
-import com.xiaomai.zhuangba.fragment.orderdetail.master.StartTheMissionFragment;
 import com.xiaomai.zhuangba.util.ConstantUtil;
 import com.xiaomai.zhuangba.util.OrderStatusUtil;
 
@@ -66,7 +65,6 @@ public class CompleteFragment extends BaseFragment {
 
     public void startOrderDetail() {
         OrderStatusUtil.startMasterOrderDetail(getBaseFragmentActivity() ,getOrderCode() , getOrderType() , DensityUtils.stringTypeInteger(getOrderStatus()));
-        startFragment(StartTheMissionFragment.newInstance(getOrderCode() , getOrderType()));
     }
 
     @Override

@@ -194,11 +194,13 @@ public class BaseOrderDetailFragment<T extends IOrderDetailModule> extends BaseF
         MapUtils.mapNavigation(getActivity(), latitude, longitude);
     }
 
+    private OngoingOrdersList ongoingOrdersList;
+
     @Override
     public void requestOrderDetailSuccess(Object object) {
         layBaseOrderDetail.setVisibility(View.VISIBLE);
         OrderServiceDate orderServiceDate = (OrderServiceDate) object;
-        OngoingOrdersList ongoingOrdersList = orderServiceDate.getOngoingOrdersList();
+        ongoingOrdersList = orderServiceDate.getOngoingOrdersList();
         if (ongoingOrdersList != null) {
             ongoingOrdersListSuccess(ongoingOrdersList);
         }
@@ -213,15 +215,15 @@ public class BaseOrderDetailFragment<T extends IOrderDetailModule> extends BaseF
         List<DeliveryContent> deliveryContents = orderServiceDate.getDeliveryContents();
         for (DeliveryContent deliveryContent : deliveryContents) {
             //雇主提交的现场照片
-            if (deliveryContent.getPicturesType().equals(String.valueOf(StaticExplain.EMPLOYER_LIVE_PHOTOS.getCode()))){
+            if (deliveryContent.getPicturesType().equals(String.valueOf(StaticExplain.EMPLOYER_LIVE_PHOTOS.getCode()))) {
                 livePhotos(deliveryContent);
             }
             //施工前照片
-            if (deliveryContent.getPicturesType().equals(String.valueOf(StaticExplain.BEFORE_THE_BEGINNING.getCode()))){
+            if (deliveryContent.getPicturesType().equals(String.valueOf(StaticExplain.BEFORE_THE_BEGINNING.getCode()))) {
                 masterScenePhoto(deliveryContent);
             }
             //施工后照片
-            if (deliveryContent.getPicturesType().equals(String.valueOf(StaticExplain.UPON_COMPLETION.getCode()))){
+            if (deliveryContent.getPicturesType().equals(String.valueOf(StaticExplain.UPON_COMPLETION.getCode()))) {
                 masterDeliveryContent(deliveryContent);
             }
         }
@@ -229,6 +231,7 @@ public class BaseOrderDetailFragment<T extends IOrderDetailModule> extends BaseF
 
     /**
      * 现场照片 和 描述
+     *
      * @param deliveryContent list
      */
     public void livePhotos(DeliveryContent deliveryContent) {
@@ -266,6 +269,15 @@ public class BaseOrderDetailFragment<T extends IOrderDetailModule> extends BaseF
     }
 
     public void orderServiceItemsSuccess(List<OrderServiceItem> orderServiceItems) {
+        if (ongoingOrdersList != null) {
+            for (OrderServiceItem orderServiceItem : orderServiceItems) {
+                orderServiceItem.setSlottingStartLength(ongoingOrdersList.getSlottingStartLength());
+                orderServiceItem.setSlottingEndLength(ongoingOrdersList.getSlottingEndLength());
+                orderServiceItem.setDebugging(ongoingOrdersList.getDebugging());
+                orderServiceItem.setMaterialsStartLength(ongoingOrdersList.getMaterialsStartLength());
+                orderServiceItem.setMaterialsEndLength(ongoingOrdersList.getMaterialsEndLength());
+            }
+        }
         //服务项目
         serviceItemsAdapter.setNewData(orderServiceItems);
     }
@@ -275,7 +287,7 @@ public class BaseOrderDetailFragment<T extends IOrderDetailModule> extends BaseF
         //服务项目 itemClick
         OrderServiceItem orderServiceItem = (OrderServiceItem) view.findViewById(R.id.tvItemServiceTotalMoney).getTag();
         startFragment(ServiceDetailFragment.newInstance(orderServiceItem.getServiceText(),
-                orderServiceItem.getServiceStandard(), orderServiceItem.getVideo() , orderServiceItem.getIconUrl()));
+                orderServiceItem.getServiceStandard(), orderServiceItem.getVideo(), orderServiceItem.getIconUrl()));
     }
 
     public void masterDeliveryContent(DeliveryContent deliveryContent) {

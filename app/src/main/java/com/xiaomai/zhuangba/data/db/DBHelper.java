@@ -2,12 +2,10 @@ package com.xiaomai.zhuangba.data.db;
 
 
 import com.xiaomai.zhuangba.DaoSession;
-import com.xiaomai.zhuangba.MaterialsListDBDao;
 import com.xiaomai.zhuangba.OrderServiceItemDao;
 import com.xiaomai.zhuangba.PushNotificationDBDao;
 import com.xiaomai.zhuangba.ShopAuxiliaryMaterialsDBDao;
 import com.xiaomai.zhuangba.ShopCarDataDao;
-import com.xiaomai.zhuangba.SlottingListDBDao;
 import com.xiaomai.zhuangba.UserInfoDao;
 
 /**
@@ -67,23 +65,6 @@ public class DBHelper {
     public OrderServiceItemDao getOrderServiceItemDao() {
         return daoSession.getOrderServiceItemDao();
     }
-
-    /**
-     * 开槽长度
-     * @return dao
-     */
-    public SlottingListDBDao getSlottingListDBDao(){
-        return daoSession.getSlottingListDBDao();
-    }
-
-    /**
-     * 辅材
-     * @return dao
-     */
-    public MaterialsListDBDao getMaterialsListDBDao(){
-        return daoSession.getMaterialsListDBDao();
-    }
-
 
     /**
      * 购物车 辅材 开槽 等必选项

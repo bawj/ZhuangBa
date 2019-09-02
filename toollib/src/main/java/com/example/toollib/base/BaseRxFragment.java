@@ -108,4 +108,8 @@ public abstract class BaseRxFragment extends QMUIFragment implements LifecyclePr
         super.onDetach();
     }
 
+    @Override
+    protected boolean canDragBack() {
+        return false;
+    }
 }

@@ -4,7 +4,7 @@ ext {
             compileSdkVersion: 28,
             buildToolsVersion: "28.0.3",
             applicationId    : "com.xiaomai.zhuangba",
-            minSdkVersion    : 16,
+            minSdkVersion    : 15,
             targetSdkVersion : 28,
             versionCode      : 12,
             versionName      : "1.4.0",

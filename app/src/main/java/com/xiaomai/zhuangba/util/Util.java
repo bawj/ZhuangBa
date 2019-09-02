@@ -240,6 +240,8 @@ public class Util {
             e.printStackTrace();
         }
     }
+
+
     public static List<String> getList(String s) {
         List<String> urlList;
         try {
@@ -253,6 +255,5 @@ public class Util {
         }
         return urlList;
     }
-
 
 }

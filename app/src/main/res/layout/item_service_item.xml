@@ -8,11 +8,12 @@
 
     <ImageView
         android:id="@+id/ivItemServiceLogo"
-        android:layout_width="@dimen/tool_lib_60dp"
-        android:layout_height="@dimen/tool_lib_60dp"
+        android:layout_width="@dimen/tool_lib_80dp"
+        android:layout_height="@dimen/tool_lib_80dp"
         tools:src="@drawable/bg_employer" />
 
     <RelativeLayout
+        android:id="@+id/relServiceItem"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/ivItemServiceLogo"
@@ -23,16 +24,16 @@
             android:id="@+id/tvItemServiceName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
             android:layout_marginStart="@dimen/tool_lib_12dp"
             android:layout_marginLeft="@dimen/tool_lib_12dp"
-            android:maxLength="15"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:singleLine="true"
-            android:ellipsize="end"
-            android:layout_toLeftOf="@+id/tvOrderDetailMaintenance"
             android:layout_toStartOf="@+id/tvOrderDetailMaintenance"
+            android:layout_toLeftOf="@+id/tvOrderDetailMaintenance"
+            android:ellipsize="end"
+            android:maxLength="15"
+            android:singleLine="true"
             android:textColor="@color/tool_lib_gray_222222"
             android:textSize="@dimen/tool_lib_14sp"
             tools:text="智能通讯座调试" />
@@ -53,6 +54,60 @@
             tools:text="36个月维保：¥1290" />
     </RelativeLayout>
 
+    <RelativeLayout
+        android:id="@+id/relAuxiliaryMaterials"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/relServiceItem"
+        android:layout_marginStart="@dimen/tool_lib_6dp"
+        android:layout_marginLeft="@dimen/tool_lib_6dp"
+        android:layout_marginTop="@dimen/tool_lib_3dp"
+        android:layout_toEndOf="@+id/ivItemServiceLogo"
+        android:layout_toRightOf="@+id/ivItemServiceLogo">
+
+        <TextView
+            android:id="@+id/tvSlotting"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/tool_lib_6dp"
+            android:layout_marginLeft="@dimen/tool_lib_6dp"
+            android:background="@drawable/bg_gray"
+            android:padding="@dimen/tool_lib_3dp"
+            android:textColor="@color/tool_lib_gray_777777"
+            android:textSize="@dimen/tool_lib_12sp"
+            android:visibility="gone"
+            tools:text="0-5米开槽" />
+
+        <TextView
+            android:id="@+id/tvDebugging"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/tool_lib_6dp"
+            android:layout_marginLeft="@dimen/tool_lib_6dp"
+            android:layout_toEndOf="@+id/tvSlotting"
+            android:layout_toRightOf="@+id/tvSlotting"
+            android:background="@drawable/bg_gray"
+            android:padding="@dimen/tool_lib_3dp"
+            android:text="@string/debugging"
+            android:textColor="@color/tool_lib_gray_777777"
+            android:textSize="@dimen/tool_lib_12sp"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/tvAuxiliaryMaterials"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/tool_lib_6dp"
+            android:layout_marginLeft="@dimen/tool_lib_6dp"
+            android:layout_toEndOf="@+id/tvDebugging"
+            android:layout_toRightOf="@+id/tvDebugging"
+            android:background="@drawable/bg_gray"
+            android:padding="@dimen/tool_lib_3dp"
+            android:text="@string/auxiliary_materials"
+            android:textColor="@color/tool_lib_gray_777777"
+            android:textSize="@dimen/tool_lib_12sp"
+            android:visibility="gone" />
+    </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"

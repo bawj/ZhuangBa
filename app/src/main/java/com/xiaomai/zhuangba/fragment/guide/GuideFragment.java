@@ -46,7 +46,7 @@ public class GuideFragment extends BaseFragment {
             btnGuideGo.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    startFragmentAndDestroyCurrent(LoginFragment.newInstance());
+                    startFragment(LoginFragment.newInstance());
                 }
             });
         }
