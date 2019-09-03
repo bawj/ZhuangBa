@@ -2,6 +2,7 @@ package com.xiaomai.zhuangba.fragment.personal.master;
 
 import android.os.Bundle;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.example.toollib.http.HttpResult;
 import com.example.toollib.http.observer.BaseHttpRxObserver;
@@ -31,12 +32,22 @@ public class UpdateScopeOfServiceFragment extends ScopeOfServiceFragment {
 
     @BindView(R.id.editAddressDetail)
     EditText editAddressDetail;
+    @BindView(R.id.tvScopeServiceSkillsClickServiceAddress)
+    TextView tvScopeServiceSkillsClickServiceAddress;
 
     public static UpdateScopeOfServiceFragment newInstance() {
         Bundle args = new Bundle();
         UpdateScopeOfServiceFragment fragment = new UpdateScopeOfServiceFragment();
         fragment.setArguments(args);
         return fragment;
+    }
+
+    @Override
+    public void initView() {
+        super.initView();
+        UserInfo unique = DBHelper.getInstance().getUserInfoDao().queryBuilder().unique();
+        String address = unique.getAddress();
+        tvScopeServiceSkillsClickServiceAddress.setText(address);
     }
 
     @Override

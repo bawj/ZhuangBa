@@ -65,9 +65,15 @@ public class OngoingOrdersList implements Parcelable{
     /** 开槽  如果是广告单 则是 预约时间 */
     private String slottingStartLength;
     private String slottingEndLength;
+    private double slottingPrice;
+
     private String debugging;
+    private double debugPrice;
+
     private String materialsStartLength;
     private String materialsEndLength;
+    private double materialsPrice;
+
     /** 1安装单 2 广告单 */
     private String orderType;
 
@@ -342,6 +348,30 @@ public class OngoingOrdersList implements Parcelable{
 
     public void setOrderType(String orderType) {
         this.orderType = orderType;
+    }
+
+    public double getSlottingPrice() {
+        return slottingPrice;
+    }
+
+    public void setSlottingPrice(double slottingPrice) {
+        this.slottingPrice = slottingPrice;
+    }
+
+    public double getDebugPrice() {
+        return debugPrice;
+    }
+
+    public void setDebugPrice(double debugPrice) {
+        this.debugPrice = debugPrice;
+    }
+
+    public double getMaterialsPrice() {
+        return materialsPrice;
+    }
+
+    public void setMaterialsPrice(double materialsPrice) {
+        this.materialsPrice = materialsPrice;
     }
 
     @Override

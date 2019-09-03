@@ -72,7 +72,7 @@ public class MasterAuthenticationModule extends BaseModule<IMasterAuthentication
             userInfo.setIdentityCard(identityCard);
             userInfo.setValidityData(validityData);
             userInfo.setEmergencyContact(emergencyContact);
-            userInfo.setAddress(address);
+            userInfo.setContactAddress(address);
             userInfo.setRole(String.valueOf(StaticExplain.FU_FU_SHI.getCode()));
 
             userInfo.setIdCardFrontPhoto(idCardFrontPhoto);

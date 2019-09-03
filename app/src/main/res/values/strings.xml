@@ -355,7 +355,7 @@
     <string name="startup_confirmation">开工确认</string>
     <string name="submit_for_acceptance">提交验收</string>
     <string name="acceptance_confirmation">验收确认</string>
-    <string name="scene_photo">现场照片</string>
+    <string name="scene_photo">开工照片</string>
     <string name="on_site_start_up_confirmation">现场开工确认</string>
     <string name="delivery_content">交付内容</string>
     <string name="confirmation_of_completion_of_construction">施工完成确认</string>

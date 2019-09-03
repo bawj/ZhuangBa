@@ -81,6 +81,7 @@ public class GlideManager {
     public static void loadImage(Context mContext, String url, ImageView imageView, int... defImage) {
         RequestOptions options = new RequestOptions();
         if (defImage != null && defImage.length > 0) {
+            options.placeholder(defImage[0]);
             options.error(defImage[0]);
         }
         options.diskCacheStrategy(DiskCacheStrategy.RESOURCE);

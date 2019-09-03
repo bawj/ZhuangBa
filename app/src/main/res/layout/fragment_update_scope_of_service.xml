@@ -67,7 +67,8 @@
             android:layout_marginTop="@dimen/tool_lib_10dp"
             android:background="@color/white"
             android:paddingLeft="@dimen/tool_lib_12dp"
-            android:paddingRight="@dimen/tool_lib_12dp">
+            android:paddingRight="@dimen/tool_lib_12dp"
+            android:visibility="gone">
 
             <TextView
                 android:id="@+id/tvAddressDetail"

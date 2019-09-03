@@ -176,7 +176,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/tool_lib_8dp"
-                        android:visibility="gone"
                         android:background="@android:color/white">
 
                         <TextView
@@ -200,7 +199,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/tool_lib_8dp"
-                        android:visibility="gone"
                         android:background="@android:color/white">
 
                         <TextView

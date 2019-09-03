@@ -23,6 +23,7 @@ import com.xiaomai.zhuangba.http.ServiceUrl;
 import com.xiaomai.zhuangba.util.ConstantUtil;
 import com.xiaomai.zhuangba.util.DateUtil;
 import com.xiaomai.zhuangba.util.ShopCarUtil;
+import com.xiaomai.zhuangba.util.Util;
 
 import java.io.File;
 import java.net.URI;
@@ -263,11 +264,7 @@ public class OrderInformationModule extends BaseModule<IOrderInformationView> im
         hashMap.put("employerDescribe", mViewRef.get().getEmployerDescribe());
         setAuxiliaryMaterials(hashMap);
         //总金额
-        double slottingPrice = (double) hashMap.get("slottingPrice");
-        double debugPrice = (double) hashMap.get("debugPrice");
-        double materialsPrice = (double) hashMap.get("materialsPrice");
-        double money = slottingPrice + debugPrice + materialsPrice;
-        hashMap.put("orderAmount", String.valueOf(orderAmount  + money));
+        hashMap.put("orderAmount", String.valueOf(ShopCarUtil.getTotalMoney()));
         return hashMap;
     }
 

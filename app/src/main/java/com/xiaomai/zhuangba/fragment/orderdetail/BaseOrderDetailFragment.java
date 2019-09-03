@@ -20,6 +20,7 @@ import com.xiaomai.zhuangba.R;
 import com.xiaomai.zhuangba.adapter.ImgExhibitionAdapter;
 import com.xiaomai.zhuangba.adapter.OrderDateListAdapter;
 import com.xiaomai.zhuangba.adapter.ServiceItemsAdapter;
+import com.xiaomai.zhuangba.application.PretendApplication;
 import com.xiaomai.zhuangba.data.bean.DeliveryContent;
 import com.xiaomai.zhuangba.data.bean.OngoingOrdersList;
 import com.xiaomai.zhuangba.data.bean.OrderDateList;
@@ -270,13 +271,20 @@ public class BaseOrderDetailFragment<T extends IOrderDetailModule> extends BaseF
 
     public void orderServiceItemsSuccess(List<OrderServiceItem> orderServiceItems) {
         if (ongoingOrdersList != null) {
-            for (OrderServiceItem orderServiceItem : orderServiceItems) {
-                orderServiceItem.setSlottingStartLength(ongoingOrdersList.getSlottingStartLength());
-                orderServiceItem.setSlottingEndLength(ongoingOrdersList.getSlottingEndLength());
-                orderServiceItem.setDebugging(ongoingOrdersList.getDebugging());
-                orderServiceItem.setMaterialsStartLength(ongoingOrdersList.getMaterialsStartLength());
-                orderServiceItem.setMaterialsEndLength(ongoingOrdersList.getMaterialsEndLength());
-            }
+            OrderServiceItem orderServiceItem = new OrderServiceItem();
+            orderServiceItem.setServiceText(getString(R.string.required_options));
+            orderServiceItem.setSlottingStartLength(ongoingOrdersList.getSlottingStartLength());
+            orderServiceItem.setSlottingEndLength(ongoingOrdersList.getSlottingEndLength());
+            orderServiceItem.setDebugging(ongoingOrdersList.getDebugging());
+            orderServiceItem.setMaterialsStartLength(ongoingOrdersList.getMaterialsStartLength());
+            orderServiceItem.setMaterialsEndLength(ongoingOrdersList.getMaterialsEndLength());
+            orderServiceItem.setAmount(ongoingOrdersList.getOrderAmount());
+            double slottingPrice = ongoingOrdersList.getSlottingPrice();
+            double debugPrice = ongoingOrdersList.getDebugPrice();
+            double materialsPrice = ongoingOrdersList.getMaterialsPrice();
+            orderServiceItem.setAmount((slottingPrice + debugPrice + materialsPrice));
+            orderServiceItem.setIconUrl(PretendApplication.BASE_URL);
+            orderServiceItems.add(orderServiceItem);
         }
         //服务项目
         serviceItemsAdapter.setNewData(orderServiceItems);
