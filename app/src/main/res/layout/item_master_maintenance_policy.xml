@@ -67,6 +67,17 @@
                 android:textColor="@color/tool_lib_gray_777777"
                 android:textSize="@dimen/tool_lib_12sp"
                 tools:text="一年零一个月" />
+
+            <TextView
+                android:id="@+id/tvMoney"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="end"
+                android:layout_marginStart="@dimen/tool_lib_12dp"
+                android:layout_marginEnd="@dimen/tool_lib_12dp"
+                android:textColor="@color/tool_lib_red_EF2B2B"
+                android:textSize="@dimen/tool_lib_16sp"
+                tools:text="¥3200.00" />
         </LinearLayout>
 
         <LinearLayout

@@ -25,7 +25,7 @@ public class WalletUpdatePasswordFragment extends UpdatePassTwoFragment {
         //下一步
         if (getVerificationCode().equals(tag)) {
             //设置交易密码
-            startFragmentAndDestroyCurrent(SetTradePasswordFragment.newInstance());
+            startFragment(SetTradePasswordFragment.newInstance());
         } else {
             showToast(getString(R.string.verification_code_input_incorrectly));
         }

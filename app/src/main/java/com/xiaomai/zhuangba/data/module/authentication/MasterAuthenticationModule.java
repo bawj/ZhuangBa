@@ -80,7 +80,7 @@ public class MasterAuthenticationModule extends BaseModule<IMasterAuthentication
             RequestBody requestBody = RequestBody.create(MediaType.parse("application/json;charset=utf-8"), new Gson().toJson(userInfo));
             RxUtils.getObservable(ServiceUrl.getUserApi().certification(requestBody))
                     .compose(mViewRef.get().<HttpResult<UserInfo>>bindLifecycle())
-                    .subscribe(new BaseHttpRxObserver<UserInfo>() {
+                    .subscribe(new BaseHttpRxObserver<UserInfo>(mContext.get()) {
                         @Override
                         protected void onSuccess(UserInfo userInfo1) {
                             DBHelper.getInstance().getUserInfoDao().deleteAll();

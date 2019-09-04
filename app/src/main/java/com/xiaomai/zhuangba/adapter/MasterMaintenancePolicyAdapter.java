@@ -40,6 +40,9 @@ public class MasterMaintenancePolicyAdapter extends BaseQuickAdapter<Maintenance
         //联系方式
         TextView tvContactInformation = helper.getView(R.id.tvContactInformation);
         tvContactInformation.setText(item.getEmployerPhone());
+        //总金额
+        TextView tvMoney = helper.getView(R.id.tvMoney);
+        tvMoney.setText(mContext.getString(R.string.content_money , item.getAmount()));
         //结束时间
         String endTime = item.getEndTime();
         if (!TextUtils.isEmpty(endTime)){

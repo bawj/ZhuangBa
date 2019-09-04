@@ -27,7 +27,7 @@ public class EmployerWalletUpdatePasswordFragment extends WalletUpdatePasswordFr
         //下一步
         if (getVerificationCode().equals(tag)) {
             //设置交易密码
-            startFragmentAndDestroyCurrent(EmployerSetTradePasswordFragment.newInstance());
+            startFragment(EmployerSetTradePasswordFragment.newInstance());
         } else {
             showToast(getString(R.string.verification_code_input_incorrectly));
         }

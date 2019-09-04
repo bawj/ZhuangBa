@@ -17,7 +17,7 @@ import com.xiaomai.zhuangba.util.ShopCarUtil;
  * @author Administrator
  * @date 2019/7/15 0015
  */
-public class ServiceItemsAdapter extends BaseQuickAdapter<OrderServiceItem , BaseViewHolder> {
+public class ServiceItemsAdapter extends BaseQuickAdapter<OrderServiceItem, BaseViewHolder> {
 
     public ServiceItemsAdapter() {
         super(R.layout.item_service_item, null);
@@ -33,17 +33,13 @@ public class ServiceItemsAdapter extends BaseQuickAdapter<OrderServiceItem , Bas
         TextView tvOrderDetailMaintenance = helper.getView(R.id.tvOrderDetailMaintenance);
 
         // TODO: 2019/9/3 0003 图片 默认站位图
-        GlideManager.loadImage(mContext , orderServiceItem.getIconUrl() , ivItemServiceLogo);
+        GlideManager.loadImage(mContext, orderServiceItem.getIconUrl(), ivItemServiceLogo , R.drawable.ic_required_options);
 
         tvItemServiceName.setText(orderServiceItem.getServiceText());
-        //项目金额
-        tvItemServiceMoney.setText(mContext.getString(R.string.content_money , String.valueOf(orderServiceItem.getAmount())));
-        //项目数量
-        tvServiceItemNumber.setText(mContext.getString(R.string.number , String.valueOf(orderServiceItem.getNumber())));
 
         //项目总金额
-        double multiply = ShopCarUtil.getTotalMoneys(orderServiceItem.getNumber() ,
-                orderServiceItem.getAmount() , orderServiceItem.getPrice2() , orderServiceItem.getPrice3() , 0);
+        double multiply = ShopCarUtil.getTotalMoneys(orderServiceItem.getNumber(),
+                orderServiceItem.getAmount(), orderServiceItem.getPrice2(), orderServiceItem.getPrice3(), 0);
 
         if (orderServiceItem.getMonthNumber() == 0) {
             //没有维保
@@ -71,6 +67,20 @@ public class ServiceItemsAdapter extends BaseQuickAdapter<OrderServiceItem , Bas
         } else {
             tvSlotting.setVisibility(View.GONE);
         }
+
+        if (mContext.getString(R.string.required_options).equals(orderServiceItem.getServiceText())) {
+            multiply = orderServiceItem.getAmount();
+            //项目金额
+            tvItemServiceMoney.setText("");
+            //项目数量
+            tvServiceItemNumber.setText("");
+        }else {
+            //项目金额
+            tvItemServiceMoney.setText(mContext.getString(R.string.content_money, String.valueOf(orderServiceItem.getAmount())));
+            //项目数量
+            tvServiceItemNumber.setText(mContext.getString(R.string.number, String.valueOf(orderServiceItem.getNumber())));
+        }
+
         //debugging 调试
         String debugging = orderServiceItem.getDebugging();
         if (debugging.equals(String.valueOf(StaticExplain.DEBUGGING.getCode()))) {
@@ -88,7 +98,7 @@ public class ServiceItemsAdapter extends BaseQuickAdapter<OrderServiceItem , Bas
             tvAuxiliaryMaterials.setVisibility(View.GONE);
         }
 
-        tvItemServiceTotalMoney.setText(mContext.getString(R.string.content_money , String.valueOf(multiply)));
+        tvItemServiceTotalMoney.setText(mContext.getString(R.string.content_money, String.valueOf(multiply)));
         tvItemServiceTotalMoney.setTag(orderServiceItem);
     }
 }

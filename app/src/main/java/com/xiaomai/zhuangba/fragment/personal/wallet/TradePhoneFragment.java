@@ -69,7 +69,7 @@ public class TradePhoneFragment extends BaseFragment {
                     @Override
                     protected void onSuccess(Object response) {
                         if (response != null) {
-                            startFragmentAndDestroyCurrent(WalletUpdatePasswordFragment.newInstance(edtPhone.getText().toString(), response.toString()));
+                            startFragment(WalletUpdatePasswordFragment.newInstance(edtPhone.getText().toString(), response.toString()));
                         }
                     }
                 });

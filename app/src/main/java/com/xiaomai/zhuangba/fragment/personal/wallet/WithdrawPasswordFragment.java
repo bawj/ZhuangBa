@@ -73,7 +73,7 @@ public class WithdrawPasswordFragment extends SetTradePasswordFragment {
                         protected void onSuccess(String response) {
                             ToastUtil.showShort("提交成功");
                             EventBus.getDefault().post(new MessageEvent(EventBusEnum.CASH_SUCCESS.getCode()));
-                            startFragmentAndDestroyCurrent(SuccessFragment.newInstance());
+                            startFragment(SuccessFragment.newInstance());
                         }
                     });
         }

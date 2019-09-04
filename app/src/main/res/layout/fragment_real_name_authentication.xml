@@ -36,7 +36,7 @@
                 android:layout_marginLeft="@dimen/tool_lib_105dp"
                 android:background="@null"
                 android:gravity="center_vertical"
-                android:hint="@string/please_enter_the_employer_name"
+                android:hint="@string/please_input_name"
                 android:maxLength="8"
                 android:textColor="@color/tool_lib_gray_222222"
                 android:textSize="@dimen/tool_lib_14sp"

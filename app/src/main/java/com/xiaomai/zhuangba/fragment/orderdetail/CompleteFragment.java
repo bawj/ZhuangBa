@@ -57,7 +57,7 @@ public class CompleteFragment extends BaseFragment {
                 break;
             case R.id.btnCompleteBackHome:
                 //首页
-                startFragmentAndDestroyCurrent(MasterWorkerFragment.newInstance());
+                startFragment(MasterWorkerFragment.newInstance());
                 break;
             default:
         }

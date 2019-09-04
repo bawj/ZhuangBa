@@ -119,8 +119,7 @@
                             style="@style/order_text"
                             android:layout_width="@dimen/tool_lib_56dp"
                             android:layout_below="@+id/tvBaseOrderDetailAppointment_"
-                            android:text="@string/confirmation_date"
-                            android:visibility="gone" />
+                            android:text="@string/confirmation_date" />
 
                         <TextView
                             android:id="@+id/tvBaseOrderConfirmationTime_"
@@ -129,7 +128,6 @@
                             android:layout_toEndOf="@+id/tvBaseOrderDetailAppointment_"
                             android:layout_toRightOf="@+id/tvBaseOrderDetailAppointment_"
                             android:textColor="@color/tool_lib_gray_222222"
-                            android:visibility="gone"
                             tools:text="2019-05-05 13:30" />
 
                         <LinearLayout

@@ -61,6 +61,10 @@ public class OrderStatusUtil {
             //已完成
             tvItemOrdersType.setText(mContext.getString(R.string.completed));
             tvItemOrdersType.setBackgroundResource(R.drawable.expired_half_fillet_bg);
+        }else if (orderStatus == OrdersEnum.MASTER_COMPLETED_CANCEL.getCode()){
+            //验收不通过
+            tvItemOrdersType.setText(mContext.getString(R.string.acceptance_is_not_acceptable));
+            tvItemOrdersType.setBackgroundResource(R.drawable.acceptance_is_not_bg);
         } else if (orderStatus == OrdersEnum.MASTER_EXPIRED.getCode()) {
             //已过期
             tvItemOrdersType.setText(mContext.getString(R.string.expired_));
@@ -116,9 +120,9 @@ public class OrderStatusUtil {
             //未支付
             tvItemOrdersType.setText(mContext.getString(R.string.unpaid));
         } else if (orderStatus == OrdersEnum.EMPLOYER_COMPLETED_CANCEL.getCode()) {
-            //师傅取消订单
-            tvItemOrdersType.setText(mContext.getString(R.string.cancelled));
-            tvItemOrdersType.setBackgroundResource(R.drawable.expired_half_fillet_bg);
+            //验收不通过
+            tvItemOrdersType.setText(mContext.getString(R.string.acceptance_is_not_acceptable));
+            tvItemOrdersType.setBackgroundResource(R.drawable.acceptance_is_not_bg);
         } else if (orderStatus == OrdersEnum.EMPLOYER_CANCELLATION_UNDER_WAY.getCode()) {
             tvItemOrdersType.setText(mContext.getString(R.string.cancellation_under_way));
             tvItemOrdersType.setBackgroundResource(R.drawable.expired_half_fillet_bg);
@@ -159,6 +163,9 @@ public class OrderStatusUtil {
         } else if (orderStatus == OrdersEnum.MASTER_CANCELLED.getCode()) {
             //已完成
             qmuiFragment.startFragment(MasterCompleteFragment.newInstance(orderCode, orderType));
+        }else if (orderStatus == OrdersEnum.MASTER_COMPLETED_CANCEL.getCode()){
+            //验收不通过
+            qmuiFragment.startFragment(BeUnderConstructionFragment.newInstance(orderCode, orderType));
         } else if (orderStatus == OrdersEnum.MASTER_EXPIRED.getCode()) {
             //已过期
             ToastUtil.showShort(qmuiFragment.getString(R.string.order_expired));
@@ -204,8 +211,8 @@ public class OrderStatusUtil {
         } else if (orderStatus == OrdersEnum.EMPLOYER_UNPAID.getCode()) {
             //未支付
         } else if (orderStatus == OrdersEnum.EMPLOYER_COMPLETED_CANCEL.getCode()) {
-            //师傅取消
-            qmuiFragment.startFragment(EmployerCancelledFragment.newInstance(orderCode, orderType));
+            //验收不通过
+            qmuiFragment.startFragment(EmployerCompleteFragment.newInstance(orderCode, orderType));
         } else if (orderStatus == OrdersEnum.EMPLOYER_CANCELLATION_UNDER_WAY.getCode()) {
             ToastUtil.showShort(qmuiFragment.getString(R.string.order_cancellation_under_way));
         }

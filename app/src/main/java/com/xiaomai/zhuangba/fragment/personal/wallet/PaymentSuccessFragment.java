@@ -39,6 +39,15 @@ public class PaymentSuccessFragment extends BaseFragment {
     }
 
     @Override
+    public boolean isBackArrow() {
+        return false;
+    }
+
+    @Override
+    protected void onBackPressed() {
+    }
+
+    @Override
     public int getContentView() {
         return R.layout.fragment_payment_success;
     }

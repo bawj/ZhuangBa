@@ -163,7 +163,7 @@ public class WithdrawFragment extends BaseFragment implements TextWatcher {
             ToastUtil.showShort("金额输入有误");
             return;
         }
-        startFragmentAndDestroyCurrent(WithdrawPasswordFragment.newInstance(name, account, amount));
+        startFragment(WithdrawPasswordFragment.newInstance(name, account, amount));
     }
 
 

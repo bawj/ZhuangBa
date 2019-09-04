@@ -40,7 +40,7 @@ public class AccountSecurityFragment extends TradePhoneFragment {
                     @Override
                     protected void onSuccess(Object response) {
                         if (response != null) {
-                            startFragmentAndDestroyCurrent(EmployerWalletUpdatePasswordFragment.newInstance(edtPhone.getText().toString(), response.toString()));
+                            startFragment(EmployerWalletUpdatePasswordFragment.newInstance(edtPhone.getText().toString(), response.toString()));
                         }
                     }
                 });

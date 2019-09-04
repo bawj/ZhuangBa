@@ -41,7 +41,7 @@ public class SuccessFragment extends BaseFragment {
                 startFragment(WalletDetailFragment.newInstance());
                 break;
             case R.id.btnCompleteBackHome:
-                startFragmentAndDestroyCurrent(MasterWorkerFragment.newInstance());
+                startFragment(MasterWorkerFragment.newInstance());
                 break;
             default:
         }

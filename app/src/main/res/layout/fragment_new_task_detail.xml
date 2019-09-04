@@ -147,7 +147,6 @@
                             style="@style/order_text"
                             android:layout_width="@dimen/tool_lib_56dp"
                             android:layout_below="@+id/tvBaseOrderDetailName_"
-                            android:layout_marginBottom="@dimen/tool_lib_12dp"
                             android:text="@string/time_of_appointment_" />
 
                         <TextView
@@ -159,14 +158,31 @@
                             android:textColor="@color/tool_lib_gray_222222"
                             tools:text="2019-05-05 13:30" />
 
+                        <TextView
+                            android:id="@+id/tvBaseOrderConfirmationTime"
+                            style="@style/order_text"
+                            android:layout_width="@dimen/tool_lib_56dp"
+                            android:layout_below="@+id/tvBaseOrderDetailAppointment"
+                            android:text="@string/confirmation_time" />
+
+                        <TextView
+                            android:id="@+id/tvBaseOrderConfirmationTime_"
+                            style="@style/order_text"
+                            android:layout_below="@+id/tvBaseOrderDetailAppointment"
+                            android:layout_toEndOf="@+id/tvBaseOrderConfirmationTime"
+                            android:layout_toRightOf="@+id/tvBaseOrderConfirmationTime"
+                            android:textColor="@color/tool_lib_gray_222222"
+                            tools:text="2019-05-05 13:30" />
+
                         <LinearLayout
                             android:id="@+id/layBaseOrderDetailDivideIntoColumns"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_below="@+id/tvBaseOrderDetailAppointment_"
+                            android:layout_below="@+id/tvBaseOrderConfirmationTime"
                             android:layout_marginLeft="@dimen/tool_lib_14dp"
                             android:layout_marginRight="@dimen/tool_lib_14dp"
                             android:layout_marginBottom="@dimen/tool_lib_12dp"
+                            android:layout_marginTop="@dimen/tool_lib_12dp"
                             android:background="@drawable/bg_divide_into_columns_bg"
                             android:gravity="center_vertical"
                             android:orientation="horizontal">

@@ -73,7 +73,7 @@ public class RoleSelectionFragment extends BaseLoginRegisteredFragment {
 
     @Override
     public void logoutSuccess() {
-        startFragmentAndDestroyCurrent(LoginFragment.newInstance());
+        startFragment(LoginFragment.newInstance());
     }
 
     @Override

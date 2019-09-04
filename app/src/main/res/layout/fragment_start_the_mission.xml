@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/tool_lib_gray_F5F6FA"
     tools:ignore="MissingDefaultResource">
 
     <com.scwang.smartrefresh.layout.SmartRefreshLayout
@@ -118,18 +119,16 @@
                             android:id="@+id/tvBaseOrderConfirmationTime"
                             style="@style/order_text"
                             android:layout_width="@dimen/tool_lib_56dp"
-                            android:layout_below="@+id/tvBaseOrderDetailAppointment_"
-                            android:text="@string/confirmation_date"
-                            android:visibility="gone" />
+                            android:layout_below="@+id/tvBaseOrderDetailAppointment"
+                            android:text="@string/confirmation_time" />
 
                         <TextView
                             android:id="@+id/tvBaseOrderConfirmationTime_"
                             style="@style/order_text"
-                            android:layout_below="@+id/tvBaseOrderDetailAppointment_"
-                            android:layout_toEndOf="@+id/tvBaseOrderDetailAppointment_"
-                            android:layout_toRightOf="@+id/tvBaseOrderDetailAppointment_"
+                            android:layout_below="@+id/tvBaseOrderDetailAppointment"
+                            android:layout_toEndOf="@+id/tvBaseOrderConfirmationTime"
+                            android:layout_toRightOf="@+id/tvBaseOrderConfirmationTime"
                             android:textColor="@color/tool_lib_gray_222222"
-                            android:visibility="gone"
                             tools:text="2019-05-05 13:30" />
 
                         <LinearLayout
@@ -225,8 +224,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/tool_lib_8dp"
-                        android:visibility="gone"
-                        android:background="@android:color/white">
+                        android:background="@android:color/white"
+                        android:visibility="gone">
 
                         <TextView
                             android:id="@+id/tvLivePhotos"
@@ -249,8 +248,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/tool_lib_8dp"
-                        android:visibility="gone"
-                        android:background="@android:color/white">
+                        android:background="@android:color/white"
+                        android:visibility="gone">
 
                         <TextView
                             android:id="@+id/tvFiledDescription_"

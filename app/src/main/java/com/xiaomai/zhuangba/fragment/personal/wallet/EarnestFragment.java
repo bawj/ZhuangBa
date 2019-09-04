@@ -56,7 +56,7 @@ public class EarnestFragment extends BaseFragment {
 
     @OnClick(R.id.tvReturn)
     public void onReturnClick(){
-        startFragmentAndDestroyCurrent(EarnestPasswordFragment.newInstance());
+        startFragment(EarnestPasswordFragment.newInstance());
     }
 
     @Override

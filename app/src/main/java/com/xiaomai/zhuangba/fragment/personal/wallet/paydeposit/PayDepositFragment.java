@@ -159,7 +159,7 @@ public class PayDepositFragment extends BaseFragment<IPayDepositModule> implemen
                     protected void onSuccess(UserInfo response) {
                         DBHelper.getInstance().getUserInfoDao().deleteAll();
                         DBHelper.getInstance().getUserInfoDao().insert(userInfo);
-                        startFragmentAndDestroyCurrent(PaymentSuccessFragment.newInstance());
+                        startFragment(PaymentSuccessFragment.newInstance());
                     }
                 });
     }

@@ -89,6 +89,11 @@ public class BaseOrderDetailFragment<T extends IOrderDetailModule> extends BaseF
      */
     @BindView(R.id.tvBaseOrderDetailLocation)
     TextView tvBaseOrderDetailLocation;
+    /** 确认时间  */
+    @BindView(R.id.tvBaseOrderConfirmationTime)
+    TextView tvBaseOrderConfirmationTime;
+    @BindView(R.id.tvBaseOrderConfirmationTime_)
+    TextView tvBaseOrderConfirmationTime_;
     /**
      * 联系地址
      */
@@ -284,7 +289,7 @@ public class BaseOrderDetailFragment<T extends IOrderDetailModule> extends BaseF
             double materialsPrice = ongoingOrdersList.getMaterialsPrice();
             orderServiceItem.setAmount((slottingPrice + debugPrice + materialsPrice));
             orderServiceItem.setIconUrl(PretendApplication.BASE_URL);
-            orderServiceItems.add(orderServiceItem);
+            orderServiceItems.add(0,orderServiceItem);
         }
         //服务项目
         serviceItemsAdapter.setNewData(orderServiceItems);
@@ -317,6 +322,16 @@ public class BaseOrderDetailFragment<T extends IOrderDetailModule> extends BaseF
         tvBaseOrderDetailAppointment.setText(ongoingOrdersList.getAppointmentTime());
         //联系地址
         tvBaseOrderDetailLocation.setText(ongoingOrdersList.getAddress());
+        //确认时间
+        String confirmationTime = ongoingOrdersList.getConfirmationTime();
+        if (!TextUtils.isEmpty(confirmationTime)){
+            tvBaseOrderConfirmationTime_.setText(confirmationTime);
+            tvBaseOrderConfirmationTime.setVisibility(View.VISIBLE);
+            tvBaseOrderConfirmationTime_.setVisibility(View.VISIBLE);
+        }else {
+            tvBaseOrderConfirmationTime.setVisibility(View.GONE);
+            tvBaseOrderConfirmationTime_.setVisibility(View.GONE);
+        }
         latitude = ongoingOrdersList.getLatitude();
         longitude = ongoingOrdersList.getLongitude();
         //订单状态

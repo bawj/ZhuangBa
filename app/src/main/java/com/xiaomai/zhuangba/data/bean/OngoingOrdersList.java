@@ -46,7 +46,7 @@ public class OngoingOrdersList implements Parcelable{
     /** 师傅端的部分字段 */
     /**  */
     private String masterOrderAmount;
-    /** 是否确认时间 */
+    /** 师傅确认时间 */
     private String confirmationTime;
     /** 修改时间 */
     private String modifyTime;
