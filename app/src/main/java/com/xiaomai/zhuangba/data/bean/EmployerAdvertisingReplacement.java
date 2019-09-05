@@ -23,7 +23,7 @@ public class EmployerAdvertisingReplacement {
     private String remark;
     private String publishTime;
     private String orderEndTime;
-    private int sumMoney;
+    private double sumMoney;
     private int count;
 
     public String getBatchCode() {
@@ -66,11 +66,11 @@ public class EmployerAdvertisingReplacement {
         this.orderEndTime = orderEndTime;
     }
 
-    public int getSumMoney() {
+    public double getSumMoney() {
         return sumMoney;
     }
 
-    public void setSumMoney(int sumMoney) {
+    public void setSumMoney(double sumMoney) {
         this.sumMoney = sumMoney;
     }
 

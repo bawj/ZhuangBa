@@ -6,10 +6,18 @@ import android.os.Message;
 import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
 import android.util.SparseArray;
+import android.view.View;
+import android.widget.Button;
 
 import com.example.toollib.base.BaseFragment;
 import com.example.toollib.data.IBaseModule;
+import com.example.toollib.http.HttpResult;
+import com.example.toollib.http.observer.BaseHttpRxObserver;
+import com.example.toollib.http.util.RxUtils;
 import com.example.toollib.util.Log;
+import com.google.gson.Gson;
+import com.qmuiteam.qmui.util.QMUIViewHelper;
+import com.qmuiteam.qmui.widget.QMUITopBarLayout;
 import com.xiaomai.zhuangba.R;
 import com.xiaomai.zhuangba.adapter.AdvertisingBillDetailPagerFragmentAdapter;
 import com.xiaomai.zhuangba.adapter.TabIncomeNavigator;
@@ -17,6 +25,7 @@ import com.xiaomai.zhuangba.data.AdvertisingBillsBean;
 import com.xiaomai.zhuangba.data.observable.EventManager;
 import com.xiaomai.zhuangba.data.observable.Observer;
 import com.xiaomai.zhuangba.enums.AdvertisingEnum;
+import com.xiaomai.zhuangba.http.ServiceUrl;
 import com.xiaomai.zhuangba.util.ConstantUtil;
 
 import net.lucode.hackware.magicindicator.MagicIndicator;
@@ -24,9 +33,13 @@ import net.lucode.hackware.magicindicator.ViewPagerHelper;
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.CommonNavigator;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import butterknife.BindView;
+import io.reactivex.Observable;
+import okhttp3.MediaType;
+import okhttp3.RequestBody;
 
 /**
  * @author Administrator
@@ -43,6 +56,8 @@ public class AdvertisingBillDetailFragment extends BaseFragment implements ViewP
     private SparseArray isRefreshFragment;
     public EventManager eventManager;
     private AdvertisingBillsBean advertisingBillsBean;
+
+    private QMUITopBarLayout topBarBase;
 
     public static AdvertisingBillDetailFragment newInstance(AdvertisingBillsBean advertisingBillsBean) {
         Bundle args = new Bundle();
@@ -77,6 +92,8 @@ public class AdvertisingBillDetailFragment extends BaseFragment implements ViewP
             eventManager.registerObserver(baseFragment);
         }
 
+        topBarBase = getTopBarBase();
+
         refresh(0);
     }
 
@@ -100,8 +117,61 @@ public class AdvertisingBillDetailFragment extends BaseFragment implements ViewP
     }
 
     @Override
-    public void onPageSelected(int i) {
+    public void onPageSelected(final int i) {
         refresh(i);
+        topBarBase.removeAllRightViews();
+        if (i == 1) {
+            Button button = topBarBase.addRightTextButton(getString(R.string.bulk_acceptance), QMUIViewHelper.generateViewId());
+            button.setTextColor(getResources().getColor(R.color.tool_lib_blue_287CDF));
+            button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    HashMap<String , Object> hashMap = getHashMap();
+                    RequestBody requestBody = RequestBody.create(MediaType.parse("application/json;charset=utf-8"), new Gson().toJson(hashMap));
+                    Observable<HttpResult<Object>> httpResultObservable = ServiceUrl.getUserApi().acceptAllAdvertisingOrder(requestBody);
+                    requestService(i , httpResultObservable);
+                }
+            });
+        } else if (i == 2) {
+            Button button = topBarBase.addRightTextButton(getString(R.string.set_out), QMUIViewHelper.generateViewId());
+            button.setTextColor(getResources().getColor(R.color.tool_lib_blue_287CDF));
+            button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    HashMap<String , Object> hashMap = getHashMap();
+                    RequestBody requestBody = RequestBody.create(MediaType.parse("application/json;charset=utf-8"), new Gson().toJson(hashMap));
+                    Observable<HttpResult<Object>> httpResultObservable = ServiceUrl.getUserApi().nowWeLeaveAllAdvertising(requestBody);
+                    requestService(i , httpResultObservable);
+                }
+            });
+        }
+    }
+
+    private HashMap<String, Object> getHashMap() {
+        HashMap<String, Object> hashMap = new HashMap<>();
+        AdvertisingBillsBean advertisingBillsBean = getAdvertisingBillsBean();
+        String province = advertisingBillsBean.getProvince();
+        hashMap.put("province" , province);
+        String city = advertisingBillsBean.getCity();
+        hashMap.put("city" , city);
+        String district = advertisingBillsBean.getDistrict();
+        hashMap.put("district" , district);
+        String street = advertisingBillsBean.getStreet();
+        hashMap.put("street" , street);
+        String villageName = advertisingBillsBean.getVillageName();
+        hashMap.put("villageName" , villageName);
+        return hashMap;
+    }
+
+    private void requestService(final int i, Observable<HttpResult<Object>> httpResultObservable) {
+        RxUtils.getObservable(httpResultObservable)
+                .compose(this.<HttpResult<Object>>bindToLifecycle())
+                .subscribe(new BaseHttpRxObserver<Object>(getActivity()) {
+                    @Override
+                    protected void onSuccess(Object response) {
+                        refresh(i);
+                    }
+                });
     }
 
     @Override

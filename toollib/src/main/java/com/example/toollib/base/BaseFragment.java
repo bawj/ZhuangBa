@@ -170,6 +170,10 @@ public abstract class BaseFragment<M extends IBaseModule> extends BaseRxFragment
         }
     }
 
+    public QMUITopBarLayout getTopBarBase(){
+        return topBarBase;
+    }
+
 
     /**
      * bar 右侧图标

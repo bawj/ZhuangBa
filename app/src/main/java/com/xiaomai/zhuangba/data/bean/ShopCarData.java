@@ -3,6 +3,7 @@ package com.xiaomai.zhuangba.data.bean;
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.Generated;
+import org.greenrobot.greendao.annotation.Transient;
 
 /**
  * @author Administrator
@@ -54,6 +55,17 @@ public class ShopCarData {
     private int maintenanceId;
     /** 维保时间 */
     private String maintenanceTime;
+
+    @Transient
+    private String slottingStartLength;
+    @Transient
+    private String slottingEndLength;
+    @Transient
+    private String debugging;
+    @Transient
+    private String materialsStartLength;
+    @Transient
+    private String materialsEndLength;
 
     @Generated(hash = 1756493303)
     public ShopCarData(Long id, String money, String money2, String money3,
@@ -172,5 +184,45 @@ public class ShopCarData {
 
     public void setMaintenanceTime(String maintenanceTime) {
         this.maintenanceTime = maintenanceTime;
+    }
+
+    public String getSlottingStartLength() {
+        return slottingStartLength == null ? "" : slottingStartLength;
+    }
+
+    public void setSlottingStartLength(String slottingStartLength) {
+        this.slottingStartLength = slottingStartLength;
+    }
+
+    public String getSlottingEndLength() {
+        return slottingEndLength == null ? "" : slottingEndLength;
+    }
+
+    public void setSlottingEndLength(String slottingEndLength) {
+        this.slottingEndLength = slottingEndLength;
+    }
+
+    public String getDebugging() {
+        return debugging == null ? "" : debugging;
+    }
+
+    public void setDebugging(String debugging) {
+        this.debugging = debugging;
+    }
+
+    public String getMaterialsStartLength() {
+        return materialsStartLength == null ? "" : materialsStartLength;
+    }
+
+    public void setMaterialsStartLength(String materialsStartLength) {
+        this.materialsStartLength = materialsStartLength;
+    }
+
+    public String getMaterialsEndLength() {
+        return materialsEndLength == null ? "" : materialsEndLength;
+    }
+
+    public void setMaterialsEndLength(String materialsEndLength) {
+        this.materialsEndLength = materialsEndLength;
     }
 }

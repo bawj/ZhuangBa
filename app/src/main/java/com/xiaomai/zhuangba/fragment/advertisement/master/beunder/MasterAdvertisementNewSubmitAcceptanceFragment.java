@@ -11,6 +11,10 @@ import com.example.toollib.util.Log;
 import com.example.toollib.util.ToastUtil;
 import com.google.gson.Gson;
 import com.xiaomai.zhuangba.R;
+import com.xiaomai.zhuangba.enums.AdvertisingEnum;
+import com.xiaomai.zhuangba.enums.OrdersEnum;
+import com.xiaomai.zhuangba.enums.StaticExplain;
+import com.xiaomai.zhuangba.fragment.advertisement.AdvertisementSubmitCompleteFragment;
 import com.xiaomai.zhuangba.fragment.masterworker.MasterWorkerFragment;
 import com.xiaomai.zhuangba.fragment.orderdetail.master.base.BaseAutographFragment;
 import com.xiaomai.zhuangba.http.ServiceUrl;
@@ -86,7 +90,8 @@ public class MasterAdvertisementNewSubmitAcceptanceFragment extends BaseAutograp
                         .subscribe(new BaseHttpRxObserver(getActivity()) {
                             @Override
                             protected void onSuccess(Object response) {
-                                startFragment(MasterWorkerFragment.newInstance());
+                                startFragment(AdvertisementSubmitCompleteFragment.newInstance(getOrderCode() ,
+                                        String.valueOf(StaticExplain.ADVERTISING_BILLS.getCode()) , String.valueOf(AdvertisingEnum.EMPLOYER_ACCEPTANCE.getCode())));
                             }
                         });
 

@@ -19,6 +19,7 @@ import com.xiaomai.zhuangba.data.bean.PlayModule;
 import com.xiaomai.zhuangba.data.bean.SubmissionOrder;
 import com.xiaomai.zhuangba.enums.StringTypeExplain;
 import com.xiaomai.zhuangba.http.ServiceUrl;
+import com.xiaomai.zhuangba.util.ShopCarUtil;
 
 import java.util.HashMap;
 import java.util.List;
@@ -46,12 +47,11 @@ public class PaymentDetailsModule extends PlayModule<IPaymentDetailView> impleme
         //任务总数量
         int number = 0;
         //订单总金额
-        Double orderAmount = 0.0;
+        Double orderAmount = ShopCarUtil.getTotalMoney();
         //服务项目
         List<OrderServicesBean> orderServicesBeans = getOrderServicesBean();
         for (OrderServicesBean orderServicesBean : orderServicesBeans) {
             number = number + orderServicesBean.getNumber();
-            orderAmount = AmountUtil.add(orderAmount, orderServicesBean.getAmount(), 2);
         }
         //任务数量
         submissionOrder.setNumber(number);

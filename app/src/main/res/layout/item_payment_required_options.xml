@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="@dimen/tool_lib_5dp"
+    android:paddingBottom="@dimen/tool_lib_12dp">
+
+    <ImageView
+        android:id="@+id/ivItemServiceLogo"
+        android:layout_width="@dimen/tool_lib_60dp"
+        android:layout_height="@dimen/tool_lib_60dp"
+        android:src="@drawable/ic_required_options" />
+
+    <RelativeLayout
+        android:id="@+id/relServiceItem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/ivItemServiceLogo"
+        android:layout_toEndOf="@+id/ivItemServiceLogo"
+        android:layout_toRightOf="@+id/ivItemServiceLogo">
+
+        <TextView
+            android:id="@+id/tvItemServiceName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/tool_lib_12dp"
+            android:layout_marginLeft="@dimen/tool_lib_12dp"
+            android:ellipsize="end"
+            android:maxLength="15"
+            android:singleLine="true"
+            android:textColor="@color/tool_lib_gray_222222"
+            android:textSize="@dimen/tool_lib_14sp"
+            android:text="@string/required_options" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/relAuxiliaryMaterials"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/relServiceItem"
+        android:layout_marginStart="@dimen/tool_lib_6dp"
+        android:layout_marginLeft="@dimen/tool_lib_6dp"
+        android:layout_marginTop="@dimen/tool_lib_7dp"
+        android:layout_toEndOf="@+id/ivItemServiceLogo"
+        android:layout_toRightOf="@+id/ivItemServiceLogo">
+
+        <TextView
+            android:id="@+id/tvSlotting"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/tool_lib_6dp"
+            android:layout_marginLeft="@dimen/tool_lib_6dp"
+            android:background="@drawable/bg_gray"
+            android:padding="@dimen/tool_lib_3dp"
+            android:textColor="@color/tool_lib_gray_777777"
+            android:textSize="@dimen/tool_lib_12sp"
+            tools:text="0-5米开槽" />
+
+        <TextView
+            android:id="@+id/tvDebugging"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/tool_lib_6dp"
+            android:layout_marginLeft="@dimen/tool_lib_6dp"
+            android:layout_toEndOf="@+id/tvSlotting"
+            android:layout_toRightOf="@+id/tvSlotting"
+            android:background="@drawable/bg_gray"
+            android:padding="@dimen/tool_lib_3dp"
+            android:text="@string/debugging"
+            android:textColor="@color/tool_lib_gray_777777"
+            android:textSize="@dimen/tool_lib_12sp" />
+
+        <TextView
+            android:id="@+id/tvAuxiliaryMaterials"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/tool_lib_6dp"
+            android:layout_marginLeft="@dimen/tool_lib_6dp"
+            android:layout_toEndOf="@+id/tvDebugging"
+            android:layout_toRightOf="@+id/tvDebugging"
+            android:background="@drawable/bg_gray"
+            android:padding="@dimen/tool_lib_3dp"
+            android:text="@string/auxiliary_materials"
+            android:textColor="@color/tool_lib_gray_777777"
+            android:textSize="@dimen/tool_lib_12sp" />
+    </RelativeLayout>
+
+
+</RelativeLayout>

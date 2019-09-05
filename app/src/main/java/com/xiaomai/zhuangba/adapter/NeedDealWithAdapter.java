@@ -112,10 +112,10 @@ public class NeedDealWithAdapter extends BaseQuickAdapter<OngoingOrdersList, Bas
         //debugging 调试
         String debugging = ongoingOrders.getDebugging();
         if (debugging.equals(String.valueOf(StaticExplain.DEBUGGING.getCode()))) {
+            tvDebugging.setVisibility(View.GONE);
+        } else {
             tvDebugging.setText(mContext.getString(R.string.debugging));
             tvDebugging.setVisibility(View.VISIBLE);
-        } else {
-            tvDebugging.setVisibility(View.GONE);
         }
         String materialsEndLength = ongoingOrders.getMaterialsEndLength();
         if (DensityUtils.stringTypeInteger(materialsEndLength) > 0) {

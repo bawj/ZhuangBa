@@ -1,16 +1,10 @@
 package com.xiaomai.zhuangba.fragment.personal;
 
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
 
-import com.example.toollib.manager.GlideManager;
 import com.xiaomai.zhuangba.R;
 import com.xiaomai.zhuangba.data.bean.MessageEvent;
-import com.xiaomai.zhuangba.data.bean.UserInfo;
-import com.xiaomai.zhuangba.data.db.DBHelper;
 import com.xiaomai.zhuangba.data.module.login.ILoginRegisteredModule;
 import com.xiaomai.zhuangba.data.module.login.LoginRegisteredModule;
 import com.xiaomai.zhuangba.enums.EventBusEnum;
@@ -22,7 +16,6 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
-import butterknife.BindView;
 import butterknife.OnClick;
 
 /**

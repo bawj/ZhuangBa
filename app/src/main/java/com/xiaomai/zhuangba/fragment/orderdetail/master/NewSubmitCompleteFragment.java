@@ -1,10 +1,14 @@
 package com.xiaomai.zhuangba.fragment.orderdetail.master;
 
 import android.os.Bundle;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.xiaomai.zhuangba.R;
 import com.xiaomai.zhuangba.fragment.orderdetail.CompleteFragment;
 import com.xiaomai.zhuangba.util.ConstantUtil;
+
+import butterknife.BindView;
 
 /**
  * @author Administrator
@@ -12,7 +16,10 @@ import com.xiaomai.zhuangba.util.ConstantUtil;
  */
 public class NewSubmitCompleteFragment extends CompleteFragment {
 
-    public static NewSubmitCompleteFragment  newInstance(String orderCode , String orderType , String orderStatus) {
+    @BindView(R.id.tvCompleteTip)
+    TextView tvCompleteTip;
+
+    public static NewSubmitCompleteFragment newInstance(String orderCode , String orderType , String orderStatus) {
         Bundle args = new Bundle();
         args.putString(ConstantUtil.ORDER_CODE , orderCode);
         args.putString(ConstantUtil.ORDER_TYPE , orderType);
@@ -20,6 +27,12 @@ public class NewSubmitCompleteFragment extends CompleteFragment {
         NewSubmitCompleteFragment fragment = new NewSubmitCompleteFragment();
         fragment.setArguments(args);
         return fragment;
+    }
+
+    @Override
+    public void initView() {
+        super.initView();
+        tvCompleteTip.setText(getString(R.string.application_for_acceptance_has_been_submitted));
     }
 
     @Override

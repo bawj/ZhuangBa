@@ -36,7 +36,7 @@ public class AdvertisingBillsFragment extends BaseMasterEmployerContentFragment 
     @Override
     public void update(String code ,String address, Handler handler) {
         super.update(code ,address, handler);
-        if (StringTypeExplain.REFRESH_ADVERTISING_BILLS_FRAGMENT.getCode().equals(code)) {
+        if (StringTypeExplain.REFRESH_ADVERTISING_BILLS_FRAGMENT.getCode().equals(code) && iModule != null) {
             iModule.requestAdvertisingBills();
         }
     }
@@ -48,7 +48,9 @@ public class AdvertisingBillsFragment extends BaseMasterEmployerContentFragment 
 
     @Override
     public void onBaseLoadMoreRequested() {
-        iModule.requestAdvertisingBills();
+        if (iModule != null){
+            iModule.requestAdvertisingBills();
+        }
     }
 
     @Override

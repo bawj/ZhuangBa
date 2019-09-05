@@ -33,9 +33,6 @@ import com.xiaomai.zhuangba.data.observable.EventManager;
 import com.xiaomai.zhuangba.data.observable.Observer;
 import com.xiaomai.zhuangba.enums.StaticExplain;
 import com.xiaomai.zhuangba.enums.StringTypeExplain;
-import com.xiaomai.zhuangba.fragment.masterworker.AdvertisingBillsFragment;
-import com.xiaomai.zhuangba.fragment.masterworker.NeedDealWithFragment;
-import com.xiaomai.zhuangba.fragment.masterworker.OrderPoolFragment;
 import com.xiaomai.zhuangba.fragment.personal.MessageFragment;
 import com.xiaomai.zhuangba.fragment.personal.PricingSheetFragment;
 

@@ -10,7 +10,13 @@ import com.example.toollib.http.observer.BaseHttpRxObserver;
 import com.example.toollib.http.util.RxUtils;
 import com.xiaomai.zhuangba.R;
 import com.xiaomai.zhuangba.data.bean.EarnestBean;
+import com.xiaomai.zhuangba.data.bean.MessageEvent;
+import com.xiaomai.zhuangba.enums.EventBusEnum;
 import com.xiaomai.zhuangba.http.ServiceUrl;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -37,6 +43,7 @@ public class EarnestFragment extends BaseFragment {
 
     @Override
     public void initView() {
+        EventBus.getDefault().register(this);
         Observable<HttpResult<EarnestBean>> observable = ServiceUrl.getUserApi().getEarnest();
         RxUtils.getObservable(observable)
                 .compose(this.<HttpResult<EarnestBean>>bindToLifecycle())
@@ -59,6 +66,13 @@ public class EarnestFragment extends BaseFragment {
         startFragment(EarnestPasswordFragment.newInstance());
     }
 
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onWeChatSuccess(MessageEvent messageEvent) {
+         if (messageEvent.getErrCode() == EventBusEnum.CASH_SUCCESS.getCode()) {
+             popBackStack();
+        }
+    }
+
     @Override
     public int getContentView() {
         return R.layout.fragment_earnest;
@@ -72,5 +86,11 @@ public class EarnestFragment extends BaseFragment {
     @Override
     protected IBaseModule initModule() {
         return null;
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
     }
 }

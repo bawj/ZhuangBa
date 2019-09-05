@@ -60,6 +60,7 @@ public class MasterCompleteFragment extends BeUnderConstructionFragment {
 
     @Override
     public void masterScenePhoto(DeliveryContent deliveryContent) {
+        super.masterScenePhoto(deliveryContent);
         //交付后的内容
         String picturesUrl = deliveryContent.getPicturesUrl();
         if (!TextUtils.isEmpty(picturesUrl)) {

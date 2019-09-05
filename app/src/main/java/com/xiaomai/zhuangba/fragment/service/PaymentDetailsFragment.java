@@ -6,23 +6,28 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
 import com.example.toollib.base.BaseFragment;
 import com.example.toollib.data.base.BaseCallback;
+import com.example.toollib.util.DensityUtils;
 import com.google.gson.Gson;
 import com.xiaomai.zhuangba.R;
 import com.xiaomai.zhuangba.adapter.PaymentDetailsAdapter;
 import com.xiaomai.zhuangba.data.bean.MessageEvent;
 import com.xiaomai.zhuangba.data.bean.ShopCarData;
 import com.xiaomai.zhuangba.data.bean.SubmissionOrder;
+import com.xiaomai.zhuangba.data.bean.db.ShopAuxiliaryMaterialsDB;
 import com.xiaomai.zhuangba.data.db.DBHelper;
 import com.xiaomai.zhuangba.data.module.pay.IPaymentDetailView;
 import com.xiaomai.zhuangba.data.module.pay.IPaymentDetailsModule;
 import com.xiaomai.zhuangba.data.module.pay.PaymentDetailsModule;
 import com.xiaomai.zhuangba.enums.ForResultCode;
+import com.xiaomai.zhuangba.enums.StaticExplain;
+import com.xiaomai.zhuangba.util.ConstantUtil;
 import com.xiaomai.zhuangba.util.RxPermissionsUtils;
 import com.xiaomai.zhuangba.util.ShopCarUtil;
 import com.xiaomai.zhuangba.weight.PayPassView;
@@ -95,9 +100,11 @@ public class PaymentDetailsFragment extends BaseFragment<IPaymentDetailsModule> 
     public void initView() {
         //服务项目
         List<ShopCarData> shopCarDataList = DBHelper.getInstance().getShopCarDataDao().queryBuilder().list();
+
         tvPaymentMonty.setText(String.valueOf(ShopCarUtil.getTotalMoney()));
         recyclerServiceItems.setLayoutManager(new LinearLayoutManager(getActivity()));
         PaymentDetailsAdapter paymentDetailsAdapter = new PaymentDetailsAdapter();
+        paymentDetailsAdapter.addHeaderView(getRequiredOptions());
         paymentDetailsAdapter.setNewData(shopCarDataList);
         recyclerServiceItems.setAdapter(paymentDetailsAdapter);
         String orderData = getOrderData();
@@ -127,6 +134,40 @@ public class PaymentDetailsFragment extends BaseFragment<IPaymentDetailsModule> 
                 .setChkWeChatBalance(chkPaymentWeChat)
                 .setChkAlipayBalance(chkPaymentPlay)
                 .setChkWalletBanlance(chkPaymentWallet);
+    }
+
+    private View getRequiredOptions() {
+        ShopAuxiliaryMaterialsDB unique = DBHelper.getInstance().getShopAuxiliaryMaterialsDBDao().queryBuilder().unique();
+        View view = LayoutInflater.from(getActivity()).inflate(R.layout.item_payment_required_options , null);
+        //开槽
+        TextView tvSlotting = view.findViewById(R.id.tvSlotting);
+        if (DensityUtils.stringTypeInteger(unique.getSlottingEndLength()) > 0) {
+            tvSlotting.setVisibility(View.VISIBLE);
+            tvSlotting.setText(getString(R.string.slotting_start_end_length,
+                    unique.getSlottingStartLength(), unique.getSlottingEndLength()));
+        } else {
+            tvSlotting.setVisibility(View.GONE);
+        }
+        //调试
+        TextView tvDebugging = view.findViewById(R.id.tvDebugging);
+        double debuggingPrice = unique.getDebuggingPrice();
+        if (debuggingPrice != 0) {
+            tvDebugging.setText(getString(R.string.debugging));
+            tvDebugging.setVisibility(View.VISIBLE);
+        } else {
+            tvDebugging.setVisibility(View.GONE);
+        }
+        //辅材
+        TextView tvAuxiliaryMaterials = view.findViewById(R.id.tvAuxiliaryMaterials);
+        String materialsEndLength = unique.getMaterialsEndLength();
+        if (DensityUtils.stringTypeInteger(materialsEndLength) > 0) {
+            tvAuxiliaryMaterials.setVisibility(View.VISIBLE);
+            tvSlotting.setText(getString(R.string.slotting_start_end_length,
+                    unique.getMaterialsStartLength(), unique.getMaterialsEndLength()));
+        } else {
+            tvAuxiliaryMaterials.setVisibility(View.GONE);
+        }
+        return view;
     }
 
     @OnClick({R.id.btnGoPayment, R.id.ivPaymentReplace})

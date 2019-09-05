@@ -69,11 +69,10 @@ public class EmployerAdvertisementUnderConstructionFragment extends BaseAdvertis
     }
 
     @Override
-    public void setDeliveryContent(List<DeliveryContent> deliveryContents) {
+    public void setDeliveryContent(DeliveryContent deliveryContents) {
         super.setDeliveryContent(deliveryContents);
-        if (!deliveryContents.isEmpty()) {
-            DeliveryContent deliveryContent = deliveryContents.get(0);
-            String picturesUrl = deliveryContent.getPicturesUrl();
+        if (deliveryContents != null){
+            String picturesUrl = deliveryContents.getPicturesUrl();
             if (!TextUtils.isEmpty(picturesUrl)) {
                 final List<String> urlList = Util.getList(picturesUrl);
                 imgExhibitionAdapter.setNewData(urlList);

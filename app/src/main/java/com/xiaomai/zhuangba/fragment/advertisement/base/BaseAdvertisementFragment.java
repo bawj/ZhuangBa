@@ -70,6 +70,7 @@ public class BaseAdvertisementFragment extends BaseFragment<IBaseAdvertisementMo
     private OrderDateListAdapter orderDateListAdapter;
     @Override
     public void initView() {
+        layBaseOrderDetail.setVisibility(View.GONE);
         //订单信息
         recyclerOrderInformation.setLayoutManager(new LinearLayoutManager(getActivity()));
         orderDateListAdapter = new OrderDateListAdapter();
@@ -98,7 +99,15 @@ public class BaseAdvertisementFragment extends BaseFragment<IBaseAdvertisementMo
 
         setOngoingOrder(ongoingOrdersList , orderDateLists);
 
-        setDeliveryContent(deliveryContents);
+        for (DeliveryContent deliveryContent : deliveryContents) {
+            if (deliveryContent.getPicturesType().equals(String.valueOf(StaticExplain.BEFORE_THE_BEGINNING.getCode()))){
+                setDeliveryContent(deliveryContent);
+            }else if (deliveryContent.getPicturesType().equals(String.valueOf(StaticExplain.UPON_COMPLETION.getCode()))){
+                setUponCompletion(deliveryContent);
+            }
+        }
+
+
     }
 
     public void setOngoingOrder(OngoingOrdersList ongoingOrdersList , List<OrderDateList> orderDateLists) {
@@ -135,7 +144,11 @@ public class BaseAdvertisementFragment extends BaseFragment<IBaseAdvertisementMo
         orderDateListAdapter.setNewData(orderDateLists);
     }
 
-    public void setDeliveryContent(List<DeliveryContent> deliveryContents) {
+    public void setDeliveryContent(DeliveryContent deliveryContents) {
+
+    }
+
+    public void setUponCompletion(DeliveryContent deliveryContent) {
 
     }
 

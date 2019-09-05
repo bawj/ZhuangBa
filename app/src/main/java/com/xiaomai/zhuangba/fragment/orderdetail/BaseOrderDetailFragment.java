@@ -223,6 +223,9 @@ public class BaseOrderDetailFragment<T extends IOrderDetailModule> extends BaseF
             //雇主提交的现场照片
             if (deliveryContent.getPicturesType().equals(String.valueOf(StaticExplain.EMPLOYER_LIVE_PHOTOS.getCode()))) {
                 livePhotos(deliveryContent);
+            }else {
+                relLivePhotos.setVisibility(View.GONE);
+                relFieldDescription.setVisibility(View.GONE);
             }
             //施工前照片
             if (deliveryContent.getPicturesType().equals(String.valueOf(StaticExplain.BEFORE_THE_BEGINNING.getCode()))) {

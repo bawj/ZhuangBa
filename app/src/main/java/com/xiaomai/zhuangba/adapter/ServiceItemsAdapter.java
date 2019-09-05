@@ -74,20 +74,22 @@ public class ServiceItemsAdapter extends BaseQuickAdapter<OrderServiceItem, Base
             tvItemServiceMoney.setText("");
             //项目数量
             tvServiceItemNumber.setText("");
+            tvOrderDetailMaintenance.setVisibility(View.GONE);
         }else {
             //项目金额
             tvItemServiceMoney.setText(mContext.getString(R.string.content_money, String.valueOf(orderServiceItem.getAmount())));
             //项目数量
             tvServiceItemNumber.setText(mContext.getString(R.string.number, String.valueOf(orderServiceItem.getNumber())));
+            tvOrderDetailMaintenance.setVisibility(View.VISIBLE);
         }
 
         //debugging 调试
         String debugging = orderServiceItem.getDebugging();
         if (debugging.equals(String.valueOf(StaticExplain.DEBUGGING.getCode()))) {
+            tvDebugging.setVisibility(View.GONE);
+        } else {
             tvDebugging.setText(mContext.getString(R.string.debugging));
             tvDebugging.setVisibility(View.VISIBLE);
-        } else {
-            tvDebugging.setVisibility(View.GONE);
         }
         String materialsEndLength = orderServiceItem.getMaterialsEndLength();
         if (DensityUtils.stringTypeInteger(materialsEndLength) > 0) {

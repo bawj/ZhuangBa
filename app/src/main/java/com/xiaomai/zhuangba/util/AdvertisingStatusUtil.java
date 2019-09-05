@@ -202,10 +202,10 @@ public class AdvertisingStatusUtil {
             qmuiFragment.startFragment(MasterAdvertisementAcceptanceFragment.newInstance(orderCode, orderType));
         } else if (orderStatus == AdvertisingEnum.MASTER_FAILURE_OF_ACCEPTANCE.getCode()) {
             //验收不通过
-            qmuiFragment.startFragment(MasterAdvertisementAcceptanceFragment.newInstance(orderCode, orderType));
+            qmuiFragment.startFragment(MasterAdvertisementBeUnderConstructionFragment.newInstance(orderCode, orderType));
         } else if (orderStatus == AdvertisingEnum.MASTER_CANCELLATION_UNDER_WAY.getCode()) {
             //正在取消
-            qmuiFragment.startFragment(MasterAdvertisementAcceptanceFragment.newInstance(orderCode, orderType));
+            ToastUtil.showShort(qmuiFragment.getString(R.string.order_cancellation_under_way));
         } else if (orderStatus == AdvertisingEnum.MASTER_CANCELLED.getCode()) {
             //已完成
             qmuiFragment.startFragment(MasterAdvertisementAcceptanceFragment.newInstance(orderCode, orderType));

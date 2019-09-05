@@ -66,11 +66,10 @@ public class MasterAdvertisementAcceptanceFragment extends BaseAdvertisementFrag
     }
 
     @Override
-    public void setDeliveryContent(List<DeliveryContent> deliveryContents) {
+    public void setDeliveryContent(DeliveryContent deliveryContents) {
         super.setDeliveryContent(deliveryContents);
-        if (!deliveryContents.isEmpty()) {
-            DeliveryContent deliveryContent = deliveryContents.get(0);
-            String picturesUrl = deliveryContent.getPicturesUrl();
+        if (deliveryContents != null) {
+            String picturesUrl = deliveryContents.getPicturesUrl();
             if (!TextUtils.isEmpty(picturesUrl)) {
                 final List<String> urlList = Util.getList(picturesUrl);
                 imgExhibitionAdapter.setNewData(urlList);
@@ -85,9 +84,12 @@ public class MasterAdvertisementAcceptanceFragment extends BaseAdvertisementFrag
                 });
             }
         }
+    }
 
-        if (!deliveryContents.isEmpty() && deliveryContents.size() > 1) {
-            DeliveryContent deliveryContent = deliveryContents.get(1);
+    @Override
+    public void setUponCompletion(DeliveryContent deliveryContent) {
+        super.setUponCompletion(deliveryContent);
+        if (deliveryContent != null) {
             //交付后的内容
             String picturesUrl = deliveryContent.getPicturesUrl();
             if (!TextUtils.isEmpty(picturesUrl)) {

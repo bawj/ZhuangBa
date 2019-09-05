@@ -12,7 +12,6 @@ import com.xiaomai.zhuangba.R;
 import com.xiaomai.zhuangba.adapter.ImgExhibitionAdapter;
 import com.xiaomai.zhuangba.data.bean.DeliveryContent;
 import com.xiaomai.zhuangba.fragment.advertisement.base.BaseAdvertisementFragment;
-import com.xiaomai.zhuangba.fragment.orderdetail.master.NewSubmitAcceptanceFragment;
 import com.xiaomai.zhuangba.util.ConstantUtil;
 import com.xiaomai.zhuangba.util.Util;
 import com.xiaomai.zhuangba.weight.GridSpacingItemDecoration;
@@ -54,11 +53,10 @@ public class MasterAdvertisementBeUnderConstructionFragment extends BaseAdvertis
     }
 
     @Override
-    public void setDeliveryContent(List<DeliveryContent> deliveryContents) {
+    public void setDeliveryContent(DeliveryContent deliveryContents) {
         super.setDeliveryContent(deliveryContents);
-        if (!deliveryContents.isEmpty()) {
-            DeliveryContent deliveryContent = deliveryContents.get(0);
-            String picturesUrl = deliveryContent.getPicturesUrl();
+        if (deliveryContents != null) {
+            String picturesUrl = deliveryContents.getPicturesUrl();
             if (!TextUtils.isEmpty(picturesUrl)) {
                 final List<String> urlList = Util.getList(picturesUrl);
                 imgExhibitionAdapter.setNewData(urlList);

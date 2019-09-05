@@ -51,6 +51,7 @@ public class Util {
             UMengUtil.deleteAlias(unique.getPhoneNumber());
         }
         DBHelper.getInstance().getUserInfoDao().deleteAll();
+        DBHelper.getInstance().getPushNotificationDBDao().deleteAll();
         SPUtils.getInstance().put(SpfConst.TOKEN , "");
     }
 

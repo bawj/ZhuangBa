@@ -1,6 +1,5 @@
 package com.xiaomai.zhuangba.fragment.base;
 
-import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.widget.LinearLayoutManager;

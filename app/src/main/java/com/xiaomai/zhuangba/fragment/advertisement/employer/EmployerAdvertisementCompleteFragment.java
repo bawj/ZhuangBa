@@ -51,11 +51,11 @@ public class EmployerAdvertisementCompleteFragment extends BaseAdvertisementFrag
     private ImgExhibitionAdapter imgExhibitionAfterAdapter;
 
 
-    public static EmployerAdvertisementUnderConstructionFragment newInstance(String orderCode, String orderType) {
+    public static EmployerAdvertisementCompleteFragment newInstance(String orderCode, String orderType) {
         Bundle args = new Bundle();
         args.putString(ConstantUtil.ORDER_CODE, orderCode);
         args.putString(ConstantUtil.ORDER_TYPE, orderType);
-        EmployerAdvertisementUnderConstructionFragment fragment = new EmployerAdvertisementUnderConstructionFragment();
+        EmployerAdvertisementCompleteFragment fragment = new EmployerAdvertisementCompleteFragment();
         fragment.setArguments(args);
         return fragment;
     }
@@ -82,11 +82,10 @@ public class EmployerAdvertisementCompleteFragment extends BaseAdvertisementFrag
     }
 
     @Override
-    public void setDeliveryContent(List<DeliveryContent> deliveryContents) {
+    public void setDeliveryContent(DeliveryContent deliveryContents) {
         super.setDeliveryContent(deliveryContents);
-        if (!deliveryContents.isEmpty()) {
-            DeliveryContent deliveryContent = deliveryContents.get(0);
-            String picturesUrl = deliveryContent.getPicturesUrl();
+        if (deliveryContents != null) {
+            String picturesUrl = deliveryContents.getPicturesUrl();
             if (!TextUtils.isEmpty(picturesUrl)) {
                 final List<String> urlList = Util.getList(picturesUrl);
                 imgExhibitionAdapter.setNewData(urlList);
@@ -101,9 +100,12 @@ public class EmployerAdvertisementCompleteFragment extends BaseAdvertisementFrag
                 });
             }
         }
+    }
 
-        if (!deliveryContents.isEmpty() && deliveryContents.size() > 1) {
-            DeliveryContent deliveryContent = deliveryContents.get(1);
+    @Override
+    public void setUponCompletion(DeliveryContent deliveryContent) {
+        super.setUponCompletion(deliveryContent);
+        if (deliveryContent != null) {
             //交付后的内容
             String picturesUrl = deliveryContent.getPicturesUrl();
             if (!TextUtils.isEmpty(picturesUrl)) {

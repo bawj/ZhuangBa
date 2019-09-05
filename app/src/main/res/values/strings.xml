@@ -253,7 +253,7 @@
     <string name="internship_master">实习师傅</string>
     <string name="observer">观察员</string>
     <string name="wallet_earnest_input_password">输入交易密码</string>
-    <string name="successful_refund_of_deposit">退换保证金成功</string>
+    <string name="successful_refund_of_deposit">退还保证金成功</string>
     <string name="i_have_read">我已阅读</string>
     <string name="go_pay">去缴纳</string>
     <string name="platform_master_rules">《平台师傅规则》</string>
@@ -488,4 +488,7 @@
     <string name="advertisement_start_construction_tip">注：务必上传高清照片</string>
     <string name="acceptance_rules">验收规则</string>
     <string name="advertising_bills">广告单</string>
+    <string name="application_for_acceptance_has_been_submitted">您的验收申请已提交</string>
+    <string name="bulk_acceptance">批量接单</string>
+    <string name="set_out">出发</string>
 </resources>
