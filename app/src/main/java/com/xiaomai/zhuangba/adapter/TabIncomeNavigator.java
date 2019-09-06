@@ -40,7 +40,7 @@ public class TabIncomeNavigator extends CommonNavigatorAdapter {
     public IPagerTitleView getTitleView(Context context, final int index) {
         SimplePagerTitleView simplePagerTitleView = new ScaleTransitionPagerTitleView(context);
         simplePagerTitleView.setText(dataList.get(index));
-        simplePagerTitleView.setTextSize(18);
+        simplePagerTitleView.setTextSize(16);
 
         //字体加粗
         TextPaint paint = simplePagerTitleView.getPaint();

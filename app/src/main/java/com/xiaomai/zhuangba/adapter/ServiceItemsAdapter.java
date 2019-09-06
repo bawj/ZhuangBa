@@ -32,7 +32,6 @@ public class ServiceItemsAdapter extends BaseQuickAdapter<OrderServiceItem, Base
         TextView tvItemServiceTotalMoney = helper.getView(R.id.tvItemServiceTotalMoney);
         TextView tvOrderDetailMaintenance = helper.getView(R.id.tvOrderDetailMaintenance);
 
-        // TODO: 2019/9/3 0003 图片 默认站位图
         GlideManager.loadImage(mContext, orderServiceItem.getIconUrl(), ivItemServiceLogo , R.drawable.ic_required_options);
 
         tvItemServiceName.setText(orderServiceItem.getServiceText());

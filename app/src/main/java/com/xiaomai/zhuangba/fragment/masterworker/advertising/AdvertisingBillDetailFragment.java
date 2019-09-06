@@ -169,7 +169,7 @@ public class AdvertisingBillDetailFragment extends BaseFragment implements ViewP
                 .subscribe(new BaseHttpRxObserver<Object>(getActivity()) {
                     @Override
                     protected void onSuccess(Object response) {
-                        refresh(i);
+                        eventManager.notifyObservers(String.valueOf(i), "", handler);
                     }
                 });
     }

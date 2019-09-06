@@ -33,9 +33,9 @@
 
         <RelativeLayout
             android:id="@+id/relSelectService"
-            android:visibility="gone"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:visibility="gone">
 
             <LinearLayout
                 android:id="@+id/laySelectService"
@@ -49,6 +49,7 @@
                     android:id="@+id/rvSelectServiceTitle"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
+                    android:layout_marginBottom="@dimen/tool_lib_36dp"
                     android:layout_weight="1" />
 
                 <LinearLayout

@@ -17,6 +17,7 @@ import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.example.toollib.util.AmountUtil;
 import com.example.toollib.util.spf.SPUtils;
 import com.example.toollib.util.spf.SpfConst;
 import com.google.gson.Gson;
@@ -255,6 +256,26 @@ public class Util {
             urlList = new ArrayList<>();
         }
         return urlList;
+    }
+
+
+    /**
+     * 大于一万 单位显示W
+     * @param title   标题
+     * @param content 显示数量
+     * @param string  标题改变
+     * @param string1 标题
+     * @param number 数量
+     */
+    public static void setTenThousand(TextView title , TextView content ,String string,String string1, int number){
+        if (number > 9999) {
+            double div = AmountUtil.div(number, 10000, 2);
+            content.setText(String.valueOf(div));
+            title.setText(string);
+        } else {
+            title.setText(string1);
+            content.setText(String.valueOf(number));
+        }
     }
 
 }

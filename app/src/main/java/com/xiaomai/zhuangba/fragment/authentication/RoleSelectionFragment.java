@@ -64,13 +64,11 @@ public class RoleSelectionFragment extends BaseLoginRegisteredFragment {
     public void startMasterAuthentication() {
         //师傅端 去认证
         startFragment(RealNameAuthenticationFragment.newInstance());
-        popBackStack();
     }
 
     @Override
     public void startEmployerAuthentication() {
         startFragment(EmployerRealNameAuthenticationFragment.newInstance());
-        popBackStack();
     }
 
     @Override

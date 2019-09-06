@@ -17,9 +17,7 @@ import com.xiaomai.zhuangba.data.db.DBHelper;
 import com.xiaomai.zhuangba.enums.StaticExplain;
 import com.xiaomai.zhuangba.fragment.authentication.AuthenticationFragment;
 import com.xiaomai.zhuangba.fragment.authentication.RoleSelectionFragment;
-import com.xiaomai.zhuangba.fragment.authentication.employer.EmployerAuthenticationFragment;
 import com.xiaomai.zhuangba.fragment.authentication.master.CertificationSuccessfulFragment;
-import com.xiaomai.zhuangba.fragment.authentication.master.MasterAuthenticationFragment;
 import com.xiaomai.zhuangba.fragment.employer.EmployerFragment;
 import com.xiaomai.zhuangba.fragment.guide.GuidePageFragment;
 import com.xiaomai.zhuangba.fragment.login.LoginFragment;
@@ -177,7 +175,7 @@ public class MainActivity extends BaseActivity {
         QMUIFragment currentFragment = getCurrentFragment();
         if (currentFragment instanceof LoginFragment || currentFragment instanceof MasterWorkerFragment
                 || currentFragment instanceof EmployerFragment || currentFragment instanceof AuthenticationFragment
-                || currentFragment instanceof CertificationSuccessfulFragment) {
+                || currentFragment instanceof CertificationSuccessfulFragment || currentFragment instanceof RoleSelectionFragment) {
             if (System.currentTimeMillis() - touchTime < WAIT_TIME) {
                 finish();
             } else {

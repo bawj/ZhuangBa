@@ -106,7 +106,7 @@ public class EmployerCompleteFragment extends EmployerUnderConstructionFragment 
         //新增维保
         List<OrderServiceItem> orderServiceItems = new ArrayList<>();
         for (OrderServiceItem orderServiceItem : orderServiceItemList) {
-            if (orderServiceItem.getMonthNumber() == 0) {
+            if (orderServiceItem.getMonthNumber() == 0 && !orderServiceItem.getServiceText().equals(getString(R.string.required_options))) {
                 orderServiceItems.add(orderServiceItem);
             }
         }

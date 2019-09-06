@@ -1,6 +1,5 @@
 package com.example.toollib.util;
 
-import com.example.toollib.enums.StaticExplain;
 import com.example.toollib.http.exception.ApiException;
 import com.example.toollib.http.version.MessageEvent;
 import com.example.toollib.http.version.Version;
@@ -19,12 +18,13 @@ public class LoginInterceptor {
     /**
      * token 过期 或 重复登录
      */
-    public static void tokenReLogin(ApiException apiException){
-        if (apiException.getStatus() == VersionEnums.LOGIN_STATUS.getCode()
+    public static boolean tokenReLogin(ApiException apiException){
+        boolean flag = apiException.getStatus() == VersionEnums.LOGIN_STATUS.getCode()
                 || apiException.getStatus() == VersionEnums.LOGIN_STATUS_.getCode()
-                || apiException.getStatus() == VersionEnums.LOGIN_OTHER_STATUS.getCode()) {
+                || apiException.getStatus() == VersionEnums.LOGIN_OTHER_STATUS.getCode();
+        if (flag) {
             EventBus.getDefault().post(new MessageEvent(apiException.getStatus() , new Version()));
         }
+        return flag;
     }
-
 }

@@ -134,7 +134,7 @@ public class EmployerUnderConstructionFragment extends BaseEmployerDetailFragmen
         //是否显示 新增维保
         List<OrderServiceItem> orderServiceItemList = new ArrayList<>();
         for (OrderServiceItem orderServiceItem : orderServiceItems) {
-            if (orderServiceItem.getMonthNumber() == 0) {
+            if (orderServiceItem.getMonthNumber() == 0 && !orderServiceItem.getServiceText().equals(getString(R.string.required_options))) {
                 orderServiceItemList.add(orderServiceItem);
             }
         }

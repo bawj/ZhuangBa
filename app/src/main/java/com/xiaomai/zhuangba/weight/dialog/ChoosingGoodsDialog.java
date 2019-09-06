@@ -68,6 +68,7 @@ public class ChoosingGoodsDialog {
         tvChoosingMaintenanceTime = view.findViewById(R.id.tvChoosingMaintenanceTime);
         //确认添加
         LinearLayout laySelectAdd = view.findViewById(R.id.laySelectAdd);
+
         animChoosingShopBtn.setOnAddDelListener(new IOnAddDelListeners() {
             @Override
             public void onAddSuccess(int mCount) {
@@ -130,6 +131,12 @@ public class ChoosingGoodsDialog {
             tvChoosingMaintenanceTime.setText(mContext.getString(R.string.not_choosing_maintenance_));
             tvChoosingMoney.setText(mContext.getString(R.string.content_money, String.valueOf(0)));
         }
+
+
+        //设置默认值 默认数量1 不选择维保
+        animChoosingShopBtn.setIsStatus(1);
+        setTvChoosingMoney(mContext, serviceSubcategoryProject, maintenance, 1);
+
         alertDialog.setView(view);
         return this;
     }

@@ -35,6 +35,7 @@ import com.xiaomai.zhuangba.enums.StaticExplain;
 import com.xiaomai.zhuangba.enums.StringTypeExplain;
 import com.xiaomai.zhuangba.fragment.personal.MessageFragment;
 import com.xiaomai.zhuangba.fragment.personal.PricingSheetFragment;
+import com.xiaomai.zhuangba.util.Util;
 
 import net.lucode.hackware.magicindicator.MagicIndicator;
 import net.lucode.hackware.magicindicator.ViewPagerHelper;
@@ -69,14 +70,20 @@ public class BaseMasterEmployerFragment extends BaseFragment<IMasterEmployerModu
 
     @BindView(R.id.tvNumberOfTeachers)
     TextView tvNumberOfTeachers;
+    @BindView(R.id.tvNumberOfTeachers_)
+    TextView tvNumberOfTeachers_;
     @BindView(R.id.tvOrderQuantity)
     TextView tvOrderQuantity;
+    @BindView(R.id.tvOrderQuantity_)
+    TextView tvOrderQuantity_;
     @BindView(R.id.tvTaskAmount_)
     TextView tvTaskAmount_;
     @BindView(R.id.tvTaskAmount)
     TextView tvTaskAmount;
     @BindView(R.id.tvNumberOfEmployers)
     TextView tvNumberOfEmployers;
+    @BindView(R.id.tvNumberOfEmployers_)
+    TextView tvNumberOfEmployers_;
     /**
      * 观察者管理
      */
@@ -258,8 +265,6 @@ public class BaseMasterEmployerFragment extends BaseFragment<IMasterEmployerModu
 
     @Override
     public void statisticsSuccess(StatisticsData statisticsData) {
-        tvNumberOfTeachers.setText(String.valueOf(statisticsData.getUserNumber()));
-        tvOrderQuantity.setText(String.valueOf(statisticsData.getOrderNumber()));
 
         double totalAmount = statisticsData.getTotalAmount();
         if (totalAmount > 999999) {
@@ -267,9 +272,18 @@ public class BaseMasterEmployerFragment extends BaseFragment<IMasterEmployerModu
             tvTaskAmount.setText(String.valueOf(div));
             tvTaskAmount_.setText(getString(R.string.task_amount_));
         } else {
+            tvTaskAmount_.setText(getString(R.string.task_amount));
             tvTaskAmount.setText(String.valueOf((int) Math.floor(statisticsData.getTotalAmount())));
         }
-        tvNumberOfEmployers.setText(String.valueOf(statisticsData.getEmployerNumber()));
+        Util.setTenThousand(tvNumberOfTeachers_ , tvNumberOfTeachers, getString(R.string.number_of_teachers_)
+                ,getString(R.string.number_of_teachers) , statisticsData.getUserNumber());
+        Util.setTenThousand(tvOrderQuantity_ , tvOrderQuantity, getString(R.string.order_quantity_),
+                getString(R.string.order_quantity) , statisticsData.getOrderNumber());
+        Util.setTenThousand(tvNumberOfEmployers_ , tvNumberOfEmployers, getString(R.string.number_of_employers_),
+                getString(R.string.number_of_employers)  , statisticsData.getEmployerNumber());
+//        tvNumberOfTeachers.setText(String.valueOf(statisticsData.getUserNumber()));
+//        tvOrderQuantity.setText(String.valueOf(statisticsData.getOrderNumber()));
+//        tvNumberOfEmployers.setText(String.valueOf(statisticsData.getEmployerNumber()));
     }
 
     @Override
