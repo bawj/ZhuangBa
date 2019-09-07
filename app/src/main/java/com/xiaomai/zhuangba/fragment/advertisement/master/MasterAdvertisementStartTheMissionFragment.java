@@ -2,16 +2,22 @@ package com.xiaomai.zhuangba.fragment.advertisement.master;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 
 import com.example.toollib.http.HttpResult;
 import com.example.toollib.http.observer.BaseHttpRxObserver;
 import com.example.toollib.http.util.RxUtils;
 import com.xiaomai.zhuangba.R;
+import com.xiaomai.zhuangba.data.bean.OngoingOrdersList;
+import com.xiaomai.zhuangba.data.bean.OrderDateList;
 import com.xiaomai.zhuangba.fragment.advertisement.base.BaseAdvertisementFragment;
 import com.xiaomai.zhuangba.fragment.masterworker.MasterWorkerFragment;
 import com.xiaomai.zhuangba.http.ServiceUrl;
 import com.xiaomai.zhuangba.util.ConstantUtil;
 
+import java.util.List;
+
+import butterknife.BindView;
 import butterknife.OnClick;
 
 /**
@@ -21,6 +27,9 @@ import butterknife.OnClick;
  * 师傅 广告单 已接单
  */
 public class MasterAdvertisementStartTheMissionFragment extends BaseAdvertisementFragment {
+
+    @BindView(R.id.btnCancelTask)
+    Button btnCancelTask;
 
     public static MasterAdvertisementStartTheMissionFragment newInstance(String orderCode, String orderType) {
         Bundle args = new Bundle();
@@ -44,6 +53,11 @@ public class MasterAdvertisementStartTheMissionFragment extends BaseAdvertisemen
                 break;
             default:
         }
+    }
+
+    @Override
+    public void setIsCancelVisibility(int visibility) {
+        btnCancelTask.setVisibility(View.VISIBLE);
     }
 
     private void taskAcceptance() {

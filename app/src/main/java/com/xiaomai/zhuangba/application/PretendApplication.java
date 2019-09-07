@@ -42,8 +42,7 @@ public class PretendApplication extends Application {
     public static final String BASE_URL = "https://zb.4000750222.com/testZhuangBa/";
 //    public static final String BASE_URL = "http://v8y57q.natappfree.cc/";
 //    public static final String BASE_URL = "http://2m4179200z.qicp.vip:19033/";
-//    public static final String BASE_URL = "http://192.168.0.117:7961/";
-//    public static final String BASE_URL = "http://192.168.0.194:7963/";
+//    public static final String BASE_URL = "http://192.168.0.178:7961/";
 //     public static final String BASE_URL = "https://zb.4000750222.com/zhuangBa/";
 
     public static PretendApplication getInstance() {

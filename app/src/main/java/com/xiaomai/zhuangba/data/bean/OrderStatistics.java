@@ -1,5 +1,7 @@
 package com.xiaomai.zhuangba.data.bean;
 
+import java.math.BigDecimal;
+
 /**
  * @author Administrator
  * @date 2019/7/6 0006
@@ -17,7 +19,7 @@ public class OrderStatistics {
     private int distribution;
 
     public double getMasterOrderAmount() {
-        return masterOrderAmount;
+        return new BigDecimal(masterOrderAmount).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
     }
 
     public void setMasterOrderAmount(double masterOrderAmount) {

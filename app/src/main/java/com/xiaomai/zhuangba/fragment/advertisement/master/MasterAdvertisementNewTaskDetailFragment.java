@@ -2,6 +2,7 @@ package com.xiaomai.zhuangba.fragment.advertisement.master;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 
 import com.example.toollib.http.HttpResult;
 import com.example.toollib.http.observer.BaseHttpRxObserver;
@@ -12,6 +13,7 @@ import com.xiaomai.zhuangba.fragment.masterworker.MasterWorkerFragment;
 import com.xiaomai.zhuangba.http.ServiceUrl;
 import com.xiaomai.zhuangba.util.ConstantUtil;
 
+import butterknife.BindView;
 import butterknife.OnClick;
 
 /**
@@ -21,6 +23,9 @@ import butterknife.OnClick;
  * 师傅 广告单 新任务详情
  */
 public class MasterAdvertisementNewTaskDetailFragment extends BaseAdvertisementFragment {
+
+    @BindView(R.id.btnCancelTask)
+    Button btnCancelTask;
 
     public static MasterAdvertisementNewTaskDetailFragment newInstance(String orderCode, String orderType) {
         Bundle args = new Bundle();
@@ -49,6 +54,11 @@ public class MasterAdvertisementNewTaskDetailFragment extends BaseAdvertisementF
                 break;
             default:
         }
+    }
+
+    @Override
+    public void setIsCancelVisibility(int visibility) {
+        btnCancelTask.setVisibility(visibility);
     }
 
     private void taskAcceptance() {
