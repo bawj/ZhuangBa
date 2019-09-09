@@ -1,31 +1,20 @@
 package com.xiaomai.zhuangba.data.module.authentication;
 
-import android.net.Uri;
 import android.text.TextUtils;
 
 import com.example.toollib.data.BaseModule;
-import com.example.toollib.data.base.BaseCallback;
 import com.example.toollib.http.HttpResult;
 import com.example.toollib.http.observer.BaseHttpRxObserver;
-import com.example.toollib.http.observer.BaseHttpZipRxObserver;
 import com.example.toollib.http.util.RxUtils;
 import com.example.toollib.util.ToastUtil;
 import com.google.gson.Gson;
 import com.xiaomai.zhuangba.R;
-import com.xiaomai.zhuangba.data.bean.ImgUrl;
 import com.xiaomai.zhuangba.data.bean.UserInfo;
 import com.xiaomai.zhuangba.data.db.DBHelper;
 import com.xiaomai.zhuangba.enums.StaticExplain;
 import com.xiaomai.zhuangba.http.ServiceUrl;
 
-import java.io.File;
-import java.net.URI;
-import java.net.URISyntaxException;
-
-import io.reactivex.Observable;
-import io.reactivex.functions.BiFunction;
 import okhttp3.MediaType;
-import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 
 /**

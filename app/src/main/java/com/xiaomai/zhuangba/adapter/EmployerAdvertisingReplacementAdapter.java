@@ -30,7 +30,7 @@ public class EmployerAdvertisingReplacementAdapter extends BaseQuickAdapter<Empl
         tvServiceRemarks.setText(item.getRemark());
         //发布时间
         TextView tvReleaseDate = helper.getView(R.id.tvReleaseDate);
-        tvReleaseDate.setText(item.getPublishTime());
+        tvReleaseDate.setText(item.getReleaseTime());
         //批量编号
         TextView tvBatchNumber = helper.getView(R.id.tvBatchNumber);
         tvBatchNumber.setText(item.getBatchCode());

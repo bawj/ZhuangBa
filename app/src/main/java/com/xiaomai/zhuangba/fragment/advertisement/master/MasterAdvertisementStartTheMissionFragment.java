@@ -56,8 +56,8 @@ public class MasterAdvertisementStartTheMissionFragment extends BaseAdvertisemen
     }
 
     @Override
-    public void setIsCancelVisibility(int visibility) {
-        btnCancelTask.setVisibility(View.VISIBLE);
+    public void setIsCancelVisibility(double orderAmount) {
+        btnCancelTask.setVisibility(orderAmount == 0 ? View.GONE : View.VISIBLE);
     }
 
     private void taskAcceptance() {

@@ -24,7 +24,16 @@ public class EmployerAdvertisingReplacement {
     private String publishTime;
     private String orderEndTime;
     private double sumMoney;
+    private String releaseTime;
     private int count;
+
+    public String getReleaseTime() {
+        return releaseTime == null ? "" : releaseTime;
+    }
+
+    public void setReleaseTime(String releaseTime) {
+        this.releaseTime = releaseTime;
+    }
 
     public String getBatchCode() {
         return TextUtils.isEmpty(batchCode) ? "" : batchCode;

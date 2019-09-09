@@ -179,11 +179,14 @@ public class Util {
     }
 
     public static String getDate(String date) {
+        if (date.equals("长期")){
+            return "9999.99.99";
+        }
         if (!TextUtils.isEmpty(date) && date.length() >= 8) {
             String substring = date.substring(0, 4);
             String substring1 = date.substring(4, 6);
             String substring2 = date.substring(6, 8);
-            return substring + "-" + substring1 + "-" + substring2;
+            return substring + "." + substring1 + "." + substring2;
         }
         return "";
     }

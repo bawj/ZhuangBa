@@ -144,10 +144,10 @@ public class BaseAdvertisementFragment extends BaseFragment<IBaseAdvertisementMo
         orderDateListAdapter.setNewData(orderDateLists);
 
         //是否显示 取消订单按钮  总金额=0  不显示
-        setIsCancelVisibility(ongoingOrdersList.getOrderAmount() == 0 ? View.GONE : View.VISIBLE);
+        setIsCancelVisibility(ongoingOrdersList.getOrderAmount());
     }
 
-    public void setIsCancelVisibility(int visibility) {
+    public void setIsCancelVisibility(double orderAmount) {
     }
 
     public void setDeliveryContent(DeliveryContent deliveryContents) {
