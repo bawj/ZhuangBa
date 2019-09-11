@@ -6,6 +6,7 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.RectF;
 import android.support.v7.widget.AppCompatEditText;
+import android.text.Editable;
 import android.text.InputType;
 import android.util.AttributeSet;
 import android.util.TypedValue;
@@ -103,12 +104,15 @@ public class CodeEditText extends AppCompatEditText {
             mText = text.toString();
         } else {
             setText(mText);
-            setSelection(getText().toString().length());  //光标制动到最后
-            //调用setText(mText)之后键盘会还原，再次把键盘设置为数字键盘；
-            setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_VARIATION_NORMAL);
+            //光标制动到最后
+            if (getText() != null) {
+                setSelection(getText().toString().length());
+                //调用setText(mText)之后键盘会还原，再次把键盘设置为数字键盘；
+                setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_VARIATION_NORMAL);
+            }
         }
         if (OnTextChangeListener != null && mText.length() == textLength) {
-            OnTextChangeListener.onTextChange(mText);
+            OnTextChangeListener.onTextChange(mText == null ? "" : mText);
         }
     }
 
@@ -148,7 +152,7 @@ public class CodeEditText extends AppCompatEditText {
         int Wide = Math.min(getMeasuredHeight(), getMeasuredWidth() / textLength);
 
         int Width = Wide * textLength;
-        int paddingLeft =(getWidth() - Width) / 2;
+        int paddingLeft = (getWidth() - Width) / 2;
 
         for (int i = 0; i < textLength; i++) {
             //区分已输入和未输入的边框颜色

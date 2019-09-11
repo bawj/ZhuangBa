@@ -11,14 +11,12 @@ import com.example.toollib.http.observer.BaseHttpRxObserver;
 import com.example.toollib.http.util.RxUtils;
 import com.example.toollib.weight.SingleCountDownView;
 import com.xiaomai.zhuangba.R;
-import com.xiaomai.zhuangba.enums.StaticExplain;
 import com.xiaomai.zhuangba.enums.StringTypeExplain;
 import com.xiaomai.zhuangba.http.ServiceUrl;
 import com.xiaomai.zhuangba.weight.CodeEditText;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import io.reactivex.Observable;
 
 /**
  * @author Administrator
@@ -67,7 +65,9 @@ public class UpdatePassTwoFragment extends BaseFragment {
         codeTxt.setOnTextChangeListener(new CodeEditText.OnTextChangeListener() {
             @Override
             public void onTextChange(String pwd) {
-                codeTxt.setTag(pwd);
+                if (codeTxt != null){
+                    codeTxt.setTag(pwd);
+                }
             }
         });
     }

@@ -13,6 +13,8 @@ import com.xiaomai.zhuangba.util.MaintenanceUtil;
 
 import org.joda.time.DateTime;
 
+import java.math.BigDecimal;
+
 /**
  * @author Administrator
  * @date 2019/8/9 0009
@@ -42,7 +44,7 @@ public class MasterMaintenancePolicyAdapter extends BaseQuickAdapter<Maintenance
         tvContactInformation.setText(item.getEmployerPhone());
         //总金额
         TextView tvMoney = helper.getView(R.id.tvMoney);
-        tvMoney.setText(mContext.getString(R.string.content_money , item.getAmount()));
+        tvMoney.setText(mContext.getString(R.string.content_money , String.valueOf(new BigDecimal(item.getAmount()).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue())));
         //结束时间
         String endTime = item.getEndTime();
         if (!TextUtils.isEmpty(endTime)){
