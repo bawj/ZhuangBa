@@ -26,8 +26,8 @@ public class DaoMaster extends AbstractDaoMaster {
         ShopCarDataDao.createTable(db, ifNotExists);
         UserInfoDao.createTable(db, ifNotExists);
         MaterialsListDBDao.createTable(db, ifNotExists);
-        SlottingListDBDao.createTable(db, ifNotExists);
         ShopAuxiliaryMaterialsDBDao.createTable(db, ifNotExists);
+        SlottingListDBDao.createTable(db, ifNotExists);
     }
 
     /** Drops underlying database table using DAOs. */
@@ -37,8 +37,8 @@ public class DaoMaster extends AbstractDaoMaster {
         ShopCarDataDao.dropTable(db, ifExists);
         UserInfoDao.dropTable(db, ifExists);
         MaterialsListDBDao.dropTable(db, ifExists);
-        SlottingListDBDao.dropTable(db, ifExists);
         ShopAuxiliaryMaterialsDBDao.dropTable(db, ifExists);
+        SlottingListDBDao.dropTable(db, ifExists);
     }
 
     /**
@@ -62,8 +62,8 @@ public class DaoMaster extends AbstractDaoMaster {
         registerDaoClass(ShopCarDataDao.class);
         registerDaoClass(UserInfoDao.class);
         registerDaoClass(MaterialsListDBDao.class);
-        registerDaoClass(SlottingListDBDao.class);
         registerDaoClass(ShopAuxiliaryMaterialsDBDao.class);
+        registerDaoClass(SlottingListDBDao.class);
     }
 
     public DaoSession newSession() {

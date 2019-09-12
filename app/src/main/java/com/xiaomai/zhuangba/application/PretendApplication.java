@@ -44,6 +44,7 @@ public class PretendApplication extends Application {
 //    public static final String BASE_URL = "http://2m4179200z.qicp.vip:19033/";
 //    public static final String BASE_URL = "http://192.168.0.195:7963/";
 //     public static final String BASE_URL = "https://zb.4000750222.com/zhuangBa/";
+    
      public static final String BASE_URL = "https://zb.hangzhouzhuangba.com/testZhuangBas/";
 
     public static PretendApplication getInstance() {
@@ -89,6 +90,7 @@ public class PretendApplication extends Application {
                     if (extra != null) {
                         pushNotificationDB.setOrderCode(extra.getCode());
                         pushNotificationDB.setOrderType(extra.getOrderType());
+                        pushNotificationDB.setType(extra.getType());
                         pushNotificationDB.setTime(extra.getTime());
                     }
                     PushNotification.PayloadBean.BodyBean body = pushNotification.getBody();
