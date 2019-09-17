@@ -294,9 +294,11 @@ public class OrderInformationModule extends BaseModule<IOrderInformationView> im
             //任务总数量
             int number = DensityUtils.stringTypeInteger(shopCarData.getNumber());
             //订单总金额
-            double orderAmount = ShopCarUtil.getTotalMoneys(number, DensityUtils.stringTypeDouble(shopCarData.getMoney())
-                    , DensityUtils.stringTypeDouble(shopCarData.getMoney2()), DensityUtils.stringTypeDouble(shopCarData.getMoney3())
-                    , DensityUtils.stringTypeDouble(shopCarData.getMaintenanceMoney()));
+///            double orderAmount = ShopCarUtil.getTotalMoneys(number, DensityUtils.stringTypeDouble(shopCarData.getMoney())
+//                    , DensityUtils.stringTypeDouble(shopCarData.getMoney2()), DensityUtils.stringTypeDouble(shopCarData.getMoney3())
+//                    , DensityUtils.stringTypeDouble(shopCarData.getMaintenanceMoney()));
+            double orderAmount = ShopCarUtil.getTotalMoney(number, DensityUtils.stringTypeDouble(shopCarData.getMoney())
+                    , DensityUtils.stringTypeDouble(shopCarData.getMoney2()), DensityUtils.stringTypeDouble(shopCarData.getMoney3()));
             //订单服务项目
             OrderServicesBean orderServicesBean = new OrderServicesBean();
             //服务项目ID
@@ -311,8 +313,7 @@ public class OrderInformationModule extends BaseModule<IOrderInformationView> im
                 //维保时间 单位（月）
                 orderServicesBean.setMonthNumber(DensityUtils.stringTypeInteger(shopCarData.getMaintenanceTime()));
                 //维保 金额 * 项目数量
-                double maintenanceAmount = DensityUtils.stringTypeDouble(shopCarData.getMaintenanceMoney())
-                        * DensityUtils.stringTypeInteger(shopCarData.getNumber());
+                double maintenanceAmount = DensityUtils.stringTypeDouble(shopCarData.getMaintenanceMoney()) * DensityUtils.stringTypeInteger(shopCarData.getNumber());
                 orderServicesBean.setMaintenanceAmount(maintenanceAmount);
             }
             orderServicesBeans.add(orderServicesBean);

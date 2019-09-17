@@ -13,8 +13,10 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.toollib.base.BaseFragment;
 import com.example.toollib.data.IBaseModule;
 import com.example.toollib.http.HttpResult;
+import com.example.toollib.http.exception.ApiException;
 import com.example.toollib.http.observer.BaseHttpRxObserver;
 import com.example.toollib.http.util.RxUtils;
+import com.example.toollib.util.Log;
 import com.example.toollib.util.spf.SPUtils;
 import com.google.gson.Gson;
 import com.xiaomai.zhuangba.R;
@@ -97,6 +99,7 @@ public class ScopeOfServiceFragment extends BaseFragment implements BaseQuickAda
     }
 
     public void submission() {
+        Log.e("服务范围设定 提交");
         String address = getAddress();
         if (TextUtils.isEmpty(address)) {
             showToast(getString(R.string.please_check_service_address));
@@ -139,6 +142,12 @@ public class ScopeOfServiceFragment extends BaseFragment implements BaseQuickAda
                                 DBHelper.getInstance().getUserInfoDao().deleteAll();
                                 DBHelper.getInstance().getUserInfoDao().insert(response);
                                 startFragment(CertificationSuccessfulFragment.newInstance());
+                            }
+
+                            @Override
+                            public void onError(ApiException apiException) {
+                                super.onError(apiException);
+                                Log.e("服务范围设定 error" + apiException.toString());
                             }
                         });
             }

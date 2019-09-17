@@ -293,6 +293,14 @@ public class ShopCarUtil {
         return new BigDecimal(totalMoney).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
     }
 
+    /**
+     * @param number 数量
+     * @param price 价格1
+     * @param price1 价格2
+     * @param price2 价格3
+     * @param maintenancePrice 维保金额
+     * @return 服务项目带维保金额的价格
+     */
     public static Double getTotalMoneys(int number, double price, double price1, double price2, double maintenancePrice) {
         Double priceNumber = 0.0;
         for (int i = 0; i < number; i++) {
@@ -307,6 +315,30 @@ public class ShopCarUtil {
             }
         }
         priceNumber += number * maintenancePrice;
+        return new BigDecimal(priceNumber).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+    }
+
+
+    /**
+     * @param number 数量
+     * @param price 价格1
+     * @param price1 价格2
+     * @param price2 价格3
+     * @return 服务项目不带维保金额的价格
+     */
+    public static Double getTotalMoney(int number, double price, double price1, double price2) {
+        Double priceNumber = 0.0;
+        for (int i = 0; i < number; i++) {
+            if (i == 0) {
+                priceNumber += price;
+            } else if (i == 1) {
+                priceNumber += price1;
+            } else if (i == 2) {
+                priceNumber += price2;
+            } else {
+                priceNumber += price2;
+            }
+        }
         return new BigDecimal(priceNumber).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
     }
 }
