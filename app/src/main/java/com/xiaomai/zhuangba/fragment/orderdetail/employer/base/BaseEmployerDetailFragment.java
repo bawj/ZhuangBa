@@ -50,4 +50,9 @@ public class BaseEmployerDetailFragment extends BaseOrderDetailFragment<IEmploye
         //总金额
         tvBaseOrderDetailTotalMoney.setText(getString(R.string.content_money, String.valueOf(ongoingOrdersList.getOrderAmount())));
     }
+
+    @Override
+    public void goAuthentication() {
+
+    }
 }

@@ -902,4 +902,12 @@ public interface IApi {
      */
     @POST("order/nowWeLeaveAllAdvertising")
     Observable<HttpResult<Object>> nowWeLeaveAllAdvertising(@Body RequestBody requestBody);
+
+
+    /**
+     * 查询是否认证
+     * @return observable
+     */
+    @GET("/userRole/verifyAccountNumber")
+    Observable<HttpResult<String>> verifyAccountNumber();
 }

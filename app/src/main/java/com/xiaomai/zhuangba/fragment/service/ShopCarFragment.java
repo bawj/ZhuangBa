@@ -4,12 +4,10 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.toollib.base.BaseFragment;
-import com.example.toollib.data.IBaseModule;
 import com.example.toollib.http.HttpResult;
 import com.example.toollib.http.observer.BaseHttpRxObserver;
 import com.example.toollib.http.util.RxUtils;
@@ -21,6 +19,9 @@ import com.xiaomai.zhuangba.data.bean.ShopCarData;
 import com.xiaomai.zhuangba.data.bean.Slotting;
 import com.xiaomai.zhuangba.data.bean.db.ShopAuxiliaryMaterialsDB;
 import com.xiaomai.zhuangba.data.db.DBHelper;
+import com.xiaomai.zhuangba.data.module.shop.IShopCarModule;
+import com.xiaomai.zhuangba.data.module.shop.IShopCarView;
+import com.xiaomai.zhuangba.data.module.shop.ShopCarModule;
 import com.xiaomai.zhuangba.enums.StaticExplain;
 import com.xiaomai.zhuangba.http.ServiceUrl;
 import com.xiaomai.zhuangba.util.ShopCarUtil;
@@ -32,6 +33,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.OnClick;
 
+import static com.xiaomai.zhuangba.fragment.SelectServiceFragment.ORDER_ADDRESS_GSON;
 import static com.xiaomai.zhuangba.fragment.SelectServiceFragment.SERVICE_ID;
 import static com.xiaomai.zhuangba.fragment.SelectServiceFragment.SERVICE_TEXT;
 
@@ -41,7 +43,7 @@ import static com.xiaomai.zhuangba.fragment.SelectServiceFragment.SERVICE_TEXT;
  * <p>
  * 购物车
  */
-public class ShopCarFragment extends BaseFragment implements ShopCarAdapter.IShopCarAdapterCallBack, View.OnClickListener {
+public class ShopCarFragment extends BaseFragment<IShopCarModule> implements ShopCarAdapter.IShopCarAdapterCallBack, View.OnClickListener , IShopCarView {
 
     @BindView(R.id.rvShopCar)
     RecyclerView rvShopCar;
@@ -51,10 +53,11 @@ public class ShopCarFragment extends BaseFragment implements ShopCarAdapter.ISho
     private ShopCarAdapter shopCarAdapter;
     private View headView;
 
-    public static ShopCarFragment newInstance(String largeClassServiceId, String serviceText) {
+    public static ShopCarFragment newInstance(String largeClassServiceId, String serviceText, String orderAddressGson) {
         Bundle args = new Bundle();
         args.putString(SERVICE_ID, largeClassServiceId);
         args.putString(SERVICE_TEXT, serviceText);
+        args.putString(ORDER_ADDRESS_GSON , orderAddressGson);
         ShopCarFragment fragment = new ShopCarFragment();
         fragment.setArguments(args);
         return fragment;
@@ -158,7 +161,8 @@ public class ShopCarFragment extends BaseFragment implements ShopCarAdapter.ISho
     public void onViewClicked() {
         Integer totalNumber = ShopCarUtil.getTotalNumber();
         if (totalNumber > 0) {
-            startFragment(SubmitOrderInformationFragment.newInstance(getServiceId(), getServiceText()));
+            //提交
+            iModule.submitOrder();
         } else {
             ToastUtil.showShort(getString(R.string.please_select_the_service_items));
         }
@@ -200,14 +204,22 @@ public class ShopCarFragment extends BaseFragment implements ShopCarAdapter.ISho
                 }).showDialog();
     }
 
-    private String getServiceId() {
+    @Override
+    public void placeOrderSuccess(String requestBodyString) {
+        //提交成功
+        startFragment(PaymentDetailsFragment.newInstance(requestBodyString));
+    }
+
+    @Override
+    public String getServiceId() {
         if (getArguments() != null) {
             return getArguments().getString(SERVICE_ID);
         }
         return "";
     }
 
-    private String getServiceText() {
+    @Override
+    public String getServiceText() {
         if (getArguments() != null) {
             return getArguments().getString(SERVICE_TEXT);
         }
@@ -215,8 +227,16 @@ public class ShopCarFragment extends BaseFragment implements ShopCarAdapter.ISho
     }
 
     @Override
-    protected IBaseModule initModule() {
+    public String getOrderAddressGson(){
+        if (getArguments() != null){
+            return getArguments().getString(ORDER_ADDRESS_GSON);
+        }
         return null;
+    }
+
+    @Override
+    protected IShopCarModule initModule() {
+        return new ShopCarModule();
     }
 
     @Override

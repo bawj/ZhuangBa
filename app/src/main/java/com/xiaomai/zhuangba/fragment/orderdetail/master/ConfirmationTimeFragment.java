@@ -70,7 +70,8 @@ public class ConfirmationTimeFragment extends BaseFragment {
             tvName.setText(ongoingOrdersList.getName());
             tvPhone.setText(ongoingOrdersList.getTelephone());
             tvAddress.setText(ongoingOrdersList.getAddress());
-            tvDate.setText(ongoingOrdersList.getAppointmentTime());
+            //产品 需要 让师傅 必须选一次 确认时间
+            //tvDate.setText(ongoingOrdersList.getAppointmentTime());
         }
     }
 

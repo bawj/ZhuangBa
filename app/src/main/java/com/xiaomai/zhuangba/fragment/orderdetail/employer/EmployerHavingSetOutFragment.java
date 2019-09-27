@@ -16,6 +16,7 @@ import com.xiaomai.zhuangba.data.bean.OngoingOrdersList;
 import com.xiaomai.zhuangba.data.bean.ServiceData;
 import com.xiaomai.zhuangba.fragment.SelectServiceFragment;
 import com.xiaomai.zhuangba.fragment.orderdetail.employer.base.BaseEmployerDetailFragment;
+import com.xiaomai.zhuangba.fragment.service.SubmitOrderInformationFragment;
 import com.xiaomai.zhuangba.http.ServiceUrl;
 import com.xiaomai.zhuangba.util.ConstantUtil;
 import java.util.List;
@@ -84,19 +85,20 @@ public class EmployerHavingSetOutFragment extends BaseEmployerDetailFragment {
                 break;
             case R.id.btnNewTaskReceipt:
                 //新增订单
-                Observable<HttpResult<List<ServiceData>>> serviceCategory = ServiceUrl.getUserApi().getServiceCategory();
-                RxUtils.getObservable(serviceCategory)
-                        .compose(this.<HttpResult<List<ServiceData>>>bindToLifecycle())
-                        .subscribe(new BaseHttpRxObserver<List<ServiceData>>(getActivity()) {
-                            @Override
-                            protected void onSuccess(List<ServiceData> serviceDataList) {
-                                if (serviceDataList != null && !serviceDataList.isEmpty()) {
-                                    ServiceData serviceData = serviceDataList.get(0);
-                                    startFragment(SelectServiceFragment.newInstance(String.valueOf(serviceData.getServiceId()),
-                                            serviceData.getServiceText()));
-                                }
-                            }
-                        });
+                startFragment(SubmitOrderInformationFragment.newInstance());
+//                Observable<HttpResult<List<ServiceData>>> serviceCategory = ServiceUrl.getUserApi().getServiceCategory();
+//                RxUtils.getObservable(serviceCategory)
+//                        .compose(this.<HttpResult<List<ServiceData>>>bindToLifecycle())
+//                        .subscribe(new BaseHttpRxObserver<List<ServiceData>>(getActivity()) {
+//                            @Override
+//                            protected void onSuccess(List<ServiceData> serviceDataList) {
+//                                if (serviceDataList != null && !serviceDataList.isEmpty()) {
+//                                    ServiceData serviceData = serviceDataList.get(0);
+//                                    startFragment(SelectServiceFragment.newInstance(String.valueOf(serviceData.getServiceId()),
+//                                            serviceData.getServiceText()));
+//                                }
+//                            }
+//                        });
                 break;
             default:
         }

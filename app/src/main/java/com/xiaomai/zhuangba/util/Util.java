@@ -26,6 +26,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
 import com.xiaomai.zhuangba.R;
+import com.xiaomai.zhuangba.data.bean.District;
 import com.xiaomai.zhuangba.data.bean.ProvinceBean;
 import com.xiaomai.zhuangba.data.bean.ProvincialData;
 import com.xiaomai.zhuangba.data.bean.UserInfo;
@@ -207,7 +208,7 @@ public class Util {
 
     }
 
-    public static List<ProvincialData> getProvincialData(Context mContext) {
+    private static List<ProvincialData> getProvincialData(Context mContext) {
         StringBuilder newstringBuilder = new StringBuilder();
         InputStream inputStream = null;
         try {
@@ -229,9 +230,68 @@ public class Util {
         }.getType());
     }
 
+
+    public static void parseData(Context mContext, List<District> options1Items
+            , ArrayList<ArrayList<String>> options2Items , ArrayList<ArrayList<ArrayList<String>>> options3Items) {
+        ArrayList<District> district = getDistrict(mContext);
+        options1Items.addAll(district);
+        //遍历省份
+        for (int i = 0; i < district.size(); i++) {
+            //该省的城市列表（第二级）
+            ArrayList<String> cityList = new ArrayList<>();
+            //该省的所有地区列表（第三极）
+            ArrayList<ArrayList<String>> provinceAreaList = new ArrayList<>();
+            //遍历该省份的所有城市
+            for (int c = 0; c < district.get(i).getCity().size(); c++) {
+                String cityName = district.get(i).getCity().get(c).getName();
+                //添加城市
+                cityList.add(cityName);
+                //该城市的所有地区列表
+                ArrayList<String> cityAreaList = new ArrayList<>();
+                List<District.CityBean.AreaBean> area = district.get(i).getCity().get(c).getArea();
+                if (area != null){
+                    for (int i1 = 0; i1 < area.size(); i1++) {
+                        cityAreaList.add(area.get(i1).getName());
+                    }
+                }
+                //添加该省所有地区数据
+                provinceAreaList.add(cityAreaList);
+            }
+            //添加城市数据
+            options2Items.add(cityList);
+
+            //添加地区数据
+            options3Items.add(provinceAreaList);
+        }
+
+    }
+
+    private static ArrayList<District> getDistrict(Context mContext) {
+        StringBuilder newstringBuilder = new StringBuilder();
+        InputStream inputStream = null;
+        try {
+            inputStream = mContext.getResources().getAssets().open("district.json");
+            InputStreamReader isr = new InputStreamReader(inputStream);
+            BufferedReader reader = new BufferedReader(isr);
+            String jsonLine;
+            while ((jsonLine = reader.readLine()) != null) {
+                newstringBuilder.append(jsonLine);
+            }
+            reader.close();
+            isr.close();
+            inputStream.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        String result = newstringBuilder.toString();
+        return new Gson().fromJson(result, new TypeToken<List<District>>() {
+        }.getType());
+    }
+
+
     /**
      * 拨打电话（跳转到拨号界面，用户手动点击拨打）
-     *
+     *k
      * @param phoneNum 电话号码
      */
     public static void callPhone(Context mContext ,String phoneNum) {

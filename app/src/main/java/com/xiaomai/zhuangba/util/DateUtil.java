@@ -202,4 +202,11 @@ public class DateUtil {
         }
         return 0L;
     }
+
+    public static boolean isDateCompare(Long appointmentTime) {
+        long l = System.currentTimeMillis();
+        String date2String = DateUtil.getDate2String(l, "yyyy-MM-dd HH");
+        Long aLong = DateUtil.dateToCurrentTimeMilli(date2String, "yyyy-MM-dd HH");
+        return appointmentTime - aLong >= 7200000;
+    }
 }

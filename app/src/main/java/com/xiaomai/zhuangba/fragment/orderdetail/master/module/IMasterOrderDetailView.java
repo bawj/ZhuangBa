@@ -17,4 +17,5 @@ public interface IMasterOrderDetailView extends IOrderDetailView {
      * 接单成功
      */
     void receiptOrderSuccess();
+
 }

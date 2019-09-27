@@ -64,6 +64,9 @@ public class OrderInformationFragment extends BaseOrderInformationFragment {
         tvOrderInformationInstallationNotes.setVisibility(View.GONE);
         editInstallationNotes.setVisibility(View.GONE);
         recyclerNotes.setVisibility(View.GONE);
+
+
+        // TODO: 2019/9/27 0027  姓名电话地址 不能修改
     }
 
     @Override

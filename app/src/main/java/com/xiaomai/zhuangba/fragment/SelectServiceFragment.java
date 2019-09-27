@@ -117,10 +117,13 @@ public class SelectServiceFragment extends BaseListFragment<ISelectServiceModule
     private BottomSheetBehavior bottomSheetBehavior;
     private SheetBehaviorAdapter sheetBehaviorAdapter;
 
-    public static SelectServiceFragment newInstance(String serviceId, String serviceText) {
+    public static final String ORDER_ADDRESS_GSON = "order_address_gson";
+
+    public static SelectServiceFragment newInstance(String serviceId, String serviceText , String orderAddressGson) {
         Bundle args = new Bundle();
         args.putString(SERVICE_ID, serviceId);
         args.putString(SERVICE_TEXT, serviceText);
+        args.putString(ORDER_ADDRESS_GSON , orderAddressGson);
         SelectServiceFragment fragment = new SelectServiceFragment();
         fragment.setArguments(args);
         return fragment;
@@ -213,7 +216,8 @@ public class SelectServiceFragment extends BaseListFragment<ISelectServiceModule
         Integer totalNumber = ShopCarUtil.getTotalNumber();
         if (totalNumber != 0) {
             //是否选择了 服务
-            startFragmentForResult(ShopCarFragment.newInstance(getServiceId(), getServiceText()), ForResultCode.START_FOR_RESULT_CODE_.getCode());
+            startFragmentForResult(ShopCarFragment.newInstance(getServiceId(),
+                    getServiceText() , getOrderAddressGson()), ForResultCode.START_FOR_RESULT_CODE_.getCode());
         } else {
             ToastUtil.showShort(getString(R.string.please_service));
         }
@@ -331,6 +335,13 @@ public class SelectServiceFragment extends BaseListFragment<ISelectServiceModule
             return getArguments().getString(SERVICE_TEXT);
         }
         return "";
+    }
+
+    public String getOrderAddressGson(){
+        if (getArguments() != null){
+            return getArguments().getString(ORDER_ADDRESS_GSON);
+        }
+        return null;
     }
 
     @Override

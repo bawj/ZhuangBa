@@ -21,24 +21,24 @@ public class DaoMaster extends AbstractDaoMaster {
 
     /** Creates underlying database table using DAOs. */
     public static void createAllTables(Database db, boolean ifNotExists) {
+        MaterialsListDBDao.createTable(db, ifNotExists);
+        ShopAuxiliaryMaterialsDBDao.createTable(db, ifNotExists);
+        SlottingListDBDao.createTable(db, ifNotExists);
         OrderServiceItemDao.createTable(db, ifNotExists);
         PushNotificationDBDao.createTable(db, ifNotExists);
         ShopCarDataDao.createTable(db, ifNotExists);
         UserInfoDao.createTable(db, ifNotExists);
-        MaterialsListDBDao.createTable(db, ifNotExists);
-        ShopAuxiliaryMaterialsDBDao.createTable(db, ifNotExists);
-        SlottingListDBDao.createTable(db, ifNotExists);
     }
 
     /** Drops underlying database table using DAOs. */
     public static void dropAllTables(Database db, boolean ifExists) {
+        MaterialsListDBDao.dropTable(db, ifExists);
+        ShopAuxiliaryMaterialsDBDao.dropTable(db, ifExists);
+        SlottingListDBDao.dropTable(db, ifExists);
         OrderServiceItemDao.dropTable(db, ifExists);
         PushNotificationDBDao.dropTable(db, ifExists);
         ShopCarDataDao.dropTable(db, ifExists);
         UserInfoDao.dropTable(db, ifExists);
-        MaterialsListDBDao.dropTable(db, ifExists);
-        ShopAuxiliaryMaterialsDBDao.dropTable(db, ifExists);
-        SlottingListDBDao.dropTable(db, ifExists);
     }
 
     /**
@@ -57,13 +57,13 @@ public class DaoMaster extends AbstractDaoMaster {
 
     public DaoMaster(Database db) {
         super(db, SCHEMA_VERSION);
+        registerDaoClass(MaterialsListDBDao.class);
+        registerDaoClass(ShopAuxiliaryMaterialsDBDao.class);
+        registerDaoClass(SlottingListDBDao.class);
         registerDaoClass(OrderServiceItemDao.class);
         registerDaoClass(PushNotificationDBDao.class);
         registerDaoClass(ShopCarDataDao.class);
         registerDaoClass(UserInfoDao.class);
-        registerDaoClass(MaterialsListDBDao.class);
-        registerDaoClass(ShopAuxiliaryMaterialsDBDao.class);
-        registerDaoClass(SlottingListDBDao.class);
     }
 
     public DaoSession newSession() {

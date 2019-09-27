@@ -99,12 +99,21 @@ public class EmployerWalletFragment extends BaseListFragment {
         refreshLayout.setHeaderInsetStart(56);
     }
 
-    @OnClick({R.id.btnRecharge, R.id.rlRechargeRecord, R.id.rlRecordsOfConsumption, R.id.rlAccountSecurity})
+    @OnClick({R.id.btnRecharge, R.id.rlRechargeRecord, R.id.rlRecordsOfConsumption,
+            R.id.rlAccountSecurity , R.id.tvEmployerWalletRecharge,R.id.tvEmployerWalletWithdraw})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btnRecharge:
                 //充值
                 startFragment(EmployerRechargeFragment.newInstance());
+                break;
+            case R.id.tvEmployerWalletRecharge:
+                //充值
+                startFragment(EmployerRechargeFragment.newInstance());
+                break;
+            case R.id.tvEmployerWalletWithdraw:
+                //提现
+                startFragment(EmployerWalletWithdrawalFragment.newInstance());
                 break;
             case R.id.rlRechargeRecord:
                 //充值记录

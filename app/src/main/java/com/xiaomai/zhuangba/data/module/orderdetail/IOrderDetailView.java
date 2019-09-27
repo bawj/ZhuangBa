@@ -33,6 +33,11 @@ public interface IOrderDetailView extends IBaseView {
      */
     String getOrderType();
 
+    /**
+     * 去认证
+     */
+    void goAuthentication();
+
 //    /**
 //     * 取消任务成功
 //     */

@@ -380,6 +380,11 @@ public class BaseOrderDetailFragment<T extends IOrderDetailModule> extends BaseF
     }
 
     @Override
+    public void goAuthentication() {
+
+    }
+
+    @Override
     protected String getActivityTitle() {
         return null;
     }

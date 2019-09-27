@@ -9,11 +9,6 @@ import com.example.toollib.data.IBaseModule;
 public interface IOrderInformationModule extends IBaseModule<IOrderInformationView> {
 
     /**
-     * 提交订单
-     */
-    void submitOrder();
-
-    /**
      * 修改订单
      */
     void requestUpdateOrder();

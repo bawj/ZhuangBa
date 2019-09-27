@@ -2,6 +2,7 @@ package com.xiaomai.zhuangba.fragment.service;
 
 import android.Manifest;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -13,16 +14,20 @@ import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.bigkoo.pickerview.builder.OptionsPickerBuilder;
 import com.bigkoo.pickerview.builder.TimePickerBuilder;
+import com.bigkoo.pickerview.listener.OnOptionsSelectListener;
 import com.bigkoo.pickerview.listener.OnTimeSelectListener;
+import com.bigkoo.pickerview.view.OptionsPickerView;
 import com.example.toollib.base.BaseFragment;
 import com.example.toollib.data.base.BaseCallback;
+import com.example.toollib.util.Log;
 import com.xiaomai.zhuangba.R;
 import com.xiaomai.zhuangba.adapter.MultiGraphSelectionAdapter;
+import com.xiaomai.zhuangba.data.bean.District;
 import com.xiaomai.zhuangba.data.module.orderinformation.IOrderInformationModule;
 import com.xiaomai.zhuangba.data.module.orderinformation.IOrderInformationView;
 import com.xiaomai.zhuangba.data.module.orderinformation.OrderInformationModule;
-import com.xiaomai.zhuangba.enums.ForResultCode;
 import com.xiaomai.zhuangba.util.DateUtil;
 import com.xiaomai.zhuangba.util.RxPermissionsUtils;
 import com.xiaomai.zhuangba.util.Util;
@@ -47,7 +52,8 @@ import static com.xiaomai.zhuangba.weight.PhotoTool.GET_IMAGE_BY_CAMERA;
  * <p>
  * 添加详细信息 或修改信息
  */
-public class BaseOrderInformationFragment extends BaseFragment<IOrderInformationModule> implements IOrderInformationView , MultiGraphSelectionAdapter.OnMultiGraphClickListener{
+public class BaseOrderInformationFragment extends BaseFragment<IOrderInformationModule>
+        implements IOrderInformationView, MultiGraphSelectionAdapter.OnMultiGraphClickListener {
 
     @BindView(R.id.editOrderInformationName)
     EditText editOrderInformationName;
@@ -82,6 +88,13 @@ public class BaseOrderInformationFragment extends BaseFragment<IOrderInformation
     private Double latitude;
     private String time;
 
+    private List<District> options1Items = new ArrayList<>();
+    private ArrayList<ArrayList<String>> options2Items = new ArrayList<>();
+    private ArrayList<ArrayList<ArrayList<String>>> options3Items = new ArrayList<>();
+    public String province;
+    public String city;
+    public String area;
+
     public static BaseOrderInformationFragment newInstance() {
         Bundle args = new Bundle();
         BaseOrderInformationFragment fragment = new BaseOrderInformationFragment();
@@ -91,8 +104,8 @@ public class BaseOrderInformationFragment extends BaseFragment<IOrderInformation
 
     @Override
     public void initView() {
-        Util.setEditTextInhibitInputSpaChat(editOrderInformationDetailedAddress , 30);
-        Util.setEditTextInhibitInputSpaChat(editOrderInformationName , 8);
+        Util.setEditTextInhibitInputSpaChat(editOrderInformationDetailedAddress, 30);
+        Util.setEditTextInhibitInputSpaChat(editOrderInformationName, 8);
 
         mediaSelectorFiles.add(null);
         recyclerNotes.setLayoutManager(new GridLayoutManager(getActivity(), 4));
@@ -100,6 +113,9 @@ public class BaseOrderInformationFragment extends BaseFragment<IOrderInformation
         recyclerNotes.setAdapter(multiGraphSelectionAdapter);
         multiGraphSelectionAdapter.setOnMultiGraphClickListener(this);
         recyclerNotes.addItemDecoration(new GridSpacingItemDecoration(4, 32, false));
+
+
+        Util.parseData(getActivity(), options1Items, options2Items, options3Items);
     }
 
 
@@ -109,14 +125,14 @@ public class BaseOrderInformationFragment extends BaseFragment<IOrderInformation
     }
 
     @OnClick({R.id.tvOrderInformationClickServiceAddress, R.id.ivOrderInformationLocation
-            , R.id.btnOrderInformation , R.id.relOrderInformationTime})
+            , R.id.btnOrderInformation, R.id.relOrderInformationTime})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.tvOrderInformationClickServiceAddress:
-                applyPermission();
+                showPickerView();
                 break;
             case R.id.ivOrderInformationLocation:
-                applyPermission();
+                showPickerView();
                 break;
             case R.id.btnOrderInformation:
                 //提交 或 修改信息
@@ -165,21 +181,6 @@ public class BaseOrderInformationFragment extends BaseFragment<IOrderInformation
             default:
                 break;
         }
-    }
-
-    private void applyPermission() {
-        RxPermissionsUtils.applyPermission(getActivity(),
-                Manifest.permission.ACCESS_FINE_LOCATION, new BaseCallback<String>() {
-                    @Override
-                    public void onSuccess(String obj) {
-                        startFragmentForResult(LocationFragment.newInstance(), ForResultCode.START_FOR_RESULT_CODE.getCode());
-                    }
-                    @Override
-                    public void onFail(Object obj) {
-                        super.onFail(obj);
-                        showToast(getString(R.string.positioning_authority_tip));
-                    }
-                });
     }
 
 
@@ -243,18 +244,37 @@ public class BaseOrderInformationFragment extends BaseFragment<IOrderInformation
 
     }
 
-    @Override
-    protected void onFragmentResult(int requestCode, int resultCode, Intent data) {
-        super.onFragmentResult(requestCode, resultCode, data);
-        if (resultCode == ForResultCode.RESULT_OK.getCode()){
-            if (requestCode == ForResultCode.START_FOR_RESULT_CODE.getCode() && data != null){
-                String name = data.getStringExtra(ForResultCode.RESULT_KEY.getExplain());
-                this.longitude = data.getDoubleExtra(ForResultCode.LONGITUDE.getExplain() , 0f);
-                this.latitude = data.getDoubleExtra(ForResultCode.LATITUDE.getExplain() , 0f);
-                tvOrderInformationClickServiceAddress.setText(name);
+    private void showPickerView() {// 弹出选择器
+        OptionsPickerView pvOptions = new OptionsPickerBuilder(getActivity(), new OnOptionsSelectListener() {
+            @Override
+            public void onOptionsSelect(int options1, int options2, int options3, View v) {
+                //返回的分别是三个级别的选中位置
+                province = options1Items.size() > 0 ?
+                        options1Items.get(options1).getName() : "";
+
+                city = options2Items.size() > 0
+                        && options2Items.get(options1).size() > 0 ?
+                        options2Items.get(options1).get(options2) : "";
+
+                area = options2Items.size() > 0
+                        && options3Items.get(options1).size() > 0
+                        && options3Items.get(options1).get(options2).size() > 0 ?
+                        options3Items.get(options1).get(options2).get(options3) : "";
+
+                String tx = province + city + area;
+                tvOrderInformationClickServiceAddress.setText(tx);
             }
-        }
+        })   .setTitleText("城市选择")
+                .setDividerColor(Color.BLACK)
+                //设置选中项文字颜色
+                .setTextColorCenter(Color.BLACK)
+                .setContentTextSize(20)
+                .build();
+        //三级选择器
+        pvOptions.setPicker(options1Items, options2Items, options3Items);
+        pvOptions.show();
     }
+
 
     @Override
     protected String getActivityTitle() {
@@ -271,7 +291,8 @@ public class BaseOrderInformationFragment extends BaseFragment<IOrderInformation
 
 
     /**
-     *  大类编号 修改信息使用
+     * 大类编号 修改信息使用
+     *
      * @return string
      */
     @Override
@@ -280,7 +301,8 @@ public class BaseOrderInformationFragment extends BaseFragment<IOrderInformation
     }
 
     /**
-     *  大类名称 修改信息使用
+     * 大类名称 修改信息使用
+     *
      * @return string
      */
     @Override
@@ -290,6 +312,7 @@ public class BaseOrderInformationFragment extends BaseFragment<IOrderInformation
 
     /**
      * 订单编号 修改信息使用
+     *
      * @return string
      */
     @Override
@@ -299,6 +322,7 @@ public class BaseOrderInformationFragment extends BaseFragment<IOrderInformation
 
     /**
      * 订单状态 修改信息使用
+     *
      * @return string
      */
     @Override
@@ -340,6 +364,7 @@ public class BaseOrderInformationFragment extends BaseFragment<IOrderInformation
     public String getLatitude() {
         return String.valueOf(latitude);
     }
+
     @Override
     public void placeOrderSuccess(String requestBodyString) {
 
