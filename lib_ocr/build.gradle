@@ -1,0 +1,58 @@
+apply plugin: 'com.android.library'
+def libs = rootProject.ext.dependencies
+def config = rootProject.ext.android
+def support = rootProject.ext.support
+
+android {
+
+    compileSdkVersion config.compileSdkVersion
+    buildToolsVersion config.buildToolsVersion
+
+    defaultConfig {
+        minSdkVersion config.minSdkVersion
+        targetSdkVersion config.targetSdkVersion
+        versionCode config.versionCode
+        versionName config.versionName
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        ndk {
+            abiFilters  'armeabi-v7a'
+        }
+
+        externalNativeBuild {
+            cmake {
+                // cppFlags "-std=c++11 -frtti -fexceptions"
+                abiFilters  'armeabi-v7a'
+                // abiFilters  'armeabi', 'armeabi-v7a', 'arm64-v8a'
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    externalNativeBuild {
+        cmake {
+            path "CMakeLists.txt"
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+//    dexOptions {
+//        incremental true
+//    }
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation support["appcompat-v7"]
+    annotationProcessor libs["butterknife-compiler"]
+    implementation libs["design"]
+    implementation project(':toollib')
+}

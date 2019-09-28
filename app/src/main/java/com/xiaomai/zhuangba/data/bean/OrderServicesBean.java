@@ -15,6 +15,18 @@ public class OrderServicesBean {
     private String serviceId;
     /** 服务项目名称 */
     private String serviceText;
+    /**
+     * 单价
+     */
+    private String money;
+    /**
+     * 2台单价
+     */
+    private String money2;
+    /**
+     * 3台单价
+     */
+    private String money3;
 
     /** 维保时间 单位 (月) */
     private int monthNumber;
@@ -75,5 +87,29 @@ public class OrderServicesBean {
 
     public void setMaintenanceAmount(double maintenanceAmount) {
         this.maintenanceAmount = maintenanceAmount;
+    }
+
+    public String getMoney() {
+        return money == null ? "" : money;
+    }
+
+    public void setMoney(String money) {
+        this.money = money;
+    }
+
+    public String getMoney2() {
+        return money2 == null ? "" : money2;
+    }
+
+    public void setMoney2(String money2) {
+        this.money2 = money2;
+    }
+
+    public String getMoney3() {
+        return money3 == null ? "" : money3;
+    }
+
+    public void setMoney3(String money3) {
+        this.money3 = money3;
     }
 }

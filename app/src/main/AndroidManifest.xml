@@ -55,7 +55,6 @@
         android:name="android.permission.READ_LOGS"
         tools:ignore="ProtectedPermissions" />
 
-
     <uses-sdk tools:overrideLibrary="fm.jiecao.jcvideoplayer_lib"/>
 
     <application

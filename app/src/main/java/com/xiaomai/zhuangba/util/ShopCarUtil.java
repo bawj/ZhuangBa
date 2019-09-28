@@ -8,6 +8,7 @@ import com.xiaomai.zhuangba.ShopAuxiliaryMaterialsDBDao;
 import com.xiaomai.zhuangba.ShopCarDataDao;
 import com.xiaomai.zhuangba.data.bean.Debugging;
 import com.xiaomai.zhuangba.data.bean.Maintenance;
+import com.xiaomai.zhuangba.data.bean.OrderServicesBean;
 import com.xiaomai.zhuangba.data.bean.ServiceSubcategoryProject;
 import com.xiaomai.zhuangba.data.bean.ShopCarData;
 import com.xiaomai.zhuangba.data.bean.db.MaterialsListDB;
@@ -16,6 +17,7 @@ import com.xiaomai.zhuangba.data.bean.db.SlottingListDB;
 import com.xiaomai.zhuangba.data.db.DBHelper;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -340,5 +342,47 @@ public class ShopCarUtil {
             }
         }
         return new BigDecimal(priceNumber).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+    }
+
+
+    public static List<OrderServicesBean> getOrderServicesBean() {
+        //服务项目{ 小类服务ID 数量 和 总价格}
+        List<ShopCarData> shopCarDataList = DBHelper.getInstance().getShopCarDataDao().queryBuilder().list();
+        List<OrderServicesBean> orderServicesBeans = new ArrayList<>();
+        for (ShopCarData shopCarData : shopCarDataList) {
+            //大类服务ID
+            //任务总数量
+            int number = DensityUtils.stringTypeInteger(shopCarData.getNumber());
+            //订单总金额
+///            double orderAmount = ShopCarUtil.getTotalMoneys(number, DensityUtils.stringTypeDouble(shopCarData.getMoney())
+//                    , DensityUtils.stringTypeDouble(shopCarData.getMoney2()), DensityUtils.stringTypeDouble(shopCarData.getMoney3())
+//                    , DensityUtils.stringTypeDouble(shopCarData.getMaintenanceMoney()));
+            double orderAmount = ShopCarUtil.getTotalMoney(number, DensityUtils.stringTypeDouble(shopCarData.getMoney())
+                    , DensityUtils.stringTypeDouble(shopCarData.getMoney2()), DensityUtils.stringTypeDouble(shopCarData.getMoney3()));
+            //订单服务项目
+            OrderServicesBean orderServicesBean = new OrderServicesBean();
+            //服务项目ID
+            orderServicesBean.setServiceId(shopCarData.getServiceId());
+            //服务项目数量
+            orderServicesBean.setNumber(number);
+            //服务项目总金额
+            orderServicesBean.setAmount(orderAmount);
+            //第一个价格
+            orderServicesBean.setMoney(shopCarData.getMoney());
+            //第二个价格
+            orderServicesBean.setMoney2(shopCarData.getMoney2());
+            //第三个价格
+            orderServicesBean.setMoney3(shopCarData.getMoney3());
+            //如果有维保 则ID != -1
+            if (shopCarData.getMaintenanceId() != ConstantUtil.DEF_MAINTENANCE) {
+                //维保时间 单位（月）
+                orderServicesBean.setMonthNumber(DensityUtils.stringTypeInteger(shopCarData.getMaintenanceTime()));
+                //维保 金额 * 项目数量
+                double maintenanceAmount = DensityUtils.stringTypeDouble(shopCarData.getMaintenanceMoney()) * DensityUtils.stringTypeInteger(shopCarData.getNumber());
+                orderServicesBean.setMaintenanceAmount(maintenanceAmount);
+            }
+            orderServicesBeans.add(orderServicesBean);
+        }
+        return orderServicesBeans;
     }
 }

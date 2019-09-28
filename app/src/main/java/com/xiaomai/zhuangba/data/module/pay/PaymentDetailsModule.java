@@ -5,11 +5,9 @@ import android.text.TextUtils;
 
 import com.example.toollib.data.base.BaseCallback;
 import com.example.toollib.http.HttpResult;
-import com.example.toollib.http.exception.ApiException;
 import com.example.toollib.http.function.BaseHttpConsumer;
 import com.example.toollib.http.observer.BaseHttpRxObserver;
 import com.example.toollib.http.util.RxUtils;
-import com.example.toollib.util.AmountUtil;
 import com.example.toollib.util.DensityUtils;
 import com.example.toollib.util.Log;
 import com.google.gson.Gson;
@@ -30,8 +28,6 @@ import io.reactivex.functions.Function;
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
 
-import static com.xiaomai.zhuangba.data.module.orderinformation.OrderInformationModule.getOrderServicesBean;
-
 /**
  * @author Administrator
  * @date 2019/7/12 0012
@@ -49,7 +45,7 @@ public class PaymentDetailsModule extends PlayModule<IPaymentDetailView> impleme
         //订单总金额
         Double orderAmount = ShopCarUtil.getTotalMoney();
         //服务项目
-        List<OrderServicesBean> orderServicesBeans = getOrderServicesBean();
+        List<OrderServicesBean> orderServicesBeans = ShopCarUtil.getOrderServicesBean();
         for (OrderServicesBean orderServicesBean : orderServicesBeans) {
             number = number + orderServicesBean.getNumber();
         }
