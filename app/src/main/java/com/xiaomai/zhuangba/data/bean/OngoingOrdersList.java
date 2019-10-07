@@ -230,7 +230,6 @@ public class OngoingOrdersList implements Parcelable{
 
     /** 格式化预约时间 */
     public String getAppointmentTime() {
-//        String date = DateUtil.getDate(appointmentTime, "yyyy-MM-dd HH:mm");
         return TextUtils.isEmpty(appointmentTime) ? appointmentTime : appointmentTime;
     }
 

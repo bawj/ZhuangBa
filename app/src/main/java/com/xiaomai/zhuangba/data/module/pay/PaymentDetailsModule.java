@@ -58,7 +58,10 @@ public class PaymentDetailsModule extends PlayModule<IPaymentDetailView> impleme
         boolean isChkPaymentWeChat = mViewRef.get().getChkPaymentWeChat();
         boolean isChkPaymentPlay = mViewRef.get().getChkPaymentPlay();
         final boolean isChkPaymentWallet = mViewRef.get().getChkPaymentWallet();
+        //月结挂账
+        final boolean monthlyAccount = mViewRef.get().getMonthlyAccount();
         String orderData = getOrderData(submissionOrder);
+        String walletPassword = mViewRef.get().getWalletPassword();
         if (!TextUtils.isEmpty(orderData)) {
             // TODO: 2019/8/7 0007 串联请求
             RequestBody requestBody = RequestBody.create(MediaType.parse("application/json;charset=utf-8"), orderData);
@@ -73,10 +76,12 @@ public class PaymentDetailsModule extends PlayModule<IPaymentDetailView> impleme
                 observablePay = RxUtils.getObservable(ServiceUrl.getUserApi()
                         .orderPay(submissionOrder.getOrderCode(), StringTypeExplain.WE_CHAT_PAYMENT.getCode(), ""));
             } else if (isChkPaymentWallet) {
-                String walletPassword = mViewRef.get().getWalletPassword();
                 //钱包支付
                 observablePay = RxUtils.getObservable(ServiceUrl.getUserApi()
                         .orderPay(submissionOrder.getOrderCode(), StringTypeExplain.WE_WALLET.getCode(), walletPassword));
+            }else if (monthlyAccount){
+                observablePay = RxUtils.getObservable(ServiceUrl.getUserApi()
+                        .orderPay(submissionOrder.getOrderCode(), StringTypeExplain.MONTHLY_KNOTS.getCode(), walletPassword));
             }
             RxUtils.getObservable(updateOrder)
                     .compose(mViewRef.get().<HttpResult<Object>>bindLifecycle())
@@ -93,14 +98,12 @@ public class PaymentDetailsModule extends PlayModule<IPaymentDetailView> impleme
                             return observablePay;
                         }
                     })
-                    .subscribe(new BaseHttpRxObserver(mContext.get()) {
+                    .subscribe(new BaseHttpRxObserver<PayData>(mContext.get()) {
                         @Override
-                        protected void onSuccess(Object response) {
-                            if (response != null && isChkPaymentWallet){
-                                PayData payData = (PayData) response;
+                        protected void onSuccess(PayData payData) {
+                            if ((isChkPaymentWallet || monthlyAccount)){
                                 mViewRef.get().paymentSuccess();
-                            }else if (response != null) {
-                                PayData payData = (PayData) response;
+                            }else if (payData != null) {
                                 Log.e("subscribe onSuccess = " + payData.toString());
                                 if (!TextUtils.isEmpty(payData.getAliPay())) {
                                     aplipayOrderPayment(mContext.get(), payData, new BaseCallback() {

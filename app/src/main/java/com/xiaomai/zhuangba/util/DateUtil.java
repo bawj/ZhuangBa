@@ -209,4 +209,23 @@ public class DateUtil {
         Long aLong = DateUtil.dateToCurrentTimeMilli(date2String, "yyyy-MM-dd HH");
         return appointmentTime - aLong >= 7200000;
     }
+
+    public static String getWeek(String slottingEndLength) {
+        if (slottingEndLength.equals("1")) {
+            return "一";
+        } else if (slottingEndLength.equals("2")) {
+            return "二";
+        } else if (slottingEndLength.equals("3")) {
+            return "三";
+        } else if (slottingEndLength.equals("4")) {
+            return "四";
+        } else if (slottingEndLength.equals("5")) {
+            return "五";
+        } else if (slottingEndLength.equals("6")) {
+            return "六";
+        } else if (slottingEndLength.equals("7")) {
+            return "七";
+        }
+        return "";
+    }
 }

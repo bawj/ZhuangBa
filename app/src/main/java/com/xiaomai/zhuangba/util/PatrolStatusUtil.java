@@ -6,6 +6,7 @@ import android.widget.TextView;
 import com.qmuiteam.qmui.arch.QMUIFragmentActivity;
 import com.xiaomai.zhuangba.R;
 import com.xiaomai.zhuangba.enums.InspectionSheetEnum;
+import com.xiaomai.zhuangba.fragment.orderdetail.employer.patrol.PatrolInDistributionDetailFragment;
 
 /**
  * @author Administrator
@@ -51,9 +52,12 @@ public class PatrolStatusUtil {
      * @param orderStatus 订单状态
      */
     public static void startEmployerPatrol(QMUIFragmentActivity baseFragmentActivity, String orderCode, String orderType, int orderStatus) {
-        if (orderStatus == InspectionSheetEnum.INSPECTION_SHEET_IN_DISTRIBUTION.getCode()){
+        if (orderStatus == InspectionSheetEnum.INSPECTION_SHEET_UNALLOCATED.getCode()){
             //分配中
-
+            baseFragmentActivity.startFragment(PatrolInDistributionDetailFragment.newInstance(orderCode , orderType));
+        } else if (orderStatus == InspectionSheetEnum.INSPECTION_SHEET_IN_DISTRIBUTION.getCode()){
+            //分配中
+            baseFragmentActivity.startFragment(PatrolInDistributionDetailFragment.newInstance(orderCode , orderType));
         }else if (orderStatus == InspectionSheetEnum.INSPECTION_SHEET_HAVE_IN_HAND.getCode()){
             //进行中
         }else if (orderStatus == InspectionSheetEnum.INSPECTION_SHEET_CANCELLED.getCode()){

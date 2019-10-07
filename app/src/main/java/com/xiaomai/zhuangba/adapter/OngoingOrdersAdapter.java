@@ -11,6 +11,8 @@ import com.xiaomai.zhuangba.R;
 import com.xiaomai.zhuangba.data.bean.OngoingOrdersList;
 import com.xiaomai.zhuangba.enums.StaticExplain;
 import com.xiaomai.zhuangba.util.AdvertisingStatusUtil;
+import com.xiaomai.zhuangba.util.ConstantUtil;
+import com.xiaomai.zhuangba.util.DateUtil;
 import com.xiaomai.zhuangba.util.OrderStatusUtil;
 import com.xiaomai.zhuangba.util.PatrolStatusUtil;
 
@@ -103,35 +105,13 @@ public class OngoingOrdersAdapter extends BaseQuickAdapter<OngoingOrdersList, Ba
         String slottingStartLength = ongoingOrders.getSlottingStartLength();
         //巡查日期
         String slottingEndLength = ongoingOrders.getSlottingEndLength();
-        //单位 月
-        String month = "month";
-        String week = "week";
-        if (slottingStartLength.equals(month)) {
+        if (slottingStartLength.equals(ConstantUtil.MONTH)) {
             tvItemPatrolFrequency.setText(mContext.getString(R.string.month));
             tvItemInspectionDate.setText(mContext.getString(R.string.inspection_date, slottingEndLength));
-        } else if (slottingStartLength.equals(week)) {
+        } else if (slottingStartLength.equals(ConstantUtil.WEEK)) {
             tvItemPatrolFrequency.setText(mContext.getString(R.string.week));
-            tvItemInspectionDate.setText(mContext.getString(R.string.inspection_date_week, getWeek(slottingEndLength)));
+            tvItemInspectionDate.setText(mContext.getString(R.string.inspection_date_week, DateUtil.getWeek(slottingEndLength)));
         }
-    }
-
-    private String getWeek(String slottingEndLength) {
-        if (slottingEndLength.equals("1")) {
-            return "一";
-        } else if (slottingEndLength.equals("2")) {
-            return "二";
-        } else if (slottingEndLength.equals("3")) {
-            return "三";
-        } else if (slottingEndLength.equals("4")) {
-            return "四";
-        } else if (slottingEndLength.equals("5")) {
-            return "五";
-        } else if (slottingEndLength.equals("6")) {
-            return "六";
-        } else if (slottingEndLength.equals("7")) {
-            return "七";
-        }
-        return "";
     }
 
     /**

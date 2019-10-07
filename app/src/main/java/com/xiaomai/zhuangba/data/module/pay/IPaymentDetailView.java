@@ -43,4 +43,10 @@ public interface IPaymentDetailView extends IBaseView {
      * 支付成功
      */
     void paymentSuccess();
+
+    /**
+     * 月结挂账
+     * @return boolean
+     */
+    boolean getMonthlyAccount();
 }

@@ -30,6 +30,16 @@ public class ConstantUtil {
     public static final String ADVERTISING_STATUS = "advertising_status";
 
     /**
+     * 巡查 单位 月
+     */
+    public static final String MONTH = "month";
+
+    /**
+     * 巡查 单位 周
+     */
+    public static final String WEEK = "week";
+
+    /**
      * 选择 服务 dialog 默认选中
      */
     public static final int DEF_MAINTENANCE = -1;

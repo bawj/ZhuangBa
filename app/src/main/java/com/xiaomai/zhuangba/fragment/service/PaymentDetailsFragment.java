@@ -264,6 +264,11 @@ public class PaymentDetailsFragment extends BaseFragment<IPaymentDetailsModule> 
     }
 
     @Override
+    public boolean getMonthlyAccount() {
+        return chkPaymentMonthlyAccount.isChecked();
+    }
+
+    @Override
     public String getWalletPassword() {
         return password;
     }
