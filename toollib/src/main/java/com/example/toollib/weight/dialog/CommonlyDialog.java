@@ -71,6 +71,11 @@ public class CommonlyDialog {
         return this;
     }
 
+    public CommonlyDialog setTvDialogCommonlyOkTextColoe(int color) {
+        tvDialogCommonlyOk.setTextColor(color);
+        return this;
+    }
+
     public CommonlyDialog setTvDialogCommonlyClose(String close) {
         tvDialogCommonlyClose.setText(close);
         return this;

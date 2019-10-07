@@ -87,10 +87,10 @@
                 android:layout_toRightOf="@+id/tvSlotting"
                 android:background="@drawable/bg_gray"
                 android:padding="@dimen/tool_lib_6dp"
+                android:text="@string/debugging"
                 android:textColor="@color/tool_lib_gray_777777"
                 android:textSize="@dimen/tool_lib_12sp"
-                android:visibility="gone"
-                android:text="@string/debugging" />
+                android:visibility="gone" />
 
             <TextView
                 android:id="@+id/tvAuxiliaryMaterials"
@@ -102,10 +102,10 @@
                 android:layout_toRightOf="@+id/tvDebugging"
                 android:background="@drawable/bg_gray"
                 android:padding="@dimen/tool_lib_6dp"
+                android:text="@string/auxiliary_materials"
                 android:textColor="@color/tool_lib_gray_777777"
                 android:textSize="@dimen/tool_lib_12sp"
-                android:visibility="gone"
-                android:text="@string/auxiliary_materials" />
+                android:visibility="gone" />
         </RelativeLayout>
 
         <ImageView
@@ -123,16 +123,34 @@
             android:layout_toRightOf="@+id/ivItemOrdersTime"
             tools:text="预约时间：2019/06/07 13:30" />
 
+        <TextView
+            android:id="@+id/tvItemPatrolFrequency"
+            style="@style/item_text_content"
+            android:layout_below="@+id/tvItemOrdersTime"
+            android:layout_toEndOf="@+id/ivItemOrdersTime"
+            android:layout_toRightOf="@+id/ivItemOrdersTime"
+            android:visibility="gone"
+            tools:text="巡查频率：周" />
+
+        <TextView
+            android:id="@+id/tvItemInspectionDate"
+            style="@style/item_text_content"
+            android:layout_below="@+id/tvItemPatrolFrequency"
+            android:layout_toEndOf="@+id/ivItemOrdersTime"
+            android:layout_toRightOf="@+id/ivItemOrdersTime"
+            android:visibility="gone"
+            tools:text="巡查日期：周二" />
+
         <ImageView
             android:id="@+id/ivItemOrdersLocation"
             style="@style/item_ic"
-            android:layout_below="@+id/ivItemOrdersTime"
+            android:layout_below="@+id/tvItemInspectionDate"
             android:src="@drawable/ic_location" />
 
         <TextView
             android:id="@+id/tvItemOrdersLocation"
             style="@style/item_text_content"
-            android:layout_below="@+id/ivItemOrdersTime"
+            android:layout_below="@+id/tvItemInspectionDate"
             android:layout_alignBottom="@+id/ivItemOrdersLocation"
             android:layout_toEndOf="@+id/ivItemOrdersLocation"
             android:layout_toRightOf="@+id/ivItemOrdersLocation"

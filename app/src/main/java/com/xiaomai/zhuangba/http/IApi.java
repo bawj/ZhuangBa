@@ -2,6 +2,7 @@ package com.xiaomai.zhuangba.http;
 
 import com.example.toollib.http.HttpResult;
 import com.xiaomai.zhuangba.data.AdvertisingBillsBean;
+import com.xiaomai.zhuangba.data.Patrol;
 import com.xiaomai.zhuangba.data.bean.AdvertisingReplacementBean;
 import com.xiaomai.zhuangba.data.bean.AdvertisingReplacementDetailBean;
 import com.xiaomai.zhuangba.data.bean.AliPayAccountBean;
@@ -910,4 +911,15 @@ public interface IApi {
      */
     @GET("/userRole/verifyAccountNumber")
     Observable<HttpResult<String>> verifyAccountNumber();
+
+
+    /**
+     * 巡查任务
+     * @param pageNum 页
+     * @param pageSize 显示多少条
+     * @return observable
+     */
+    @FormUrlEncoded
+    @POST("order/getPatrolOrderList ")
+    Observable<HttpResult<Patrol>> getPatrolOrderList(@Field("pageNum") String pageNum, @Field("pageSize") String pageSize);
 }

@@ -17,6 +17,9 @@ public class ShopPayCheckBox implements CompoundButton.OnCheckedChangeListener {
     private RadioButton chkAliPayBalance;
     /** 钱包支付 */
     private RadioButton chkWalletBalance;
+    /** 月结挂账 */
+    private RadioButton chkPaymentMonthlyAccount;
+
 
     public ShopPayCheckBox setChkWeChatBalance(RadioButton chkWeChatBalance) {
         this.chkWeChatBalance = chkWeChatBalance;
@@ -36,6 +39,12 @@ public class ShopPayCheckBox implements CompoundButton.OnCheckedChangeListener {
         return this;
     }
 
+    public ShopPayCheckBox setChkPaymentMonthlyAccount(RadioButton chkPaymentMonthlyAccount) {
+        this.chkPaymentMonthlyAccount = chkPaymentMonthlyAccount;
+        this.chkPaymentMonthlyAccount.setOnCheckedChangeListener(this);
+        return this;
+    }
+
     @Override
     public void onCheckedChanged(CompoundButton compoundButton, boolean flag) {
         switch (compoundButton.getId()) {
@@ -43,18 +52,28 @@ public class ShopPayCheckBox implements CompoundButton.OnCheckedChangeListener {
                 if (flag) {
                     chkAliPayBalance.setChecked(false);
                     chkWalletBalance.setChecked(false);
+                    chkPaymentMonthlyAccount.setChecked(false);
                 }
                 break;
             case R.id.chkPaymentPlay:
                 if (flag) {
                     chkWeChatBalance.setChecked(false);
                     chkWalletBalance.setChecked(false);
+                    chkPaymentMonthlyAccount.setChecked(false);
                 }
                 break;
             case R.id.chkPaymentWallet:
                 if (flag) {
                     chkAliPayBalance.setChecked(false);
                     chkWeChatBalance.setChecked(false);
+                    chkPaymentMonthlyAccount.setChecked(false);
+                }
+                break;
+            case R.id.chkPaymentMonthlyAccount:
+                if (flag) {
+                    chkAliPayBalance.setChecked(false);
+                    chkWeChatBalance.setChecked(false);
+                    chkWalletBalance.setChecked(false);
                 }
                 break;
             default:

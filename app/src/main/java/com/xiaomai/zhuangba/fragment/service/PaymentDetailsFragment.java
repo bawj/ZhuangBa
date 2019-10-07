@@ -74,6 +74,8 @@ public class PaymentDetailsFragment extends BaseFragment<IPaymentDetailsModule> 
     RadioButton chkPaymentPlay;
     @BindView(R.id.chkPaymentWallet)
     RadioButton chkPaymentWallet;
+    @BindView(R.id.chkPaymentMonthlyAccount)
+    RadioButton chkPaymentMonthlyAccount;
 
     /**
      * 支付密码
@@ -133,7 +135,8 @@ public class PaymentDetailsFragment extends BaseFragment<IPaymentDetailsModule> 
         new ShopPayCheckBox()
                 .setChkWeChatBalance(chkPaymentWeChat)
                 .setChkAlipayBalance(chkPaymentPlay)
-                .setChkWalletBanlance(chkPaymentWallet);
+                .setChkWalletBanlance(chkPaymentWallet)
+                .setChkPaymentMonthlyAccount(chkPaymentMonthlyAccount);
     }
 
     private View getRequiredOptions() {
@@ -266,7 +269,7 @@ public class PaymentDetailsFragment extends BaseFragment<IPaymentDetailsModule> 
     }
 
     public void inputPassword() {
-        final PayPassDialog dialog=new PayPassDialog(getActivity());
+        final PayPassDialog dialog = new PayPassDialog(getActivity());
         dialog.getPayViewPass()
                 .setPayClickListener(new PayPassView.OnPayClickListener() {
                     @Override

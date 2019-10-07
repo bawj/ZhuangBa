@@ -456,6 +456,9 @@
     <string name="please_upload_id_card">请上传身份证</string>
     <string name="continuous_income">持续收入</string>
     <string name="equipment_number">设备编号：</string>
+    <string name="device_number">设备号：%1$s</string>
+    <string name="length_of_service">服务时长：%1$s</string>
+    <string name="service_date">服务日期：%1$s</string>
     <string name="change_places">更换位置：</string>
     <string name="maintenance_cycle">维护周期：</string>
     <string name="maintenance_cycle_date">%1$s月</string>
@@ -494,4 +497,16 @@
     <string name="application_for_acceptance_has_been_submitted">您的验收申请已提交</string>
     <string name="bulk_acceptance">批量接单</string>
     <string name="set_out">出发</string>
+    <string name="patrol">巡查</string>
+    <string name="patrol_title">巡查任务</string>
+    <string name="patrol_deatil_tip">请到雇主Web端查看巡查详情</string>
+    <string name="length_of_inspection">巡查时长：%1$s个月</string>
+    <string name="month">巡查频率：月</string>
+    <string name="monthly_account">月结挂账</string>
+    <string name="inspection_date">巡查日期：%1$s号</string>
+    <string name="inspection_date_week">巡查日期：周%1$s</string>
+    <string name="week">巡查频率：周</string>
+    <string name="patrol_area">巡查区域：</string>
+    <string name="length_of_service_">服务时长：</string>
+    <string name="length_of_service_time">服务时间：</string>
 </resources>

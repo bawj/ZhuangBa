@@ -78,7 +78,8 @@ public class EmployerPersonalFragment extends PersonalFragment {
                 getString(R.string.fabricating_user_service_protocol)));
     }
 
-    @OnClick({R.id.relWallet ,R.id.relEmployerMaintenance,R.id.relEmployerAdvertisingReplacement,R.id.relEnterpriseCertification})
+    @OnClick({R.id.relWallet ,R.id.relEmployerMaintenance,R.id.relEmployerAdvertisingReplacement,
+            R.id.relEnterpriseCertification , R.id.relEmployerPatrol})
     public void onViewEmployerClicked(View view) {
         switch (view.getId()) {
             case R.id.relWallet:
@@ -97,6 +98,10 @@ public class EmployerPersonalFragment extends PersonalFragment {
                 //企业认证
                 startFragment(BusinessLicenseFragment.newInstance());
                 break;
+            case R.id.relEmployerPatrol:
+                //巡查
+                startFragment(EmployerPatrolFragment.newInstance());
+            break;
             default:
         }
     }

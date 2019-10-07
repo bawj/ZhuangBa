@@ -18,6 +18,7 @@ public enum StringTypeExplain {
     A_ALIPAY_PAYMENT("1" , "支付宝支付"),
     WE_CHAT_PAYMENT("2" , "微信支付"),
     WE_WALLET("3" , "钱包支付"),
+    MONTHLY_KNOTS("4" , "月结挂账"),
     RECEIPT_ORDER_SUCCESS("1" , "接单成功"),
     ;
 

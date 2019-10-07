@@ -70,6 +70,10 @@ public class SubmitOrderInformationFragment extends BaseOrderInformationFragment
         final String addressDetail = getAddressDetail();
         //预约时间
         final String appointmentTime = getAppointmentTime();
+        if (TextUtils.isEmpty(appointmentTime)) {
+            showToast(getString(R.string.please_input_appointment_time));
+            return;
+        }
         String date = DateUtil.dateToStr(appointmentTime, "yyyy-MM-dd HH:mm:ss");
         Long aLong = DateUtil.dateToCurrentTimeMillis(date, "yyyy-MM-dd HH:mm:ss");
         if (TextUtils.isEmpty(userText)) {
