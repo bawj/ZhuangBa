@@ -12,6 +12,8 @@ import com.xiaomai.zhuangba.data.bean.EarnestBean;
 import com.xiaomai.zhuangba.data.bean.EmployerAdvertisingReplacement;
 import com.xiaomai.zhuangba.data.bean.EmployerWalletBean;
 import com.xiaomai.zhuangba.data.bean.EmployerWalletDetailBean;
+import com.xiaomai.zhuangba.data.bean.InspectionSheetBean;
+import com.xiaomai.zhuangba.data.bean.InspectionSheetDetailBean;
 import com.xiaomai.zhuangba.data.bean.Maintenance;
 import com.xiaomai.zhuangba.data.bean.MaintenanceBean;
 import com.xiaomai.zhuangba.data.bean.OngoingOrdersList;
@@ -885,6 +887,16 @@ public interface IApi {
     @GET("order/getMasterHandleOrder")
     Observable<HttpResult<RefreshBaseList<AdvertisingBillsBean>>> getMasterHandleOrder(@Query("pageNum") int pageNum, @Query("pageSize") int pageSize);
 
+    /**
+     * 巡查单 师傅
+     *
+     * @param pageNum  页码
+     * @param pageSize 一页显示行数
+     * @return observable
+     */
+    @GET("order/getMasterHandleInspectionOrder ")
+    Observable<HttpResult<RefreshBaseList<InspectionSheetBean>>> getMasterHandleInspectionOrder(@Query("pageNum") int pageNum, @Query("pageSize") int pageSize);
+
 
     /**
      * 师傅批量接受广告订单
@@ -920,6 +932,14 @@ public interface IApi {
      * @return observable
      */
     @FormUrlEncoded
-    @POST("order/getPatrolOrderList ")
+    @POST("order/getPatrolOrderList")
     Observable<HttpResult<Patrol>> getPatrolOrderList(@Field("pageNum") String pageNum, @Field("pageSize") String pageSize);
+
+    /**
+     * 巡查任务
+     * @param requestBody body
+     * @return observable
+     */
+    @POST("order/getMasterHandleInspectionOrderList")
+    Observable<HttpResult<RefreshBaseList<InspectionSheetDetailBean>>> getMasterHandleInspectionOrderList(@Body RequestBody requestBody);
 }

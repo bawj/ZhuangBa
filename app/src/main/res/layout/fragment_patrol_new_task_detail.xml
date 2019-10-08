@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:id="@+id/refreshBaseList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        app:srlAccentColor="@android:color/white"
+        app:srlEnableHeaderTranslationContent="false"
+        app:srlEnableLoadMore="false"
+        app:srlPrimaryColor="@color/colorPrimary">
+
+        <com.scwang.smartrefresh.header.MaterialHeader
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <RelativeLayout
+            android:id="@+id/relBaseOrderDetail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:id="@+id/relOrderInfo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/white">
+
+                        <TextView
+                            android:id="@+id/tvBasePatrolTaskTitle"
+                            style="@style/item_text_title"
+                            tools:text="巡查任务" />
+
+                        <TextView
+                            android:id="@+id/tvBasePatrolOrdersType"
+                            style="@style/order_status"
+                            android:background="@drawable/distribution_half_fillet_bg"
+                            tools:text="分配中" />
+
+                        <TextView
+                            android:id="@+id/tvBasePatrolEquipmentNumber_"
+                            style="@style/order_text"
+                            android:layout_width="@dimen/tool_lib_65dp"
+                            android:layout_below="@+id/tvBasePatrolTaskTitle"
+                            android:text="@string/equipment_number" />
+
+                        <TextView
+                            android:id="@+id/tvBasePatrolEquipmentNumber"
+                            style="@style/order_text"
+                            android:layout_below="@+id/tvBasePatrolTaskTitle"
+                            android:layout_toEndOf="@+id/tvBasePatrolEquipmentNumber_"
+                            android:layout_toRightOf="@+id/tvBasePatrolEquipmentNumber_"
+                            android:textColor="@color/tool_lib_gray_222222"
+                            tools:text="LLDKJDH" />
+
+                        <TextView
+                            android:id="@+id/tvBaseOrderDetailTotalMoney"
+                            style="@style/order_money"
+                            android:layout_below="@+id/tvBasePatrolTaskTitle"
+                            tools:text="¥3200.00" />
+
+                        <TextView
+                            android:id="@+id/tvBasePatrolArea_"
+                            style="@style/order_text"
+                            android:layout_width="@dimen/tool_lib_65dp"
+                            android:layout_below="@+id/tvBasePatrolEquipmentNumber_"
+                            android:text="@string/patrol_area" />
+
+                        <TextView
+                            android:id="@+id/tvBasePatrolArea"
+                            style="@style/order_text"
+                            android:layout_below="@+id/tvBasePatrolEquipmentNumber_"
+                            android:layout_toEndOf="@+id/tvBasePatrolArea_"
+                            android:layout_toRightOf="@+id/tvBasePatrolArea_"
+                            android:textColor="@color/tool_lib_gray_222222"
+                            tools:text="A面 B面 C面 D面" />
+
+                        <TextView
+                            android:id="@+id/tvBasePatrolOrderNumber_"
+                            style="@style/order_text"
+                            android:layout_width="@dimen/tool_lib_65dp"
+                            android:layout_below="@+id/tvBasePatrolArea_"
+                            android:text="@string/order_number_" />
+
+                        <TextView
+                            android:id="@+id/tvBasePatrolOrderNumber"
+                            style="@style/order_text"
+                            android:layout_below="@+id/tvBasePatrolArea_"
+                            android:layout_toEndOf="@+id/tvBasePatrolOrderNumber_"
+                            android:layout_toRightOf="@+id/tvBasePatrolOrderNumber_"
+                            android:textColor="@color/tool_lib_gray_222222"
+                            tools:text="7266473746778273" />
+
+                        <TextView
+                            android:id="@+id/tvBasePatrolLengthOfService_"
+                            style="@style/order_text"
+                            android:layout_width="@dimen/tool_lib_65dp"
+                            android:layout_below="@+id/tvBasePatrolOrderNumber"
+                            android:text="@string/length_of_service_" />
+
+                        <TextView
+                            android:id="@+id/tvBasePatrolLengthOfService"
+                            style="@style/order_text"
+                            android:layout_below="@+id/tvBasePatrolOrderNumber"
+                            android:layout_toEndOf="@+id/tvBasePatrolLengthOfService_"
+                            android:layout_toRightOf="@+id/tvBasePatrolLengthOfService_"
+                            android:textColor="@color/tool_lib_gray_222222"
+                            tools:text="3个月" />
+
+
+                        <TextView
+                            android:id="@+id/tvBasePatrolLengthOfServiceTime_"
+                            style="@style/order_text"
+                            android:layout_width="@dimen/tool_lib_65dp"
+                            android:layout_below="@+id/tvBasePatrolLengthOfService"
+                            android:text="@string/length_of_service_time" />
+
+                        <TextView
+                            android:id="@+id/tvBasePatrolLengthOfServiceTime"
+                            style="@style/order_text"
+                            android:layout_below="@+id/tvBasePatrolLengthOfService"
+                            android:layout_toEndOf="@+id/tvBasePatrolLengthOfServiceTime_"
+                            android:layout_toRightOf="@+id/tvBasePatrolLengthOfServiceTime_"
+                            android:textColor="@color/tool_lib_gray_222222"
+                            tools:text="每周二" />
+
+                        <TextView
+                            android:id="@+id/tvBasePatrolNotes_"
+                            style="@style/order_text"
+                            android:layout_width="@dimen/tool_lib_65dp"
+                            android:layout_below="@+id/tvBasePatrolLengthOfServiceTime"
+                            android:text="@string/notes" />
+
+                        <TextView
+                            android:id="@+id/tvBasePatrolNotes"
+                            style="@style/order_text"
+                            android:layout_below="@+id/tvBasePatrolLengthOfServiceTime"
+                            android:layout_toEndOf="@+id/tvBasePatrolNotes_"
+                            android:layout_toRightOf="@+id/tvBasePatrolNotes_"
+                            android:textColor="@color/tool_lib_gray_222222"
+                            tools:text="计算机上进的好想你的角度还是内心就是想对你说 数据库" />
+
+                        <View
+                            android:id="@+id/viewHorizontalLine"
+                            style="@style/tool_lib_horizontal_line"
+                            android:layout_below="@+id/tvBasePatrolNotes"
+                            android:layout_marginLeft="@dimen/tool_lib_12dp"
+                            android:layout_marginTop="@dimen/tool_lib_12dp"
+                            android:layout_marginRight="@dimen/tool_lib_12dp" />
+
+                        <RelativeLayout
+                            android:id="@+id/relBaseOrderDetailLocation"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/viewHorizontalLine"
+                            android:paddingTop="@dimen/tool_lib_12dp"
+                            android:paddingBottom="@dimen/tool_lib_12dp">
+
+                            <ImageView
+                                android:id="@+id/ivBaseOrderDetailLocation"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_marginStart="@dimen/tool_lib_12dp"
+                                android:layout_marginLeft="@dimen/tool_lib_12dp"
+                                android:background="@drawable/ic_location_order" />
+
+                            <TextView
+                                android:id="@+id/tvBaseOrderDetailLocation"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_marginLeft="@dimen/tool_lib_3dp"
+                                android:layout_marginRight="@dimen/tool_lib_3dp"
+                                android:layout_toStartOf="@+id/ivBaseOrderDetailRight"
+                                android:layout_toLeftOf="@+id/ivBaseOrderDetailRight"
+                                android:layout_toEndOf="@+id/ivBaseOrderDetailLocation"
+                                android:layout_toRightOf="@+id/ivBaseOrderDetailLocation"
+                                android:maxLines="1"
+                                android:singleLine="true"
+                                android:textColor="@color/tool_lib_gray_222222"
+                                android:textSize="@dimen/tool_lib_12sp"
+                                tools:text="杭州市余杭区西溪北苑西区38幢3单元1502" />
+
+                            <ImageView
+                                android:id="@+id/ivBaseOrderDetailRight"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentEnd="true"
+                                android:layout_alignParentRight="true"
+                                android:layout_centerVertical="true"
+                                android:layout_marginEnd="@dimen/tool_lib_12dp"
+                                android:layout_marginRight="@dimen/tool_lib_12dp"
+                                android:src="@drawable/ic_right" />
+                        </RelativeLayout>
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/relOrderInfo"
+                        android:layout_marginTop="@dimen/tool_lib_8dp"
+                        android:background="@android:color/white">
+
+                        <TextView
+                            android:id="@+id/tvBaseOrderDetailOrderInformation"
+                            style="@style/item_text_title"
+                            android:text="@string/order_information" />
+
+                        <android.support.v7.widget.RecyclerView
+                            android:id="@+id/recyclerOrderInformation"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/tvBaseOrderDetailOrderInformation"
+                            android:layout_marginLeft="@dimen/tool_lib_12dp"
+                            android:layout_marginTop="@dimen/tool_lib_2dp"
+                            android:layout_marginRight="@dimen/tool_lib_12dp"
+                            android:layout_marginBottom="@dimen/tool_lib_8dp"
+                            android:descendantFocusability="blocksDescendants" />
+                    </RelativeLayout>
+                </RelativeLayout>
+            </ScrollView>
+
+            <RelativeLayout
+                android:id="@+id/relNewTaskOrderDetailBottom"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/tool_lib_56dp"
+                android:layout_alignParentBottom="true"
+                android:background="@android:color/white"
+                android:paddingLeft="@dimen/tool_lib_16dp"
+                android:paddingRight="@dimen/tool_lib_16dp">
+
+                <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
+                    android:id="@+id/btnPatrolCancelTask"
+                    android:layout_width="@dimen/tool_lib_90dp"
+                    android:layout_height="@dimen/tool_lib_40dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="@dimen/tool_lib_16dp"
+                    android:layout_marginRight="@dimen/tool_lib_16dp"
+                    android:layout_toStartOf="@+id/btnPatrolTaskAcceptance"
+                    android:layout_toLeftOf="@+id/btnPatrolTaskAcceptance"
+                    android:text="@string/cancel_task"
+                    android:textColor="@color/tool_lib_gray_777777"
+                    android:textSize="@dimen/tool_lib_14sp"
+                    app:qmui_backgroundColor="@android:color/white"
+                    app:qmui_borderColor="@color/tool_lib_gray_E8E8E8"
+                    app:qmui_borderWidth="@dimen/tool_lib_1dp" />
+
+                <com.qmuiteam.qmui.layout.QMUIButton
+                    android:id="@+id/btnPatrolTaskAcceptance"
+                    style="@style/base_btn"
+                    android:layout_width="@dimen/tool_lib_90dp"
+                    android:layout_height="@dimen/tool_lib_40dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="@dimen/tool_lib_16dp"
+                    android:layout_marginRight="@dimen/tool_lib_16dp"
+                    android:text="@string/task_Acceptance" />
+            </RelativeLayout>
+        </RelativeLayout>
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
+</RelativeLayout>

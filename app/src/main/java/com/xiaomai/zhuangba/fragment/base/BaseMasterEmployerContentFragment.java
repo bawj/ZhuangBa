@@ -11,6 +11,7 @@ import com.example.toollib.base.BaseFragment;
 import com.example.toollib.util.Log;
 import com.xiaomai.zhuangba.R;
 import com.xiaomai.zhuangba.data.AdvertisingBillsBean;
+import com.xiaomai.zhuangba.data.bean.InspectionSheetBean;
 import com.xiaomai.zhuangba.data.bean.OngoingOrdersList;
 import com.xiaomai.zhuangba.data.bean.OrderStatistics;
 import com.xiaomai.zhuangba.data.bean.StatisticsData;
@@ -198,6 +199,17 @@ public class BaseMasterEmployerContentFragment extends BaseFragment<IMasterEmplo
     @Override
     public void loadMoreAdvertisingSuccess(List<AdvertisingBillsBean> advertisingBillsBeans) {
 
+    }
+
+    @Override
+    public void refreshInspectionSuccess(List<InspectionSheetBean> advertisingBillsBeans) {
+        //巡查任务 刷新成功
+        stopRefresh();
+    }
+
+    @Override
+    public void loadInspectionSuccess(List<InspectionSheetBean> advertisingBillsBeans) {
+        //巡查任务 加载成功
     }
 
     @Override

@@ -202,12 +202,13 @@ public class MasterWorkerFragment extends BaseMasterEmployerFragment implements 
         fragmentList.add(OrderPoolFragment.newInstance());
         fragmentList.add(NeedDealWithFragment.newInstance());
         fragmentList.add(AdvertisingBillsFragment.newInstance());
+        fragmentList.add(InspectionSheetFragment.newInstance());
         return fragmentList;
     }
 
     @Override
     public String[] getTabTitle() {
-        return new String[]{getString(R.string.order_pool), getString(R.string.need_to_be_dealt_with) , getString(R.string.advertising_bills)};
+        return new String[]{getString(R.string.order_pool), getString(R.string.need_to_be_dealt_with) , getString(R.string.advertising_bills) , getString(R.string.inspection_sheet)};
     }
 
     @Override

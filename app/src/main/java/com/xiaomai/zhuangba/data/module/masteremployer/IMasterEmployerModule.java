@@ -47,4 +47,10 @@ public interface IMasterEmployerModule extends IBaseModule<IMasterEmployerView> 
      * 广告单
      */
     void requestAdvertisingBills();
+
+
+    /**
+     * 巡查单
+     */
+    void requestInspectionSheet();
 }

@@ -12,6 +12,7 @@ import com.example.toollib.util.Log;
 import com.xiaomai.zhuangba.R;
 import com.xiaomai.zhuangba.UserInfoDao;
 import com.xiaomai.zhuangba.data.AdvertisingBillsBean;
+import com.xiaomai.zhuangba.data.bean.InspectionSheetBean;
 import com.xiaomai.zhuangba.data.bean.OngoingOrdersList;
 import com.xiaomai.zhuangba.data.bean.OrderStatistics;
 import com.xiaomai.zhuangba.data.bean.Orders;
@@ -185,6 +186,39 @@ public class MasterEmployerModule extends BaseModule<IMasterEmployerView> implem
                         } else {
                             //加载
                             mViewRef.get().loadMoreAdvertisingSuccess(advertisingBillsBeans);
+                        }
+                        if (advertisingBillsBeans.size() < StaticExplain.PAGE_NUM.getCode()) {
+                            //加载结束
+                            mViewRef.get().loadMoreEnd();
+                        } else {
+                            //加载完成
+                            mViewRef.get().loadMoreComplete();
+                        }
+                    }
+                    @Override
+                    public void onError(ApiException e) {
+                        super.onError(e);
+                        mViewRef.get().refreshError();
+                    }
+                });
+    }
+
+    @Override
+    public void requestInspectionSheet() {
+        final int page = mViewRef.get().getPage();
+        RxUtils.getObservable(ServiceUrl.getUserApi().getMasterHandleInspectionOrder(page
+                , StaticExplain.PAGE_NUM.getCode()))
+                .compose(mViewRef.get().<HttpResult<RefreshBaseList<InspectionSheetBean>>>bindLifecycle())
+                .subscribe(new BaseHttpRxObserver<RefreshBaseList<InspectionSheetBean>>() {
+                    @Override
+                    protected void onSuccess(RefreshBaseList<InspectionSheetBean> response) {
+                        List<InspectionSheetBean> advertisingBillsBeans = response.getList();
+                        if (page == StaticExplain.PAGE_NUMBER.getCode()) {
+                            //刷新
+                            mViewRef.get().refreshInspectionSuccess(advertisingBillsBeans);
+                        } else {
+                            //加载
+                            mViewRef.get().loadInspectionSuccess(advertisingBillsBeans);
                         }
                         if (advertisingBillsBeans.size() < StaticExplain.PAGE_NUM.getCode()) {
                             //加载结束

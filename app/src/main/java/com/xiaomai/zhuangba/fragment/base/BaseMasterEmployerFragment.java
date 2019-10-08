@@ -21,6 +21,7 @@ import com.xiaomai.zhuangba.adapter.PagerFragmentAdapter;
 import com.xiaomai.zhuangba.adapter.TabCommonGoneNavigator;
 import com.xiaomai.zhuangba.adapter.TabCommonNavigator;
 import com.xiaomai.zhuangba.data.AdvertisingBillsBean;
+import com.xiaomai.zhuangba.data.bean.InspectionSheetBean;
 import com.xiaomai.zhuangba.data.bean.OngoingOrdersList;
 import com.xiaomai.zhuangba.data.bean.OrderStatistics;
 import com.xiaomai.zhuangba.data.bean.StatisticsData;
@@ -211,6 +212,8 @@ public class BaseMasterEmployerFragment extends BaseFragment<IMasterEmployerModu
             message = StringTypeExplain.REFRESH_NEED_DEAL_WITH_FRAGMENT.getCode();
         } else if (currentItem == 2) {
             message = StringTypeExplain.REFRESH_ADVERTISING_BILLS_FRAGMENT.getCode();
+        }else if (currentItem == 3){
+            message = StringTypeExplain.INSPECTION_SHEET_BILLS_FRAGMENT.getCode();
         }
         eventManager.notifyObservers(message, getAddress(), handler);
 
@@ -298,6 +301,16 @@ public class BaseMasterEmployerFragment extends BaseFragment<IMasterEmployerModu
 
     @Override
     public void loadMoreAdvertisingSuccess(List<AdvertisingBillsBean> advertisingBillsBeans) {
+
+    }
+
+    @Override
+    public void refreshInspectionSuccess(List<InspectionSheetBean> advertisingBillsBeans) {
+
+    }
+
+    @Override
+    public void loadInspectionSuccess(List<InspectionSheetBean> advertisingBillsBeans) {
 
     }
 

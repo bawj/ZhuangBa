@@ -17,6 +17,10 @@ import com.xiaomai.zhuangba.adapter.OrderDateListAdapter;
 import com.xiaomai.zhuangba.data.bean.OngoingOrdersList;
 import com.xiaomai.zhuangba.data.bean.OrderDateList;
 import com.xiaomai.zhuangba.data.bean.OrderServiceDate;
+import com.xiaomai.zhuangba.data.bean.UserInfo;
+import com.xiaomai.zhuangba.data.db.DBHelper;
+import com.xiaomai.zhuangba.enums.StaticExplain;
+import com.xiaomai.zhuangba.enums.StringTypeExplain;
 import com.xiaomai.zhuangba.util.ConstantUtil;
 import com.xiaomai.zhuangba.util.DateUtil;
 import com.xiaomai.zhuangba.util.PatrolStatusUtil;
@@ -144,7 +148,12 @@ public class BasePatrolDetailFragment<T extends IBasePatrolModule> extends BaseF
         //标题
         tvBasePatrolTaskTitle.setText(getString(R.string.patrol_title));
         //订单状态
-        PatrolStatusUtil.employerStatus(getActivity() , ongoingOrdersList.getOrderStatus() ,tvBasePatrolOrdersType);
+        UserInfo unique = DBHelper.getInstance().getUserInfoDao().queryBuilder().unique();
+        if (unique.getRole().equals(String.valueOf(StaticExplain.EMPLOYER.getCode()))){
+            PatrolStatusUtil.employerStatus(getActivity() , ongoingOrdersList.getOrderStatus() ,tvBasePatrolOrdersType);
+        }else if (unique.getRole().equals(String.valueOf(StaticExplain.FU_FU_SHI.getCode()))){
+            PatrolStatusUtil.masterStatus(getActivity() , ongoingOrdersList.getOrderStatus() ,tvBasePatrolOrdersType);
+        }
         //设备编号
         tvBasePatrolEquipmentNumber.setText(ongoingOrdersList.getMaterialsStartLength());
         //价格

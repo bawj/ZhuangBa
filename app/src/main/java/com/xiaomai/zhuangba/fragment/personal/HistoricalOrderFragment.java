@@ -17,7 +17,6 @@ import com.xiaomai.zhuangba.data.bean.OngoingOrdersList;
 import com.xiaomai.zhuangba.data.bean.Orders;
 import com.xiaomai.zhuangba.data.bean.UserInfo;
 import com.xiaomai.zhuangba.data.db.DBHelper;
-import com.xiaomai.zhuangba.enums.OrdersEnum;
 import com.xiaomai.zhuangba.enums.StaticExplain;
 import com.xiaomai.zhuangba.fragment.base.BaseListFragment;
 import com.xiaomai.zhuangba.http.ServiceUrl;

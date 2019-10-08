@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/card_view"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:foreground="?android:attr/selectableItemBackground"
+    card_view:cardBackgroundColor="@color/white"
+    card_view:cardCornerRadius="@dimen/tool_lib_5dp"
+    card_view:cardElevation="0dp"
+    card_view:cardUseCompatPadding="true">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:id="@+id/layOrder"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/tool_lib_10dp"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:id="@+id/tvItemInspectionSheetTitle"
+                style="@style/item_text_title"
+                android:layout_centerVertical="true"
+                android:layout_marginTop="0dp"
+                tools:text="巡查任务" />
+
+
+            <TextView
+                android:id="@+id/tvItemInspectionSheetType"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/distribution_half_fillet_bg"
+                android:padding="@dimen/tool_lib_8dp"
+                android:textColor="@color/white"
+                android:textSize="@dimen/tool_lib_12sp"
+                tools:text="分配中" />
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/ivItemInspectionSheetTime"
+            style="@style/item_ic"
+            android:layout_below="@+id/layOrder"
+            android:src="@drawable/ic_equipment_number" />
+
+        <TextView
+            android:id="@+id/tvItemInspectionSheetTime"
+            style="@style/item_text_content"
+            android:layout_below="@+id/layOrder"
+            android:layout_alignBottom="@+id/ivItemInspectionSheetTime"
+            android:layout_toEndOf="@+id/ivItemInspectionSheetTime"
+            android:layout_toRightOf="@+id/ivItemInspectionSheetTime"
+            tools:text="设备编号：KDKDFJFJ" />
+
+        <ImageView
+            android:id="@+id/ivItemPatrolTime"
+            style="@style/item_ic"
+            android:layout_below="@+id/tvItemInspectionSheetTime"
+            android:src="@drawable/ic_maintenance_date" />
+
+        <TextView
+            android:id="@+id/tvItemPatrolTime"
+            style="@style/item_text_content"
+            android:layout_below="@+id/tvItemInspectionSheetTime"
+            android:layout_toEndOf="@+id/ivItemInspectionSheetTime"
+            android:layout_toRightOf="@+id/ivItemInspectionSheetTime"
+            tools:text="服务时长：3个月" />
+
+        <TextView
+            android:id="@+id/tvItemInspectionDate"
+            style="@style/item_text_content"
+            android:layout_below="@+id/tvItemPatrolTime"
+            android:layout_toEndOf="@+id/ivItemInspectionSheetTime"
+            android:layout_toRightOf="@+id/ivItemInspectionSheetTime"
+            tools:text="服务日期：每周二" />
+
+        <ImageView
+            android:id="@+id/ivItemPatrolNoodles"
+            style="@style/item_ic"
+            android:layout_below="@+id/tvItemInspectionDate"
+            android:src="@drawable/ic_noodles" />
+
+        <TextView
+            android:id="@+id/tvItemPatrolNoodles"
+            style="@style/item_text_content"
+            android:layout_below="@+id/tvItemInspectionDate"
+            android:layout_toEndOf="@+id/ivItemInspectionSheetTime"
+            android:layout_toRightOf="@+id/ivItemInspectionSheetTime"
+            tools:text="A面 B面 C面 D面" />
+
+        <ImageView
+            android:id="@+id/ivItemInspectionSheetLocation"
+            style="@style/item_ic"
+            android:layout_below="@+id/ivItemPatrolNoodles"
+            android:src="@drawable/ic_location" />
+
+        <TextView
+            android:id="@+id/tvItemInspectionSheetLocation"
+            style="@style/item_text_content"
+            android:layout_below="@+id/ivItemPatrolNoodles"
+            android:layout_alignBottom="@+id/ivItemInspectionSheetLocation"
+            android:layout_toEndOf="@+id/ivItemInspectionSheetLocation"
+            android:layout_toRightOf="@+id/ivItemInspectionSheetLocation"
+            android:ellipsize="end"
+            android:singleLine="true"
+            tools:text="杭州市江干钱江新城2390号" />
+
+        <View
+            android:id="@+id/viewHorizontalLine"
+            style="@style/tool_lib_horizontal_line"
+            android:layout_below="@+id/ivItemInspectionSheetLocation"
+            android:layout_marginLeft="@dimen/tool_lib_12dp"
+            android:layout_marginTop="@dimen/tool_lib_14dp"
+            android:layout_marginRight="@dimen/tool_lib_12dp" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/viewHorizontalLine"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="@dimen/tool_lib_10dp"
+            android:layout_marginBottom="@dimen/tool_lib_10dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tvItemInspectionSheetNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/tool_lib_6dp"
+                android:layout_marginRight="@dimen/tool_lib_6dp"
+                android:textColor="@color/tool_lib_gray_777777"
+                android:textSize="@dimen/tool_lib_11sp"
+                tools:text="共6项" />
+
+            <TextView
+                android:id="@+id/tvItemInspectionSheetTotal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/total_project"
+                android:textColor="@color/tool_lib_gray_222222"
+                android:textSize="@dimen/tool_lib_12sp" />
+
+            <TextView
+                android:id="@+id/tvItemInspectionSheetMoney"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/tool_lib_12dp"
+                android:layout_marginRight="@dimen/tool_lib_12dp"
+                android:textColor="@color/tool_lib_red_EF2B2B"
+                android:textSize="@dimen/tool_lib_14sp"
+                tools:text="¥300.00" />
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</android.support.v7.widget.CardView>

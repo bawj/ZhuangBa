@@ -510,4 +510,6 @@
     <string name="length_of_service_">服务时长：</string>
     <string name="length_of_service_time">服务时间：</string>
     <string name="noodles">面&#160;&#160;</string>
+    <string name="inspection_sheet">巡查单</string>
+    <string name="batch_order">批量接单</string>
 </resources>
