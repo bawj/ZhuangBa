@@ -21,6 +21,8 @@ import com.xiaomai.zhuangba.data.bean.OrderDateList;
 import com.xiaomai.zhuangba.data.bean.OrderServiceItem;
 import com.xiaomai.zhuangba.data.bean.OrderStatistics;
 import com.xiaomai.zhuangba.data.bean.Orders;
+import com.xiaomai.zhuangba.data.bean.PatrolBean;
+import com.xiaomai.zhuangba.data.bean.PatrolMissionDetailListBean;
 import com.xiaomai.zhuangba.data.bean.PayData;
 import com.xiaomai.zhuangba.data.bean.PayDepositBean;
 import com.xiaomai.zhuangba.data.bean.ProvincialBean;
@@ -236,7 +238,7 @@ public interface IApi {
      * @return observable
      */
     @GET("order/getOrderValidation/{orderCode}")
-    Observable<HttpResult<List<DeliveryContent>>> getOrderValidation(@Path("orderCode") String orderCode , @Query("orderType") String orderType);
+    Observable<HttpResult<List<DeliveryContent>>> getOrderValidation(@Path("orderCode") String orderCode, @Query("orderType") String orderType);
 
 
     /**
@@ -517,7 +519,6 @@ public interface IApi {
     Observable<HttpResult<UserInfo>> certification(@Body RequestBody requestBody);
 
 
-
     /**
      * 修改服务范围
      *
@@ -716,8 +717,8 @@ public interface IApi {
     @FormUrlEncoded
     @POST("wallet/getRunningAccountDetail")
     Observable<HttpResult<EmployerWalletDetailBean>> getRunningAccountDetail(@Field("phoneNumber") String phoneNumber,
-                                                                                   @Field("team") String team, @Field("pageNum") int pageNum,
-                                                                                   @Field("pageSize") int pageSize);
+                                                                             @Field("team") String team, @Field("pageNum") int pageNum,
+                                                                             @Field("pageSize") int pageSize);
 
     /**
      * 充值记录 和 消费记录
@@ -732,10 +733,10 @@ public interface IApi {
     @FormUrlEncoded
     @POST("wallet/rechargeRecord")
     Observable<HttpResult<EmployerWalletDetailBean>> rechargeRecord(@Field("phoneNumber") String phoneNumber,
-                                                                          @Field("team") String team,
-                                                                          @Field("wallerType") String wallerType,
-                                                                          @Field("pageIndex") int pageNum,
-                                                                          @Field("pageSize") int pageSize);
+                                                                    @Field("team") String team,
+                                                                    @Field("wallerType") String wallerType,
+                                                                    @Field("pageIndex") int pageNum,
+                                                                    @Field("pageSize") int pageSize);
 
     /**
      * 订单首页统计详细信息
@@ -749,6 +750,7 @@ public interface IApi {
 
     /**
      * 查询开槽、辅材和调试
+     *
      * @return observable
      */
     @GET("userRole/getSlottingAndDebug")
@@ -757,9 +759,10 @@ public interface IApi {
 
     /**
      * 广告更换
+     *
      * @param phoneNumber 手机号
-     * @param pageNum 页码
-     * @param pageSize 一页显示
+     * @param pageNum     页码
+     * @param pageSize    一页显示
      * @return observable
      */
     @FormUrlEncoded
@@ -769,9 +772,10 @@ public interface IApi {
 
     /**
      * 雇主广告更换
+     *
      * @param phoneNumber 手机号
-     * @param pageNum 页码
-     * @param pageSize 一页显示
+     * @param pageNum     页码
+     * @param pageSize    一页显示
      * @return observable
      */
     @FormUrlEncoded
@@ -781,9 +785,10 @@ public interface IApi {
 
     /**
      * 雇主广告更换详情
+     *
      * @param batchCode 批量号
-     * @param pageNum 页码
-     * @param pageSize 一页显示
+     * @param pageNum   页码
+     * @param pageSize  一页显示
      * @return observable
      */
     @FormUrlEncoded
@@ -804,12 +809,12 @@ public interface IApi {
     /**
      * 广告单验收不通过
      *
-     * @param orderCode 订单编号
+     * @param orderCode        订单编号
      * @param employerDescribe 验收不通过理由
      * @return observable
      */
     @GET("order/notPassedAdvertisingOrder/{orderCode}")
-    Observable<HttpResult<Object>> notPassedAdvertisingOrder(@Path("orderCode") String orderCode , @Query("employerDescribe") String employerDescribe);
+    Observable<HttpResult<Object>> notPassedAdvertisingOrder(@Path("orderCode") String orderCode, @Query("employerDescribe") String employerDescribe);
 
     /**
      * 广告单验收通过
@@ -852,12 +857,12 @@ public interface IApi {
     /**
      * 广告单 师傅 开始施工
      *
-     * @param orderCode 订单编号
+     * @param orderCode         订单编号
      * @param beforePicturesUrl 开始施工前的照片
      * @return observable
      */
     @GET("order/startTaskAdvertisingOrder/{orderCode}")
-    Observable<HttpResult<Object>> startTaskAdvertisingOrder(@Path("orderCode") String orderCode , @Query("beforePicturesUrl") String beforePicturesUrl);
+    Observable<HttpResult<Object>> startTaskAdvertisingOrder(@Path("orderCode") String orderCode, @Query("beforePicturesUrl") String beforePicturesUrl);
 
     /**
      * 广告单 师傅 完成提交
@@ -919,6 +924,7 @@ public interface IApi {
 
     /**
      * 查询是否认证
+     *
      * @return observable
      */
     @GET("/userRole/verifyAccountNumber")
@@ -926,8 +932,9 @@ public interface IApi {
 
 
     /**
-     * 巡查任务
-     * @param pageNum 页
+     * 雇主 巡查任务
+     *
+     * @param pageNum  页
      * @param pageSize 显示多少条
      * @return observable
      */
@@ -937,9 +944,53 @@ public interface IApi {
 
     /**
      * 巡查任务
+     *
      * @param requestBody body
      * @return observable
      */
     @POST("order/getMasterHandleInspectionOrderList")
     Observable<HttpResult<RefreshBaseList<InspectionSheetDetailBean>>> getMasterHandleInspectionOrderList(@Body RequestBody requestBody);
+
+
+    /**
+     * 查询团队
+     *
+     * @param requestBody body
+     * @return observable
+     */
+    @POST("teamwork/selectByTeam")
+    Observable<HttpResult<Object>> selectByTeam(@Body RequestBody requestBody);
+
+
+    /**
+     * 师傅巡查任务 列表
+     *
+     * @param pageNum  页
+     * @param pageSize 显示多少条
+     * @param current  巡查任务传：current ，记录传0
+     * @return observable
+     */
+    @FormUrlEncoded
+    @POST("task/selectByMentor")
+    Observable<HttpResult<RefreshBaseList<PatrolBean>>> selectByMentor(@Field("pageNum") String pageNum,
+                                                                       @Field("pageSize") String pageSize,
+                                                                       @Field("current") String current);
+
+    /**
+     * 师傅巡查任务 列表
+     *
+     * @param pageNum  页
+     * @param pageSize 显示多少条
+     * @param detailNo 子订单编号
+     * @param current  巡查任务传：current ，记录传0
+     * @return observable
+     */
+    @FormUrlEncoded
+    @POST("task/selectByDetailNo")
+    Observable<HttpResult<RefreshBaseList<PatrolMissionDetailListBean>>> selectByDetailNo(@Field("pageNum") String pageNum,
+                                                                                          @Field("pageSize") String pageSize,
+                                                                                          @Field("detailNo") String detailNo,
+                                                                                          @Field("current") String current);
+
+
 }

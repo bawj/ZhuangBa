@@ -12,9 +12,9 @@ import com.xiaomai.zhuangba.data.bean.UserInfo;
 import com.xiaomai.zhuangba.data.db.DBHelper;
 import com.xiaomai.zhuangba.enums.StaticExplain;
 import com.xiaomai.zhuangba.fragment.authentication.master.IDCardScanningFragment;
-import com.xiaomai.zhuangba.fragment.authentication.master.RealAuthenticationFragment;
 import com.xiaomai.zhuangba.fragment.personal.PersonalFragment;
 import com.xiaomai.zhuangba.fragment.personal.agreement.WebViewFragment;
+import com.xiaomai.zhuangba.fragment.personal.master.patrol.PatrolMissionFragment;
 import com.xiaomai.zhuangba.fragment.personal.wallet.WalletFragment;
 import com.xiaomai.zhuangba.fragment.personal.wallet.paydeposit.PayDepositFragment;
 import com.xiaomai.zhuangba.util.ConstantUtil;
@@ -80,7 +80,8 @@ public class MasterPersonalFragment extends PersonalFragment {
         GlideManager.loadCircleImage(getActivity(), userInfo.getBareHeadedPhotoUrl(), ivUserHead, R.drawable.bg_def_head);
     }
 
-    @OnClick({R.id.relWallet, R.id.relPersonalScopeOfService, R.id.relPlatformMaster, R.id.relMasterMaintenance})
+    @OnClick({R.id.relWallet, R.id.relPersonalScopeOfService, R.id.relPlatformMaster, R.id.relMasterMaintenance
+            , R.id.relPersonalPatrolMission , R.id.relPersonalTeam})
     public void onMasterViewClicked(View view) {
         switch (view.getId()) {
             case R.id.relWallet:
@@ -104,6 +105,14 @@ public class MasterPersonalFragment extends PersonalFragment {
                     startFragment(IDCardScanningFragment.newInstance());
                 }
                 break;
+            case R.id.relPersonalPatrolMission:
+                //巡查任务
+                startFragment(PatrolMissionFragment.newInstance());
+                break;
+            case R.id.relPersonalTeam:
+                //我的团队  查询是否加入了团队  创建了团队
+                //startTeamFragment();
+                 break;
             default:
         }
     }

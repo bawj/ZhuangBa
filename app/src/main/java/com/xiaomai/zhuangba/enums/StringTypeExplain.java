@@ -21,6 +21,10 @@ public enum StringTypeExplain {
     WE_WALLET("3" , "钱包支付"),
     MONTHLY_KNOTS("4" , "月结挂账"),
     RECEIPT_ORDER_SUCCESS("1" , "接单成功"),
+    PROCESSING("processing" , "巡查任务未处理"),
+    PROCESSED("processed" , "巡查任务已处理"),
+    CURRENT("current" , "巡查任务"),
+    PATROL_RECORD("0" , "巡查记录"),
     ;
 
     private String code;

@@ -4,12 +4,12 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-
     <ImageView
         android:id="@+id/ivNotData"
         android:layout_width="@dimen/tool_lib_130dp"
         android:layout_height="@dimen/tool_lib_130dp"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/tool_lib_83dp"
         android:src="@drawable/bg_not_data" />
 
     <TextView

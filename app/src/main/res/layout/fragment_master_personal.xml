@@ -298,6 +298,63 @@
                 android:src="@drawable/ic_right" />
         </RelativeLayout>
 
+        <!--巡查任务-->
+        <RelativeLayout
+            android:id="@+id/relPersonalPatrolMission"
+            style="@style/personal_rel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/tool_lib_8dp">
+
+            <ImageView
+                android:id="@+id/ivPersonalPatrolMission"
+                style="@style/personal_img"
+                android:src="@drawable/ic_patrol_mission" />
+
+            <TextView
+                android:id="@+id/tvPersonalPatrolMission"
+                style="@style/personal_text"
+                android:layout_toEndOf="@+id/ivPersonalPatrolMission"
+                android:layout_toRightOf="@+id/ivPersonalPatrolMission"
+                android:text="@string/patrol_mission" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_right" />
+        </RelativeLayout>
+
+        <!--设置-->
+        <RelativeLayout
+            android:id="@+id/relPersonalTeam"
+            style="@style/personal_rel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/ivPersonalTeam"
+                style="@style/personal_img"
+                android:src="@drawable/ic_team" />
+
+            <TextView
+                android:id="@+id/tvPersonalTeam"
+                style="@style/personal_text"
+                android:layout_toEndOf="@+id/ivPersonalTeam"
+                android:layout_toRightOf="@+id/ivPersonalTeam"
+                android:text="@string/team" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_right" />
+        </RelativeLayout>
+
         <!--设置-->
         <RelativeLayout
             android:id="@+id/relSetUp"

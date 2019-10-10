@@ -3,8 +3,12 @@ package com.xiaomai.zhuangba.fragment.base;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.Animation;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.toollib.base.BaseFragment;
@@ -50,7 +54,8 @@ public class BaseListFragment<M extends IBaseModule, T extends BaseQuickAdapter>
             baseListAdapter = getBaseListAdapter();
             if (baseListAdapter != null) {
                 rvBaseList.setAdapter(baseListAdapter);
-                baseListAdapter.setEmptyView(getEmptyView(), rvBaseList);
+                View notDataView = getEmptyView();
+                baseListAdapter.setEmptyView(notDataView);
                 baseListAdapter.setOnItemClickListener(this);
                 baseListAdapter.setOnLoadMoreListener(this, rvBaseList);
             }
@@ -145,12 +150,30 @@ public class BaseListFragment<M extends IBaseModule, T extends BaseQuickAdapter>
 
     /**
      * 默认空布局
-     *
      * @return layout
      */
-    public int getEmptyView() {
-        return R.layout.item_not_data;
+    public View getEmptyView() {
+        View view = getLayoutInflater().inflate(R.layout.item_not_data, (ViewGroup) rvBaseList.getParent(), false);
+        ImageView ivNotData = view.findViewById(R.id.ivNotData);
+        if (getIvNotDataBackground() != 0){
+            ivNotData.setImageResource(getIvNotDataBackground());
+        }
+        TextView tvNotData = view.findViewById(R.id.tvNotData);
+        String tvNotData1 = getTvNotData();
+        if (!TextUtils.isEmpty(tvNotData1)){
+            tvNotData.setText(tvNotData1);
+        }
+        return view;
     }
+
+    public int getIvNotDataBackground(){
+        return 0;
+    }
+
+    public String getTvNotData(){
+        return "";
+    }
+
 
     @Override
     protected M initModule() {

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/itemOrderLayoutFor"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_horizontal"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/tool_lib_12dp"
+    android:paddingRight="@dimen/tool_lib_12dp"
+    android:paddingBottom="@dimen/tool_lib_12dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/qmui_config_color_white">
+
+        <RelativeLayout
+            android:id="@+id/relNeedDeal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/tool_lib_10dp">
+
+            <TextView
+                android:id="@+id/tvPatrolMissionEquipmentNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/tool_lib_16dp"
+                android:layout_marginLeft="@dimen/tool_lib_16dp"
+                android:layout_toStartOf="@+id/tvBasePatrolDetailType"
+                android:layout_toLeftOf="@+id/tvBasePatrolDetailType"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:src="@drawable/ic_advertising_location"
+                tools:text="设备号：201221120120120" />
+
+            <TextView
+                android:id="@+id/tvBasePatrolDetailType"
+                style="@style/order_status"
+                android:layout_centerVertical="true"
+                android:background="@drawable/distribution_half_fillet_bg"
+                tools:text="分配中" />
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/tvItemInspectionAddress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/relNeedDeal"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginStart="@dimen/tool_lib_16dp"
+            android:layout_marginLeft="@dimen/tool_lib_16dp"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:textColor="@color/tool_lib_gray_777777"
+            android:textSize="@dimen/tool_lib_12sp"
+            tools:text="地址：杭州市西湖区三墩镇润达花园" />
+
+
+        <TextView
+            android:id="@+id/tvNoodles"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvItemInspectionAddress"
+            android:layout_marginStart="@dimen/tool_lib_16dp"
+            android:layout_marginLeft="@dimen/tool_lib_16dp"
+            android:layout_marginTop="@dimen/tool_lib_10dp"
+            android:layout_marginBottom="@dimen/tool_lib_10dp"
+            android:textColor="@color/tool_lib_gray_777777"
+            android:textSize="@dimen/tool_lib_12sp"
+            tools:text="A面 B面 C面 D面" />
+    </RelativeLayout>
+
+</LinearLayout>

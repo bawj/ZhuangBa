@@ -20,10 +20,10 @@ import com.xiaomai.zhuangba.data.bean.OrderServiceDate;
 import com.xiaomai.zhuangba.data.bean.UserInfo;
 import com.xiaomai.zhuangba.data.db.DBHelper;
 import com.xiaomai.zhuangba.enums.StaticExplain;
-import com.xiaomai.zhuangba.enums.StringTypeExplain;
 import com.xiaomai.zhuangba.util.ConstantUtil;
 import com.xiaomai.zhuangba.util.DateUtil;
 import com.xiaomai.zhuangba.util.PatrolStatusUtil;
+import com.xiaomai.zhuangba.util.Util;
 
 import java.util.List;
 
@@ -160,13 +160,7 @@ public class BasePatrolDetailFragment<T extends IBasePatrolModule> extends BaseF
         tvBaseOrderDetailTotalMoney.setText(getString(R.string.content_money,String.valueOf(ongoingOrdersList.getOrderAmount())));
         //巡查区域
         String telephone = ongoingOrdersList.getTelephone();
-        StringBuilder stringBuilder = null;
-        if (telephone.contains(",")){
-            stringBuilder = new StringBuilder();
-            telephone = telephone.replace("," , getString(R.string.noodles));
-            stringBuilder.append(telephone).append(getString(R.string.noodles));
-        }
-        tvBasePatrolArea.setText(stringBuilder != null ? stringBuilder : telephone);
+        tvBasePatrolArea.setText(Util.getNoodles(getActivity() , telephone));
         //订单编号
         tvBasePatrolOrderNumber.setText(ongoingOrdersList.getOrderCode());
         //服务时长

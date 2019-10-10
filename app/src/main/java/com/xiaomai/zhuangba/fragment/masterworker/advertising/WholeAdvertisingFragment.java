@@ -172,8 +172,13 @@ public class WholeAdvertisingFragment extends BaseListFragment implements Observ
     }
 
     @Override
-    public int getEmptyView() {
-        return R.layout.item_not_data_search_empty;
+    public int getIvNotDataBackground() {
+        return R.drawable.bg_search_empty;
+    }
+
+    @Override
+    public String getTvNotData() {
+        return getString(R.string.search_empty);
     }
 
     @Override

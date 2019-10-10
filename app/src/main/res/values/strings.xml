@@ -512,4 +512,12 @@
     <string name="noodles">面&#160;&#160;</string>
     <string name="inspection_sheet">巡查单</string>
     <string name="batch_order">批量接单</string>
+    <string name="patrol_mission">巡查任务</string>
+    <string name="team">我的团队</string>
+    <string name="colon">%1$s：</string>
+    <string name="task_total">%1$s/%2$s</string>
+    <string name="no_patrol_duty_today">今日无巡查任务</string>
+    <string name="no_inspection">未巡查</string>
+    <string name="inspected">已巡查</string>
+    <string name="inspection_records">巡查记录</string>
 </resources>

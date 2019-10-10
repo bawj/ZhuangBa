@@ -74,7 +74,7 @@ public class WalletDetailAdapter extends BaseExpandableListAdapter {
 
     @Override
     public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
-        View view = inflater.inflate(R.layout.item_wallet_detail_group, null);
+        View view = inflater.inflate(R.layout.item_wallet_detail_group, parent, false);
         String title = groupList.get(groupPosition);
         Date date = DateUtil.strToDate_(title, "yyyy-MM");
         String timeTitle = DateUtil.dateToString(date, "yyyy年MM月");
@@ -91,7 +91,7 @@ public class WalletDetailAdapter extends BaseExpandableListAdapter {
 
     @Override
     public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
-        View view = inflater.inflate(R.layout.item_wallet_detail_children, null);
+        View view = inflater.inflate(R.layout.item_wallet_detail_children, parent , false);
         TextView tvCode = view.findViewById(R.id.tv_order_code);
         TextView tvTime = view.findViewById(R.id.tv_order_time);
         TextView tvInfo = view.findViewById(R.id.tv_order_info);

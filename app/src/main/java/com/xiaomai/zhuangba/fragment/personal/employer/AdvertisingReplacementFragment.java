@@ -90,8 +90,13 @@ public class AdvertisingReplacementFragment extends BaseListFragment {
     }
 
     @Override
-    public int getEmptyView() {
-        return R.layout.item_empty_view;
+    public int getIvNotDataBackground() {
+        return R.drawable.bg_search_empty;
+    }
+
+    @Override
+    public String getTvNotData() {
+        return getString(R.string.search_empty);
     }
 
     @Override

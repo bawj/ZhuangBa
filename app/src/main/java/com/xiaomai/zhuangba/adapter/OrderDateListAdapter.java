@@ -22,7 +22,7 @@ public class OrderDateListAdapter extends BaseQuickAdapter<OrderDateList, BaseVi
         TextView tvItemOrderDateListCodeTxt = helper.getView(R.id.tvItemOrderDateListCodeTxt);
         TextView tvItemOrderDateListCode = helper.getView(R.id.tvItemOrderDateListCode);
 
-        tvItemOrderDateListCodeTxt.setText(item.getTypeText());
+        tvItemOrderDateListCodeTxt.setText(mContext.getString(R.string.colon,item.getTypeText()));
         if (item.getTypeText().equals(mContext.getString(R.string.order_code))){
             tvItemOrderDateListCode.setText(item.getOrderCode());
         }else{

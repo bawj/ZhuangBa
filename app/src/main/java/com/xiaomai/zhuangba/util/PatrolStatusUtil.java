@@ -6,6 +6,7 @@ import android.widget.TextView;
 import com.qmuiteam.qmui.arch.QMUIFragmentActivity;
 import com.xiaomai.zhuangba.R;
 import com.xiaomai.zhuangba.enums.InspectionSheetEnum;
+import com.xiaomai.zhuangba.enums.StringTypeExplain;
 import com.xiaomai.zhuangba.fragment.masterworker.inspection.PatrolHaveHandDetailFragment;
 import com.xiaomai.zhuangba.fragment.masterworker.inspection.PatrolNewTaskDetailFragment;
 import com.xiaomai.zhuangba.fragment.orderdetail.employer.patrol.PatrolInDistributionDetailFragment;
@@ -89,6 +90,24 @@ public class PatrolStatusUtil {
             //已完成
             tvItemOrdersType.setText(mContext.getString(R.string.completed));
             tvItemOrdersType.setBackgroundResource(R.drawable.expired_half_fillet_bg);
+        }
+    }
+
+    /**
+     * 巡查任务订单详情状态
+     * @param mContext context
+     * @param status 订单状态：processing：未处理  processed：已处理
+     * @param tv TextView
+     */
+    public static void masterPatrolMission(Context mContext , String status , TextView tv){
+        if (status.equals(StringTypeExplain.PROCESSING.getCode())){
+            //未处理
+            tv.setText(mContext.getString(R.string.no_inspection));
+            tv.setBackgroundResource(R.drawable.having_set_out_bg);
+        }else if (status.equals(StringTypeExplain.PROCESSED.getCode())){
+            //已处理
+            tv.setText(mContext.getString(R.string.inspected));
+            tv.setBackgroundResource(R.drawable.expired_half_fillet_bg);
         }
     }
 

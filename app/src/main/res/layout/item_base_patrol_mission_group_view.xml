@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tvPatrolGroupTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/tool_lib_16dp"
+        android:paddingRight="@dimen/tool_lib_16dp"
+        android:paddingBottom="@dimen/tool_lib_12dp"
+        android:textColor="@color/tool_lib_gray_777777"
+        android:textSize="@dimen/tool_lib_12sp"
+        tools:text="2019/01/25" />
+</LinearLayout>

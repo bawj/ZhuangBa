@@ -7,7 +7,7 @@
 
     <TextView
         android:id="@+id/tvItemOrderDateListCodeTxt"
-        android:layout_width="@dimen/tool_lib_84dp"
+        android:layout_width="@dimen/tool_lib_86dp"
         android:layout_height="wrap_content"
         android:textColor="@color/tool_lib_gray_777777"
         android:textSize="@dimen/tool_lib_12sp"

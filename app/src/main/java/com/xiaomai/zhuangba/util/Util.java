@@ -341,4 +341,14 @@ public class Util {
         }
     }
 
+    public static String getNoodles(Context mContext,String noodles){
+        StringBuilder stringBuilder = null;
+        if (noodles.contains(",")){
+            stringBuilder = new StringBuilder();
+            noodles = noodles.replace("," , mContext.getString(R.string.noodles));
+            stringBuilder.append(noodles).append(mContext.getString(R.string.noodles));
+        }
+        return stringBuilder == null ? "" : stringBuilder.toString();
+    }
+
 }
