@@ -22,6 +22,7 @@ import com.xiaomai.zhuangba.data.bean.OrderServiceItem;
 import com.xiaomai.zhuangba.data.bean.OrderStatistics;
 import com.xiaomai.zhuangba.data.bean.Orders;
 import com.xiaomai.zhuangba.data.bean.PatrolBean;
+import com.xiaomai.zhuangba.data.bean.PatrolInspectionRecordsDetailImgBean;
 import com.xiaomai.zhuangba.data.bean.PatrolMissionDetailListBean;
 import com.xiaomai.zhuangba.data.bean.PayData;
 import com.xiaomai.zhuangba.data.bean.PayDepositBean;
@@ -992,5 +993,13 @@ public interface IApi {
                                                                                           @Field("detailNo") String detailNo,
                                                                                           @Field("current") String current);
 
-
+    /**
+     * 师傅巡查任务 列表
+     *
+     * @param id id
+     * @return observable
+     */
+    @FormUrlEncoded
+    @POST("task/selectByTaskId")
+    Observable<HttpResult<PatrolInspectionRecordsDetailImgBean>> selectByTaskId(@Field("id") String id);
 }

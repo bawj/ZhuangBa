@@ -8,17 +8,11 @@ import com.example.toollib.base.BaseFragment;
 import com.example.toollib.data.IBaseModule;
 import com.xiaomai.zhuangba.R;
 import com.xiaomai.zhuangba.adapter.IncomePagerFragmentAdapter;
-import com.xiaomai.zhuangba.adapter.TabCommonGoneNavigator;
-import com.xiaomai.zhuangba.adapter.TabCommonNavigator;
 import com.xiaomai.zhuangba.adapter.TabIncomeNavigator;
-import com.xiaomai.zhuangba.fragment.personal.employer.AdvertisingReplacementFragment;
 
 import net.lucode.hackware.magicindicator.MagicIndicator;
 import net.lucode.hackware.magicindicator.ViewPagerHelper;
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.CommonNavigator;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.BindView;
 

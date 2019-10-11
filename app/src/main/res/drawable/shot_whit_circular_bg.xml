@@ -1,0 +1,14 @@
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="oval"
+    android:useLevel="false">
+    <corners android:radius="@dimen/tool_lib_38dp" />
+
+    <solid android:color="#F5F8FA" />
+    <stroke
+        android:width="1dp"
+        android:color="@color/tool_lib_gray_E8E8E8" />
+    <size
+        android:width="@dimen/tool_lib_15dp"
+        android:height="@dimen/tool_lib_15dp" />
+
+</shape>

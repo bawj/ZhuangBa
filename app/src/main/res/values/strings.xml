@@ -520,4 +520,9 @@
     <string name="no_inspection">未巡查</string>
     <string name="inspected">已巡查</string>
     <string name="inspection_records">巡查记录</string>
+    <string name="shot">拍摄</string>
+    <string name="save">保存</string>
+    <string name="remake">重拍</string>
+    <string name="problem_feedback">问题反馈</string>
+    <string name="complete">完成</string>
 </resources>

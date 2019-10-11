@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:toold="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tvImgDetailTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/tool_lib_22dp"
+        android:textColor="@color/tool_lib_gray_222222"
+        android:textSize="@dimen/tool_lib_18sp"
+        toold:text="A面" />
+
+    <ImageView
+        android:id="@+id/ivImgDetailNoodles"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/tvImgDetailTitle"
+        android:layout_marginLeft="@dimen/tool_lib_68dp"
+        android:layout_marginTop="@dimen/tool_lib_15dp"
+        android:layout_marginRight="@dimen/tool_lib_68dp"
+        android:layout_marginBottom="@dimen/tool_lib_147dp" />
+
+</RelativeLayout>

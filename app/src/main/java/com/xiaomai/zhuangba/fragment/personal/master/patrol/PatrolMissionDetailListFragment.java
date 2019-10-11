@@ -1,8 +1,12 @@
 package com.xiaomai.zhuangba.fragment.personal.master.patrol;
 
 import android.os.Bundle;
+import android.view.View;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.toollib.http.HttpResult;
+import com.google.gson.Gson;
+import com.xiaomai.zhuangba.R;
 import com.xiaomai.zhuangba.data.bean.PatrolMissionDetailListBean;
 import com.xiaomai.zhuangba.data.bean.RefreshBaseList;
 import com.xiaomai.zhuangba.enums.StaticExplain;
@@ -36,6 +40,13 @@ public class PatrolMissionDetailListFragment extends BasePatrolMissionDetailList
     public Observable<HttpResult<RefreshBaseList<PatrolMissionDetailListBean>>> getObservable() {
         return ServiceUrl.getUserApi().selectByDetailNo(String.valueOf(getPage())
                 , String.valueOf(StaticExplain.PAGE_NUM.getCode()), getDetailNo(),StringTypeExplain.CURRENT.getCode());
+    }
+
+    @Override
+    public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+        PatrolMissionDetailListBean patrolMissionDetailListBean = (PatrolMissionDetailListBean)
+                view.findViewById(R.id.tvPatrolMissionEquipmentNumber).getTag();
+        startFragment(PatrolInspectionRecordsPhotoFragment.newInstance(new Gson().toJson(patrolMissionDetailListBean)));
     }
 
     @Override

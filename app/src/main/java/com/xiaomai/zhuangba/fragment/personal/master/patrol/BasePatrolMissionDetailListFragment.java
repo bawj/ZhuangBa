@@ -12,7 +12,6 @@ import com.xiaomai.zhuangba.data.bean.PatrolMissionDetailListBean;
 import com.xiaomai.zhuangba.data.bean.RefreshBaseList;
 import com.xiaomai.zhuangba.enums.StaticExplain;
 import com.xiaomai.zhuangba.fragment.base.BaseListFragment;
-import com.xiaomai.zhuangba.http.ServiceUrl;
 
 import java.util.List;
 

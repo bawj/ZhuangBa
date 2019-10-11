@@ -4,7 +4,7 @@ package com.xiaomai.zhuangba.data.bean;
  * @author Administrator
  * @date 2019/10/10 0010
  */
-public class PatrolMissionDetailListBean {
+public class PatrolMissionDetailListBean{
 
     /**
      * id : 65
@@ -139,4 +139,5 @@ public class PatrolMissionDetailListBean {
     public void setCreateTime(String createTime) {
         this.createTime = createTime;
     }
+
 }
