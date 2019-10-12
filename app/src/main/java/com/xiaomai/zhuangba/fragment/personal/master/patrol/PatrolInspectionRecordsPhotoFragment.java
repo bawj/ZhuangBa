@@ -2,6 +2,7 @@ package com.xiaomai.zhuangba.fragment.personal.master.patrol;
 
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
+import android.view.View;
 
 import com.example.toollib.base.BaseFragment;
 import com.example.toollib.data.IBaseModule;
@@ -35,7 +36,7 @@ public class PatrolInspectionRecordsPhotoFragment extends BaseFragment {
 
     public static PatrolInspectionRecordsPhotoFragment newInstance(String patrolMissionDetailListBean) {
         Bundle args = new Bundle();
-        args.putString(PATROL_MISSION_DETAIL_LIST_BEAN , patrolMissionDetailListBean);
+        args.putString(PATROL_MISSION_DETAIL_LIST_BEAN, patrolMissionDetailListBean);
         PatrolInspectionRecordsPhotoFragment fragment = new PatrolInspectionRecordsPhotoFragment();
         fragment.setArguments(args);
         return fragment;
@@ -59,10 +60,10 @@ public class PatrolInspectionRecordsPhotoFragment extends BaseFragment {
         ViewPagerHelper.bind(magicIndicator, mViewPager);
     }
 
-    private List<PatrolInspectionRecordsPhotoDetailFragment> getListFragment( String[] tabTitle) {
+    private List<PatrolInspectionRecordsPhotoDetailFragment> getListFragment(String[] tabTitle) {
         List<PatrolInspectionRecordsPhotoDetailFragment> list = new ArrayList<>();
         for (int i = 0; i < tabTitle.length; i++) {
-            list.add(PatrolInspectionRecordsPhotoDetailFragment.newInstance());
+            list.add(PatrolInspectionRecordsPhotoDetailFragment.newInstance(tabTitle[i]));
         }
         return list;
     }
@@ -81,7 +82,7 @@ public class PatrolInspectionRecordsPhotoFragment extends BaseFragment {
     private String[] getTabTitle() {
         PatrolMissionDetailListBean patrolMissionDetailListBean = getPatrolMissionDetailListBean();
         String cover = patrolMissionDetailListBean.getCover();
-        if (cover.contains(",")){
+        if (cover.contains(",")) {
             String[] split = cover.split(",");
             String[] title = new String[split.length];
             for (int i = 0; i < split.length; i++) {
@@ -93,12 +94,22 @@ public class PatrolInspectionRecordsPhotoFragment extends BaseFragment {
     }
 
 
-    public PatrolMissionDetailListBean getPatrolMissionDetailListBean(){
-        if (getArguments() != null){
+    public PatrolMissionDetailListBean getPatrolMissionDetailListBean() {
+        if (getArguments() != null) {
             String string = getArguments().getString(PATROL_MISSION_DETAIL_LIST_BEAN);
-            return new Gson().fromJson(string , PatrolMissionDetailListBean.class);
+            return new Gson().fromJson(string, PatrolMissionDetailListBean.class);
         }
         return new PatrolMissionDetailListBean();
     }
 
+
+    @Override
+    public void rightTitleClick(View v) {
+        //完成
+    }
+
+    @Override
+    public String getRightTitle() {
+        return getString(R.string.complete);
+    }
 }

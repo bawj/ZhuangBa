@@ -1,6 +1,8 @@
 package com.example.toollib.util;
 
+import android.content.Context;
 import android.content.res.Resources;
+import android.util.DisplayMetrics;
 
 /**
  * @author Administrator
@@ -47,5 +49,36 @@ public class DensityUtil {
      */
     public float px2dip(int pxValue) {
         return (pxValue / density);
+    }
+
+    /**
+     * dp转px
+     * @param context ctx
+     * @param dp dp
+     * @return int
+     */
+    public static int dip2px(Context context, int dp) {
+        float density = context.getResources().getDisplayMetrics().density;
+        return (int) (dp * density + 0.5f);
+    }
+
+    /**
+     * px转dp
+     * @param context ctx
+     * @param px px
+     * @return int
+     */
+    public static int px2dip(Context context, int px) {
+        float density = context.getResources().getDisplayMetrics().density;
+        return (int) (px / density + 0.5f);
+    }
+
+    /**
+     *获取屏幕大小（px）
+     * @param context context
+     * @return getDisplayMetrics
+     */
+    public static DisplayMetrics getScreenSize(Context context) {
+        return context.getResources().getDisplayMetrics();
     }
 }

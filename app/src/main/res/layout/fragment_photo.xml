@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/tool_lib_color_000000">
+
+    <com.xiaomai.zhuangba.weight.camera.view.CameraPreview
+        android:id="@+id/photoCameraPreview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <com.xiaomai.zhuangba.weight.camera.view.ViewFinderView
+        android:id="@+id/viewFinderView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <FrameLayout
+        android:id="@+id/fl_camera_option"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/tool_lib_120dp"
+        android:layout_alignParentBottom="true"
+        android:gravity="center">
+
+        <com.qmuiteam.qmui.layout.QMUIButton
+            android:id="@+id/btnPhotoShot"
+            android:layout_width="@dimen/tool_lib_70dp"
+            android:layout_height="@dimen/tool_lib_70dp"
+            android:layout_gravity="center"
+            android:background="@drawable/shot_circular_bg"
+            android:gravity="center"
+            android:text="@string/shot"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/tool_lib_14sp" />
+
+    </FrameLayout>
+
+
+</RelativeLayout>

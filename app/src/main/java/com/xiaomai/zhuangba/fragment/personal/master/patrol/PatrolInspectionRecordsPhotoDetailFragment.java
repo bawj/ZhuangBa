@@ -1,12 +1,22 @@
 package com.xiaomai.zhuangba.fragment.personal.master.patrol;
 
+import android.Manifest;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 
 import com.example.toollib.base.BaseFragment;
 import com.example.toollib.data.IBaseModule;
+import com.example.toollib.data.base.BaseCallback;
+import com.example.toollib.manager.GlideManager;
+import com.example.toollib.util.Log;
 import com.qmuiteam.qmui.layout.QMUIButton;
 import com.xiaomai.zhuangba.R;
+import com.xiaomai.zhuangba.enums.ForResultCode;
+import com.xiaomai.zhuangba.enums.StaticExplain;
+import com.xiaomai.zhuangba.util.ConstantUtil;
+import com.xiaomai.zhuangba.util.RxPermissionsUtils;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -26,9 +36,14 @@ public class PatrolInspectionRecordsPhotoDetailFragment extends BaseFragment {
     QMUIButton btnPhotoSave;
     @BindView(R.id.btnPhotoProblemFeedback)
     QMUIButton btnPhotoProblemFeedback;
+    @BindView(R.id.ivPhotoImg)
+    ImageView ivPhotoImg;
 
-    public static PatrolInspectionRecordsPhotoDetailFragment newInstance() {
+    private static final String NOODLES = "noodles";
+
+    public static PatrolInspectionRecordsPhotoDetailFragment newInstance(String noodles) {
         Bundle args = new Bundle();
+        args.putString(NOODLES, noodles);
         PatrolInspectionRecordsPhotoDetailFragment fragment = new PatrolInspectionRecordsPhotoDetailFragment();
         fragment.setArguments(args);
         return fragment;
@@ -65,6 +80,18 @@ public class PatrolInspectionRecordsPhotoDetailFragment extends BaseFragment {
         switch (view.getId()) {
             case R.id.btnPhotoShot:
                 //拍照
+                RxPermissionsUtils.applyPermission(getActivity(), new BaseCallback<String>() {
+                    @Override
+                    public void onSuccess(String obj) {
+                        //相机
+                        startFragmentForResult(PhotoFragment.newInstance(), ForResultCode.START_FOR_RESULT_CODE.getCode());
+                    }
+
+                    @Override
+                    public void onFail(Object obj) {
+                        showToast(getString(R.string.please_open_permissions));
+                    }
+                }, Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE);
                 break;
             case R.id.btnPhotoRemake:
                 //重拍
@@ -80,12 +107,31 @@ public class PatrolInspectionRecordsPhotoDetailFragment extends BaseFragment {
     }
 
     @Override
-    public void rightTitleClick(View v) {
-        //完成
+    protected void onFragmentResult(int requestCode, int resultCode, Intent data) {
+        super.onFragmentResult(requestCode, resultCode, data);
+        if (resultCode == ForResultCode.RESULT_OK.getCode()) {
+            if (requestCode == ForResultCode.START_FOR_RESULT_CODE.getCode()) {
+                //地址选择成功返回
+                String imgUrl = data.getStringExtra(ForResultCode.RESULT_KEY.getExplain());
+                Log.e("imgUrl = " + imgUrl);
+                GlideManager.loadUriImage(getActivity(), imgUrl, ivPhotoImg);
+                isVisibility();
+            }
+        }
     }
 
-    @Override
-    public String getRightTitle() {
-        return getString(R.string.complete);
+    private void isVisibility(){
+        btnPhotoShot.setVisibility(View.GONE);
+        btnPhotoRemake.setVisibility(View.VISIBLE);
+        btnPhotoSave.setVisibility(View.VISIBLE);
+        btnPhotoProblemFeedback.setVisibility(View.VISIBLE);
+    }
+
+
+    public String getNoodles() {
+        if (getArguments() != null) {
+            return getArguments().getString(NOODLES);
+        }
+        return "";
     }
 }
