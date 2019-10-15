@@ -525,4 +525,23 @@
     <string name="remake">重拍</string>
     <string name="problem_feedback">问题反馈</string>
     <string name="complete">完成</string>
+    <string name="confirm_preservation">确认保存</string>
+    <string name="save_the_current_photo">是否保存当前照片？</string>
+    <string name="feedback_and_save">反馈并保存</string>
+    <string name="please_save_the_patrol_pictures">请保存巡查图片</string>
+    <string name="my_team">我的团队</string>
+    <string name="create_team">创建团队</string>
+    <string name="join_the_team">加入团队</string>
+    <string name="team_name">团队名称</string>
+    <string name="please_input_team_name">请输入团队名称</string>
+    <string name="disbanded_team">解散团队</string>
+    <string name="enum_name_val">%1$s (%2$s)</string>
+    <string name="exit_team">退出团队</string>
+    <string name="colonel_account">团长帐号</string>
+    <string name="please_enter_the_head_account_number">请输入团长帐号</string>
+    <string name="confirm_accession">确认加入</string>
+    <string name="please_input_team_phone">请输入团长手机号</string>
+    <string name="phone_is_not_null">手机号不能为空</string>
+    <string name="captain">队长 (%1$s)</string>
+    <string name="invited_members">邀请成员</string>
 </resources>

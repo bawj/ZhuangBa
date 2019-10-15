@@ -21,7 +21,16 @@ public class PatrolInspectionRecordsDetailImgBean {
     private int id;
     private String orderDetailNo;
     private String status;
+    private String cover;
     private List<TaskPictureListBean> taskPictureList;
+
+    public String getCover() {
+        return cover == null ? "" : cover;
+    }
+
+    public void setCover(String cover) {
+        this.cover = cover;
+    }
 
     public int getId() {
         return id;
@@ -67,12 +76,12 @@ public class PatrolInspectionRecordsDetailImgBean {
          */
 
         private int id;
-        private Object taskid;
+        private String taskid;
         private String pic;
         private String side;
         private String remarks;
-        private Object createtime;
-        private Object isdelete;
+        private String createtime;
+        private String isdelete;
 
         public TaskPictureListBean() {
         }
@@ -104,16 +113,16 @@ public class PatrolInspectionRecordsDetailImgBean {
             this.id = id;
         }
 
-        public Object getTaskid() {
-            return taskid;
+        public String getTaskid() {
+            return taskid == null ? "" : taskid;
         }
 
-        public void setTaskid(Object taskid) {
+        public void setTaskid(String taskid) {
             this.taskid = taskid;
         }
 
         public String getPic() {
-            return pic;
+            return pic == null ? "" : pic;
         }
 
         public void setPic(String pic) {
@@ -121,7 +130,7 @@ public class PatrolInspectionRecordsDetailImgBean {
         }
 
         public String getSide() {
-            return side;
+            return side == null ? "" : side;
         }
 
         public void setSide(String side) {
@@ -129,26 +138,26 @@ public class PatrolInspectionRecordsDetailImgBean {
         }
 
         public String getRemarks() {
-            return remarks;
+            return remarks == null ? "" : remarks;
         }
 
         public void setRemarks(String remarks) {
             this.remarks = remarks;
         }
 
-        public Object getCreatetime() {
-            return createtime;
+        public String getCreatetime() {
+            return createtime == null ? "" : createtime;
         }
 
-        public void setCreatetime(Object createtime) {
+        public void setCreatetime(String createtime) {
             this.createtime = createtime;
         }
 
-        public Object getIsdelete() {
-            return isdelete;
+        public String getIsdelete() {
+            return isdelete == null ? "" : isdelete;
         }
 
-        public void setIsdelete(Object isdelete) {
+        public void setIsdelete(String isdelete) {
             this.isdelete = isdelete;
         }
 

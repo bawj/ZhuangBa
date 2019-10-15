@@ -66,8 +66,18 @@ public class CommonlyDialog {
         return this;
     }
 
+    public CommonlyDialog isTvDialogBondTipsVisibility(int visibility){
+        tvDialogBondTips.setVisibility(visibility);
+        return this;
+    }
+
     public CommonlyDialog setTvDialogCommonlyOk(String commonlyOk) {
         tvDialogCommonlyOk.setText(commonlyOk);
+        return this;
+    }
+
+    public CommonlyDialog setTvDialogCommonlyOkColor(int color) {
+        tvDialogCommonlyOk.setTextColor(color);
         return this;
     }
 

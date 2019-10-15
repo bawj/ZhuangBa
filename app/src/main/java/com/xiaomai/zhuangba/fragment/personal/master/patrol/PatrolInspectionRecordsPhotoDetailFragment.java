@@ -3,23 +3,37 @@ package com.xiaomai.zhuangba.fragment.personal.master.patrol;
 import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 
 import com.example.toollib.base.BaseFragment;
 import com.example.toollib.data.IBaseModule;
 import com.example.toollib.data.base.BaseCallback;
+import com.example.toollib.http.HttpResult;
+import com.example.toollib.http.observer.BaseHttpRxObserver;
+import com.example.toollib.http.util.RxUtils;
 import com.example.toollib.manager.GlideManager;
 import com.example.toollib.util.Log;
+import com.example.toollib.weight.dialog.CommonlyDialog;
+import com.google.gson.Gson;
 import com.qmuiteam.qmui.layout.QMUIButton;
 import com.xiaomai.zhuangba.R;
+import com.xiaomai.zhuangba.data.bean.PatrolInspectionRecordsDetailImgBean;
 import com.xiaomai.zhuangba.enums.ForResultCode;
-import com.xiaomai.zhuangba.enums.StaticExplain;
-import com.xiaomai.zhuangba.util.ConstantUtil;
+import com.xiaomai.zhuangba.http.ServiceUrl;
 import com.xiaomai.zhuangba.util.RxPermissionsUtils;
+import com.xiaomai.zhuangba.weight.dialog.EditTextDialogBuilder;
+
+import java.io.File;
+import java.net.URI;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import io.reactivex.Observable;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 
 /**
  * @author Administrator
@@ -39,11 +53,17 @@ public class PatrolInspectionRecordsPhotoDetailFragment extends BaseFragment {
     @BindView(R.id.ivPhotoImg)
     ImageView ivPhotoImg;
 
+    private String imgUrl = "";
+    private String remarks = "";
+    public boolean flag;
     private static final String NOODLES = "noodles";
+    public static final String TASK_PICTURE_LIST_BEAN = "task_picture_list_bean";
+    private PatrolInspectionRecordsDetailImgBean.TaskPictureListBean taskPictureListBean;
 
-    public static PatrolInspectionRecordsPhotoDetailFragment newInstance(String noodles) {
+    public static PatrolInspectionRecordsPhotoDetailFragment newInstance(String noodles, String taskPictureListBean) {
         Bundle args = new Bundle();
         args.putString(NOODLES, noodles);
+        args.putString(TASK_PICTURE_LIST_BEAN, taskPictureListBean);
         PatrolInspectionRecordsPhotoDetailFragment fragment = new PatrolInspectionRecordsPhotoDetailFragment();
         fragment.setArguments(args);
         return fragment;
@@ -56,7 +76,17 @@ public class PatrolInspectionRecordsPhotoDetailFragment extends BaseFragment {
 
     @Override
     public void initView() {
-
+        if (getArguments() != null) {
+            taskPictureListBean = new Gson().fromJson(getArguments().getString(TASK_PICTURE_LIST_BEAN)
+                    , PatrolInspectionRecordsDetailImgBean.TaskPictureListBean.class);
+        } else {
+            taskPictureListBean = new PatrolInspectionRecordsDetailImgBean.TaskPictureListBean();
+        }
+        String pic = taskPictureListBean.getPic();
+        if (!TextUtils.isEmpty(pic)){
+            GlideManager.loadUriImage(getActivity(), pic, ivPhotoImg);
+        }
+        remarks = taskPictureListBean.getRemarks();
     }
 
     @Override
@@ -95,14 +125,71 @@ public class PatrolInspectionRecordsPhotoDetailFragment extends BaseFragment {
                 break;
             case R.id.btnPhotoRemake:
                 //重拍
+                RxPermissionsUtils.applyPermission(getActivity(), new BaseCallback<String>() {
+                    @Override
+                    public void onSuccess(String obj) {
+                        //相机
+                        startFragmentForResult(PhotoFragment.newInstance(), ForResultCode.START_FOR_RESULT_CODE.getCode());
+                    }
+
+                    @Override
+                    public void onFail(Object obj) {
+                        showToast(getString(R.string.please_open_permissions));
+                    }
+                }, Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE);
                 break;
             case R.id.btnPhotoSave:
-                //保存
+                //保存  上传图片
+                CommonlyDialog.getInstance().initView(getActivity())
+                        .isTvDialogBondTipsVisibility(View.GONE)
+                        .setTvDialogCommonlyOk(getString(R.string.confirm_preservation))
+                        .setTvDialogCommonlyOkColor(getResources().getColor(R.color.tool_lib_gray_222222))
+                        .setTvDialogCommonlyClose(getString(R.string.close))
+                        .setTvDialogCommonlyContent(getString(R.string.save_the_current_photo))
+                        .setICallBase(new CommonlyDialog.BaseCallback() {
+                            @Override
+                            public void sure() {
+                                uploadImg();
+                            }
+                        }).showDialog();
                 break;
             case R.id.btnPhotoProblemFeedback:
                 //问题反馈
+                EditTextDialogBuilder.getInstance()
+                        .initView(getActivity())
+                        .setContent(remarks)
+                        .setTitle(getString(R.string.problem_feedback))
+                        .setDialogOk(getString(R.string.feedback_and_save))
+                        .setDialogOkColor(getResources().getColor(R.color.tool_lib_gray_222222))
+                        .setICallBase(new EditTextDialogBuilder.BaseCallback() {
+                            @Override
+                            public void ok(String content) {
+                                taskPictureListBean.setRemarks(content);
+                            }
+                        }).showDialog();
                 break;
             default:
+        }
+    }
+
+    private void uploadImg() {
+        MultipartBody.Builder builder = new MultipartBody.Builder().setType(MultipartBody.FORM);
+        try {
+            File file = new File(new URI("file:///" + imgUrl));
+            builder.addFormDataPart("file", file.getName(),
+                    RequestBody.create(MediaType.parse("multipart/form-data"), file));
+            Observable<HttpResult<Object>> responseBodyObservable = ServiceUrl.getUserApi().uploadFile(builder.build());
+            RxUtils.getObservable(responseBodyObservable)
+                    .compose(this.<HttpResult<Object>>bindToLifecycle())
+                    .subscribe(new BaseHttpRxObserver<Object>(getActivity()) {
+                        @Override
+                        protected void onSuccess(Object response) {
+                            flag = true;
+                            taskPictureListBean.setPic(response.toString());
+                        }
+                    });
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -112,21 +199,27 @@ public class PatrolInspectionRecordsPhotoDetailFragment extends BaseFragment {
         if (resultCode == ForResultCode.RESULT_OK.getCode()) {
             if (requestCode == ForResultCode.START_FOR_RESULT_CODE.getCode()) {
                 //地址选择成功返回
-                String imgUrl = data.getStringExtra(ForResultCode.RESULT_KEY.getExplain());
-                Log.e("imgUrl = " + imgUrl);
+                imgUrl = data.getStringExtra(ForResultCode.RESULT_KEY.getExplain());
                 GlideManager.loadUriImage(getActivity(), imgUrl, ivPhotoImg);
                 isVisibility();
             }
         }
     }
 
-    private void isVisibility(){
+    private void isVisibility() {
         btnPhotoShot.setVisibility(View.GONE);
         btnPhotoRemake.setVisibility(View.VISIBLE);
         btnPhotoSave.setVisibility(View.VISIBLE);
         btnPhotoProblemFeedback.setVisibility(View.VISIBLE);
     }
 
+    public PatrolInspectionRecordsDetailImgBean.TaskPictureListBean getTaskPictureListBean() {
+        return taskPictureListBean;
+    }
+
+    public boolean isFlag(){
+        return flag;
+    }
 
     public String getNoodles() {
         if (getArguments() != null) {

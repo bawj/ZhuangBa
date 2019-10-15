@@ -51,6 +51,12 @@ public enum StaticExplain {
     BEFORE_THE_BEGINNING(1, "开始前的图片地址"),
     UPON_COMPLETION(2, "完成后的图片地址"),
     EMPLOYER_LIVE_PHOTOS(3, "雇主提交的现场照片"),
+    JOIN_THE_TEAM(1018, "您加入了团队"),
+    CREATE_TEAM(1015, "创建了团队"),
+    NO_TEAM_WAS_CREATED_JOINED(1017, "您没有创建团队和加入团队"),
+    REGIMENTAL_COMMANDER(1, "团长"),
+    LEAGUE_MEMBER(2, "团员"),
+
     ;
     /**
      * 状态

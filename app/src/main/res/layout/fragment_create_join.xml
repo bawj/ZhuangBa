@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/tool_lib_gray_F5F8FA"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/ivTeamLog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/tool_lib_73dp"
+        android:src="@drawable/bg_team" />
+
+    <com.qmuiteam.qmui.layout.QMUIButton
+        android:id="@+id/btnCreateTeam"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/tool_lib_46dp"
+        android:layout_below="@+id/ivTeamLog"
+        android:layout_marginLeft="@dimen/tool_lib_16dp"
+        android:layout_marginTop="@dimen/tool_lib_46dp"
+        android:layout_marginRight="@dimen/tool_lib_16dp"
+        android:background="@drawable/login_login_btn"
+        android:text="@string/create_team"
+        android:textColor="@color/tool_lib_white_FFFFFF"
+        android:textSize="@dimen/tool_lib_14sp" />
+
+    <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
+        android:id="@+id/btnJoinTheTeam"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/tool_lib_46dp"
+        android:layout_below="@+id/btnCreateTeam"
+        android:layout_marginLeft="@dimen/tool_lib_16dp"
+        android:layout_marginTop="@dimen/tool_lib_20dp"
+        android:layout_marginRight="@dimen/tool_lib_16dp"
+        android:text="@string/join_the_team"
+        android:textColor="@color/tool_lib_red_EF2B2B"
+        android:textSize="@dimen/tool_lib_14sp"
+        app:qmui_backgroundColor="@android:color/white"
+        app:qmui_borderColor="@color/color_FD583F"
+        app:qmui_borderWidth="@dimen/tool_lib_1dp" />
+</RelativeLayout>

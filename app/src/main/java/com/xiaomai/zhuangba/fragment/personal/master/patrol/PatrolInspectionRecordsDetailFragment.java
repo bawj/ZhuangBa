@@ -59,10 +59,6 @@ public class PatrolInspectionRecordsDetailFragment extends BasePatrolMissionDeta
                     protected void onSuccess(PatrolInspectionRecordsDetailImgBean patrolInspectionRecordsDetailImgBean) {
                         List<PatrolInspectionRecordsDetailImgBean.TaskPictureListBean> taskPictureList
                                 = patrolInspectionRecordsDetailImgBean.getTaskPictureList();
-//                        ArrayList<String> arrayList = new ArrayList<>();
-//                        for (PatrolInspectionRecordsDetailImgBean.TaskPictureListBean taskPictureListBean : taskPictureList) {
-//                            arrayList.add(taskPictureListBean.getPic());
-//                        }
                         String orderDetailNo = patrolInspectionRecordsDetailImgBean.getOrderDetailNo();
                         startFragment(PatrolInspectionRecordsImgFragment.newInstance(orderDetailNo, taskPictureList));
                     }

@@ -6,8 +6,14 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.example.toollib.http.HttpResult;
+import com.example.toollib.http.exception.ApiException;
+import com.example.toollib.http.observer.BaseHttpRxObserver;
+import com.example.toollib.http.util.RxUtils;
 import com.example.toollib.manager.GlideManager;
+import com.google.gson.Gson;
 import com.xiaomai.zhuangba.R;
+import com.xiaomai.zhuangba.data.bean.CreateTeamBean;
 import com.xiaomai.zhuangba.data.bean.UserInfo;
 import com.xiaomai.zhuangba.data.db.DBHelper;
 import com.xiaomai.zhuangba.enums.StaticExplain;
@@ -15,8 +21,12 @@ import com.xiaomai.zhuangba.fragment.authentication.master.IDCardScanningFragmen
 import com.xiaomai.zhuangba.fragment.personal.PersonalFragment;
 import com.xiaomai.zhuangba.fragment.personal.agreement.WebViewFragment;
 import com.xiaomai.zhuangba.fragment.personal.master.patrol.PatrolMissionFragment;
+import com.xiaomai.zhuangba.fragment.personal.master.team.create.CreateJoinFragment;
+import com.xiaomai.zhuangba.fragment.personal.master.team.join.JoinTheTeamFragment;
+import com.xiaomai.zhuangba.fragment.personal.master.team.TheTeamJoinedFragment;
 import com.xiaomai.zhuangba.fragment.personal.wallet.WalletFragment;
 import com.xiaomai.zhuangba.fragment.personal.wallet.paydeposit.PayDepositFragment;
+import com.xiaomai.zhuangba.http.ServiceUrl;
 import com.xiaomai.zhuangba.util.ConstantUtil;
 
 import butterknife.BindView;
@@ -40,6 +50,8 @@ public class MasterPersonalFragment extends PersonalFragment {
     TextView tvPersonalTodayIncome;
     @BindView(R.id.tvPersonalStatus)
     TextView tvPersonalStatus;
+    @BindView(R.id.tvMasterPersonalTeamName)
+    TextView tvMasterPersonalTeamName;
     @BindView(R.id.relPlatformMaster)
     RelativeLayout relPlatformMaster;
 
@@ -51,6 +63,10 @@ public class MasterPersonalFragment extends PersonalFragment {
      * 师傅端显示 今日收入
      */
     public static final String TODAY_FLOWING_RMB = "today_flowing_rmb";
+
+
+    private int status;
+    private String teamTile = "";
 
     public static MasterPersonalFragment newInstance(String orderToday, String todayFlowingRmb) {
         Bundle args = new Bundle();
@@ -78,10 +94,13 @@ public class MasterPersonalFragment extends PersonalFragment {
         tvPersonalStatus.setText(userInfo.getMasterRankName());
         tvPersonalName.setText(userInfo.getUserText());
         GlideManager.loadCircleImage(getActivity(), userInfo.getBareHeadedPhotoUrl(), ivUserHead, R.drawable.bg_def_head);
+
+        //查询 是否有团队
+        findTeam();
     }
 
     @OnClick({R.id.relWallet, R.id.relPersonalScopeOfService, R.id.relPlatformMaster, R.id.relMasterMaintenance
-            , R.id.relPersonalPatrolMission , R.id.relPersonalTeam})
+            , R.id.relPersonalPatrolMission, R.id.relPersonalTeam})
     public void onMasterViewClicked(View view) {
         switch (view.getId()) {
             case R.id.relWallet:
@@ -99,9 +118,9 @@ public class MasterPersonalFragment extends PersonalFragment {
             case R.id.relPlatformMaster:
                 //缴纳保证金
                 UserInfo unique = DBHelper.getInstance().getUserInfoDao().queryBuilder().unique();
-                if (unique.getAuthenticationStatue() == StaticExplain.CERTIFIED.getCode()){
+                if (unique.getAuthenticationStatue() == StaticExplain.CERTIFIED.getCode()) {
                     startFragment(PayDepositFragment.newInstance());
-                }else {
+                } else {
                     startFragment(IDCardScanningFragment.newInstance());
                 }
                 break;
@@ -112,11 +131,45 @@ public class MasterPersonalFragment extends PersonalFragment {
             case R.id.relPersonalTeam:
                 //我的团队  查询是否加入了团队  创建了团队
                 //startTeamFragment();
-                 break;
+                if (status == StaticExplain.NO_TEAM_WAS_CREATED_JOINED.getCode()) {
+                    //没有创建或者加入团队
+                    startFragment(CreateJoinFragment.newInstance());
+                } else if (status == StaticExplain.CREATE_TEAM.getCode()) {
+                    //创建了团队
+                    startFragment(TheTeamJoinedFragment.newInstance());
+                } else if (status == StaticExplain.JOIN_THE_TEAM.getCode()) {
+                    //加入团队
+                    startFragment(JoinTheTeamFragment.newInstance(teamTile));
+                }
+                break;
             default:
         }
     }
 
+    private void findTeam() {
+        RxUtils.getObservable(ServiceUrl.getUserApi().selectByTeam())
+                .compose(this.<HttpResult<Object>>bindToLifecycle())
+                .subscribe(new BaseHttpRxObserver<Object>(getActivity()) {
+                    @Override
+                    protected void onSuccess(Object response) {
+                    }
+                    @Override
+                    public void onError(ApiException apiException) {
+                        status = apiException.getStatus();
+                        if (status == StaticExplain.CREATE_TEAM.getCode()){
+                            CreateTeamBean createTeamBean = new Gson().fromJson(apiException.getData() , CreateTeamBean.class);
+                            tvMasterPersonalTeamName.setText(getString(R.string.enum_name_val
+                                    , createTeamBean.getEnumName() ,String.valueOf(createTeamBean.getEnumVal())));
+                            teamTile = createTeamBean.getEnumName();
+                        }else if (status == StaticExplain.JOIN_THE_TEAM.getCode()){
+                            CreateTeamBean createTeamBean = new Gson().fromJson(apiException.getData() , CreateTeamBean.class);
+                            tvMasterPersonalTeamName.setText(getString(R.string.enum_name_val
+                                    , createTeamBean.getEnumName() ,String.valueOf(createTeamBean.getEnumVal())));
+                            teamTile = createTeamBean.getEnumName();
+                        }
+                    }
+                });
+    }
 
     @Override
     public void startServiceAgreement() {

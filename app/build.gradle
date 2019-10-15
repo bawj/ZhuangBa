@@ -90,6 +90,6 @@ dependencies {
     implementation project(':toollib')
     implementation project(':citypicker')
     implementation project(':calendarview')
-    implementation project(':lib_ocr')
+//    implementation project(':lib_ocr')
     implementation 'fm.jiecao:jiecaovideoplayer:5.5.2'
 }

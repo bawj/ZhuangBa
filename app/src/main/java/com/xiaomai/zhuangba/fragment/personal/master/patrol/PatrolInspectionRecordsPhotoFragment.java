@@ -1,25 +1,35 @@
 package com.xiaomai.zhuangba.fragment.personal.master.patrol;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 
 import com.example.toollib.base.BaseFragment;
 import com.example.toollib.data.IBaseModule;
+import com.example.toollib.http.HttpResult;
+import com.example.toollib.http.observer.BaseHttpRxObserver;
+import com.example.toollib.http.util.RxUtils;
+import com.example.toollib.util.ToastUtil;
 import com.google.gson.Gson;
 import com.xiaomai.zhuangba.R;
 import com.xiaomai.zhuangba.adapter.PhotoPagerFragmentAdapter;
 import com.xiaomai.zhuangba.adapter.TabIncomeNavigator;
-import com.xiaomai.zhuangba.data.bean.PatrolMissionDetailListBean;
+import com.xiaomai.zhuangba.data.bean.PatrolInspectionRecordsDetailImgBean;
+import com.xiaomai.zhuangba.enums.ForResultCode;
+import com.xiaomai.zhuangba.http.ServiceUrl;
 
 import net.lucode.hackware.magicindicator.MagicIndicator;
 import net.lucode.hackware.magicindicator.ViewPagerHelper;
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.CommonNavigator;
 
+import java.security.interfaces.RSAKey;
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import okhttp3.MediaType;
+import okhttp3.RequestBody;
 
 /**
  * @author Administrator
@@ -31,6 +41,8 @@ public class PatrolInspectionRecordsPhotoFragment extends BaseFragment {
     MagicIndicator magicIndicator;
     @BindView(R.id.viewPager)
     ViewPager mViewPager;
+
+    private List<PatrolInspectionRecordsPhotoDetailFragment> photoDetailFragmentList;
 
     public static final String PATROL_MISSION_DETAIL_LIST_BEAN = "patrol_mission_detail_list_bean";
 
@@ -50,7 +62,7 @@ public class PatrolInspectionRecordsPhotoFragment extends BaseFragment {
     @Override
     public void initView() {
         String[] tabTitle = getTabTitle();
-        List<PatrolInspectionRecordsPhotoDetailFragment> photoDetailFragmentList = getListFragment(tabTitle);
+        photoDetailFragmentList = getListFragment(tabTitle);
         mViewPager.setAdapter(new PhotoPagerFragmentAdapter(getChildFragmentManager(), photoDetailFragmentList, tabTitle));
 
         CommonNavigator commonNavigator = new CommonNavigator(getActivity());
@@ -61,9 +73,16 @@ public class PatrolInspectionRecordsPhotoFragment extends BaseFragment {
     }
 
     private List<PatrolInspectionRecordsPhotoDetailFragment> getListFragment(String[] tabTitle) {
+        PatrolInspectionRecordsDetailImgBean patrolInspectionRecordsDetailImgBean = getPatrolInspectionRecordsDetailImgBean();
+        List<PatrolInspectionRecordsDetailImgBean.TaskPictureListBean> taskPictureList = patrolInspectionRecordsDetailImgBean.getTaskPictureList();
         List<PatrolInspectionRecordsPhotoDetailFragment> list = new ArrayList<>();
         for (int i = 0; i < tabTitle.length; i++) {
-            list.add(PatrolInspectionRecordsPhotoDetailFragment.newInstance(tabTitle[i]));
+            PatrolInspectionRecordsDetailImgBean.TaskPictureListBean taskPictureListBean
+                    = new PatrolInspectionRecordsDetailImgBean.TaskPictureListBean();
+            if (taskPictureList.size() > i){
+                taskPictureListBean = taskPictureList.get(i);
+            }
+            list.add(PatrolInspectionRecordsPhotoDetailFragment.newInstance(tabTitle[i] , new Gson().toJson(taskPictureListBean)));
         }
         return list;
     }
@@ -75,12 +94,12 @@ public class PatrolInspectionRecordsPhotoFragment extends BaseFragment {
 
     @Override
     protected String getActivityTitle() {
-        PatrolMissionDetailListBean patrolMissionDetailListBean = getPatrolMissionDetailListBean();
-        return patrolMissionDetailListBean.getDetailNo();
+        PatrolInspectionRecordsDetailImgBean patrolMissionDetailListBean = getPatrolInspectionRecordsDetailImgBean();
+        return patrolMissionDetailListBean.getOrderDetailNo();
     }
 
     private String[] getTabTitle() {
-        PatrolMissionDetailListBean patrolMissionDetailListBean = getPatrolMissionDetailListBean();
+        PatrolInspectionRecordsDetailImgBean patrolMissionDetailListBean = getPatrolInspectionRecordsDetailImgBean();
         String cover = patrolMissionDetailListBean.getCover();
         if (cover.contains(",")) {
             String[] split = cover.split(",");
@@ -93,19 +112,43 @@ public class PatrolInspectionRecordsPhotoFragment extends BaseFragment {
         return new String[]{"A面", "B面", "C面", "D面"};
     }
 
-
-    public PatrolMissionDetailListBean getPatrolMissionDetailListBean() {
+    public PatrolInspectionRecordsDetailImgBean getPatrolInspectionRecordsDetailImgBean() {
         if (getArguments() != null) {
             String string = getArguments().getString(PATROL_MISSION_DETAIL_LIST_BEAN);
-            return new Gson().fromJson(string, PatrolMissionDetailListBean.class);
+            return new Gson().fromJson(string, PatrolInspectionRecordsDetailImgBean.class);
         }
-        return new PatrolMissionDetailListBean();
+        return new PatrolInspectionRecordsDetailImgBean();
     }
 
 
     @Override
     public void rightTitleClick(View v) {
+        boolean flag = false;
         //完成
+        PatrolInspectionRecordsDetailImgBean patrolInspectionRecordsDetailImgBean = getPatrolInspectionRecordsDetailImgBean();
+        List<PatrolInspectionRecordsDetailImgBean.TaskPictureListBean> taskPictureListBeanList = new ArrayList<>();
+        for (PatrolInspectionRecordsPhotoDetailFragment patrolInspectionRecordsPhotoDetailFragment : photoDetailFragmentList) {
+            PatrolInspectionRecordsDetailImgBean.TaskPictureListBean taskPictureListBean =
+                    patrolInspectionRecordsPhotoDetailFragment.getTaskPictureListBean();
+            taskPictureListBeanList.add(taskPictureListBean);
+            flag = patrolInspectionRecordsPhotoDetailFragment.isFlag();
+        }
+        if (!flag){
+            ToastUtil.showShort(getString(R.string.please_save_the_patrol_pictures));
+            return;
+        }
+        patrolInspectionRecordsDetailImgBean.setTaskPictureList(taskPictureListBeanList);
+        RequestBody requestBody = RequestBody.create(MediaType.parse("application/json;charset=utf-8"), new Gson().toJson(taskPictureListBeanList));
+        RxUtils.getObservable(ServiceUrl.getUserApi().save(requestBody))
+                .compose(this.<HttpResult<Object>>bindToLifecycle())
+                .subscribe(new BaseHttpRxObserver<Object>() {
+                    @Override
+                    protected void onSuccess(Object response) {
+                        Intent intent = new Intent();
+                        setFragmentResult(ForResultCode.RESULT_OK.getCode(), intent);
+                        popBackStack();
+                    }
+                });
     }
 
     @Override

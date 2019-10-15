@@ -33,6 +33,7 @@ import com.xiaomai.zhuangba.data.bean.ServiceSubcategory;
 import com.xiaomai.zhuangba.data.bean.SkillList;
 import com.xiaomai.zhuangba.data.bean.Slotting;
 import com.xiaomai.zhuangba.data.bean.StatisticsData;
+import com.xiaomai.zhuangba.data.bean.TeamJoinedBean;
 import com.xiaomai.zhuangba.data.bean.UserInfo;
 import com.xiaomai.zhuangba.data.bean.WalletBean;
 import com.xiaomai.zhuangba.data.bean.WalletDetailBean;
@@ -1002,4 +1003,67 @@ public interface IApi {
     @FormUrlEncoded
     @POST("task/selectByTaskId")
     Observable<HttpResult<PatrolInspectionRecordsDetailImgBean>> selectByTaskId(@Field("id") String id);
+
+
+
+    /**
+     * 师傅巡查任务 列表
+     *
+     * @param requestBody body
+     * @return observable
+     */
+    @POST("task/save")
+    Observable<HttpResult<Object>> save(@Body RequestBody requestBody);
+
+    /**
+     * 查询 是否加入了团队
+     * @return observable
+     */
+    @POST("teamwork/selectByTeam")
+    Observable<HttpResult<Object>> selectByTeam();
+
+    /**
+     * 创建团队
+     * @param nameTeam 团队名称
+     * @return observable
+     */
+    @FormUrlEncoded
+    @POST("teamwork/save")
+    Observable<HttpResult<Object>> saveTeam(@Field("name") String nameTeam);
+
+    /**
+     * 查询团队成员
+     * @param type 1:团长；2:团员
+     * @return observable
+     */
+    @FormUrlEncoded
+    @POST("teamwork/getTeamPersonnel")
+    Observable<HttpResult<List<TeamJoinedBean>>> getTeamPersonnel(@Field("type") String type);
+
+    /**
+     * 解散团队
+     * @param type 1:团长；2:团员
+     * @return observable
+     */
+    @FormUrlEncoded
+    @POST("teamwork/dissolutionTeam")
+    Observable<HttpResult<Object>> dissolutionTeam(@Field("type") String type);
+
+    /**
+     * 加入团队
+     * @param phone 团长手机号
+     * @return observable
+     */
+    @FormUrlEncoded
+    @POST("teamwork/inviteMember")
+    Observable<HttpResult<Object>> inviteMember(@Field("phone") String phone);
+
+    /**
+     * 退出团队
+     * @param phone 团长手机号
+     * @return observable
+     */
+    @FormUrlEncoded
+    @POST("teamwork/dropOutTeam")
+    Observable<HttpResult<Object>> dropOutTeam(@Field("phone") String phone);
 }

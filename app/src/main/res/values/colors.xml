@@ -6,4 +6,6 @@
     <color name="colorPrimaryDark">#FFFFFF</color>
     <!--控制各个控件被选中时的颜色-->
     <color name="colorAccent">#FFFFFF</color>
+    
+    <color name="color_FD583F">#FD583F</color>
 </resources>

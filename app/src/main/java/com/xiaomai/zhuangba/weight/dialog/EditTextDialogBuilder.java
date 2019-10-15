@@ -25,8 +25,10 @@ public class EditTextDialogBuilder {
 
     private QMUIDialog qmuiDialog;
 
+    private TextView tvProblemFeedback;
+    private  TextView tvDialogOk;
     private BaseCallback baseCallback;
-
+    private EditText editDialogContent;
     public static EditTextDialogBuilder getInstance() {
         return new EditTextDialogBuilder();
     }
@@ -37,9 +39,10 @@ public class EditTextDialogBuilder {
         dialogBuilder.setLayout(R.layout.dialog_edittext);
         qmuiDialog = dialogBuilder.create();
         qmuiDialog.setContentView(inflater.inflate(R.layout.dialog_edittext, null));
-        TextView tvDialogOk = qmuiDialog.findViewById(R.id.tvDialogOk);
+        tvProblemFeedback = qmuiDialog.findViewById(R.id.tvProblemFeedback);
+        tvDialogOk = qmuiDialog.findViewById(R.id.tvDialogOk);
         TextView tvDialogClose = qmuiDialog.findViewById(R.id.tvDialogClose);
-        final EditText editDialogContent = qmuiDialog.findViewById(R.id.editDialogContent);
+        editDialogContent = qmuiDialog.findViewById(R.id.editDialogContent);
         Util.setEditTextInhibitInputSpaChat(editDialogContent,50);
         tvDialogOk.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,6 +79,23 @@ public class EditTextDialogBuilder {
 
     public EditTextDialogBuilder setICallBase(BaseCallback baseCallback) {
         this.baseCallback = baseCallback;
+        return this;
+    }
+
+    public EditTextDialogBuilder setTitle(String s){
+        tvProblemFeedback.setText(s);
+        return this;
+    }
+    public EditTextDialogBuilder setDialogOk(String s){
+        tvDialogOk.setText(s);
+        return this;
+    }
+    public EditTextDialogBuilder setDialogOkColor(int color){
+        tvDialogOk.setTextColor(color);
+        return this;
+    }
+    public EditTextDialogBuilder setContent(String s){
+        editDialogContent.setText(s);
         return this;
     }
 

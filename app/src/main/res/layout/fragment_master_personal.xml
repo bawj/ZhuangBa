@@ -346,7 +346,19 @@
                 android:layout_toRightOf="@+id/ivPersonalTeam"
                 android:text="@string/team" />
 
+            <TextView
+                android:id="@+id/tvMasterPersonalTeamName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@+id/ivMasterPersonalRight"
+                android:layout_toStartOf="@+id/ivMasterPersonalRight"
+                tools:text="三墩施工队（48人）"
+                android:textColor="@color/tool_lib_gray_B1B1B1"
+                android:textSize="@dimen/tool_lib_12sp" />
+
             <ImageView
+                android:id="@+id/ivMasterPersonalRight"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"

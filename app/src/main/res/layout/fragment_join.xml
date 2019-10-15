@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/tool_lib_gray_F5F8FA">
+
+    <TextView
+        android:id="@+id/tvTeamName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/tool_lib_36dp"
+        android:layout_marginLeft="@dimen/tool_lib_36dp"
+        android:layout_marginTop="@dimen/tool_lib_26dp"
+        android:text="@string/colonel_account"
+        android:textColor="@color/tool_lib_gray_222222"
+        android:textSize="@dimen/tool_lib_14sp" />
+
+
+    <EditText
+        android:id="@+id/editTeamPhone"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/tool_lib_50dp"
+        android:layout_below="@+id/tvTeamName"
+        android:layout_marginLeft="@dimen/tool_lib_16dp"
+        android:layout_marginTop="@dimen/tool_lib_12dp"
+        android:layout_marginRight="@dimen/tool_lib_16dp"
+        android:background="@android:color/white"
+        android:hint="@string/please_enter_the_head_account_number"
+        android:padding="@dimen/tool_lib_5dp"
+        android:textSize="@dimen/tool_lib_15sp" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editTeamPhone"
+        android:layout_marginTop="@dimen/tool_lib_30dp"
+        android:background="@android:color/white">
+
+        <com.qmuiteam.qmui.layout.QMUIButton
+            android:id="@+id/btnCreateTeam"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/tool_lib_46dp"
+            android:layout_margin="@dimen/tool_lib_8dp"
+            android:layout_marginLeft="@dimen/tool_lib_16dp"
+            android:layout_marginTop="@dimen/tool_lib_46dp"
+            android:layout_marginRight="@dimen/tool_lib_16dp"
+            android:background="@drawable/login_login_btn"
+            android:text="@string/confirm_accession"
+            android:textColor="@color/tool_lib_white_FFFFFF"
+            android:textSize="@dimen/tool_lib_14sp" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

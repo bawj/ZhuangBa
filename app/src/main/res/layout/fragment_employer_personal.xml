@@ -38,253 +38,265 @@
             tools:text="张老板" />
     </RelativeLayout>
 
-    <!--钱包-->
-    <RelativeLayout
-        android:id="@+id/relWallet"
-        style="@style/personal_rel"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/tool_lib_8dp">
+        android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/ivPersonalWallet"
-            style="@style/personal_img"
-            android:src="@drawable/ic_wallet" />
-
-        <TextView
-            style="@style/personal_text"
-            android:layout_toEndOf="@+id/ivPersonalWallet"
-            android:layout_toRightOf="@+id/ivPersonalWallet"
-            android:text="@string/wallet" />
-
-        <ImageView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:src="@drawable/ic_right" />
-    </RelativeLayout>
+            android:orientation="vertical">
 
-    <!--历史订单-->
-    <RelativeLayout
-        android:id="@+id/relHistoricalOrder"
-        style="@style/personal_rel"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
 
-        <ImageView
-            android:id="@+id/ivHistoricalOrder"
-            style="@style/personal_img"
-            android:src="@drawable/ic_historical_order" />
+            <!--钱包-->
+            <RelativeLayout
+                android:id="@+id/relWallet"
+                style="@style/personal_rel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/tool_lib_8dp">
 
-        <TextView
-            android:id="@+id/tvHistoricalOrder"
-            style="@style/personal_text"
-            android:layout_toEndOf="@+id/ivHistoricalOrder"
-            android:layout_toRightOf="@+id/ivHistoricalOrder"
-            android:text="@string/historical_order" />
+                <ImageView
+                    android:id="@+id/ivPersonalWallet"
+                    style="@style/personal_img"
+                    android:src="@drawable/ic_wallet" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginEnd="@dimen/tool_lib_12dp"
-            android:layout_marginRight="@dimen/tool_lib_12dp"
-            android:layout_toStartOf="@+id/ivPersonalRight"
-            android:layout_toLeftOf="@+id/ivPersonalRight"
-            android:text="@string/view_order"
-            android:textColor="@color/tool_lib_gray_B1B1B1"
-            android:textSize="@dimen/tool_lib_12sp" />
+                <TextView
+                    style="@style/personal_text"
+                    android:layout_toEndOf="@+id/ivPersonalWallet"
+                    android:layout_toRightOf="@+id/ivPersonalWallet"
+                    android:text="@string/wallet" />
 
-        <ImageView
-            android:id="@+id/ivPersonalRight"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:src="@drawable/ic_right" />
-    </RelativeLayout>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_right" />
+            </RelativeLayout>
 
-    <!--维保-->
-    <RelativeLayout
-        android:id="@+id/relEmployerMaintenance"
-        style="@style/personal_rel"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+            <!--历史订单-->
+            <RelativeLayout
+                android:id="@+id/relHistoricalOrder"
+                style="@style/personal_rel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-        <ImageView
-            android:id="@+id/ivPersonalEmployerMaintenance"
-            style="@style/personal_img"
-            android:src="@drawable/ic_maintenance" />
+                <ImageView
+                    android:id="@+id/ivHistoricalOrder"
+                    style="@style/personal_img"
+                    android:src="@drawable/ic_historical_order" />
 
-        <TextView
-            android:id="@+id/tvPersonalEmployerMaintenance"
-            style="@style/personal_text"
-            android:layout_toEndOf="@+id/ivPersonalEmployerMaintenance"
-            android:layout_toRightOf="@+id/ivPersonalEmployerMaintenance"
-            android:text="@string/maintenance_policy" />
+                <TextView
+                    android:id="@+id/tvHistoricalOrder"
+                    style="@style/personal_text"
+                    android:layout_toEndOf="@+id/ivHistoricalOrder"
+                    android:layout_toRightOf="@+id/ivHistoricalOrder"
+                    android:text="@string/historical_order" />
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:src="@drawable/ic_right" />
-    </RelativeLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="@dimen/tool_lib_12dp"
+                    android:layout_marginRight="@dimen/tool_lib_12dp"
+                    android:layout_toStartOf="@+id/ivPersonalRight"
+                    android:layout_toLeftOf="@+id/ivPersonalRight"
+                    android:text="@string/view_order"
+                    android:textColor="@color/tool_lib_gray_B1B1B1"
+                    android:textSize="@dimen/tool_lib_12sp" />
 
-    <RelativeLayout
-        android:id="@+id/relEmployerAdvertisingReplacement"
-        style="@style/personal_rel"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+                <ImageView
+                    android:id="@+id/ivPersonalRight"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_right" />
+            </RelativeLayout>
 
-        <ImageView
-            android:id="@+id/ivPersonalEmployerAdvertisingReplacement"
-            style="@style/personal_img"
-            android:src="@drawable/ic_advertising_replacement" />
+            <!--维保-->
+            <RelativeLayout
+                android:id="@+id/relEmployerMaintenance"
+                style="@style/personal_rel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/tvPersonalEmployerAdvertisingReplacement"
-            style="@style/personal_text"
-            android:layout_toEndOf="@+id/ivPersonalEmployerAdvertisingReplacement"
-            android:layout_toRightOf="@+id/ivPersonalEmployerAdvertisingReplacement"
-            android:text="@string/advertising_replacement" />
+                <ImageView
+                    android:id="@+id/ivPersonalEmployerMaintenance"
+                    style="@style/personal_img"
+                    android:src="@drawable/ic_maintenance" />
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:src="@drawable/ic_right" />
-    </RelativeLayout>
+                <TextView
+                    android:id="@+id/tvPersonalEmployerMaintenance"
+                    style="@style/personal_text"
+                    android:layout_toEndOf="@+id/ivPersonalEmployerMaintenance"
+                    android:layout_toRightOf="@+id/ivPersonalEmployerMaintenance"
+                    android:text="@string/maintenance_policy" />
 
-    <RelativeLayout
-        android:id="@+id/relEmployerPatrol"
-        style="@style/personal_rel"
-        android:layout_marginTop="@dimen/tool_lib_8dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_right" />
+            </RelativeLayout>
 
-        <ImageView
-            android:id="@+id/ivPersonalEmployerPatrol"
-            style="@style/personal_img"
-            android:src="@drawable/ic_patrol" />
+            <RelativeLayout
+                android:id="@+id/relEmployerAdvertisingReplacement"
+                style="@style/personal_rel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/tvPersonalEmployerPatrol"
-            style="@style/personal_text"
-            android:layout_toEndOf="@+id/ivPersonalEmployerPatrol"
-            android:layout_toRightOf="@+id/ivPersonalEmployerPatrol"
-            android:text="@string/patrol" />
+                <ImageView
+                    android:id="@+id/ivPersonalEmployerAdvertisingReplacement"
+                    style="@style/personal_img"
+                    android:src="@drawable/ic_advertising_replacement" />
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:src="@drawable/ic_right" />
-    </RelativeLayout>
+                <TextView
+                    android:id="@+id/tvPersonalEmployerAdvertisingReplacement"
+                    style="@style/personal_text"
+                    android:layout_toEndOf="@+id/ivPersonalEmployerAdvertisingReplacement"
+                    android:layout_toRightOf="@+id/ivPersonalEmployerAdvertisingReplacement"
+                    android:text="@string/advertising_replacement" />
 
-    <RelativeLayout
-        android:id="@+id/relEnterpriseCertification"
-        style="@style/personal_rel"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/tool_lib_8dp">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_right" />
+            </RelativeLayout>
 
-        <ImageView
-            android:id="@+id/ivPersonalEnterpriseCertification"
-            style="@style/personal_img"
-            android:src="@drawable/ic_enterprise_certification" />
+            <RelativeLayout
+                android:id="@+id/relEmployerPatrol"
+                style="@style/personal_rel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/tool_lib_8dp">
 
-        <TextView
-            android:id="@+id/tvPersonalEnterpriseCertification"
-            style="@style/personal_text"
-            android:layout_toEndOf="@+id/ivPersonalEnterpriseCertification"
-            android:layout_toRightOf="@+id/ivPersonalEnterpriseCertification"
-            android:text="@string/enterprise_certification" />
+                <ImageView
+                    android:id="@+id/ivPersonalEmployerPatrol"
+                    style="@style/personal_img"
+                    android:src="@drawable/ic_patrol" />
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:src="@drawable/ic_right" />
-    </RelativeLayout>
+                <TextView
+                    android:id="@+id/tvPersonalEmployerPatrol"
+                    style="@style/personal_text"
+                    android:layout_toEndOf="@+id/ivPersonalEmployerPatrol"
+                    android:layout_toRightOf="@+id/ivPersonalEmployerPatrol"
+                    android:text="@string/patrol" />
 
-    <RelativeLayout
-        android:id="@+id/relServiceAgreement"
-        style="@style/personal_rel"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_right" />
+            </RelativeLayout>
 
-        <ImageView
-            android:id="@+id/ivPersonalServiceAgreement"
-            style="@style/personal_img"
-            android:src="@drawable/ic_service_agreement" />
+            <RelativeLayout
+                android:id="@+id/relEnterpriseCertification"
+                style="@style/personal_rel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/tool_lib_8dp">
 
-        <TextView
-            android:id="@+id/tvPersonalServiceAgreement"
-            style="@style/personal_text"
-            android:layout_toEndOf="@+id/ivPersonalServiceAgreement"
-            android:layout_toRightOf="@+id/ivPersonalServiceAgreement"
-            android:text="@string/agreement" />
+                <ImageView
+                    android:id="@+id/ivPersonalEnterpriseCertification"
+                    style="@style/personal_img"
+                    android:src="@drawable/ic_enterprise_certification" />
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:src="@drawable/ic_right" />
-    </RelativeLayout>
+                <TextView
+                    android:id="@+id/tvPersonalEnterpriseCertification"
+                    style="@style/personal_text"
+                    android:layout_toEndOf="@+id/ivPersonalEnterpriseCertification"
+                    android:layout_toRightOf="@+id/ivPersonalEnterpriseCertification"
+                    android:text="@string/enterprise_certification" />
 
-    <!--设置-->
-    <RelativeLayout
-        android:id="@+id/relSetUp"
-        style="@style/personal_rel"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_right" />
+            </RelativeLayout>
 
-        <ImageView
-            android:id="@+id/ivPersonalSetUp"
-            style="@style/personal_img"
-            android:src="@drawable/ic_set" />
+            <RelativeLayout
+                android:id="@+id/relServiceAgreement"
+                style="@style/personal_rel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/tvPersonalWallet"
-            style="@style/personal_text"
-            android:layout_toEndOf="@+id/ivPersonalSetUp"
-            android:layout_toRightOf="@+id/ivPersonalSetUp"
-            android:text="@string/set_up" />
+                <ImageView
+                    android:id="@+id/ivPersonalServiceAgreement"
+                    style="@style/personal_img"
+                    android:src="@drawable/ic_service_agreement" />
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:src="@drawable/ic_right" />
-    </RelativeLayout>
+                <TextView
+                    android:id="@+id/tvPersonalServiceAgreement"
+                    style="@style/personal_text"
+                    android:layout_toEndOf="@+id/ivPersonalServiceAgreement"
+                    android:layout_toRightOf="@+id/ivPersonalServiceAgreement"
+                    android:text="@string/agreement" />
 
-    <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
-        android:id="@+id/btnLogout"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/tool_lib_46dp"
-        android:layout_marginLeft="@dimen/tool_lib_16dp"
-        android:layout_marginTop="@dimen/tool_lib_30dp"
-        android:layout_marginRight="@dimen/tool_lib_16dp"
-        android:text="@string/logout"
-        android:textColor="@color/tool_lib_gray_222222"
-        android:textSize="@dimen/tool_lib_14sp"
-        app:qmui_backgroundColor="@android:color/white"
-        app:qmui_borderColor="@android:color/white"
-        app:qmui_borderWidth="@dimen/tool_lib_1dp" />
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_right" />
+            </RelativeLayout>
 
+            <!--设置-->
+            <RelativeLayout
+                android:id="@+id/relSetUp"
+                style="@style/personal_rel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/ivPersonalSetUp"
+                    style="@style/personal_img"
+                    android:src="@drawable/ic_set" />
+
+                <TextView
+                    android:id="@+id/tvPersonalWallet"
+                    style="@style/personal_text"
+                    android:layout_toEndOf="@+id/ivPersonalSetUp"
+                    android:layout_toRightOf="@+id/ivPersonalSetUp"
+                    android:text="@string/set_up" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_right" />
+            </RelativeLayout>
+
+            <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
+                android:id="@+id/btnLogout"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/tool_lib_46dp"
+                android:layout_marginLeft="@dimen/tool_lib_16dp"
+                android:layout_marginTop="@dimen/tool_lib_30dp"
+                android:layout_marginRight="@dimen/tool_lib_16dp"
+                android:layout_marginBottom="@dimen/tool_lib_6dp"
+                android:text="@string/logout"
+                android:textColor="@color/tool_lib_gray_222222"
+                android:textSize="@dimen/tool_lib_14sp"
+                app:qmui_backgroundColor="@android:color/white"
+                app:qmui_borderColor="@android:color/white"
+                app:qmui_borderWidth="@dimen/tool_lib_1dp" />
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>

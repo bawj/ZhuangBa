@@ -49,6 +49,7 @@ public class BaseListFragment<M extends IBaseModule, T extends BaseQuickAdapter>
     public void initView() {
         refreshLayout.setEnableRefresh(true);
         refreshLayout.setOnRefreshListener(this);
+        refreshLayout.setEnableLoadMoreWhenContentNotFull(true);
         if (rvBaseList != null) {
             rvBaseList.setLayoutManager(new LinearLayoutManager(getActivity()));
             baseListAdapter = getBaseListAdapter();
@@ -111,10 +112,10 @@ public class BaseListFragment<M extends IBaseModule, T extends BaseQuickAdapter>
     @Override
     public void finishRefresh() {
         //刷新完成 可以上拉加载
+        refreshLayout.finishRefresh();
         if (baseListAdapter != null) {
             baseListAdapter.setEnableLoadMore(true);
         }
-        refreshLayout.finishRefresh();
     }
 
     @Override
@@ -173,7 +174,6 @@ public class BaseListFragment<M extends IBaseModule, T extends BaseQuickAdapter>
     public String getTvNotData(){
         return "";
     }
-
 
     @Override
     protected M initModule() {
