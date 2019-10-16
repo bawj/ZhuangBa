@@ -1066,4 +1066,13 @@ public interface IApi {
     @FormUrlEncoded
     @POST("teamwork/dropOutTeam")
     Observable<HttpResult<Object>> dropOutTeam(@Field("phone") String phone);
+
+    /**
+     * 邀请团员
+     * @param member 团员手机号
+     * @return observable
+     */
+    @FormUrlEncoded
+    @POST("teamwork/saveMember")
+    Observable<HttpResult<Object>> saveMember(@Field("member") String member);
 }

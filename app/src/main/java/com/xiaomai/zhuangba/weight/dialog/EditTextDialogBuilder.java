@@ -29,6 +29,7 @@ public class EditTextDialogBuilder {
     private  TextView tvDialogOk;
     private BaseCallback baseCallback;
     private EditText editDialogContent;
+    private String tip;
     public static EditTextDialogBuilder getInstance() {
         return new EditTextDialogBuilder();
     }
@@ -43,6 +44,7 @@ public class EditTextDialogBuilder {
         tvDialogOk = qmuiDialog.findViewById(R.id.tvDialogOk);
         TextView tvDialogClose = qmuiDialog.findViewById(R.id.tvDialogClose);
         editDialogContent = qmuiDialog.findViewById(R.id.editDialogContent);
+        tip = mContext.getString(R.string.please_input_content);
         Util.setEditTextInhibitInputSpaChat(editDialogContent,50);
         tvDialogOk.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,7 +54,7 @@ public class EditTextDialogBuilder {
                     qmuiDialog.dismiss();
                     baseCallback.ok(editDialogContent.getText().toString());
                 }else{
-                    ToastUtil.showShort(mContext.getString(R.string.please_input_content));
+                    ToastUtil.showShort(tip);
                 }
             }
         });
@@ -62,7 +64,6 @@ public class EditTextDialogBuilder {
                 qmuiDialog.dismiss();
             }
         });
-
         return this;
     }
 
@@ -94,9 +95,20 @@ public class EditTextDialogBuilder {
         tvDialogOk.setTextColor(color);
         return this;
     }
+    public TextView getTvDialogOk(){
+        return tvDialogOk;
+    }
+
     public EditTextDialogBuilder setContent(String s){
         editDialogContent.setText(s);
         return this;
+    }
+    public void getTip(String notTip){
+        tip = notTip;
+    }
+
+    public EditText geteditDialogContent(){
+        return editDialogContent;
     }
 
     public interface BaseCallback {

@@ -130,7 +130,6 @@ public class MasterPersonalFragment extends PersonalFragment {
                 break;
             case R.id.relPersonalTeam:
                 //我的团队  查询是否加入了团队  创建了团队
-                //startTeamFragment();
                 if (status == StaticExplain.NO_TEAM_WAS_CREATED_JOINED.getCode()) {
                     //没有创建或者加入团队
                     startFragment(CreateJoinFragment.newInstance());
