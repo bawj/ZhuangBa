@@ -23,6 +23,7 @@ import com.xiaomai.zhuangba.data.db.DBHelper;
 import com.xiaomai.zhuangba.enums.StaticExplain;
 import com.xiaomai.zhuangba.fragment.base.BaseListFragment;
 import com.xiaomai.zhuangba.fragment.masterworker.MasterWorkerFragment;
+import com.xiaomai.zhuangba.fragment.personal.master.assignment.AssignmentTaskFragment;
 import com.xiaomai.zhuangba.http.ServiceUrl;
 import com.xiaomai.zhuangba.weight.dialog.EditTextDialogBuilder;
 
@@ -38,6 +39,7 @@ import butterknife.OnClick;
  */
 public class TheTeamJoinedFragment extends BaseListFragment {
 
+    private List<TeamJoinedBean> teamJoinedBeanLists;
     private TeamJoinedAdapter teamJoinedAdapter;
 
     public static TheTeamJoinedFragment newInstance() {
@@ -49,7 +51,36 @@ public class TheTeamJoinedFragment extends BaseListFragment {
 
     @Override
     public BaseQuickAdapter getBaseListAdapter() {
-        return teamJoinedAdapter = new TeamJoinedAdapter();
+        teamJoinedAdapter = new TeamJoinedAdapter();
+        teamJoinedAdapter.setOnDelListener(new TeamJoinedAdapter.IOnSwipeListener() {
+            @Override
+            public void onDel(String phone, int pos) {
+                delTeamJoined(phone, pos);
+            }
+
+            @Override
+            public void onItemClick(String phone) {
+                //分配任务
+                TeamJoinedBean teamJoinedBean = (TeamJoinedBean) view.findViewById(R.id.tvTeamPhone).getTag();
+                startFragment(AssignmentTaskFragment.newInstance(teamJoinedBean.getUsernumber()));
+            }
+        });
+        return teamJoinedAdapter;
+    }
+
+    private void delTeamJoined(final String phone, final int pos) {
+        //删除团队成员
+        RxUtils.getObservable(ServiceUrl.getUserApi().deleteMember(phone))
+                .compose(this.<HttpResult<Object>>bindToLifecycle())
+                .subscribe(new BaseHttpRxObserver<Object>(getActivity()) {
+                    @Override
+                    protected void onSuccess(Object response) {
+                        if (pos >= 0 && pos < teamJoinedBeanLists.size()) {
+                            teamJoinedBeanLists.remove(pos);
+                            teamJoinedAdapter.notifyItemRemoved(pos);
+                        }
+                    }
+                });
     }
 
     @Override
@@ -60,7 +91,8 @@ public class TheTeamJoinedFragment extends BaseListFragment {
                 .subscribe(new BaseHttpRxObserver<List<TeamJoinedBean>>() {
                     @Override
                     protected void onSuccess(List<TeamJoinedBean> teamJoinedBeanList) {
-                        teamJoinedAdapter.setNewData(teamJoinedBeanList);
+                        teamJoinedBeanLists = teamJoinedBeanList;
+                        teamJoinedAdapter.setNewData(teamJoinedBeanLists);
                         finishRefresh();
                         loadMoreEnd();
                     }
@@ -90,9 +122,9 @@ public class TheTeamJoinedFragment extends BaseListFragment {
                         //邀请团员  不能邀请自己
                         UserInfo unique = DBHelper.getInstance().getUserInfoDao().queryBuilder().unique();
                         String phoneNumber = unique.getPhoneNumber();
-                        if (!phoneNumber.equals(phone)){
+                        if (!phoneNumber.equals(phone)) {
                             saveMember(phone);
-                        }else {
+                        } else {
                             ToastUtil.showShort(getString(R.string.not_invitation_own));
                         }
                     }

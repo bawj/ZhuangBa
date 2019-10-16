@@ -1075,4 +1075,26 @@ public interface IApi {
     @FormUrlEncoded
     @POST("teamwork/saveMember")
     Observable<HttpResult<Object>> saveMember(@Field("member") String member);
+
+
+    /**
+     * 删除团队成员
+     * @param phone 团员手机号
+     * @return observable
+     */
+    @FormUrlEncoded
+    @POST("teamwork/deleteMember")
+    Observable<HttpResult<Object>> deleteMember(@Field("phone") String phone);
+
+    /**
+     * 安装单
+     * @param staffNumber 团员手机号
+     * @param pageNum  页
+     * @param pageSize 显示多少条
+     * @return observable
+     */
+    @GET("order/getOrderListByStaff")
+    Observable<HttpResult<RefreshBaseList<OngoingOrdersList>>> getOrderListByStaff(@Query("staffNumber") String staffNumber,
+                                                       @Query("pageNum") String pageNum,
+                                                       @Query("pageSize") String pageSize);
 }
