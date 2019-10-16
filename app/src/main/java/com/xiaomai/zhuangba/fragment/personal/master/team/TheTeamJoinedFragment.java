@@ -13,6 +13,7 @@ import com.example.toollib.http.HttpResult;
 import com.example.toollib.http.observer.BaseHttpRxObserver;
 import com.example.toollib.http.util.RxUtils;
 import com.example.toollib.util.DensityUtil;
+import com.example.toollib.util.RegexUtils;
 import com.example.toollib.util.ToastUtil;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.xiaomai.zhuangba.R;
@@ -116,13 +117,14 @@ public class TheTeamJoinedFragment extends BaseListFragment {
         editText.setLayoutParams(lp);
         instance.getTip(getString(R.string.please_input_invitation_phone));
         instance.setTitle(getString(R.string.member_account))
+                .setContent(getString(R.string.please_input_invitation_phone))
                 .setICallBase(new EditTextDialogBuilder.BaseCallback() {
                     @Override
                     public void ok(String phone) {
                         //邀请团员  不能邀请自己
                         UserInfo unique = DBHelper.getInstance().getUserInfoDao().queryBuilder().unique();
                         String phoneNumber = unique.getPhoneNumber();
-                        if (!phoneNumber.equals(phone)) {
+                        if (!phoneNumber.equals(phone) && RegexUtils.isMobileExact(phone)) {
                             saveMember(phone);
                         } else {
                             ToastUtil.showShort(getString(R.string.not_invitation_own));

@@ -1055,8 +1055,8 @@ public interface IApi {
      * @return observable
      */
     @FormUrlEncoded
-    @POST("teamwork/inviteMember")
-    Observable<HttpResult<Object>> inviteMember(@Field("phone") String phone);
+    @POST("teamwork/insertTeamMember")
+    Observable<HttpResult<Object>> insertTeamMember(@Field("phone") String phone);
 
     /**
      * 退出团队

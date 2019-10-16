@@ -44,7 +44,7 @@ public class JoinFragment extends BaseFragment {
         if (TextUtils.isEmpty(phone)){
             ToastUtil.showShort(getString(R.string.please_input_team_phone));
         }else {
-            RxUtils.getObservable(ServiceUrl.getUserApi().inviteMember(phone))
+            RxUtils.getObservable(ServiceUrl.getUserApi().insertTeamMember(phone))
                     .compose(this.<HttpResult<Object>>bindToLifecycle())
                     .subscribe(new BaseHttpRxObserver<Object>() {
                         @Override
