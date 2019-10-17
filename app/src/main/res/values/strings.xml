@@ -553,4 +553,7 @@
     <string name="invitation_success">邀请成功</string>
     <string name="please_input_invitation_phone">请输入成员手机号</string>
     <string name="assignment_task">分配任务</string>
+    <string name="add_task">添加任务</string>
+    <string name="all_election">全选</string>
+    <string name="finish_adding">完成添加</string>
 </resources>

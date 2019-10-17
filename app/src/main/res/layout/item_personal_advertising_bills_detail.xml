@@ -16,11 +16,12 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/tool_lib_12dp"
         android:paddingLeft="@dimen/tool_lib_16dp"
         android:paddingRight="@dimen/tool_lib_16dp">
 
-        <com.qmuiteam.qmui.layout.QMUILinearLayout
+        <com.qmuiteam.qmui.layout.QMUILinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
             android:id="@+id/itemOrderLayoutFor"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -60,10 +61,9 @@
                         android:layout_toRightOf="@+id/tvItemOrdersTitle"
                         android:background="@drawable/green_radius_bg"
                         android:padding="@dimen/tool_lib_6dp"
-                        android:text="@string/maintenance"
+                        android:text="@string/single_service"
                         android:textColor="@color/tool_lib_color_199898"
-                        android:textSize="@dimen/tool_lib_12sp"
-                        android:visibility="gone" />
+                        android:textSize="@dimen/tool_lib_12sp" />
 
                     <TextView
                         android:id="@+id/tvItemOrdersType"
@@ -79,83 +79,16 @@
                         tools:text="分配中" />
                 </RelativeLayout>
 
-                <RelativeLayout
-                    android:id="@+id/relAuxiliaryMaterials"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/relNeedDeal"
-                    android:layout_marginTop="@dimen/tool_lib_3dp">
-
-                    <TextView
-                        android:id="@+id/tvSlotting"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/tool_lib_12dp"
-                        android:layout_marginLeft="@dimen/tool_lib_12dp"
-                        android:background="@drawable/bg_gray"
-                        android:padding="@dimen/tool_lib_6dp"
-                        android:textColor="@color/tool_lib_gray_777777"
-                        android:textSize="@dimen/tool_lib_12sp"
-                        android:visibility="gone"
-                        tools:text="0-5米开槽" />
-
-                    <TextView
-                        android:id="@+id/tvDebugging"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/tool_lib_12dp"
-                        android:layout_marginLeft="@dimen/tool_lib_12dp"
-                        android:layout_toEndOf="@+id/tvSlotting"
-                        android:layout_toRightOf="@+id/tvSlotting"
-                        android:background="@drawable/bg_gray"
-                        android:padding="@dimen/tool_lib_6dp"
-                        android:text="@string/debugging"
-                        android:textColor="@color/tool_lib_gray_777777"
-                        android:textSize="@dimen/tool_lib_12sp"
-                        android:visibility="gone" />
-
-                    <TextView
-                        android:id="@+id/tvAuxiliaryMaterials"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/tool_lib_12dp"
-                        android:layout_marginLeft="@dimen/tool_lib_12dp"
-                        android:layout_toEndOf="@+id/tvDebugging"
-                        android:layout_toRightOf="@+id/tvDebugging"
-                        android:background="@drawable/bg_gray"
-                        android:padding="@dimen/tool_lib_6dp"
-                        android:text="@string/auxiliary_materials"
-                        android:textColor="@color/tool_lib_gray_777777"
-                        android:textSize="@dimen/tool_lib_12sp"
-                        android:visibility="gone" />
-                </RelativeLayout>
-
-                <ImageView
-                    android:id="@+id/ivItemOrdersIdentification"
-                    style="@style/item_ic"
-                    android:layout_below="@+id/relAuxiliaryMaterials"
-                    android:src="@drawable/ic_identification" />
-
-                <TextView
-                    android:id="@+id/tvItemOrdersIdentification"
-                    style="@style/item_text_content"
-                    android:layout_below="@+id/relAuxiliaryMaterials"
-                    android:layout_alignBottom="@+id/ivItemOrdersIdentification"
-                    android:layout_toEndOf="@+id/ivItemOrdersIdentification"
-                    android:layout_toRightOf="@+id/ivItemOrdersIdentification"
-                    android:textColor="@color/tool_lib_orange_F4702C"
-                    tools:text="请在13:50之前确认接单" />
-
                 <ImageView
                     android:id="@+id/ivItemOrdersTime"
                     style="@style/item_ic"
-                    android:layout_below="@+id/ivItemOrdersIdentification"
+                    android:layout_below="@+id/relNeedDeal"
                     android:src="@drawable/ic_time" />
 
                 <TextView
                     android:id="@+id/tvItemOrdersTime"
                     style="@style/item_text_content"
-                    android:layout_below="@+id/ivItemOrdersIdentification"
+                    android:layout_below="@+id/relNeedDeal"
                     android:layout_alignBottom="@+id/ivItemOrdersTime"
                     android:layout_toEndOf="@+id/ivItemOrdersTime"
                     android:layout_toRightOf="@+id/ivItemOrdersTime"
@@ -211,7 +144,7 @@
                         android:id="@+id/tvItemOrdersTotal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="项目总计："
+                        android:text="@string/total_project"
                         android:textColor="@color/tool_lib_gray_222222"
                         android:textSize="@dimen/tool_lib_12sp" />
 

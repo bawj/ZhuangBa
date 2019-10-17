@@ -1097,4 +1097,27 @@ public interface IApi {
     Observable<HttpResult<RefreshBaseList<OngoingOrdersList>>> getOrderListByStaff(@Query("staffNumber") String staffNumber,
                                                        @Query("pageNum") String pageNum,
                                                        @Query("pageSize") String pageSize);
+
+    /**
+     * 广告单
+     * @param staffNumber 团员手机号
+     * @param pageNum  页
+     * @param pageSize 显示多少条
+     * @return observable
+     */
+    @GET("order/getAdvertisingOrderByStaff")
+    Observable<HttpResult<RefreshBaseList<AdvertisingBillsBean>>> getAdvertisingOrderByStaff(@Query("staffNumber") String staffNumber,
+                                                       @Query("pageNum") String pageNum,
+                                                       @Query("pageSize") String pageSize);
+
+
+    /**
+     * 订单详情
+     *
+     * @param orderCode 订单code
+     * @param type      订单类型 1安装单 2 广告单
+     * @return observable
+     */
+    @GET("order/deleteOrder/{orderCode}")
+    Observable<HttpResult<Object>> deleteOrder(@Path("orderCode") String orderCode, @Query("type") String type);
 }

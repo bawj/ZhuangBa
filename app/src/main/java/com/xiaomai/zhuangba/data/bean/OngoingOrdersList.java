@@ -82,6 +82,12 @@ public class OngoingOrdersList implements Parcelable{
     /** 广告图 */
     private String picturesUrl;
 
+
+    /**
+     * 是否选中
+     */
+    private boolean isCheck;
+
     public OngoingOrdersList() {
     }
 
@@ -371,6 +377,14 @@ public class OngoingOrdersList implements Parcelable{
 
     public void setMaterialsPrice(double materialsPrice) {
         this.materialsPrice = materialsPrice;
+    }
+
+    public boolean isCheck() {
+        return isCheck;
+    }
+
+    public void setCheck(boolean check) {
+        isCheck = check;
     }
 
     @Override

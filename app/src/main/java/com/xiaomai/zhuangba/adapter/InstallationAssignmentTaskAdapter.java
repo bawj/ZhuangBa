@@ -1,7 +1,8 @@
 package com.xiaomai.zhuangba.adapter;
 
 import android.view.View;
-import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -16,18 +17,20 @@ import com.xiaomai.zhuangba.enums.OrdersEnum;
 import com.xiaomai.zhuangba.enums.StaticExplain;
 import com.xiaomai.zhuangba.util.OrderStatusUtil;
 
+import java.util.List;
+
 /**
  * @author Administrator
- * @date 2019/10/16 0016
+ * @date 2019/10/17 0017
  */
-public class PersonalNeedDealWithAdapter extends BaseQuickAdapter<OngoingOrdersList, BaseViewHolder> {
+public class InstallationAssignmentTaskAdapter extends BaseQuickAdapter<OngoingOrdersList, BaseViewHolder> {
 
-    public PersonalNeedDealWithAdapter() {
-        super(R.layout.item_personal_need_deal_with, null);
+    public InstallationAssignmentTaskAdapter() {
+        super(R.layout.item_installation_assignment_task, null);
     }
 
     @Override
-    protected void convert(BaseViewHolder helper, OngoingOrdersList ongoingOrders) {
+    protected void convert(BaseViewHolder helper, final OngoingOrdersList ongoingOrders) {
         QMUILinearLayout itemOrderLayoutFor = helper.getView(R.id.itemOrderLayoutFor);
         itemOrderLayoutFor.setRadiusAndShadow(QMUIDisplayHelper.dp2px(mContext, 15), QMUIDisplayHelper.dp2px(mContext, 14),
                 0.0f);
@@ -86,7 +89,6 @@ public class PersonalNeedDealWithAdapter extends BaseQuickAdapter<OngoingOrdersL
         TextView tvSlotting = helper.getView(R.id.tvSlotting);
         TextView tvDebugging = helper.getView(R.id.tvDebugging);
         TextView tvAuxiliaryMaterials = helper.getView(R.id.tvAuxiliaryMaterials);
-        String orderType = ongoingOrders.getOrderType();
         //安装单
         tvItemOrdersTime.setText(mContext.getString(R.string.time, ongoingOrders.getAppointmentTime()));
         if (ongoingOrders.getMaintenanceFlag() == StaticExplain.YES_MAINTENANCE.getCode()) {
@@ -123,58 +125,35 @@ public class PersonalNeedDealWithAdapter extends BaseQuickAdapter<OngoingOrdersL
         } else {
             tvAuxiliaryMaterials.setVisibility(View.GONE);
         }
-        ///广告单
-         /*else if (orderType.equals(String.valueOf(StaticExplain.ADVERTISING_BILLS.getCode()))) {
-            tvMaintenance.setVisibility(View.VISIBLE);
-            tvItemOrdersTime.setText(mContext.getString(R.string.time, ongoingOrders.getSlottingStartLength()));
-            //如果是广告单  maintenanceFlag  0 单次 1 持续
-            int maintenanceFlag = ongoingOrders.getMaintenanceFlag();
-            if (maintenanceFlag == StaticExplain.SINGLE_SERVICE.getCode()) {
-                tvMaintenance.setText(mContext.getString(R.string.single_service));
-                tvMaintenance.setBackgroundResource(R.drawable.blue_radius_bg);
-                tvMaintenance.setTextColor(mContext.getResources().getColor(R.color.tool_lib_color_287CDF));
-            } else {
-                tvMaintenance.setText(mContext.getString(R.string.continuous_service));
-                tvMaintenance.setBackgroundResource(R.drawable.violet_radius_bg);
-                tvMaintenance.setTextColor(mContext.getResources().getColor(R.color.tool_lib_color_542BE9));
-            }
-            tvSlotting.setVisibility(View.GONE);
-            tvDebugging.setVisibility(View.GONE);
-            tvAuxiliaryMaterials.setVisibility(View.GONE);
-        }*/
         OrderStatusUtil.masterStatus(mContext, orderStatus, tvItemOrdersType);
 
-        Button btnDelete = helper.getView(R.id.btnDelete);
-        final String orderCode = ongoingOrders.getOrderCode();
-        final int adapterPosition = helper.getAdapterPosition();
-        btnDelete.setOnClickListener(new View.OnClickListener() {
+        //选择
+        CheckBox chkTaskAllElection = helper.getView(R.id.chkTaskAllElection);
+        chkTaskAllElection.setChecked(ongoingOrders.isCheck());
+        chkTaskAllElection.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
-            public void onClick(View v) {
-                if (null != mOnSwipeListener) {
-                    mOnSwipeListener.onDel(orderCode , adapterPosition);
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                ongoingOrders.setCheck(isChecked);
+                if (iOnCheckedChangeListener != null){
+                    iOnCheckedChangeListener.onCheckedChanged(isChecked);
                 }
             }
         });
     }
 
-    private IOnSwipeListener mOnSwipeListener;
+    private IOnCheckedChangeListener iOnCheckedChangeListener;
 
-    public IOnSwipeListener getOnDelListener() {
-        return mOnSwipeListener;
+    public IOnCheckedChangeListener getOnDelListener() {
+        return iOnCheckedChangeListener;
     }
 
-    public void setOnDelListener(IOnSwipeListener mOnDelListener) {
-        this.mOnSwipeListener = mOnDelListener;
+    public void setOnCheckedChangeListener(IOnCheckedChangeListener mOnDelListener) {
+        this.iOnCheckedChangeListener = mOnDelListener;
     }
 
-    public interface IOnSwipeListener {
-        /**
-         * 删除
-         *
-         * @param orderCode 订单编号
-         * @param pos   pos
-         */
-        void onDel(String orderCode, int pos);
+    public interface IOnCheckedChangeListener {
+        void onCheckedChanged(boolean isChecked);
     }
+
 
 }

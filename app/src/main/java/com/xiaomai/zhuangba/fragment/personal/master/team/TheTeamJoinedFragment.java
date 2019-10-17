@@ -1,5 +1,6 @@
 package com.xiaomai.zhuangba.fragment.personal.master.team;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputFilter;
 import android.text.InputType;
@@ -21,9 +22,9 @@ import com.xiaomai.zhuangba.adapter.TeamJoinedAdapter;
 import com.xiaomai.zhuangba.data.bean.TeamJoinedBean;
 import com.xiaomai.zhuangba.data.bean.UserInfo;
 import com.xiaomai.zhuangba.data.db.DBHelper;
+import com.xiaomai.zhuangba.enums.ForResultCode;
 import com.xiaomai.zhuangba.enums.StaticExplain;
 import com.xiaomai.zhuangba.fragment.base.BaseListFragment;
-import com.xiaomai.zhuangba.fragment.masterworker.MasterWorkerFragment;
 import com.xiaomai.zhuangba.fragment.personal.master.assignment.AssignmentTaskFragment;
 import com.xiaomai.zhuangba.http.ServiceUrl;
 import com.xiaomai.zhuangba.weight.dialog.EditTextDialogBuilder;
@@ -61,9 +62,12 @@ public class TheTeamJoinedFragment extends BaseListFragment {
 
             @Override
             public void onItemClick(String phone) {
-                //分配任务
-                TeamJoinedBean teamJoinedBean = (TeamJoinedBean) view.findViewById(R.id.tvTeamPhone).getTag();
-                startFragment(AssignmentTaskFragment.newInstance(teamJoinedBean.getUsernumber()));
+                UserInfo unique = DBHelper.getInstance().getUserInfoDao().queryBuilder().unique();
+                String phoneNumber = unique.getPhoneNumber();
+                if (!phoneNumber.equals(phone)){
+                    //分配任务
+                    startFragment(AssignmentTaskFragment.newInstance(phone));
+                }
             }
         });
         return teamJoinedAdapter;
@@ -77,6 +81,7 @@ public class TheTeamJoinedFragment extends BaseListFragment {
                     @Override
                     protected void onSuccess(Object response) {
                         if (pos >= 0 && pos < teamJoinedBeanLists.size()) {
+                            setFragmentResult(ForResultCode.RESULT_OK.getCode() , new Intent());
                             teamJoinedBeanLists.remove(pos);
                             teamJoinedAdapter.notifyItemRemoved(pos);
                         }
@@ -115,9 +120,9 @@ public class TheTeamJoinedFragment extends BaseListFragment {
         ViewGroup.LayoutParams lp = editText.getLayoutParams();
         lp.height = DensityUtil.dp2px(50);
         editText.setLayoutParams(lp);
+        editText.setHint(getString(R.string.please_input_invitation_phone));
         instance.getTip(getString(R.string.please_input_invitation_phone));
         instance.setTitle(getString(R.string.member_account))
-                .setContent(getString(R.string.please_input_invitation_phone))
                 .setICallBase(new EditTextDialogBuilder.BaseCallback() {
                     @Override
                     public void ok(String phone) {
@@ -139,6 +144,7 @@ public class TheTeamJoinedFragment extends BaseListFragment {
                 .subscribe(new BaseHttpRxObserver<Object>(getActivity()) {
                     @Override
                     protected void onSuccess(Object response) {
+                        setFragmentResult(ForResultCode.RESULT_OK.getCode() , new Intent());
                         ToastUtil.showShort(getString(R.string.invitation_success));
                     }
                 });
@@ -153,7 +159,8 @@ public class TheTeamJoinedFragment extends BaseListFragment {
                     @Override
                     public void onNext(HttpResult<Object> httpResult) {
                         super.onNext(httpResult);
-                        startFragment(MasterWorkerFragment.newInstance());
+                        setFragmentResult(ForResultCode.RESULT_OK.getCode() , new Intent());
+                        popBackStack();
                     }
 
                     @Override
@@ -162,6 +169,7 @@ public class TheTeamJoinedFragment extends BaseListFragment {
                 });
 
     }
+
 
     @Override
     public int getContentView() {

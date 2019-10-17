@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical">
@@ -26,9 +26,9 @@
 
     <Button
         android:id="@+id/btnDelete"
-        android:layout_width="@dimen/tool_lib_78dp"
+        android:layout_width="@dimen/tool_lib_70dp"
         android:layout_height="match_parent"
-        android:background="@color/tool_lib_color_E74C3C"
+        android:background="@drawable/left_red"
         android:text="@string/delete"
         android:textColor="@android:color/white" />
 </LinearLayout>

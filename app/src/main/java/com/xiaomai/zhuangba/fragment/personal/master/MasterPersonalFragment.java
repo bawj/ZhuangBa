@@ -1,5 +1,6 @@
 package com.xiaomai.zhuangba.fragment.personal.master;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -16,6 +17,7 @@ import com.xiaomai.zhuangba.R;
 import com.xiaomai.zhuangba.data.bean.CreateTeamBean;
 import com.xiaomai.zhuangba.data.bean.UserInfo;
 import com.xiaomai.zhuangba.data.db.DBHelper;
+import com.xiaomai.zhuangba.enums.ForResultCode;
 import com.xiaomai.zhuangba.enums.StaticExplain;
 import com.xiaomai.zhuangba.fragment.authentication.master.IDCardScanningFragment;
 import com.xiaomai.zhuangba.fragment.personal.PersonalFragment;
@@ -135,9 +137,9 @@ public class MasterPersonalFragment extends PersonalFragment {
                     startFragment(CreateJoinFragment.newInstance());
                 } else if (status == StaticExplain.CREATE_TEAM.getCode()) {
                     //创建了团队
-                    startFragment(TheTeamJoinedFragment.newInstance());
+                    startFragmentForResult(TheTeamJoinedFragment.newInstance() , ForResultCode.START_FOR_RESULT_CODE.getCode());
                 } else if (status == StaticExplain.JOIN_THE_TEAM.getCode()) {
-                    //加入团队
+                    //加入了团队
                     startFragment(JoinTheTeamFragment.newInstance(teamTile));
                 }
                 break;
@@ -168,6 +170,16 @@ public class MasterPersonalFragment extends PersonalFragment {
                         }
                     }
                 });
+    }
+
+    @Override
+    protected void onFragmentResult(int requestCode, int resultCode, Intent data) {
+        super.onFragmentResult(requestCode, resultCode, data);
+        if (resultCode == ForResultCode.RESULT_OK.getCode()) {
+            if (requestCode == ForResultCode.START_FOR_RESULT_CODE.getCode()) {
+                findTeam();
+            }
+        }
     }
 
     @Override

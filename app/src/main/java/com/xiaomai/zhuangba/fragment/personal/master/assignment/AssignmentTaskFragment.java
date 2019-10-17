@@ -58,7 +58,7 @@ public class AssignmentTaskFragment extends BaseFragment {
     private List<BaseFragment> getListFragment() {
         List<BaseFragment> fragmentList = new ArrayList<>();
         fragmentList.add(PersonalNeedDealWithFragment.newInstance(getPhone()));
-        fragmentList.add(PersonalAdvertisingBillsFragment.newInstance());
+        fragmentList.add(PersonalAdvertisingBillsFragment.newInstance(getPhone()));
         return fragmentList;
     }
 

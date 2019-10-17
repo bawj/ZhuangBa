@@ -65,14 +65,14 @@ public abstract class BaseHttpRxObserver<T> implements Observer<HttpResult<T>>, 
         if (tipLoading != null && tipLoading.isShowing()) {
             tipLoading.dismiss();
         }
-        T data = httpResult.getData();
-        if (data != null) {
-            onSuccess(data);
-        }
         Version version = httpResult.getVersion();
         if (version != null) {
             //更新
             EventBus.getDefault().post(new MessageEvent(VersionEnums.APP_UPDATE.getCode(), version));
+        }
+        T data = httpResult.getData();
+        if (version == null) {
+            onSuccess(data);
         }
     }
 
