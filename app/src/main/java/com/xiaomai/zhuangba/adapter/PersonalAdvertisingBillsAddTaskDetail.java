@@ -110,7 +110,7 @@ public class PersonalAdvertisingBillsAddTaskDetail extends BaseListFragment {
             });
         }
         RequestBody requestBody = RequestBody.create(MediaType.parse("application/json;charset=utf-8"), new Gson().toJson(hashMap));
-        RxUtils.getObservable(ServiceUrl.getUserApi().getMasterHandleAdvertisingOrderList(requestBody))
+        RxUtils.getObservable(ServiceUrl.getUserApi().getAdvertisingOrderListByStaff(requestBody))
                 .compose(this.<HttpResult<RefreshBaseList<OngoingOrdersList>>>bindToLifecycle())
                 .subscribe(new BaseHttpRxObserver<RefreshBaseList<OngoingOrdersList>>() {
                     @Override
@@ -122,6 +122,8 @@ public class PersonalAdvertisingBillsAddTaskDetail extends BaseListFragment {
                             finishRefresh();
                             if (ordersLists != null && ordersLists.size() > 0) {
                                 relInstallationAssignmentTask.setVisibility(View.VISIBLE);
+                            } else {
+                                relInstallationAssignmentTask.setVisibility(View.GONE);
                             }
                         } else {
                             //加载
@@ -159,52 +161,59 @@ public class PersonalAdvertisingBillsAddTaskDetail extends BaseListFragment {
         personalAdvertisingBillsAddTaskDetailAdapter.setOnCheckedChangeListener(new PersonalAdvertisingBillsAddTaskDetailAdapter.IOnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(boolean isChecked) {
-                if (!isChecked) {
-                    chkTaskAllElection.setChecked(false);
-                } else {
-                    //查询是否所有的 都选中了
-                    boolean check = false;
-                    List<OngoingOrdersList> data = personalAdvertisingBillsAddTaskDetailAdapter.getData();
-                    for (OngoingOrdersList datum : data) {
-                        if (!datum.isCheck()) {
-                            check = false;
-                            break;
-                        }
-                        check = true;
+                //查询是否所有的 都选中了
+                boolean check = true;
+                List<OngoingOrdersList> data = personalAdvertisingBillsAddTaskDetailAdapter.getData();
+                for (OngoingOrdersList datum : data) {
+                    if (!datum.isCheck()) {
+                        check = false;
+                        break;
                     }
-                    chkTaskAllElection.setChecked(check);
                 }
+                chkTaskAllElection.setChecked(check);
             }
         });
         return personalAdvertisingBillsAddTaskDetailAdapter;
     }
 
-    @OnClick(R.id.btnFinishAdding)
-    public void onViewClicked() {
-        //订单编号集合
-        List<String> orderList = new ArrayList<>();
-        List<OngoingOrdersList> data = personalAdvertisingBillsAddTaskDetailAdapter.getData();
-        for (OngoingOrdersList datum : data) {
-            boolean check = datum.isCheck();
-            if (check) {
-                String orderCode = datum.getOrderCode();
-                orderList.add(orderCode);
-            }
-        }
-        HashMap<String, Object> hashMap = new HashMap<>();
-        hashMap.put("staff", getPhone());
-        hashMap.put("orderCodes", orderList);
-        hashMap.put("orderType", "3");
-        RequestBody requestBody = RequestBody.create(MediaType.parse("application/json;charset=utf-8"), new Gson().toJson(hashMap));
-        RxUtils.getObservable(ServiceUrl.getUserApi().addOrder(requestBody))
-                .compose(this.<HttpResult<Object>>bindToLifecycle())
-                .subscribe(new BaseHttpRxObserver<Object>(getActivity()) {
-                    @Override
-                    protected void onSuccess(Object response) {
-                        refresh();
-                        setFragmentResult(ForResultCode.RESULT_OK.getCode(), new Intent());
+    @OnClick({R.id.btnFinishAdding, R.id.chkTaskAllElection})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.btnFinishAdding:
+                //订单编号集合
+                List<String> orderList = new ArrayList<>();
+                List<OngoingOrdersList> data = personalAdvertisingBillsAddTaskDetailAdapter.getData();
+                for (OngoingOrdersList datum : data) {
+                    boolean check = datum.isCheck();
+                    if (check) {
+                        String orderCode = datum.getOrderCode();
+                        orderList.add(orderCode);
                     }
-                });
+                }
+                HashMap<String, Object> hashMap = new HashMap<>();
+                hashMap.put("staff", getPhone());
+                hashMap.put("orderCodes", orderList);
+                hashMap.put("orderType", "3");
+                RequestBody requestBody = RequestBody.create(MediaType.parse("application/json;charset=utf-8"), new Gson().toJson(hashMap));
+                RxUtils.getObservable(ServiceUrl.getUserApi().addOrder(requestBody))
+                        .compose(this.<HttpResult<Object>>bindToLifecycle())
+                        .subscribe(new BaseHttpRxObserver<Object>(getActivity()) {
+                            @Override
+                            protected void onSuccess(Object response) {
+                                refresh();
+                                setFragmentResult(ForResultCode.RESULT_OK.getCode(), new Intent());
+                            }
+                        });
+                break;
+            case R.id.chkTaskAllElection:
+                List<OngoingOrdersList> ongoingOrdersLists = personalAdvertisingBillsAddTaskDetailAdapter.getData();
+                for (OngoingOrdersList datum : ongoingOrdersLists) {
+                    datum.setCheck(chkTaskAllElection.isChecked());
+                }
+                personalAdvertisingBillsAddTaskDetailAdapter.notifyDataSetChanged();
+                break;
+            default:
+        }
     }
 
     private AdvertisingBillsBean getAdvertisingBillsBean() {

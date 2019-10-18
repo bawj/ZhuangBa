@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.RelativeLayout;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -36,7 +35,7 @@ import okhttp3.RequestBody;
  * @author Administrator
  * @date 2019/10/17 0017
  */
-public class InstallationAssignmentTask extends BaseListFragment implements CompoundButton.OnCheckedChangeListener {
+public class InstallationAssignmentTask extends BaseListFragment {
 
     /**
      * 全选
@@ -55,24 +54,6 @@ public class InstallationAssignmentTask extends BaseListFragment implements Comp
         InstallationAssignmentTask fragment = new InstallationAssignmentTask();
         fragment.setArguments(args);
         return fragment;
-    }
-
-    @Override
-    public void initView() {
-        super.initView();
-        chkTaskAllElection.setOnCheckedChangeListener(this);
-    }
-
-    @Override
-    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-        if (!buttonView.isChecked()) {
-            return;
-        }
-        List<OngoingOrdersList> data = installationAssignmentTaskAdapter.getData();
-        for (OngoingOrdersList datum : data) {
-            datum.setCheck(isChecked);
-        }
-        installationAssignmentTaskAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -100,6 +81,8 @@ public class InstallationAssignmentTask extends BaseListFragment implements Comp
                             installationAssignmentTaskAdapter.setNewData(ordersListRefreshBaseList.getList());
                             if (ordersListRefreshBaseList.getList() != null && ordersListRefreshBaseList.getList().size() > 0) {
                                 relInstallationAssignmentTask.setVisibility(View.VISIBLE);
+                            } else {
+                                relInstallationAssignmentTask.setVisibility(View.GONE);
                             }
                             finishRefresh();
                         }
@@ -127,53 +110,60 @@ public class InstallationAssignmentTask extends BaseListFragment implements Comp
         installationAssignmentTaskAdapter.setOnCheckedChangeListener(new InstallationAssignmentTaskAdapter.IOnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(boolean isChecked) {
-                if (!isChecked) {
-                    chkTaskAllElection.setChecked(false);
-                } else {
-                    //查询是否所有的 都选中了
-                    boolean check = false;
-                    List<OngoingOrdersList> data = installationAssignmentTaskAdapter.getData();
-                    for (OngoingOrdersList datum : data) {
-                        if (!datum.isCheck()) {
-                            check = false;
-                            break;
-                        }
-                        check = true;
+                //查询是否所有的 都选中了
+                boolean check = true;
+                List<OngoingOrdersList> data = installationAssignmentTaskAdapter.getData();
+                for (OngoingOrdersList datum : data) {
+                    if (!datum.isCheck()) {
+                        check = false;
+                        break;
                     }
-                    chkTaskAllElection.setChecked(check);
                 }
+                chkTaskAllElection.setChecked(check);
             }
         });
         return installationAssignmentTaskAdapter;
     }
 
-    @OnClick(R.id.btnFinishAdding)
-    public void onViewClicked() {
-        //分配人
-        //订单编号集合
-        List<String> orderList = new ArrayList<>();
-        List<OngoingOrdersList> data = installationAssignmentTaskAdapter.getData();
-        for (OngoingOrdersList datum : data) {
-            boolean check = datum.isCheck();
-            if (check) {
-                String orderCode = datum.getOrderCode();
-                orderList.add(orderCode);
-            }
-        }
-        HashMap<String, Object> hashMap = new HashMap<>();
-        hashMap.put("staff", getPhone());
-        hashMap.put("orderCodes", orderList);
-        hashMap.put("orderType", "1");
-        RequestBody requestBody = RequestBody.create(MediaType.parse("application/json;charset=utf-8"), new Gson().toJson(hashMap));
-        RxUtils.getObservable(ServiceUrl.getUserApi().addOrder(requestBody))
-                .compose(this.<HttpResult<Object>>bindToLifecycle())
-                .subscribe(new BaseHttpRxObserver<Object>(getActivity()) {
-                    @Override
-                    protected void onSuccess(Object response) {
-                        refresh();
-                        setFragmentResult(ForResultCode.RESULT_OK.getCode(), new Intent());
+    @OnClick({R.id.btnFinishAdding, R.id.chkTaskAllElection})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.btnFinishAdding:
+                //分配人
+                //订单编号集合
+                List<String> orderList = new ArrayList<>();
+                List<OngoingOrdersList> data = installationAssignmentTaskAdapter.getData();
+                for (OngoingOrdersList datum : data) {
+                    boolean check = datum.isCheck();
+                    if (check) {
+                        String orderCode = datum.getOrderCode();
+                        orderList.add(orderCode);
                     }
-                });
+                }
+                HashMap<String, Object> hashMap = new HashMap<>();
+                hashMap.put("staff", getPhone());
+                hashMap.put("orderCodes", orderList);
+                hashMap.put("orderType", "1");
+                RequestBody requestBody = RequestBody.create(MediaType.parse("application/json;charset=utf-8"), new Gson().toJson(hashMap));
+                RxUtils.getObservable(ServiceUrl.getUserApi().addOrder(requestBody))
+                        .compose(this.<HttpResult<Object>>bindToLifecycle())
+                        .subscribe(new BaseHttpRxObserver<Object>(getActivity()) {
+                            @Override
+                            protected void onSuccess(Object response) {
+                                refresh();
+                                setFragmentResult(ForResultCode.RESULT_OK.getCode(), new Intent());
+                            }
+                        });
+                break;
+            case R.id.chkTaskAllElection:
+                List<OngoingOrdersList> ongoingOrdersLists = installationAssignmentTaskAdapter.getData();
+                for (OngoingOrdersList datum : ongoingOrdersLists) {
+                    datum.setCheck(chkTaskAllElection.isChecked());
+                }
+                installationAssignmentTaskAdapter.notifyDataSetChanged();
+                break;
+            default:
+        }
     }
 
     @Override

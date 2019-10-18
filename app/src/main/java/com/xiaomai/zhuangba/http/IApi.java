@@ -1129,4 +1129,14 @@ public interface IApi {
      */
     @POST("order/addOrder")
     Observable<HttpResult<Object>> addOrder(@Body RequestBody body);
+
+    /**
+     * 广告单 分配任务 列表
+     *
+     * @param requestBody body
+     * @return observable
+     */
+    @POST("order/getAdvertisingOrderListByStaff")
+    Observable<HttpResult<RefreshBaseList<OngoingOrdersList>>> getAdvertisingOrderListByStaff(@Body RequestBody requestBody);
+
 }
