@@ -11,6 +11,7 @@ import com.example.toollib.util.DensityUtils;
 import com.xiaomai.zhuangba.R;
 import com.xiaomai.zhuangba.data.bean.PushNotificationDB;
 import com.xiaomai.zhuangba.data.db.DBHelper;
+import com.xiaomai.zhuangba.fragment.personal.master.team.TeamMessageFragment;
 import com.xiaomai.zhuangba.util.DateUtil;
 
 import java.util.Collections;
@@ -57,12 +58,16 @@ public class MessageFragment extends BaseFragment {
         }
     }
 
-    @OnClick({R.id.relMessageSystem, R.id.relMessageCustomerService})
+    @OnClick({R.id.relMessageSystem, R.id.relMessageCustomerService , R.id.relMessageTeam})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.relMessageSystem:
                 //通知消息
                 startFragment(NotificationMessageFragment.newInstance());
+                break;
+            case R.id.relMessageTeam:
+                //团队
+                startFragment(TeamMessageFragment.newInstance());
                 break;
             case R.id.relMessageCustomerService:
                 // TODO: 2019/6/3 0003 客服

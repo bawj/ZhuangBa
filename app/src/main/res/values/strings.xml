@@ -239,7 +239,7 @@
     <string name="wallet_input_trade_password">请输入交易密码</string>
     <string name="error_in_input_amount">输入金额有误</string>
     <string name="the_account_is_empty">账户为空</string>
-    <string name="apply_success_tip">提现申请成功，现金将在24小时内 到达您的账户</string>
+    <string name="apply_success_tip">提现申请成功，预计将在7个工作日内到账，请注意查收</string>
     <string name="view_the_tipping_history">查看提现历史</string>
     <string name="apply_success">申请提现成功</string>
     <string name="wallet_alipay_account">支付宝账号</string>
@@ -515,6 +515,7 @@
     <string name="batch_order">批量接单</string>
     <string name="patrol_mission">巡查任务</string>
     <string name="team">我的团队</string>
+    <string name="team_">团队</string>
     <string name="colon">%1$s：</string>
     <string name="task_total">%1$s/%2$s</string>
     <string name="no_patrol_duty_today">今日无巡查任务</string>
@@ -561,4 +562,6 @@
     <string name="order_number_symbol">订单编号：%1$s</string>
     <string name="accounting_time_symbol">入账时间：每月%1$s号</string>
     <string name="amount_of_account_symbol">入账金额：¥%1$s/月</string>
+    <string name="member_phone">%1$s请求加入团队</string>
+    <string name="agree">同意</string>
 </resources>

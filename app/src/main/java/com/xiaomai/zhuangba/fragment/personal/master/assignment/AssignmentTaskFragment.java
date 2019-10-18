@@ -7,7 +7,6 @@ import com.example.toollib.base.BaseFragment;
 import com.example.toollib.data.IBaseModule;
 import com.xiaomai.zhuangba.R;
 import com.xiaomai.zhuangba.adapter.AssignmentTaskFragmentAdapter;
-import com.xiaomai.zhuangba.adapter.PhotoPagerFragmentAdapter;
 import com.xiaomai.zhuangba.adapter.TabIncomeNavigator;
 
 import net.lucode.hackware.magicindicator.MagicIndicator;

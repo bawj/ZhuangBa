@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.toollib.http.HttpResult;
+import com.example.toollib.http.exception.ApiException;
 import com.example.toollib.http.observer.BaseHttpRxObserver;
 import com.example.toollib.http.util.RxUtils;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -69,6 +70,12 @@ public class MasterPersonalFrozenAmount extends BaseListFragment {
                             //加载完成
                             loadMoreComplete();
                         }
+                    }
+                    @Override
+                    public void onError(ApiException apiException) {
+                        super.onError(apiException);
+                        finishRefresh();
+                        loadError();
                     }
                 });
     }

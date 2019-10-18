@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.xiaomai.zhuangba.weight.SwipeMenuLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/itemTeamJoinedSwipeMenuLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/tool_lib_16dp"
+    android:background="@color/tool_lib_gray_F5F8FA"
+    android:clickable="true"
+    android:paddingBottom="1dp"
+    app:ios="false"
+    app:leftSwipe="true"
+    app:swipeEnable="true">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingLeft="@dimen/tool_lib_16dp"
+        android:paddingTop="@dimen/tool_lib_10dp"
+        android:paddingRight="@dimen/tool_lib_16dp"
+        android:paddingBottom="@dimen/tool_lib_10dp">
+
+        <TextView
+            android:id="@+id/tvMemberPhone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/tool_lib_gray_222222"
+            android:textSize="@dimen/tool_lib_14sp"
+            tools:text="16253637672请求加入团队" />
+
+        <TextView
+            android:id="@+id/tvTeamDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvMemberPhone"
+            android:layout_marginTop="@dimen/tool_lib_4dp"
+            android:textColor="@color/tool_lib_gray_999999"
+            android:textSize="@dimen/tool_lib_11sp"
+            tools:text="2019-05-07 17:03:09" />
+
+
+        <TextView
+            android:id="@+id/tvAgree"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/gray_item_message_bg"
+            android:paddingLeft="@dimen/tool_lib_12dp"
+            android:paddingTop="@dimen/tool_lib_8dp"
+            android:paddingRight="@dimen/tool_lib_12dp"
+            android:paddingBottom="@dimen/tool_lib_8dp"
+            android:text="@string/agree"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/tool_lib_12sp" />
+    </RelativeLayout>
+
+    <include layout="@layout/item_swipe_menu" />
+</com.xiaomai.zhuangba.weight.SwipeMenuLayout>

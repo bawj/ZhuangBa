@@ -32,7 +32,6 @@ public class PersonalNeedDealWithFragment extends BaseListFragment {
 
     private static final String PHONE = "phone";
 
-    private List<OngoingOrdersList> ongoingOrdersLists;
     private PersonalNeedDealWithAdapter personalNeedDealWithAdapter;
 
     public static PersonalNeedDealWithFragment newInstance(String phone) {
@@ -66,16 +65,15 @@ public class PersonalNeedDealWithFragment extends BaseListFragment {
                 .subscribe(new BaseHttpRxObserver<RefreshBaseList<OngoingOrdersList>>() {
                     @Override
                     protected void onSuccess(RefreshBaseList<OngoingOrdersList> ordersListRefreshBaseList) {
-                        ongoingOrdersLists = ordersListRefreshBaseList.getList();
                         if (getPage() != StaticExplain.PAGE_NUMBER.getCode()) {
                             //加载
-                            personalNeedDealWithAdapter.addData(ongoingOrdersLists);
+                            personalNeedDealWithAdapter.addData(ordersListRefreshBaseList.getList());
                         } else {
                             //刷新
-                            personalNeedDealWithAdapter.setNewData(ongoingOrdersLists);
+                            personalNeedDealWithAdapter.setNewData(ordersListRefreshBaseList.getList());
                             finishRefresh();
                         }
-                        if (ongoingOrdersLists.size() < StaticExplain.PAGE_NUM.getCode()) {
+                        if (ordersListRefreshBaseList.getList().size() < StaticExplain.PAGE_NUM.getCode()) {
                             //加载结束
                             loadMoreEnd();
                         } else {
@@ -113,9 +111,10 @@ public class PersonalNeedDealWithFragment extends BaseListFragment {
                     @Override
                     protected void onSuccess(Object response) {
                         //删除成功
-                        if (pos >= 0 && pos < ongoingOrdersLists.size()) {
+                        List<OngoingOrdersList> data = personalNeedDealWithAdapter.getData();
+                        if (pos >= 0 && pos < data.size()) {
                             setFragmentResult(ForResultCode.RESULT_OK.getCode(), new Intent());
-                            ongoingOrdersLists.remove(pos);
+                            data.remove(pos);
                             personalNeedDealWithAdapter.notifyItemRemoved(pos);
                         }
                     }

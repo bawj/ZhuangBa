@@ -33,7 +33,6 @@ import okhttp3.RequestBody;
  */
 public class PersonalAdvertisingBillsDetailFragment extends BaseListFragment {
 
-    private  List<OngoingOrdersList> ongoingOrdersLists;
     private PersonalAdvertisingBillsDetailAdapter personalAdvertisingBillsDetailAdapter;
 
     public static PersonalAdvertisingBillsDetailFragment newInstance(AdvertisingBillsBean advertisingBillsBean) {
@@ -81,16 +80,15 @@ public class PersonalAdvertisingBillsDetailFragment extends BaseListFragment {
                 .subscribe(new BaseHttpRxObserver<RefreshBaseList<OngoingOrdersList>>() {
                     @Override
                     protected void onSuccess(RefreshBaseList<OngoingOrdersList> response) {
-                        ongoingOrdersLists = response.getList();
                         if (getPage() == StaticExplain.PAGE_NUMBER.getCode()) {
                             //刷新
-                            personalAdvertisingBillsDetailAdapter.setNewData(ongoingOrdersLists);
+                            personalAdvertisingBillsDetailAdapter.setNewData(response.getList());
                             finishRefresh();
                         } else {
                             //加载
-                            personalAdvertisingBillsDetailAdapter.addData(ongoingOrdersLists);
+                            personalAdvertisingBillsDetailAdapter.addData(response.getList());
                         }
-                        if (ongoingOrdersLists.size() < StaticExplain.PAGE_NUM.getCode()) {
+                        if (response.getList().size() < StaticExplain.PAGE_NUM.getCode()) {
                             //加载结束
                             loadMoreEnd();
                         } else {
@@ -128,9 +126,10 @@ public class PersonalAdvertisingBillsDetailFragment extends BaseListFragment {
                     @Override
                     protected void onSuccess(Object response) {
                         //删除成功
-                        if (pos >= 0 && pos < ongoingOrdersLists.size()) {
+                        List<OngoingOrdersList> data = personalAdvertisingBillsDetailAdapter.getData();
+                        if (pos >= 0 && pos < data.size()) {
                             setFragmentResult(ForResultCode.RESULT_OK.getCode() , new Intent());
-                            ongoingOrdersLists.remove(pos);
+                            data.remove(pos);
                             personalAdvertisingBillsDetailAdapter.notifyItemRemoved(pos);
                         }
                     }

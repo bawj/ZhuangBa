@@ -41,7 +41,6 @@ import butterknife.OnClick;
  */
 public class TheTeamJoinedFragment extends BaseListFragment {
 
-    private List<TeamJoinedBean> teamJoinedBeanLists;
     private TeamJoinedAdapter teamJoinedAdapter;
 
     public static TheTeamJoinedFragment newInstance() {
@@ -80,9 +79,10 @@ public class TheTeamJoinedFragment extends BaseListFragment {
                 .subscribe(new BaseHttpRxObserver<Object>(getActivity()) {
                     @Override
                     protected void onSuccess(Object response) {
-                        if (pos >= 0 && pos < teamJoinedBeanLists.size()) {
+                        List<TeamJoinedBean> data = teamJoinedAdapter.getData();
+                        if (pos >= 0 && pos < data.size()) {
                             setFragmentResult(ForResultCode.RESULT_OK.getCode() , new Intent());
-                            teamJoinedBeanLists.remove(pos);
+                            data.remove(pos);
                             teamJoinedAdapter.notifyItemRemoved(pos);
                         }
                     }
@@ -97,8 +97,7 @@ public class TheTeamJoinedFragment extends BaseListFragment {
                 .subscribe(new BaseHttpRxObserver<List<TeamJoinedBean>>() {
                     @Override
                     protected void onSuccess(List<TeamJoinedBean> teamJoinedBeanList) {
-                        teamJoinedBeanLists = teamJoinedBeanList;
-                        teamJoinedAdapter.setNewData(teamJoinedBeanLists);
+                        teamJoinedAdapter.setNewData(teamJoinedBeanList);
                         finishRefresh();
                         loadMoreEnd();
                     }

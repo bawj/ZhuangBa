@@ -35,6 +35,7 @@ import com.xiaomai.zhuangba.data.bean.SkillList;
 import com.xiaomai.zhuangba.data.bean.Slotting;
 import com.xiaomai.zhuangba.data.bean.StatisticsData;
 import com.xiaomai.zhuangba.data.bean.TeamJoinedBean;
+import com.xiaomai.zhuangba.data.bean.TeamMessageBean;
 import com.xiaomai.zhuangba.data.bean.UserInfo;
 import com.xiaomai.zhuangba.data.bean.WalletBean;
 import com.xiaomai.zhuangba.data.bean.WalletDetailBean;
@@ -1149,4 +1150,34 @@ public interface IApi {
     @FormUrlEncoded
     @POST("wallet/selectFreezeOrder")
     Observable<HttpResult<List<FrozenAmountBean>>> selectFreezeOrder(@Field("phoneNumber") String phoneNumber);
+
+    /**
+     * 系统通知列表
+     * @param userNumber 师傅手机号
+     * @param isAgree    3:拒绝:拒绝加入时将删除状态改为y;4同意;  不传 返回通知列表
+     * @return observable
+     */
+    @FormUrlEncoded
+    @POST("user/selectTeamUserByPhone")
+    Observable<HttpResult<List<TeamMessageBean>>> selectTeamUserByPhone(@Field("userNumber") String userNumber , @Field("isAgree") String isAgree);
+
+    /**
+     * 是否同意师傅加入团队
+     * @param userNumber 师傅手机号
+     * @param isAgree    3:拒绝:拒绝加入时将删除状态改为y;4同意;  不传 返回通知列表
+     * @return observable
+     */
+    @FormUrlEncoded
+    @POST("user/updateTeam")
+    Observable<HttpResult<Object>> updateTeam(@Field("userNumber") String userNumber , @Field("isAgree") String isAgree);
+
+    /**
+     * 清空消息
+     * @param userNumber 师傅手机号
+     * @param isAgree    5 清空
+     * @return observable
+     */
+    @FormUrlEncoded
+    @POST("user/updateAll")
+    Observable<HttpResult<Object>> updateAll(@Field("userNumber") String userNumber , @Field("isAgree") String isAgree);
 }

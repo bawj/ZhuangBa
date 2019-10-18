@@ -56,7 +56,9 @@ public enum StaticExplain {
     NO_TEAM_WAS_CREATED_JOINED(1017, "您没有创建团队和加入团队"),
     REGIMENTAL_COMMANDER(1, "团长"),
     LEAGUE_MEMBER(2, "团员"),
-
+    AGREE(4, "同意加入团队"),
+    REFUSE(3, "拒绝加入团队"),
+    EMPTY(5, "清空消息"),
     ;
     /**
      * 状态

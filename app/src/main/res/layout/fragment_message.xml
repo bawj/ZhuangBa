@@ -58,9 +58,9 @@
                 android:layout_toRightOf="@+id/ivMessageType"
                 android:ellipsize="end"
                 android:maxLines="1"
+                android:text="@string/not_message"
                 android:textColor="@color/tool_lib_gray_666666"
-                android:textSize="@dimen/tool_lib_12sp"
-                android:text="@string/not_message" />
+                android:textSize="@dimen/tool_lib_12sp" />
 
             <View
                 style="@style/tool_lib_horizontal_line"
@@ -76,7 +76,9 @@
             android:id="@+id/relMessageCustomerService"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/tool_lib_16dp">
+            android:layout_marginLeft="@dimen/tool_lib_16dp"
+            android:layout_marginTop="@dimen/tool_lib_16dp"
+            android:layout_marginRight="@dimen/tool_lib_16dp">
 
             <ImageView
                 android:id="@+id/ivMessageCustomerService"
@@ -117,11 +119,72 @@
                 android:layout_toRightOf="@+id/ivMessageCustomerService"
                 android:ellipsize="end"
                 android:maxLines="1"
+                android:text="@string/not_message"
                 android:textColor="@color/tool_lib_gray_666666"
-                android:textSize="@dimen/tool_lib_12sp"
-                android:text="@string/not_message"  />
+                android:textSize="@dimen/tool_lib_12sp" />
+
+            <View
+                style="@style/tool_lib_horizontal_line"
+                android:layout_below="@+id/ivMessageCustomerService"
+                android:layout_marginStart="@dimen/tool_lib_11dp"
+                android:layout_marginLeft="@dimen/tool_lib_11dp"
+                android:layout_marginTop="@dimen/tool_lib_16dp"
+                android:layout_toEndOf="@+id/ivMessageCustomerService"
+                android:layout_toRightOf="@+id/ivMessageCustomerService" />
         </RelativeLayout>
 
+        <RelativeLayout
+            android:id="@+id/relMessageTeam"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/tool_lib_16dp"
+            android:layout_marginTop="@dimen/tool_lib_16dp"
+            android:layout_marginRight="@dimen/tool_lib_16dp"
+            android:layout_marginBottom="@dimen/tool_lib_16dp">
+
+            <ImageView
+                android:id="@+id/ivMessageTeam"
+                android:layout_width="@dimen/tool_lib_46dp"
+                android:layout_height="@dimen/tool_lib_46dp"
+                android:src="@drawable/ic_message_team" />
+
+            <TextView
+                android:id="@+id/tvMessageTeam"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/tool_lib_11dp"
+                android:layout_marginLeft="@dimen/tool_lib_11dp"
+                android:layout_toEndOf="@+id/ivMessageTeam"
+                android:layout_toRightOf="@+id/ivMessageTeam"
+                android:text="@string/team_"
+                android:textColor="@color/tool_lib_gray_222222"
+                android:textSize="@dimen/tool_lib_14sp" />
+
+            <TextView
+                android:id="@+id/tvMessageDateTeam"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:textColor="@color/tool_lib_gray_999999"
+                android:textSize="@dimen/tool_lib_12sp"
+                tools:text="2019-05-07 17:03:09" />
+
+            <TextView
+                android:id="@+id/tvMessagesTeam"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/ivMessageTeam"
+                android:layout_marginStart="@dimen/tool_lib_11dp"
+                android:layout_marginLeft="@dimen/tool_lib_11dp"
+                android:layout_toEndOf="@+id/ivMessageTeam"
+                android:layout_toRightOf="@+id/ivMessageTeam"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="@string/not_message"
+                android:textColor="@color/tool_lib_gray_666666"
+                android:textSize="@dimen/tool_lib_12sp" />
+        </RelativeLayout>
     </LinearLayout>
 
 </RelativeLayout>
