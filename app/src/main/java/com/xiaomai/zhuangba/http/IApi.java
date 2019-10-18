@@ -1120,4 +1120,13 @@ public interface IApi {
      */
     @GET("order/deleteOrder/{orderCode}")
     Observable<HttpResult<Object>> deleteOrder(@Path("orderCode") String orderCode, @Query("type") String type);
+
+    /**
+     * 分配任务
+     *
+     * @param body body
+     * @return observable
+     */
+    @POST("order/addOrder")
+    Observable<HttpResult<Object>> addOrder(@Body RequestBody body);
 }

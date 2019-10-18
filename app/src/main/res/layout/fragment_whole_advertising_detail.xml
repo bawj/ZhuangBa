@@ -14,12 +14,68 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rvBaseList"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="@dimen/tool_lib_16dp"
-            android:layout_marginTop="@dimen/tool_lib_16dp"
-            android:layout_marginRight="@dimen/tool_lib_16dp" />
+            android:layout_height="wrap_content">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rvBaseList"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_above="@+id/relInstallationAssignmentTask"
+                android:layout_marginLeft="@dimen/tool_lib_16dp"
+                android:layout_marginTop="@dimen/tool_lib_12dp"
+                android:layout_marginRight="@dimen/tool_lib_16dp"
+                android:layout_marginBottom="@dimen/tool_lib_6dp" />
+
+
+            <RelativeLayout
+                android:id="@+id/relInstallationAssignmentTask"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/tool_lib_62dp"
+                android:layout_alignParentBottom="true"
+                android:background="@android:color/white"
+                android:visibility="gone">
+
+                <CheckBox
+                    android:id="@+id/chkTaskAllElection"
+                    style="@style/CustomCheckAllElection"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="@dimen/tool_lib_12dp"
+                    android:layout_marginLeft="@dimen/tool_lib_12dp"
+                    android:layout_marginTop="@dimen/tool_lib_12dp"
+                    android:layout_marginEnd="@dimen/tool_lib_8dp"
+                    android:layout_marginRight="@dimen/tool_lib_8dp"
+                    android:checked="false" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toEndOf="@+id/chkTaskAllElection"
+                    android:layout_toRightOf="@+id/chkTaskAllElection"
+                    android:text="@string/all_election"
+                    android:textColor="@color/tool_lib_red_EF2B2B"
+                    android:textSize="@dimen/tool_lib_16sp" />
+
+                <Button
+                    android:id="@+id/btnFinishAdding"
+                    style="@style/base_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="@dimen/tool_lib_16dp"
+                    android:layout_marginRight="@dimen/tool_lib_16dp"
+                    android:paddingLeft="@dimen/tool_lib_53dp"
+                    android:paddingTop="@dimen/tool_lib_13dp"
+                    android:paddingRight="@dimen/tool_lib_53dp"
+                    android:paddingBottom="@dimen/tool_lib_13dp"
+                    android:text="@string/finish_adding" />
+            </RelativeLayout>
+        </RelativeLayout>
     </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 </RelativeLayout>

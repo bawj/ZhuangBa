@@ -1,5 +1,6 @@
 package com.xiaomai.zhuangba.fragment.personal.master.assignment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.CheckBox;
@@ -11,18 +12,25 @@ import com.example.toollib.http.HttpResult;
 import com.example.toollib.http.exception.ApiException;
 import com.example.toollib.http.observer.BaseHttpRxObserver;
 import com.example.toollib.http.util.RxUtils;
+import com.google.gson.Gson;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.xiaomai.zhuangba.R;
 import com.xiaomai.zhuangba.adapter.InstallationAssignmentTaskAdapter;
 import com.xiaomai.zhuangba.data.bean.OngoingOrdersList;
 import com.xiaomai.zhuangba.data.bean.RefreshBaseList;
+import com.xiaomai.zhuangba.enums.ForResultCode;
 import com.xiaomai.zhuangba.enums.StaticExplain;
 import com.xiaomai.zhuangba.fragment.base.BaseListFragment;
 import com.xiaomai.zhuangba.http.ServiceUrl;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.OnClick;
+import okhttp3.MediaType;
+import okhttp3.RequestBody;
 
 /**
  * @author Administrator
@@ -38,10 +46,12 @@ public class InstallationAssignmentTask extends BaseListFragment implements Comp
     @BindView(R.id.relInstallationAssignmentTask)
     RelativeLayout relInstallationAssignmentTask;
 
+    private static final String PHONE = "phone";
     private InstallationAssignmentTaskAdapter installationAssignmentTaskAdapter;
 
-    public static InstallationAssignmentTask newInstance() {
+    public static InstallationAssignmentTask newInstance(String phone) {
         Bundle args = new Bundle();
+        args.putString(PHONE, phone);
         InstallationAssignmentTask fragment = new InstallationAssignmentTask();
         fragment.setArguments(args);
         return fragment;
@@ -82,13 +92,15 @@ public class InstallationAssignmentTask extends BaseListFragment implements Comp
                 .subscribe(new BaseHttpRxObserver<RefreshBaseList<OngoingOrdersList>>() {
                     @Override
                     protected void onSuccess(RefreshBaseList<OngoingOrdersList> ordersListRefreshBaseList) {
-                        relInstallationAssignmentTask.setVisibility(View.VISIBLE);
                         if (getPage() != StaticExplain.PAGE_NUMBER.getCode()) {
                             //加载
                             installationAssignmentTaskAdapter.addData(ordersListRefreshBaseList.getList());
                         } else {
                             //刷新
                             installationAssignmentTaskAdapter.setNewData(ordersListRefreshBaseList.getList());
+                            if (ordersListRefreshBaseList.getList() != null && ordersListRefreshBaseList.getList().size() > 0) {
+                                relInstallationAssignmentTask.setVisibility(View.VISIBLE);
+                            }
                             finishRefresh();
                         }
                         if (ordersListRefreshBaseList.getList().size() < StaticExplain.PAGE_NUM.getCode()) {
@@ -135,6 +147,35 @@ public class InstallationAssignmentTask extends BaseListFragment implements Comp
         return installationAssignmentTaskAdapter;
     }
 
+    @OnClick(R.id.btnFinishAdding)
+    public void onViewClicked() {
+        //分配人
+        //订单编号集合
+        List<String> orderList = new ArrayList<>();
+        List<OngoingOrdersList> data = installationAssignmentTaskAdapter.getData();
+        for (OngoingOrdersList datum : data) {
+            boolean check = datum.isCheck();
+            if (check) {
+                String orderCode = datum.getOrderCode();
+                orderList.add(orderCode);
+            }
+        }
+        HashMap<String, Object> hashMap = new HashMap<>();
+        hashMap.put("staff", getPhone());
+        hashMap.put("orderCodes", orderList);
+        hashMap.put("orderType", "1");
+        RequestBody requestBody = RequestBody.create(MediaType.parse("application/json;charset=utf-8"), new Gson().toJson(hashMap));
+        RxUtils.getObservable(ServiceUrl.getUserApi().addOrder(requestBody))
+                .compose(this.<HttpResult<Object>>bindToLifecycle())
+                .subscribe(new BaseHttpRxObserver<Object>(getActivity()) {
+                    @Override
+                    protected void onSuccess(Object response) {
+                        refresh();
+                        setFragmentResult(ForResultCode.RESULT_OK.getCode(), new Intent());
+                    }
+                });
+    }
+
     @Override
     public int getContentView() {
         return R.layout.fragment_installation_assignment_task;
@@ -150,9 +191,15 @@ public class InstallationAssignmentTask extends BaseListFragment implements Comp
         return getString(R.string.search_empty);
     }
 
+    private String getPhone() {
+        if (getArguments() != null) {
+            return getArguments().getString(PHONE);
+        }
+        return "";
+    }
+
     @Override
     protected String getActivityTitle() {
         return getString(R.string.assignment_task);
     }
-
 }

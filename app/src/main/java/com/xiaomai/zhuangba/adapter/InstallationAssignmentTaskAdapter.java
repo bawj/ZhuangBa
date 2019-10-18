@@ -17,8 +17,6 @@ import com.xiaomai.zhuangba.enums.OrdersEnum;
 import com.xiaomai.zhuangba.enums.StaticExplain;
 import com.xiaomai.zhuangba.util.OrderStatusUtil;
 
-import java.util.List;
-
 /**
  * @author Administrator
  * @date 2019/10/17 0017

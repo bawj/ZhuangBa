@@ -125,7 +125,7 @@ public class PersonalNeedDealWithFragment extends BaseListFragment {
     @OnClick(R.id.btnAddTask)
     public void onViewClicked() {
         //安装单 添加任务
-        startFragmentForResult(InstallationAssignmentTask.newInstance(), ForResultCode.START_FOR_RESULT_CODE.getCode());
+        startFragmentForResult(InstallationAssignmentTask.newInstance(getPhone()), ForResultCode.START_FOR_RESULT_CODE.getCode());
     }
 
     @Override
