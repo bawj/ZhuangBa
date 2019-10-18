@@ -415,6 +415,7 @@
     <string name="number_of_employers">雇主数量</string>
     <string name="number_of_employers_">雇主数量(万)</string>
     <string name="frozen_amount">冻结金额(元)</string>
+    <string name="frozen_amount_title">冻结金额</string>
     <string name="data_details">数据详情</string>
     <string name="same_day">当日</string>
     <string name="this_week">本周</string>
@@ -556,4 +557,8 @@
     <string name="add_task">添加任务</string>
     <string name="all_election">全选</string>
     <string name="finish_adding">完成添加</string>
+    <string name="monthly_statement">月结单</string>
+    <string name="order_number_symbol">订单编号：%1$s</string>
+    <string name="accounting_time_symbol">入账时间：每月%1$s号</string>
+    <string name="amount_of_account_symbol">入账金额：¥%1$s/月</string>
 </resources>

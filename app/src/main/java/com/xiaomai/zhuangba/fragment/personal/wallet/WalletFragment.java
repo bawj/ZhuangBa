@@ -25,6 +25,7 @@ import com.xiaomai.zhuangba.data.bean.MessageEvent;
 import com.xiaomai.zhuangba.data.bean.WalletBean;
 import com.xiaomai.zhuangba.enums.EventBusEnum;
 import com.xiaomai.zhuangba.enums.WalletOrderTypeEnum;
+import com.xiaomai.zhuangba.fragment.personal.master.MasterPersonalFrozenAmount;
 import com.xiaomai.zhuangba.fragment.personal.wallet.detailed.CashWithdrawalFragment;
 import com.xiaomai.zhuangba.fragment.personal.wallet.detailed.IncomeDetailedFragment;
 import com.xiaomai.zhuangba.fragment.personal.wallet.detailed.WalletDetailFragment;
@@ -144,7 +145,7 @@ public class WalletFragment extends BaseFragment implements OnRefreshListener {
     }
 
     @OnClick({R.id.btnWithdraw, R.id.tvAccountManager, R.id.tvAccountSafe, R.id.rlEarNest
-            , R.id.rlIncome, R.id.rlAlreadyWithdraw , R.id.ivQuestionMark})
+            , R.id.rlIncome, R.id.rlAlreadyWithdraw , R.id.relWalletFrozenAmount})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btnWithdraw:
@@ -173,8 +174,9 @@ public class WalletFragment extends BaseFragment implements OnRefreshListener {
                 //已提现
                 startFragment(CashWithdrawalFragment.newInstance());
                 break;
-            case R.id.ivQuestionMark:
-                // TODO: 2019/8/11 0011 问号
+            case R.id.relWalletFrozenAmount:
+                // 冻结金额
+                startFragment(MasterPersonalFrozenAmount.newInstance());
                 break;
             default:
         }

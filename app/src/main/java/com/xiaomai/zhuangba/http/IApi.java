@@ -12,6 +12,7 @@ import com.xiaomai.zhuangba.data.bean.EarnestBean;
 import com.xiaomai.zhuangba.data.bean.EmployerAdvertisingReplacement;
 import com.xiaomai.zhuangba.data.bean.EmployerWalletBean;
 import com.xiaomai.zhuangba.data.bean.EmployerWalletDetailBean;
+import com.xiaomai.zhuangba.data.bean.FrozenAmountBean;
 import com.xiaomai.zhuangba.data.bean.InspectionSheetBean;
 import com.xiaomai.zhuangba.data.bean.InspectionSheetDetailBean;
 import com.xiaomai.zhuangba.data.bean.Maintenance;
@@ -1139,4 +1140,13 @@ public interface IApi {
     @POST("order/getAdvertisingOrderListByStaff")
     Observable<HttpResult<RefreshBaseList<OngoingOrdersList>>> getAdvertisingOrderListByStaff(@Body RequestBody requestBody);
 
+
+    /**
+     * 冻结金额
+     * @param phoneNumber 手机号
+     * @return observable
+     */
+    @FormUrlEncoded
+    @POST("wallet/selectFreezeOrder")
+    Observable<HttpResult<List<FrozenAmountBean>>> selectFreezeOrder(@Field("phoneNumber") String phoneNumber);
 }
