@@ -103,6 +103,7 @@ public class StartConstructionFragment extends BaseAutographFragment {
                     @Override
                     public void onFail(Object obj) {
                         super.onFail(obj);
+                        ToastUtil.showShort(obj.toString());
                         DialogUtil.tipLoadingDismiss();
                     }
                 });
@@ -121,6 +122,7 @@ public class StartConstructionFragment extends BaseAutographFragment {
                         DialogUtil.tipLoadingDismiss();
                         startFragment(ConstructionCompleteFragment.newInstance(getOrderCode()
                                 , getOrderType() , String.valueOf(OrdersEnum.MASTER_CHECK_AND_ACCEPT.getCode())));
+                        popBackStack();
                     }
                     @Override
                     public void onError(ApiException e) {

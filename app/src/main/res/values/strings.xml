@@ -564,4 +564,6 @@
     <string name="amount_of_account_symbol">入账金额：¥%1$s/月</string>
     <string name="member_phone">%1$s请求加入团队</string>
     <string name="agree">同意</string>
+    <string name="photo_tip">注：拍摄标志性信息，确认已到现场</string>
+    <string name="please_shot_img">请拍摄图片</string>
 </resources>

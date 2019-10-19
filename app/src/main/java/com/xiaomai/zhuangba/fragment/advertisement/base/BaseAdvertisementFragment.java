@@ -106,45 +106,45 @@ public class BaseAdvertisementFragment extends BaseFragment<IBaseAdvertisementMo
                 setUponCompletion(deliveryContent);
             }
         }
-
-
     }
 
     public void setOngoingOrder(OngoingOrdersList ongoingOrdersList , List<OrderDateList> orderDateLists) {
         //广告单 状态
         UserInfo unique = DBHelper.getInstance().getUserInfoDao().queryBuilder().unique();
-        if (unique.getRole().equals(String.valueOf(StaticExplain.FU_FU_SHI.getCode()))) {
+        if (unique.getRole().equals(String.valueOf(StaticExplain.FU_FU_SHI.getCode())) && ongoingOrdersList != null) {
             //师傅端
             AdvertisingStatusUtil.masterStatus(getActivity(), ongoingOrdersList.getOrderStatus(), tvBaseOrderDetailItemOrdersType);
-        }else if (unique.getRole().equals(String.valueOf(StaticExplain.EMPLOYER.getCode()))) {
+        }else if (unique.getRole().equals(String.valueOf(StaticExplain.EMPLOYER.getCode())) && ongoingOrdersList != null) {
             //雇主端
             AdvertisingStatusUtil.employerStatus(getActivity(), ongoingOrdersList.getOrderStatus(), tvBaseOrderDetailItemOrdersType);
         }
-        //设备编号
-        tvBaseEquipmentNumber.setText(ongoingOrdersList.getName());
-        //更换位置
-        tvBaseAdvertisementChangePlaces.setText(ongoingOrdersList.getTelephone());
-        //批量查询号
-        tvBaseAdvertisementBatchQueryNumber.setText(ongoingOrdersList.getMaterialsStartLength());
-        //预约时间
-        tvBaseAdvertisementDateOfAppointment.setText(ongoingOrdersList.getSlottingStartLength());
-        //服务周期
-        tvBaseAdvertisementServiceCycle.setText(ongoingOrdersList.getExpireTime());
-        //备注
-        tvBaseAdvertisementNotes.setText(ongoingOrdersList.getEmployerDescribe());
-        //总金额
-        tvBaseAdvertisementMoney.setText(getString(R.string.content_money , String.valueOf(ongoingOrdersList.getOrderAmount())));
-        //安装地址
-        tvBaseOrderDetailLocation.setText(ongoingOrdersList.getAddress());
-        //广告图
-        GlideManager.loadImage(getActivity() ,ongoingOrdersList.getPicturesUrl() ,ivBaseReplacementOfAdvertisingDrawings);
+        if (ongoingOrdersList != null){
+            //设备编号
+            tvBaseEquipmentNumber.setText(ongoingOrdersList.getName());
+            //更换位置
+            tvBaseAdvertisementChangePlaces.setText(ongoingOrdersList.getTelephone());
+            //批量查询号
+            tvBaseAdvertisementBatchQueryNumber.setText(ongoingOrdersList.getMaterialsStartLength());
+            //预约时间
+            tvBaseAdvertisementDateOfAppointment.setText(ongoingOrdersList.getSlottingStartLength());
+            //服务周期
+            tvBaseAdvertisementServiceCycle.setText(ongoingOrdersList.getExpireTime());
+            //备注
+            tvBaseAdvertisementNotes.setText(ongoingOrdersList.getEmployerDescribe());
+            //总金额
+            tvBaseAdvertisementMoney.setText(getString(R.string.content_money , String.valueOf(ongoingOrdersList.getOrderAmount())));
+            //安装地址
+            tvBaseOrderDetailLocation.setText(ongoingOrdersList.getAddress());
+            //广告图
+            GlideManager.loadImage(getActivity() ,ongoingOrdersList.getPicturesUrl() ,ivBaseReplacementOfAdvertisingDrawings);
 
-        //订单时间信息
-        orderDateLists.add(0, new OrderDateList(ongoingOrdersList.getOrderCode(), "", getString(R.string.order_code)));
-        orderDateListAdapter.setNewData(orderDateLists);
+            //订单时间信息
+            orderDateLists.add(0, new OrderDateList(ongoingOrdersList.getOrderCode(), "", getString(R.string.order_code)));
+            orderDateListAdapter.setNewData(orderDateLists);
 
-        //是否显示 取消订单按钮  总金额=0  不显示
-        setIsCancelVisibility(ongoingOrdersList.getOrderAmount());
+            //是否显示 取消订单按钮  总金额=0  不显示
+            setIsCancelVisibility(ongoingOrdersList.getOrderAmount());
+        }
     }
 
     public void setIsCancelVisibility(double orderAmount) {

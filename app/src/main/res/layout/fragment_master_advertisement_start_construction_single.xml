@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/ivPhotoImg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/tvPhotoTip"
+        android:layout_marginLeft="@dimen/tool_lib_68dp"
+        android:layout_marginTop="@dimen/tool_lib_60dp"
+        android:layout_marginRight="@dimen/tool_lib_68dp"
+        android:layout_marginBottom="@dimen/tool_lib_20dp" />
+
+    <TextView
+        android:id="@+id/tvPhotoTip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/relPhoto"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/tool_lib_20dp"
+        android:text="@string/photo_tip"
+        android:textColor="@color/tool_lib_red_EF2B2B"
+        android:textSize="@dimen/tool_lib_12sp" />
+
+    <RelativeLayout
+        android:id="@+id/relPhoto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="@dimen/tool_lib_46dp">
+
+        <com.qmuiteam.qmui.layout.QMUIButton
+            android:id="@+id/btnPhotoShot"
+            android:layout_width="@dimen/tool_lib_70dp"
+            android:layout_height="@dimen/tool_lib_70dp"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/shot_circular_bg"
+            android:text="@string/shot"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/tool_lib_14sp" />
+
+
+        <com.qmuiteam.qmui.layout.QMUIButton
+            android:id="@+id/btnPhotoRemake"
+            android:layout_width="@dimen/tool_lib_65dp"
+            android:layout_height="@dimen/tool_lib_65dp"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="@dimen/tool_lib_15dp"
+            android:layout_marginRight="@dimen/tool_lib_15dp"
+            android:layout_toStartOf="@+id/btnPhotoSave"
+            android:layout_toLeftOf="@+id/btnPhotoSave"
+            android:background="@drawable/shot_whit_circular_bg"
+            android:text="@string/remake"
+            android:textColor="@color/tool_lib_gray_777777"
+            android:textSize="@dimen/tool_lib_14sp"
+            android:visibility="gone" />
+
+        <com.qmuiteam.qmui.layout.QMUIButton
+            android:id="@+id/btnPhotoSave"
+            android:layout_width="@dimen/tool_lib_65dp"
+            android:layout_height="@dimen/tool_lib_65dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/shot_circular_bg"
+            android:text="@string/save"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/tool_lib_14sp"
+            android:visibility="gone" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

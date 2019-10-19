@@ -45,7 +45,10 @@ public class MasterAdvertisementHavingSetOutFragment extends BaseAdvertisementFr
                 break;
             case R.id.btnStartConstruction:
                 //开始施工
-                startFragment(MasterAdvertisementStartConstructionFragment.newInstance(getOrderCode() , getOrderType()));
+                /// 多图上传
+                ///startFragment(MasterAdvertisementStartConstructionFragment.newInstance(getOrderCode() , getOrderType()));
+                //单图上传
+                startFragment(MasterAdvertisementStartConstructionSingleFragment.newInstance(getOrderCode() , getOrderType()));
                 break;
             default:
         }
