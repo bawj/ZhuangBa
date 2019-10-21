@@ -7,6 +7,7 @@ import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.toollib.fragment.ImgPreviewFragment;
+import com.example.toollib.weight.dialog.CommonlyDialog;
 import com.xiaomai.zhuangba.R;
 import com.xiaomai.zhuangba.adapter.ImgExhibitionAdapter;
 import com.xiaomai.zhuangba.data.bean.DeliveryContent;
@@ -19,11 +20,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 /**
  * @author Administrator
  * @date 2019/10/21 0021
- *
+ * <p>
  * 师傅 待开工
  */
 public class ToBeStartedFragment extends BaseMasterOrderDetailFragment {
@@ -36,7 +38,7 @@ public class ToBeStartedFragment extends BaseMasterOrderDetailFragment {
      */
     private ImgExhibitionAdapter imgExhibitionAdapter;
 
-    public static ToBeStartedFragment newInstance(String orderCode , String orderType) {
+    public static ToBeStartedFragment newInstance(String orderCode, String orderType) {
         Bundle args = new Bundle();
         args.putString(ConstantUtil.ORDER_CODE, orderCode);
         args.putString(ConstantUtil.ORDER_TYPE, orderType);
@@ -55,6 +57,18 @@ public class ToBeStartedFragment extends BaseMasterOrderDetailFragment {
         recyclerMasterWorkerScenePhoto.setAdapter(imgExhibitionAdapter);
     }
 
+    @OnClick(R.id.btnCancelToBeStarted)
+    public void onViewClicked() {
+        //取消订单
+        CommonlyDialog.getInstance().initView(getActivity())
+                .setTvDialogCommonlyContent(getString(R.string.cancel_order_tip))
+                .setICallBase(new CommonlyDialog.BaseCallback() {
+                    @Override
+                    public void sure() {
+                        iModule.requestCancelOrder();
+                    }
+                }).showDialog();
+    }
 
     @Override
     public void masterScenePhoto(DeliveryContent deliveryContent) {
@@ -81,4 +95,5 @@ public class ToBeStartedFragment extends BaseMasterOrderDetailFragment {
     public int getContentView() {
         return R.layout.fragment_to_be_started;
     }
+
 }
