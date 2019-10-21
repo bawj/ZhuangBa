@@ -63,8 +63,10 @@ public class PatrolStatusUtil {
             baseFragmentActivity.startFragment(PatrolInDistributionDetailFragment.newInstance(orderCode , orderType));
         }else if (orderStatus == InspectionSheetEnum.INSPECTION_SHEET_HAVE_IN_HAND.getCode()){
             //进行中
+            baseFragmentActivity.startFragment(PatrolHaveHandDetailFragment.newInstance(orderCode , orderType));
         }else if (orderStatus == InspectionSheetEnum.INSPECTION_SHEET_CANCELLED.getCode()){
             //已完成
+            baseFragmentActivity.startFragment(PatrolHaveHandDetailFragment.newInstance(orderCode , orderType));
         }
     }
 
@@ -126,8 +128,7 @@ public class PatrolStatusUtil {
             baseFragmentActivity.startFragment(PatrolHaveHandDetailFragment.newInstance(orderCode , orderType));
         }else if (orderStatus == InspectionSheetEnum.MASTER_INSPECTION_SHEET_CANCELLED.getCode()){
             //已完成
+            baseFragmentActivity.startFragment(PatrolHaveHandDetailFragment.newInstance(orderCode , orderType));
         }
     }
-
-
 }

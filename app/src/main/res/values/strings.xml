@@ -569,4 +569,7 @@
     <string name="to_be_started">待开工</string>
     <string name="can_not_start">不能开工</string>
     <string name="start_construction_tip">注：确认提交将发送短信给现场负责人，请务必让现场负责人点击短信中的链接签字并确认开工</string>
+    <string name="weekly">每周%1$s</string>
+    <string name="sing_month">每月%1$s号</string>
+    <string name="months">%1$s个月</string>
 </resources>

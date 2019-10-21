@@ -1,5 +1,6 @@
 package com.xiaomai.zhuangba.adapter;
 
+import android.text.TextUtils;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -50,16 +51,17 @@ public class InspectionSheetDetailAdapter extends BaseQuickAdapter<InspectionShe
         TextView tvItemPatrolNoodles = helper.getView(R.id.tvItemPatrolNoodles);
         //巡查区域
         String telephone = inspectionSheetDetailBean.getTelephone();
-        StringBuilder stringBuilder = null;
-        if (telephone.contains(",")){
-            stringBuilder = new StringBuilder();
-            telephone = telephone.replace("," , mContext.getString(R.string.noodles));
-            stringBuilder.append(telephone).append(mContext.getString(R.string.noodles));
+        if (!TextUtils.isEmpty(telephone)){
+            telephone = inspectionSheetDetailBean.getTelephone();
+            tvItemPatrolNoodles.setText(telephone);
         }
-        tvItemPatrolNoodles.setText(stringBuilder);
         //地址
         TextView tvItemInspectionSheetLocation = helper.getView(R.id.tvItemInspectionSheetLocation);
         tvItemInspectionSheetLocation.setText(inspectionSheetDetailBean.getAddress());
+
+        //金额
+        TextView tvItemInspectionSheetMoney = helper.getView(R.id.tvItemInspectionSheetMoney);
+        tvItemInspectionSheetMoney.setText(mContext.getString(R.string.content_money , String.valueOf(inspectionSheetDetailBean.getOrderAmount())));
 
         tvItemInspectionSheetTitle.setTag(inspectionSheetDetailBean);
     }

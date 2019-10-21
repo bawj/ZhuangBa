@@ -23,7 +23,6 @@ import com.xiaomai.zhuangba.enums.StaticExplain;
 import com.xiaomai.zhuangba.util.ConstantUtil;
 import com.xiaomai.zhuangba.util.DateUtil;
 import com.xiaomai.zhuangba.util.PatrolStatusUtil;
-import com.xiaomai.zhuangba.util.Util;
 
 import java.util.List;
 
@@ -160,19 +159,20 @@ public class BasePatrolDetailFragment<T extends IBasePatrolModule> extends BaseF
         tvBaseOrderDetailTotalMoney.setText(getString(R.string.content_money,String.valueOf(ongoingOrdersList.getOrderAmount())));
         //巡查区域
         String telephone = ongoingOrdersList.getTelephone();
-        tvBasePatrolArea.setText(Util.getNoodles(getActivity() , telephone));
+        ///tvBasePatrolArea.setText(Util.getNoodles(getActivity() , telephone));
+        tvBasePatrolArea.setText(telephone);
         //订单编号
         tvBasePatrolOrderNumber.setText(ongoingOrdersList.getOrderCode());
         //服务时长
-        tvBasePatrolLengthOfService.setText(ongoingOrdersList.getDebugging());
+        tvBasePatrolLengthOfService.setText(getString(R.string.months , ongoingOrdersList.getDebugging()));
         //服务时间
         String slottingStartLength = ongoingOrdersList.getSlottingStartLength();
         //巡查日期
         String slottingEndLength = ongoingOrdersList.getSlottingEndLength();
         if (slottingStartLength.equals(ConstantUtil.MONTH)) {
-            tvBasePatrolLengthOfServiceTime.setText(slottingEndLength);
+            tvBasePatrolLengthOfServiceTime.setText(getString(R.string.sing_month , slottingEndLength));
         } else if (slottingStartLength.equals(ConstantUtil.WEEK)) {
-            tvBasePatrolLengthOfServiceTime.setText(DateUtil.getWeek(slottingEndLength));
+            tvBasePatrolLengthOfServiceTime.setText(getString(R.string.weekly , DateUtil.getWeek(slottingEndLength)));
         }
         //备注说明
         tvBasePatrolNotes.setText(ongoingOrdersList.getEmployerDescribe());
