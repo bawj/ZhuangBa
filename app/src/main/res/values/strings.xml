@@ -566,4 +566,7 @@
     <string name="agree">同意</string>
     <string name="photo_tip">注：拍摄标志性信息，确认已到现场</string>
     <string name="please_shot_img">请拍摄图片</string>
+    <string name="to_be_started">待开工</string>
+    <string name="can_not_start">不能开工</string>
+    <string name="start_construction_tip">注：确认提交将发送短信给现场负责人，请务必让现场负责人点击短信中的链接签字并确认开工</string>
 </resources>

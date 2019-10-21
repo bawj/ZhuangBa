@@ -1,0 +1,357 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/tool_lib_gray_F5F6FA">
+
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:id="@+id/refreshBaseList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        app:srlAccentColor="@android:color/white"
+        app:srlEnableHeaderTranslationContent="false"
+        app:srlEnableLoadMore="false"
+        app:srlPrimaryColor="@color/colorPrimary">
+
+        <com.scwang.smartrefresh.header.MaterialHeader
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+
+        <RelativeLayout
+            android:id="@+id/layBaseOrderDetail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:id="@+id/relOrderInfo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/white">
+
+                        <TextView
+                            android:id="@+id/tvBaseOrderDetailItemOrdersTitle"
+                            style="@style/item_text_title"
+                            tools:text="公共安全" />
+
+                        <TextView
+                            android:id="@+id/tvBaseOrderDetailItemOrdersType"
+                            style="@style/order_status"
+                            android:background="@drawable/distribution_half_fillet_bg"
+                            tools:text="分配中" />
+
+                        <TextView
+                            android:id="@+id/tvBaseOrderDetailTaskQuantity_"
+                            style="@style/order_text"
+                            android:layout_width="@dimen/tool_lib_56dp"
+                            android:layout_below="@+id/tvBaseOrderDetailItemOrdersTitle"
+                            android:text="@string/task_quantity" />
+
+                        <TextView
+                            android:id="@+id/tvBaseOrderDetailTaskQuantity"
+                            style="@style/order_text"
+                            android:layout_below="@+id/tvBaseOrderDetailItemOrdersTitle"
+                            android:layout_toEndOf="@+id/tvBaseOrderDetailTaskQuantity_"
+                            android:layout_toRightOf="@+id/tvBaseOrderDetailTaskQuantity_"
+                            android:textColor="@color/tool_lib_gray_222222"
+                            tools:text="6" />
+
+                        <TextView
+                            android:id="@+id/tvBaseOrderDetailTotalMoney"
+                            style="@style/order_money"
+                            android:layout_below="@+id/tvBaseOrderDetailItemOrdersTitle"
+                            tools:text="¥3200.00" />
+
+                        <TextView
+                            android:id="@+id/tvBaseOrderDetailName_"
+                            style="@style/order_text"
+                            android:layout_width="@dimen/tool_lib_56dp"
+                            android:layout_below="@+id/tvBaseOrderDetailTaskQuantity_"
+                            android:text="@string/contacts" />
+
+                        <TextView
+                            android:id="@+id/tvBaseOrderDetailName"
+                            style="@style/order_text"
+                            android:layout_below="@+id/tvBaseOrderDetailTaskQuantity_"
+                            android:layout_toEndOf="@+id/tvBaseOrderDetailName_"
+                            android:layout_toRightOf="@+id/tvBaseOrderDetailName_"
+                            android:textColor="@color/tool_lib_gray_222222"
+                            tools:text="王翠花" />
+
+                        <TextView
+                            android:id="@+id/tvBaseOrderDetailPhone"
+                            style="@style/order_text"
+                            android:layout_below="@+id/tvBaseOrderDetailTaskQuantity_"
+                            android:layout_toEndOf="@+id/tvBaseOrderDetailName"
+                            android:layout_toRightOf="@+id/tvBaseOrderDetailName"
+                            android:textColor="@color/tool_lib_gray_222222"
+                            tools:text="13082779654" />
+
+                        <TextView
+                            android:id="@+id/tvBaseOrderDetailAppointment_"
+                            style="@style/order_text"
+                            android:layout_width="@dimen/tool_lib_56dp"
+                            android:layout_below="@+id/tvBaseOrderDetailName_"
+                            android:text="@string/time_of_appointment_" />
+
+                        <TextView
+                            android:id="@+id/tvBaseOrderDetailAppointment"
+                            style="@style/order_text"
+                            android:layout_below="@+id/tvBaseOrderDetailName_"
+                            android:layout_toEndOf="@+id/tvBaseOrderDetailAppointment_"
+                            android:layout_toRightOf="@+id/tvBaseOrderDetailAppointment_"
+                            android:textColor="@color/tool_lib_gray_222222"
+                            tools:text="2019-05-05 13:30" />
+
+                        <TextView
+                            android:id="@+id/tvBaseOrderConfirmationTime"
+                            style="@style/order_text"
+                            android:layout_width="@dimen/tool_lib_56dp"
+                            android:layout_below="@+id/tvBaseOrderDetailAppointment"
+                            android:text="@string/confirmation_time" />
+
+                        <TextView
+                            android:id="@+id/tvBaseOrderConfirmationTime_"
+                            style="@style/order_text"
+                            android:layout_below="@+id/tvBaseOrderDetailAppointment"
+                            android:layout_toEndOf="@+id/tvBaseOrderConfirmationTime"
+                            android:layout_toRightOf="@+id/tvBaseOrderConfirmationTime"
+                            android:textColor="@color/tool_lib_gray_222222"
+                            tools:text="2019-05-05 13:30" />
+
+                        <View
+                            android:id="@+id/viewHorizontalLine"
+                            style="@style/tool_lib_horizontal_line"
+                            android:layout_below="@+id/tvBaseOrderConfirmationTime"
+                            android:layout_marginLeft="@dimen/tool_lib_12dp"
+                            android:layout_marginTop="@dimen/tool_lib_12dp"
+                            android:layout_marginRight="@dimen/tool_lib_12dp" />
+
+                        <RelativeLayout
+                            android:id="@+id/relBaseOrderDetailLocation"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/viewHorizontalLine"
+                            android:paddingTop="@dimen/tool_lib_12dp"
+                            android:paddingBottom="@dimen/tool_lib_12dp">
+
+                            <ImageView
+                                android:id="@+id/ivBaseOrderDetailLocation"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_marginStart="@dimen/tool_lib_12dp"
+                                android:layout_marginLeft="@dimen/tool_lib_12dp"
+                                android:background="@drawable/ic_location_order" />
+
+                            <TextView
+                                android:id="@+id/tvBaseOrderDetailLocation"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_marginLeft="@dimen/tool_lib_3dp"
+                                android:layout_marginRight="@dimen/tool_lib_3dp"
+                                android:layout_toStartOf="@+id/ivBaseOrderDetailRight"
+                                android:layout_toLeftOf="@+id/ivBaseOrderDetailRight"
+                                android:layout_toEndOf="@+id/ivBaseOrderDetailLocation"
+                                android:layout_toRightOf="@+id/ivBaseOrderDetailLocation"
+                                android:maxLines="1"
+                                android:singleLine="true"
+                                android:textColor="@color/tool_lib_gray_222222"
+                                android:textSize="@dimen/tool_lib_12sp"
+                                tools:text="杭州市余杭区西溪北苑西区38幢3单元1502" />
+
+                            <ImageView
+                                android:id="@+id/ivBaseOrderDetailRight"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentEnd="true"
+                                android:layout_alignParentRight="true"
+                                android:layout_centerVertical="true"
+                                android:layout_marginEnd="@dimen/tool_lib_12dp"
+                                android:layout_marginRight="@dimen/tool_lib_12dp"
+                                android:src="@drawable/ic_right" />
+                        </RelativeLayout>
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/relEmployerScenePhoto"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/tool_lib_8dp"
+                        android:background="@android:color/white">
+
+                        <TextView
+                            android:id="@+id/tvMasterWorkerScenePhoto"
+                            style="@style/item_text_title"
+                            android:text="@string/scene_photo" />
+
+                        <android.support.v7.widget.RecyclerView
+                            android:id="@+id/recyclerEmployerScenePhoto"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/tvMasterWorkerScenePhoto"
+                            android:layout_marginLeft="@dimen/tool_lib_12dp"
+                            android:layout_marginTop="@dimen/tool_lib_8dp"
+                            android:layout_marginRight="@dimen/tool_lib_12dp"
+                            android:layout_marginBottom="@dimen/tool_lib_8dp"
+                            android:descendantFocusability="blocksDescendants" />
+
+                    </RelativeLayout>
+                    <!--现场照片-->
+                    <RelativeLayout
+                        android:id="@+id/relLivePhotos"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/tool_lib_8dp"
+                        android:background="@android:color/white"
+                        android:visibility="gone">
+
+                        <TextView
+                            android:id="@+id/tvLivePhotos"
+                            style="@style/item_text_title"
+                            android:text="@string/live_photos" />
+
+                        <android.support.v7.widget.RecyclerView
+                            android:id="@+id/recyclerLivePhotos"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/tvLivePhotos"
+                            android:layout_marginLeft="@dimen/tool_lib_12dp"
+                            android:layout_marginTop="@dimen/tool_lib_8dp"
+                            android:layout_marginRight="@dimen/tool_lib_12dp"
+                            android:descendantFocusability="blocksDescendants" />
+                    </RelativeLayout>
+                    <!--现场描述-->
+                    <RelativeLayout
+                        android:id="@+id/relFieldDescription"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/tool_lib_8dp"
+                        android:background="@android:color/white"
+                        android:visibility="gone">
+
+                        <TextView
+                            android:id="@+id/tvFiledDescription_"
+                            style="@style/item_text_title"
+                            android:text="@string/field_description" />
+
+                        <TextView
+                            android:id="@+id/tvFiledDescription"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/tool_lib_110dp"
+                            android:layout_below="@+id/tvFiledDescription_"
+                            android:layout_marginLeft="@dimen/tool_lib_16dp"
+                            android:layout_marginTop="@dimen/tool_lib_8dp"
+                            android:layout_marginRight="@dimen/tool_lib_16dp"
+                            android:background="@drawable/gray_field_description_bg"
+                            android:ellipsize="end"
+                            android:maxLines="6"
+                            android:padding="@dimen/tool_lib_8dp"
+                            tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. " />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/relService"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/tool_lib_8dp"
+                        android:background="@android:color/white">
+
+                        <TextView
+                            android:id="@+id/tvBaseOrderDetailServiceItems"
+                            style="@style/item_text_title"
+                            android:text="@string/service_items" />
+
+                        <android.support.v7.widget.RecyclerView
+                            android:id="@+id/recyclerServiceItems"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/tvBaseOrderDetailServiceItems"
+                            android:layout_marginLeft="@dimen/tool_lib_12dp"
+                            android:layout_marginTop="@dimen/tool_lib_8dp"
+                            android:layout_marginRight="@dimen/tool_lib_12dp"
+                            android:descendantFocusability="blocksDescendants" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/tool_lib_8dp"
+                        android:layout_marginBottom="@dimen/tool_lib_56dp"
+                        android:background="@android:color/white">
+
+                        <TextView
+                            android:id="@+id/tvBaseOrderDetailOrderInformation"
+                            style="@style/item_text_title"
+                            android:text="@string/order_information" />
+
+                        <android.support.v7.widget.RecyclerView
+                            android:id="@+id/recyclerOrderInformation"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/tvBaseOrderDetailOrderInformation"
+                            android:layout_marginLeft="@dimen/tool_lib_12dp"
+                            android:layout_marginTop="@dimen/tool_lib_2dp"
+                            android:layout_marginRight="@dimen/tool_lib_12dp"
+                            android:layout_marginBottom="@dimen/tool_lib_8dp"
+                            android:descendantFocusability="blocksDescendants" />
+                    </RelativeLayout>
+                </LinearLayout>
+            </ScrollView>
+
+            <RelativeLayout
+                android:id="@+id/relNewTaskOrderDetailBottom"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/tool_lib_56dp"
+                android:layout_alignParentBottom="true"
+                android:background="@android:color/white"
+                android:paddingLeft="@dimen/tool_lib_16dp"
+                android:paddingRight="@dimen/tool_lib_16dp">
+
+                <ImageView
+                    android:id="@+id/ivEmployerDetailMasterHeader"
+                    android:layout_width="@dimen/tool_lib_34dp"
+                    android:layout_height="@dimen/tool_lib_34dp"
+                    android:layout_centerVertical="true" />
+
+                <ImageView
+                    android:id="@+id/ivEmployerDetailMasterLog"
+                    android:layout_width="@dimen/tool_lib_16dp"
+                    android:layout_height="@dimen/tool_lib_16dp"
+                    android:layout_alignBottom="@+id/ivEmployerDetailMasterHeader"
+                    android:layout_marginStart="@dimen/tool_lib_24dp"
+                    android:layout_marginLeft="@dimen/tool_lib_24dp"
+                    android:src="@drawable/ic_master_log" />
+
+                <TextView
+                    android:id="@+id/tvEmployerDetailMasterName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="@dimen/tool_lib_12dp"
+                    android:layout_marginLeft="@dimen/tool_lib_12dp"
+                    android:layout_toEndOf="@+id/ivEmployerDetailMasterHeader"
+                    android:layout_toRightOf="@+id/ivEmployerDetailMasterHeader"
+                    tools:text="康师傅" />
+
+
+            </RelativeLayout>
+        </RelativeLayout>
+
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
+</RelativeLayout>

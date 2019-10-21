@@ -1,1 +1,1 @@
-include ':app', ':toollib', ':citypicker', ':calendarview'/*, ':lib_ocr'*/
+include ':app', ':toollib', ':citypicker', ':calendarview', ':lib_ocr'

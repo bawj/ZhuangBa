@@ -1180,4 +1180,30 @@ public interface IApi {
     @FormUrlEncoded
     @POST("user/updateAll")
     Observable<HttpResult<Object>> updateAll(@Field("userNumber") String userNumber , @Field("isAgree") String isAgree);
+
+    /**
+     * 师傅巡查任务接受订单
+     * @param orderCode 订单编号
+     * @return observable
+     */
+    @GET("order/acceptInspectionOrder/{orderCode}")
+    Observable<HttpResult<Object>> acceptInspectionOrder(@Path("orderCode") String orderCode);
+
+
+    /**
+     * 师傅巡查任务取消订单
+     * @param orderCode 订单编号
+     * @return observable
+     */
+    @GET("order/masterCancelInspectionOrder/{orderCode}")
+    Observable<HttpResult<Object>> masterCancelInspectionOrder(@Path("orderCode") String orderCode);
+
+
+    /**
+     * 雇主巡查任务取消订单
+     * @param orderCode 订单编号
+     * @return observable
+     */
+    @GET("order/cancelInspectionOrder/{orderCode}")
+    Observable<HttpResult<Object>> cancelInspectionOrder(@Path("orderCode") String orderCode);
 }

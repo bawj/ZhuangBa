@@ -12,12 +12,14 @@ import com.xiaomai.zhuangba.fragment.orderdetail.employer.EmployerCancelledFragm
 import com.xiaomai.zhuangba.fragment.orderdetail.employer.EmployerCompleteFragment;
 import com.xiaomai.zhuangba.fragment.orderdetail.employer.EmployerDistributionFragment;
 import com.xiaomai.zhuangba.fragment.orderdetail.employer.EmployerHavingSetOutFragment;
+import com.xiaomai.zhuangba.fragment.orderdetail.employer.EmployerToBeStartedFragment;
 import com.xiaomai.zhuangba.fragment.orderdetail.employer.EmployerUnderConstructionFragment;
 import com.xiaomai.zhuangba.fragment.orderdetail.master.BeUnderConstructionFragment;
 import com.xiaomai.zhuangba.fragment.orderdetail.master.HavingSetOutFragment;
 import com.xiaomai.zhuangba.fragment.orderdetail.master.MasterCompleteFragment;
 import com.xiaomai.zhuangba.fragment.orderdetail.master.NewTaskDetailFragment;
 import com.xiaomai.zhuangba.fragment.orderdetail.master.StartTheMissionFragment;
+import com.xiaomai.zhuangba.fragment.orderdetail.master.ToBeStartedFragment;
 
 /**
  * @author Administrator
@@ -49,11 +51,19 @@ public class OrderStatusUtil {
             //施工中
             tvItemOrdersType.setText(mContext.getString(R.string.be_under_construction));
             tvItemOrdersType.setBackgroundResource(R.drawable.distribution_half_fillet_bg);
+        } else if (orderStatus == OrdersEnum.MASTER_TO_BE_STARTED.getCode()) {
+            //待开工
+            tvItemOrdersType.setText(mContext.getString(R.string.to_be_started));
+            tvItemOrdersType.setBackgroundResource(R.drawable.distribution_half_fillet_bg);
+        } else if (orderStatus == OrdersEnum.MASTER_CAN_NOT_START.getCode()) {
+            //不能开工 状态和  已出发一致
+            tvItemOrdersType.setText(mContext.getString(R.string.having_set_out));
+            tvItemOrdersType.setBackgroundResource(R.drawable.having_set_out_bg);
         } else if (orderStatus == OrdersEnum.MASTER_ACCEPTANCE.getCode()) {
             //验收中
             tvItemOrdersType.setText(mContext.getString(R.string.acceptance));
             tvItemOrdersType.setBackgroundResource(R.drawable.distribution_half_fillet_bg);
-        }else if (orderStatus == OrdersEnum.MASTER_COMPLETED.getCode()) {
+        } else if (orderStatus == OrdersEnum.MASTER_COMPLETED.getCode()) {
             //已取消
             tvItemOrdersType.setText(mContext.getString(R.string.cancelled));
             tvItemOrdersType.setBackgroundResource(R.drawable.expired_half_fillet_bg);
@@ -61,7 +71,7 @@ public class OrderStatusUtil {
             //已完成
             tvItemOrdersType.setText(mContext.getString(R.string.completed));
             tvItemOrdersType.setBackgroundResource(R.drawable.expired_half_fillet_bg);
-        }else if (orderStatus == OrdersEnum.MASTER_COMPLETED_CANCEL.getCode()){
+        } else if (orderStatus == OrdersEnum.MASTER_COMPLETED_CANCEL.getCode()) {
             //验收不通过
             tvItemOrdersType.setText(mContext.getString(R.string.acceptance_is_not_acceptable));
             tvItemOrdersType.setBackgroundResource(R.drawable.acceptance_is_not_bg);
@@ -108,7 +118,7 @@ public class OrderStatusUtil {
             //已取消
             tvItemOrdersType.setText(mContext.getString(R.string.cancelled));
             tvItemOrdersType.setBackgroundResource(R.drawable.expired_half_fillet_bg);
-        } else if (orderStatus == OrdersEnum.EMPLOYER_ACCEPTANCE.getCode()){
+        } else if (orderStatus == OrdersEnum.EMPLOYER_ACCEPTANCE.getCode()) {
             //验收中
             tvItemOrdersType.setText(mContext.getString(R.string.acceptance));
             tvItemOrdersType.setBackgroundResource(R.drawable.distribution_half_fillet_bg);
@@ -126,6 +136,14 @@ public class OrderStatusUtil {
         } else if (orderStatus == OrdersEnum.EMPLOYER_CANCELLATION_UNDER_WAY.getCode()) {
             tvItemOrdersType.setText(mContext.getString(R.string.cancellation_under_way));
             tvItemOrdersType.setBackgroundResource(R.drawable.expired_half_fillet_bg);
+        }else if (orderStatus == OrdersEnum.EMPLOYER_TO_BE_STARTED.getCode()) {
+            //待开工
+            tvItemOrdersType.setText(mContext.getString(R.string.to_be_started));
+            tvItemOrdersType.setBackgroundResource(R.drawable.distribution_half_fillet_bg);
+        } else if (orderStatus == OrdersEnum.EMPLOYER_CAN_NOT_START.getCode()) {
+            //不能开工 状态和 已出发 一致
+            tvItemOrdersType.setText(mContext.getString(R.string.having_set_out));
+            tvItemOrdersType.setBackgroundResource(R.drawable.having_set_out_bg);
         }
     }
 
@@ -163,7 +181,7 @@ public class OrderStatusUtil {
         } else if (orderStatus == OrdersEnum.MASTER_CANCELLED.getCode()) {
             //已完成
             qmuiFragment.startFragment(MasterCompleteFragment.newInstance(orderCode, orderType));
-        }else if (orderStatus == OrdersEnum.MASTER_COMPLETED_CANCEL.getCode()){
+        } else if (orderStatus == OrdersEnum.MASTER_COMPLETED_CANCEL.getCode()) {
             //验收不通过
             qmuiFragment.startFragment(BeUnderConstructionFragment.newInstance(orderCode, orderType));
         } else if (orderStatus == OrdersEnum.MASTER_EXPIRED.getCode()) {
@@ -174,6 +192,12 @@ public class OrderStatusUtil {
             ToastUtil.showShort(qmuiFragment.getString(R.string.order_cancelled));
         } else if (orderStatus == OrdersEnum.MASTER_CANCELLATION_UNDER_WAY.getCode()) {
             ToastUtil.showShort(qmuiFragment.getString(R.string.order_cancellation_under_way));
+        } else if (orderStatus == OrdersEnum.MASTER_TO_BE_STARTED.getCode()) {
+            // 待开工
+            qmuiFragment.startFragment(ToBeStartedFragment.newInstance(orderCode, orderType));
+        } else if (orderStatus == OrdersEnum.MASTER_CAN_NOT_START.getCode()) {
+            // 不能开工 变成 已出发状态
+            qmuiFragment.startFragment(HavingSetOutFragment.newInstance(orderCode, orderType));
         }
     }
 
@@ -199,7 +223,7 @@ public class OrderStatusUtil {
         } else if (orderStatus == OrdersEnum.EMPLOYER_CHECK_AND_ACCEPT.getCode()) {
             //施工中
             qmuiFragment.startFragment(EmployerUnderConstructionFragment.newInstance(orderCode, orderType));
-        }  else if (orderStatus == OrdersEnum.EMPLOYER_ACCEPTANCE.getCode()) {
+        } else if (orderStatus == OrdersEnum.EMPLOYER_ACCEPTANCE.getCode()) {
             //验收中
             qmuiFragment.startFragment(EmployerCompleteFragment.newInstance(orderCode, orderType));
         } else if (orderStatus == OrdersEnum.EMPLOYER_COMPLETED.getCode()) {
@@ -215,6 +239,12 @@ public class OrderStatusUtil {
             qmuiFragment.startFragment(EmployerCompleteFragment.newInstance(orderCode, orderType));
         } else if (orderStatus == OrdersEnum.EMPLOYER_CANCELLATION_UNDER_WAY.getCode()) {
             ToastUtil.showShort(qmuiFragment.getString(R.string.order_cancellation_under_way));
+        }else if (orderStatus == OrdersEnum.EMPLOYER_TO_BE_STARTED.getCode()) {
+            // 待开工
+            qmuiFragment.startFragment(EmployerToBeStartedFragment.newInstance(orderCode, orderType));
+        } else if (orderStatus == OrdersEnum.EMPLOYER_CAN_NOT_START.getCode()) {
+            //不能开工 状态和 已出发 一致
+            qmuiFragment.startFragment(EmployerHavingSetOutFragment.newInstance(orderCode, orderType));
         }
     }
 }

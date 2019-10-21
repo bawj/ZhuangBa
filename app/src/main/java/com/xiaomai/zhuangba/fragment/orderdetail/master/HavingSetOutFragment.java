@@ -1,12 +1,17 @@
 package com.xiaomai.zhuangba.fragment.orderdetail.master;
 
+import android.Manifest;
 import android.os.Bundle;
 import android.view.View;
 
+import com.example.toollib.data.base.BaseCallback;
 import com.example.toollib.weight.dialog.CommonlyDialog;
 import com.xiaomai.zhuangba.R;
+import com.xiaomai.zhuangba.enums.ForResultCode;
 import com.xiaomai.zhuangba.fragment.orderdetail.master.base.BaseMasterOrderDetailFragment;
+import com.xiaomai.zhuangba.fragment.service.LocationFragment;
 import com.xiaomai.zhuangba.util.ConstantUtil;
+import com.xiaomai.zhuangba.util.RxPermissionsUtils;
 
 import butterknife.OnClick;
 
@@ -47,7 +52,17 @@ public class HavingSetOutFragment extends BaseMasterOrderDetailFragment {
                 break;
             case R.id.btnStartConstruction:
                 //开始施工 签名 拍照
-                startFragment(StartConstructionFragment.newInstance(getOrderCode(),getOrderType()));
+                RxPermissionsUtils.applyPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION, new BaseCallback<String>() {
+                    @Override
+                    public void onSuccess(String obj) {
+                        startFragment(StartConstructionFragment.newInstance(getOrderCode(),getOrderType()));
+                    }
+                    @Override
+                    public void onFail(Object obj) {
+                        super.onFail(obj);
+                        showToast(getString(R.string.positioning_authority_tip));
+                    }
+                });
                 break;
             default:
         }

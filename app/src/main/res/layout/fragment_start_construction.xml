@@ -4,30 +4,76 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/tool_lib_gray_F5F6FA"
-    android:orientation="vertical"
-    android:paddingLeft="@dimen/tool_lib_12dp"
-    android:paddingRight="@dimen/tool_lib_12dp">
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/tvBaseAutographImgTip"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/tool_lib_30dp"
-            android:textColor="@color/tool_lib_gray_222222"
-            android:textSize="@dimen/tool_lib_12sp"
-            tools:text="请上传开始前工作现场的照片" />
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recyclerBeforeInstallation"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/tool_lib_9dp" />
+            android:background="@android:color/white"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/tool_lib_12dp"
+            android:paddingRight="@dimen/tool_lib_12dp">
 
+            <TextView
+                android:id="@+id/tvBaseAutographImgTip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/tool_lib_30dp"
+                android:textColor="@color/tool_lib_gray_222222"
+                android:textSize="@dimen/tool_lib_12sp"
+                tools:text="请上传开始前工作现场的照片" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerBeforeInstallation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/tool_lib_9dp" />
+
+            <!--定位点-->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/tool_lib_16dp"
+                android:layout_marginBottom="@dimen/tool_lib_16dp">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/ic_location_orange" />
+
+
+                <TextView
+                    android:id="@+id/tvStartConstructionLocation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/tool_lib_16dp"
+                    android:layout_marginLeft="@dimen/tool_lib_16dp"
+                    android:textColor="@color/tool_lib_gray_222222"
+                    android:textSize="@dimen/tool_lib_12sp"
+                    tools:text="定位点" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/tool_lib_12dp"
+            android:layout_marginTop="@dimen/tool_lib_16dp"
+            android:layout_marginRight="@dimen/tool_lib_12dp"
+            android:lineSpacingExtra="@dimen/tool_lib_6dp"
+            android:text="@string/start_construction_tip"
+            android:textColor="@color/tool_lib_red_EF2B2B"
+            android:textSize="@dimen/tool_lib_12sp" />
+
+        <!-- ↓↓↓↓↓↓↓ 签名去掉 ↓↓↓↓↓↓↓ -->
         <TextView
             android:id="@+id/tvBaseAutographServiceTip"
             android:layout_width="wrap_content"
@@ -35,13 +81,15 @@
             android:layout_marginTop="@dimen/tool_lib_15dp"
             android:textColor="@color/tool_lib_gray_222222"
             android:textSize="@dimen/tool_lib_12sp"
+            android:visibility="gone"
             tools:text="服务内容无异议，同意开工。" />
 
         <RelativeLayout
             android:id="@+id/relAcceptanceDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/tool_lib_12dp">
+            android:layout_marginTop="@dimen/tool_lib_12dp"
+            android:visibility="gone">
 
             <ImageView
                 android:id="@+id/ivSubmitDescription"
@@ -63,14 +111,14 @@
                 android:textColor="@color/tool_lib_gray_B1B1B1"
                 android:textSize="@dimen/tool_lib_16sp" />
         </RelativeLayout>
-
+        <!-- ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ -->
 
         <com.qmuiteam.qmui.layout.QMUIButton
             android:id="@+id/btnBeforeInstallation"
             style="@style/base_btn"
-            android:layout_marginLeft="0dp"
+            android:layout_marginLeft="@dimen/tool_lib_12dp"
             android:layout_marginTop="@dimen/tool_lib_24dp"
-            android:layout_marginRight="0dp"
+            android:layout_marginRight="@dimen/tool_lib_12dp"
             android:layout_marginBottom="@dimen/tool_lib_12dp"
             android:text="@string/construction_submission" />
     </LinearLayout>

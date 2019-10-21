@@ -64,7 +64,8 @@ public class CompleteFragment extends BaseFragment {
     }
 
     public void startOrderDetail() {
-        OrderStatusUtil.startMasterOrderDetail(getBaseFragmentActivity() ,getOrderCode() , getOrderType() , DensityUtils.stringTypeInteger(getOrderStatus()));
+        OrderStatusUtil.startMasterOrderDetail(getBaseFragmentActivity() ,getOrderCode()
+                , getOrderType() , DensityUtils.stringTypeInteger(getOrderStatus()));
     }
 
     @Override

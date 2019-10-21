@@ -274,6 +274,34 @@ public class MapUtils {
         mLocationClient.startLocation();
     }
 
+
+    public static void location(final Context mContext, final TextView tvLocation) {
+        mLocationClient = new AMapLocationClient(mContext);
+        AMapLocationClientOption mAMapLocationClientOption = new AMapLocationClientOption();
+        // 设置定位模式为高精度模式
+        mAMapLocationClientOption.setLocationMode(AMapLocationClientOption.AMapLocationMode.Hight_Accuracy);
+        //设置发送定位请求的时间间隔,最小值为1000，如果小于1000，按照1000算
+        mAMapLocationClientOption.setInterval(2000);
+        // 设置定位参数
+        mLocationClient.setLocationOption(mAMapLocationClientOption);
+        mLocationClient.setLocationListener(new AMapLocationListener() {
+            @Override
+            public void onLocationChanged(AMapLocation aMapLocation) {
+                //省
+                String provider = aMapLocation.getProvider();
+                //市
+                String city = aMapLocation.getCity();
+                //区
+                String district = aMapLocation.getDistrict();
+                //街道
+                String street = aMapLocation.getStreet();
+                StringBuilder stringBuilder = new StringBuilder();
+                tvLocation.setText(stringBuilder.append(provider).append(city).append(district).append(street));
+            }
+        });
+        mLocationClient.startLocation();
+    }
+
     public static void stopLocation() {
         if (mLocationClient != null) {
             mLocationClient.stopLocation();

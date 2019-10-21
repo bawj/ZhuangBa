@@ -20,6 +20,8 @@ public enum OrdersEnum {
     EMPLOYER_ACCEPTANCE(9, "验收中"),
     EMPLOYER_COMPLETED_CANCEL(10, "验收不通过"),
     EMPLOYER_CANCELLATION_UNDER_WAY(11, "正在取消"),
+    EMPLOYER_TO_BE_STARTED(12, "待开工"),
+    EMPLOYER_CAN_NOT_START(13, "不能开工"),
 
     /**
      * 师傅
@@ -35,6 +37,8 @@ public enum OrdersEnum {
     MASTER_ACCEPTANCE(9, "验收中"),
     MASTER_COMPLETED_CANCEL(10 , "验收不通过"),
     MASTER_CANCELLATION_UNDER_WAY(11, "正在取消"),
+    MASTER_TO_BE_STARTED(12, "待开工"),
+    MASTER_CAN_NOT_START(13, "不能开工"),
 
     MASTER_REST(2 , "休息中"),
     MASTER_WORK(1 , "工作中"),

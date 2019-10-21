@@ -3,8 +3,13 @@ package com.xiaomai.zhuangba.fragment.masterworker.inspection;
 import android.os.Bundle;
 import android.view.View;
 
+import com.example.toollib.http.HttpResult;
+import com.example.toollib.http.observer.BaseHttpRxObserver;
+import com.example.toollib.http.util.RxUtils;
 import com.xiaomai.zhuangba.R;
+import com.xiaomai.zhuangba.enums.InspectionSheetEnum;
 import com.xiaomai.zhuangba.fragment.orderdetail.employer.patrol.base.BasePatrolDetailFragment;
+import com.xiaomai.zhuangba.http.ServiceUrl;
 import com.xiaomai.zhuangba.util.ConstantUtil;
 
 import butterknife.OnClick;
@@ -33,11 +38,28 @@ public class PatrolNewTaskDetailFragment extends BasePatrolDetailFragment {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btnPatrolCancelTask:
-                //取消订单
+                //巡查任务取消订单
+                RxUtils.getObservable(ServiceUrl.getUserApi().masterCancelInspectionOrder(getOrderCode()))
+                        .compose(this.<HttpResult<Object>>bindToLifecycle())
+                        .subscribe(new BaseHttpRxObserver<Object>(getActivity()) {
+                            @Override
+                            protected void onSuccess(Object response) {
+                                popBackStack();
+                            }
+                        });
                 break;
             case R.id.btnPatrolTaskAcceptance:
-                // TODO: 2019/10/7 0007  接单
-
+                //巡查任务接单
+                RxUtils.getObservable(ServiceUrl.getUserApi().acceptInspectionOrder(getOrderCode()))
+                        .compose(this.<HttpResult<Object>>bindToLifecycle())
+                        .subscribe(new BaseHttpRxObserver<Object>(getActivity()) {
+                            @Override
+                            protected void onSuccess(Object response) {
+                                startFragment(PatrolHaveHandDetailFragment.newInstance(getOrderCode()
+                                        , String.valueOf(InspectionSheetEnum.MASTER_INSPECTION_SHEET_HAVE_IN_HAND.getCode())));
+                                popBackStack();
+                            }
+                        });
                 break;
             default:
         }
