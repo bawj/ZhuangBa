@@ -97,8 +97,7 @@ public class StartTheMissionFragment extends BaseMasterOrderDetailFragment {
                     @Override
                     protected void onSuccess(Object response) {
                         //现在出发 -> 已出发
-                        startFragment(HavingSetOutFragment.newInstance(getOrderCode(),getOrderType()));
-                        popBackStack();
+                        startFragmentAndDestroyCurrent(HavingSetOutFragment.newInstance(getOrderCode(),getOrderType()));
                     }
                 });
     }

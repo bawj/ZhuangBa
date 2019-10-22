@@ -1,5 +1,6 @@
 package com.xiaomai.zhuangba.fragment.masterworker.inspection;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
@@ -7,7 +8,7 @@ import com.example.toollib.http.HttpResult;
 import com.example.toollib.http.observer.BaseHttpRxObserver;
 import com.example.toollib.http.util.RxUtils;
 import com.xiaomai.zhuangba.R;
-import com.xiaomai.zhuangba.enums.InspectionSheetEnum;
+import com.xiaomai.zhuangba.enums.ForResultCode;
 import com.xiaomai.zhuangba.fragment.orderdetail.employer.patrol.base.BasePatrolDetailFragment;
 import com.xiaomai.zhuangba.http.ServiceUrl;
 import com.xiaomai.zhuangba.util.ConstantUtil;
@@ -44,6 +45,7 @@ public class PatrolNewTaskDetailFragment extends BasePatrolDetailFragment {
                         .subscribe(new BaseHttpRxObserver<Object>(getActivity()) {
                             @Override
                             protected void onSuccess(Object response) {
+                                setFragmentResult(ForResultCode.START_FOR_RESULT_CODE.getCode() , new Intent());
                                 popBackStack();
                             }
                         });
@@ -55,8 +57,7 @@ public class PatrolNewTaskDetailFragment extends BasePatrolDetailFragment {
                         .subscribe(new BaseHttpRxObserver<Object>(getActivity()) {
                             @Override
                             protected void onSuccess(Object response) {
-                                startFragment(PatrolHaveHandDetailFragment.newInstance(getOrderCode()
-                                        , String.valueOf(InspectionSheetEnum.MASTER_INSPECTION_SHEET_HAVE_IN_HAND.getCode())));
+                                setFragmentResult(ForResultCode.START_FOR_RESULT_CODE.getCode() , new Intent());
                                 popBackStack();
                             }
                         });

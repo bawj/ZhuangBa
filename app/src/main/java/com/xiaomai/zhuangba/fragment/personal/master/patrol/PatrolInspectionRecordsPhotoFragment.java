@@ -3,6 +3,7 @@ package com.xiaomai.zhuangba.fragment.personal.master.patrol;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
+import android.text.TextUtils;
 import android.view.View;
 
 import com.example.toollib.base.BaseFragment;
@@ -23,7 +24,6 @@ import net.lucode.hackware.magicindicator.MagicIndicator;
 import net.lucode.hackware.magicindicator.ViewPagerHelper;
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.CommonNavigator;
 
-import java.security.interfaces.RSAKey;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -79,10 +79,10 @@ public class PatrolInspectionRecordsPhotoFragment extends BaseFragment {
         for (int i = 0; i < tabTitle.length; i++) {
             PatrolInspectionRecordsDetailImgBean.TaskPictureListBean taskPictureListBean
                     = new PatrolInspectionRecordsDetailImgBean.TaskPictureListBean();
-            if (taskPictureList.size() > i){
+            if (taskPictureList.size() > i) {
                 taskPictureListBean = taskPictureList.get(i);
             }
-            list.add(PatrolInspectionRecordsPhotoDetailFragment.newInstance(tabTitle[i] , new Gson().toJson(taskPictureListBean)));
+            list.add(PatrolInspectionRecordsPhotoDetailFragment.newInstance(tabTitle[i], new Gson().toJson(taskPictureListBean)));
         }
         return list;
     }
@@ -102,12 +102,9 @@ public class PatrolInspectionRecordsPhotoFragment extends BaseFragment {
         PatrolInspectionRecordsDetailImgBean patrolMissionDetailListBean = getPatrolInspectionRecordsDetailImgBean();
         String cover = patrolMissionDetailListBean.getCover();
         if (cover.contains(",")) {
-            String[] split = cover.split(",");
-            String[] title = new String[split.length];
-            for (int i = 0; i < split.length; i++) {
-                title[i] = (split[i] + "面");
-            }
-            return title;
+            return cover.split(",");
+        } else if (!TextUtils.isEmpty(cover)) {
+            return new String[]{cover};
         }
         return new String[]{"A面", "B面", "C面", "D面"};
     }
@@ -133,7 +130,7 @@ public class PatrolInspectionRecordsPhotoFragment extends BaseFragment {
             taskPictureListBeanList.add(taskPictureListBean);
             flag = patrolInspectionRecordsPhotoDetailFragment.isFlag();
         }
-        if (!flag){
+        if (!flag) {
             ToastUtil.showShort(getString(R.string.please_save_the_patrol_pictures));
             return;
         }

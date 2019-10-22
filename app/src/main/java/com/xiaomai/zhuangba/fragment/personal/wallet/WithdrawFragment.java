@@ -124,10 +124,10 @@ public class WithdrawFragment extends BaseFragment implements TextWatcher {
     @Override
     protected void onFragmentResult(int requestCode, int resultCode, Intent data) {
         super.onFragmentResult(requestCode, resultCode, data);
-        if (resultCode == ForResultCode.RESULT_OK.getCode()){
-            if (requestCode == ForResultCode.START_FOR_RESULT_CODE.getCode()){
+        if (requestCode == ForResultCode.START_FOR_RESULT_CODE_.getCode()){
+            if (resultCode == ForResultCode.START_FOR_RESULT_CODE.getCode()){
                 request();
-            }else if (requestCode == ForResultCode.START_FOR_RESULT_CODE_.getCode() && data != null){
+            }else if (resultCode == ForResultCode.START_FOR_RESULT_CODE_.getCode() && data != null){
                 String name = data.getStringExtra("name");
                 if (!TextUtils.isEmpty(name)){
                     tvName.setText(name);

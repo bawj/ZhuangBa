@@ -184,8 +184,7 @@ public class StartConstructionFragment extends BaseAutographFragment {
                             @Override
                             protected void onSuccess(Object object) {
                                 //跳转到待开工
-                                startFragment(ToBeStartedFragment.newInstance(getOrderCode(), getOrderType()));
-                                popBackStack();
+                                startFragmentAndDestroyCurrent(ToBeStartedFragment.newInstance(getOrderCode(), getOrderType()));
                             }
                         });
 

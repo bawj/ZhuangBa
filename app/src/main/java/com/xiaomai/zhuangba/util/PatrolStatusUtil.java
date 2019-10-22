@@ -3,8 +3,10 @@ package com.xiaomai.zhuangba.util;
 import android.content.Context;
 import android.widget.TextView;
 
+import com.qmuiteam.qmui.arch.QMUIFragment;
 import com.qmuiteam.qmui.arch.QMUIFragmentActivity;
 import com.xiaomai.zhuangba.R;
+import com.xiaomai.zhuangba.enums.ForResultCode;
 import com.xiaomai.zhuangba.enums.InspectionSheetEnum;
 import com.xiaomai.zhuangba.enums.StringTypeExplain;
 import com.xiaomai.zhuangba.fragment.masterworker.inspection.PatrolHaveHandDetailFragment;
@@ -119,10 +121,11 @@ public class PatrolStatusUtil {
      * @param orderType 订单类型
      * @param orderStatus 订单状态
      */
-    public static void startMasterPatrol(QMUIFragmentActivity baseFragmentActivity, String orderCode, String orderType, int orderStatus) {
+    public static void startMasterPatrol(QMUIFragmentActivity baseFragmentActivity,String orderCode, String orderType, int orderStatus) {
         if (orderStatus == InspectionSheetEnum.MASTER_INSPECTION_SHEET_IN_DISTRIBUTION.getCode()){
             //新任务
-            baseFragmentActivity.startFragment(PatrolNewTaskDetailFragment.newInstance(orderCode , orderType));
+            QMUIFragment currentFragment = baseFragmentActivity.getCurrentFragment();
+            currentFragment.startFragmentForResult(PatrolNewTaskDetailFragment.newInstance(orderCode , orderType) , ForResultCode.RESULT_OK.getCode());
         } else if (orderStatus == InspectionSheetEnum.MASTER_INSPECTION_SHEET_HAVE_IN_HAND.getCode()){
             //进行中
             baseFragmentActivity.startFragment(PatrolHaveHandDetailFragment.newInstance(orderCode , orderType));

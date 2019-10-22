@@ -1,5 +1,6 @@
 package com.xiaomai.zhuangba.fragment.masterworker.inspection;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
@@ -18,6 +19,7 @@ import com.xiaomai.zhuangba.adapter.InspectionSheetDetailAdapter;
 import com.xiaomai.zhuangba.data.bean.InspectionSheetBean;
 import com.xiaomai.zhuangba.data.bean.InspectionSheetDetailBean;
 import com.xiaomai.zhuangba.data.bean.RefreshBaseList;
+import com.xiaomai.zhuangba.enums.ForResultCode;
 import com.xiaomai.zhuangba.enums.StaticExplain;
 import com.xiaomai.zhuangba.fragment.base.BaseListFragment;
 import com.xiaomai.zhuangba.http.ServiceUrl;
@@ -119,6 +121,16 @@ public class InspectionSheetDetailFragment extends BaseListFragment<IBaseModule,
         InspectionSheetDetailBean inspectionSheetDetailBean = (InspectionSheetDetailBean) view.findViewById(R.id.tvItemInspectionSheetTitle).getTag();
         PatrolStatusUtil.startMasterPatrol(getBaseFragmentActivity(), inspectionSheetDetailBean.getOrderCode()
                 ,inspectionSheetDetailBean.getOrderType(), inspectionSheetDetailBean.getOrderStatus());
+    }
+
+    @Override
+    protected void onFragmentResult(int requestCode, int resultCode, Intent data) {
+        super.onFragmentResult(requestCode, resultCode, data);
+        if (requestCode == ForResultCode.RESULT_OK.getCode()){
+            if (resultCode == ForResultCode.START_FOR_RESULT_CODE.getCode())     {
+                refresh();
+            }
+        }
     }
 
     @Override

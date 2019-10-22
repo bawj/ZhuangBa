@@ -190,8 +190,7 @@ public class NewSubmitAcceptanceFragment extends BaseAutographFragment {
                         .subscribe(new BaseHttpRxObserver<Object>(getActivity()) {
                             @Override
                             protected void onSuccess(Object object) {
-                                startFragment(NewSubmitCompleteFragment.newInstance(getOrderCode(), getOrderType(), String.valueOf(OrdersEnum.MASTER_ACCEPTANCE.getCode())));
-                                popBackStack();
+                                startFragmentAndDestroyCurrent(NewSubmitCompleteFragment.newInstance(getOrderCode(), getOrderType(), String.valueOf(OrdersEnum.MASTER_ACCEPTANCE.getCode())));
                             }
                         });
             } catch (URISyntaxException e) {
