@@ -476,6 +476,15 @@ public interface IApi {
     Observable<HttpResult<Object>> uploadFile(@Body RequestBody body);
 
     /**
+     * 单图上传
+     *
+     * @param body body
+     * @return Observable
+     */
+    @POST("uploadIng/uploadImg")
+    Observable<HttpResult<Object>> uploadImg(@Body RequestBody body);
+
+    /**
      * 多图上传
      *
      * @param parts parts

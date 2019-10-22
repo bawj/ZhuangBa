@@ -1,11 +1,13 @@
 package com.xiaomai.zhuangba.fragment.authentication.master;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.toollib.base.BaseFragment;
 import com.example.toollib.data.IBaseModule;
+import com.example.toollib.util.ToastUtil;
 import com.google.gson.Gson;
 import com.xiaomai.zhuangba.R;
 import com.xiaomai.zhuangba.data.bean.MasterAuthenticationInfo;
@@ -49,10 +51,14 @@ public class RealNameAuthenticationFragment extends BaseFragment {
 
     @OnClick(R.id.btnAuthenticationNext)
     public void onViewClicked() {
+        String address = editAddress.getText().toString();
+        if (TextUtils.isEmpty(address)){
+            ToastUtil.showShort(getString(R.string.please_fill_in_the_address_));
+            return;
+        }
         MasterAuthenticationInfo masterAuthenticationInfo = new MasterAuthenticationInfo();
         masterAuthenticationInfo.setUserText(editAuthenticationName.getText().toString());
         String emergencyContact = editEmergencyContact.getText().toString();
-        String address = editAddress.getText().toString();
         masterAuthenticationInfo.setEmergencyContact(emergencyContact);
         masterAuthenticationInfo.setContactAddress(address);
         startFragment(BareheadedFragment.newInstance(new Gson().toJson(masterAuthenticationInfo)));

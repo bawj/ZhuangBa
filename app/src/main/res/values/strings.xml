@@ -289,6 +289,7 @@
     <string name="address">地址</string>
     <string name="advertising_address">地址：%1$s</string>
     <string name="address_">紧急联系地址</string>
+    <string name="please_fill_in_the_address_">请填写紧急联系地址</string>
     <string name="please_fill_in_the_address">请填写地址</string>
     <string name="please_open_permissions">请在应用管理中打开相机和存储权限</string>
     <string name="user_name_null">姓名不能为空，请重新扫描</string>
