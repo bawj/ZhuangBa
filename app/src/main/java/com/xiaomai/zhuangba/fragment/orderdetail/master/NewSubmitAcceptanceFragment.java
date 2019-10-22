@@ -13,6 +13,7 @@ import com.example.toollib.util.ToastUtil;
 import com.google.gson.Gson;
 import com.xiaomai.zhuangba.R;
 import com.xiaomai.zhuangba.enums.OrdersEnum;
+import com.xiaomai.zhuangba.fragment.masterworker.MasterWorkerFragment;
 import com.xiaomai.zhuangba.fragment.orderdetail.master.base.BaseAutographFragment;
 import com.xiaomai.zhuangba.http.ServiceUrl;
 import com.xiaomai.zhuangba.util.ConstantUtil;
@@ -151,9 +152,9 @@ public class NewSubmitAcceptanceFragment extends BaseAutographFragment {
         uriList.remove(uriList.size() - 1);
         if (uriList.isEmpty()) {
             ToastUtil.showShort(getString(R.string.job_site_font_installation_img));
-        } else if (TextUtils.isEmpty(descriptionPhotoPath)) {
+        } /*else if (TextUtils.isEmpty(descriptionPhotoPath)) {
             ToastUtil.showShort(getString(R.string.please_sign_electronically));
-        } else {
+        }*/ else {
             try {
                 //安装前 图片集合
                 List<MultipartBody.Part> parts = new ArrayList<>();
@@ -184,13 +185,14 @@ public class NewSubmitAcceptanceFragment extends BaseAutographFragment {
                                 //图片地址
                                 hashMap.put("picturesUrl", httpResult.getData().toString());
                                 RequestBody requestBody = RequestBody.create(MediaType.parse("application/json;charset=utf-8"), new Gson().toJson(hashMap));
-                                return  ServiceUrl.getUserApi().submitValidation(requestBody);
+                                return  RxUtils.getObservable(ServiceUrl.getUserApi().submitValidation(requestBody));
                             }
                         })
                         .subscribe(new BaseHttpRxObserver<Object>(getActivity()) {
                             @Override
                             protected void onSuccess(Object object) {
-                                startFragmentAndDestroyCurrent(NewSubmitCompleteFragment.newInstance(getOrderCode(), getOrderType(), String.valueOf(OrdersEnum.MASTER_ACCEPTANCE.getCode())));
+                                startFragmentAndDestroyCurrent(MasterWorkerFragment.newInstance());
+                                //startFragmentAndDestroyCurrent(NewSubmitCompleteFragment.newInstance(getOrderCode(), getOrderType(), String.valueOf(OrdersEnum.MASTER_ACCEPTANCE.getCode())));
                             }
                         });
             } catch (URISyntaxException e) {

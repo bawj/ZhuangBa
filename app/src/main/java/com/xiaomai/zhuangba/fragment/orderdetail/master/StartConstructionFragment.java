@@ -6,11 +6,13 @@ import android.text.TextUtils;
 import android.widget.TextView;
 
 import com.example.toollib.http.HttpResult;
+import com.example.toollib.http.exception.ApiException;
 import com.example.toollib.http.function.BaseHttpConsumer;
 import com.example.toollib.http.observer.BaseHttpRxObserver;
 import com.example.toollib.http.util.RxUtils;
 import com.example.toollib.util.ToastUtil;
 import com.xiaomai.zhuangba.R;
+import com.xiaomai.zhuangba.fragment.masterworker.MasterWorkerFragment;
 import com.xiaomai.zhuangba.fragment.orderdetail.master.base.BaseAutographFragment;
 import com.xiaomai.zhuangba.http.ServiceUrl;
 import com.xiaomai.zhuangba.util.ConstantUtil;
@@ -151,9 +153,9 @@ public class StartConstructionFragment extends BaseAutographFragment {
         uriList.remove(uriList.size() - 1);
         if (uriList.isEmpty()) {
             ToastUtil.showShort(getString(R.string.job_site_font_installation_img));
-        } else if (TextUtils.isEmpty(descriptionPhotoPath)) {
+        } /*else if (TextUtils.isEmpty(descriptionPhotoPath)) {
             ToastUtil.showShort(getString(R.string.please_sign_electronically));
-        } else {
+        }*/ else {
             try {
                 //安装前 图片集合
                 List<MultipartBody.Part> parts = new ArrayList<>();
@@ -176,15 +178,21 @@ public class StartConstructionFragment extends BaseAutographFragment {
                         .concatMap(new Function<HttpResult<Object>, ObservableSource<HttpResult<Object>>>() {
                             @Override
                             public ObservableSource<HttpResult<Object>> apply(HttpResult<Object> httpResult) throws Exception {
-                                return ServiceUrl.getUserApi().startTaskOrder(getOrderCode(),
-                                        httpResult.getData().toString(), tvStartConstructionLocation.getText().toString());
+                                return RxUtils.getObservable(ServiceUrl.getUserApi().startTaskOrder(getOrderCode(),
+                                        httpResult.getData().toString(), tvStartConstructionLocation.getText().toString()));
                             }
                         })
                         .subscribe(new BaseHttpRxObserver<Object>(getActivity()) {
                             @Override
                             protected void onSuccess(Object object) {
                                 //跳转到待开工
-                                startFragmentAndDestroyCurrent(ToBeStartedFragment.newInstance(getOrderCode(), getOrderType()));
+                                startFragmentAndDestroyCurrent(MasterWorkerFragment.newInstance());
+                                //startFragmentAndDestroyCurrent(ToBeStartedFragment.newInstance(getOrderCode(), getOrderType()));
+                            }
+
+                            @Override
+                            public void onError(ApiException apiException) {
+                                super.onError(apiException);
                             }
                         });
 

@@ -3,6 +3,7 @@ package com.xiaomai.zhuangba.data.bean;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -23,6 +24,7 @@ public class PatrolInspectionRecordsDetailImgBean {
     private String status;
     private String cover;
     private List<TaskPictureListBean> taskPictureList;
+    private List<TaskPictureListBean> taskPictureVOList;
 
     public String getCover() {
         return cover == null ? "" : cover;
@@ -57,11 +59,25 @@ public class PatrolInspectionRecordsDetailImgBean {
     }
 
     public List<TaskPictureListBean> getTaskPictureList() {
+        if (taskPictureList == null) {
+            return new ArrayList<>();
+        }
         return taskPictureList;
     }
 
     public void setTaskPictureList(List<TaskPictureListBean> taskPictureList) {
         this.taskPictureList = taskPictureList;
+    }
+
+    public List<TaskPictureListBean> getTaskPictureVOList() {
+        if (taskPictureVOList == null) {
+            return new ArrayList<>();
+        }
+        return taskPictureVOList;
+    }
+
+    public void setTaskPictureVOList(List<TaskPictureListBean> taskPictureVOList) {
+        this.taskPictureVOList = taskPictureVOList;
     }
 
     public static class TaskPictureListBean implements Parcelable {

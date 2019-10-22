@@ -14,7 +14,6 @@ import com.example.toollib.http.HttpResult;
 import com.example.toollib.http.observer.BaseHttpRxObserver;
 import com.example.toollib.http.util.RxUtils;
 import com.example.toollib.manager.GlideManager;
-import com.example.toollib.util.Log;
 import com.example.toollib.weight.dialog.CommonlyDialog;
 import com.google.gson.Gson;
 import com.qmuiteam.qmui.layout.QMUIButton;
@@ -55,7 +54,6 @@ public class PatrolInspectionRecordsPhotoDetailFragment extends BaseFragment {
 
     private String imgUrl = "";
     private String remarks = "";
-    public boolean flag;
     private static final String NOODLES = "noodles";
     public static final String TASK_PICTURE_LIST_BEAN = "task_picture_list_bean";
     private PatrolInspectionRecordsDetailImgBean.TaskPictureListBean taskPictureListBean;
@@ -184,7 +182,6 @@ public class PatrolInspectionRecordsPhotoDetailFragment extends BaseFragment {
                     .subscribe(new BaseHttpRxObserver<Object>(getActivity()) {
                         @Override
                         protected void onSuccess(Object response) {
-                            flag = true;
                             taskPictureListBean.setPic(response.toString());
                         }
                     });
@@ -215,10 +212,6 @@ public class PatrolInspectionRecordsPhotoDetailFragment extends BaseFragment {
 
     public PatrolInspectionRecordsDetailImgBean.TaskPictureListBean getTaskPictureListBean() {
         return taskPictureListBean;
-    }
-
-    public boolean isFlag(){
-        return flag;
     }
 
     public String getNoodles() {

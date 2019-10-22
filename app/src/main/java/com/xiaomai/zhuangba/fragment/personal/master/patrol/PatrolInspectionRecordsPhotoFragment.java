@@ -77,11 +77,11 @@ public class PatrolInspectionRecordsPhotoFragment extends BaseFragment {
         List<PatrolInspectionRecordsDetailImgBean.TaskPictureListBean> taskPictureList = patrolInspectionRecordsDetailImgBean.getTaskPictureList();
         List<PatrolInspectionRecordsPhotoDetailFragment> list = new ArrayList<>();
         for (int i = 0; i < tabTitle.length; i++) {
-            PatrolInspectionRecordsDetailImgBean.TaskPictureListBean taskPictureListBean
-                    = new PatrolInspectionRecordsDetailImgBean.TaskPictureListBean();
+            PatrolInspectionRecordsDetailImgBean.TaskPictureListBean taskPictureListBean = new PatrolInspectionRecordsDetailImgBean.TaskPictureListBean();
             if (taskPictureList.size() > i) {
                 taskPictureListBean = taskPictureList.get(i);
             }
+            taskPictureListBean.setSide(tabTitle[i]);
             list.add(PatrolInspectionRecordsPhotoDetailFragment.newInstance(tabTitle[i], new Gson().toJson(taskPictureListBean)));
         }
         return list;
@@ -125,20 +125,27 @@ public class PatrolInspectionRecordsPhotoFragment extends BaseFragment {
         PatrolInspectionRecordsDetailImgBean patrolInspectionRecordsDetailImgBean = getPatrolInspectionRecordsDetailImgBean();
         List<PatrolInspectionRecordsDetailImgBean.TaskPictureListBean> taskPictureListBeanList = new ArrayList<>();
         for (PatrolInspectionRecordsPhotoDetailFragment patrolInspectionRecordsPhotoDetailFragment : photoDetailFragmentList) {
-            PatrolInspectionRecordsDetailImgBean.TaskPictureListBean taskPictureListBean =
-                    patrolInspectionRecordsPhotoDetailFragment.getTaskPictureListBean();
+            PatrolInspectionRecordsDetailImgBean.TaskPictureListBean taskPictureListBean = patrolInspectionRecordsPhotoDetailFragment.getTaskPictureListBean();
             taskPictureListBeanList.add(taskPictureListBean);
-            flag = patrolInspectionRecordsPhotoDetailFragment.isFlag();
+            String pic = taskPictureListBean.getPic();
+            if (!TextUtils.isEmpty(pic)){
+                flag = true;
+            }
         }
         if (!flag) {
             ToastUtil.showShort(getString(R.string.please_save_the_patrol_pictures));
             return;
         }
-        patrolInspectionRecordsDetailImgBean.setTaskPictureList(taskPictureListBeanList);
-        RequestBody requestBody = RequestBody.create(MediaType.parse("application/json;charset=utf-8"), new Gson().toJson(taskPictureListBeanList));
+        PatrolInspectionRecordsDetailImgBean detailImgBean  = new PatrolInspectionRecordsDetailImgBean();
+        detailImgBean.setId(patrolInspectionRecordsDetailImgBean.getId());
+        detailImgBean.setCover(patrolInspectionRecordsDetailImgBean.getCover());
+        detailImgBean.setOrderDetailNo(patrolInspectionRecordsDetailImgBean.getOrderDetailNo());
+        detailImgBean.setStatus(patrolInspectionRecordsDetailImgBean.getStatus());
+        detailImgBean.setTaskPictureVOList(taskPictureListBeanList);
+        RequestBody requestBody = RequestBody.create(MediaType.parse("application/json;charset=utf-8"), new Gson().toJson(detailImgBean));
         RxUtils.getObservable(ServiceUrl.getUserApi().save(requestBody))
                 .compose(this.<HttpResult<Object>>bindToLifecycle())
-                .subscribe(new BaseHttpRxObserver<Object>() {
+                .subscribe(new BaseHttpRxObserver<Object>(getActivity()) {
                     @Override
                     protected void onSuccess(Object response) {
                         Intent intent = new Intent();

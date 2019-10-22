@@ -288,15 +288,17 @@ public class MapUtils {
             @Override
             public void onLocationChanged(AMapLocation aMapLocation) {
                 //省
-                String provider = aMapLocation.getProvider();
+                String provider = aMapLocation.getProvince();
                 //市
                 String city = aMapLocation.getCity();
                 //区
                 String district = aMapLocation.getDistrict();
                 //街道
                 String street = aMapLocation.getStreet();
+                //门牌号
+                String streetNum = aMapLocation.getStreetNum();
                 StringBuilder stringBuilder = new StringBuilder();
-                tvLocation.setText(stringBuilder.append(provider).append(city).append(district).append(street));
+                tvLocation.setText(stringBuilder.append(provider).append(city).append(district).append(street).append(streetNum));
             }
         });
         mLocationClient.startLocation();
