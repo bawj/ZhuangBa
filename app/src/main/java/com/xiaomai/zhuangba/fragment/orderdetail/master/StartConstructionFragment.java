@@ -2,11 +2,9 @@ package com.xiaomai.zhuangba.fragment.orderdetail.master;
 
 import android.net.Uri;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.widget.TextView;
 
 import com.example.toollib.http.HttpResult;
-import com.example.toollib.http.exception.ApiException;
 import com.example.toollib.http.function.BaseHttpConsumer;
 import com.example.toollib.http.observer.BaseHttpRxObserver;
 import com.example.toollib.http.util.RxUtils;
@@ -188,11 +186,6 @@ public class StartConstructionFragment extends BaseAutographFragment {
                                 //跳转到待开工
                                 startFragmentAndDestroyCurrent(MasterWorkerFragment.newInstance());
                                 //startFragmentAndDestroyCurrent(ToBeStartedFragment.newInstance(getOrderCode(), getOrderType()));
-                            }
-
-                            @Override
-                            public void onError(ApiException apiException) {
-                                super.onError(apiException);
                             }
                         });
 
