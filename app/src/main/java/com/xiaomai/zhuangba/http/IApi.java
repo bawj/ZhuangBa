@@ -1215,4 +1215,12 @@ public interface IApi {
      */
     @GET("order/cancelInspectionOrder/{orderCode}")
     Observable<HttpResult<Object>> cancelInspectionOrder(@Path("orderCode") String orderCode);
+
+
+    /**
+     * 查询该用户是否有月结单选项
+     * @return observable
+     */
+    @GET("user/getUserMonthly")
+    Observable<HttpResult<Boolean>> getUserMonthly();
 }

@@ -341,12 +341,12 @@ public class Util {
         }
     }
 
-    public static String getNoodles(Context mContext,String noodles){
+    public static String getNoodles(String noodles){
         StringBuilder stringBuilder = null;
         if (noodles.contains(",")){
             stringBuilder = new StringBuilder();
-            noodles = noodles.replace("," , mContext.getString(R.string.noodles));
-            stringBuilder.append(noodles).append(mContext.getString(R.string.noodles));
+            noodles = noodles.replace("," , "");
+            stringBuilder.append(noodles);
         }
         return stringBuilder == null ? "" : stringBuilder.toString();
     }

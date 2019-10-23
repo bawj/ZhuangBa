@@ -33,7 +33,7 @@ public class PatrolMissionDetailListAdapter extends BaseQuickAdapter<PatrolMissi
         tvItemInspectionAddress.setText(item.getAddress());
         //A B C D 面
         TextView tvNoodles = helper.getView(R.id.tvNoodles);
-        tvNoodles.setText(Util.getNoodles(mContext , item.getCover()));
+        tvNoodles.setText(Util.getNoodles(item.getCover()));
 
         tvPatrolMissionEquipmentNumber.setTag(item);
     }

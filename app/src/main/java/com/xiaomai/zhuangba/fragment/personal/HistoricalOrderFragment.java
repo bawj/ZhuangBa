@@ -22,6 +22,7 @@ import com.xiaomai.zhuangba.fragment.base.BaseListFragment;
 import com.xiaomai.zhuangba.http.ServiceUrl;
 import com.xiaomai.zhuangba.util.AdvertisingStatusUtil;
 import com.xiaomai.zhuangba.util.OrderStatusUtil;
+import com.xiaomai.zhuangba.util.PatrolStatusUtil;
 
 import io.reactivex.Observable;
 
@@ -69,6 +70,9 @@ public class HistoricalOrderFragment extends BaseListFragment<IBaseModule, Histo
                 //广告单
                 AdvertisingStatusUtil.startEmployerAdvertisingBills(getBaseFragmentActivity(), ongoingOrdersList.getOrderCode()
                         ,ongoingOrdersList.getOrderType(), ongoingOrdersList.getOrderStatus());
+            }if (orderType.equals(String.valueOf(StaticExplain.PATROL.getCode()))){
+                PatrolStatusUtil.startEmployerPatrol(getBaseFragmentActivity(), ongoingOrdersList.getOrderCode()
+                        ,ongoingOrdersList.getOrderType(), ongoingOrdersList.getOrderStatus());
             }
             //师傅端
         } else if (unique.getRole().equals(String.valueOf(StaticExplain.FU_FU_SHI.getCode()))) {
@@ -79,6 +83,9 @@ public class HistoricalOrderFragment extends BaseListFragment<IBaseModule, Histo
                 //广告单
             }else if (orderType.equals(String.valueOf(StaticExplain.ADVERTISING_BILLS.getCode()))){
                 AdvertisingStatusUtil.startMasterOrderDetail(getBaseFragmentActivity() ,ongoingOrdersList.getOrderCode() , ongoingOrdersList.getOrderType(),
+                        ongoingOrdersList.getOrderStatus() );
+            }if (orderType.equals(String.valueOf(StaticExplain.PATROL.getCode()))){
+                PatrolStatusUtil.startMasterPatrol(getBaseFragmentActivity() ,ongoingOrdersList.getOrderCode() , ongoingOrdersList.getOrderType(),
                         ongoingOrdersList.getOrderStatus() );
             }
         }

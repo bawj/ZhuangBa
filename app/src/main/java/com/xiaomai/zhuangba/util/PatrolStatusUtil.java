@@ -46,11 +46,20 @@ public class PatrolStatusUtil {
             //已完成
             tvItemOrdersType.setText(mContext.getString(R.string.completed));
             tvItemOrdersType.setBackgroundResource(R.drawable.expired_half_fillet_bg);
+        }else if (orderStatus == InspectionSheetEnum.INSPECTION_APPLY_FOR_REFUND.getCode()){
+            //申请退款
+            tvItemOrdersType.setText(mContext.getString(R.string.apply_for_refund));
+            tvItemOrdersType.setBackgroundResource(R.drawable.expired_half_fillet_bg);
+        }else if (orderStatus == InspectionSheetEnum.INSPECTION_REFUNDED.getCode()){
+            //已退款
+            tvItemOrdersType.setText(mContext.getString(R.string.refunded));
+            tvItemOrdersType.setBackgroundResource(R.drawable.expired_half_fillet_bg);
         }
     }
 
 
     /**
+     * 雇主
      * @param baseFragmentActivity baseFragment
      * @param orderCode 订单编号
      * @param orderType 订单类型
@@ -68,6 +77,12 @@ public class PatrolStatusUtil {
             baseFragmentActivity.startFragment(PatrolHaveHandDetailFragment.newInstance(orderCode , orderType));
         }else if (orderStatus == InspectionSheetEnum.INSPECTION_SHEET_CANCELLED.getCode()){
             //已完成
+            baseFragmentActivity.startFragment(PatrolHaveHandDetailFragment.newInstance(orderCode , orderType));
+        }else if (orderStatus == InspectionSheetEnum.INSPECTION_APPLY_FOR_REFUND.getCode()){
+            //申请退款
+            baseFragmentActivity.startFragment(PatrolHaveHandDetailFragment.newInstance(orderCode , orderType));
+        }else if (orderStatus == InspectionSheetEnum.INSPECTION_REFUNDED.getCode()){
+            //已退款
             baseFragmentActivity.startFragment(PatrolHaveHandDetailFragment.newInstance(orderCode , orderType));
         }
     }
@@ -93,6 +108,14 @@ public class PatrolStatusUtil {
         } else if (orderStatus == InspectionSheetEnum.MASTER_INSPECTION_SHEET_CANCELLED.getCode()) {
             //已完成
             tvItemOrdersType.setText(mContext.getString(R.string.completed));
+            tvItemOrdersType.setBackgroundResource(R.drawable.expired_half_fillet_bg);
+        }else if (orderStatus == InspectionSheetEnum.MASTER_APPLY_FOR_REFUND.getCode()){
+            //申请退款
+            tvItemOrdersType.setText(mContext.getString(R.string.apply_for_refund));
+            tvItemOrdersType.setBackgroundResource(R.drawable.expired_half_fillet_bg);
+        }else if (orderStatus == InspectionSheetEnum.MASTER_REFUNDED.getCode()){
+            //已退款
+            tvItemOrdersType.setText(mContext.getString(R.string.refunded));
             tvItemOrdersType.setBackgroundResource(R.drawable.expired_half_fillet_bg);
         }
     }
@@ -131,6 +154,12 @@ public class PatrolStatusUtil {
             baseFragmentActivity.startFragment(PatrolHaveHandDetailFragment.newInstance(orderCode , orderType));
         }else if (orderStatus == InspectionSheetEnum.MASTER_INSPECTION_SHEET_CANCELLED.getCode()){
             //已完成
+            baseFragmentActivity.startFragment(PatrolHaveHandDetailFragment.newInstance(orderCode , orderType));
+        }else if (orderStatus == InspectionSheetEnum.MASTER_APPLY_FOR_REFUND.getCode()){
+            //申请退款
+            baseFragmentActivity.startFragment(PatrolHaveHandDetailFragment.newInstance(orderCode , orderType));
+        }else if (orderStatus == InspectionSheetEnum.MASTER_REFUNDED.getCode()){
+            //已退款
             baseFragmentActivity.startFragment(PatrolHaveHandDetailFragment.newInstance(orderCode , orderType));
         }
     }

@@ -15,6 +15,7 @@ import com.xiaomai.zhuangba.data.db.DBHelper;
 import com.xiaomai.zhuangba.enums.StaticExplain;
 import com.xiaomai.zhuangba.util.AdvertisingStatusUtil;
 import com.xiaomai.zhuangba.util.OrderStatusUtil;
+import com.xiaomai.zhuangba.util.PatrolStatusUtil;
 
 /**
  * @author Administrator
@@ -95,6 +96,14 @@ public class HistoricalAdapter extends BaseQuickAdapter<OngoingOrdersList, BaseV
                 tvHistoricalMaintenance.setText(mContext.getString(R.string.continuous_service));
                 tvHistoricalMaintenance.setBackgroundResource(R.drawable.violet_radius_bg);
                 tvHistoricalMaintenance.setTextColor(mContext.getResources().getColor(R.color.tool_lib_color_542BE9));
+            }
+        }else if (orderType.equals(String.valueOf(StaticExplain.PATROL.getCode()))){
+            if (userInfo.getRole().equals(String.valueOf(StaticExplain.FU_FU_SHI.getCode()))) {
+                //师傅
+                PatrolStatusUtil.masterStatus(mContext, orderStatus, tvItemHistoricalOrdersType);
+            }else if (userInfo.getRole().equals(String.valueOf(StaticExplain.EMPLOYER.getCode()))) {
+                //雇主
+                PatrolStatusUtil.employerStatus(mContext, orderStatus, tvItemHistoricalOrdersType);
             }
         }
     }

@@ -72,7 +72,7 @@ public class PatrolInspectionRecordsImgFragment extends BaseFragment {
         for (int i = 0; i < urlList.size(); i++) {
             PatrolInspectionRecordsDetailImgBean.TaskPictureListBean taskPictureListBean = urlList.get(i);
             patrolInspectionRecordsImgDetailFragmentList.add(PatrolInspectionRecordsImgDetailFragment.newInstance(
-                    taskPictureListBean.getPic(), (taskPictureListBean.getSide() + "面")));
+                    taskPictureListBean.getPic(), (taskPictureListBean.getSide())));
         }
         return patrolInspectionRecordsImgDetailFragmentList;
     }
@@ -81,7 +81,7 @@ public class PatrolInspectionRecordsImgFragment extends BaseFragment {
         List<PatrolInspectionRecordsDetailImgBean.TaskPictureListBean> urlList = getUrlList();
         String[] stringTitle = new String[urlList.size()];
         for (int i = 0; i < urlList.size(); i++) {
-            stringTitle[i] = (urlList.get(i).getSide() + "面");
+            stringTitle[i] = (urlList.get(i).getSide());
         }
         return stringTitle;
     }

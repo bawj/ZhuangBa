@@ -9,11 +9,16 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.RadioButton;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.toollib.base.BaseFragment;
 import com.example.toollib.data.base.BaseCallback;
+import com.example.toollib.http.HttpResult;
+import com.example.toollib.http.observer.BaseHttpRxObserver;
+import com.example.toollib.http.util.RxUtils;
 import com.example.toollib.util.DensityUtils;
+import com.example.toollib.weight.dialog.CommonlyDialog;
 import com.google.gson.Gson;
 import com.xiaomai.zhuangba.R;
 import com.xiaomai.zhuangba.adapter.PaymentDetailsAdapter;
@@ -26,8 +31,7 @@ import com.xiaomai.zhuangba.data.module.pay.IPaymentDetailView;
 import com.xiaomai.zhuangba.data.module.pay.IPaymentDetailsModule;
 import com.xiaomai.zhuangba.data.module.pay.PaymentDetailsModule;
 import com.xiaomai.zhuangba.enums.ForResultCode;
-import com.xiaomai.zhuangba.enums.StaticExplain;
-import com.xiaomai.zhuangba.util.ConstantUtil;
+import com.xiaomai.zhuangba.http.ServiceUrl;
 import com.xiaomai.zhuangba.util.RxPermissionsUtils;
 import com.xiaomai.zhuangba.util.ShopCarUtil;
 import com.xiaomai.zhuangba.weight.PayPassView;
@@ -76,6 +80,8 @@ public class PaymentDetailsFragment extends BaseFragment<IPaymentDetailsModule> 
     RadioButton chkPaymentWallet;
     @BindView(R.id.chkPaymentMonthlyAccount)
     RadioButton chkPaymentMonthlyAccount;
+    @BindView(R.id.relPaymentMonthlyAccount)
+    RelativeLayout relPaymentMonthlyAccount;
 
     /**
      * 支付密码
@@ -137,11 +143,30 @@ public class PaymentDetailsFragment extends BaseFragment<IPaymentDetailsModule> 
                 .setChkAlipayBalance(chkPaymentPlay)
                 .setChkWalletBanlance(chkPaymentWallet)
                 .setChkPaymentMonthlyAccount(chkPaymentMonthlyAccount);
+
+        //是否显示 月结挂账
+        isPaymentMonthlyAccount();
+    }
+
+    private void isPaymentMonthlyAccount() {
+        RxUtils.getObservable(ServiceUrl.getUserApi().getUserMonthly())
+                .compose(this.<HttpResult<Boolean>>bindToLifecycle())
+                .subscribe(new BaseHttpRxObserver<Boolean>(getActivity()) {
+                    @Override
+                    protected void onSuccess(Boolean response) {
+                        //是否显示月结挂账
+                        if (response){
+                            relPaymentMonthlyAccount.setVisibility(View.VISIBLE);
+                        }else {
+                            relPaymentMonthlyAccount.setVisibility(View.GONE);
+                        }
+                    }
+                });
     }
 
     private View getRequiredOptions() {
         ShopAuxiliaryMaterialsDB unique = DBHelper.getInstance().getShopAuxiliaryMaterialsDBDao().queryBuilder().unique();
-        View view = LayoutInflater.from(getActivity()).inflate(R.layout.item_payment_required_options , null);
+        View view = LayoutInflater.from(getActivity()).inflate(R.layout.item_payment_required_options, null);
         //开槽
         TextView tvSlotting = view.findViewById(R.id.tvSlotting);
         if (DensityUtils.stringTypeInteger(unique.getSlottingEndLength()) > 0) {
@@ -178,11 +203,18 @@ public class PaymentDetailsFragment extends BaseFragment<IPaymentDetailsModule> 
         switch (view.getId()) {
             case R.id.btnGoPayment:
                 //去支付 先调用修改订单 修改成功后调用 支付
-                if (chkPaymentWallet.isChecked()){
-                    inputPassword();
-                }else {
-                    iModule.goOrderPay();
-                }
+                CommonlyDialog.getInstance().initView(getActivity())
+                        .setTvDialogCommonlyContent(getString(R.string.order_tip))
+                        .setICallBase(new CommonlyDialog.BaseCallback() {
+                            @Override
+                            public void sure() {
+                                if (chkPaymentWallet.isChecked()) {
+                                    inputPassword();
+                                } else {
+                                    iModule.goOrderPay();
+                                }
+                            }
+                        }).showDialog();
                 break;
             case R.id.ivPaymentReplace:
                 RxPermissionsUtils.applyPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION, new BaseCallback<String>() {
@@ -283,10 +315,12 @@ public class PaymentDetailsFragment extends BaseFragment<IPaymentDetailsModule> 
                         password = passContent;
                         iModule.goOrderPay();
                     }
+
                     @Override
                     public void onPayClose() {
                         dialog.dismiss();
                     }
+
                     @Override
                     public void onPayForget() {
                         dialog.dismiss();
@@ -315,7 +349,7 @@ public class PaymentDetailsFragment extends BaseFragment<IPaymentDetailsModule> 
         String orderCode = submissionOrder.getOrderCode();
         String orderType = submissionOrder.getOrderType();
         Double money = ShopCarUtil.getTotalMoney();
-        startFragment(SuccessfulPaymentFragment.newInstance(name, telephone, address, String.valueOf(money), orderCode ,orderType));
+        startFragment(SuccessfulPaymentFragment.newInstance(name, telephone, address, String.valueOf(money), orderCode, orderType));
     }
 
     @Override

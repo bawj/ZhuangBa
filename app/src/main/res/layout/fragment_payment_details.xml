@@ -124,10 +124,10 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="@dimen/tool_lib_3dp"
                     android:layout_marginRight="@dimen/tool_lib_3dp"
+                    android:layout_toStartOf="@+id/ivPaymentReplace"
+                    android:layout_toLeftOf="@+id/ivPaymentReplace"
                     android:layout_toEndOf="@+id/ivPaymentLocation"
                     android:layout_toRightOf="@+id/ivPaymentLocation"
-                    android:layout_toLeftOf="@+id/ivPaymentReplace"
-                    android:layout_toStartOf="@+id/ivPaymentReplace"
                     android:maxLines="1"
                     android:singleLine="true"
                     android:textColor="@color/tool_lib_gray_222222"
@@ -192,7 +192,8 @@
                 android:id="@+id/relPaymentMonthlyAccount"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/tool_lib_12dp">
+                android:layout_marginTop="@dimen/tool_lib_12dp"
+                android:visibility="gone">
 
                 <TextView
                     android:layout_width="wrap_content"
