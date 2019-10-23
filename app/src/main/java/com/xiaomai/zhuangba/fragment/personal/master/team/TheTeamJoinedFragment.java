@@ -84,6 +84,7 @@ public class TheTeamJoinedFragment extends BaseListFragment {
                             setFragmentResult(ForResultCode.RESULT_OK.getCode() , new Intent());
                             data.remove(pos);
                             teamJoinedAdapter.notifyItemRemoved(pos);
+                            teamJoinedAdapter.notifyDataSetChanged();
                         }
                     }
                 });
@@ -117,7 +118,7 @@ public class TheTeamJoinedFragment extends BaseListFragment {
         editText.setFilters(filters);
         editText.setTextColor(getResources().getColor(R.color.tool_lib_red_EF2B2B));
         ViewGroup.LayoutParams lp = editText.getLayoutParams();
-        lp.height = DensityUtil.dp2px(50);
+        lp.height = DensityUtil.dp2px(40);
         editText.setLayoutParams(lp);
         editText.setHint(getString(R.string.please_input_invitation_phone));
         instance.getTip(getString(R.string.please_input_invitation_phone));

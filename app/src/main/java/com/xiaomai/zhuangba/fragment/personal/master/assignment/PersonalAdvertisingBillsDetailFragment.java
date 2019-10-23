@@ -131,6 +131,9 @@ public class PersonalAdvertisingBillsDetailFragment extends BaseListFragment {
                             setFragmentResult(ForResultCode.RESULT_OK.getCode() , new Intent());
                             data.remove(pos);
                             personalAdvertisingBillsDetailAdapter.notifyItemRemoved(pos);
+                            personalAdvertisingBillsDetailAdapter.notifyDataSetChanged();
+
+                            setFragmentResult(ForResultCode.RESULT_OK.getCode() , new Intent());
                         }
                     }
                 });

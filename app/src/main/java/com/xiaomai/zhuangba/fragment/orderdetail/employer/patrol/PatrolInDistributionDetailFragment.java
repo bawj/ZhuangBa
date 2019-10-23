@@ -1,12 +1,16 @@
 package com.xiaomai.zhuangba.fragment.orderdetail.employer.patrol;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
 import com.example.toollib.http.HttpResult;
+import com.example.toollib.http.exception.ApiException;
 import com.example.toollib.http.observer.BaseHttpRxObserver;
 import com.example.toollib.http.util.RxUtils;
 import com.xiaomai.zhuangba.R;
+import com.xiaomai.zhuangba.enums.ForResultCode;
+import com.xiaomai.zhuangba.enums.StaticExplain;
 import com.xiaomai.zhuangba.fragment.orderdetail.employer.patrol.base.BasePatrolDetailFragment;
 import com.xiaomai.zhuangba.http.ServiceUrl;
 import com.xiaomai.zhuangba.util.ConstantUtil;
@@ -47,7 +51,16 @@ public class PatrolInDistributionDetailFragment extends BasePatrolDetailFragment
                         .subscribe(new BaseHttpRxObserver<Object>(getActivity()) {
                             @Override
                             protected void onSuccess(Object response) {
+                                setFragmentResult(ForResultCode.START_FOR_RESULT_CODE.getCode() , new Intent());
                                 popBackStack();
+                            }
+                            @Override
+                            public void onError(ApiException apiException) {
+                                super.onError(apiException);
+                                if (apiException.getStatus() == StaticExplain.REFUND.getCode()){
+                                    setFragmentResult(ForResultCode.START_FOR_RESULT_CODE.getCode() , new Intent());
+                                    popBackStack();
+                                }
                             }
                         });
                 break;

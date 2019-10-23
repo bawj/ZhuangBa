@@ -103,6 +103,7 @@ public class TeamMessageFragment extends BaseListFragment {
                         if (pos >= 0 && pos < data.size()) {
                             data.remove(pos);
                             teamMessageAdapter.notifyItemRemoved(pos);
+                            teamMessageAdapter.notifyDataSetChanged();
                         }
                     }
                 });

@@ -68,10 +68,12 @@ public class PatrolStatusUtil {
     public static void startEmployerPatrol(QMUIFragmentActivity baseFragmentActivity, String orderCode, String orderType, int orderStatus) {
         if (orderStatus == InspectionSheetEnum.INSPECTION_SHEET_UNALLOCATED.getCode()){
             //分配中
-            baseFragmentActivity.startFragment(PatrolInDistributionDetailFragment.newInstance(orderCode , orderType));
+            QMUIFragment currentFragment = baseFragmentActivity.getCurrentFragment();
+            currentFragment.startFragmentForResult(PatrolInDistributionDetailFragment.newInstance(orderCode , orderType) , ForResultCode.RESULT_OK.getCode());
         } else if (orderStatus == InspectionSheetEnum.INSPECTION_SHEET_IN_DISTRIBUTION.getCode()){
             //分配中
-            baseFragmentActivity.startFragment(PatrolInDistributionDetailFragment.newInstance(orderCode , orderType));
+            QMUIFragment currentFragment = baseFragmentActivity.getCurrentFragment();
+            currentFragment.startFragmentForResult(PatrolInDistributionDetailFragment.newInstance(orderCode , orderType) , ForResultCode.RESULT_OK.getCode());
         }else if (orderStatus == InspectionSheetEnum.INSPECTION_SHEET_HAVE_IN_HAND.getCode()){
             //进行中
             baseFragmentActivity.startFragment(PatrolHaveHandDetailFragment.newInstance(orderCode , orderType));

@@ -59,6 +59,7 @@ public enum StaticExplain {
     AGREE(4, "同意加入团队"),
     REFUSE(3, "拒绝加入团队"),
     EMPTY(5, "清空消息"),
+    REFUND(1002, "退款中"),
     ;
     /**
      * 状态

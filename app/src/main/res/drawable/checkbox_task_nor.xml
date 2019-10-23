@@ -9,7 +9,7 @@
         android:width="@dimen/tool_lib_1dp"
         android:color="#E8E8E8" />
 
-    <size android:width="@dimen/tool_lib_21dp"
-        android:height="@dimen/tool_lib_21dp" />
+    <size android:width="@dimen/tool_lib_24dp"
+        android:height="@dimen/tool_lib_24dp" />
 
 </shape>

@@ -105,6 +105,7 @@ public class PersonalAdvertisingBillsAddTaskFragment extends BaseListFragment {
         if (resultCode == ForResultCode.RESULT_OK.getCode()) {
             if (requestCode == ForResultCode.START_FOR_RESULT_CODE.getCode()) {
                 //刷新
+                refresh();
                 setFragmentResult(ForResultCode.RESULT_OK.getCode(), new Intent());
             }
         }

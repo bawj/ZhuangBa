@@ -177,8 +177,15 @@ public class BaseMasterEmployerFragment extends BaseFragment<IMasterEmployerModu
         }
     }
 
-    private void refresh(int i) {
+    public void refresh(int i) {
         if (isRefreshFragment.get(i) == null) {
+            refreshBaseList.autoRefresh();
+            isRefreshFragment.put(i, i);
+        }
+    }
+
+    public void refreshRefreshFragment(int i) {
+        if (isRefreshFragment.get(i) != null) {
             refreshBaseList.autoRefresh();
             isRefreshFragment.put(i, i);
         }

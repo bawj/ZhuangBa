@@ -1,5 +1,6 @@
 package com.xiaomai.zhuangba.fragment.employer;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -13,6 +14,7 @@ import com.xiaomai.zhuangba.data.bean.OrderStatistics;
 import com.xiaomai.zhuangba.data.bean.ServiceData;
 import com.xiaomai.zhuangba.data.bean.UserInfo;
 import com.xiaomai.zhuangba.data.db.DBHelper;
+import com.xiaomai.zhuangba.enums.ForResultCode;
 import com.xiaomai.zhuangba.enums.StaticExplain;
 import com.xiaomai.zhuangba.fragment.SelectServiceFragment;
 import com.xiaomai.zhuangba.fragment.authentication.employer.BusinessLicenseFragment;
@@ -143,6 +145,16 @@ public class EmployerFragment extends BaseMasterEmployerFragment {
             tvUnallocatedOrders.setText(String.valueOf(orderStatistics.getDistribution()));
             //待处理
             tvPendingOrders.setText(String.valueOf(orderStatistics.getPendingDisposal()));
+        }
+    }
+
+    @Override
+    protected void onFragmentResult(int requestCode, int resultCode, Intent data) {
+        super.onFragmentResult(requestCode, resultCode, data);
+        if (requestCode == ForResultCode.RESULT_OK.getCode()){
+            if (resultCode == ForResultCode.START_FOR_RESULT_CODE.getCode()){
+                refreshRefreshFragment(0);
+            }
         }
     }
 

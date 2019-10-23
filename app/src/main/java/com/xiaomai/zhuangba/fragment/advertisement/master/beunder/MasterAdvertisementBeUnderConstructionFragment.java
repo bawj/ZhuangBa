@@ -83,7 +83,7 @@ public class MasterAdvertisementBeUnderConstructionFragment extends BaseAdvertis
 
     @Override
     protected String getActivityTitle() {
-        return getString(R.string.post_construction_photos);
+        return getString(R.string.order_detail);
     }
 
     @Override

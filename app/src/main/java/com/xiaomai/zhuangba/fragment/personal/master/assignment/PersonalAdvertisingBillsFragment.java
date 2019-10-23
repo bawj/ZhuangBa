@@ -8,6 +8,7 @@ import com.example.toollib.http.HttpResult;
 import com.example.toollib.http.exception.ApiException;
 import com.example.toollib.http.observer.BaseHttpRxObserver;
 import com.example.toollib.http.util.RxUtils;
+import com.google.gson.Gson;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.xiaomai.zhuangba.R;
 import com.xiaomai.zhuangba.adapter.PersonalAdvertisingBillsAdapter;
@@ -18,7 +19,12 @@ import com.xiaomai.zhuangba.enums.StaticExplain;
 import com.xiaomai.zhuangba.fragment.base.BaseListFragment;
 import com.xiaomai.zhuangba.http.ServiceUrl;
 
+import java.util.HashMap;
+import java.util.List;
+
 import butterknife.OnClick;
+import okhttp3.MediaType;
+import okhttp3.RequestBody;
 
 /**
  * @author Administrator
@@ -101,15 +107,38 @@ public class PersonalAdvertisingBillsFragment extends BaseListFragment {
             @Override
             public void onItemClick(AdvertisingBillsBean advertisingBillsBean) {
                 //广告单详情
-                startFragment(PersonalAdvertisingBillsDetailFragment.newInstance(advertisingBillsBean));
+                startFragmentForResult(PersonalAdvertisingBillsDetailFragment.newInstance(advertisingBillsBean) , ForResultCode.START_FOR_RESULT_CODE.getCode());
             }
         });
         return personalAdvertisingBillsAdapter;
     }
 
-    private void delAdvertisingBills(AdvertisingBillsBean advertisingBillsBean, int pos) {
-        // TODO: 2019/10/17 0017 删除广告单
-
+    private void delAdvertisingBills(AdvertisingBillsBean advertisingBillsBean,final int pos) {
+        HashMap<String, String> hashMap = new HashMap<>();
+        //省
+        hashMap.put("province", advertisingBillsBean.getProvince());
+        //市
+        hashMap.put("city", advertisingBillsBean.getCity());
+        //区
+        hashMap.put("district", advertisingBillsBean.getDistrict());
+        //街道
+        hashMap.put("street", advertisingBillsBean.getStreet());
+        //小区
+        hashMap.put("villageName", advertisingBillsBean.getVillageName());
+        RequestBody requestBody = RequestBody.create(MediaType.parse("application/json;charset=utf-8"), new Gson().toJson(hashMap));
+        RxUtils.getObservable(ServiceUrl.getUserApi().deleteAllOrder(requestBody))
+                .compose(this.<HttpResult<Object>>bindToLifecycle())
+                .subscribe(new BaseHttpRxObserver<Object>(getActivity()) {
+                    @Override
+                    protected void onSuccess(Object response) {
+                        List<AdvertisingBillsBean> data = personalAdvertisingBillsAdapter.getData();
+                        if (pos >= 0 && pos < data.size()) {
+                            data.remove(pos);
+                            personalAdvertisingBillsAdapter.notifyItemRemoved(pos);
+                            personalAdvertisingBillsAdapter.notifyDataSetChanged();
+                        }
+                    }
+                });
 
     }
 

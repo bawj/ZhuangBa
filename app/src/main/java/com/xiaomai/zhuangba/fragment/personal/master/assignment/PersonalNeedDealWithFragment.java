@@ -116,6 +116,7 @@ public class PersonalNeedDealWithFragment extends BaseListFragment {
                             setFragmentResult(ForResultCode.RESULT_OK.getCode(), new Intent());
                             data.remove(pos);
                             personalNeedDealWithAdapter.notifyItemRemoved(pos);
+                            personalNeedDealWithAdapter.notifyDataSetChanged();
                         }
                     }
                 });

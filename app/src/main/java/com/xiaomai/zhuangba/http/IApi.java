@@ -1216,6 +1216,14 @@ public interface IApi {
     @GET("order/cancelInspectionOrder/{orderCode}")
     Observable<HttpResult<Object>> cancelInspectionOrder(@Path("orderCode") String orderCode);
 
+    /**
+     * 团队 删除 广告单
+     * @param requestBody body
+     * @return observable
+     */
+    @POST("order/deleteAllOrder")
+    Observable<HttpResult<Object>> deleteAllOrder(@Body RequestBody requestBody);
+
 
     /**
      * 查询该用户是否有月结单选项
