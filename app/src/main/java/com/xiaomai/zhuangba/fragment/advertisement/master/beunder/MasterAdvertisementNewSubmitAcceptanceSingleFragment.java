@@ -28,10 +28,10 @@ import okhttp3.RequestBody;
  */
 public class MasterAdvertisementNewSubmitAcceptanceSingleFragment extends MasterAdvertisementStartConstructionSingleFragment {
 
-    public static MasterAdvertisementStartConstructionSingleFragment newInstance(String orderCode) {
+    public static MasterAdvertisementNewSubmitAcceptanceSingleFragment newInstance(String orderCode) {
         Bundle args = new Bundle();
         args.putString(ConstantUtil.ORDER_CODE, orderCode);
-        MasterAdvertisementStartConstructionSingleFragment fragment = new MasterAdvertisementStartConstructionSingleFragment();
+        MasterAdvertisementNewSubmitAcceptanceSingleFragment fragment = new MasterAdvertisementNewSubmitAcceptanceSingleFragment();
         fragment.setArguments(args);
         return fragment;
     }
@@ -53,7 +53,7 @@ public class MasterAdvertisementNewSubmitAcceptanceSingleFragment extends Master
             RequestBody requestBody = RequestBody.create(MediaType.parse("application/json;charset=utf-8"), new Gson().toJson(hashMap));
             RxUtils.getObservable(ServiceUrl.getUserApi().submitAdvertisingValidation(requestBody))
                     .compose(this.<HttpResult<Object>>bindToLifecycle())
-                    .subscribe(new BaseHttpRxObserver<Object>() {
+                    .subscribe(new BaseHttpRxObserver<Object>(getActivity()) {
                         @Override
                         protected void onSuccess(Object response) {
                             startFragment(AdvertisementSubmitCompleteFragment.newInstance(getOrderCode() ,

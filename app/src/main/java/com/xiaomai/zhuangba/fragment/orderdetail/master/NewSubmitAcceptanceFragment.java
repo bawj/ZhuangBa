@@ -17,6 +17,7 @@ import com.xiaomai.zhuangba.fragment.masterworker.MasterWorkerFragment;
 import com.xiaomai.zhuangba.fragment.orderdetail.master.base.BaseAutographFragment;
 import com.xiaomai.zhuangba.http.ServiceUrl;
 import com.xiaomai.zhuangba.util.ConstantUtil;
+import com.xiaomai.zhuangba.util.MapUtils;
 
 import java.io.File;
 import java.net.URI;
@@ -55,6 +56,12 @@ public class NewSubmitAcceptanceFragment extends BaseAutographFragment {
         NewSubmitAcceptanceFragment fragment = new NewSubmitAcceptanceFragment();
         fragment.setArguments(args);
         return fragment;
+    }
+
+    @Override
+    public void initView() {
+        super.initView();
+        MapUtils.location(getActivity(), tvStartConstructionLocation);
     }
 
 ///    /**

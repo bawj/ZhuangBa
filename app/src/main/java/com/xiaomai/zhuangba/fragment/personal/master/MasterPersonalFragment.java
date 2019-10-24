@@ -23,9 +23,9 @@ import com.xiaomai.zhuangba.fragment.authentication.master.IDCardScanningFragmen
 import com.xiaomai.zhuangba.fragment.personal.PersonalFragment;
 import com.xiaomai.zhuangba.fragment.personal.agreement.WebViewFragment;
 import com.xiaomai.zhuangba.fragment.personal.master.patrol.PatrolMissionFragment;
+import com.xiaomai.zhuangba.fragment.personal.master.team.TheTeamJoinedFragment;
 import com.xiaomai.zhuangba.fragment.personal.master.team.create.CreateJoinFragment;
 import com.xiaomai.zhuangba.fragment.personal.master.team.join.JoinTheTeamFragment;
-import com.xiaomai.zhuangba.fragment.personal.master.team.TheTeamJoinedFragment;
 import com.xiaomai.zhuangba.fragment.personal.wallet.WalletFragment;
 import com.xiaomai.zhuangba.fragment.personal.wallet.paydeposit.PayDepositFragment;
 import com.xiaomai.zhuangba.http.ServiceUrl;
@@ -167,6 +167,9 @@ public class MasterPersonalFragment extends PersonalFragment {
                             tvMasterPersonalTeamName.setText(getString(R.string.enum_name_val
                                     , createTeamBean.getEnumName() ,String.valueOf(createTeamBean.getEnumVal())));
                             teamTile = createTeamBean.getEnumName();
+                        }else if (status == StaticExplain.NO_TEAM_WAS_CREATED_JOINED.getCode()){
+                            tvMasterPersonalTeamName.setText("");
+                            teamTile = "";
                         }
                     }
                 });

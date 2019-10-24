@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 
 import com.example.toollib.ToolLib;
+import com.example.toollib.util.Log;
 import com.google.gson.Gson;
 import com.qmuiteam.qmui.arch.QMUISwipeBackActivityManager;
 import com.tencent.bugly.Bugly;
@@ -141,6 +142,7 @@ public class PretendApplication extends Application {
         instance.register(new IUmengRegisterCallback() {
             @Override
             public void onSuccess(String deviceToken) {
+                Log.e("deviceToken = " + deviceToken);
             }
             @Override
             public void onFailure(String s, String s1) {

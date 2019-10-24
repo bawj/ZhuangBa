@@ -125,6 +125,8 @@ public class PersonalAdvertisingBillsFragment extends BaseListFragment {
         hashMap.put("street", advertisingBillsBean.getStreet());
         //小区
         hashMap.put("villageName", advertisingBillsBean.getVillageName());
+        //要分配的人员
+        hashMap.put("staff", getPhone());
         RequestBody requestBody = RequestBody.create(MediaType.parse("application/json;charset=utf-8"), new Gson().toJson(hashMap));
         RxUtils.getObservable(ServiceUrl.getUserApi().deleteAllOrder(requestBody))
                 .compose(this.<HttpResult<Object>>bindToLifecycle())

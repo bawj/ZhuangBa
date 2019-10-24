@@ -211,7 +211,7 @@ public class PatrolInspectionRecordsPhotoDetailFragment extends BaseFragment {
     }
 
     public PatrolInspectionRecordsDetailImgBean.TaskPictureListBean getTaskPictureListBean() {
-        return taskPictureListBean;
+        return taskPictureListBean == null ? new PatrolInspectionRecordsDetailImgBean.TaskPictureListBean() : taskPictureListBean;
     }
 
     public String getNoodles() {
