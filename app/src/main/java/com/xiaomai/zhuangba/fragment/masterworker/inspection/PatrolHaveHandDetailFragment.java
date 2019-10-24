@@ -2,7 +2,6 @@ package com.xiaomai.zhuangba.fragment.masterworker.inspection;
 
 import android.os.Bundle;
 
-import com.xiaomai.zhuangba.fragment.orderdetail.employer.patrol.PatrolInDistributionDetailFragment;
 import com.xiaomai.zhuangba.fragment.orderdetail.employer.patrol.base.BasePatrolDetailFragment;
 import com.xiaomai.zhuangba.util.ConstantUtil;
 

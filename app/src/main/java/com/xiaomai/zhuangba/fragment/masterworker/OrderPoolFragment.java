@@ -14,8 +14,12 @@ import com.xiaomai.zhuangba.data.bean.OngoingOrdersList;
 import com.xiaomai.zhuangba.enums.StaticExplain;
 import com.xiaomai.zhuangba.enums.StringTypeExplain;
 import com.xiaomai.zhuangba.fragment.advertisement.master.MasterAdvertisementOrderPoolAdDetailFragment;
+import com.xiaomai.zhuangba.fragment.advertisement.master.PatrolPoolDetailFragment;
 import com.xiaomai.zhuangba.fragment.base.BaseMasterEmployerContentFragment;
 import com.xiaomai.zhuangba.fragment.orderdetail.master.OrderPoolDetailFragment;
+import com.xiaomai.zhuangba.util.AdvertisingStatusUtil;
+import com.xiaomai.zhuangba.util.OrderStatusUtil;
+import com.xiaomai.zhuangba.util.PatrolStatusUtil;
 
 import java.util.List;
 
@@ -89,9 +93,14 @@ public class OrderPoolFragment extends BaseMasterEmployerContentFragment {
                 view.findViewById(R.id.tvItemOrdersTitle).getTag();
         String orderType = ongoingOrdersList.getOrderType();
         if (orderType.equals(String.valueOf(StaticExplain.INSTALLATION_LIST.getCode()))){
+            //安装单
             startFragment(OrderPoolDetailFragment.newInstance(ongoingOrdersList.getOrderCode() , ongoingOrdersList.getOrderType()));
-        }else {
+        }else if (orderType.equals(String.valueOf(StaticExplain.ADVERTISING_BILLS.getCode()))){
+            //广告单
             startFragment(MasterAdvertisementOrderPoolAdDetailFragment.newInstance(ongoingOrdersList.getOrderCode() , ongoingOrdersList.getOrderType()));
+        }else if (orderType.equals(String.valueOf(StaticExplain.PATROL.getCode()))){
+            //巡查任务
+            startFragment(PatrolPoolDetailFragment.newInstance(ongoingOrdersList.getOrderCode() , ongoingOrdersList.getOrderType()));
         }
     }
 

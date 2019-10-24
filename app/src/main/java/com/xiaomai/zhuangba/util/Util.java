@@ -351,4 +351,14 @@ public class Util {
         return stringBuilder == null ? "" : stringBuilder.toString();
     }
 
+    public static String[] getNoodle(String noodles){
+        String[] title = null;
+        if (noodles.contains(",")){
+            title = noodles.split(",");
+        }else if (!TextUtils.isEmpty(noodles)){
+            title = new String[]{noodles};
+        }
+        return title;
+    }
+
 }

@@ -16,12 +16,14 @@ public enum InspectionSheetEnum {
     INSPECTION_APPLY_FOR_REFUND(4 , "申请退款"),
     INSPECTION_REFUNDED(5 , "已退款"),
 
-
     MASTER_INSPECTION_SHEET_IN_DISTRIBUTION(1 , "师傅 新任务"),
     MASTER_INSPECTION_SHEET_HAVE_IN_HAND(2 , "师傅 进行中"),
     MASTER_INSPECTION_SHEET_CANCELLED(3 , "师傅 已完成"),
     MASTER_APPLY_FOR_REFUND(4 , "申请退款"),
     MASTER_REFUNDED(5 , "已退款"),
+
+
+    UNPAID(-1 , "未付款"),
     ;
     private int code;
     private String explain;

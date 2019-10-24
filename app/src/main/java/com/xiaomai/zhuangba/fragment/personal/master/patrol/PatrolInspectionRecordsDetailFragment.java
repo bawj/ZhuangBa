@@ -60,7 +60,8 @@ public class PatrolInspectionRecordsDetailFragment extends BasePatrolMissionDeta
                         List<PatrolInspectionRecordsDetailImgBean.TaskPictureListBean> taskPictureList
                                 = patrolInspectionRecordsDetailImgBean.getTaskPictureList();
                         String orderDetailNo = patrolInspectionRecordsDetailImgBean.getOrderDetailNo();
-                        startFragment(PatrolInspectionRecordsImgFragment.newInstance(orderDetailNo, taskPictureList));
+                        startFragment(PatrolInspectionRecordsImgFragment.newInstance(orderDetailNo
+                                , patrolInspectionRecordsDetailImgBean.getCover(), taskPictureList));
                     }
                 });
     }
