@@ -97,7 +97,7 @@ public interface IOrderInformationView extends IBaseView {
      * 提交安装备注
      * @return list
      */
-    List<Uri> getMediaSelectorFiles();
+    List<String> getMediaSelectorFiles();
 
 
     /**

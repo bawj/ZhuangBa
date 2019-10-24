@@ -208,7 +208,7 @@ public class PaymentDetailsFragment extends BaseFragment<IPaymentDetailsModule> 
                         .setICallBase(new CommonlyDialog.BaseCallback() {
                             @Override
                             public void sure() {
-                                if (chkPaymentWallet.isChecked()) {
+                                if (getChkPaymentWallet() || getMonthlyAccount()) {
                                     inputPassword();
                                 } else {
                                     iModule.goOrderPay();

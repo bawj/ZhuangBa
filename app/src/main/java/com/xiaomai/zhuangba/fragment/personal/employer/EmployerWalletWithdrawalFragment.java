@@ -11,8 +11,9 @@ import com.xiaomai.zhuangba.fragment.personal.wallet.WithdrawFragment;
  */
 public class EmployerWalletWithdrawalFragment extends WithdrawFragment {
 
-    public static EmployerWalletWithdrawalFragment newInstance() {
+    public static EmployerWalletWithdrawalFragment newInstance(double money) {
         Bundle args = new Bundle();
+        args.putDouble("max", money);
         EmployerWalletWithdrawalFragment fragment = new EmployerWalletWithdrawalFragment();
         fragment.setArguments(args);
         return fragment;

@@ -5,6 +5,7 @@ import android.content.Context;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,14 +27,14 @@ import butterknife.ButterKnife;
 public class MultiGraphSelectionAdapter extends RecyclerView.Adapter<MultiGraphSelectionAdapter.ViewHolder> {
 
     private Context mContext;
-    private List<Uri> stringList;
+    private List<String> stringList;
 
     /**
      * 最多能添加3张图
      */
     private static final int MAX_IMG = 4;
 
-    public MultiGraphSelectionAdapter(Context context, List<Uri> stringList) {
+    public MultiGraphSelectionAdapter(Context context, List<String> stringList) {
         this.mContext = context;
         this.stringList = stringList;
     }
@@ -51,8 +52,8 @@ public class MultiGraphSelectionAdapter extends RecyclerView.Adapter<MultiGraphS
         ImageView ivItemMultiGraphMediaAdd = holder.ivItemMultiGraphMediaAdd;
         ImageView ivItemMultiGraphSelectionDelete = holder.ivItemMultiGraphSelectionDelete;
         RelativeLayout relItemMultiGraph = holder.relItemMultiGraph;
-        Uri uri = stringList.get(position);
-        if (uri == null) {
+        String url = stringList.get(position);
+        if (TextUtils.isEmpty(url)) {
             ivItemMultiGraphMediaAdd.setVisibility(View.VISIBLE);
             ivItemMultiGraphMedia.setVisibility(View.GONE);
             ivItemMultiGraphSelectionDelete.setVisibility(View.GONE);
@@ -66,6 +67,7 @@ public class MultiGraphSelectionAdapter extends RecyclerView.Adapter<MultiGraphS
             });
             relItemMultiGraph.setBackgroundResource(R.drawable.item_multi_graph_selection_bg);
         } else {
+            Uri uri = Uri.parse(url);
             relItemMultiGraph.setOnClickListener(null);
             relItemMultiGraph.setBackgroundResource(0);
             ivItemMultiGraphSelectionDelete.setVisibility(View.VISIBLE);

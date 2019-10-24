@@ -47,7 +47,7 @@ public class MasterAdvertisementStartConstructionFragment extends BaseAutographF
 
     @Override
     public void beforeInstallation() {
-        List<Uri> uriList = new ArrayList<>(mediaSelectorFiles);
+        List<String> uriList = new ArrayList<>(mediaSelectorFiles);
         uriList.remove(uriList.size() - 1);
         if (uriList.isEmpty()) {
             ToastUtil.showShort(getString(R.string.job_site_font_installation_img));
@@ -56,7 +56,7 @@ public class MasterAdvertisementStartConstructionFragment extends BaseAutographF
                 //确认提交
                 List<MultipartBody.Part> parts = new ArrayList<>();
                 for (int i = 0; i < uriList.size(); i++) {
-                    Uri compressPath = uriList.get(i);
+                    Uri compressPath = Uri.parse(uriList.get(i));
                     File file = new File(new URI(compressPath.toString()));
                     RequestBody requestBody = RequestBody.create(MediaType.parse("multipart/form-data"), file);
                     MultipartBody.Part body = MultipartBody.Part.createFormData("files", file.getName(), requestBody);
@@ -78,7 +78,7 @@ public class MasterAdvertisementStartConstructionFragment extends BaseAutographF
                                         .startTaskAdvertisingOrder(getOrderCode(), httpResult.getData().toString()));
                             }
                         })
-                        .subscribe(new BaseHttpRxObserver(getActivity()) {
+                        .subscribe(new BaseHttpRxObserver<Object>(getActivity()) {
                             @Override
                             protected void onSuccess(Object response) {
                                 startFragment(MasterWorkerFragment.newInstance());

@@ -9,6 +9,7 @@ import com.example.toollib.data.IBaseModule;
 import com.example.toollib.http.HttpResult;
 import com.example.toollib.http.observer.BaseHttpRxObserver;
 import com.example.toollib.http.util.RxUtils;
+import com.example.toollib.util.DensityUtils;
 import com.qmuiteam.qmui.util.QMUIViewHelper;
 import com.qmuiteam.qmui.widget.QMUITopBarLayout;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
@@ -113,7 +114,8 @@ public class EmployerWalletFragment extends BaseListFragment {
                 break;
             case R.id.tvEmployerWalletWithdraw:
                 //提现
-                startFragment(EmployerWalletWithdrawalFragment.newInstance());
+                String money = tvEmployerMoney.getText().toString();
+                startFragment(EmployerWalletWithdrawalFragment.newInstance(DensityUtils.stringTypeDouble(money)));
                 break;
             case R.id.rlRechargeRecord:
                 //充值记录

@@ -1,7 +1,5 @@
 package com.xiaomai.zhuangba.data.bean;
 
-import android.net.Uri;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,7 +32,7 @@ public class OrderAddress {
     /** 雇主描述 */
     private String employerDescribe;
     /** 图片 */
-    private List<Uri> imgList;
+    private List<String> imgList;
 
     public String getUserText() {
         return userText == null ? "" : userText;
@@ -124,14 +122,14 @@ public class OrderAddress {
         this.latitude = latitude;
     }
 
-    public List<Uri> getImgList() {
+    public List<String> getImgList() {
         if (imgList == null) {
             return new ArrayList<>();
         }
         return imgList;
     }
 
-    public void setImgList(List<Uri> imgList) {
+    public void setImgList(List<String> imgList) {
         this.imgList = imgList;
     }
 }

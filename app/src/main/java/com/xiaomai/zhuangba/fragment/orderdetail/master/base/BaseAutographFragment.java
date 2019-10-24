@@ -3,7 +3,6 @@ package com.xiaomai.zhuangba.fragment.orderdetail.master.base;
 import android.Manifest;
 import android.content.Intent;
 import android.net.Uri;
-import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -57,7 +56,7 @@ public class BaseAutographFragment extends BaseFragment implements MultiGraphSel
     /**
      * 拍照图片保存
      */
-    public List<Uri> mediaSelectorFiles = new ArrayList<>();
+    public List<String> mediaSelectorFiles = new ArrayList<>();
     private MultiGraphSelectionAdapter multiGraphSelectionAdapter;
     private Uri imageUriFromCamera;
     public Uri resultUri = null;
@@ -125,7 +124,7 @@ public class BaseAutographFragment extends BaseFragment implements MultiGraphSel
                 //拍照之后的处理
                 if (resultCode == RESULT_OK && getActivity() != null) {
                     resultUri = Uri.parse("file:///" + PhotoTool.getImageAbsolutePath(getActivity(), imageUriFromCamera));
-                    mediaSelectorFiles.add(0, resultUri);
+                    mediaSelectorFiles.add(0, resultUri.toString());
                     multiGraphSelectionAdapter.notifyDataSetChanged();
                 }
                 break;

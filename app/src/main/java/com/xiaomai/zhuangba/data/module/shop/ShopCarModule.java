@@ -52,12 +52,12 @@ public class ShopCarModule extends BaseModule<IShopCarView> implements IShopCarM
         String orderAddressGson = mViewRef.get().getOrderAddressGson();
         OrderAddress orderAddress = new Gson().fromJson(orderAddressGson , OrderAddress.class);
         //串联请求 先上传图片
-        List<Uri> mediaSelectorFiles = orderAddress.getImgList();
-        List<Uri> uriList = new ArrayList<>(mediaSelectorFiles);
+        List<String> mediaSelectorFiles = orderAddress.getImgList();
+        List<String> uriList = new ArrayList<>(mediaSelectorFiles);
         uriList.remove(uriList.size() - 1);
         List<MultipartBody.Part> parts = new ArrayList<>();
         for (int i = 0; i < uriList.size(); i++) {
-            Uri compressPath = uriList.get(i);
+            Uri compressPath = Uri.parse(uriList.get(i));
             try {
                 File file = new File(new URI(compressPath.toString()));
                 RequestBody requestBody = RequestBody.create(MediaType.parse("multipart/form-data"), file);
@@ -97,9 +97,9 @@ public class ShopCarModule extends BaseModule<IShopCarView> implements IShopCarM
                         return RxUtils.getObservable(ServiceUrl.getUserApi().postGenerateOrder(requestBody));
                     }
                 })
-                .subscribe(new BaseHttpRxObserver(mContext.get()) {
+                .subscribe(new BaseHttpRxObserver<String>(mContext.get()) {
                     @Override
-                    protected void onSuccess(Object response) {
+                    protected void onSuccess(String response) {
                         hashMap.put("orderCode", response);
                         hashMap.put("orderType", String.valueOf(StaticExplain.INSTALLATION_LIST.getCode()));
                         mViewRef.get().placeOrderSuccess(new Gson().toJson(hashMap));

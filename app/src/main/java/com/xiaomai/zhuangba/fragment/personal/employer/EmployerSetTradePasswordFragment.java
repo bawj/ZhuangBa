@@ -7,6 +7,7 @@ import com.example.toollib.http.observer.BaseHttpRxObserver;
 import com.example.toollib.http.util.RxUtils;
 import com.example.toollib.util.ToastUtil;
 import com.xiaomai.zhuangba.R;
+import com.xiaomai.zhuangba.fragment.employer.EmployerFragment;
 import com.xiaomai.zhuangba.fragment.personal.wallet.SetTradePasswordFragment;
 import com.xiaomai.zhuangba.http.ServiceUrl;
 
@@ -32,7 +33,7 @@ public class EmployerSetTradePasswordFragment extends SetTradePasswordFragment {
                     @Override
                     protected void onSuccess(String response) {
                         ToastUtil.showShort(getString(R.string.wallet_set_trade_success));
-                        popBackStack();
+                        startFragmentAndDestroyCurrent(EmployerFragment.newInstance());
                     }
                 });
     }

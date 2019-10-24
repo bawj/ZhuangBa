@@ -78,7 +78,7 @@ public class BaseOrderInformationFragment extends BaseFragment<IOrderInformation
     /**
      * 拍照图片保存
      */
-    public List<Uri> mediaSelectorFiles = new ArrayList<>();
+    public List<String> mediaSelectorFiles = new ArrayList<>();
     private MultiGraphSelectionAdapter multiGraphSelectionAdapter;
     private Uri imageUriFromCamera;
     public Uri resultUri = null;
@@ -174,7 +174,7 @@ public class BaseOrderInformationFragment extends BaseFragment<IOrderInformation
                 //拍照之后的处理
                 if (resultCode == RESULT_OK && getActivity() != null) {
                     resultUri = Uri.parse("file:///" + PhotoTool.getImageAbsolutePath(getActivity(), imageUriFromCamera));
-                    mediaSelectorFiles.add(0, resultUri);
+                    mediaSelectorFiles.add(0, resultUri.toString());
                     multiGraphSelectionAdapter.notifyDataSetChanged();
                 }
                 break;
@@ -376,7 +376,7 @@ public class BaseOrderInformationFragment extends BaseFragment<IOrderInformation
     }
 
     @Override
-    public List<Uri> getMediaSelectorFiles() {
+    public List<String> getMediaSelectorFiles() {
         return mediaSelectorFiles;
     }
 
