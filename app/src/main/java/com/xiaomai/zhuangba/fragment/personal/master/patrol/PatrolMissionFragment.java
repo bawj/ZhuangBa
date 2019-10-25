@@ -33,8 +33,11 @@ public class PatrolMissionFragment extends BasePatrolMissionFragment{
     @Override
     public void onBasePatrolItemClick(PatrolMissionBean patrolMissionBean) {
         PatrolBean.TasklistBean t = patrolMissionBean.t;
-        String address = TextUtils.isEmpty(t.getStreet()) ? t.getCity() : t.getStreet();
-        startFragment(PatrolMissionDetailListFragment.newInstance(t.getDetailNo() , address));
+        String villagename = t.getVillagename();
+        if (TextUtils.isEmpty(villagename)) {
+            villagename = t.getStreet();
+        }
+        startFragment(PatrolMissionDetailListFragment.newInstance(t.getDetailNo() , villagename));
     }
 
     @Override

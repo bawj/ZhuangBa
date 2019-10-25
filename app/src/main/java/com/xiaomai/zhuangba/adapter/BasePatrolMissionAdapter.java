@@ -31,14 +31,13 @@ public class BasePatrolMissionAdapter extends BaseSectionQuickAdapter<PatrolMiss
         PatrolBean.TasklistBean taskListBean = item.t;
         //标题
         TextView tvItemOrdersTitle = helper.getView(R.id.tvItemOrdersTitle);
-        String street = taskListBean.getStreet();
-        if (!TextUtils.isEmpty(street)) {
-            tvItemOrdersTitle.setText(street);
+        String villagename = taskListBean.getVillagename();
+        if (!TextUtils.isEmpty(villagename)) {
+            tvItemOrdersTitle.setText(villagename);
         } else {
-            String region = taskListBean.getRegion();
-            tvItemOrdersTitle.setText(region);
+            String street = taskListBean.getStreet();
+            tvItemOrdersTitle.setText(street);
         }
-        tvItemOrdersTitle.setText(street);
         //数量
         TextView tvPatrolMissionChildNumber = helper.getView(R.id.tvPatrolMissionChildNumber);
         tvPatrolMissionChildNumber.setText(String.valueOf(taskListBean.getCount()));

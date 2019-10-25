@@ -150,7 +150,7 @@ public class InspectionSheetDetailFragment extends BaseListFragment<IBaseModule,
 
     @Override
     protected String getActivityTitle() {
-        String villageName = getInspectionSheetBean().getVillageName();
+        String villageName = getInspectionSheetBean().getVillageNames();
         if (TextUtils.isEmpty(villageName)) {
             villageName = getInspectionSheetBean().getStreet();
         }

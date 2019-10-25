@@ -44,7 +44,7 @@ public class BaseAdvertisementModule extends BaseModule<IBaseAdvertisementView> 
             @Override
             public Object apply(HttpResult<OngoingOrdersList> ongoingOrdersListHttpResult,
                                 HttpResult<List<DeliveryContent>> listHttpResult,
-                                HttpResult<List<OrderDateList>> listHttpResult2) throws Exception {
+                                HttpResult<List<OrderDateList>> listHttpResult2){
                 OrderServiceDate orderServiceDate = new OrderServiceDate();
                 orderServiceDate.setOngoingOrdersList(ongoingOrdersListHttpResult.getData());
                 orderServiceDate.setOrderDateLists(listHttpResult2.getData());
@@ -83,6 +83,7 @@ public class BaseAdvertisementModule extends BaseModule<IBaseAdvertisementView> 
         //订单时间信息
         Observable<HttpResult<List<OrderDateList>>> orderDateListZip = RxUtils.getObservableZip(
                 ServiceUrl.getUserApi().getOrderDateList(orderCode).subscribeOn(Schedulers.io()));
+
         Observable<Object> compose = Observable.zip(orderDetailsZip, observableZip, orderDateListZip, new Function3<HttpResult<OngoingOrdersList>,
                 HttpResult<List<DeliveryContent>>, HttpResult<List<OrderDateList>>, Object>() {
             @Override

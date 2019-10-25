@@ -7,11 +7,9 @@ import android.view.View;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.xiaomai.zhuangba.R;
 import com.xiaomai.zhuangba.adapter.InspectionSheetAdapter;
-import com.xiaomai.zhuangba.data.AdvertisingBillsBean;
 import com.xiaomai.zhuangba.data.bean.InspectionSheetBean;
 import com.xiaomai.zhuangba.enums.StringTypeExplain;
 import com.xiaomai.zhuangba.fragment.base.BaseMasterEmployerContentFragment;
-import com.xiaomai.zhuangba.fragment.masterworker.advertising.AdvertisingBillDetailFragment;
 import com.xiaomai.zhuangba.fragment.masterworker.inspection.InspectionSheetDetailFragment;
 
 import java.util.List;
@@ -21,6 +19,8 @@ import java.util.List;
  * @date 2019/10/8 0008
  */
 public class InspectionSheetFragment extends BaseMasterEmployerContentFragment {
+
+    private InspectionSheetAdapter inspectionSheetAdapter;
 
     public static InspectionSheetFragment newInstance() {
         Bundle args = new Bundle();
@@ -53,15 +53,15 @@ public class InspectionSheetFragment extends BaseMasterEmployerContentFragment {
     @Override
     public void refreshInspectionSuccess(List<InspectionSheetBean> inspectionSheetBeans) {
         super.refreshInspectionSuccess(inspectionSheetBeans);
-        if (orderListAdapter != null) {
-            orderListAdapter.setNewData(inspectionSheetBeans);
+        if (inspectionSheetAdapter != null) {
+            inspectionSheetAdapter.setNewData(inspectionSheetBeans);
         }
     }
 
     @Override
     public void loadInspectionSuccess(List<InspectionSheetBean> inspectionSheetBeans) {
-        if (orderListAdapter != null) {
-            orderListAdapter.addData(inspectionSheetBeans);
+        if (inspectionSheetAdapter != null) {
+            inspectionSheetAdapter.addData(inspectionSheetBeans);
         }
     }
     @Override
@@ -72,7 +72,8 @@ public class InspectionSheetFragment extends BaseMasterEmployerContentFragment {
 
     @Override
     public BaseQuickAdapter getBaseOrderAdapter() {
-        return new InspectionSheetAdapter();
+        inspectionSheetAdapter = new InspectionSheetAdapter();
+        return inspectionSheetAdapter;
     }
 
     @Override

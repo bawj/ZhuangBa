@@ -27,6 +27,7 @@ public class InspectionSheetBean implements Parcelable {
     private String district;
     private String street;
     private String villageName;
+    private String villageNames;
     private int num;
     private int pageNum;
     private int pageSize;
@@ -56,6 +57,7 @@ public class InspectionSheetBean implements Parcelable {
         dest.writeString(district);
         dest.writeString(street);
         dest.writeString(villageName);
+        dest.writeString(villageNames);
         dest.writeInt(num);
         dest.writeInt(pageNum);
         dest.writeInt(pageSize);
@@ -130,6 +132,14 @@ public class InspectionSheetBean implements Parcelable {
 
     public int getPageNum() {
         return pageNum;
+    }
+
+    public String getVillageNames() {
+        return villageNames == null ? "" : villageNames;
+    }
+
+    public void setVillageNames(String villageNames) {
+        this.villageNames = villageNames;
     }
 
     public void setPageNum(int pageNum) {

@@ -76,6 +76,7 @@ public class PatrolBean {
         private String cover;
         private String status;
         private String createTime;
+        private String villagename;
 
         public int getId() {
             return id;
@@ -179,6 +180,14 @@ public class PatrolBean {
 
         public void setCreateTime(String createTime) {
             this.createTime = createTime;
+        }
+
+        public String getVillagename() {
+            return villagename == null ? "" : villagename;
+        }
+
+        public void setVillagename(String villagename) {
+            this.villagename = villagename;
         }
     }
 }

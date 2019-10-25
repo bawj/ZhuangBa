@@ -154,7 +154,7 @@ public class BasePatrolDetailFragment<T extends IBasePatrolModule> extends BaseF
             PatrolStatusUtil.masterStatus(getActivity() , ongoingOrdersList.getOrderStatus() ,tvBasePatrolOrdersType);
         }
         //设备编号
-        tvBasePatrolEquipmentNumber.setText(ongoingOrdersList.getMaterialsStartLength());
+        tvBasePatrolEquipmentNumber.setText(ongoingOrdersList.getName());
         //价格
         tvBaseOrderDetailTotalMoney.setText(getString(R.string.content_money,String.valueOf(ongoingOrdersList.getOrderAmount())));
         //巡查区域

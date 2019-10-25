@@ -8,6 +8,8 @@ import com.qmuiteam.qmui.layout.QMUILinearLayout;
 import com.qmuiteam.qmui.util.QMUIDisplayHelper;
 import com.xiaomai.zhuangba.R;
 import com.xiaomai.zhuangba.data.bean.OngoingOrdersList;
+import com.xiaomai.zhuangba.enums.StaticExplain;
+import com.xiaomai.zhuangba.util.ConstantUtil;
 
 import java.util.ArrayList;
 
@@ -28,10 +30,29 @@ public class NewTaskAdapter extends BaseQuickAdapter<OngoingOrdersList, BaseView
                 0.0f);
         //title
         TextView tvItemOrdersTitle = helper.getView(R.id.tvItemOrdersTitle);
-        tvItemOrdersTitle.setText(ongoingOrders.getServiceText());
+        if (ongoingOrders.getOrderType().equals(String.valueOf(StaticExplain.ADVERTISING_BILLS.getCode()))){
+            tvItemOrdersTitle.setText(mContext.getString(R.string.advertising_replacement));
+        }else {
+            tvItemOrdersTitle.setText(ongoingOrders.getServiceText());
+        }
         //time
         TextView tvItemOrdersTime = helper.getView(R.id.tvItemOrdersTime);
-        tvItemOrdersTime.setText(mContext.getString(R.string.time, ongoingOrders.getSlottingStartLength()));
+
+        //巡查任务
+        if (ongoingOrders.getOrderType().equals(String.valueOf(StaticExplain.PATROL.getCode()))) {
+            //巡查时长 单位 month 月  week周
+            String slottingStartLength = ongoingOrders.getSlottingStartLength();
+            //巡查日期
+            String slottingEndLength = ongoingOrders.getSlottingEndLength();
+            if (slottingStartLength.equals(ConstantUtil.MONTH)) {
+                tvItemOrdersTime.setText(mContext.getString(R.string.inspection_date, slottingEndLength));
+            } else if (slottingStartLength.equals(ConstantUtil.WEEK)) {
+                tvItemOrdersTime.setText(mContext.getString(R.string.inspection_date_week, slottingEndLength));
+            }
+        }else {
+            tvItemOrdersTime.setText(mContext.getString(R.string.time, ongoingOrders.getSlottingStartLength()));
+        }
+
         //location
         TextView tvItemOrdersLocation = helper.getView(R.id.tvItemOrdersLocation);
         tvItemOrdersLocation.setText(ongoingOrders.getAddress());
