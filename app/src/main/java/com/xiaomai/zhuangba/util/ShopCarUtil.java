@@ -361,6 +361,8 @@ public class ShopCarUtil {
                     , DensityUtils.stringTypeDouble(shopCarData.getMoney2()), DensityUtils.stringTypeDouble(shopCarData.getMoney3()));
             //订单服务项目
             OrderServicesBean orderServicesBean = new OrderServicesBean();
+            //服务名称
+            orderServicesBean.setServiceText(shopCarData.getText());
             //服务项目ID
             orderServicesBean.setServiceId(shopCarData.getServiceId());
             //服务项目数量

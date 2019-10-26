@@ -18,15 +18,15 @@ public class OrderServicesBean {
     /**
      * 单价
      */
-    private String money;
+    private String price;
     /**
      * 2台单价
      */
-    private String money2;
+    private String price2;
     /**
      * 3台单价
      */
-    private String money3;
+    private String price3;
 
     /** 维保时间 单位 (月) */
     private int monthNumber;
@@ -90,26 +90,26 @@ public class OrderServicesBean {
     }
 
     public String getMoney() {
-        return money == null ? "" : money;
+        return price == null ? "" : price;
     }
 
     public void setMoney(String money) {
-        this.money = money;
+        this.price = money;
     }
 
     public String getMoney2() {
-        return money2 == null ? "" : money2;
+        return price2 == null ? "" : price2;
     }
 
     public void setMoney2(String money2) {
-        this.money2 = money2;
+        this.price2 = money2;
     }
 
     public String getMoney3() {
-        return money3 == null ? "" : money3;
+        return price3 == null ? "" : price3;
     }
 
     public void setMoney3(String money3) {
-        this.money3 = money3;
+        this.price3 = money3;
     }
 }
