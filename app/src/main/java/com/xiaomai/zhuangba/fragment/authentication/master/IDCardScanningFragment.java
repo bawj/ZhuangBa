@@ -32,18 +32,18 @@ import com.xiaomai.zhuangba.util.Util;
 import java.io.File;
 import java.net.URI;
 
-//import activity.IDCardRecognitionActivity;
+import activity.IDCardRecognitionActivity;
 import butterknife.BindView;
 import butterknife.OnClick;
-//import exocr.exocrengine.EXOCRModel;
+import exocr.exocrengine.EXOCRModel;
 import io.reactivex.Observable;
 import io.reactivex.functions.BiFunction;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 
-//import static fragment.IdCardRecognitionFragment.RESULT;
-//import static fragment.IdCardRecognitionFragment.RESULT_CODE;
+import static fragment.IdCardRecognitionFragment.RESULT;
+import static fragment.IdCardRecognitionFragment.RESULT_CODE;
 
 /**
  * @author Administrator
@@ -99,10 +99,9 @@ public class IDCardScanningFragment extends BaseFragment {
                 RxPermissionsUtils.applyPermission(getActivity(), new BaseCallback<String>() {
                     @Override
                     public void onSuccess(String obj) {
-                        // TODO: 2019/10/14 0014 身份证
-//                        Intent scanIntent = new Intent(getActivity(), IDCardRecognitionActivity.class);
-//                        scanIntent.putExtra(IDCardRecognitionActivity.FRONT, true);
-//                        startActivityForResult(scanIntent, ForResultCode.START_FOR_RESULT_CODE.getCode());
+                        Intent scanIntent = new Intent(getActivity(), IDCardRecognitionActivity.class);
+                        scanIntent.putExtra(IDCardRecognitionActivity.FRONT, true);
+                        startActivityForResult(scanIntent, ForResultCode.START_FOR_RESULT_CODE.getCode());
                     }
 
                     @Override
@@ -115,9 +114,9 @@ public class IDCardScanningFragment extends BaseFragment {
                 RxPermissionsUtils.applyPermission(getActivity(), new BaseCallback<String>() {
                     @Override
                     public void onSuccess(String obj) {
-//                        Intent scanIntent = new Intent(getActivity(), IDCardRecognitionActivity.class);
-//                        scanIntent.putExtra(IDCardRecognitionActivity.FRONT, false);
-//                        startActivityForResult(scanIntent, ForResultCode.START_FOR_RESULT_CODE_.getCode());
+                        Intent scanIntent = new Intent(getActivity(), IDCardRecognitionActivity.class);
+                        scanIntent.putExtra(IDCardRecognitionActivity.FRONT, false);
+                        startActivityForResult(scanIntent, ForResultCode.START_FOR_RESULT_CODE_.getCode());
                     }
 
                     @Override
@@ -189,34 +188,34 @@ public class IDCardScanningFragment extends BaseFragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-//        if (resultCode == RESULT_CODE) {
-//            if (requestCode == ForResultCode.START_FOR_RESULT_CODE.getCode() && null != data) {
-//                final EXOCRModel result = (EXOCRModel) data.getSerializableExtra(RESULT);
-//                this.name = result.name;
-//                this.cardnum = result.cardnum;
-//
-//                String absolutePath = FileUtil.getSaveFile(PretendApplication.getInstance()).getAbsolutePath();
-//
-//                byte[] decode = Base64.decode(result.base64bitmap, Base64.DEFAULT);
-//                Bitmap bitmap = BitmapFactory.decodeByteArray(decode, 0, decode.length);
-//                FileUtil.saveBitmap(absolutePath, bitmap);
-//                this.absolutePath = absolutePath;
-//                ivAuthenticationFont.setImageBitmap(bitmap);
-//
-//            } else if (requestCode == ForResultCode.START_FOR_RESULT_CODE_.getCode() && null != data) {
-//                final EXOCRModel result = (EXOCRModel) data.getSerializableExtra(RESULT);
-//                byte[] decode = Base64.decode(result.base64bitmap, Base64.DEFAULT);
-//                Bitmap bitmap = BitmapFactory.decodeByteArray(decode, 0, decode.length);
-//                String absolutePath = FileUtil.getSaveFile(PretendApplication.getInstance()).getAbsolutePath();
-//                FileUtil.saveBitmap(absolutePath, bitmap);
-//                absoluteBlackPath = absolutePath;
-//                ivAuthenticationBack.setImageBitmap(bitmap);
-//                String[] valDate = Util.getValDate(result.validdate);
-//                if (valDate != null && valDate.length > 1) {
-//                    idCardDate = getString(R.string.id_card_date, Util.getDate(valDate[0]), Util.getDate(valDate[1]));
-//                }
-//            }
-//        }
+        if (resultCode == RESULT_CODE) {
+            if (requestCode == ForResultCode.START_FOR_RESULT_CODE.getCode() && null != data) {
+                final EXOCRModel result = (EXOCRModel) data.getSerializableExtra(RESULT);
+                this.name = result.name;
+                this.cardnum = result.cardnum;
+
+                String absolutePath = FileUtil.getSaveFile(PretendApplication.getInstance()).getAbsolutePath();
+
+                byte[] decode = Base64.decode(result.base64bitmap, Base64.DEFAULT);
+                Bitmap bitmap = BitmapFactory.decodeByteArray(decode, 0, decode.length);
+                FileUtil.saveBitmap(absolutePath, bitmap);
+                this.absolutePath = absolutePath;
+                ivAuthenticationFont.setImageBitmap(bitmap);
+
+            } else if (requestCode == ForResultCode.START_FOR_RESULT_CODE_.getCode() && null != data) {
+                final EXOCRModel result = (EXOCRModel) data.getSerializableExtra(RESULT);
+                byte[] decode = Base64.decode(result.base64bitmap, Base64.DEFAULT);
+                Bitmap bitmap = BitmapFactory.decodeByteArray(decode, 0, decode.length);
+                String absolutePath = FileUtil.getSaveFile(PretendApplication.getInstance()).getAbsolutePath();
+                FileUtil.saveBitmap(absolutePath, bitmap);
+                absoluteBlackPath = absolutePath;
+                ivAuthenticationBack.setImageBitmap(bitmap);
+                String[] valDate = Util.getValDate(result.validdate);
+                if (valDate != null && valDate.length > 1) {
+                    idCardDate = getString(R.string.id_card_date, Util.getDate(valDate[0]), Util.getDate(valDate[1]));
+                }
+            }
+        }
     }
 
     @Override

@@ -21,6 +21,8 @@ import java.util.List;
  */
 public class AdvertisingBillsFragment extends BaseMasterEmployerContentFragment {
 
+    private AdvertisingBillsAdapter advertisingBillsAdapter;
+
     public static AdvertisingBillsFragment newInstance() {
         Bundle args = new Bundle();
         AdvertisingBillsFragment fragment = new AdvertisingBillsFragment();
@@ -57,14 +59,14 @@ public class AdvertisingBillsFragment extends BaseMasterEmployerContentFragment 
     public void refreshAdvertisingSuccess(List<AdvertisingBillsBean> advertisingBillsBeans) {
         super.refreshAdvertisingSuccess(advertisingBillsBeans);
         if (orderListAdapter != null) {
-            orderListAdapter.setNewData(advertisingBillsBeans);
+            advertisingBillsAdapter.setNewData(advertisingBillsBeans);
         }
     }
 
     @Override
     public void loadMoreAdvertisingSuccess(List<AdvertisingBillsBean> advertisingBillsBeans) {
         if (orderListAdapter != null) {
-            orderListAdapter.addData(advertisingBillsBeans);
+            advertisingBillsAdapter.addData(advertisingBillsBeans);
         }
     }
 
@@ -76,7 +78,8 @@ public class AdvertisingBillsFragment extends BaseMasterEmployerContentFragment 
 
     @Override
     public BaseQuickAdapter getBaseOrderAdapter() {
-        return new AdvertisingBillsAdapter();
+        advertisingBillsAdapter = new AdvertisingBillsAdapter();
+        return advertisingBillsAdapter;
     }
 
     @Override
