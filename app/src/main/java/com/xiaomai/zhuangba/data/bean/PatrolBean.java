@@ -77,6 +77,7 @@ public class PatrolBean {
         private String status;
         private String createTime;
         private String villagename;
+        private String addr;
 
         public int getId() {
             return id;
@@ -136,6 +137,14 @@ public class PatrolBean {
 
         public String getAddress() {
             return address == null ? "" : address;
+        }
+
+        public String getAddr() {
+            return addr == null ? "" : addr;
+        }
+
+        public void setAddr(String addr) {
+            this.addr = addr;
         }
 
         public void setAddress(String address) {

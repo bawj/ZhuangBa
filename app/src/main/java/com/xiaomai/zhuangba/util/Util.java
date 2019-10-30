@@ -348,7 +348,7 @@ public class Util {
             noodles = noodles.replace("," , "");
             stringBuilder.append(noodles);
         }
-        return stringBuilder == null ? "" : stringBuilder.toString();
+        return stringBuilder == null ? noodles : stringBuilder.toString();
     }
 
     public static String[] getNoodle(String noodles){

@@ -37,7 +37,7 @@ public class PatrolMissionFragment extends BasePatrolMissionFragment{
         if (TextUtils.isEmpty(villagename)) {
             villagename = t.getStreet();
         }
-        startFragment(PatrolMissionDetailListFragment.newInstance(t.getDetailNo() , villagename));
+        startFragment(PatrolMissionDetailListFragment.newInstance(t.getAddr() , villagename));
     }
 
     @Override

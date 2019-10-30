@@ -36,7 +36,7 @@ public class PatrolInspectionRecordsFragment extends BasePatrolMissionFragment {
         if (TextUtils.isEmpty(villagename)) {
             villagename = t.getStreet();
         }
-        startFragment(PatrolInspectionRecordsDetailFragment.newInstance(t.getDetailNo() , villagename));
+        startFragment(PatrolInspectionRecordsDetailFragment.newInstance(t.getAddr() , villagename));
     }
 
     @Override

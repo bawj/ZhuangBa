@@ -994,7 +994,7 @@ public interface IApi {
      *
      * @param pageNum  页
      * @param pageSize 显示多少条
-     * @param detailNo 子订单编号
+     * @param addr 子订单编号
      * @param current  巡查任务传：current ，记录传0
      * @return observable
      */
@@ -1002,7 +1002,7 @@ public interface IApi {
     @POST("task/selectByDetailNo")
     Observable<HttpResult<RefreshBaseList<PatrolMissionDetailListBean>>> selectByDetailNo(@Field("pageNum") String pageNum,
                                                                                           @Field("pageSize") String pageSize,
-                                                                                          @Field("detailNo") String detailNo,
+                                                                                          @Field("addr") String addr,
                                                                                           @Field("current") String current);
 
     /**

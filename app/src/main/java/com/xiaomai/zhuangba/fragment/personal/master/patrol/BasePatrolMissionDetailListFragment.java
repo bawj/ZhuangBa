@@ -96,7 +96,7 @@ public class BasePatrolMissionDetailListFragment extends BaseListFragment {
         return getTitle() == null ? "" : getTitle();
     }
 
-    public String getDetailNo() {
+    public String getAddR() {
         return null;
     }
 

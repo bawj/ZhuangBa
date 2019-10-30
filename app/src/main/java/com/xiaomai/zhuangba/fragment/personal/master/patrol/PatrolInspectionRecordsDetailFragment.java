@@ -15,7 +15,6 @@ import com.xiaomai.zhuangba.enums.StaticExplain;
 import com.xiaomai.zhuangba.enums.StringTypeExplain;
 import com.xiaomai.zhuangba.http.ServiceUrl;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.Observable;
@@ -28,9 +27,9 @@ import io.reactivex.Observable;
  */
 public class PatrolInspectionRecordsDetailFragment extends BasePatrolMissionDetailListFragment {
 
-    public static PatrolInspectionRecordsDetailFragment newInstance(String detailNo, String title) {
+    public static PatrolInspectionRecordsDetailFragment newInstance(String addr, String title) {
         Bundle args = new Bundle();
-        args.putString(PatrolMissionDetailListFragment.DETAIL_NO, detailNo);
+        args.putString(PatrolMissionDetailListFragment.ADD_R, addr);
         args.putString(PatrolMissionDetailListFragment.TITLE, title);
         PatrolInspectionRecordsDetailFragment fragment = new PatrolInspectionRecordsDetailFragment();
         fragment.setArguments(args);
@@ -40,7 +39,7 @@ public class PatrolInspectionRecordsDetailFragment extends BasePatrolMissionDeta
     @Override
     public Observable<HttpResult<RefreshBaseList<PatrolMissionDetailListBean>>> getObservable() {
         return ServiceUrl.getUserApi().selectByDetailNo(String.valueOf(getPage())
-                , String.valueOf(StaticExplain.PAGE_NUM.getCode()), getDetailNo(), StringTypeExplain.PATROL_RECORD.getCode());
+                , String.valueOf(StaticExplain.PAGE_NUM.getCode()), getAddR(), StringTypeExplain.PATROL_RECORD.getCode());
     }
 
     @Override
@@ -67,9 +66,9 @@ public class PatrolInspectionRecordsDetailFragment extends BasePatrolMissionDeta
     }
 
     @Override
-    public String getDetailNo() {
+    public String getAddR() {
         if (getArguments() != null) {
-            return getArguments().getString(PatrolMissionDetailListFragment.DETAIL_NO);
+            return getArguments().getString(PatrolMissionDetailListFragment.ADD_R);
         }
         return null;
     }

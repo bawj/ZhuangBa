@@ -29,12 +29,12 @@ public class PatrolMissionDetailListFragment extends BasePatrolMissionDetailList
     /**
      * 子订单编号
      */
-    public static final String DETAIL_NO = "detail_no";
+    public static final String ADD_R = "addr";
     public static final String TITLE = "title";
 
-    public static PatrolMissionDetailListFragment newInstance(String detailNo, String title) {
+    public static PatrolMissionDetailListFragment newInstance(String addr, String title) {
         Bundle args = new Bundle();
-        args.putString(DETAIL_NO, detailNo);
+        args.putString(ADD_R, addr);
         args.putString(TITLE, title);
         PatrolMissionDetailListFragment fragment = new PatrolMissionDetailListFragment();
         fragment.setArguments(args);
@@ -44,7 +44,7 @@ public class PatrolMissionDetailListFragment extends BasePatrolMissionDetailList
     @Override
     public Observable<HttpResult<RefreshBaseList<PatrolMissionDetailListBean>>> getObservable() {
         return ServiceUrl.getUserApi().selectByDetailNo(String.valueOf(getPage())
-                , String.valueOf(StaticExplain.PAGE_NUM.getCode()), getDetailNo(), StringTypeExplain.CURRENT.getCode());
+                , String.valueOf(StaticExplain.PAGE_NUM.getCode()), getAddR(), StringTypeExplain.CURRENT.getCode());
     }
 
     @Override
@@ -74,9 +74,9 @@ public class PatrolMissionDetailListFragment extends BasePatrolMissionDetailList
     }
 
     @Override
-    public String getDetailNo() {
+    public String getAddR() {
         if (getArguments() != null) {
-            return getArguments().getString(DETAIL_NO);
+            return getArguments().getString(ADD_R);
         }
         return null;
     }
