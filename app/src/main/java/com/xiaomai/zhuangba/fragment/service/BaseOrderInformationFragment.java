@@ -1,6 +1,7 @@
 package com.xiaomai.zhuangba.fragment.service;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
@@ -9,6 +10,7 @@ import android.provider.MediaStore;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
@@ -21,7 +23,6 @@ import com.bigkoo.pickerview.listener.OnTimeSelectListener;
 import com.bigkoo.pickerview.view.OptionsPickerView;
 import com.example.toollib.base.BaseFragment;
 import com.example.toollib.data.base.BaseCallback;
-import com.example.toollib.util.Log;
 import com.xiaomai.zhuangba.R;
 import com.xiaomai.zhuangba.adapter.MultiGraphSelectionAdapter;
 import com.xiaomai.zhuangba.data.bean.District;
@@ -129,9 +130,11 @@ public class BaseOrderInformationFragment extends BaseFragment<IOrderInformation
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.tvOrderInformationClickServiceAddress:
+                hideKeyboard(view);
                 showPickerView();
                 break;
             case R.id.ivOrderInformationLocation:
+                hideKeyboard(view);
                 showPickerView();
                 break;
             case R.id.btnOrderInformation:
@@ -383,5 +386,12 @@ public class BaseOrderInformationFragment extends BaseFragment<IOrderInformation
     @Override
     public String getEmployerDescribe() {
         return editInstallationNotes.getText().toString();
+    }
+
+    /** 隐藏键盘 */
+    public void hideKeyboard(View view) {
+        InputMethodManager imm = (InputMethodManager)  getBaseFragmentActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.showSoftInput(view,InputMethodManager.SHOW_FORCED);
+        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 }

@@ -5,7 +5,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.example.toollib.util.Log;
 import com.example.toollib.weight.BtnToEditListenerUtils;
 import com.xiaomai.zhuangba.R;
 import com.xiaomai.zhuangba.data.module.login.ILoginRegisteredModule;

@@ -198,7 +198,7 @@ public class NewSubmitAcceptanceFragment extends BaseAutographFragment {
                         .subscribe(new BaseHttpRxObserver<Object>(getActivity()) {
                             @Override
                             protected void onSuccess(Object object) {
-                                startFragmentAndDestroyCurrent(MasterWorkerFragment.newInstance());
+                                startFragment(MasterWorkerFragment.newInstance());
                                 //startFragmentAndDestroyCurrent(NewSubmitCompleteFragment.newInstance(getOrderCode(), getOrderType(), String.valueOf(OrdersEnum.MASTER_ACCEPTANCE.getCode())));
                             }
                         });

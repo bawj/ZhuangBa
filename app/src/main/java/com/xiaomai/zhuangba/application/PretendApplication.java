@@ -3,6 +3,7 @@ package com.xiaomai.zhuangba.application;
 import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
+import android.support.multidex.MultiDex;
 
 import com.example.toollib.ToolLib;
 import com.example.toollib.util.Log;
@@ -70,6 +71,12 @@ public class PretendApplication extends Application {
         uMengNotificationClick(mPushAgent);
         //读取消息
         uMengMessageHandler(mPushAgent);
+    }
+
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        MultiDex.install(this);
     }
 
     private void uMengMessageHandler(PushAgent mPushAgent) {

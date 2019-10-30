@@ -10,7 +10,7 @@ import com.xiaomai.zhuangba.fragment.authentication.master.MasterAuthenticationF
  * @author Administrator
  * @date 2019/7/4 0004
  */
-public abstract class BaseLoginRegisteredFragment extends  BaseFragment<ILoginRegisteredModule> implements ILoginRegisteredView {
+public abstract class BaseLoginRegisteredFragment extends BaseFragment<ILoginRegisteredModule> implements ILoginRegisteredView {
 
 
     @Override

@@ -184,8 +184,7 @@ public class StartConstructionFragment extends BaseAutographFragment {
                             @Override
                             protected void onSuccess(Object object) {
                                 //跳转到待开工
-                                startFragmentAndDestroyCurrent(MasterWorkerFragment.newInstance());
-                                //startFragmentAndDestroyCurrent(ToBeStartedFragment.newInstance(getOrderCode(), getOrderType()));
+                                startFragment(MasterWorkerFragment.newInstance());
                             }
                         });
 

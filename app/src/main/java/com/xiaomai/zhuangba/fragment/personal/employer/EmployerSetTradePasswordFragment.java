@@ -33,7 +33,7 @@ public class EmployerSetTradePasswordFragment extends SetTradePasswordFragment {
                     @Override
                     protected void onSuccess(String response) {
                         ToastUtil.showShort(getString(R.string.wallet_set_trade_success));
-                        startFragmentAndDestroyCurrent(EmployerFragment.newInstance());
+                        startFragment(EmployerFragment.newInstance());
                     }
                 });
     }

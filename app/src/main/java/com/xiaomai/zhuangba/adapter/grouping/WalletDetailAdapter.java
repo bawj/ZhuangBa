@@ -118,7 +118,7 @@ public class WalletDetailAdapter extends BaseExpandableListAdapter {
         //收入：1，支出：2
         String typeStr = "" ;
         int streamType = childrenList.get(groupPosition).get(childPosition).getStreamType();
-        if (streamType == StaticExplain.EXPENDITURE.getCode()){
+        if (streamType == StaticExplain.EXPENDITURE.getCode() || streamType == 5 || streamType == 21){
             typeStr = "+";
             tvInfo.setTextColor(context.getResources().getColor(R.color.tool_lib_color_3AB960));
         }else if (streamType == StaticExplain.INCOME.getCode()){

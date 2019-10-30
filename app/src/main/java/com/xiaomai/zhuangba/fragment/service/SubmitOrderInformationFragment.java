@@ -131,7 +131,4 @@ public class SubmitOrderInformationFragment extends BaseOrderInformationFragment
     protected String getActivityTitle() {
         return getString(R.string.add_information);
     }
-
-
-
 }

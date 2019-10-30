@@ -6,15 +6,11 @@ import android.widget.TextView;
 
 import com.example.toollib.base.BaseFragment;
 import com.example.toollib.data.IBaseModule;
-import com.example.toollib.http.HttpResult;
-import com.example.toollib.http.observer.BaseHttpRxObserver;
-import com.example.toollib.http.util.RxUtils;
 import com.example.toollib.util.Log;
 import com.xiaomai.zhuangba.R;
-import com.xiaomai.zhuangba.data.bean.UserInfo;
-import com.xiaomai.zhuangba.http.ServiceUrl;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 /**
  * @author Administrator
@@ -39,14 +35,11 @@ public class YesBarFragment extends BaseFragment {
 
     @Override
     public void initView() {
-        RxUtils.getObservable(ServiceUrl.getUserApi().login("13757188697", "a123456")
-                .compose(this.<HttpResult<UserInfo>>bindToLifecycle()))
-                .subscribe(new BaseHttpRxObserver<UserInfo>(getActivity()) {
-                    @Override
-                    protected void onSuccess(UserInfo response) {
-                        tvTest.setText(response.toString());
-                    }
-                });
+    }
+
+    @OnClick(R.id.btnYesBar)
+    public void onViewClicked() {
+        startFragmentAndDestroyCurrent(NotBarFragment.newInstance());
     }
 
     @Override
@@ -78,5 +71,4 @@ public class YesBarFragment extends BaseFragment {
     public void rightTitleClick(View v) {
         Log.e("右侧标题点击事件");
     }
-
 }
