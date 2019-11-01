@@ -18,7 +18,7 @@ import io.reactivex.Observable;
  * @author Administrator
  * @date 2019/10/10 0010
  *
- * 巡查记录
+ * 巡查列表
  */
 public class PatrolInspectionRecordsFragment extends BasePatrolMissionFragment {
 
