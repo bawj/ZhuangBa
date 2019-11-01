@@ -32,6 +32,14 @@ public class ServiceItemsAdapter extends BaseQuickAdapter<OrderServiceItem, Base
         TextView tvItemServiceTotalMoney = helper.getView(R.id.tvItemServiceTotalMoney);
         TextView tvOrderDetailMaintenance = helper.getView(R.id.tvOrderDetailMaintenance);
 
+        TextView ivServiceItemRight = helper.getView(R.id.ivServiceItemRight);
+        int adapterPosition = helper.getAdapterPosition();
+        if (adapterPosition == 0){
+            ivServiceItemRight.setVisibility(View.GONE);
+        }else {
+            ivServiceItemRight.setVisibility(View.VISIBLE);
+        }
+
         GlideManager.loadImage(mContext, orderServiceItem.getIconUrl(), ivItemServiceLogo , R.drawable.ic_required_options);
 
         tvItemServiceName.setText(orderServiceItem.getServiceText());

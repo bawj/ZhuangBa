@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -57,7 +58,6 @@ public class WalletOrderDetailFragment extends BaseFragment {
         if (getArguments() != null){
             bean = (WalletDetailBean.ListBean) getArguments().getSerializable("date");
            if (bean != null){
-               tvTitle.setText(getTitle(bean));
                tvNumber.setText(String.format(getString(R.string.content_money), getAmount(bean)));
                recyclerView.setAdapter(new DetailAdapter(getList(bean)));
            }
@@ -65,34 +65,54 @@ public class WalletOrderDetailFragment extends BaseFragment {
     }
 
     @SuppressLint("StringFormatMatches")
-    private List<WalletOrderDetailBean> getList(WalletDetailBean.ListBean bean) {
+    public List<WalletOrderDetailBean> getList(WalletDetailBean.ListBean bean) {
         List<WalletOrderDetailBean> list = new ArrayList<>();
-
         if (type == WalletOrderTypeEnum.DETAIL_OUT.getCode() || bean.getStreamType() == 2) {
+//            String modifyTime = bean.getModifyTime();
+//            String times = bean.getTimes();
+//            list.add(new WalletOrderDetailBean(getString(R.string.wallet_out_account), bean.getWithdrawalsAccount()));
+//            if (!TextUtils.isEmpty(modifyTime)){
+//                //处理中
+//                list.add(new WalletOrderDetailBean(getString(R.string.wallet_out_time), bean.getModifyTime()));
+//                list.add(new WalletOrderDetailBean(getString(R.string.wallet_out_status), getString(R.string.in_processing)));
+//                list.add(new WalletOrderDetailBean(getString(R.string.wallet_out_code), bean.getOrderCode()));
+//
+//                tvTitle.setText(getString(R.string.in_processing));
+//            }else if (!TextUtils.isEmpty(times)){
+//                //已提现
+//                list.add(new WalletOrderDetailBean(getString(R.string.withdrawal_success_time), bean.getTimes()));
+//                list.add(new WalletOrderDetailBean(getString(R.string.wallet_out_status), getString(R.string.wallet_out_success)));
+//                list.add(new WalletOrderDetailBean(getString(R.string.serial_number), bean.getAccountNumber()));
+//                tvTitle.setText(getString(R.string.wallet_out_success));
+//            }
+
+
             //从明细进入详情与从提现进入详情，取值字段不一样
-            if (type == WalletOrderTypeEnum.DETAIL_OUT.getCode()) {
+            if (type == WalletOrderTypeEnum.DETAIL_OUT.getCode() && bean.getWallerType() == 1) {
                 list.add(new WalletOrderDetailBean(getString(R.string.wallet_out_time), bean.getTimes()));
-            } else if (type == WalletOrderTypeEnum.DETAIL_ALL.getCode()) {
-                list.add(new WalletOrderDetailBean(getString(R.string.wallet_out_time), bean.getModifyTime()));
+            } else if (bean.getWallerType() == 6) {
+                list.add(new WalletOrderDetailBean(getString(R.string.withdrawal_success_time), bean.getModifyTime()));
             }
             list.add(new WalletOrderDetailBean(getString(R.string.wallet_out_account), bean.getWithdrawalsAccount()));
 
             //提现中
             if (bean.getWallerType() == 6) {
+                //处理中
                 list.add(new WalletOrderDetailBean(getString(R.string.wallet_out_status), getString(R.string.in_processing)));
                 return list;
-            } else {
+            } else if (bean.getWallerType() == 1){
+                //提现成功
                 list.add(new WalletOrderDetailBean(getString(R.string.wallet_out_status), getString(R.string.wallet_out_success)));
             }
 
             if (type == WalletOrderTypeEnum.DETAIL_OUT.getCode()) {
-                list.add(new WalletOrderDetailBean(getString(R.string.wallet_out_code), bean.getAccountNumber()));
+                list.add(new WalletOrderDetailBean(getString(R.string.serial_number), bean.getAccountNumber()));
             } else if (type == WalletOrderTypeEnum.DETAIL_ALL.getCode()) {
                 list.add(new WalletOrderDetailBean(getString(R.string.wallet_out_code), bean.getOrderCode()));
             }
 
             if (type == WalletOrderTypeEnum.DETAIL_OUT.getCode()) {
-                list.add(new WalletOrderDetailBean(getString(R.string.wallet_out_time), bean.getTimes()));
+                list.add(new WalletOrderDetailBean(getString(R.string.withdrawal_success_time), bean.getTimes()));
             } else if (type == WalletOrderTypeEnum.DETAIL_ALL.getCode()) {
                 list.add(new WalletOrderDetailBean(getString(R.string.wallet_out_time), bean.getModifyTime()));
             }
@@ -110,12 +130,12 @@ public class WalletOrderDetailFragment extends BaseFragment {
      * @param bean
      * @return
      */
-    private String getTitle(WalletDetailBean.ListBean bean) {
+    public String getTitle(WalletDetailBean.ListBean bean) {
         String str = "";
         if (type == WalletOrderTypeEnum.DETAIL_ALL.getCode()) {
             str = bean.getStreamType() == 2 ? getString(R.string.wallet_detail_out) : getString(R.string.wallet_income_number);
         } else {
-            str = type == WalletOrderTypeEnum.DETAIL_OUT.getCode() ? getString(R.string.wallet_detail_out) : getString(R.string.wallet_income_number);
+            str = (type == WalletOrderTypeEnum.DETAIL_OUT.getCode() && bean.getWallerType() == 6) ? getString(R.string.wallet_income_number) : getString(R.string.wallet_detail_out);
         }
         return str;
     }
@@ -144,7 +164,7 @@ public class WalletOrderDetailFragment extends BaseFragment {
     /**
      * 分成比例
      */
-    private String getScale(double amount, double masterOrderAmount) {
+    public String getScale(double amount, double masterOrderAmount) {
         double scale = 1;
         if (amount != 0){
             scale = masterOrderAmount / amount;

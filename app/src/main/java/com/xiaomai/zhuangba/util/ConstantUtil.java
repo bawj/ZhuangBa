@@ -47,16 +47,16 @@ public class ConstantUtil {
     /**
      * 师傅 用户协议
      */
-    public static final String MASTER_FABRICATING_USER_SERVICE_PROTOCOL = "https://zb.4000750222.com/testZhuangBaManagerPage/shifu";
+    public static final String MASTER_FABRICATING_USER_SERVICE_PROTOCOL = "https://zb.hangzhouzhuangba.com/testZhuangBaManagerPages/shifu";
 
     /**
      * 雇主 用户协议
      */
-    public static final String EMPLOYER_FABRICATING_USER_SERVICE_PROTOCOL = "https://zb.4000750222.com/testZhuangBaManagerPage/guzhu";
+    public static final String EMPLOYER_FABRICATING_USER_SERVICE_PROTOCOL = "https://zb.hangzhouzhuangba.com/testZhuangBaManagerPages/guzhu";
 
 
     /**
      * 隐私协议
      */
-    public static final String PRIVACY_PROTOCOL = "https://zb.4000750222.com/testZhuangBaManagerPage/yinsi";
+    public static final String PRIVACY_PROTOCOL = "https://zb.hangzhouzhuangba.com/testZhuangBaManagerPages/yinsi";
 }

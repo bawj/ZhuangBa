@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.toollib.fragment.ImgPreviewFragment;
 import com.example.toollib.manager.GlideManager;
+import com.example.toollib.util.Log;
 import com.xiaomai.zhuangba.R;
 import com.xiaomai.zhuangba.adapter.ImgExhibitionAdapter;
 import com.xiaomai.zhuangba.data.bean.DeliveryContent;
@@ -74,6 +75,7 @@ public class BeUnderConstructionFragment extends BaseMasterOrderDetailFragment {
                 }
             }
         });
+        Log.e("开工确认图片 地址 " + deliveryContent.getElectronicSignature());
         GlideManager.loadImage(getActivity(), deliveryContent.getElectronicSignature(), ivMasterConfirmation);
     }
 

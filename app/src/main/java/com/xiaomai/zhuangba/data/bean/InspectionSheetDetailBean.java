@@ -50,7 +50,7 @@ public class InspectionSheetDetailBean {
     private int serviceId;
     private String serviceText;
     private int number;
-    private int orderAmount;
+    private double orderAmount;
     private int maintenanceAmount;
     private int masterOrderAmount;
     private int orderStatus;
@@ -59,8 +59,8 @@ public class InspectionSheetDetailBean {
     private String address;
     private String appointmentTime;
     private String confirmationTime;
-    private int longitude;
-    private int latitude;
+    private double longitude;
+    private double latitude;
     private String publisher;
     private String receivingParty;
     private String userText;
@@ -114,11 +114,11 @@ public class InspectionSheetDetailBean {
         this.number = number;
     }
 
-    public int getOrderAmount() {
+    public double getOrderAmount() {
         return orderAmount;
     }
 
-    public void setOrderAmount(int orderAmount) {
+    public void setOrderAmount(double orderAmount) {
         this.orderAmount = orderAmount;
     }
 
@@ -186,19 +186,19 @@ public class InspectionSheetDetailBean {
         this.confirmationTime = confirmationTime;
     }
 
-    public int getLongitude() {
+    public double getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(int longitude) {
+    public void setLongitude(double longitude) {
         this.longitude = longitude;
     }
 
-    public int getLatitude() {
+    public double getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(int latitude) {
+    public void setLatitude(double latitude) {
         this.latitude = latitude;
     }
 

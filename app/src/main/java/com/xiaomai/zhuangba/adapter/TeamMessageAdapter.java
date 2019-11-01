@@ -24,7 +24,12 @@ public class TeamMessageAdapter extends BaseQuickAdapter<TeamMessageBean , BaseV
     protected void convert(BaseViewHolder helper, TeamMessageBean teamMessageBean) {
         //邀请人电话
         TextView tvMemberPhone = helper.getView(R.id.tvMemberPhone);
-        tvMemberPhone.setText(mContext.getString(R.string.member_phone , teamMessageBean.getUserNumber()));
+        // 1被邀请 2 请求加入
+        if (teamMessageBean.getIsAgree() == 2){
+            tvMemberPhone.setText(mContext.getString(R.string.member_phone , teamMessageBean.getUserNumber()));
+        }else if (teamMessageBean.getIsAgree() == 1){
+            tvMemberPhone.setText(mContext.getString(R.string.member_phone_ , teamMessageBean.getUserNumber()));
+        }
         //时间
         TextView tvTeamDate = helper.getView(R.id.tvTeamDate);
         tvTeamDate.setText(teamMessageBean.getCreateTime());

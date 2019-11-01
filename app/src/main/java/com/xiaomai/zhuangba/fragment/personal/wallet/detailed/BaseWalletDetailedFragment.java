@@ -208,7 +208,21 @@ public class BaseWalletDetailedFragment extends BaseListFragment implements Expa
     @Override
     public boolean onChildClick(ExpandableListView parent, View view, int groupPosition, int childPosition, long id) {
         WalletDetailBean.ListBean listBean = (WalletDetailBean.ListBean) view.findViewById(R.id.tv_order_time).getTag();
-        startFragment(WalletOrderDetailFragment.newInstance(listBean, getType()));
+        int type = getType();
+        if (type == WalletOrderTypeEnum.DETAIL_OUT.getCode()|| listBean.getStreamType() == 2){
+            //已提现详情  分处理中 和 提现成功
+            if (listBean.getWallerType() == 6){
+                //处理中详情
+                startFragment(WalletOrderInProcessingFragment.newInstance(listBean));
+            }else if (listBean.getWallerType() == 1){
+                //提现成功
+                startFragment(WalletOrderSuccessfulWithdrawalsFragment.newInstance(listBean));
+            }
+        }else if (type == WalletOrderTypeEnum.DETAIL_INCOME.getCode() || listBean.getStreamType() == 1){
+            //收入详情
+            startFragment(WalletOrderIncomeDetailsFragment.newInstance(listBean));
+        }
+///        startFragment(WalletOrderDetailFragment.newInstance(listBean, getType()));
         return false;
     }
 
