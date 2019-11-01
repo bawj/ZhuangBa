@@ -164,7 +164,7 @@ public class BasePatrolDetailFragment<T extends IBasePatrolModule> extends BaseF
         //订单编号
         tvBasePatrolOrderNumber.setText(ongoingOrdersList.getOrderCode());
         //服务时长
-        tvBasePatrolLengthOfService.setText(getString(R.string.months , ongoingOrdersList.getDebugging()));
+        tvBasePatrolLengthOfService.setText(getString(R.string.months , String.valueOf(ongoingOrdersList.getMaintenanceFlag())));
         //服务时间
         String slottingStartLength = ongoingOrdersList.getSlottingStartLength();
         //巡查日期
