@@ -44,10 +44,12 @@ public class PatrolInspectionRecordsPhotoFragment extends BaseFragment {
 
     private List<PatrolInspectionRecordsPhotoDetailFragment> photoDetailFragmentList;
 
+    public static final String TITLE = "title";
     public static final String PATROL_MISSION_DETAIL_LIST_BEAN = "patrol_mission_detail_list_bean";
 
-    public static PatrolInspectionRecordsPhotoFragment newInstance(String patrolMissionDetailListBean) {
+    public static PatrolInspectionRecordsPhotoFragment newInstance(String title,String patrolMissionDetailListBean) {
         Bundle args = new Bundle();
+        args.putString(TITLE , title);
         args.putString(PATROL_MISSION_DETAIL_LIST_BEAN, patrolMissionDetailListBean);
         PatrolInspectionRecordsPhotoFragment fragment = new PatrolInspectionRecordsPhotoFragment();
         fragment.setArguments(args);
@@ -94,8 +96,12 @@ public class PatrolInspectionRecordsPhotoFragment extends BaseFragment {
 
     @Override
     protected String getActivityTitle() {
-        PatrolInspectionRecordsDetailImgBean patrolMissionDetailListBean = getPatrolInspectionRecordsDetailImgBean();
-        return patrolMissionDetailListBean.getOrderDetailNo();
+        if (!TextUtils.isEmpty(getTitle())){
+            return getTitle();
+        }else {
+            PatrolInspectionRecordsDetailImgBean patrolMissionDetailListBean = getPatrolInspectionRecordsDetailImgBean();
+            return  patrolMissionDetailListBean.getOrderDetailNo();
+        }
     }
 
     private String[] getTabTitle() {
@@ -153,6 +159,13 @@ public class PatrolInspectionRecordsPhotoFragment extends BaseFragment {
                         popBackStack();
                     }
                 });
+    }
+
+    public String getTitle(){
+        if (getArguments() != null){
+            return getArguments().getString(TITLE);
+        }
+        return "";
     }
 
     @Override

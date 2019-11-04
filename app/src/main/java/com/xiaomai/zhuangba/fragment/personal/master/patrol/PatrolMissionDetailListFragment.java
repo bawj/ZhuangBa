@@ -52,12 +52,13 @@ public class PatrolMissionDetailListFragment extends BasePatrolMissionDetailList
         final PatrolMissionDetailListBean patrolMissionDetailListBean = (PatrolMissionDetailListBean)
                 view.findViewById(R.id.tvPatrolMissionEquipmentNumber).getTag();
         int id = patrolMissionDetailListBean.getId();
+        final String equipmentNo = patrolMissionDetailListBean.getEquipmentNo();
         RxUtils.getObservable(ServiceUrl.getUserApi().selectByTaskId(String.valueOf(id)))
                 .compose(this.<HttpResult<PatrolInspectionRecordsDetailImgBean>>bindToLifecycle())
                 .subscribe(new BaseHttpRxObserver<PatrolInspectionRecordsDetailImgBean>(getActivity()) {
                     @Override
                     protected void onSuccess(PatrolInspectionRecordsDetailImgBean patrolInspectionRecordsDetailImgBean) {
-                        startFragmentForResult(PatrolInspectionRecordsPhotoFragment.newInstance(new Gson().toJson(patrolInspectionRecordsDetailImgBean))
+                        startFragmentForResult(PatrolInspectionRecordsPhotoFragment.newInstance(equipmentNo,new Gson().toJson(patrolInspectionRecordsDetailImgBean))
                                 , ForResultCode.START_FOR_RESULT_CODE.getCode());
                     }
                 });
