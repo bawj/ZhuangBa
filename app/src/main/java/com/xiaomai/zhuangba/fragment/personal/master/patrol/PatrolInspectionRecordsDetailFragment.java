@@ -47,10 +47,11 @@ public class PatrolInspectionRecordsDetailFragment extends BasePatrolMissionDeta
         PatrolMissionDetailListBean patrolMissionDetailListBean = (PatrolMissionDetailListBean)
                 view.findViewById(R.id.tvPatrolMissionEquipmentNumber).getTag();
         int id = patrolMissionDetailListBean.getId();
-        requestRecordsDetailImg(id);
+        String equipmentNo = patrolMissionDetailListBean.getEquipmentNo();
+        requestRecordsDetailImg(id , equipmentNo);
     }
 
-    private void requestRecordsDetailImg(int id) {
+    private void requestRecordsDetailImg(int id ,final String equipmentNo) {
         RxUtils.getObservable(ServiceUrl.getUserApi().selectByTaskId(String.valueOf(id)))
                 .compose(this.<HttpResult<PatrolInspectionRecordsDetailImgBean>>bindToLifecycle())
                 .subscribe(new BaseHttpRxObserver<PatrolInspectionRecordsDetailImgBean>(getActivity()) {
@@ -58,8 +59,7 @@ public class PatrolInspectionRecordsDetailFragment extends BasePatrolMissionDeta
                     protected void onSuccess(PatrolInspectionRecordsDetailImgBean patrolInspectionRecordsDetailImgBean) {
                         List<PatrolInspectionRecordsDetailImgBean.TaskPictureListBean> taskPictureList
                                 = patrolInspectionRecordsDetailImgBean.getTaskPictureList();
-                        String orderDetailNo = patrolInspectionRecordsDetailImgBean.getOrderDetailNo();
-                        startFragment(PatrolInspectionRecordsImgFragment.newInstance(orderDetailNo
+                        startFragment(PatrolInspectionRecordsImgFragment.newInstance(equipmentNo
                                 , patrolInspectionRecordsDetailImgBean.getCover(), taskPictureList));
                     }
                 });

@@ -58,26 +58,27 @@ public class OngoingOrdersAdapter extends BaseQuickAdapter<OngoingOrdersList, Ba
         TextView tvSlotting = helper.getView(R.id.tvSlotting);
         TextView tvDebugging = helper.getView(R.id.tvDebugging);
         TextView tvAuxiliaryMaterials = helper.getView(R.id.tvAuxiliaryMaterials);
+        int orderStatus = ongoingOrders.getOrderStatus();
+        String orderCode = ongoingOrders.getOrderCode();
+        tvItemPatrolFrequency.setVisibility(View.GONE);
+        tvItemInspectionDate.setVisibility(View.GONE);
         //安装单
         if (orderType.equals(String.valueOf(StaticExplain.INSTALLATION_LIST.getCode()))) {
             installation(ongoingOrders, tvItemOrdersTime, tvMaintenance, tvSlotting, tvDebugging, tvAuxiliaryMaterials);
+            OrderStatusUtil.employerStatus(mContext, orderStatus, tvItemOrdersType);
         } else if (orderType.equals(String.valueOf(StaticExplain.ADVERTISING_BILLS.getCode()))) {
             //广告单
             advertisement(ongoingOrders, tvItemOrdersTime, tvMaintenance, tvSlotting, tvDebugging, tvAuxiliaryMaterials);
+            AdvertisingStatusUtil.employerStatus(mContext, orderStatus, tvItemOrdersType);
+            tvItemOrdersTitle.setText(mContext.getString(R.string.advertising_bills));
+
         } else if (orderType.equals(String.valueOf(StaticExplain.PATROL.getCode()))) {
             //巡查
             patrol(mContext, ongoingOrders, tvItemOrdersTime, tvMaintenance, tvItemPatrolFrequency, tvItemInspectionDate, tvItemOrdersLocation);
+            PatrolStatusUtil.employerStatus(mContext, orderStatus, tvItemOrdersType);
+            tvItemOrdersTitle.setText(mContext.getString(R.string.patrol_title));
         }
         tvItemOrdersTitle.setTag(ongoingOrders);
-        //order status
-        int orderStatus = ongoingOrders.getOrderStatus();
-        if (orderType.equals(String.valueOf(StaticExplain.ADVERTISING_BILLS.getCode()))) {
-            AdvertisingStatusUtil.employerStatus(mContext, orderStatus, tvItemOrdersType);
-        } else if (orderType.equals(String.valueOf(StaticExplain.INSTALLATION_LIST.getCode()))) {
-            OrderStatusUtil.employerStatus(mContext, orderStatus, tvItemOrdersType);
-        } else if (orderType.equals(String.valueOf(StaticExplain.PATROL.getCode()))) {
-            PatrolStatusUtil.employerStatus(mContext, orderStatus, tvItemOrdersType);
-        }
     }
 
 
@@ -110,7 +111,8 @@ public class OngoingOrdersAdapter extends BaseQuickAdapter<OngoingOrdersList, Ba
             tvItemInspectionDate.setText(mContext.getString(R.string.inspection_date, slottingEndLength));
         } else if (slottingStartLength.equals(ConstantUtil.WEEK)) {
             tvItemPatrolFrequency.setText(mContext.getString(R.string.week));
-            tvItemInspectionDate.setText(mContext.getString(R.string.inspection_date_week, DateUtil.getWeek(slottingEndLength)));
+            tvItemInspectionDate.setText(mContext.getString(R.string.inspection_date_week, slottingEndLength));
+            //tvItemInspectionDate.setText(mContext.getString(R.string.inspection_date_week, DateUtil.getWeek(slottingEndLength)));
         }
     }
 

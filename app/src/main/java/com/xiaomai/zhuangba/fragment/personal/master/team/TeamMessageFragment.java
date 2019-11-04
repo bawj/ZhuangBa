@@ -23,7 +23,7 @@ import java.util.List;
 /**
  * @author Administrator
  * @date 2019/10/18 0018
- *
+ * <p>
  * 团队消息
  */
 public class TeamMessageFragment extends BaseListFragment {
@@ -49,7 +49,7 @@ public class TeamMessageFragment extends BaseListFragment {
 
     private void requestSelectTeamUserByPhone() {
         UserInfo unique = DBHelper.getInstance().getUserInfoDao().queryBuilder().unique();
-        RxUtils.getObservable(ServiceUrl.getUserApi().selectTeamUserByPhone(unique.getPhoneNumber(),""))
+        RxUtils.getObservable(ServiceUrl.getUserApi().selectTeamUserByPhone(unique.getPhoneNumber(), ""))
                 .compose(this.<HttpResult<List<TeamMessageBean>>>bindToLifecycle())
                 .subscribe(new BaseHttpRxObserver<List<TeamMessageBean>>() {
                     @Override
@@ -70,6 +70,7 @@ public class TeamMessageFragment extends BaseListFragment {
                             loadMoreComplete();
                         }
                     }
+
                     @Override
                     public void onError(ApiException apiException) {
                         super.onError(apiException);
@@ -84,17 +85,15 @@ public class TeamMessageFragment extends BaseListFragment {
         teamMessageAdapter = new TeamMessageAdapter();
         teamMessageAdapter.setOnDelListener(new TeamMessageAdapter.IOnSwipeListener() {
             @Override
-            public void isAgree(String isAgree, int pos) {
-                updateTeam(isAgree , pos);
+            public void isAgree(String userNumber, String isAgree, int pos) {
+                updateTeam(userNumber, isAgree, pos);
             }
         });
         return teamMessageAdapter;
     }
 
-    private void updateTeam(String isAgree,final int pos){
-        UserInfo unique = DBHelper.getInstance().getUserInfoDao().queryBuilder().unique();
-        String phoneNumber = unique.getPhoneNumber();
-        RxUtils.getObservable(ServiceUrl.getUserApi().updateTeam(phoneNumber,isAgree))
+    private void updateTeam(String userNumber, String isAgree, final int pos) {
+        RxUtils.getObservable(ServiceUrl.getUserApi().updateTeam(userNumber, isAgree))
                 .compose(this.<HttpResult<Object>>bindToLifecycle())
                 .subscribe(new BaseHttpRxObserver<Object>(getActivity()) {
                     @Override
@@ -113,12 +112,12 @@ public class TeamMessageFragment extends BaseListFragment {
     public void rightTitleClick(View v) {
         //清空
         UserInfo unique = DBHelper.getInstance().getUserInfoDao().queryBuilder().unique();
-        RxUtils.getObservable(ServiceUrl.getUserApi().updateAll(unique.getPhoneNumber(),String.valueOf(StaticExplain.EMPTY.getCode())))
+        RxUtils.getObservable(ServiceUrl.getUserApi().updateAll(unique.getPhoneNumber(), String.valueOf(StaticExplain.EMPTY.getCode())))
                 .compose(this.<HttpResult<Object>>bindToLifecycle())
                 .subscribe(new BaseHttpRxObserver<Object>(getActivity()) {
                     @Override
                     protected void onSuccess(Object response) {
-                        if (teamMessageAdapter != null){
+                        if (teamMessageAdapter != null) {
                             teamMessageAdapter.getData().clear();
                             teamMessageAdapter.notifyDataSetChanged();
                         }

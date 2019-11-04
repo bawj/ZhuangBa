@@ -32,7 +32,7 @@ public class ServiceItemsAdapter extends BaseQuickAdapter<OrderServiceItem, Base
         TextView tvItemServiceTotalMoney = helper.getView(R.id.tvItemServiceTotalMoney);
         TextView tvOrderDetailMaintenance = helper.getView(R.id.tvOrderDetailMaintenance);
 
-        TextView ivServiceItemRight = helper.getView(R.id.ivServiceItemRight);
+        ImageView ivServiceItemRight = helper.getView(R.id.ivServiceItemRight);
         int adapterPosition = helper.getAdapterPosition();
         if (adapterPosition == 0){
             ivServiceItemRight.setVisibility(View.GONE);

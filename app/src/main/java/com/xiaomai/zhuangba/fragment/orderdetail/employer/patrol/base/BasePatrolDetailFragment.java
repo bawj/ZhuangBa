@@ -172,7 +172,8 @@ public class BasePatrolDetailFragment<T extends IBasePatrolModule> extends BaseF
         if (slottingStartLength.equals(ConstantUtil.MONTH)) {
             tvBasePatrolLengthOfServiceTime.setText(getString(R.string.sing_month , slottingEndLength));
         } else if (slottingStartLength.equals(ConstantUtil.WEEK)) {
-            tvBasePatrolLengthOfServiceTime.setText(getString(R.string.weekly , DateUtil.getWeek(slottingEndLength)));
+            tvBasePatrolLengthOfServiceTime.setText(getString(R.string.weekly , slottingEndLength));
+            //tvBasePatrolLengthOfServiceTime.setText(getString(R.string.weekly , DateUtil.getWeek(slottingEndLength)));
         }
         //备注说明
         tvBasePatrolNotes.setText(ongoingOrdersList.getEmployerDescribe());

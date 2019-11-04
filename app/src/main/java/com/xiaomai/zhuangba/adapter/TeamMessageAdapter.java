@@ -24,11 +24,12 @@ public class TeamMessageAdapter extends BaseQuickAdapter<TeamMessageBean , BaseV
     protected void convert(BaseViewHolder helper, TeamMessageBean teamMessageBean) {
         //邀请人电话
         TextView tvMemberPhone = helper.getView(R.id.tvMemberPhone);
+        final String userNumber = teamMessageBean.getUserNumber();
         // 1被邀请 2 请求加入
         if (teamMessageBean.getIsAgree() == 2){
-            tvMemberPhone.setText(mContext.getString(R.string.member_phone , teamMessageBean.getUserNumber()));
+            tvMemberPhone.setText(mContext.getString(R.string.member_phone , userNumber));
         }else if (teamMessageBean.getIsAgree() == 1){
-            tvMemberPhone.setText(mContext.getString(R.string.member_phone_ , teamMessageBean.getUserNumber()));
+            tvMemberPhone.setText(mContext.getString(R.string.member_phone_ , userNumber));
         }
         //时间
         TextView tvTeamDate = helper.getView(R.id.tvTeamDate);
@@ -40,7 +41,7 @@ public class TeamMessageAdapter extends BaseQuickAdapter<TeamMessageBean , BaseV
             public void onClick(View v) {
                 if (null != mOnSwipeListener) {
                     //同意
-                    mOnSwipeListener.isAgree(String.valueOf(StaticExplain.AGREE.getCode()), adapterPosition);
+                    mOnSwipeListener.isAgree(userNumber,String.valueOf(StaticExplain.AGREE.getCode()), adapterPosition);
                 }
             }
         });
@@ -51,7 +52,7 @@ public class TeamMessageAdapter extends BaseQuickAdapter<TeamMessageBean , BaseV
             public void onClick(View v) {
                 if (null != mOnSwipeListener) {
                     //不同意
-                    mOnSwipeListener.isAgree(String.valueOf(StaticExplain.REFUSE.getCode()), adapterPosition);
+                    mOnSwipeListener.isAgree(userNumber,String.valueOf(StaticExplain.REFUSE.getCode()), adapterPosition);
                 }
             }
         });
@@ -70,9 +71,10 @@ public class TeamMessageAdapter extends BaseQuickAdapter<TeamMessageBean , BaseV
     public interface IOnSwipeListener {
         /**
          * 师傅加入团队
+         * @param userNumber 手机号
          * @param isAgree 3:拒绝;4同意
          * @param pos position
          */
-        void isAgree(String isAgree, int pos);
+        void isAgree(String userNumber,String isAgree, int pos);
     }
 }

@@ -510,8 +510,8 @@
     <string name="length_of_inspection">巡查时长：%1$s个月</string>
     <string name="month">巡查频率：月</string>
     <string name="monthly_account">月结挂账</string>
-    <string name="inspection_date">巡查日期：%1$s号</string>
-    <string name="inspection_date_week">巡查日期：周%1$s</string>
+    <string name="inspection_date">巡查日期：每月%1$s号</string>
+    <string name="inspection_date_week">巡查日期：每周%1$s</string>
     <string name="week">巡查频率：周</string>
     <string name="patrol_area">巡查区域：</string>
     <string name="length_of_service_">服务时长：</string>
@@ -579,4 +579,5 @@
     <string name="weekly">每周%1$s</string>
     <string name="sing_month">每月%1$s号</string>
     <string name="months">%1$s个月</string>
+    <string name="create_team_success">创建成功</string>
 </resources>

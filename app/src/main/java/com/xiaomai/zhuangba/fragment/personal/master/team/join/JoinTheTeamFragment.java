@@ -94,7 +94,7 @@ public class JoinTheTeamFragment extends BaseListFragment {
         } else {
             RxUtils.getObservable(ServiceUrl.getUserApi().dropOutTeam(phone))
                     .compose(this.<HttpResult<Object>>bindToLifecycle())
-                    .subscribe(new BaseHttpRxObserver<Object>() {
+                    .subscribe(new BaseHttpRxObserver<Object>(getActivity()) {
                         @Override
                         protected void onSuccess(Object response) {
                             startFragment(MasterWorkerFragment.newInstance());

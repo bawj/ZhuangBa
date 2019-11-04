@@ -30,7 +30,13 @@ public class PatrolMissionDetailListAdapter extends BaseQuickAdapter<PatrolMissi
         PatrolStatusUtil.masterPatrolMission(mContext , item.getStatus() , tvBasePatrolDetailType);
         //地址
         TextView tvItemInspectionAddress = helper.getView(R.id.tvItemInspectionAddress);
-        tvItemInspectionAddress.setText(item.getAddress());
+        String province = item.getProvince();
+        String city = item.getCity();
+        String street = item.getStreet();
+        String address = item.getAddress();
+        StringBuilder stringBuilder = new StringBuilder(province);
+        stringBuilder.append(city).append(street).append(address);
+        tvItemInspectionAddress.setText(stringBuilder);
         //A B C D 面
         TextView tvNoodles = helper.getView(R.id.tvNoodles);
         tvNoodles.setText(Util.getNoodles(item.getCover()));

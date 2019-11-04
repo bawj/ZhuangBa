@@ -72,6 +72,7 @@ public class CreateTeamFragment extends BaseFragment {
                         @Override
                         public void onNext(HttpResult<Object> httpResult) {
                             super.onNext(httpResult);
+                            ToastUtil.showShort(httpResult.getMsg());
                             startFragment(MasterWorkerFragment.newInstance());
                         }
                         @Override
