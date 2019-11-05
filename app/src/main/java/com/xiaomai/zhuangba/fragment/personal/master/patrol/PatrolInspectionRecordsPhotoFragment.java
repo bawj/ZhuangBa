@@ -18,6 +18,7 @@ import com.xiaomai.zhuangba.adapter.PhotoPagerFragmentAdapter;
 import com.xiaomai.zhuangba.adapter.TabIncomeNavigator;
 import com.xiaomai.zhuangba.data.bean.PatrolInspectionRecordsDetailImgBean;
 import com.xiaomai.zhuangba.enums.ForResultCode;
+import com.xiaomai.zhuangba.enums.StringTypeExplain;
 import com.xiaomai.zhuangba.http.ServiceUrl;
 
 import net.lucode.hackware.magicindicator.MagicIndicator;
@@ -47,9 +48,9 @@ public class PatrolInspectionRecordsPhotoFragment extends BaseFragment {
     public static final String TITLE = "title";
     public static final String PATROL_MISSION_DETAIL_LIST_BEAN = "patrol_mission_detail_list_bean";
 
-    public static PatrolInspectionRecordsPhotoFragment newInstance(String title,String patrolMissionDetailListBean) {
+    public static PatrolInspectionRecordsPhotoFragment newInstance(String title, String patrolMissionDetailListBean) {
         Bundle args = new Bundle();
-        args.putString(TITLE , title);
+        args.putString(TITLE, title);
         args.putString(PATROL_MISSION_DETAIL_LIST_BEAN, patrolMissionDetailListBean);
         PatrolInspectionRecordsPhotoFragment fragment = new PatrolInspectionRecordsPhotoFragment();
         fragment.setArguments(args);
@@ -96,11 +97,11 @@ public class PatrolInspectionRecordsPhotoFragment extends BaseFragment {
 
     @Override
     protected String getActivityTitle() {
-        if (!TextUtils.isEmpty(getTitle())){
+        if (!TextUtils.isEmpty(getTitle())) {
             return getTitle();
-        }else {
+        } else {
             PatrolInspectionRecordsDetailImgBean patrolMissionDetailListBean = getPatrolInspectionRecordsDetailImgBean();
-            return  patrolMissionDetailListBean.getOrderDetailNo();
+            return patrolMissionDetailListBean.getOrderDetailNo();
         }
     }
 
@@ -129,25 +130,33 @@ public class PatrolInspectionRecordsPhotoFragment extends BaseFragment {
         boolean flag = false;
         //完成
         PatrolInspectionRecordsDetailImgBean patrolInspectionRecordsDetailImgBean = getPatrolInspectionRecordsDetailImgBean();
-        List<PatrolInspectionRecordsDetailImgBean.TaskPictureListBean> taskPictureListBeanList = new ArrayList<>();
-        for (PatrolInspectionRecordsPhotoDetailFragment patrolInspectionRecordsPhotoDetailFragment : photoDetailFragmentList) {
+        //默认设置已巡查
+        patrolInspectionRecordsDetailImgBean.setStatus(StringTypeExplain.PROCESSED.getCode());
+        List<PatrolInspectionRecordsDetailImgBean.TaskPictureListBean> taskPictureVOList = patrolInspectionRecordsDetailImgBean.getTaskPictureList();
+        for (int i = 0; i < photoDetailFragmentList.size(); i++) {
+            PatrolInspectionRecordsPhotoDetailFragment patrolInspectionRecordsPhotoDetailFragment = photoDetailFragmentList.get(i);
             PatrolInspectionRecordsDetailImgBean.TaskPictureListBean taskPictureListBean = patrolInspectionRecordsPhotoDetailFragment.getTaskPictureListBean();
-            taskPictureListBeanList.add(taskPictureListBean);
-            String pic = taskPictureListBean.getPic();
-            if (!TextUtils.isEmpty(pic)){
+            String newPic = taskPictureListBean.getPic();
+            PatrolInspectionRecordsDetailImgBean.TaskPictureListBean taskPictureListBean1 = taskPictureVOList.get(i);
+            String pic = taskPictureListBean1.getPic();
+            if (!TextUtils.isEmpty(newPic)) {
+                taskPictureVOList.add(taskPictureListBean);
                 flag = true;
+            } else if (TextUtils.isEmpty(pic)){
+                //有一个面 没有上传图片  则 未巡查
+                patrolInspectionRecordsDetailImgBean.setStatus(StringTypeExplain.PROCESSING.getCode());
             }
         }
         if (!flag) {
             ToastUtil.showShort(getString(R.string.please_save_the_patrol_pictures));
             return;
         }
-        PatrolInspectionRecordsDetailImgBean detailImgBean  = new PatrolInspectionRecordsDetailImgBean();
+        PatrolInspectionRecordsDetailImgBean detailImgBean = new PatrolInspectionRecordsDetailImgBean();
         detailImgBean.setId(patrolInspectionRecordsDetailImgBean.getId());
         detailImgBean.setCover(patrolInspectionRecordsDetailImgBean.getCover());
         detailImgBean.setOrderDetailNo(patrolInspectionRecordsDetailImgBean.getOrderDetailNo());
         detailImgBean.setStatus(patrolInspectionRecordsDetailImgBean.getStatus());
-        detailImgBean.setTaskPictureVOList(taskPictureListBeanList);
+        detailImgBean.setTaskPictureVOList(taskPictureVOList);
         RequestBody requestBody = RequestBody.create(MediaType.parse("application/json;charset=utf-8"), new Gson().toJson(detailImgBean));
         RxUtils.getObservable(ServiceUrl.getUserApi().save(requestBody))
                 .compose(this.<HttpResult<Object>>bindToLifecycle())
@@ -161,8 +170,8 @@ public class PatrolInspectionRecordsPhotoFragment extends BaseFragment {
                 });
     }
 
-    public String getTitle(){
-        if (getArguments() != null){
+    public String getTitle() {
+        if (getArguments() != null) {
             return getArguments().getString(TITLE);
         }
         return "";

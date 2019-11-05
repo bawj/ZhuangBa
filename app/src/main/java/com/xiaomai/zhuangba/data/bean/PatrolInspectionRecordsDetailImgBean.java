@@ -15,7 +15,7 @@ public class PatrolInspectionRecordsDetailImgBean {
     /**
      * id : 65
      * orderDetailNo : 231671268242382848
-     * status : processed
+     * status : processed  processing
      * taskPictureList : [{"id":34,"taskid":null,"pic":"D:\\work_zs\\img\\2019-10-11\\1c8622da5a074b9da6d6bba00b2a4022.jpg","side":"C","remarks":"本面是新增","createtime":null,"isdelete":null}]
      */
 
