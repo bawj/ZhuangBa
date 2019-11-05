@@ -58,6 +58,7 @@
     <string name="time">预约时间：%1$s</string>
     <string name="task_number">共%1$s项</string>
     <string name="content_money">¥%1$s</string>
+    <string name="asterisk">***</string>
     <string name="number">x%1$s</string>
     <string name="task_number_">数量：%1$s</string>
     <string name="in_distribution">分配中</string>
@@ -105,6 +106,7 @@
     <string name="cancel_the_order">取消接单</string>
     <string name="cancel_task">取消任务</string>
     <string name="proportion">订单中总金额¥%1$s，您当前分成比例为%2$s</string>
+    <string name="proportion_">订单中总金额%1$s，您当前分成比例为%2$s</string>
     <string name="select_service">选择服务</string>
     <string name="individual">/个</string>
     <string name="individual_">x%1$s</string>
@@ -573,6 +575,7 @@
     <string name="agree">同意</string>
     <string name="photo_tip">注：拍摄标志性信息，确认已到现场</string>
     <string name="please_shot_img">请拍摄图片</string>
+    <string name="please_save_shot_img">请保存图片</string>
     <string name="to_be_started">待开工</string>
     <string name="can_not_start">不能开工</string>
     <string name="start_construction_tip">注：确认提交将发送短信给现场负责人，请务必让现场负责人点击短信中的链接签字并确认开工</string>

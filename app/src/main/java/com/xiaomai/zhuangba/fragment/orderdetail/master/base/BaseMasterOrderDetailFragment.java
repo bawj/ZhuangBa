@@ -1,11 +1,14 @@
 package com.xiaomai.zhuangba.fragment.orderdetail.master.base;
 
+import android.text.TextUtils;
 import android.widget.TextView;
 
 import com.example.toollib.util.AmountUtil;
 import com.example.toollib.util.DensityUtils;
 import com.xiaomai.zhuangba.R;
 import com.xiaomai.zhuangba.data.bean.OngoingOrdersList;
+import com.xiaomai.zhuangba.data.bean.UserInfo;
+import com.xiaomai.zhuangba.data.db.DBHelper;
 import com.xiaomai.zhuangba.enums.OrdersEnum;
 import com.xiaomai.zhuangba.fragment.authentication.master.IDCardScanningFragment;
 import com.xiaomai.zhuangba.fragment.masterworker.MasterWorkerFragment;
@@ -44,12 +47,22 @@ public class BaseMasterOrderDetailFragment extends BaseOrderDetailFragment<IMast
     @Override
     public void masterOngoingOrdersListSuccess(OngoingOrdersList ongoingOrdersList) {
         //师傅得到的金额
-        tvBaseOrderDetailTotalMoney.setText(getString(R.string.content_money, ongoingOrdersList.getMasterOrderAmount()));
-        //总金额
-        String percentage = AmountUtil.percentage(DensityUtils.stringTypeDouble(ongoingOrdersList.getMasterOrderAmount()),
-                DensityUtils.stringTypeDouble(String.valueOf(ongoingOrdersList.getOrderAmount())));
-        String s = getString(R.string.proportion, String.valueOf(ongoingOrdersList.getOrderAmount()), percentage) + "%";
-        tvBaseOrderDetailDivideIntoColumns.setText(s);
+        String assigner = ongoingOrdersList.getAssigner();
+        UserInfo unique = DBHelper.getInstance().getUserInfoDao().queryBuilder().unique();
+        String phoneNumber = unique.getPhoneNumber();
+
+        String percentage;
+        if (TextUtils.isEmpty(assigner) || phoneNumber.equals(assigner)){
+            tvBaseOrderDetailTotalMoney.setText(getString(R.string.content_money, ongoingOrdersList.getMasterOrderAmount()));
+            //总金额
+            percentage = AmountUtil.percentage(DensityUtils.stringTypeDouble(ongoingOrdersList.getMasterOrderAmount()),
+                    DensityUtils.stringTypeDouble(String.valueOf(ongoingOrdersList.getOrderAmount())));
+            percentage = getString(R.string.proportion, String.valueOf(ongoingOrdersList.getOrderAmount()), percentage) + "%";
+        }else {
+            tvBaseOrderDetailTotalMoney.setText(getString(R.string.asterisk));
+            percentage = getString(R.string.proportion_, getString(R.string.asterisk), getString(R.string.asterisk));
+        }
+        tvBaseOrderDetailDivideIntoColumns.setText(percentage);
     }
 
     @Override

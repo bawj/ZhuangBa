@@ -1,5 +1,6 @@
 package com.xiaomai.zhuangba.adapter;
 
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -11,9 +12,10 @@ import com.qmuiteam.qmui.layout.QMUILinearLayout;
 import com.qmuiteam.qmui.util.QMUIDisplayHelper;
 import com.xiaomai.zhuangba.R;
 import com.xiaomai.zhuangba.data.bean.OngoingOrdersList;
+import com.xiaomai.zhuangba.data.bean.UserInfo;
+import com.xiaomai.zhuangba.data.db.DBHelper;
 import com.xiaomai.zhuangba.enums.OrdersEnum;
 import com.xiaomai.zhuangba.enums.StaticExplain;
-import com.xiaomai.zhuangba.util.AdvertisingStatusUtil;
 import com.xiaomai.zhuangba.util.OrderStatusUtil;
 
 import java.util.ArrayList;
@@ -47,7 +49,6 @@ public class NeedDealWithAdapter extends BaseQuickAdapter<OngoingOrdersList, Bas
         tvItemOrdersNumber.setText(mContext.getString(R.string.task_number, String.valueOf(ongoingOrders.getNumber())));
         //money
         TextView tvItemOrdersMoney = helper.getView(R.id.tvItemOrdersMoney);
-        tvItemOrdersMoney.setText(String.valueOf(mContext.getString(R.string.content_money, String.valueOf(ongoingOrders.getOrderAmount()))));
         //type
         TextView tvItemOrdersType = helper.getView(R.id.tvItemOrdersType);
 
@@ -144,6 +145,24 @@ public class NeedDealWithAdapter extends BaseQuickAdapter<OngoingOrdersList, Bas
             tvDebugging.setVisibility(View.GONE);
             tvAuxiliaryMaterials.setVisibility(View.GONE);
         }*/
+
+        //是否是团队的订单
+        TextView tvMaintenanceTeam = helper.getView(R.id.tvMaintenanceTeam);
+        String assigner = ongoingOrders.getAssigner();
+        if (!TextUtils.isEmpty(assigner)){
+            tvMaintenanceTeam.setVisibility(View.VISIBLE);
+        }else {
+            tvMaintenanceTeam.setVisibility(View.GONE);
+        }
+        //如果 assigner == 登录账号 则是 团长 显示金额 否则不显示
+        UserInfo unique = DBHelper.getInstance().getUserInfoDao().queryBuilder().unique();
+        String phoneNumber = unique.getPhoneNumber();
+        if (TextUtils.isEmpty(assigner) || phoneNumber.equals(assigner)){
+            tvItemOrdersMoney.setText(String.valueOf(mContext.getString(R.string.content_money, String.valueOf(ongoingOrders.getOrderAmount()))));
+        }else {
+            tvItemOrdersMoney.setText(String.valueOf(mContext.getString(R.string.asterisk)));
+        }
+
         OrderStatusUtil.masterStatus(mContext, orderStatus, tvItemOrdersType);
     }
 }

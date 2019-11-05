@@ -88,6 +88,8 @@ public class IdCardRecognitionFragment extends BaseFragment {
                 }
             });
         }
+
+        //getBaseFragmentActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
     }
 
     private boolean isFront(){
@@ -120,7 +122,7 @@ public class IdCardRecognitionFragment extends BaseFragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        getBaseFragmentActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        ///getBaseFragmentActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         if (animation != null){
             animation.cancel();
         }

@@ -24,6 +24,7 @@ public class InspectionSheetBean implements Parcelable {
 
     private String province;
     private String city;
+    private String region;
     private String district;
     private String street;
     private String villageName;
@@ -148,6 +149,14 @@ public class InspectionSheetBean implements Parcelable {
 
     public int getPageSize() {
         return pageSize;
+    }
+
+    public String getRegion() {
+        return region == null ? "" : region;
+    }
+
+    public void setRegion(String region) {
+        this.region = region;
     }
 
     public void setPageSize(int pageSize) {

@@ -48,6 +48,21 @@
                 android:visibility="gone" />
 
             <TextView
+                android:id="@+id/tvMaintenanceTeam"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/tool_lib_6dp"
+                android:layout_marginLeft="@dimen/tool_lib_6dp"
+                android:layout_toEndOf="@+id/tvMaintenance"
+                android:layout_toRightOf="@+id/tvMaintenance"
+                android:background="@drawable/green_team_radius_bg"
+                android:padding="@dimen/tool_lib_6dp"
+                android:text="@string/team_"
+                android:textColor="@color/tool_lib_color_22B64A"
+                android:textSize="@dimen/tool_lib_12sp" />
+
+            <TextView
                 android:id="@+id/tvItemOrdersType"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

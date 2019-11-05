@@ -44,10 +44,7 @@ public class InspectionSheetAdapter extends BaseQuickAdapter<InspectionSheetBean
         //街道
         String street = item.getStreet();
         StringBuffer stringBuffer = new StringBuffer(province);
-        if (!province.equals(city)) {
-            stringBuffer.append(city);
-        }
-        stringBuffer.append(district).append(street).append(villageName);
+        stringBuffer.append(city).append(district).append(street).append(villageName);
         tvItemInspectionAddress.setText(mContext.getString(R.string.advertising_address , stringBuffer));
 
         tvItemOrdersTitle.setTag(item);

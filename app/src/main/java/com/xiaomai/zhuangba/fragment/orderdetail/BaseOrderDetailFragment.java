@@ -89,7 +89,9 @@ public class BaseOrderDetailFragment<T extends IOrderDetailModule> extends BaseF
      */
     @BindView(R.id.tvBaseOrderDetailLocation)
     TextView tvBaseOrderDetailLocation;
-    /** 确认时间  */
+    /**
+     * 确认时间
+     */
     @BindView(R.id.tvBaseOrderConfirmationTime)
     TextView tvBaseOrderConfirmationTime;
     @BindView(R.id.tvBaseOrderConfirmationTime_)
@@ -223,7 +225,7 @@ public class BaseOrderDetailFragment<T extends IOrderDetailModule> extends BaseF
             //雇主提交的现场照片
             if (deliveryContent.getPicturesType().equals(String.valueOf(StaticExplain.EMPLOYER_LIVE_PHOTOS.getCode()))) {
                 livePhotos(deliveryContent);
-            }else {
+            } else {
                 relLivePhotos.setVisibility(View.GONE);
                 relFieldDescription.setVisibility(View.GONE);
             }
@@ -292,7 +294,7 @@ public class BaseOrderDetailFragment<T extends IOrderDetailModule> extends BaseF
             double materialsPrice = ongoingOrdersList.getMaterialsPrice();
             orderServiceItem.setAmount((slottingPrice + debugPrice + materialsPrice));
             orderServiceItem.setIconUrl(PretendApplication.BASE_URL);
-            orderServiceItems.add(0,orderServiceItem);
+            orderServiceItems.add(0, orderServiceItem);
         }
         //服务项目
         serviceItemsAdapter.setNewData(orderServiceItems);
@@ -301,9 +303,11 @@ public class BaseOrderDetailFragment<T extends IOrderDetailModule> extends BaseF
     @Override
     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
         //服务项目 itemClick
-        OrderServiceItem orderServiceItem = (OrderServiceItem) view.findViewById(R.id.tvItemServiceTotalMoney).getTag();
-        startFragment(ServiceDetailFragment.newInstance(orderServiceItem.getServiceText(),
-                orderServiceItem.getServiceStandard(), orderServiceItem.getVideo(), orderServiceItem.getIconUrl()));
+        if (position != 0) {
+            OrderServiceItem orderServiceItem = (OrderServiceItem) view.findViewById(R.id.tvItemServiceTotalMoney).getTag();
+            startFragment(ServiceDetailFragment.newInstance(orderServiceItem.getServiceText(),
+                    orderServiceItem.getServiceStandard(), orderServiceItem.getVideo(), orderServiceItem.getIconUrl()));
+        }
     }
 
     public void masterDeliveryContent(DeliveryContent deliveryContent) {
@@ -327,11 +331,11 @@ public class BaseOrderDetailFragment<T extends IOrderDetailModule> extends BaseF
         tvBaseOrderDetailLocation.setText(ongoingOrdersList.getAddress());
         //确认时间
         String confirmationTime = ongoingOrdersList.getConfirmationTime();
-        if (!TextUtils.isEmpty(confirmationTime)){
+        if (!TextUtils.isEmpty(confirmationTime)) {
             tvBaseOrderConfirmationTime_.setText(confirmationTime);
             tvBaseOrderConfirmationTime.setVisibility(View.VISIBLE);
             tvBaseOrderConfirmationTime_.setVisibility(View.VISIBLE);
-        }else {
+        } else {
             tvBaseOrderConfirmationTime.setVisibility(View.GONE);
             tvBaseOrderConfirmationTime_.setVisibility(View.GONE);
         }

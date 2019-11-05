@@ -55,7 +55,7 @@
         android:name="android.permission.READ_LOGS"
         tools:ignore="ProtectedPermissions" />
 
-    <uses-sdk tools:overrideLibrary="fm.jiecao.jcvideoplayer_lib"/>
+    <uses-sdk tools:overrideLibrary="fm.jiecao.jcvideoplayer_lib" />
 
     <application
         android:name=".application.PretendApplication"
@@ -92,6 +92,11 @@
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/translucent" />
+
+        <activity
+            android:name="activity.IDCardRecognitionActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="landscape" />
 
         <provider
             android:name="android.support.v4.content.FileProvider"

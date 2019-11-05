@@ -61,8 +61,10 @@ public class MasterAdvertisementNewSubmitAcceptanceSingleFragment extends Master
                         }
                     });
 
-        } else {
+        } else if (resultUri == null){
             ToastUtil.showShort(getString(R.string.please_shot_img));
+        }else {
+            ToastUtil.showShort(getString(R.string.please_save_shot_img));
         }
     }
 

@@ -61,7 +61,7 @@ public class MasterAdvertisementStartConstructionSingleFragment extends BaseFrag
     public String requestImgUrl = "";
     private Uri imageUriFromCamera;
     /** 提交图片前的本地地址 */
-    private Uri resultUri = null;
+    public Uri resultUri = null;
 
     public static MasterAdvertisementStartConstructionSingleFragment newInstance(String orderCode, String orderType) {
         Bundle args = new Bundle();
@@ -167,8 +167,10 @@ public class MasterAdvertisementStartConstructionSingleFragment extends BaseFrag
                             startFragment(MasterWorkerFragment.newInstance());
                         }
                     });
-        }else {
+        }else if (resultUri == null){
             ToastUtil.showShort(getString(R.string.please_shot_img));
+        }else {
+            ToastUtil.showShort(getString(R.string.please_save_shot_img));
         }
     }
 

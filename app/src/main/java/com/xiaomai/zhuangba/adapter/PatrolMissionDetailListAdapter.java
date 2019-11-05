@@ -35,7 +35,7 @@ public class PatrolMissionDetailListAdapter extends BaseQuickAdapter<PatrolMissi
         String street = item.getStreet();
         String address = item.getAddress();
         StringBuilder stringBuilder = new StringBuilder(province);
-        stringBuilder.append(city).append(street).append(address);
+        stringBuilder.append(city).append(item.getRegion()).append(street).append(address);
         tvItemInspectionAddress.setText(stringBuilder);
         //A B C D 面
         TextView tvNoodles = helper.getView(R.id.tvNoodles);

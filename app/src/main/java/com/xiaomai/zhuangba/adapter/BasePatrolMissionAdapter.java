@@ -44,8 +44,9 @@ public class BasePatrolMissionAdapter extends BaseSectionQuickAdapter<PatrolMiss
         //地址
         TextView tvItemInspectionAddress = helper.getView(R.id.tvItemInspectionAddress);
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(taskListBean.getProvince()).append(taskListBean.getCity())
-                .append(taskListBean.getStreet());
+        stringBuilder.append(taskListBean.getProvince())
+                .append(taskListBean.getCity()).append(taskListBean.getRegion())
+                .append(taskListBean.getStreet()).append(taskListBean.getAddress());
         tvItemInspectionAddress.setText(stringBuilder);
         //3 / 25
         TextView tvPatrolMissionChildTotal = helper.getView(R.id.tvPatrolMissionChildTotal);

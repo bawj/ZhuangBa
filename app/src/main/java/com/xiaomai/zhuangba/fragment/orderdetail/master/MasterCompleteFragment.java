@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.toollib.fragment.ImgPreviewFragment;
@@ -33,6 +34,8 @@ public class MasterCompleteFragment extends BeUnderConstructionFragment {
     RecyclerView recyclerMasterWorkerDeliveryContent;
     @BindView(R.id.ivMasterWorkerSignature)
     ImageView ivMasterWorkerSignature;
+    @BindView(R.id.tvMasterWorkerSignature)
+    TextView tvMasterWorkerSignature;
 
     /**
      * 任务提交后的照片
@@ -75,11 +78,16 @@ public class MasterCompleteFragment extends BeUnderConstructionFragment {
                 }
             });
         }
-        String electronicSignature = deliveryContent.getElectronicSignature();
-        if (!TextUtils.isEmpty(electronicSignature)) {
-            //负责人签名
-            GlideManager.loadImage(getActivity(), electronicSignature, ivMasterWorkerSignature);
-        }
+//        String electronicSignature = deliveryContent.getElectronicSignature();
+//        if (!TextUtils.isEmpty(electronicSignature)) {
+//            //负责人签名
+//            tvMasterWorkerSignature.setVisibility(View.VISIBLE);
+//            ivMasterWorkerSignature.setVisibility(View.VISIBLE);
+//            GlideManager.loadImage(getActivity(), electronicSignature, ivMasterWorkerSignature);
+//        }else {
+//            tvMasterWorkerSignature.setVisibility(View.GONE);
+//            ivMasterWorkerSignature.setVisibility(View.GONE);
+//        }
     }
 
 

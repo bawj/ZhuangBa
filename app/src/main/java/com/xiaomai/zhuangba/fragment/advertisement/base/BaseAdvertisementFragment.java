@@ -3,6 +3,7 @@ package com.xiaomai.zhuangba.fragment.advertisement.base;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -131,8 +132,17 @@ public class BaseAdvertisementFragment extends BaseFragment<IBaseAdvertisementMo
             tvBaseAdvertisementServiceCycle.setText(ongoingOrdersList.getExpireTime());
             //备注
             tvBaseAdvertisementNotes.setText(ongoingOrdersList.getEmployerDescribe());
-            //总金额
-            tvBaseAdvertisementMoney.setText(getString(R.string.content_money , String.valueOf(ongoingOrdersList.getOrderAmount())));
+
+            //师傅得到的金额
+            String assigner = ongoingOrdersList.getAssigner();
+            String phoneNumber = unique.getPhoneNumber();
+            if (TextUtils.isEmpty(assigner) || phoneNumber.equals(assigner)){
+                //总金额
+                tvBaseAdvertisementMoney.setText(getString(R.string.content_money , String.valueOf(ongoingOrdersList.getOrderAmount())));
+            }else {
+                tvBaseAdvertisementMoney.setText(getString(R.string.content_money , getString(R.string.asterisk)));
+            }
+
             //安装地址
             tvBaseOrderDetailLocation.setText(ongoingOrdersList.getAddress());
             //广告图

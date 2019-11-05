@@ -82,6 +82,8 @@ public class OngoingOrdersList implements Parcelable{
     /** 广告图 */
     private String picturesUrl;
 
+    /** 团长手机号 如果不为空 则是团队的订单 否则不是*/
+    private String assigner;
 
     /**
      * 是否选中
@@ -385,6 +387,14 @@ public class OngoingOrdersList implements Parcelable{
 
     public void setCheck(boolean check) {
         isCheck = check;
+    }
+
+    public String getAssigner() {
+        return assigner == null ? "" : assigner;
+    }
+
+    public void setAssigner(String assigner) {
+        this.assigner = assigner;
     }
 
     @Override

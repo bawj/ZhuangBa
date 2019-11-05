@@ -3,20 +3,24 @@ package lib.kalu.ocr;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
 import android.graphics.PixelFormat;
+import android.graphics.Point;
 import android.hardware.Camera;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.Looper;
 import android.os.Message;
 import android.util.AttributeSet;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Surface;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.WindowManager;
 import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import exocr.exocrengine.EXOCREngine;
 import exocr.exocrengine.EXOCRModel;
@@ -27,21 +31,24 @@ import exocr.exocrengine.EXOCRModel;
  */
 public class OcrSurfaceView extends SurfaceView implements SurfaceHolder.Callback {
 
+    private Context mContext;
     private Camera mCamera;
 
     /**********************************************************************************************/
 
     public OcrSurfaceView(Context context) {
         this(context, null, 0);
+        this.mContext = context;
     }
 
     public OcrSurfaceView(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
+        this.mContext = context;
     }
 
     public OcrSurfaceView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-
+        this.mContext = context;
         boolean b = EXOCREngine.InitDict(getContext().getApplicationContext());
         if (!b) {
             Toast.makeText(getContext().getApplicationContext(), "初始化失败", Toast.LENGTH_SHORT).show();
@@ -54,12 +61,21 @@ public class OcrSurfaceView extends SurfaceView implements SurfaceHolder.Callbac
         getHolder().setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
     }
 
+//    int width = 640;
+//    int height = 480;
+    int mWidth = 1920;
+    int mHeight = 1080;
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-
+        //手机分辨率
+        DisplayMetrics dm = mContext.getResources().getDisplayMetrics();
+        Point screenRelsolution = new Point(dm.widthPixels, dm.heightPixels);
+        mWidth = screenRelsolution.x;
+        mHeight = screenRelsolution.y;
         final int height = MeasureSpec.getSize(heightMeasureSpec);
-        final int width = 640 * height / 480;
+        final int width = mWidth * height / mHeight;
         setMeasuredDimension(width, height);
+
 
 //        final int canvasHeight = MeasureSpec.getSize(heightMeasureSpec);
 //        final int canvasWidth = MeasureSpec.getSize(widthMeasureSpec);
@@ -90,11 +106,18 @@ public class OcrSurfaceView extends SurfaceView implements SurfaceHolder.Callbac
         try {
             mCamera = Camera.open();
 
-            Camera.Parameters parameters = mCamera.getParameters();//得到摄像头的参数
-            parameters.setJpegQuality(100);//设置照片的质量
-            parameters.setPreviewSize(640, 480);//设置预览尺寸
-            parameters.setPictureSize(640, 480);//设置照片尺寸
-            parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE);// 连续对焦模式
+            //得到摄像头的参数
+            Camera.Parameters parameters = mCamera.getParameters();
+            //设置照片的质量
+            parameters.setJpegQuality(100);
+
+            //设置预览尺寸
+            parameters.setPreviewSize(mWidth, mHeight);
+            //设置照片尺寸
+            parameters.setPictureSize(mWidth, mHeight);
+            // 连续对焦模式
+            parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE);
+            mCamera.cancelAutoFocus();
             //Camera.Parameters.FOCUS_MODE_AUTO; //自动聚焦模式
             //Camera.Parameters.FOCUS_MODE_INFINITY;//无穷远
             //Camera.Parameters.FOCUS_MODE_MACRO;//微距
@@ -121,6 +144,7 @@ public class OcrSurfaceView extends SurfaceView implements SurfaceHolder.Callbac
                 case Surface.ROTATION_270:
                     degrees = 270;
                     break;
+                default:
             }
             if (info.facing == Camera.CameraInfo.CAMERA_FACING_FRONT) {
                 // 前置摄像头
@@ -131,8 +155,8 @@ public class OcrSurfaceView extends SurfaceView implements SurfaceHolder.Callbac
                 int result = (info.orientation - degrees + 360) % 360;
                 mCamera.setDisplayOrientation(result);
             }
-
-            mCamera.setPreviewDisplay(getHolder());//通过SurfaceView显示取景画面
+            //通过SurfaceView显示取景画面
+            mCamera.setPreviewDisplay(getHolder());
             mCamera.startPreview();//开始预览
 
             mCamera.setPreviewCallback(new Camera.PreviewCallback() {
@@ -141,13 +165,17 @@ public class OcrSurfaceView extends SurfaceView implements SurfaceHolder.Callbac
                     //Log.e("kalu", "onPreviewFrame");
 
                     boolean alive = mThread.isAlive();
-                    if (!alive) return;
+                    if (!alive) {
+                        return;
+                    }
                     //Log.e("kalu11", "setPreviewCallback ==> ");
 
                     final Message obtain = Message.obtain();
                     obtain.obj = data;
-                    obtain.arg1 = 640;
-                    obtain.arg2 = 480;
+                    //obtain.arg1 = 640;
+                    //obtain.arg2 = 480;
+                    obtain.arg1 = mWidth;
+                    obtain.arg2 = mHeight;
                     mHandler.removeCallbacksAndMessages(null);
                     mHandler.sendMessage(obtain);
                 }
@@ -190,8 +218,9 @@ public class OcrSurfaceView extends SurfaceView implements SurfaceHolder.Callbac
         @Override
         public void handleMessage(Message msg) {
 
-            if (null == listener || null == msg.obj)
+            if (null == listener || null == msg.obj) {
                 return;
+            }
 
             final EXOCRModel model = (EXOCRModel) msg.obj;
             listener.onSucc(model);
@@ -213,8 +242,9 @@ public class OcrSurfaceView extends SurfaceView implements SurfaceHolder.Callbac
             final int height = msg.arg2;
 
             final EXOCRModel decode = EXOCREngine.decodeByte(data, width, height);
-            if (null == decode)
+            if (null == decode){
                 return;
+            }
 
             final Message obtain = Message.obtain();
             obtain.obj = decode;
@@ -239,4 +269,6 @@ public class OcrSurfaceView extends SurfaceView implements SurfaceHolder.Callbac
     public void setOnOcrChangeListener(OnOcrChangeListener listener) {
         this.listener = listener;
     }
+
+
 }
