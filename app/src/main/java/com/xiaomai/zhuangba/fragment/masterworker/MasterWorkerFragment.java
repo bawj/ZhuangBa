@@ -203,6 +203,7 @@ public class MasterWorkerFragment extends BaseMasterEmployerFragment implements 
         fragmentList.add(NeedDealWithFragment.newInstance());
         fragmentList.add(AdvertisingBillsFragment.newInstance());
         fragmentList.add(InspectionSheetFragment.newInstance());
+        //
         return fragmentList;
     }
 
