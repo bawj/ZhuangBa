@@ -26,6 +26,7 @@ import com.xiaomai.zhuangba.enums.StringTypeExplain;
 import com.xiaomai.zhuangba.http.ServiceUrl;
 import com.xiaomai.zhuangba.util.AdvertisingStatusUtil;
 import com.xiaomai.zhuangba.util.OrderStatusUtil;
+import com.xiaomai.zhuangba.util.PatrolStatusUtil;
 
 import java.util.Collections;
 import java.util.List;
@@ -106,11 +107,13 @@ public class NotificationMessageFragment extends BaseFragment {
                 .subscribe(new BaseHttpRxObserver<OngoingOrdersList>(getActivity()) {
                     @Override
                     protected void onSuccess(OngoingOrdersList ongoingOrdersList) {
-                        //师傅端
-                        if (role.equals(String.valueOf(StaticExplain.FU_FU_SHI.getCode()))) {
-                            startMasterOrderDetail(orderType , ongoingOrdersList);
-                        }else if (role.equals(String.valueOf(StaticExplain.EMPLOYER.getCode()))) {
-                            startEmployerOrderDetail(orderType , ongoingOrdersList);
+                        if (ongoingOrdersList != null) {
+                            //师傅端
+                            if (role.equals(String.valueOf(StaticExplain.FU_FU_SHI.getCode()))) {
+                                startMasterOrderDetail(orderType, ongoingOrdersList);
+                            } else if (role.equals(String.valueOf(StaticExplain.EMPLOYER.getCode()))) {
+                                startEmployerOrderDetail(orderType, ongoingOrdersList);
+                            }
                         }
                     }
                 });
@@ -118,10 +121,11 @@ public class NotificationMessageFragment extends BaseFragment {
 
     /**
      * 到 师傅详情
-     * @param orderType type
+     *
+     * @param orderType         type
      * @param ongoingOrdersList 订单详情
      */
-    private void startMasterOrderDetail(String orderType , OngoingOrdersList ongoingOrdersList) {
+    private void startMasterOrderDetail(String orderType, OngoingOrdersList ongoingOrdersList) {
         // 安装单
         if (orderType.equals(String.valueOf(StaticExplain.INSTALLATION_LIST.getCode()))) {
             OrderStatusUtil.startMasterOrderDetail(getBaseFragmentActivity(), ongoingOrdersList.getOrderCode(), orderType,
@@ -130,15 +134,20 @@ public class NotificationMessageFragment extends BaseFragment {
         } else if (orderType.equals(String.valueOf(StaticExplain.ADVERTISING_BILLS.getCode()))) {
             AdvertisingStatusUtil.startMasterOrderDetail(getBaseFragmentActivity(), ongoingOrdersList.getOrderCode(), orderType,
                     ongoingOrdersList.getOrderStatus());
+            //巡查单
+        }else if (orderType.equals(String.valueOf(StaticExplain.PATROL.getCode()))){
+            PatrolStatusUtil.startMasterPatrol(getBaseFragmentActivity(), ongoingOrdersList.getOrderCode(), orderType,
+                    ongoingOrdersList.getOrderStatus());
         }
     }
 
     /**
      * 到雇主详情
-     * @param orderType type
+     *
+     * @param orderType         type
      * @param ongoingOrdersList 订单详情
      */
-    private void startEmployerOrderDetail(String orderType , OngoingOrdersList ongoingOrdersList) {
+    private void startEmployerOrderDetail(String orderType, OngoingOrdersList ongoingOrdersList) {
         // 安装单
         if (orderType.equals(String.valueOf(StaticExplain.INSTALLATION_LIST.getCode()))) {
             OrderStatusUtil.startEmployerOrderDetail(getBaseFragmentActivity(), ongoingOrdersList.getOrderCode()
@@ -147,6 +156,10 @@ public class NotificationMessageFragment extends BaseFragment {
             //广告单
             AdvertisingStatusUtil.startEmployerAdvertisingBills(getBaseFragmentActivity(), ongoingOrdersList.getOrderCode()
                     , orderType, ongoingOrdersList.getOrderStatus());
+            //巡查单
+        }else if (orderType.equals(String.valueOf(StaticExplain.PATROL.getCode()))){
+            PatrolStatusUtil.startEmployerPatrol(getBaseFragmentActivity(), ongoingOrdersList.getOrderCode(), orderType,
+                    ongoingOrdersList.getOrderStatus());
         }
     }
 

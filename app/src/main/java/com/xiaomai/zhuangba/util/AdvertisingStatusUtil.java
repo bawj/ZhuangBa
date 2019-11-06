@@ -76,7 +76,7 @@ public class AdvertisingStatusUtil {
             tvItemOrdersType.setBackgroundResource(R.drawable.distribution_half_fillet_bg);
         } else if (orderStatus == AdvertisingEnum.MASTER_FAILURE_OF_ACCEPTANCE.getCode()) {
             //验收不通过
-            tvItemOrdersType.setText(mContext.getString(R.string.be_under_construction));
+            tvItemOrdersType.setText(mContext.getString(R.string.acceptance_is_not_acceptable));
             tvItemOrdersType.setBackgroundResource(R.drawable.distribution_half_fillet_bg);
         } else if (orderStatus == AdvertisingEnum.MASTER_CANCELLATION_UNDER_WAY.getCode()) {
             //正在取消
