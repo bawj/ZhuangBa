@@ -189,7 +189,7 @@
                     style="@style/personal_text"
                     android:layout_toEndOf="@+id/ivPersonalEmployerPatrol"
                     android:layout_toRightOf="@+id/ivPersonalEmployerPatrol"
-                    android:text="@string/patrol" />
+                    android:text="@string/inspection_records" />
 
                 <ImageView
                     android:layout_width="wrap_content"

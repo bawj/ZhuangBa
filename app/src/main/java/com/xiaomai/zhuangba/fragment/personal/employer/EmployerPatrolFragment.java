@@ -99,6 +99,6 @@ public class EmployerPatrolFragment extends BaseListFragment<IBaseModule, Employ
 
     @Override
     protected String getActivityTitle() {
-        return getString(R.string.patrol_title);
+        return getString(R.string.inspection_records);
     }
 }

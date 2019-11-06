@@ -6,6 +6,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.xiaomai.zhuangba.R;
 import com.xiaomai.zhuangba.data.Patrol;
+import com.xiaomai.zhuangba.util.ConstantUtil;
 import com.xiaomai.zhuangba.util.PatrolStatusUtil;
 
 /**
@@ -25,10 +26,20 @@ public class EmployerPatrolAdapter extends BaseQuickAdapter<Patrol.ListBean, Bas
         tvItemPatrolDeviceNumber.setText(mContext.getString(R.string.device_number , patrol.getMaterialsStartLength()));
         //服务时长
         TextView tvLengthOfService = helper.getView(R.id.tvLengthOfService);
-        tvLengthOfService.setText(mContext.getString(R.string.length_of_service,String.valueOf(patrol.getDebugging())));
+        int debugging = patrol.getDebugging();
+        tvLengthOfService.setText(mContext.getString(R.string.length_of_inspection, String.valueOf(debugging)));
+
         //服务日期
         TextView tvServiceDate = helper.getView(R.id.tvServiceDate);
-        tvServiceDate.setText(mContext.getString(R.string.service_date,patrol.getSlottingEndLength()));
+        //巡查时长 单位 month 月  week周
+        String slottingStartLength = patrol.getSlottingStartLength();
+        //巡查日期
+        String slottingEndLength = patrol.getSlottingEndLength();
+        if (slottingStartLength.equals(ConstantUtil.MONTH)) {
+            tvServiceDate.setText(mContext.getString(R.string.inspection_date, slottingEndLength));
+        } else if (slottingStartLength.equals(ConstantUtil.WEEK)) {
+            tvServiceDate.setText(mContext.getString(R.string.inspection_date_week, slottingEndLength));
+        }
         //A B C D 面
         TextView tvNoodles = helper.getView(R.id.tvNoodles);
         tvNoodles.setText(patrol.getMaterialsEndLength());
