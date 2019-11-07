@@ -50,7 +50,7 @@ public class GuaranteeAdapter extends BaseQuickAdapter<MaintenanceOverman, BaseV
         //入账时间
         String accountingTime;
         if (!TextUtils.isEmpty(endTime)) {
-            endTime = DateUtil.dateToFormat(endTime, "yyyy-MM-dd HH:mm:ss", "yyyy/MM/dd");
+            endTime = DateUtil.dateToFormat(endTime, "yyyy-MM-dd", "yyyy/MM/dd");
             //往后推两天 为入账时间
             DateTime dateTime = DateUtil.strToDate(endTime, "yyyy-MM-dd");
             dateTime = dateTime.plusDays(2);
@@ -58,7 +58,7 @@ public class GuaranteeAdapter extends BaseQuickAdapter<MaintenanceOverman, BaseV
             accountingTime = mContext.getString(R.string.accounting_time, String.valueOf(dayOfYear));
         } else {
             endTime = "--";
-            accountingTime = mContext.getString(R.string.accounting_time_null , "--");
+            accountingTime = mContext.getString(R.string.accounting_time_null, "--");
         }
         tvEndTime.setText(mContext.getString(R.string.end_time, endTime));
         tvAccountingTime.setText(accountingTime);

@@ -38,6 +38,8 @@ public class GuaranteeDeatil {
     private String orderType;
     private String address;
 
+    private String code;
+
     public String getId() {
         return id == null ? "" : id;
     }
@@ -148,5 +150,13 @@ public class GuaranteeDeatil {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public String getCode() {
+        return code == null ? "" : code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 }

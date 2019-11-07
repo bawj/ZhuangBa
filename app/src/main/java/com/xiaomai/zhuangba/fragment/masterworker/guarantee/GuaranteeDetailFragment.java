@@ -124,7 +124,7 @@ public class GuaranteeDetailFragment extends BaseFragment implements OnRefreshLi
                     layGuaranteeDetail.setVisibility(View.VISIBLE);
                     GuaranteeAndOrderDate guaranteeAndOrderDate = (GuaranteeAndOrderDate) object;
                     setOrderInfo(guaranteeAndOrderDate.getGuaranteeDeatil());
-                    setOrderDateInfo(guaranteeAndOrderDate.getOrderDateListList());
+                    setOrderDateInfo(guaranteeAndOrderDate.getOrderDateListList() , guaranteeAndOrderDate.getGuaranteeDeatil());
                 }
                 refreshBaseList.finishRefresh();
             }
@@ -154,7 +154,7 @@ public class GuaranteeDetailFragment extends BaseFragment implements OnRefreshLi
         //结束时间
         String endTime = guaranteeDeatil.getEndTime();
         if (!TextUtils.isEmpty(endTime)) {
-            endTime = DateUtil.dateToFormat(endTime, "yyyy-MM-dd HH:mm:ss", "yyyy/MM/dd");
+            endTime = DateUtil.dateToFormat(endTime, "yyyy-MM-dd", "yyyy/MM/dd");
         } else {
             endTime = "--";
         }
@@ -173,9 +173,9 @@ public class GuaranteeDetailFragment extends BaseFragment implements OnRefreshLi
         tvBaseOrderDetailLocation.setText(guaranteeDeatil.getAddress());
     }
 
-    private void setOrderDateInfo(List<OrderDateList> orderDateListList) {
+    private void setOrderDateInfo(List<OrderDateList> orderDateListList , GuaranteeDeatil guaranteeDeatil) {
         //订单时间信息
-        orderDateListList.add(0, new OrderDateList(getOrderCode() == null ? "" : getOrderCode(), "", getString(R.string.order_code)));
+        orderDateListList.add(0, new OrderDateList(guaranteeDeatil.getCode(), "", getString(R.string.order_code)));
         orderDateListAdapter.setNewData(orderDateListList);
     }
 
