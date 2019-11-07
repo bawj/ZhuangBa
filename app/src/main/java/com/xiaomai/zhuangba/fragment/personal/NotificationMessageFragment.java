@@ -139,6 +139,7 @@ public class NotificationMessageFragment extends BaseFragment {
             PatrolStatusUtil.startMasterPatrol(getBaseFragmentActivity(), ongoingOrdersList.getOrderCode(), orderType,
                     ongoingOrdersList.getOrderStatus());
         }
+        // TODO: 2019/11/7 0007 推送 4 广告维保 type = 4
     }
 
     /**

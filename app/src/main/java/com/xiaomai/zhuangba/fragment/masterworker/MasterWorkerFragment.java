@@ -73,8 +73,6 @@ public class MasterWorkerFragment extends BaseFragment {
         commonNavigator.setAdapter(homeCommonNavigatorAdapter);
         magicIndicator.setNavigator(commonNavigator);
         ViewPagerHelper.bind(magicIndicator, mViewPager);
-        //设置状态栏为白色
-        statusBarWhite();
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int i, float v, int i1) {

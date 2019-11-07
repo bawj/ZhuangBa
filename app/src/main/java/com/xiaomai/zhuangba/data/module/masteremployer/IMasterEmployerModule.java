@@ -20,12 +20,6 @@ public interface IMasterEmployerModule extends IBaseModule<IMasterEmployerView> 
 
 
     /**
-     * 需处理
-     */
-    void requestOngoingOrders();
-
-
-    /**
      * 雇主端订单列表
      */
     void employerOrderList();
@@ -41,12 +35,6 @@ public interface IMasterEmployerModule extends IBaseModule<IMasterEmployerView> 
      * 开工中 和 休息中切换
      */
     void requestWorkingStateSwitching();
-
-
-    /**
-     * 广告单
-     */
-    void requestAdvertisingBills();
 
 
     /**

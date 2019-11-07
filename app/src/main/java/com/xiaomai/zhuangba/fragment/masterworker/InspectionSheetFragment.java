@@ -1,16 +1,23 @@
 package com.xiaomai.zhuangba.fragment.masterworker;
 
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.example.toollib.data.IBaseModule;
+import com.example.toollib.http.HttpResult;
+import com.example.toollib.http.exception.ApiException;
+import com.example.toollib.http.observer.BaseHttpRxObserver;
+import com.example.toollib.http.util.RxUtils;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.xiaomai.zhuangba.R;
 import com.xiaomai.zhuangba.adapter.InspectionSheetAdapter;
 import com.xiaomai.zhuangba.data.bean.InspectionSheetBean;
-import com.xiaomai.zhuangba.enums.StringTypeExplain;
-import com.xiaomai.zhuangba.fragment.base.BaseMasterEmployerContentFragment;
+import com.xiaomai.zhuangba.data.bean.RefreshBaseList;
+import com.xiaomai.zhuangba.enums.StaticExplain;
+import com.xiaomai.zhuangba.fragment.base.BaseListFragment;
 import com.xiaomai.zhuangba.fragment.masterworker.inspection.InspectionSheetDetailFragment;
+import com.xiaomai.zhuangba.http.ServiceUrl;
 
 import java.util.List;
 
@@ -18,7 +25,7 @@ import java.util.List;
  * @author Administrator
  * @date 2019/10/8 0008
  */
-public class InspectionSheetFragment extends BaseMasterEmployerContentFragment {
+public class InspectionSheetFragment extends BaseListFragment<IBaseModule ,InspectionSheetAdapter> {
 
     private InspectionSheetAdapter inspectionSheetAdapter;
 
@@ -30,35 +37,60 @@ public class InspectionSheetFragment extends BaseMasterEmployerContentFragment {
     }
 
     @Override
-    public int getContentView() {
-        return R.layout.fragment_inspection_sheet;
-    }
-
-    @Override
-    public void update(String code, String address, Handler handler) {
-        super.update(code, address, handler);
-        if (StringTypeExplain.INSPECTION_SHEET_BILLS_FRAGMENT.getCode().equals(code) && iModule != null) {
-            //刷新
-            iModule.requestInspectionSheet();
-        }
+    public void onBaseRefresh(RefreshLayout refreshLayout) {
+        requestInspectionSheet();
     }
 
     @Override
     public void onBaseLoadMoreRequested() {
-        if (iModule != null) {
-            iModule.requestAdvertisingBills();
-        }
+        requestInspectionSheet();
+    }
+
+    public void requestInspectionSheet() {
+        RxUtils.getObservable(ServiceUrl.getUserApi().getMasterHandleInspectionOrder(getPage()
+                , StaticExplain.PAGE_NUM.getCode()))
+                .compose(this.<HttpResult<RefreshBaseList<InspectionSheetBean>>>bindToLifecycle())
+                .subscribe(new BaseHttpRxObserver<RefreshBaseList<InspectionSheetBean>>() {
+                    @Override
+                    protected void onSuccess(RefreshBaseList<InspectionSheetBean> response) {
+                        List<InspectionSheetBean> advertisingBillsBeans = response.getList();
+                        if (getPage() == StaticExplain.PAGE_NUMBER.getCode()) {
+                            //刷新
+                            refreshInspectionSuccess(advertisingBillsBeans);
+                            finishRefresh();
+                        } else {
+                            //加载
+                            loadInspectionSuccess(advertisingBillsBeans);
+                        }
+                        if (advertisingBillsBeans.size() < StaticExplain.PAGE_NUM.getCode()) {
+                            //加载结束
+                            loadMoreEnd();
+                        } else {
+                            //加载完成
+                            loadMoreComplete();
+                        }
+                    }
+                    @Override
+                    public void onError(ApiException e) {
+                        super.onError(e);
+                        finishRefresh();
+                        loadError();
+                    }
+                });
     }
 
     @Override
+    public int getContentView() {
+        return R.layout.fragment_inspection_sheet;
+    }
+
+
     public void refreshInspectionSuccess(List<InspectionSheetBean> inspectionSheetBeans) {
-        super.refreshInspectionSuccess(inspectionSheetBeans);
         if (inspectionSheetAdapter != null) {
             inspectionSheetAdapter.setNewData(inspectionSheetBeans);
         }
     }
 
-    @Override
     public void loadInspectionSuccess(List<InspectionSheetBean> inspectionSheetBeans) {
         if (inspectionSheetAdapter != null) {
             inspectionSheetAdapter.addData(inspectionSheetBeans);
@@ -71,7 +103,7 @@ public class InspectionSheetFragment extends BaseMasterEmployerContentFragment {
     }
 
     @Override
-    public BaseQuickAdapter getBaseOrderAdapter() {
+    public InspectionSheetAdapter getBaseListAdapter() {
         inspectionSheetAdapter = new InspectionSheetAdapter();
         return inspectionSheetAdapter;
     }

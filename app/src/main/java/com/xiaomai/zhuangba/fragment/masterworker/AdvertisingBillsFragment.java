@@ -1,16 +1,23 @@
 package com.xiaomai.zhuangba.fragment.masterworker;
 
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.example.toollib.data.IBaseModule;
+import com.example.toollib.http.HttpResult;
+import com.example.toollib.http.exception.ApiException;
+import com.example.toollib.http.observer.BaseHttpRxObserver;
+import com.example.toollib.http.util.RxUtils;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.xiaomai.zhuangba.R;
 import com.xiaomai.zhuangba.adapter.AdvertisingBillsAdapter;
 import com.xiaomai.zhuangba.data.AdvertisingBillsBean;
-import com.xiaomai.zhuangba.enums.StringTypeExplain;
-import com.xiaomai.zhuangba.fragment.base.BaseMasterEmployerContentFragment;
+import com.xiaomai.zhuangba.data.bean.RefreshBaseList;
+import com.xiaomai.zhuangba.enums.StaticExplain;
+import com.xiaomai.zhuangba.fragment.base.BaseListFragment;
 import com.xiaomai.zhuangba.fragment.masterworker.advertising.AdvertisingBillDetailFragment;
+import com.xiaomai.zhuangba.http.ServiceUrl;
 
 import java.util.List;
 
@@ -19,7 +26,7 @@ import java.util.List;
  * @date 2019/8/30 0030
  * 广告单
  */
-public class AdvertisingBillsFragment extends BaseMasterEmployerContentFragment {
+public class AdvertisingBillsFragment extends BaseListFragment<IBaseModule, AdvertisingBillsAdapter> {
 
     private AdvertisingBillsAdapter advertisingBillsAdapter;
 
@@ -30,17 +37,49 @@ public class AdvertisingBillsFragment extends BaseMasterEmployerContentFragment 
         return fragment;
     }
 
+
     @Override
-    public void initView() {
-        super.initView();
+    public void onBaseRefresh(RefreshLayout refreshLayout) {
+        requestAdvertisingBills();
     }
 
     @Override
-    public void update(String code ,String address, Handler handler) {
-        super.update(code ,address, handler);
-        if (StringTypeExplain.REFRESH_ADVERTISING_BILLS_FRAGMENT.getCode().equals(code) && iModule != null) {
-            iModule.requestAdvertisingBills();
-        }
+    public void onBaseLoadMoreRequested() {
+        requestAdvertisingBills();
+    }
+
+    public void requestAdvertisingBills() {
+        RxUtils.getObservable(ServiceUrl.getUserApi().getMasterHandleOrder(getPage()
+                , StaticExplain.PAGE_NUM.getCode()))
+                .compose(this.<HttpResult<RefreshBaseList<AdvertisingBillsBean>>>bindToLifecycle())
+                .subscribe(new BaseHttpRxObserver<RefreshBaseList<AdvertisingBillsBean>>() {
+                    @Override
+                    protected void onSuccess(RefreshBaseList<AdvertisingBillsBean> response) {
+                        List<AdvertisingBillsBean> advertisingBillsBeans = response.getList();
+                        if (getPage() == StaticExplain.PAGE_NUMBER.getCode()) {
+                            //刷新
+                            refreshAdvertisingSuccess(advertisingBillsBeans);
+                            finishRefresh();
+                        } else {
+                            //加载
+                            loadMoreAdvertisingSuccess(advertisingBillsBeans);
+                        }
+                        if (advertisingBillsBeans.size() < StaticExplain.PAGE_NUM.getCode()) {
+                            //加载结束
+                            loadMoreEnd();
+                        } else {
+                            //加载完成
+                            loadMoreComplete();
+                        }
+                    }
+
+                    @Override
+                    public void onError(ApiException e) {
+                        super.onError(e);
+                        finishRefresh();
+                        loadError();
+                    }
+                });
     }
 
     @Override
@@ -48,36 +87,27 @@ public class AdvertisingBillsFragment extends BaseMasterEmployerContentFragment 
         return R.layout.fragment_advertising_bills;
     }
 
-    @Override
-    public void onBaseLoadMoreRequested() {
-        if (iModule != null){
-            iModule.requestAdvertisingBills();
-        }
-    }
-
-    @Override
     public void refreshAdvertisingSuccess(List<AdvertisingBillsBean> advertisingBillsBeans) {
-        super.refreshAdvertisingSuccess(advertisingBillsBeans);
-        if (orderListAdapter != null) {
+        if (advertisingBillsAdapter != null) {
             advertisingBillsAdapter.setNewData(advertisingBillsBeans);
         }
     }
 
-    @Override
     public void loadMoreAdvertisingSuccess(List<AdvertisingBillsBean> advertisingBillsBeans) {
-        if (orderListAdapter != null) {
+        if (advertisingBillsAdapter != null) {
             advertisingBillsAdapter.addData(advertisingBillsBeans);
         }
     }
 
     @Override
     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+        super.onItemClick(adapter, view, position);
         AdvertisingBillsBean advertisingBillsBean = (AdvertisingBillsBean) view.findViewById(R.id.tvItemOrdersTitle).getTag();
         startFragment(AdvertisingBillDetailFragment.newInstance(advertisingBillsBean));
     }
 
     @Override
-    public BaseQuickAdapter getBaseOrderAdapter() {
+    public AdvertisingBillsAdapter getBaseListAdapter() {
         advertisingBillsAdapter = new AdvertisingBillsAdapter();
         return advertisingBillsAdapter;
     }

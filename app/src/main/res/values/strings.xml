@@ -419,6 +419,7 @@
     <string name="income">+¥%1$s</string>
     <string name="expenditure">-¥%1$s</string>
     <string name="accounting_time">入账时间：每月%1$s号</string>
+    <string name="accounting_time_null">入账时间：%1$s</string>
     <string name="accounting_amount">入账金额：¥%1$s/月</string>
     <string name="number_of_employers">雇主数量</string>
     <string name="number_of_employers_">雇主数量(万)</string>
@@ -585,4 +586,10 @@
     <string name="create_team_success">创建成功</string>
     <string name="homepage">主页</string>
     <string name="order">订单</string>
+    <string name="toll_maintenance">收费维保：%1$s个月</string>
+    <string name="customer_name_order">客户姓名：%1$s</string>
+    <string name="contact_information_order">联系方式：%1$s</string>
+    <string name="end_time">结束时间：%1$s</string>
+    <string name="not_yet_begun">未开始</string>
+    <string name="screen">筛选</string>
 </resources>

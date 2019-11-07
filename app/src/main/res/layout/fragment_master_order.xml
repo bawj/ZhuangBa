@@ -4,14 +4,44 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <net.lucode.hackware.magicindicator.MagicIndicator
-        android:id="@+id/magicIndicator"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/tool_lib_46dp" />
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/viewPager"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <net.lucode.hackware.magicindicator.MagicIndicator
+                android:id="@+id/magicIndicator"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/tool_lib_46dp"
+                android:background="@android:color/white" />
+
+            <TextView
+                android:id="@+id/tvScreen"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="@dimen/tool_lib_16dp"
+                android:layout_marginRight="@dimen/tool_lib_16dp"
+                android:drawableStart="@drawable/ic_screen"
+                android:drawableLeft="@drawable/ic_screen"
+                android:drawablePadding="@dimen/tool_lib_12dp"
+                android:gravity="center_vertical"
+                android:text="@string/screen"
+                android:textColor="@color/tool_lib_gray_777777"
+                android:textSize="@dimen/tool_lib_12sp" />
+        </RelativeLayout>
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/viewPager"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
 
 </LinearLayout>

@@ -40,6 +40,13 @@ public class OrderPoolFragment extends BaseMasterEmployerContentFragment {
     }
 
     @Override
+    public void initView() {
+        super.initView();
+        //设置状态栏为白色
+        statusBarWhite();
+    }
+
+    @Override
     public int getContentView() {
         return R.layout.fragment_order_pool;
     }
@@ -92,15 +99,15 @@ public class OrderPoolFragment extends BaseMasterEmployerContentFragment {
         OngoingOrdersList ongoingOrdersList = (OngoingOrdersList)
                 view.findViewById(R.id.tvItemOrdersTitle).getTag();
         String orderType = ongoingOrdersList.getOrderType();
-        if (orderType.equals(String.valueOf(StaticExplain.INSTALLATION_LIST.getCode()))){
+        if (orderType.equals(String.valueOf(StaticExplain.INSTALLATION_LIST.getCode()))) {
             //安装单
-            startFragment(OrderPoolDetailFragment.newInstance(ongoingOrdersList.getOrderCode() , ongoingOrdersList.getOrderType()));
-        }else if (orderType.equals(String.valueOf(StaticExplain.ADVERTISING_BILLS.getCode()))){
+            startFragment(OrderPoolDetailFragment.newInstance(ongoingOrdersList.getOrderCode(), ongoingOrdersList.getOrderType()));
+        } else if (orderType.equals(String.valueOf(StaticExplain.ADVERTISING_BILLS.getCode()))) {
             //广告单
-            startFragment(MasterAdvertisementOrderPoolAdDetailFragment.newInstance(ongoingOrdersList.getOrderCode() , ongoingOrdersList.getOrderType()));
-        }else if (orderType.equals(String.valueOf(StaticExplain.PATROL.getCode()))){
+            startFragment(MasterAdvertisementOrderPoolAdDetailFragment.newInstance(ongoingOrdersList.getOrderCode(), ongoingOrdersList.getOrderType()));
+        } else if (orderType.equals(String.valueOf(StaticExplain.PATROL.getCode()))) {
             //巡查任务
-            startFragment(PatrolPoolDetailFragment.newInstance(ongoingOrdersList.getOrderCode() , ongoingOrdersList.getOrderType()));
+            startFragment(PatrolPoolDetailFragment.newInstance(ongoingOrdersList.getOrderCode(), ongoingOrdersList.getOrderType()));
         }
     }
 

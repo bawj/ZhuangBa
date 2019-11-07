@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/tool_lib_gray_F5F6FA">
+
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:id="@+id/refreshBaseList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        app:srlAccentColor="@android:color/white"
+        app:srlEnableHeaderTranslationContent="false"
+        app:srlEnableLoadMore="false"
+        app:srlPrimaryColor="@color/colorPrimary">
+
+        <com.scwang.smartrefresh.header.MaterialHeader
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <RelativeLayout
+            android:id="@+id/layBaseOrderDetail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:id="@+id/layGuaranteeDetail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:id="@+id/relOrderInfo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/white"
+                        android:orientation="vertical">
+
+                        <RelativeLayout
+                            android:id="@+id/relAdvertisementTitle"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:id="@+id/tvBaseGuaranteeTitle"
+                                style="@style/item_text_title"
+                                android:layout_centerVertical="true"
+                                tools:text="维保" />
+
+                            <TextView
+                                android:id="@+id/tvBaseGuaranteeType"
+                                style="@style/order_status"
+                                android:layout_centerVertical="true"
+                                android:background="@drawable/distribution_half_fillet_bg"
+                                tools:text="分配中" />
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:id="@+id/tvBaseGuaranteeName_"
+                                style="@style/advertisement_text"
+                                android:layout_centerVertical="true"
+                                android:text="@string/customer_name_" />
+
+                            <TextView
+                                android:id="@+id/tvBaseGuaranteeName"
+                                style="@style/advertisement_text"
+                                android:layout_centerVertical="true"
+                                android:layout_marginStart="@dimen/tool_lib_24dp"
+                                android:layout_marginLeft="@dimen/tool_lib_24dp"
+                                android:layout_toStartOf="@+id/tvBaseGuaranteeMoney"
+                                android:layout_toLeftOf="@+id/tvBaseGuaranteeMoney"
+                                android:layout_toEndOf="@+id/tvBaseGuaranteeName_"
+                                android:layout_toRightOf="@+id/tvBaseGuaranteeName_"
+                                android:textColor="@color/tool_lib_gray_222222"
+                                tools:text="LLDKJDH" />
+
+                            <TextView
+                                android:id="@+id/tvBaseGuaranteeMoney"
+                                style="@style/order_money"
+                                android:layout_centerVertical="true"
+                                android:layout_marginTop="0dp"
+                                tools:text="¥3200.00" />
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/tool_lib_8dp">
+
+                            <TextView
+                                android:id="@+id/tvBaseGuaranteeInformation_"
+                                style="@style/advertisement_text"
+                                android:text="@string/contact_information_" />
+
+                            <TextView
+                                android:id="@+id/tvBaseGuaranteeInformation"
+                                style="@style/advertisement_text"
+                                android:layout_marginStart="@dimen/tool_lib_24dp"
+                                android:layout_marginLeft="@dimen/tool_lib_24dp"
+                                android:layout_toEndOf="@+id/tvBaseGuaranteeInformation_"
+                                android:layout_toRightOf="@+id/tvBaseGuaranteeInformation_"
+                                android:textColor="@color/tool_lib_gray_222222"
+                                tools:text="15367636266" />
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/tool_lib_8dp">
+
+                            <TextView
+                                android:id="@+id/tvBaseGuaranteeLengthOfService_"
+                                style="@style/advertisement_text"
+                                android:text="@string/length_of_service_" />
+
+                            <TextView
+                                android:id="@+id/tvBaseGuaranteeLengthOfService"
+                                style="@style/advertisement_text"
+                                android:layout_marginStart="@dimen/tool_lib_24dp"
+                                android:layout_marginLeft="@dimen/tool_lib_24dp"
+                                android:layout_toEndOf="@+id/tvBaseGuaranteeLengthOfService_"
+                                android:layout_toRightOf="@+id/tvBaseGuaranteeLengthOfService_"
+                                android:textColor="@color/tool_lib_gray_222222"
+                                tools:text="三个月" />
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/tool_lib_8dp">
+
+                            <TextView
+                                android:id="@+id/tvBaseGuaranteeEndingTime_"
+                                style="@style/advertisement_text"
+                                android:text="@string/ending_time" />
+
+                            <TextView
+                                android:id="@+id/tvBaseGuaranteeEndingTime"
+                                style="@style/advertisement_text"
+                                android:layout_marginStart="@dimen/tool_lib_24dp"
+                                android:layout_marginLeft="@dimen/tool_lib_24dp"
+                                android:layout_toEndOf="@+id/tvBaseGuaranteeEndingTime_"
+                                android:layout_toRightOf="@+id/tvBaseGuaranteeEndingTime_"
+                                android:textColor="@color/tool_lib_gray_222222"
+                                tools:text="2019/06/24" />
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/tool_lib_8dp">
+
+                            <TextView
+                                android:id="@+id/tvBaseGuaranteeEquipmentNumber_"
+                                style="@style/advertisement_text"
+                                android:text="@string/equipment_number" />
+
+                            <TextView
+                                android:id="@+id/tvBaseGuaranteeEquipmentNumber"
+                                style="@style/advertisement_text"
+                                android:layout_marginStart="@dimen/tool_lib_24dp"
+                                android:layout_marginLeft="@dimen/tool_lib_24dp"
+                                android:layout_toEndOf="@+id/tvBaseGuaranteeEquipmentNumber_"
+                                android:layout_toRightOf="@+id/tvBaseGuaranteeEquipmentNumber_"
+                                android:textColor="@color/tool_lib_gray_222222"
+                                tools:text="524621235262123525" />
+                        </RelativeLayout>
+
+                        <View
+                            android:id="@+id/viewHorizontalLine"
+                            style="@style/tool_lib_horizontal_line"
+                            android:layout_marginLeft="@dimen/tool_lib_12dp"
+                            android:layout_marginTop="@dimen/tool_lib_12dp"
+                            android:layout_marginRight="@dimen/tool_lib_12dp" />
+
+                        <RelativeLayout
+                            android:id="@+id/relBaseOrderDetailLocation"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingTop="@dimen/tool_lib_12dp"
+                            android:paddingBottom="@dimen/tool_lib_12dp">
+
+                            <ImageView
+                                android:id="@+id/ivBaseOrderDetailLocation"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_marginStart="@dimen/tool_lib_12dp"
+                                android:layout_marginLeft="@dimen/tool_lib_12dp"
+                                android:background="@drawable/ic_location_order" />
+
+                            <TextView
+                                android:id="@+id/tvBaseOrderDetailLocation"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_marginLeft="@dimen/tool_lib_6dp"
+                                android:layout_marginRight="@dimen/tool_lib_6dp"
+                                android:layout_toEndOf="@+id/ivBaseOrderDetailLocation"
+                                android:layout_toRightOf="@+id/ivBaseOrderDetailLocation"
+                                android:maxLines="1"
+                                android:singleLine="true"
+                                android:textColor="@color/tool_lib_gray_222222"
+                                android:textSize="@dimen/tool_lib_12sp"
+                                tools:text="杭州市余杭区西溪北苑西区38幢3单元1502" />
+
+                        </RelativeLayout>
+                    </LinearLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/relBaseOrderInformation"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/tool_lib_8dp"
+                        android:background="@android:color/white">
+
+                        <TextView
+                            android:id="@+id/tvBaseOrderDetailOrderInformation"
+                            style="@style/item_text_title"
+                            android:text="@string/order_information" />
+
+                        <android.support.v7.widget.RecyclerView
+                            android:id="@+id/recyclerOrderInformation"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/tvBaseOrderDetailOrderInformation"
+                            android:layout_marginLeft="@dimen/tool_lib_12dp"
+                            android:layout_marginTop="@dimen/tool_lib_6dp"
+                            android:layout_marginRight="@dimen/tool_lib_12dp"
+                            android:layout_marginBottom="@dimen/tool_lib_12dp"
+                            android:descendantFocusability="blocksDescendants" />
+                    </RelativeLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/tool_lib_44dp"
+                        android:layout_marginTop="@dimen/tool_lib_8dp"
+                        android:visibility="gone">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/tool_lib_16dp"
+                            android:layout_marginRight="@dimen/tool_lib_16dp"
+                            android:background="@drawable/bg_divide_into_columns_bg">
+
+                            <ImageView
+                                android:layout_width="@dimen/tool_lib_12dp"
+                                android:layout_height="@dimen/tool_lib_12dp"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginStart="@dimen/tool_lib_10dp"
+                                android:layout_marginLeft="@dimen/tool_lib_10dp"
+                                android:layout_marginTop="@dimen/tool_lib_6dp"
+                                android:layout_marginBottom="@dimen/tool_lib_6dp"
+                                android:src="@drawable/ic_tip" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginStart="@dimen/tool_lib_6dp"
+                                android:layout_marginLeft="@dimen/tool_lib_6dp"
+                                android:textColor="@color/tool_lib_gray_C76900"
+                                android:textSize="@dimen/tool_lib_12sp"
+                                tools:text="验收截止时间：2019.08.09 13:08:00" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+                </LinearLayout>
+
+            </ScrollView>
+        </RelativeLayout>
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
+</RelativeLayout>

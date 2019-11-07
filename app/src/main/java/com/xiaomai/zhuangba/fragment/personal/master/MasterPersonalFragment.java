@@ -98,7 +98,7 @@ public class MasterPersonalFragment extends PersonalFragment {
         GlideManager.loadCircleImage(getActivity(), userInfo.getBareHeadedPhotoUrl(), ivUserHead, R.drawable.bg_def_head);
 
         //查询 是否有团队
-        findTeam();
+        //findTeam();
     }
 
     @OnClick({R.id.relWallet, R.id.relPersonalScopeOfService, R.id.relPlatformMaster, R.id.relMasterMaintenance

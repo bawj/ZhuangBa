@@ -98,7 +98,7 @@ public class DateUtil {
     /**
      * 将 时间 转换 成指定格式
      * @param date 时间
-     * @param pattern 格式
+     * @param pattern 时间格式
      * @param formatPattern 转换的指定格式
      * @return string
      */

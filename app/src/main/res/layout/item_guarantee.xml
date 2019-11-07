@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.qmuiteam.qmui.layout.QMUILinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/itemOrderLayoutFor"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_horizontal"
+    android:layout_marginBottom="@dimen/tool_lib_12dp"
+    android:background="@color/qmui_config_color_white"
+    android:gravity="center"
+    android:orientation="vertical"
+    app:qmui_borderColor="?attr/qmui_config_color_separator"
+    app:qmui_outerNormalColor="?attr/qmui_config_color_background"
+    app:qmui_showBorderOnlyBeforeL="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:id="@+id/relNeedDeal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/tool_lib_10dp">
+
+            <TextView
+                android:id="@+id/tvItemOrdersTitle"
+                style="@style/item_text_title"
+                android:layout_centerVertical="true"
+                android:layout_marginTop="0dp"
+                tools:text="公共安全-视频监控" />
+
+
+            <TextView
+                android:id="@+id/tvItemOrdersType"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/distribution_half_fillet_bg"
+                android:padding="@dimen/tool_lib_5dp"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/tool_lib_12sp"
+                tools:text="分配中" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/tvTollMaintenance"
+            style="@style/item_text_content"
+            android:layout_marginStart="@dimen/tool_lib_12dp"
+            android:layout_marginLeft="@dimen/tool_lib_12dp"
+            tools:text="收费维保：请在13:50之前确认接单" />
+
+        <TextView
+            android:id="@+id/tvName"
+            style="@style/item_text_content"
+            android:layout_marginStart="@dimen/tool_lib_12dp"
+            android:layout_marginLeft="@dimen/tool_lib_12dp"
+            tools:text="客户姓名：张三" />
+
+        <TextView
+            android:id="@+id/tvPhone"
+            style="@style/item_text_content"
+            android:layout_marginStart="@dimen/tool_lib_12dp"
+            android:layout_marginLeft="@dimen/tool_lib_12dp"
+            tools:text="联系方式：16512346587" />
+
+        <TextView
+            android:id="@+id/tvEndTime"
+            style="@style/item_text_content"
+            android:layout_marginStart="@dimen/tool_lib_12dp"
+            android:layout_marginLeft="@dimen/tool_lib_12dp"
+            tools:text="结束时间：2019/06/07" />
+
+        <View
+            android:id="@+id/viewHorizontalLine"
+            style="@style/tool_lib_horizontal_line"
+            android:layout_marginLeft="@dimen/tool_lib_12dp"
+            android:layout_marginTop="@dimen/tool_lib_14dp"
+            android:layout_marginRight="@dimen/tool_lib_12dp" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginTop="@dimen/tool_lib_10dp"
+            android:layout_marginBottom="@dimen/tool_lib_10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tvAccountingTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/tool_lib_12dp"
+                android:layout_marginRight="@dimen/tool_lib_12dp"
+                android:textColor="@color/tool_lib_gray_222222"
+                android:textSize="@dimen/tool_lib_12sp"
+                tools:text="入账时间：每月1号" />
+
+            <TextView
+                android:id="@+id/tvItemOrdersTotal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/total_project"
+                android:textColor="@color/tool_lib_gray_222222"
+                android:textSize="@dimen/tool_lib_12sp" />
+
+            <TextView
+                android:id="@+id/tvItemOrdersMoney"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/tool_lib_12dp"
+                android:layout_marginRight="@dimen/tool_lib_12dp"
+                android:textColor="@color/tool_lib_red_EF2B2B"
+                android:textSize="@dimen/tool_lib_14sp"
+                tools:text="¥300.00" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</com.qmuiteam.qmui.layout.QMUILinearLayout>

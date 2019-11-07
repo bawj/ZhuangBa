@@ -13,10 +13,12 @@ import com.xiaomai.zhuangba.data.bean.EmployerAdvertisingReplacement;
 import com.xiaomai.zhuangba.data.bean.EmployerWalletBean;
 import com.xiaomai.zhuangba.data.bean.EmployerWalletDetailBean;
 import com.xiaomai.zhuangba.data.bean.FrozenAmountBean;
+import com.xiaomai.zhuangba.data.bean.GuaranteeDeatil;
 import com.xiaomai.zhuangba.data.bean.InspectionSheetBean;
 import com.xiaomai.zhuangba.data.bean.InspectionSheetDetailBean;
 import com.xiaomai.zhuangba.data.bean.Maintenance;
 import com.xiaomai.zhuangba.data.bean.MaintenanceBean;
+import com.xiaomai.zhuangba.data.bean.MaintenanceOverman;
 import com.xiaomai.zhuangba.data.bean.OngoingOrdersList;
 import com.xiaomai.zhuangba.data.bean.OrderDateList;
 import com.xiaomai.zhuangba.data.bean.OrderServiceItem;
@@ -193,6 +195,16 @@ public interface IApi {
     @GET("order/getMasterHandleOrderList")
     Observable<HttpResult<Orders>> getMasterHandleOrderList(@Query("pageNum") String pageNum, @Query("pageSize") String pageSize);
 
+
+    /**
+     * 维保单
+     * @param pageNum  页码
+     * @param pageSize 一页显示多少条
+     * @return Observable
+     */
+    @FormUrlEncoded
+    @POST("order/getMasterMaintenanceOrderList")
+    Observable<HttpResult<RefreshBaseList<MaintenanceOverman>>> getMasterMaintenanceOrderList(@Field("pageNum") String pageNum, @Field("pageSize") String pageSize);
 
     /**
      * 订单详情
@@ -1231,4 +1243,15 @@ public interface IApi {
      */
     @GET("user/getUserMonthly")
     Observable<HttpResult<Boolean>> getUserMonthly();
+
+    /**
+     * 师傅维保订单详情
+     * @param orderCode 订单编号
+     * @param orderType 订单类型：1;安装单 2；广告单
+     * @return observable
+     */
+    @FormUrlEncoded
+    @POST("order/getMasterMaintenanceOrderDetails")
+    Observable<HttpResult<GuaranteeDeatil>> getMasterMaintenanceOrderDetails(@Field("orderCode") String orderCode , @Field("orderType") String orderType);
+
 }
