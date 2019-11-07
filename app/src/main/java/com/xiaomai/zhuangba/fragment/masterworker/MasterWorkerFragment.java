@@ -1,44 +1,26 @@
 package com.xiaomai.zhuangba.fragment.masterworker;
 
-import android.graphics.Color;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.view.View;
-import android.widget.CompoundButton;
-import android.widget.TextView;
-import android.widget.ToggleButton;
+import android.support.v4.view.ViewPager;
 
-import com.bigkoo.pickerview.builder.OptionsPickerBuilder;
-import com.bigkoo.pickerview.listener.OnOptionsSelectChangeListener;
-import com.bigkoo.pickerview.listener.OnOptionsSelectListener;
-import com.bigkoo.pickerview.view.OptionsPickerView;
-import com.example.toollib.http.HttpResult;
-import com.example.toollib.http.observer.BaseHttpRxObserver;
-import com.example.toollib.http.util.RxUtils;
-import com.qmuiteam.qmui.layout.QMUIButton;
-import com.qmuiteam.qmui.widget.dialog.QMUITipDialog;
-import com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton;
-import com.scwang.smartrefresh.layout.SmartRefreshLayout;
-import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.example.toollib.base.BaseFragment;
+import com.example.toollib.data.IBaseModule;
 import com.xiaomai.zhuangba.R;
-import com.xiaomai.zhuangba.data.bean.OrderStatistics;
-import com.xiaomai.zhuangba.data.bean.ProvinceBean;
-import com.xiaomai.zhuangba.data.bean.UserInfo;
-import com.xiaomai.zhuangba.data.db.DBHelper;
-import com.xiaomai.zhuangba.enums.OrdersEnum;
-import com.xiaomai.zhuangba.enums.StaticExplain;
-import com.xiaomai.zhuangba.fragment.authentication.master.IDCardScanningFragment;
-import com.xiaomai.zhuangba.fragment.base.BaseMasterEmployerContentFragment;
-import com.xiaomai.zhuangba.fragment.base.BaseMasterEmployerFragment;
+import com.xiaomai.zhuangba.adapter.ExamplePagerAdapter;
+import com.xiaomai.zhuangba.adapter.HomeCommonNavigatorAdapter;
+import com.xiaomai.zhuangba.fragment.masterworker.table.MasterHomeFragment;
+import com.xiaomai.zhuangba.fragment.masterworker.table.MasterOrderFragment;
 import com.xiaomai.zhuangba.fragment.personal.master.MasterPersonalFragment;
-import com.xiaomai.zhuangba.http.ServiceUrl;
-import com.xiaomai.zhuangba.util.Util;
+
+import net.lucode.hackware.magicindicator.MagicIndicator;
+import net.lucode.hackware.magicindicator.ViewPagerHelper;
+import net.lucode.hackware.magicindicator.buildins.commonnavigator.CommonNavigator;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.OnClick;
 
 /**
  * @author Administrator
@@ -46,26 +28,14 @@ import butterknife.OnClick;
  * <p>
  * 师傅端
  */
-public class MasterWorkerFragment extends BaseMasterEmployerFragment implements CompoundButton.OnCheckedChangeListener {
+public class MasterWorkerFragment extends BaseFragment {
 
-    @BindView(R.id.refreshBaseList)
-    SmartRefreshLayout refreshBaseList;
-    @BindView(R.id.tvTodayFlowingRMB)
-    TextView tvTodayFlowingRMB;
-    @BindView(R.id.tvOrderToday)
-    TextView tvOrderToday;
-    @BindView(R.id.tvFinishToday)
-    TextView tvFinishToday;
-    @BindView(R.id.toggleButton)
-    ToggleButton toggleButton;
-    @BindView(R.id.roundButtonCheckCountry)
-    QMUIRoundButton roundButtonCheckCountry;
-    @BindView(R.id.btnMasterApply)
-    QMUIButton btnMasterApply;
 
-    private int optionsOne = 0, optionsTwo = 0;
-    private ArrayList<ProvinceBean> options1Items = new ArrayList<>();
-    private ArrayList<ArrayList<String>> options2Items = new ArrayList<>();
+    @BindView(R.id.viewPager)
+    ViewPager mViewPager;
+    @BindView(R.id.magicIndicator)
+    MagicIndicator magicIndicator;
+
 
     public static MasterWorkerFragment newInstance() {
         Bundle args = new Bundle();
@@ -75,170 +45,83 @@ public class MasterWorkerFragment extends BaseMasterEmployerFragment implements 
     }
 
     @Override
+    public void initView() {
+        String[] titleName = new String[]{getString(R.string.homepage), getString(R.string.order), getString(R.string.my)};
+        List<String> mDataTitleName = Arrays.asList(titleName);
+        //未选中
+        Integer[] titleImgUnChecked = new Integer[]{R.drawable.ic_home_page_unchecked, R.drawable.ic_order_unchecked, R.drawable.ic_my_unchecked};
+        List<Integer> mDataTitleImgUnChecked = Arrays.asList(titleImgUnChecked);
+        //选中
+        Integer[] titleImgSelection = new Integer[]{R.drawable.ic_homepage_selection, R.drawable.ic_order_selection, R.drawable.ic_my_selection};
+        List<Integer> mDataTitleImgSelection = Arrays.asList(titleImgSelection);
+        //fragment
+        List<BaseFragment> fragmentList = new ArrayList<>();
+        fragmentList.add(MasterHomeFragment.newInstance());
+        fragmentList.add(MasterOrderFragment.newInstance());
+        // TODO: 2019/11/6 0006 师傅 今日接单数 和 今日收入 要加上下拉刷新
+        fragmentList.add(MasterPersonalFragment.newInstance(getString(R.string.zero), getString(R.string.zero)));
+        ExamplePagerAdapter mExamplePagerAdapter = new ExamplePagerAdapter(getChildFragmentManager(), fragmentList, mDataTitleName);
+        mViewPager.setAdapter(mExamplePagerAdapter);
+        initMagicIndicator(mDataTitleName, mDataTitleImgUnChecked, mDataTitleImgSelection);
+    }
+
+    private void initMagicIndicator(List<String> mDataTitleName, List<Integer> mDataTitleImgUnChecked, List<Integer> mDataTitleImgSelection) {
+        CommonNavigator commonNavigator = new CommonNavigator(getActivity());
+        commonNavigator.setAdjustMode(true);
+        HomeCommonNavigatorAdapter homeCommonNavigatorAdapter = new HomeCommonNavigatorAdapter(
+                mDataTitleName, mDataTitleImgUnChecked, mDataTitleImgSelection, mViewPager);
+        commonNavigator.setAdapter(homeCommonNavigatorAdapter);
+        magicIndicator.setNavigator(commonNavigator);
+        ViewPagerHelper.bind(magicIndicator, mViewPager);
+        //设置状态栏为白色
+        statusBarWhite();
+        mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int i, float v, int i1) {
+            }
+
+            @Override
+            public void onPageSelected(int i) {
+                if (i == 0) {
+                    //首页状态栏白色
+                    statusBarWhite();
+                } else {
+                    //其它状态栏黑色
+                    statusBarBlack();
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int i) {
+            }
+        });
+    }
+
+
+    @Override
     public int getContentView() {
         return R.layout.fragment_master_worker;
     }
 
+
     @Override
-    public void initView() {
-        super.initView();
-        UserInfo userInfo = DBHelper.getInstance().getUserInfoDao().queryBuilder().unique();
-        if (userInfo != null) {
-            int startFlag = userInfo.getStartFlag();
-            toggleButton.setChecked(OrdersEnum.MASTER_WORK.getCode() == startFlag);
-            toggleButton.setOnCheckedChangeListener(this);
-            isBtnMasterApplyVisible(userInfo);
-
-        }
-        //省市 联动数据组装
-        Util.getProvincialAssemble(getActivity(), options1Items, options2Items);
-    }
-
-    private void isBtnMasterApplyVisible(UserInfo userInfo) {
-        //是否显示 申请成为师傅 缴纳保证金
-        if (userInfo.getAuthenticationStatue() != StaticExplain.CERTIFIED.getCode()) {
-            btnMasterApply.setVisibility(View.VISIBLE);
-        } else {
-            btnMasterApply.setVisibility(View.GONE);
-        }
-    }
-
-    @OnClick({R.id.roundButtonCheckCountry, R.id.btnMasterApply})
-    public void onMasterViewClicked(View view) {
-        switch (view.getId()) {
-            case R.id.roundButtonCheckCountry:
-                showAddress();
-                break;
-            case R.id.btnMasterApply:
-                //去认证
-                startFragment(IDCardScanningFragment.newInstance());
-                break;
-            default:
-        }
-    }
-
-    private void showAddress() {
-        OptionsPickerView pvOptions = new OptionsPickerBuilder(getActivity(), new OnOptionsSelectListener() {
-            @Override
-            public void onOptionsSelect(int options1, int options2, int options3, View v) {
-                //返回的分别是三个级别的选中位置
-                String s = options2Items.get(options1).get(options2);
-                roundButtonCheckCountry.setText(s);
-                refreshContent();
-            }
-        })
-                .setTitleText("城市选择")
-                .setContentTextSize(20)
-                .setDividerColor(Color.LTGRAY)
-                .setSelectOptions(optionsOne, optionsTwo)
-                .setBgColor(Color.WHITE)
-                .setTitleBgColor(getResources().getColor(R.color.tool_lib_gray_E8E8E8))
-                .setTitleColor(Color.BLACK)
-                .setCancelColor(getResources().getColor(R.color.tool_lib_red_EF2B2B))
-                .setSubmitColor(getResources().getColor(R.color.tool_lib_red_EF2B2B))
-                .setTextColorCenter(Color.BLACK)
-                .isRestoreItem(false)
-                .isCenterLabel(false)
-                .setLabels("", "", "")
-                .setOutSideColor(0x00000000)
-                .setOptionsSelectChangeListener(new OnOptionsSelectChangeListener() {
-                    @Override
-                    public void onOptionsSelectChanged(int options1, int options2, int options3) {
-                        optionsOne = options1;
-                        optionsTwo = options2;
-                    }
-                })
-                .build();
-        pvOptions.setPicker(options1Items, options2Items);
-        pvOptions.show();
-    }
-
-    /**
-     * 刷新 订单池
-     */
-    private void refreshContent() {
-        refreshBaseList.autoRefresh();
+    protected String getActivityTitle() {
+        return null;
     }
 
     @Override
-    public String getAddress() {
-        return roundButtonCheckCountry.getText().toString();
+    public boolean isCustomView() {
+        return false;
     }
 
     @Override
-    public void onRefresh(@NonNull RefreshLayout refreshLayout) {
-        super.onRefresh(refreshLayout);
-        RxUtils.getObservable(ServiceUrl.getUserApi().getUser())
-                .compose(this.<HttpResult<UserInfo>>bindToLifecycle())
-                .subscribe(new BaseHttpRxObserver<UserInfo>() {
-                    @Override
-                    protected void onSuccess(UserInfo userInfo) {
-                        DBHelper.getInstance().getUserInfoDao().deleteAll();
-                        DBHelper.getInstance().getUserInfoDao().insert(userInfo);
-                    }
-                });
+    protected boolean translucentFull() {
+        return true;
     }
 
     @Override
-    public void orderStatisticsSuccess(OrderStatistics orderStatistics) {
-        if (orderStatistics != null) {
-            tvTodayFlowingRMB.setText(Util.getZero(orderStatistics.getMasterOrderAmount()));
-            tvOrderToday.setText(String.valueOf(orderStatistics.getPendingDisposal()));
-            tvFinishToday.setText(String.valueOf(orderStatistics.getComplete()));
-        }
-        isBtnMasterApplyVisible(DBHelper.getInstance().getUserInfoDao().queryBuilder().unique());
-    }
-
-    @Override
-    public void startPersonal() {
-        String orderToday = tvOrderToday.getText().toString();
-        String todayFlowingRMB = tvTodayFlowingRMB.getText().toString();
-        startFragment(MasterPersonalFragment.newInstance(orderToday, todayFlowingRMB));
-    }
-
-    @Override
-    public List<BaseMasterEmployerContentFragment> getListFragment() {
-        List<BaseMasterEmployerContentFragment> fragmentList = new ArrayList<>();
-        fragmentList.add(OrderPoolFragment.newInstance());
-        fragmentList.add(NeedDealWithFragment.newInstance());
-        fragmentList.add(AdvertisingBillsFragment.newInstance());
-        fragmentList.add(InspectionSheetFragment.newInstance());
-        //
-        return fragmentList;
-    }
-
-    @Override
-    public String[] getTabTitle() {
-        return new String[]{getString(R.string.order_pool), getString(R.string.need_to_be_dealt_with) , getString(R.string.advertising_bills) , getString(R.string.inspection_sheet)};
-    }
-
-    @Override
-    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-        iModule.requestWorkingStateSwitching();
-    }
-
-    @Override
-    public String getStatus() {
-        return toggleButton.isChecked() ? String.valueOf(OrdersEnum.MASTER_WORK.getCode()) : String.valueOf(OrdersEnum.MASTER_REST.getCode());
-    }
-
-    @Override
-    public void roundButtonCheckCountryIsVisible(int visible) {
-        roundButtonCheckCountry.setVisibility(visible);
-    }
-
-    @Override
-    public void workingStateSwitchingSuccess() {
-        final QMUITipDialog tipDialog = new QMUITipDialog.CustomBuilder(getContext())
-                .setContent(R.layout.dialog_tip_custom)
-                .create();
-        tipDialog.show();
-        toggleButton.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                tipDialog.dismiss();
-            }
-        }, 1500);
+    protected IBaseModule initModule() {
+        return null;
     }
 }
 

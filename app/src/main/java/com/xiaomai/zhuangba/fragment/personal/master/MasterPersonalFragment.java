@@ -215,4 +215,9 @@ public class MasterPersonalFragment extends PersonalFragment {
         }
         return "0";
     }
+
+    @Override
+    public boolean isBackArrow() {
+        return false;
+    }
 }
