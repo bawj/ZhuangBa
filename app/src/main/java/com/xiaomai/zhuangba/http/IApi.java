@@ -19,7 +19,6 @@ import com.xiaomai.zhuangba.data.bean.InspectionSheetBean;
 import com.xiaomai.zhuangba.data.bean.InspectionSheetDetailBean;
 import com.xiaomai.zhuangba.data.bean.Maintenance;
 import com.xiaomai.zhuangba.data.bean.MaintenanceBean;
-import com.xiaomai.zhuangba.data.bean.MaintenanceOverman;
 import com.xiaomai.zhuangba.data.bean.OngoingOrdersList;
 import com.xiaomai.zhuangba.data.bean.OrderDateList;
 import com.xiaomai.zhuangba.data.bean.OrderServiceItem;
@@ -1253,5 +1252,13 @@ public interface IApi {
     @FormUrlEncoded
     @POST("order/getMasterMaintenanceOrderDetails")
     Observable<HttpResult<GuaranteeDeatil>> getMasterMaintenanceOrderDetails(@Field("orderCode") String orderCode , @Field("orderType") String orderType);
+
+    /**
+     * 师傅维保订单详情
+     * @param requestBody body
+     * @return observable
+     */
+    @POST("search/getAllSearchCondition")
+    Observable<HttpResult<Object>> getAllSearchCondition(@Body RequestBody requestBody);
 
 }

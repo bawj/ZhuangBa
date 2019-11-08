@@ -7,14 +7,21 @@ import android.widget.TextView;
 
 import com.example.toollib.base.BaseFragment;
 import com.example.toollib.data.IBaseModule;
+import com.example.toollib.http.HttpResult;
+import com.example.toollib.http.observer.BaseHttpRxObserver;
+import com.example.toollib.http.util.RxUtils;
+import com.google.gson.Gson;
 import com.xiaomai.zhuangba.R;
 import com.xiaomai.zhuangba.adapter.MasterOrderAdapter;
 import com.xiaomai.zhuangba.adapter.TabCommonNavigator;
+import com.xiaomai.zhuangba.data.bean.SearchCondition;
+import com.xiaomai.zhuangba.enums.StaticExplain;
 import com.xiaomai.zhuangba.fragment.base.BaseListFragment;
 import com.xiaomai.zhuangba.fragment.masterworker.AdvertisingBillsFragment;
 import com.xiaomai.zhuangba.fragment.masterworker.GuaranteeFragment;
 import com.xiaomai.zhuangba.fragment.masterworker.InspectionSheetFragment;
 import com.xiaomai.zhuangba.fragment.masterworker.NeedDealWithFragment;
+import com.xiaomai.zhuangba.http.ServiceUrl;
 import com.xiaomai.zhuangba.weight.dialog.ScreenDialog;
 
 import net.lucode.hackware.magicindicator.MagicIndicator;
@@ -22,10 +29,13 @@ import net.lucode.hackware.magicindicator.ViewPagerHelper;
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.CommonNavigator;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import okhttp3.MediaType;
+import okhttp3.RequestBody;
 
 /**
  * @author Administrator
@@ -39,6 +49,19 @@ public class MasterOrderFragment extends BaseFragment implements ViewPager.OnPag
     ViewPager mViewPager;
     @BindView(R.id.tvScreen)
     TextView tvScreen;
+
+    /**
+     * 筛选条件
+     */
+    private List<String> teamList = new ArrayList<>();
+    /**
+     * 筛选条件
+     */
+    private List<String> equipmentList = new ArrayList<>();
+    /**
+     * 筛选条件
+     */
+    private List<String> batchCodeList = new ArrayList<>();
 
     public static MasterOrderFragment newInstance() {
         Bundle args = new Bundle();
@@ -84,10 +107,54 @@ public class MasterOrderFragment extends BaseFragment implements ViewPager.OnPag
 
     @OnClick(R.id.tvScreen)
     public void onViewClicked() {
+        HashMap<String, Object> hashMap = new HashMap<>();
+        hashMap.put("type", "1");
+        hashMap.put("teamList", getTeamList());
+        hashMap.put("equipmentList", getEquipmentList());
+        hashMap.put("batchCodeList", getBatchCodeList());
+        RequestBody requestBody = RequestBody.create(MediaType.parse("application/json;charset=utf-8"), new Gson().toJson(hashMap));
+        RxUtils.getObservable(ServiceUrl.getUserApi().getAllSearchCondition(requestBody))
+                .compose(this.<HttpResult<Object>>bindToLifecycle())
+                .subscribe(new BaseHttpRxObserver<Object>(getActivity()) {
+                    @Override
+                    protected void onSuccess(Object response) {
+                        //筛选
+                        ScreenDialog.getInstance().showRightDialog(getActivity());
+                    }
+                });
+    }
 
+    public List<String> getTeamList() {
+        if (teamList == null) {
+            return new ArrayList<>();
+        }
+        return teamList;
+    }
 
-        //筛选
-        ScreenDialog.getInstance().showRightDialog(getActivity());
+    public void setTeamList(List<String> teamList) {
+        this.teamList = teamList;
+    }
+
+    public List<String> getEquipmentList() {
+        if (equipmentList == null) {
+            return new ArrayList<>();
+        }
+        return equipmentList;
+    }
+
+    public void setEquipmentList(List<String> equipmentList) {
+        this.equipmentList = equipmentList;
+    }
+
+    public List<String> getBatchCodeList() {
+        if (batchCodeList == null) {
+            return new ArrayList<>();
+        }
+        return batchCodeList;
+    }
+
+    public void setBatchCodeList(List<String> batchCodeList) {
+        this.batchCodeList = batchCodeList;
     }
 
     @Override

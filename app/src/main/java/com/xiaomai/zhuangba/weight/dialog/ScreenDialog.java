@@ -2,7 +2,6 @@ package com.xiaomai.zhuangba.weight.dialog;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +9,10 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import com.xiaomai.zhuangba.R;
+import com.xiaomai.zhuangba.data.bean.SearchCondition;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Administrator
@@ -19,6 +22,11 @@ public class ScreenDialog {
 
     private Dialog dialog;
     private View inflate;
+    /** 搜索条件 */
+    private List<String> teamList = new ArrayList<>();
+    private List<String> equipmentList = new ArrayList<>();
+    private List<String> batchCodeList = new ArrayList<>();
+    private SearchCondition searchCondition;
 
     public static ScreenDialog getInstance() {
         return new ScreenDialog();
@@ -49,6 +57,10 @@ public class ScreenDialog {
             dialog.dismiss();
             dialog = null;
         }
+    }
+
+    public SearchCondition getSearchCondition(){
+        return searchCondition = new SearchCondition();
     }
 
 }
