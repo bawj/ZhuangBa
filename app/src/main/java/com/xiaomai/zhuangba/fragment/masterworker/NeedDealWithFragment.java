@@ -103,9 +103,9 @@ public class NeedDealWithFragment extends BaseListFragment<IBaseModule, NeedDeal
     protected String getActivityTitle() {
         return null;
     }
-
     @Override
     public boolean isCustomView() {
         return false;
     }
+
 }

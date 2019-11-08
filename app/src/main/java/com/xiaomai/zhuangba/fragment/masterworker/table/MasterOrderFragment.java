@@ -98,13 +98,23 @@ public class MasterOrderFragment extends BaseFragment implements ViewPager.OnPag
     }
 
     @Override
-    protected String getActivityTitle() {
-        return getString(R.string.order);
+    public boolean isBackArrow() {
+        return false;
     }
 
     @Override
-    public boolean isBackArrow() {
+    public boolean isCustomView() {
         return false;
+    }
+
+    @Override
+    protected String getActivityTitle() {
+        return null;
+    }
+
+    @Override
+    protected boolean translucentFull() {
+        return true;
     }
 
     @Override

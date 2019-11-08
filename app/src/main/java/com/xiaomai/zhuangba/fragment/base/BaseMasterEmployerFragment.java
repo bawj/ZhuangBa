@@ -102,12 +102,6 @@ public class BaseMasterEmployerFragment extends BaseFragment<IMasterEmployerModu
     }
 
     @Override
-    public void onStart() {
-        super.onStart();
-        statusBarWhite();
-    }
-
-    @Override
     public void initView() {
         listFragment = getListFragment();
 

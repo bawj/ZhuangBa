@@ -105,4 +105,5 @@ public class AmountUtil {
         BigDecimal bg = new BigDecimal(bigDecimal);
         return bg.setScale(newScale, BigDecimal.ROUND_HALF_UP).doubleValue();
     }
+
 }

@@ -81,8 +81,11 @@ public class PatrolInspectionRecordsPhotoFragment extends BaseFragment {
         List<PatrolInspectionRecordsPhotoDetailFragment> list = new ArrayList<>();
         for (int i = 0; i < tabTitle.length; i++) {
             PatrolInspectionRecordsDetailImgBean.TaskPictureListBean taskPictureListBean = new PatrolInspectionRecordsDetailImgBean.TaskPictureListBean();
-            if (taskPictureList.size() > i) {
-                taskPictureListBean = taskPictureList.get(i);
+            for (PatrolInspectionRecordsDetailImgBean.TaskPictureListBean pictureListBean : taskPictureList) {
+                if (pictureListBean.getSide().equals(tabTitle[i])){
+                    taskPictureListBean = pictureListBean;
+                    break;
+                }
             }
             taskPictureListBean.setSide(tabTitle[i]);
             list.add(PatrolInspectionRecordsPhotoDetailFragment.newInstance(tabTitle[i], new Gson().toJson(taskPictureListBean)));
@@ -127,29 +130,55 @@ public class PatrolInspectionRecordsPhotoFragment extends BaseFragment {
 
     @Override
     public void rightTitleClick(View v) {
-        boolean flag = false;
+        //判断是否有图片 没有上传
+        boolean isTip = false;
         //完成
         PatrolInspectionRecordsDetailImgBean patrolInspectionRecordsDetailImgBean = getPatrolInspectionRecordsDetailImgBean();
         //默认设置已巡查
         patrolInspectionRecordsDetailImgBean.setStatus(StringTypeExplain.PROCESSED.getCode());
+        //默认图 可能没有
         List<PatrolInspectionRecordsDetailImgBean.TaskPictureListBean> taskPictureVOList = patrolInspectionRecordsDetailImgBean.getTaskPictureList();
         for (int i = 0; i < photoDetailFragmentList.size(); i++) {
+            //新图片
             PatrolInspectionRecordsPhotoDetailFragment patrolInspectionRecordsPhotoDetailFragment = photoDetailFragmentList.get(i);
             PatrolInspectionRecordsDetailImgBean.TaskPictureListBean taskPictureListBean = patrolInspectionRecordsPhotoDetailFragment.getTaskPictureListBean();
+            //新图片
             String newPic = taskPictureListBean.getPic();
-            PatrolInspectionRecordsDetailImgBean.TaskPictureListBean taskPictureListBean1 = taskPictureVOList.get(i);
-            String pic = taskPictureListBean1.getPic();
-            if (!TextUtils.isEmpty(newPic)) {
+            String newSide = taskPictureListBean.getSide();
+            //如果有 则替换  没有 则添加
+            PatrolInspectionRecordsDetailImgBean.TaskPictureListBean primaryTaskPictureListBean = null;
+            for (PatrolInspectionRecordsDetailImgBean.TaskPictureListBean pictureListBean : taskPictureVOList) {
+                String side = pictureListBean.getSide();
+                if (side.equals(newSide)){
+                    primaryTaskPictureListBean = pictureListBean;
+                    break;
+                }
+            }
+            if (primaryTaskPictureListBean != null && !TextUtils.isEmpty(newPic)){
+                primaryTaskPictureListBean.setPic(newPic);
+            }else if (!TextUtils.isEmpty(newPic)){
                 taskPictureVOList.add(taskPictureListBean);
-                flag = true;
-            } else if (TextUtils.isEmpty(pic)){
-                //有一个面 没有上传图片  则 未巡查
-                patrolInspectionRecordsDetailImgBean.setStatus(StringTypeExplain.PROCESSING.getCode());
+            }
+            boolean shot = photoDetailFragmentList.get(i).isShot();
+            boolean upload = photoDetailFragmentList.get(i).isUpload();
+            //拍照了 但是没有上传
+            if (shot && !upload){
+                isTip = true;
             }
         }
-        if (!flag) {
-            ToastUtil.showShort(getString(R.string.please_save_the_patrol_pictures));
+
+        if (taskPictureVOList.size() <= 0){
+            ToastUtil.showShort(getString(R.string.please_shot_img));
             return;
+        }
+        if (isTip){
+            ToastUtil.showShort(getString(R.string.please_save_shot_img));
+            return;
+        }
+
+        if (taskPictureVOList.size() != photoDetailFragmentList.size()){
+            //有一个面 没有上传图片  则 未巡查
+            patrolInspectionRecordsDetailImgBean.setStatus(StringTypeExplain.PROCESSING.getCode());
         }
         PatrolInspectionRecordsDetailImgBean detailImgBean = new PatrolInspectionRecordsDetailImgBean();
         detailImgBean.setId(patrolInspectionRecordsDetailImgBean.getId());

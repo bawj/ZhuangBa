@@ -62,7 +62,6 @@ public class BaseMasterEmployerContentFragment extends BaseFragment<IMasterEmplo
             rvBaseList.setAdapter(orderListAdapter);
             orderListAdapter.setOnLoadMoreListener(this, rvBaseList);
         }
-        statusBarWhite();
     }
 
     @Override

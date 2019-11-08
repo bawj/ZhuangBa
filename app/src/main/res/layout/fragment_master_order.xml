@@ -9,6 +9,16 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/tool_lib_64dp"
+            android:background="@android:color/white"
+            android:gravity="center_horizontal"
+            android:paddingTop="@dimen/tool_lib_31dp"
+            android:text="@string/order"
+            android:textColor="@color/tool_lib_gray_222222"
+            android:textSize="@dimen/tool_lib_18sp" />
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -41,7 +51,8 @@
         <android.support.v4.view.ViewPager
             android:id="@+id/viewPager"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:background="@color/tool_lib_gray_F5F8FA" />
     </LinearLayout>
 
 </LinearLayout>

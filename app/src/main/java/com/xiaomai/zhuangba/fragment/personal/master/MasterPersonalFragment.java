@@ -97,7 +97,7 @@ public class MasterPersonalFragment extends PersonalFragment {
         tvPersonalName.setText(userInfo.getUserText());
         GlideManager.loadCircleImage(getActivity(), userInfo.getBareHeadedPhotoUrl(), ivUserHead, R.drawable.bg_def_head);
 
-        //查询 是否有团队
+        // TODO: 2019/11/8 0008  查询 是否有团队
         //findTeam();
     }
 
@@ -137,7 +137,7 @@ public class MasterPersonalFragment extends PersonalFragment {
                     startFragment(CreateJoinFragment.newInstance());
                 } else if (status == StaticExplain.CREATE_TEAM.getCode()) {
                     //创建了团队
-                    startFragmentForResult(TheTeamJoinedFragment.newInstance() , ForResultCode.START_FOR_RESULT_CODE.getCode());
+                    startFragmentForResult(TheTeamJoinedFragment.newInstance(), ForResultCode.START_FOR_RESULT_CODE.getCode());
                 } else if (status == StaticExplain.JOIN_THE_TEAM.getCode()) {
                     //加入了团队
                     startFragment(JoinTheTeamFragment.newInstance(teamTile));
@@ -154,20 +154,21 @@ public class MasterPersonalFragment extends PersonalFragment {
                     @Override
                     protected void onSuccess(Object response) {
                     }
+
                     @Override
                     public void onError(ApiException apiException) {
                         status = apiException.getStatus();
-                        if (status == StaticExplain.CREATE_TEAM.getCode()){
-                            CreateTeamBean createTeamBean = new Gson().fromJson(apiException.getData() , CreateTeamBean.class);
+                        if (status == StaticExplain.CREATE_TEAM.getCode()) {
+                            CreateTeamBean createTeamBean = new Gson().fromJson(apiException.getData(), CreateTeamBean.class);
                             tvMasterPersonalTeamName.setText(getString(R.string.enum_name_val
-                                    , createTeamBean.getEnumName() ,String.valueOf(createTeamBean.getEnumVal())));
+                                    , createTeamBean.getEnumName(), String.valueOf(createTeamBean.getEnumVal())));
                             teamTile = createTeamBean.getEnumName();
-                        }else if (status == StaticExplain.JOIN_THE_TEAM.getCode()){
-                            CreateTeamBean createTeamBean = new Gson().fromJson(apiException.getData() , CreateTeamBean.class);
+                        } else if (status == StaticExplain.JOIN_THE_TEAM.getCode()) {
+                            CreateTeamBean createTeamBean = new Gson().fromJson(apiException.getData(), CreateTeamBean.class);
                             tvMasterPersonalTeamName.setText(getString(R.string.enum_name_val
-                                    , createTeamBean.getEnumName() ,String.valueOf(createTeamBean.getEnumVal())));
+                                    , createTeamBean.getEnumName(), String.valueOf(createTeamBean.getEnumVal())));
                             teamTile = createTeamBean.getEnumName();
-                        }else if (status == StaticExplain.NO_TEAM_WAS_CREATED_JOINED.getCode()){
+                        } else if (status == StaticExplain.NO_TEAM_WAS_CREATED_JOINED.getCode()) {
                             tvMasterPersonalTeamName.setText("");
                             teamTile = "";
                         }
@@ -219,5 +220,20 @@ public class MasterPersonalFragment extends PersonalFragment {
     @Override
     public boolean isBackArrow() {
         return false;
+    }
+
+    @Override
+    public boolean isCustomView() {
+        return false;
+    }
+
+    @Override
+    protected String getActivityTitle() {
+        return null;
+    }
+
+    @Override
+    protected boolean translucentFull() {
+        return true;
     }
 }

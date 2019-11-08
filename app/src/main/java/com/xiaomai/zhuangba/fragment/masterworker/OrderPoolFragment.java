@@ -17,9 +17,6 @@ import com.xiaomai.zhuangba.fragment.advertisement.master.MasterAdvertisementOrd
 import com.xiaomai.zhuangba.fragment.advertisement.master.PatrolPoolDetailFragment;
 import com.xiaomai.zhuangba.fragment.base.BaseMasterEmployerContentFragment;
 import com.xiaomai.zhuangba.fragment.orderdetail.master.OrderPoolDetailFragment;
-import com.xiaomai.zhuangba.util.AdvertisingStatusUtil;
-import com.xiaomai.zhuangba.util.OrderStatusUtil;
-import com.xiaomai.zhuangba.util.PatrolStatusUtil;
 
 import java.util.List;
 
@@ -37,13 +34,6 @@ public class OrderPoolFragment extends BaseMasterEmployerContentFragment {
         OrderPoolFragment fragment = new OrderPoolFragment();
         fragment.setArguments(args);
         return fragment;
-    }
-
-    @Override
-    public void initView() {
-        super.initView();
-        //设置状态栏为白色
-        statusBarWhite();
     }
 
     @Override

@@ -2,6 +2,7 @@ package com.xiaomai.zhuangba.adapter;
 
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -51,16 +52,29 @@ public class WholeAdvertisingAdapter extends BaseQuickAdapter<OngoingOrdersList,
         tvItemOrdersTime.setText(mContext.getString(R.string.time, ongoingOrders.getSlottingStartLength()));
 
         TextView tvMaintenance = helper.getView(R.id.tvMaintenance);
+
+
+        //持续服务
+        ImageView ivItemMaintenanceTime = helper.getView(R.id.ivItemMaintenanceTime);
+        TextView tvItemOrdersMaintenanceTime = helper.getView(R.id.tvItemOrdersMaintenanceTime);
+
         //如果是广告单  maintenanceFlag  0 单次 1 持续
         int maintenanceFlag = ongoingOrders.getMaintenanceFlag();
         if (maintenanceFlag == StaticExplain.SINGLE_SERVICE.getCode()) {
             tvMaintenance.setText(mContext.getString(R.string.single_service));
             tvMaintenance.setBackgroundResource(R.drawable.blue_radius_bg);
             tvMaintenance.setTextColor(mContext.getResources().getColor(R.color.tool_lib_color_287CDF));
+            ivItemMaintenanceTime.setVisibility(View.GONE);
+            tvItemOrdersMaintenanceTime.setVisibility(View.GONE);
         } else {
             tvMaintenance.setText(mContext.getString(R.string.continuous_service));
             tvMaintenance.setBackgroundResource(R.drawable.violet_radius_bg);
             tvMaintenance.setTextColor(mContext.getResources().getColor(R.color.tool_lib_color_542BE9));
+            ivItemMaintenanceTime.setVisibility(View.VISIBLE);
+            tvItemOrdersMaintenanceTime.setVisibility(View.VISIBLE);
+            //维护时间
+            // TODO: 2019/11/8 0008 维护时间 段 没有数据
+            //tvItemOrdersMaintenanceTime.setText(mContext.getString(R.string.ending_date_ , ));
         }
         int orderStatus = ongoingOrders.getOrderStatus();
         AdvertisingStatusUtil.masterStatus(mContext , orderStatus ,tvItemOrdersType);

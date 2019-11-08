@@ -39,10 +39,10 @@ public class AdvertisingReplacementAdapter extends BaseQuickAdapter<AdvertisingL
         tvChangePlaces.setText(item.getEquipmentSurface());
         //金额
         TextView tvMoney = helper.getView(R.id.tvMoney);
-        tvMoney.setText(mContext.getString(R.string.content_money , String.valueOf(item.getOrderAmount())));
+        tvMoney.setText(mContext.getString(R.string.content_money , String.valueOf( String.valueOf(AmountUtil.getDoubleValue(item.getOrderAmount() , 2)))));
         //维护周期
         TextView tvMaintenanceCycle = helper.getView(R.id.tvMaintenanceCycle);
-        tvMaintenanceCycle.setText(item.getOrderTime());
+        tvMaintenanceCycle.setText(mContext.getString(R.string.maintenance_time , item.getOrderTime()));
         //维护时间
         TextView tvEndingTime = helper.getView(R.id.tvEndingTime);
         String startTime = item.getStartTime();

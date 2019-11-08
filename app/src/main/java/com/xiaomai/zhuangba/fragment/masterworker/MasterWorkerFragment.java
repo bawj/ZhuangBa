@@ -63,6 +63,7 @@ public class MasterWorkerFragment extends BaseFragment {
         ExamplePagerAdapter mExamplePagerAdapter = new ExamplePagerAdapter(getChildFragmentManager(), fragmentList, mDataTitleName);
         mViewPager.setAdapter(mExamplePagerAdapter);
         initMagicIndicator(mDataTitleName, mDataTitleImgUnChecked, mDataTitleImgSelection);
+
     }
 
     private void initMagicIndicator(List<String> mDataTitleName, List<Integer> mDataTitleImgUnChecked, List<Integer> mDataTitleImgSelection) {
@@ -73,26 +74,6 @@ public class MasterWorkerFragment extends BaseFragment {
         commonNavigator.setAdapter(homeCommonNavigatorAdapter);
         magicIndicator.setNavigator(commonNavigator);
         ViewPagerHelper.bind(magicIndicator, mViewPager);
-        mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int i, float v, int i1) {
-            }
-
-            @Override
-            public void onPageSelected(int i) {
-                if (i == 0) {
-                    //首页状态栏白色
-                    statusBarWhite();
-                } else {
-                    //其它状态栏黑色
-                    statusBarBlack();
-                }
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int i) {
-            }
-        });
     }
 
 

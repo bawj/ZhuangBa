@@ -183,12 +183,18 @@ public class PatrolInspectionRecordsPhotoDetailFragment extends BaseFragment {
                         @Override
                         protected void onSuccess(Object response) {
                             taskPictureListBean.setPic(response.toString());
+                            isUpload = true;
                         }
                     });
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
+    /** 是否拍摄了图片 */
+    private boolean isShot = false;
+    /** 拍摄后是否上传了图片 */
+    private boolean isUpload = false;
 
     @Override
     protected void onFragmentResult(int requestCode, int resultCode, Intent data) {
@@ -199,6 +205,7 @@ public class PatrolInspectionRecordsPhotoDetailFragment extends BaseFragment {
                 imgUrl = data.getStringExtra(ForResultCode.RESULT_KEY.getExplain());
                 GlideManager.loadUriImage(getActivity(), imgUrl, ivPhotoImg);
                 isVisibility();
+                isShot = true;
             }
         }
     }
@@ -219,5 +226,13 @@ public class PatrolInspectionRecordsPhotoDetailFragment extends BaseFragment {
             return getArguments().getString(NOODLES);
         }
         return "";
+    }
+
+    public boolean isShot() {
+        return isShot;
+    }
+
+    public boolean isUpload() {
+        return isUpload;
     }
 }

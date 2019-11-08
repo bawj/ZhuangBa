@@ -85,7 +85,7 @@ public class BasePatrolMissionFragment extends BaseListFragment{
     }
 
     private void requestSuccess(List<PatrolBean> patrolBeanList) {
-        if (getPage() != StaticExplain.PAGE_NUMBER.getCode()) {
+        if (getPage() > StaticExplain.PAGE_NUMBER.getCode()) {
             //加载
             loadSuccess(patrolBeanList);
         } else {
