@@ -595,4 +595,9 @@
     <string name="screen">筛选</string>
     <string name="total_quantity">总数量：%1$s</string>
     <string name="gross_income">预计总收入：¥%1$s</string>
+    <string name="select_company">选择公司</string>
+    <string name="selective_advertising">选择广告</string>
+    <string name="selective_size">选择尺寸</string>
+    <string name="reset">重置</string>
+    <string name="search_complete">完成（%1$s条信息）</string>
 </resources>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/white">
+
+    <TextView
+        android:id="@+id/tvItemListSectionHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/tool_lib_24dp"
+        android:layout_marginLeft="@dimen/tool_lib_24dp"
+        android:layout_marginTop="@dimen/tool_lib_16dp"
+        android:layout_marginEnd="@dimen/tool_lib_24dp"
+        android:layout_marginRight="@dimen/tool_lib_24dp"
+        android:layout_marginBottom="@dimen/tool_lib_16dp"
+        android:textColor="@color/tool_lib_color_171B27"
+        android:textSize="@dimen/tool_lib_16sp"
+        android:textStyle="bold"
+        tools:text="选择公司" />
+
+    <ImageView
+        android:id="@+id/ivArrowView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="@dimen/tool_lib_24dp"
+        android:layout_marginRight="@dimen/tool_lib_24dp"
+        android:src="@drawable/ic_fold" />
+</RelativeLayout>

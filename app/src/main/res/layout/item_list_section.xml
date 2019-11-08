@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/tool_lib_24dp"
+        android:layout_marginLeft="@dimen/tool_lib_24dp"
+        android:layout_marginEnd="@dimen/tool_lib_12dp"
+        android:layout_marginRight="@dimen/tool_lib_12dp"
+        android:background="@drawable/item_list_section">
+
+        <TextView
+            android:id="@+id/tvListSectionText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="@dimen/tool_lib_16dp"
+            android:layout_marginEnd="@dimen/tool_lib_12dp"
+            android:layout_marginRight="@dimen/tool_lib_12dp"
+            android:layout_marginBottom="@dimen/tool_lib_16dp"
+            android:layout_toStartOf="@+id/ivSection"
+            android:layout_toLeftOf="@+id/ivSection"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textColor="@color/tool_lib_gray_777777"
+            android:textSize="@dimen/tool_lib_14sp"
+            tools:text="浙江省杭州市公司某某某公司某某浙江省杭州市公司某某某公司某某" />
+
+        <ImageView
+            android:id="@+id/ivSection"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="@dimen/tool_lib_20dp"
+            android:layout_marginRight="@dimen/tool_lib_20dp"
+            android:src="@drawable/ic_select_search" />
+    </RelativeLayout>
+
+
+</RelativeLayout>

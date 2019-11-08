@@ -1,14 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white">
+    android:background="@android:color/white"
+    android:orientation="vertical">
 
-    <TextView
-        android:layout_width="@dimen/tool_lib_280dp"
+    <com.qmuiteam.qmui.widget.section.QMUIStickySectionLayout
+        android:id="@+id/sectionLayout"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@android:color/white"
-        android:gravity="center"
-        android:text="筛选" />
+        android:layout_above="@+id/relBottom"
+        android:paddingTop="@dimen/tool_lib_16dp" />
+
+    <View style="@style/tool_lib_horizontal_line" />
+
+    <RelativeLayout
+        android:id="@+id/relBottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@android:color/white">
+
+        <TextView
+            android:id="@+id/tvSearchRest"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="@dimen/tool_lib_10dp"
+            android:layout_marginRight="@dimen/tool_lib_10dp"
+            android:layout_toStartOf="@+id/tvSearchComplete"
+            android:layout_toLeftOf="@+id/tvSearchComplete"
+            android:background="@drawable/gray_radius_bg"
+            android:paddingLeft="@dimen/tool_lib_31dp"
+            android:paddingTop="@dimen/tool_lib_10dp"
+            android:paddingRight="@dimen/tool_lib_31dp"
+            android:paddingBottom="@dimen/tool_lib_10dp"
+            android:text="@string/reset"
+            android:textColor="@color/tool_lib_gray_777777"
+            android:textSize="@dimen/tool_lib_14sp" />
+
+
+        <TextView
+            android:id="@+id/tvSearchComplete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="@dimen/tool_lib_8dp"
+            android:layout_marginEnd="@dimen/tool_lib_16dp"
+            android:layout_marginRight="@dimen/tool_lib_16dp"
+            android:layout_marginBottom="@dimen/tool_lib_8dp"
+            android:background="@drawable/login_login_btn"
+            android:paddingLeft="@dimen/tool_lib_16dp"
+            android:paddingTop="@dimen/tool_lib_10dp"
+            android:paddingRight="@dimen/tool_lib_16dp"
+            android:paddingBottom="@dimen/tool_lib_10dp"
+            android:textColor="@color/tool_lib_white_FFFFFF"
+            android:textSize="@dimen/tool_lib_14sp"
+            tools:text="完成（9999条信息）" />
+    </RelativeLayout>
+
 
 </RelativeLayout>

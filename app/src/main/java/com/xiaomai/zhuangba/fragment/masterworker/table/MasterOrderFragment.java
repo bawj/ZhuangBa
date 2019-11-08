@@ -15,7 +15,6 @@ import com.xiaomai.zhuangba.R;
 import com.xiaomai.zhuangba.adapter.MasterOrderAdapter;
 import com.xiaomai.zhuangba.adapter.TabCommonNavigator;
 import com.xiaomai.zhuangba.data.bean.SearchCondition;
-import com.xiaomai.zhuangba.enums.StaticExplain;
 import com.xiaomai.zhuangba.fragment.base.BaseListFragment;
 import com.xiaomai.zhuangba.fragment.masterworker.AdvertisingBillsFragment;
 import com.xiaomai.zhuangba.fragment.masterworker.GuaranteeFragment;
@@ -114,12 +113,15 @@ public class MasterOrderFragment extends BaseFragment implements ViewPager.OnPag
         hashMap.put("batchCodeList", getBatchCodeList());
         RequestBody requestBody = RequestBody.create(MediaType.parse("application/json;charset=utf-8"), new Gson().toJson(hashMap));
         RxUtils.getObservable(ServiceUrl.getUserApi().getAllSearchCondition(requestBody))
-                .compose(this.<HttpResult<Object>>bindToLifecycle())
-                .subscribe(new BaseHttpRxObserver<Object>(getActivity()) {
+                .compose(this.<HttpResult<SearchCondition>>bindToLifecycle())
+                .subscribe(new BaseHttpRxObserver<SearchCondition>(getActivity()) {
                     @Override
-                    protected void onSuccess(Object response) {
+                    protected void onSuccess(SearchCondition searchCondition) {
                         //筛选
-                        ScreenDialog.getInstance().showRightDialog(getActivity());
+                        ScreenDialog.getInstance()
+                                .setContext(getActivity())
+                                .setSearchConditionContent(searchCondition)
+                                .showRightDialog(getActivity());
                     }
                 });
     }

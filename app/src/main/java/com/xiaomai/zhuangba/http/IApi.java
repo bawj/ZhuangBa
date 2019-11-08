@@ -32,6 +32,7 @@ import com.xiaomai.zhuangba.data.bean.PayData;
 import com.xiaomai.zhuangba.data.bean.PayDepositBean;
 import com.xiaomai.zhuangba.data.bean.ProvincialBean;
 import com.xiaomai.zhuangba.data.bean.RefreshBaseList;
+import com.xiaomai.zhuangba.data.bean.SearchCondition;
 import com.xiaomai.zhuangba.data.bean.ServiceData;
 import com.xiaomai.zhuangba.data.bean.ServiceSubcategory;
 import com.xiaomai.zhuangba.data.bean.SkillList;
@@ -1259,6 +1260,6 @@ public interface IApi {
      * @return observable
      */
     @POST("search/getAllSearchCondition")
-    Observable<HttpResult<Object>> getAllSearchCondition(@Body RequestBody requestBody);
+    Observable<HttpResult<SearchCondition>> getAllSearchCondition(@Body RequestBody requestBody);
 
 }

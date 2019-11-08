@@ -1,6 +1,5 @@
 package com.xiaomai.zhuangba.data.bean;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -9,49 +8,158 @@ import java.util.List;
  */
 public class SearchCondition {
 
-    private String type;
-    private List<String> teamList;
-    private List<String> equipmentList;
-    private List<String> batchCodeList;
+    /**
+     * batchCodeList : [{"text":"dawd","list":["04611028473764590"],"num":null}]
+     * teamList : [{"text":"yingg","list":["19805851571","15067172560"],"num":null}]
+     * equipmentList : [{"text":"300cm*400cm","list":["962"],"num":null}]
+     * num : 10
+     */
 
-    public String getType() {
-        return type == null ? "" : type;
+    private int num;
+    /** 广告名称 */
+    private List<BatchCodeListBean> batchCodeList;
+    /** 选择公司 */
+    private List<TeamListBean> teamList;
+    /** 选择尺寸 */
+    private List<EquipmentListBean> equipmentList;
+
+    public int getNum() {
+        return num;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setNum(int num) {
+        this.num = num;
     }
 
-    public List<String> getTeamList() {
-        if (teamList == null) {
-            return new ArrayList<>();
-        }
-        return teamList;
-    }
-
-    public void setTeamList(List<String> teamList) {
-        this.teamList = teamList;
-    }
-
-    public List<String> getEquipmentList() {
-        if (equipmentList == null) {
-            return new ArrayList<>();
-        }
-        return equipmentList;
-    }
-
-    public void setEquipmentList(List<String> equipmentList) {
-        this.equipmentList = equipmentList;
-    }
-
-    public List<String> getBatchCodeList() {
-        if (batchCodeList == null) {
-            return new ArrayList<>();
-        }
+    public List<BatchCodeListBean> getBatchCodeList() {
         return batchCodeList;
     }
 
-    public void setBatchCodeList(List<String> batchCodeList) {
+    public void setBatchCodeList(List<BatchCodeListBean> batchCodeList) {
         this.batchCodeList = batchCodeList;
+    }
+
+    public List<TeamListBean> getTeamList() {
+        return teamList;
+    }
+
+    public void setTeamList(List<TeamListBean> teamList) {
+        this.teamList = teamList;
+    }
+
+    public List<EquipmentListBean> getEquipmentList() {
+        return equipmentList;
+    }
+
+    public void setEquipmentList(List<EquipmentListBean> equipmentList) {
+        this.equipmentList = equipmentList;
+    }
+
+    public static class BatchCodeListBean {
+        /**
+         * text : dawd
+         * list : ["04611028473764590"]
+         * num : null
+         */
+
+        private String text;
+        private Object num;
+        private List<String> list;
+
+        public String getText() {
+            return text;
+        }
+
+        public void setText(String text) {
+            this.text = text;
+        }
+
+        public Object getNum() {
+            return num;
+        }
+
+        public void setNum(Object num) {
+            this.num = num;
+        }
+
+        public List<String> getList() {
+            return list;
+        }
+
+        public void setList(List<String> list) {
+            this.list = list;
+        }
+    }
+
+    public static class TeamListBean {
+        /**
+         * text : yingg
+         * list : ["19805851571","15067172560"]
+         * num : null
+         */
+
+        private String text;
+        private Object num;
+        private List<String> list;
+
+        public String getText() {
+            return text;
+        }
+
+        public void setText(String text) {
+            this.text = text;
+        }
+
+        public Object getNum() {
+            return num;
+        }
+
+        public void setNum(Object num) {
+            this.num = num;
+        }
+
+        public List<String> getList() {
+            return list;
+        }
+
+        public void setList(List<String> list) {
+            this.list = list;
+        }
+    }
+
+    public static class EquipmentListBean {
+        /**
+         * text : 300cm*400cm
+         * list : ["962"]
+         * num : null
+         */
+
+        private String text;
+        private Object num;
+        private List<String> list;
+
+        public String getText() {
+            return text;
+        }
+
+        public void setText(String text) {
+            this.text = text;
+        }
+
+        public Object getNum() {
+            return num;
+        }
+
+        public void setNum(Object num) {
+            this.num = num;
+        }
+
+        public List<String> getList() {
+            return list;
+        }
+
+        public void setList(List<String> list) {
+            this.list = list;
+        }
     }
 }
