@@ -71,6 +71,4 @@ public class ContinuousIncomeFragment extends BaseFragment {
     protected String getActivityTitle() {
         return getString(R.string.continuous_income);
     }
-
-
 }

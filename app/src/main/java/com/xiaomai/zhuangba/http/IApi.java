@@ -2,6 +2,7 @@ package com.xiaomai.zhuangba.http;
 
 import com.example.toollib.http.HttpResult;
 import com.xiaomai.zhuangba.data.AdvertisingBillsBean;
+import com.xiaomai.zhuangba.data.OuterLayerMaintenanceOverman;
 import com.xiaomai.zhuangba.data.Patrol;
 import com.xiaomai.zhuangba.data.bean.AdvertisingReplacementBean;
 import com.xiaomai.zhuangba.data.bean.AdvertisingReplacementDetailBean;
@@ -24,6 +25,7 @@ import com.xiaomai.zhuangba.data.bean.OrderDateList;
 import com.xiaomai.zhuangba.data.bean.OrderServiceItem;
 import com.xiaomai.zhuangba.data.bean.OrderStatistics;
 import com.xiaomai.zhuangba.data.bean.Orders;
+import com.xiaomai.zhuangba.data.bean.OuterLayerAdvertisingBills;
 import com.xiaomai.zhuangba.data.bean.PatrolBean;
 import com.xiaomai.zhuangba.data.bean.PatrolInspectionRecordsDetailImgBean;
 import com.xiaomai.zhuangba.data.bean.PatrolMissionDetailListBean;
@@ -204,7 +206,7 @@ public interface IApi {
      */
     @FormUrlEncoded
     @POST("order/getMasterMaintenanceOrderList")
-    Observable<HttpResult<RefreshBaseList<MaintenanceOverman>>> getMasterMaintenanceOrderList(@Field("pageNum") String pageNum, @Field("pageSize") String pageSize);
+    Observable<HttpResult<OuterLayerMaintenanceOverman>> getMasterMaintenanceOrderList(@Field("pageNum") String pageNum, @Field("pageSize") String pageSize);
 
     /**
      * 订单详情
@@ -908,14 +910,12 @@ public interface IApi {
     Observable<HttpResult<RefreshBaseList<OngoingOrdersList>>> getMasterHandleAdvertisingOrderList(@Body RequestBody requestBody);
 
     /**
-     * 广告单 师傅 完成提交
-     *
-     * @param pageNum  页码
-     * @param pageSize 一页显示行数
+     * 广告单 列表
+     * @param requestBody body
      * @return observable
      */
-    @GET("order/getMasterHandleOrder")
-    Observable<HttpResult<RefreshBaseList<AdvertisingBillsBean>>> getMasterHandleOrder(@Query("pageNum") int pageNum, @Query("pageSize") int pageSize);
+    @POST("order/getMasterHandleOrder")
+    Observable<HttpResult<OuterLayerAdvertisingBills>> getMasterHandleOrder(@Body RequestBody requestBody);
 
     /**
      * 巡查单 师傅

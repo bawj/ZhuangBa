@@ -118,4 +118,15 @@ public class InspectionSheetFragment extends BaseListFragment<IBaseModule ,Inspe
         return false;
     }
 
+    @Override
+    public boolean isBackArrow() {
+        return false;
+    }
+
+
+    @Override
+    protected boolean translucentFull() {
+        return true;
+    }
+
 }

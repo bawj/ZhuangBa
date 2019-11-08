@@ -2,6 +2,7 @@ package com.xiaomai.zhuangba.fragment.masterworker;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.toollib.data.IBaseModule;
@@ -13,8 +14,8 @@ import com.example.toollib.util.Log;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.xiaomai.zhuangba.R;
 import com.xiaomai.zhuangba.adapter.GuaranteeAdapter;
+import com.xiaomai.zhuangba.data.OuterLayerMaintenanceOverman;
 import com.xiaomai.zhuangba.data.bean.MaintenanceOverman;
-import com.xiaomai.zhuangba.data.bean.RefreshBaseList;
 import com.xiaomai.zhuangba.enums.StaticExplain;
 import com.xiaomai.zhuangba.fragment.base.BaseListFragment;
 import com.xiaomai.zhuangba.fragment.masterworker.guarantee.GuaranteeDetailFragment;
@@ -22,12 +23,19 @@ import com.xiaomai.zhuangba.http.ServiceUrl;
 
 import java.util.List;
 
+import butterknife.BindView;
+
 /**
  * @author Administrator
  * @date 2019/11/7 0007
  * 维保单
  */
 public class GuaranteeFragment extends BaseListFragment<IBaseModule , GuaranteeAdapter> {
+
+    @BindView(R.id.tvGuaranteeNumber)
+    TextView tvGuaranteeNumber;
+    @BindView(R.id.tvGuaranteeGrossIncome)
+    TextView tvGuaranteeGrossIncome;
 
     private GuaranteeAdapter guaranteeAdapter;
 
@@ -53,11 +61,12 @@ public class GuaranteeFragment extends BaseListFragment<IBaseModule , GuaranteeA
         Log.e("维保单刷新");
         RxUtils.getObservable(ServiceUrl.getUserApi().getMasterMaintenanceOrderList(String.valueOf(getPage())
                 , String.valueOf(StaticExplain.PAGE_NUM.getCode())))
-                .compose(this.<HttpResult<RefreshBaseList<MaintenanceOverman>>>bindToLifecycle())
-                .subscribe(new BaseHttpRxObserver<RefreshBaseList<MaintenanceOverman>>() {
+                .compose(this.<HttpResult<OuterLayerMaintenanceOverman>>bindToLifecycle())
+                .subscribe(new BaseHttpRxObserver<OuterLayerMaintenanceOverman>() {
                     @Override
-                    protected void onSuccess(RefreshBaseList<MaintenanceOverman> object) {
-                        List<MaintenanceOverman> list = object.getList();
+                    protected void onSuccess(OuterLayerMaintenanceOverman outerLayerMaintenanceOverman) {
+                        setGuaranteeNumberGrossIncome(outerLayerMaintenanceOverman);
+                        List<MaintenanceOverman> list = outerLayerMaintenanceOverman.getList().getList();
                         if (getPage() != StaticExplain.PAGE_NUMBER.getCode()) {
                             //加载
                             guaranteeAdapter.addData(list);
@@ -82,6 +91,20 @@ public class GuaranteeFragment extends BaseListFragment<IBaseModule , GuaranteeA
                         loadError();
                     }
                 });
+    }
+
+    private void setGuaranteeNumberGrossIncome(OuterLayerMaintenanceOverman outerLayerMaintenanceOverman) {
+        int num = outerLayerMaintenanceOverman.getNum();
+        int amount = outerLayerMaintenanceOverman.getAmount();
+        if (num == 0){
+            tvGuaranteeNumber.setVisibility(View.GONE);
+            tvGuaranteeGrossIncome.setVisibility(View.GONE);
+        }else {
+            tvGuaranteeNumber.setText(getString(R.string.total_quantity , String.valueOf(num)));
+            tvGuaranteeGrossIncome.setText(getString(R.string.gross_income , String.valueOf(amount)));
+            tvGuaranteeNumber.setVisibility(View.VISIBLE);
+            tvGuaranteeGrossIncome.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override

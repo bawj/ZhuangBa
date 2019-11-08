@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/tool_lib_gray_F5F6FA">
+    android:layout_height="match_parent">
 
     <com.scwang.smartrefresh.layout.SmartRefreshLayout
         android:id="@+id/refreshBaseList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#F2F2F2"
+        android:background="@color/tool_lib_gray_F5F8FA"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         app:srlAccentColor="@android:color/white"
         app:srlEnableHeaderTranslationContent="false"
@@ -20,13 +20,31 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rvBaseList"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginLeft="@dimen/tool_lib_16dp"
-            android:layout_marginTop="@dimen/tool_lib_10dp"
-            android:layout_marginRight="@dimen/tool_lib_16dp" />
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvAdvertisingNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:layout_marginLeft="@dimen/tool_lib_16dp"
+                android:layout_marginTop="@dimen/tool_lib_14dp"
+                android:layout_marginRight="@dimen/tool_lib_16dp"
+                android:textColor="@color/tool_lib_gray_777777"
+                android:textSize="@dimen/tool_lib_14sp"
+                tools:text="总数量：2000" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rvBaseList"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/tool_lib_16dp"
+                android:layout_marginTop="@dimen/tool_lib_12dp"
+                android:layout_marginRight="@dimen/tool_lib_16dp" />
+        </LinearLayout>
 
     </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 

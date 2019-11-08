@@ -161,9 +161,9 @@ public class GuaranteeDetailFragment extends BaseFragment implements OnRefreshLi
         tvBaseGuaranteeEndingTime.setText(endTime);
         //设备编号
         String orderType = guaranteeDeatil.getOrderType();
-        //如果orderType 是广告单 则 serviceName代表 设备编号
+        //如果orderType 是广告单 则 ServiceId代表 设备编号
         if (orderType.equals(String.valueOf(StaticExplain.ADVERTISING_BILLS.getCode()))){
-            tvBaseGuaranteeEquipmentNumber.setText(guaranteeDeatil.getServiceName());
+            tvBaseGuaranteeEquipmentNumber.setText(guaranteeDeatil.getServiceId());
         }else {
             tvBaseGuaranteeEquipmentNumber.setText("--");
         }

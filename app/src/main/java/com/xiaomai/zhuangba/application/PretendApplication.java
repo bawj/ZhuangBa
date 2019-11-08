@@ -40,10 +40,10 @@ public class PretendApplication extends Application {
     private final static String U_MENG_MESSAGE_SECRET = "8953a06a2bdd1eaf7a3b8ceeb616817a";
     private static PretendApplication pretendApplication;
 
-//    public static final String BASE_URL = "http://192.168.0.160:7966/";
+    public static final String BASE_URL = "http://192.168.0.160:7966/";
 //    public static final String BASE_URL = "http://192.168.0.174:7966/";
 //     public static final String BASE_URL = "https://zb.hangzhouzhuangba.com/zhuangBas/";
-     public static final String BASE_URL = "https://zb.hangzhouzhuangba.com/testZhuangBas/";
+//     public static final String BASE_URL = "https://zb.hangzhouzhuangba.com/testZhuangBas/";
 
     public static PretendApplication getInstance() {
         return pretendApplication;

@@ -75,7 +75,7 @@ public class MasterOrderFragment extends BaseFragment implements ViewPager.OnPag
 
     @Override
     public void onPageSelected(int i) {
-        if (i == 1 || i == 2) {
+        if (/*i == 1 ||*/ i == 2) {
             tvScreen.setVisibility(View.VISIBLE);
         } else {
             tvScreen.setVisibility(View.GONE);
@@ -84,6 +84,9 @@ public class MasterOrderFragment extends BaseFragment implements ViewPager.OnPag
 
     @OnClick(R.id.tvScreen)
     public void onViewClicked() {
+
+
+        //筛选
         ScreenDialog.getInstance().showRightDialog(getActivity());
     }
 
@@ -108,14 +111,15 @@ public class MasterOrderFragment extends BaseFragment implements ViewPager.OnPag
     }
 
     @Override
+    protected boolean translucentFull() {
+        return true;
+    }
+
+    @Override
     protected String getActivityTitle() {
         return null;
     }
 
-    @Override
-    protected boolean translucentFull() {
-        return true;
-    }
 
     @Override
     public void onPageScrolled(int i, float v, int i1) {
