@@ -114,6 +114,7 @@ public class WalletDetailBean {
         private String accountNumber;
         private String times;
 
+        private String successTimes;
 
         private String phoneNumber;
         private String externalAccountNumber;
@@ -215,6 +216,13 @@ public class WalletDetailBean {
             this.phoneNumber = phoneNumber;
         }
 
+        public String getSuccessTimes() {
+            return successTimes == null ? "" : successTimes;
+        }
+
+        public void setSuccessTimes(String successTimes) {
+            this.successTimes = successTimes;
+        }
 
         public String getTeam() {
             return team;

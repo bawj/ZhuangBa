@@ -273,9 +273,34 @@ public class ScreenDialog implements View.OnClickListener {
     private void requestSearch() {
         HashMap<String, Object> hashMap = new HashMap<>();
         hashMap.put("type", "1");
-        hashMap.put("teamList", teamList);
-        hashMap.put("equipmentList", equipmentList);
-        hashMap.put("batchCodeList", batchCodeList);
+
+
+        StringBuilder team = new StringBuilder();
+        for (int i = 0; i < teamList.size(); i++) {
+            team.append(teamList.get(i));
+            if (i < teamList.size() - 1){
+                team.append(",");
+            }
+        }
+        StringBuilder equipment = new StringBuilder();
+        for (int i = 0; i < equipmentList.size(); i++) {
+            equipment.append(equipmentList.get(i));
+            if (i < equipmentList.size() - 1){
+                equipment.append(",");
+            }
+        }
+        StringBuilder batchCode = new StringBuilder();
+        for (int i = 0; i < batchCodeList.size(); i++) {
+            batchCode.append(batchCodeList.get(i));
+            if (i < batchCodeList.size() - 1){
+                batchCode.append(",");
+            }
+        }
+
+        hashMap.put("teams", team.toString());
+        hashMap.put("equipments", equipment.toString());
+        hashMap.put("batchCodes", batchCode.toString());
+
         RequestBody requestBody = RequestBody.create(MediaType.parse("application/json;charset=utf-8"), new Gson().toJson(hashMap));
         RxUtils.getObservable(ServiceUrl.getUserApi().getAllSearchCondition(requestBody))
                 .subscribe(new BaseHttpRxObserver<SearchCondition>(mContext) {

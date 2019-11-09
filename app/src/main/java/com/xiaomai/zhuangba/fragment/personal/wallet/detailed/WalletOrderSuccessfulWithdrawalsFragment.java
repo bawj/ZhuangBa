@@ -1,6 +1,7 @@
 package com.xiaomai.zhuangba.fragment.personal.wallet.detailed;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.widget.TextView;
 
 import com.xiaomai.zhuangba.R;
@@ -41,12 +42,11 @@ public class WalletOrderSuccessfulWithdrawalsFragment extends WalletOrderDetailF
     public List<WalletOrderDetailBean> getList(WalletDetailBean.ListBean bean) {
         tvNumber.setText(String.format(getString(R.string.content_money), String.valueOf(bean.getOrderAmount())));
         List<WalletOrderDetailBean> list = new ArrayList<>();
-        // TODO: 2019/10/31 0031 提现时间 和 成功时间 一样
-        list.add(new WalletOrderDetailBean(getString(R.string.wallet_out_time), bean.getTimes()));
+        list.add(new WalletOrderDetailBean(getString(R.string.wallet_out_time), TextUtils.isEmpty(bean.getModifyTime()) ? bean.getTimes() : bean.getModifyTime()));
         list.add(new WalletOrderDetailBean(getString(R.string.wallet_out_account), bean.getWithdrawalsAccount()));
         list.add(new WalletOrderDetailBean(getString(R.string.wallet_out_status), getString(R.string.wallet_out_success)));
         list.add(new WalletOrderDetailBean(getString(R.string.wallet_out_code), bean.getAccountNumber()));
-        list.add(new WalletOrderDetailBean(getString(R.string.withdrawal_success_time), bean.getTimes()));
+        list.add(new WalletOrderDetailBean(getString(R.string.withdrawal_success_time), bean.getSuccessTimes()));
         return list;
     }
 

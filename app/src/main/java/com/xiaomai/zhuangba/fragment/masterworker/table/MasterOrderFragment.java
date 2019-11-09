@@ -108,12 +108,15 @@ public class MasterOrderFragment extends BaseFragment implements ViewPager.OnPag
     public void onViewClicked() {
         HashMap<String, Object> hashMap = new HashMap<>();
         hashMap.put("type", "1");
+
         //hashMap.put("teamList", getTeamList()); 放开 和 完成 之前 展示的信息一样
         //hashMap.put("equipmentList", getEquipmentList());
         //hashMap.put("batchCodeList", getBatchCodeList());
-        hashMap.put("teamList", new ArrayList<String>());
-        hashMap.put("equipmentList", new ArrayList<String>());
-        hashMap.put("batchCodeList", new ArrayList<String>());
+
+        hashMap.put("teams", "");
+        hashMap.put("equipments", "");
+        hashMap.put("batchCodes", "");
+
         RequestBody requestBody = RequestBody.create(MediaType.parse("application/json;charset=utf-8"), new Gson().toJson(hashMap));
         RxUtils.getObservable(ServiceUrl.getUserApi().getAllSearchCondition(requestBody))
                 .compose(this.<HttpResult<SearchCondition>>bindToLifecycle())

@@ -10,7 +10,6 @@ import android.widget.TextView;
 
 import com.xiaomai.zhuangba.R;
 import com.xiaomai.zhuangba.data.bean.WalletDetailBean;
-import com.xiaomai.zhuangba.enums.StaticExplain;
 import com.xiaomai.zhuangba.enums.WalletOrderTypeEnum;
 import com.xiaomai.zhuangba.util.DateUtil;
 
@@ -117,14 +116,14 @@ public class WalletDetailAdapter extends BaseExpandableListAdapter {
 
         //收入：1，支出：2
         String typeStr = "" ;
-        int streamType = childrenList.get(groupPosition).get(childPosition).getStreamType();
+        ///int streamType = childrenList.get(groupPosition).get(childPosition).getStreamType();
         int wallerType = childrenList.get(groupPosition).get(childPosition).getWallerType();
-        if (streamType == StaticExplain.EXPENDITURE.getCode() || wallerType == 5 || wallerType == 21){
-            typeStr = "+";
-            tvInfo.setTextColor(context.getResources().getColor(R.color.tool_lib_color_3AB960));
-        }else if (streamType == StaticExplain.INCOME.getCode()){
+        if (wallerType == 1 || wallerType == 6){
             typeStr = "-";
             tvInfo.setTextColor(context.getResources().getColor(R.color.tool_lib_red_EF2B2B));
+        }else{
+            typeStr = "+";
+            tvInfo.setTextColor(context.getResources().getColor(R.color.tool_lib_color_3AB960));
         }
         double amount = childrenList.get(groupPosition).get(childPosition).getAmount();
         double orderAmount = childrenList.get(groupPosition).get(childPosition).getOrderAmount();
