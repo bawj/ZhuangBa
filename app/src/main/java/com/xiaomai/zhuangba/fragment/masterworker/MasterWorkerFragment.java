@@ -58,8 +58,7 @@ public class MasterWorkerFragment extends BaseFragment {
         List<BaseFragment> fragmentList = new ArrayList<>();
         fragmentList.add(MasterHomeFragment.newInstance());
         fragmentList.add(MasterOrderFragment.newInstance());
-        // TODO: 2019/11/6 0006 师傅 今日接单数 和 今日收入 要加上下拉刷新
-        fragmentList.add(MasterPersonalFragment.newInstance(getString(R.string.zero), getString(R.string.zero)));
+        fragmentList.add(MasterPersonalFragment.newInstance());
         ExamplePagerAdapter mExamplePagerAdapter = new ExamplePagerAdapter(getChildFragmentManager(), fragmentList, mDataTitleName);
         mViewPager.setAdapter(mExamplePagerAdapter);
         initMagicIndicator(mDataTitleName, mDataTitleImgUnChecked, mDataTitleImgSelection);

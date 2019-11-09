@@ -1,5 +1,6 @@
 package com.xiaomai.zhuangba.fragment.masterworker;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -11,15 +12,21 @@ import com.example.toollib.http.exception.ApiException;
 import com.example.toollib.http.observer.BaseHttpRxObserver;
 import com.example.toollib.http.util.RxUtils;
 import com.example.toollib.util.Log;
+import com.qmuiteam.qmui.arch.QMUIFragment;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.xiaomai.zhuangba.R;
 import com.xiaomai.zhuangba.adapter.GuaranteeAdapter;
 import com.xiaomai.zhuangba.data.OuterLayerMaintenanceOverman;
 import com.xiaomai.zhuangba.data.bean.MaintenanceOverman;
+import com.xiaomai.zhuangba.enums.ForResultCode;
+import com.xiaomai.zhuangba.enums.GuaranteeEnums;
 import com.xiaomai.zhuangba.enums.StaticExplain;
 import com.xiaomai.zhuangba.fragment.base.BaseListFragment;
-import com.xiaomai.zhuangba.fragment.masterworker.guarantee.GuaranteeDetailFragment;
+import com.xiaomai.zhuangba.fragment.masterworker.guarantee.HaveInHandGuaranteeFragment;
+import com.xiaomai.zhuangba.fragment.masterworker.guarantee.NewTaskGuaranteeDetailFragment;
+import com.xiaomai.zhuangba.fragment.masterworker.guarantee.NotYetBegunGuaranteeFragment;
 import com.xiaomai.zhuangba.http.ServiceUrl;
+import com.xiaomai.zhuangba.util.GuaranteeUtil;
 
 import java.util.List;
 
@@ -113,7 +120,31 @@ public class GuaranteeFragment extends BaseListFragment<IBaseModule , GuaranteeA
         MaintenanceOverman maintenanceOverman = (MaintenanceOverman) view.findViewById(R.id.tvItemOrdersMoney).getTag();
         String orderCode = maintenanceOverman.getOrderCode();
         String orderType = maintenanceOverman.getOrderType();
-        startFragment(GuaranteeDetailFragment.newInstance(orderCode , orderType));
+        String status = maintenanceOverman.getStatus();
+        //GuaranteeUtil.startGuaranteeOrderDetail(getBaseFragmentActivity() , orderCode , orderType , status);
+        if (status.equals(String.valueOf(GuaranteeEnums.GUARANTEE_NEW_TASK.getCode()))) {
+            //新任务
+            startFragmentForResult(NewTaskGuaranteeDetailFragment.newInstance(orderCode , orderType)  , ForResultCode.RESULT_OK.getCode());
+        } else if (status.equals(String.valueOf(GuaranteeEnums.GUARANTEE_HAVE_IN_HAND.getCode()))) {
+            //进行中
+            startFragment(HaveInHandGuaranteeFragment.newInstance(orderCode, orderType));
+        } else if (status.equals(String.valueOf(GuaranteeEnums.GUARANTEE_NOT_YET_BEGUN.getCode()))) {
+            //未开始
+            startFragment(NotYetBegunGuaranteeFragment.newInstance(orderCode, orderType));
+        } else if (status.equals(String.valueOf(GuaranteeEnums.GUARANTEE_HAS_ENDED.getCode()))) {
+            //已结束
+        }
+    }
+
+
+    @Override
+    protected void onFragmentResult(int requestCode, int resultCode, Intent data) {
+        super.onFragmentResult(requestCode, resultCode, data);
+        if (requestCode == ForResultCode.RESULT_OK.getCode()){
+            if (resultCode == ForResultCode.START_FOR_RESULT_CODE.getCode())     {
+                refresh();
+            }
+        }
     }
 
     @Override

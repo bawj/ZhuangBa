@@ -31,7 +31,6 @@ import com.xiaomai.zhuangba.fragment.authentication.master.IDCardScanningFragmen
 import com.xiaomai.zhuangba.fragment.base.BaseMasterEmployerContentFragment;
 import com.xiaomai.zhuangba.fragment.base.BaseMasterEmployerFragment;
 import com.xiaomai.zhuangba.fragment.masterworker.OrderPoolFragment;
-import com.xiaomai.zhuangba.fragment.personal.master.MasterPersonalFragment;
 import com.xiaomai.zhuangba.http.ServiceUrl;
 import com.xiaomai.zhuangba.util.Util;
 
@@ -186,13 +185,6 @@ public class MasterHomeFragment extends BaseMasterEmployerFragment implements Co
             tvFinishToday.setText(String.valueOf(orderStatistics.getComplete()));
         }
         isBtnMasterApplyVisible(DBHelper.getInstance().getUserInfoDao().queryBuilder().unique());
-    }
-
-    @Override
-    public void startPersonal() {
-        String orderToday = tvOrderToday.getText().toString();
-        String todayFlowingRMB = tvTodayFlowingRMB.getText().toString();
-        startFragment(MasterPersonalFragment.newInstance(orderToday, todayFlowingRMB));
     }
 
     @Override

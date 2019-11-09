@@ -61,7 +61,7 @@ public class MasterOrderFragment extends BaseFragment implements ViewPager.OnPag
      * 筛选条件
      */
     private List<String> batchCodeList = new ArrayList<>();
-
+    private List<BaseListFragment> fragmentList;
     public static MasterOrderFragment newInstance() {
         Bundle args = new Bundle();
         MasterOrderFragment fragment = new MasterOrderFragment();
@@ -71,7 +71,7 @@ public class MasterOrderFragment extends BaseFragment implements ViewPager.OnPag
 
     @Override
     public void initView() {
-        List<BaseListFragment> fragmentList = new ArrayList<>();
+        fragmentList = new ArrayList<>();
         //安装单
         fragmentList.add(NeedDealWithFragment.newInstance());
         //维保单
@@ -108,9 +108,12 @@ public class MasterOrderFragment extends BaseFragment implements ViewPager.OnPag
     public void onViewClicked() {
         HashMap<String, Object> hashMap = new HashMap<>();
         hashMap.put("type", "1");
-        hashMap.put("teamList", getTeamList());
-        hashMap.put("equipmentList", getEquipmentList());
-        hashMap.put("batchCodeList", getBatchCodeList());
+        //hashMap.put("teamList", getTeamList()); 放开 和 完成 之前 展示的信息一样
+        //hashMap.put("equipmentList", getEquipmentList());
+        //hashMap.put("batchCodeList", getBatchCodeList());
+        hashMap.put("teamList", new ArrayList<String>());
+        hashMap.put("equipmentList", new ArrayList<String>());
+        hashMap.put("batchCodeList", new ArrayList<String>());
         RequestBody requestBody = RequestBody.create(MediaType.parse("application/json;charset=utf-8"), new Gson().toJson(hashMap));
         RxUtils.getObservable(ServiceUrl.getUserApi().getAllSearchCondition(requestBody))
                 .compose(this.<HttpResult<SearchCondition>>bindToLifecycle())
@@ -121,6 +124,19 @@ public class MasterOrderFragment extends BaseFragment implements ViewPager.OnPag
                         ScreenDialog.getInstance()
                                 .setContext(getActivity())
                                 .setSearchConditionContent(searchCondition)
+                                .setScreenDialogCallBack(new ScreenDialog.ScreenDialogCallBack() {
+                                    @Override
+                                    public void callBack(List<String> teamListSearch, List<String> equipmentListSearch, List<String> batchCodeListSearch) {
+                                        teamList = teamListSearch;
+                                        equipmentList = equipmentListSearch;
+                                        batchCodeList = batchCodeListSearch;
+                                        AdvertisingBillsFragment advertisingBillsFragment = (AdvertisingBillsFragment) fragmentList.get(2);
+                                        advertisingBillsFragment.setTeamList(teamListSearch);
+                                        advertisingBillsFragment.setEquipmentList(equipmentListSearch);
+                                        advertisingBillsFragment.setBatchCodeList(batchCodeListSearch);
+                                        advertisingBillsFragment.refrshAdvertisingBills();
+                                    }
+                                })
                                 .showRightDialog(getActivity());
                     }
                 });

@@ -2,19 +2,24 @@ package com.xiaomai.zhuangba.fragment.personal.master;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.example.toollib.data.base.BaseCallback;
 import com.example.toollib.http.HttpResult;
-import com.example.toollib.http.exception.ApiException;
-import com.example.toollib.http.observer.BaseHttpRxObserver;
+import com.example.toollib.http.observer.BaseHttpZipRxObserver;
 import com.example.toollib.http.util.RxUtils;
 import com.example.toollib.manager.GlideManager;
-import com.google.gson.Gson;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.xiaomai.zhuangba.R;
 import com.xiaomai.zhuangba.data.bean.CreateTeamBean;
+import com.xiaomai.zhuangba.data.bean.MasterPersonalZip;
+import com.xiaomai.zhuangba.data.bean.OrderStatistics;
 import com.xiaomai.zhuangba.data.bean.UserInfo;
 import com.xiaomai.zhuangba.data.db.DBHelper;
 import com.xiaomai.zhuangba.enums.ForResultCode;
@@ -30,9 +35,13 @@ import com.xiaomai.zhuangba.fragment.personal.wallet.WalletFragment;
 import com.xiaomai.zhuangba.fragment.personal.wallet.paydeposit.PayDepositFragment;
 import com.xiaomai.zhuangba.http.ServiceUrl;
 import com.xiaomai.zhuangba.util.ConstantUtil;
+import com.xiaomai.zhuangba.util.Util;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import io.reactivex.Observable;
+import io.reactivex.functions.BiFunction;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * @author Administrator
@@ -40,7 +49,7 @@ import butterknife.OnClick;
  * <p>
  * 师傅端 个人中心
  */
-public class MasterPersonalFragment extends PersonalFragment {
+public class MasterPersonalFragment extends PersonalFragment implements OnRefreshListener {
 
     @BindView(R.id.ivUserHead)
     ImageView ivUserHead;
@@ -56,24 +65,14 @@ public class MasterPersonalFragment extends PersonalFragment {
     TextView tvMasterPersonalTeamName;
     @BindView(R.id.relPlatformMaster)
     RelativeLayout relPlatformMaster;
+    @BindView(R.id.refreshBaseList)
+    SmartRefreshLayout refreshBaseList;
 
-    /**
-     * 师傅端显示 今日接单
-     */
-    public static final String ORDER_TODAY = "order_today";
-    /**
-     * 师傅端显示 今日收入
-     */
-    public static final String TODAY_FLOWING_RMB = "today_flowing_rmb";
-
-
-    private int status;
+    private String status;
     private String teamTile = "";
 
-    public static MasterPersonalFragment newInstance(String orderToday, String todayFlowingRmb) {
+    public static MasterPersonalFragment newInstance() {
         Bundle args = new Bundle();
-        args.putString(ORDER_TODAY, orderToday);
-        args.putString(TODAY_FLOWING_RMB, todayFlowingRmb);
         MasterPersonalFragment fragment = new MasterPersonalFragment();
         fragment.setArguments(args);
         return fragment;
@@ -82,10 +81,6 @@ public class MasterPersonalFragment extends PersonalFragment {
     @Override
     public void initView() {
         super.initView();
-        //今日收入
-        tvPersonalTodayIncome.setText(getTodayFlowingRmb());
-        //今日单数
-        tvPersonalTodayNumbers.setText(getOrderToday());
         UserInfo userInfo = DBHelper.getInstance().getUserInfoDao().queryBuilder().unique();
         int authenticationStatue = userInfo.getAuthenticationStatue();
         if (authenticationStatue == StaticExplain.IN_AUDIT.getCode()
@@ -97,8 +92,15 @@ public class MasterPersonalFragment extends PersonalFragment {
         tvPersonalName.setText(userInfo.getUserText());
         GlideManager.loadCircleImage(getActivity(), userInfo.getBareHeadedPhotoUrl(), ivUserHead, R.drawable.bg_def_head);
 
-        // TODO: 2019/11/8 0008  查询 是否有团队
-        //findTeam();
+        //刷新
+        refreshBaseList.setOnRefreshListener(this);
+        //默认刷新
+        refreshBaseList.autoRefresh();
+    }
+
+    @Override
+    public void onRefresh(@NonNull RefreshLayout refreshLayout) {
+        refreshMasterPersonal();
     }
 
     @OnClick({R.id.relWallet, R.id.relPersonalScopeOfService, R.id.relPlatformMaster, R.id.relMasterMaintenance
@@ -132,13 +134,13 @@ public class MasterPersonalFragment extends PersonalFragment {
                 break;
             case R.id.relPersonalTeam:
                 //我的团队  查询是否加入了团队  创建了团队
-                if (status == StaticExplain.NO_TEAM_WAS_CREATED_JOINED.getCode()) {
+                if (status.equals(String.valueOf(StaticExplain.NO_TEAM_WAS_CREATED_JOINED.getCode()))) {
                     //没有创建或者加入团队
                     startFragment(CreateJoinFragment.newInstance());
-                } else if (status == StaticExplain.CREATE_TEAM.getCode()) {
+                } else if (status.equals(String.valueOf(StaticExplain.CREATE_TEAM.getCode()))) {
                     //创建了团队
                     startFragmentForResult(TheTeamJoinedFragment.newInstance(), ForResultCode.START_FOR_RESULT_CODE.getCode());
-                } else if (status == StaticExplain.JOIN_THE_TEAM.getCode()) {
+                } else if (status.equals(String.valueOf(StaticExplain.JOIN_THE_TEAM.getCode()))) {
                     //加入了团队
                     startFragment(JoinTheTeamFragment.newInstance(teamTile));
                 }
@@ -147,33 +149,59 @@ public class MasterPersonalFragment extends PersonalFragment {
         }
     }
 
-    private void findTeam() {
-        RxUtils.getObservable(ServiceUrl.getUserApi().selectByTeam())
-                .compose(this.<HttpResult<Object>>bindToLifecycle())
-                .subscribe(new BaseHttpRxObserver<Object>(getActivity()) {
-                    @Override
-                    protected void onSuccess(Object response) {
-                    }
+    private void refreshMasterPersonal() {
+        //团队
+        Observable<HttpResult<CreateTeamBean>> teamObservable = RxUtils.getObservable(ServiceUrl.getUserApi().selectByTeam())
+                .subscribeOn(Schedulers.io());
+        //统计雇主和师傅
+        Observable<HttpResult<OrderStatistics>> httpResultObservable = RxUtils.getObservable(ServiceUrl.getUserApi().getOrderStatistics())
+                .subscribeOn(Schedulers.io());
+        Observable<Object> objectObservable = Observable.zip(teamObservable, httpResultObservable, new BiFunction<HttpResult<CreateTeamBean>
+                , HttpResult<OrderStatistics>, Object>() {
+            @Override
+            public Object apply(HttpResult<CreateTeamBean> createTeamBeanHttpResult, HttpResult<OrderStatistics> orderStatisticsHttpResult) {
+                MasterPersonalZip masterPersonalZip = new MasterPersonalZip();
+                masterPersonalZip.setCreateTeamBean(createTeamBeanHttpResult.getData());
+                masterPersonalZip.setOrderStatistics(orderStatisticsHttpResult.getData());
+                return masterPersonalZip;
+            }
+        }).compose(this.bindToLifecycle());
+        BaseHttpZipRxObserver.getInstance().httpZipObserver(objectObservable, new BaseCallback() {
+            @Override
+            public void onSuccess(Object obj) {
+                MasterPersonalZip masterPersonalZip = (MasterPersonalZip) obj;
+                initDataTeam(masterPersonalZip);
+                refreshBaseList.finishRefresh();
+            }
 
-                    @Override
-                    public void onError(ApiException apiException) {
-                        status = apiException.getStatus();
-                        if (status == StaticExplain.CREATE_TEAM.getCode()) {
-                            CreateTeamBean createTeamBean = new Gson().fromJson(apiException.getData(), CreateTeamBean.class);
-                            tvMasterPersonalTeamName.setText(getString(R.string.enum_name_val
-                                    , createTeamBean.getEnumName(), String.valueOf(createTeamBean.getEnumVal())));
-                            teamTile = createTeamBean.getEnumName();
-                        } else if (status == StaticExplain.JOIN_THE_TEAM.getCode()) {
-                            CreateTeamBean createTeamBean = new Gson().fromJson(apiException.getData(), CreateTeamBean.class);
-                            tvMasterPersonalTeamName.setText(getString(R.string.enum_name_val
-                                    , createTeamBean.getEnumName(), String.valueOf(createTeamBean.getEnumVal())));
-                            teamTile = createTeamBean.getEnumName();
-                        } else if (status == StaticExplain.NO_TEAM_WAS_CREATED_JOINED.getCode()) {
-                            tvMasterPersonalTeamName.setText("");
-                            teamTile = "";
-                        }
-                    }
-                });
+            @Override
+            public void onFail(Object obj) {
+                super.onFail(obj);
+                refreshBaseList.finishRefresh();
+            }
+        });
+    }
+
+    private void initDataTeam(MasterPersonalZip masterPersonalZip) {
+        CreateTeamBean createTeamBean = masterPersonalZip.getCreateTeamBean();
+        OrderStatistics orderStatistics = masterPersonalZip.getOrderStatistics();
+        status = createTeamBean.getEnumCode();
+        if (status.equals(String.valueOf(StaticExplain.CREATE_TEAM.getCode()))) {
+            tvMasterPersonalTeamName.setText(getString(R.string.enum_name_val
+                    , createTeamBean.getEnumName(), String.valueOf(createTeamBean.getEnumVal())));
+            teamTile = createTeamBean.getEnumName();
+        } else if (status.equals(String.valueOf(StaticExplain.JOIN_THE_TEAM.getCode()))) {
+            tvMasterPersonalTeamName.setText(getString(R.string.enum_name_val
+                    , createTeamBean.getEnumName(), String.valueOf(createTeamBean.getEnumVal())));
+            teamTile = createTeamBean.getEnumName();
+        } else if (status.equals(String.valueOf(StaticExplain.NO_TEAM_WAS_CREATED_JOINED.getCode()))) {
+            tvMasterPersonalTeamName.setText("");
+            teamTile = "";
+        }
+        //今日收入
+        tvPersonalTodayIncome.setText(Util.getZero(orderStatistics.getMasterOrderAmount()));
+        //今日单数
+        tvPersonalTodayNumbers.setText(String.valueOf(orderStatistics.getPendingDisposal()));
     }
 
     @Override
@@ -181,7 +209,7 @@ public class MasterPersonalFragment extends PersonalFragment {
         super.onFragmentResult(requestCode, resultCode, data);
         if (resultCode == ForResultCode.RESULT_OK.getCode()) {
             if (requestCode == ForResultCode.START_FOR_RESULT_CODE.getCode()) {
-                findTeam();
+                refreshBaseList.autoRefresh();
             }
         }
     }
@@ -195,26 +223,6 @@ public class MasterPersonalFragment extends PersonalFragment {
     @Override
     public int getContentView() {
         return R.layout.fragment_master_personal;
-    }
-
-    /**
-     * 今日单数
-     */
-    private String getOrderToday() {
-        if (getArguments() != null) {
-            return getArguments().getString(ORDER_TODAY);
-        }
-        return "0";
-    }
-
-    /**
-     * 今日收入
-     */
-    private String getTodayFlowingRmb() {
-        if (getArguments() != null) {
-            return getArguments().getString(TODAY_FLOWING_RMB);
-        }
-        return "0";
     }
 
     @Override

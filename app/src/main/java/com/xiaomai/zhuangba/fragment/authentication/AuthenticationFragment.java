@@ -79,7 +79,7 @@ public class AuthenticationFragment extends BaseFragment {
                 String role = UserInfoUtil.getRole();
                 if (role.equals(String.valueOf(StaticExplain.FU_FU_SHI.getCode()))) {
                     //师傅端
-                    startFragment(MasterPersonalFragment.newInstance(getString(R.string.zero) , getString(R.string.zero)));
+                    startFragment(MasterPersonalFragment.newInstance());
                 } else if (role.equals(String.valueOf(StaticExplain.EMPLOYER.getCode()))) {
                     //雇主端
                     startFragment(EmployerPersonalFragment.newInstance());

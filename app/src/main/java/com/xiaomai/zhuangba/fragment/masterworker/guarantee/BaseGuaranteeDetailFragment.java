@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.toollib.base.BaseFragment;
@@ -39,7 +40,7 @@ import io.reactivex.schedulers.Schedulers;
  * @author Administrator
  * @date 2019/11/7 0007
  */
-public class GuaranteeDetailFragment extends BaseFragment implements OnRefreshListener {
+public class BaseGuaranteeDetailFragment extends BaseFragment implements OnRefreshListener {
 
     @BindView(R.id.tvBaseGuaranteeTitle)
     TextView tvBaseGuaranteeTitle;
@@ -73,11 +74,11 @@ public class GuaranteeDetailFragment extends BaseFragment implements OnRefreshLi
      */
     private OrderDateListAdapter orderDateListAdapter;
 
-    public static GuaranteeDetailFragment newInstance(String orderCode, String orderType) {
+    public static BaseGuaranteeDetailFragment newInstance(String orderCode, String orderType) {
         Bundle args = new Bundle();
         args.putString(ORDER_CODE, orderCode);
         args.putString(ORDER_TYPE, orderType);
-        GuaranteeDetailFragment fragment = new GuaranteeDetailFragment();
+        BaseGuaranteeDetailFragment fragment = new BaseGuaranteeDetailFragment();
         fragment.setArguments(args);
         return fragment;
     }
@@ -137,7 +138,7 @@ public class GuaranteeDetailFragment extends BaseFragment implements OnRefreshLi
         });
     }
 
-    private void setOrderInfo(GuaranteeDeatil guaranteeDeatil) {
+    public void setOrderInfo(GuaranteeDeatil guaranteeDeatil) {
         //设备名称
         String serviceName = guaranteeDeatil.getServiceName();
         tvBaseGuaranteeTitle.setText(serviceName);
@@ -189,14 +190,14 @@ public class GuaranteeDetailFragment extends BaseFragment implements OnRefreshLi
         return R.layout.fragment_cuarantee_detail;
     }
 
-    private String getOrderCode() {
+    public String getOrderCode() {
         if (getArguments() != null) {
             return getArguments().getString(ORDER_CODE);
         }
         return "";
     }
 
-    private String getOrderType() {
+    public String getOrderType() {
         if (getArguments() != null) {
             return getArguments().getString(ORDER_TYPE);
         }

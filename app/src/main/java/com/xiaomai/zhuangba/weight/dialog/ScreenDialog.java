@@ -70,6 +70,19 @@ public class ScreenDialog implements View.OnClickListener {
      */
     private TextView tvSearchComplete;
 
+    /**
+     * 公司
+     */
+    private List<String> teamList = new ArrayList<>();
+    /**
+     * 尺寸
+     */
+    private List<String> equipmentList = new ArrayList<>();
+    /**
+     * 广告
+     */
+    private List<String> batchCodeList = new ArrayList<>();
+
     public static ScreenDialog getInstance() {
         return new ScreenDialog();
     }
@@ -96,7 +109,6 @@ public class ScreenDialog implements View.OnClickListener {
         window.setAttributes(wlp);
         dialog.show();
     }
-
 
 
     private void initView(View inflate) {
@@ -130,7 +142,7 @@ public class ScreenDialog implements View.OnClickListener {
         tvSearchComplete = inflate.findViewById(R.id.tvSearchComplete);
         tvSearchComplete.setOnClickListener(this);
         int num = mSearchCondition.getNum();
-        tvSearchComplete.setText(mContext.getString(R.string.search_complete , String.valueOf(num)));
+        tvSearchComplete.setText(mContext.getString(R.string.search_complete, String.valueOf(num)));
     }
 
     private void onItemClickUpdate(int position) {
@@ -139,14 +151,8 @@ public class ScreenDialog implements View.OnClickListener {
         if (itemIndex >= 0) {
             Log.e("第 " + sectionIndex + "组" + "-- 第" + itemIndex + "个");
             mAdapter.setSelect(sectionIndex, itemIndex);
-            //公司
-            List<String> teamList = new ArrayList<>();
-            //尺寸
-            List<String> equipmentList = new ArrayList<>();
-            //广告
-            List<String> batchCodeList = new ArrayList<>();
             //刷新 界面  传入选中的数据
-            switch (sectionIndex){
+            switch (sectionIndex) {
                 case company:
                     //公司
                     teamList = mSearchCondition.getTeamList().get(itemIndex).getList();
@@ -161,7 +167,7 @@ public class ScreenDialog implements View.OnClickListener {
                     break;
                 default:
             }
-            requesetSearch(teamList , equipmentList , batchCodeList);
+            requestSearch();
         }
     }
 
@@ -184,22 +190,28 @@ public class ScreenDialog implements View.OnClickListener {
             case company:
                 //公司
                 List<SearchCondition.TeamListBean> teamList = mSearchCondition.getTeamList();
-                for (SearchCondition.TeamListBean teamListBean : teamList) {
-                    contents.add(new SectionItem(teamListBean.getText()));
+                if (teamList != null){
+                    for (SearchCondition.TeamListBean teamListBean : teamList) {
+                        contents.add(new SectionItem(teamListBean.getText()));
+                    }
                 }
                 break;
             case advertising:
                 //广告
                 List<SearchCondition.BatchCodeListBean> batchCodeList = mSearchCondition.getBatchCodeList();
-                for (SearchCondition.BatchCodeListBean batchCodeListBean : batchCodeList) {
-                    contents.add(new SectionItem(batchCodeListBean.getText()));
+                if (batchCodeList != null){
+                    for (SearchCondition.BatchCodeListBean batchCodeListBean : batchCodeList) {
+                        contents.add(new SectionItem(batchCodeListBean.getText()));
+                    }
                 }
                 break;
             case size:
                 //尺寸
                 List<SearchCondition.EquipmentListBean> equipmentList = mSearchCondition.getEquipmentList();
-                for (SearchCondition.EquipmentListBean equipmentListBean : equipmentList) {
-                    contents.add(new SectionItem(equipmentListBean.getText()));
+                if (equipmentList != null){
+                    for (SearchCondition.EquipmentListBean equipmentListBean : equipmentList) {
+                        contents.add(new SectionItem(equipmentListBean.getText()));
+                    }
                 }
                 break;
             default:
@@ -214,9 +226,17 @@ public class ScreenDialog implements View.OnClickListener {
         switch (v.getId()) {
             case R.id.tvSearchRest:
                 //重置
+                teamList = new ArrayList<>();
+                equipmentList = new ArrayList<>();
+                batchCodeList = new ArrayList<>();
+                requestSearch();
                 break;
             case R.id.tvSearchComplete:
                 //完成
+                if (screenDialogCallBack != null){
+                    screenDialogCallBack.callBack(teamList , equipmentList , batchCodeList);
+                    close();
+                }
                 break;
             default:
         }
@@ -249,7 +269,8 @@ public class ScreenDialog implements View.OnClickListener {
         this.mSearchCondition = searchCondition;
         return this;
     }
-    private void requesetSearch(List<String> teamList , List<String> equipmentList , List<String> batchCodeList){
+
+    private void requestSearch() {
         HashMap<String, Object> hashMap = new HashMap<>();
         hashMap.put("type", "1");
         hashMap.put("teamList", teamList);
@@ -264,9 +285,26 @@ public class ScreenDialog implements View.OnClickListener {
                         ArrayList<QMUISection<SectionHeader, SectionItem>> list = analysisData();
                         mAdapter.setData(list);
                         int num = mSearchCondition.getNum();
-                        tvSearchComplete.setText(mContext.getString(R.string.search_complete , String.valueOf(num)));
+                        tvSearchComplete.setText(mContext.getString(R.string.search_complete, String.valueOf(num)));
                     }
                 });
+    }
+
+    private ScreenDialogCallBack screenDialogCallBack;
+    public ScreenDialog setScreenDialogCallBack(ScreenDialogCallBack screenDialogCallBack){
+        this.screenDialogCallBack = screenDialogCallBack;
+        return this;
+    }
+
+
+    public interface ScreenDialogCallBack{
+        /**
+         * 回调
+         * @param teamList 公司
+         * @param equipmentList 尺寸
+         * @param batchCodeList 广告
+         */
+        void callBack(List<String> teamList , List<String> equipmentList , List<String> batchCodeList);
     }
 
     /**

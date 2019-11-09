@@ -7,6 +7,7 @@ import com.xiaomai.zhuangba.data.Patrol;
 import com.xiaomai.zhuangba.data.bean.AdvertisingReplacementBean;
 import com.xiaomai.zhuangba.data.bean.AdvertisingReplacementDetailBean;
 import com.xiaomai.zhuangba.data.bean.AliPayAccountBean;
+import com.xiaomai.zhuangba.data.bean.CreateTeamBean;
 import com.xiaomai.zhuangba.data.bean.DataDetailsContent;
 import com.xiaomai.zhuangba.data.bean.DeliveryContent;
 import com.xiaomai.zhuangba.data.bean.EarnestBean;
@@ -1043,7 +1044,7 @@ public interface IApi {
      * @return observable
      */
     @POST("teamwork/selectByTeam")
-    Observable<HttpResult<Object>> selectByTeam();
+    Observable<HttpResult<CreateTeamBean>> selectByTeam();
 
     /**
      * 创建团队
@@ -1218,6 +1219,23 @@ public interface IApi {
      */
     @GET("order/masterCancelInspectionOrder/{orderCode}")
     Observable<HttpResult<Object>> masterCancelInspectionOrder(@Path("orderCode") String orderCode);
+
+
+    /**
+     * 师傅取消广告维保单
+     * @param orderCode 订单编号
+     * @return observable
+     */
+    @GET("order/masterCancelAdvertisingMaintenanceOrder/{orderCode}")
+    Observable<HttpResult<Object>> masterCancelAdvertisingMaintenanceOrder(@Path("orderCode") String orderCode);
+
+    /**
+     * 师傅接受广告维保单
+     * @param orderCode 订单编号
+     * @return observable
+     */
+    @GET("order/acceptAdvertisingMaintenanceOrder/{orderCode}")
+    Observable<HttpResult<Object>> acceptAdvertisingMaintenanceOrder(@Path("orderCode") String orderCode);
 
 
     /**

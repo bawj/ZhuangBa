@@ -59,6 +59,7 @@ public class AdvertisingBillsFragment extends BaseListFragment<IBaseModule, Adve
         return fragment;
     }
 
+
     @Override
     public void onBaseRefresh(RefreshLayout refreshLayout) {
         requestAdvertisingBills();
@@ -179,6 +180,10 @@ public class AdvertisingBillsFragment extends BaseListFragment<IBaseModule, Adve
 
     public void setBatchCodeList(List<String> batchCodeList) {
         this.batchCodeList = batchCodeList;
+    }
+
+    public void refrshAdvertisingBills(){
+        refresh();
     }
 
     @Override
