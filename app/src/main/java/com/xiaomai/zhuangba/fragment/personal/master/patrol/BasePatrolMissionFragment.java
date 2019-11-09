@@ -28,12 +28,11 @@ import io.reactivex.Observable;
  * @author Administrator
  * @date 2019/10/9 0009
  */
-public class BasePatrolMissionFragment extends BaseListFragment{
+public class BasePatrolMissionFragment extends BaseListFragment {
 
     @BindView(R.id.rvBaseList)
     RecyclerView rvBaseList;
 
-    private List<PatrolMissionBean> missionBeanList;
     private BasePatrolMissionAdapter basePatrolMissionAdapter;
 
     public static BasePatrolMissionFragment newInstance() {
@@ -46,12 +45,6 @@ public class BasePatrolMissionFragment extends BaseListFragment{
     @Override
     public int getContentView() {
         return R.layout.fragment_base_patrol_mission;
-    }
-
-    @Override
-    public void initView() {
-        super.initView();
-        missionBeanList = new ArrayList<>();
     }
 
     @Override
@@ -74,6 +67,7 @@ public class BasePatrolMissionFragment extends BaseListFragment{
                     protected void onSuccess(RefreshBaseList<PatrolBean> patrolBeanList) {
                         requestSuccess(patrolBeanList.getList());
                     }
+
                     @Override
                     public void onError(ApiException e) {
                         super.onError(e);
@@ -85,7 +79,8 @@ public class BasePatrolMissionFragment extends BaseListFragment{
     }
 
     private void requestSuccess(List<PatrolBean> patrolBeanList) {
-        if (getPage() > StaticExplain.PAGE_NUMBER.getCode()) {
+        int page = getPage();
+        if (page > StaticExplain.PAGE_NUMBER.getCode()) {
             //加载
             loadSuccess(patrolBeanList);
         } else {
@@ -102,41 +97,40 @@ public class BasePatrolMissionFragment extends BaseListFragment{
     }
 
     private void refreshSuccess(List<PatrolBean> patrolBeanList) {
-        missionBeanList.clear();
-        getPatrolData(patrolBeanList);
-        basePatrolMissionAdapter.setNewData(missionBeanList);
+        List<PatrolMissionBean> patrolData = getPatrolData(patrolBeanList);
+        basePatrolMissionAdapter.setNewData(patrolData);
     }
 
     private void loadSuccess(List<PatrolBean> patrolBeanList) {
-        getPatrolData(patrolBeanList);
-        basePatrolMissionAdapter.addData(missionBeanList);
+        List<PatrolMissionBean> patrolData = getPatrolData(patrolBeanList);
+        basePatrolMissionAdapter.addData(patrolData);
     }
 
-    private void getPatrolData(List<PatrolBean> patrolBeanList) {
+    private List<PatrolMissionBean> getPatrolData(List<PatrolBean> patrolBeanList) {
+        List<PatrolMissionBean> missionBeanList = new ArrayList<>();
         for (PatrolBean patrolBean : patrolBeanList) {
-            missionBeanList.add(new PatrolMissionBean(true , patrolBean.getTime() , false));
+            missionBeanList.add(new PatrolMissionBean(true, patrolBean.getTime(), false));
             List<PatrolBean.TasklistBean> taskList = patrolBean.getTaskList();
             for (PatrolBean.TasklistBean taskListBean : taskList) {
                 missionBeanList.add(new PatrolMissionBean(taskListBean));
             }
         }
+        return missionBeanList;
     }
 
     @Override
     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
         super.onItemClick(adapter, view, position);
-        if (missionBeanList.size() >= position){
-            PatrolMissionBean patrolMissionBean = missionBeanList.get(position);
-            if (!patrolMissionBean.isHeader){
-                onBasePatrolItemClick(patrolMissionBean);
-            }
+        PatrolMissionBean patrolMissionBean = (PatrolMissionBean) view.findViewById(R.id.tvItemOrdersTitle).getTag();
+        if (!patrolMissionBean.isHeader) {
+            onBasePatrolItemClick(patrolMissionBean);
         }
     }
 
     @Override
     public BaseQuickAdapter getBaseListAdapter() {
         basePatrolMissionAdapter = new BasePatrolMissionAdapter(R.layout.item_base_patrol_mission_child_view
-                , R.layout.item_base_patrol_mission_group_view , missionBeanList);
+                , R.layout.item_base_patrol_mission_group_view, new ArrayList<PatrolMissionBean>());
         return basePatrolMissionAdapter;
     }
 
@@ -150,7 +144,7 @@ public class BasePatrolMissionFragment extends BaseListFragment{
         return getString(R.string.no_patrol_duty_today);
     }
 
-    public Observable<HttpResult<RefreshBaseList<PatrolBean>>> getObservable(){
+    public Observable<HttpResult<RefreshBaseList<PatrolBean>>> getObservable() {
         return null;
     }
 

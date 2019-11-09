@@ -52,7 +52,7 @@ public class GuaranteeAdapter extends BaseQuickAdapter<MaintenanceOverman, BaseV
         if (!TextUtils.isEmpty(endTime)) {
             endTime = DateUtil.dateToFormat(endTime, "yyyy-MM-dd", "yyyy/MM/dd");
             //往后推两天 为入账时间
-            DateTime dateTime = DateUtil.strToDate(endTime, "yyyy-MM-dd");
+            DateTime dateTime = DateUtil.strToDate(endTime, "yyyy/MM/dd");
             dateTime = dateTime.plusDays(2);
             int dayOfYear = dateTime.getDayOfMonth();
             accountingTime = mContext.getString(R.string.accounting_time, String.valueOf(dayOfYear));

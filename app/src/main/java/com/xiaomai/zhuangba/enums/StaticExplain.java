@@ -44,6 +44,7 @@ public enum StaticExplain {
     INSTALLATION_LIST(1, "安装单"),
     ADVERTISING_BILLS(2, "广告单"),
     PATROL(3,"巡查"),
+    ADVERTISING_MAINTENANCE(4,"广告维保"),
     DEBUGGING(0, "不需要调试"),
     NOT_DEBUGGING(1, "需要调试"),
     SINGLE_SERVICE(0, "单次服务"),

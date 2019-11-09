@@ -12,6 +12,8 @@ public enum GuaranteeEnums {
     GUARANTEE_HAVE_IN_HAND(2 , "进行中"),
     GUARANTEE_NOT_YET_BEGUN(3 , "未开始"),
     GUARANTEE_HAS_ENDED(4 , "已结束"),
+
+    GUARANTEE__IN_DISTRIBUTION(1,"雇主 分配中"),
     ;
     private int code;
     private String explain;

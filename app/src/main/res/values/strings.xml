@@ -171,6 +171,7 @@
     <string name="mission_details">查看任务详情</string>
     <string name="back_to_home_page">返回首页</string>
     <string name="my">我的</string>
+    <string name="my_maintenance">我的维保</string>
     <string name="historical_order">历史订单</string>
     <string name="view_order">可查看已完成的订单记录</string>
     <string name="set_up">设置</string>
@@ -587,7 +588,7 @@
     <string name="create_team_success">创建成功</string>
     <string name="homepage">主页</string>
     <string name="order">订单</string>
-    <string name="toll_maintenance">收费维保：%1$s个月</string>
+    <string name="toll_maintenance">服务时长：%1$s个月</string>
     <string name="customer_name_order">客户姓名：%1$s</string>
     <string name="contact_information_order">联系方式：%1$s</string>
     <string name="end_time">结束时间：%1$s</string>

@@ -52,5 +52,8 @@ public class BasePatrolMissionAdapter extends BaseSectionQuickAdapter<PatrolMiss
         TextView tvPatrolMissionChildTotal = helper.getView(R.id.tvPatrolMissionChildTotal);
         tvPatrolMissionChildTotal.setText(mContext.getString(R.string.task_total
                 , String.valueOf(taskListBean.getSuCount()) , String.valueOf(taskListBean.getCount())));
+
+
+        tvItemOrdersTitle.setTag(item);
     }
 }

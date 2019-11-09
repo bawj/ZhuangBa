@@ -21,6 +21,12 @@ import com.xiaomai.zhuangba.fragment.masterworker.guarantee.NotYetBegunGuarantee
 public class GuaranteeUtil {
 
 
+    /**
+     * 师傅
+     * @param mContext context
+     * @param orderStatus 订单状态
+     * @param tvItemOrdersType 订单类型
+     */
     public static void guaranteeStatus(Context mContext, String orderStatus, TextView tvItemOrdersType) {
         if (orderStatus.equals(String.valueOf(GuaranteeEnums.GUARANTEE_NEW_TASK.getCode()))) {
             //新任务
@@ -61,5 +67,18 @@ public class GuaranteeUtil {
         }
     }
 
+    /**
+     * 雇主
+     * @param mContext context
+     * @param orderStatus 订单状态
+     * @param tvItemOrdersType 订单类型
+     */
+    public static void guaranteeEmployerStatus(Context mContext, String orderStatus, TextView tvItemOrdersType) {
+        if (orderStatus.equals(String.valueOf(GuaranteeEnums.GUARANTEE_NEW_TASK.getCode()))) {
+            //分配中
+            tvItemOrdersType.setText(mContext.getString(R.string.in_distribution));
+            tvItemOrdersType.setBackgroundResource(R.drawable.distribution_half_fillet_bg);
+        }
+    }
 
 }

@@ -154,10 +154,12 @@
                 android:textSize="@dimen/tool_lib_14sp"
                 tools:text="维保总价：¥300.00" />
 
+            <!--dev 1.6.0 注释-->
             <com.qmuiteam.qmui.layout.QMUIButton
                 android:id="@+id/btnContinuedMaintenance"
                 android:layout_width="@dimen/tool_lib_80dp"
                 android:layout_height="@dimen/tool_lib_28dp"
+                android:visibility="gone"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"

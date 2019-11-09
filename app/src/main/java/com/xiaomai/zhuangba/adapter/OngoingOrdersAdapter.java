@@ -2,6 +2,7 @@ package com.xiaomai.zhuangba.adapter;
 
 import android.content.Context;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -13,6 +14,7 @@ import com.xiaomai.zhuangba.enums.StaticExplain;
 import com.xiaomai.zhuangba.util.AdvertisingStatusUtil;
 import com.xiaomai.zhuangba.util.ConstantUtil;
 import com.xiaomai.zhuangba.util.DateUtil;
+import com.xiaomai.zhuangba.util.GuaranteeUtil;
 import com.xiaomai.zhuangba.util.OrderStatusUtil;
 import com.xiaomai.zhuangba.util.PatrolStatusUtil;
 
@@ -44,7 +46,9 @@ public class OngoingOrdersAdapter extends BaseQuickAdapter<OngoingOrdersList, Ba
         //巡查
         TextView tvItemPatrolFrequency = helper.getView(R.id.tvItemPatrolFrequency);
         TextView tvItemInspectionDate = helper.getView(R.id.tvItemInspectionDate);
-
+        //时间 和 地址  icon
+        ImageView ivItemOrdersTime = helper.getView(R.id.ivItemOrdersTime);
+        ImageView ivItemOrdersLocation = helper.getView(R.id.ivItemOrdersLocation);
 
         tvItemOrdersTitle.setText(ongoingOrders.getServiceText());
         tvItemOrdersLocation.setText(ongoingOrders.getAddress());
@@ -64,19 +68,38 @@ public class OngoingOrdersAdapter extends BaseQuickAdapter<OngoingOrdersList, Ba
         tvItemInspectionDate.setVisibility(View.GONE);
         //安装单
         if (orderType.equals(String.valueOf(StaticExplain.INSTALLATION_LIST.getCode()))) {
+            ivItemOrdersTime.setVisibility(View.VISIBLE);
+            ivItemOrdersLocation.setVisibility(View.VISIBLE);
             installation(ongoingOrders, tvItemOrdersTime, tvMaintenance, tvSlotting, tvDebugging, tvAuxiliaryMaterials);
             OrderStatusUtil.employerStatus(mContext, orderStatus, tvItemOrdersType);
         } else if (orderType.equals(String.valueOf(StaticExplain.ADVERTISING_BILLS.getCode()))) {
             //广告单
+            ivItemOrdersTime.setVisibility(View.VISIBLE);
+            ivItemOrdersLocation.setVisibility(View.VISIBLE);
             advertisement(ongoingOrders, tvItemOrdersTime, tvMaintenance, tvSlotting, tvDebugging, tvAuxiliaryMaterials);
             AdvertisingStatusUtil.employerStatus(mContext, orderStatus, tvItemOrdersType);
             tvItemOrdersTitle.setText(mContext.getString(R.string.advertising_bills));
-
         } else if (orderType.equals(String.valueOf(StaticExplain.PATROL.getCode()))) {
             //巡查
+            ivItemOrdersTime.setVisibility(View.VISIBLE);
+            ivItemOrdersLocation.setVisibility(View.VISIBLE);
             patrol(mContext, ongoingOrders, tvItemOrdersTime, tvMaintenance, tvItemPatrolFrequency, tvItemInspectionDate, tvItemOrdersLocation);
             PatrolStatusUtil.employerStatus(mContext, orderStatus, tvItemOrdersType);
             tvItemOrdersTitle.setText(mContext.getString(R.string.patrol_title));
+        }else if (orderType.equals(String.valueOf(StaticExplain.ADVERTISING_MAINTENANCE.getCode()))){
+            //广告维保
+            tvMaintenance.setVisibility(View.GONE);
+
+            ivItemOrdersTime.setVisibility(View.GONE);
+            ivItemOrdersLocation.setVisibility(View.GONE);
+
+            tvItemOrdersTitle.setText(ongoingOrders.getServiceText());
+            GuaranteeUtil.guaranteeEmployerStatus(mContext , String.valueOf(orderStatus) , tvItemOrdersType);
+            //维保时长
+            tvItemOrdersTime.setText(mContext.getString(R.string.toll_maintenance, String.valueOf(ongoingOrders.getMaintenanceFlag())));
+            //结束时间
+            String endTime = DateUtil.dateToFormat(ongoingOrders.getSlottingEndLength(), "yyyy-MM-dd", "yyyy/MM/dd");
+            tvItemOrdersLocation.setText(mContext.getString(R.string.end_time, endTime));
         }
         tvItemOrdersTitle.setTag(ongoingOrders);
     }

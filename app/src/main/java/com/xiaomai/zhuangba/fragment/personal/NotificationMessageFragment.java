@@ -25,6 +25,7 @@ import com.xiaomai.zhuangba.enums.StaticExplain;
 import com.xiaomai.zhuangba.enums.StringTypeExplain;
 import com.xiaomai.zhuangba.http.ServiceUrl;
 import com.xiaomai.zhuangba.util.AdvertisingStatusUtil;
+import com.xiaomai.zhuangba.util.GuaranteeUtil;
 import com.xiaomai.zhuangba.util.OrderStatusUtil;
 import com.xiaomai.zhuangba.util.PatrolStatusUtil;
 
@@ -138,8 +139,11 @@ public class NotificationMessageFragment extends BaseFragment {
         }else if (orderType.equals(String.valueOf(StaticExplain.PATROL.getCode()))){
             PatrolStatusUtil.startMasterPatrol(getBaseFragmentActivity(), ongoingOrdersList.getOrderCode(), orderType,
                     ongoingOrdersList.getOrderStatus());
+        }else if (orderType.equals(String.valueOf(StaticExplain.ADVERTISING_MAINTENANCE.getCode()))){
+            //4 广告维保
+            GuaranteeUtil.startGuaranteeOrderDetail(getBaseFragmentActivity() , ongoingOrdersList.getOrderCode()
+                    , ongoingOrdersList.getOrderType() , String.valueOf(ongoingOrdersList.getOrderStatus()));
         }
-        // TODO: 2019/11/7 0007 推送 4 广告维保 type = 4
     }
 
     /**
@@ -162,6 +166,7 @@ public class NotificationMessageFragment extends BaseFragment {
             PatrolStatusUtil.startEmployerPatrol(getBaseFragmentActivity(), ongoingOrdersList.getOrderCode(), orderType,
                     ongoingOrdersList.getOrderStatus());
         }
+        //雇主维保 没有详情
     }
 
     @Override
