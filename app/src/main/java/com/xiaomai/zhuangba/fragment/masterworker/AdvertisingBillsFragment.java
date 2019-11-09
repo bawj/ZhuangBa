@@ -74,9 +74,42 @@ public class AdvertisingBillsFragment extends BaseListFragment<IBaseModule, Adve
         HashMap<String, Object> hashMap = new HashMap<>();
         hashMap.put("pageNum", getPage());
         hashMap.put("pageSize", StaticExplain.PAGE_NUM.getCode());
-        hashMap.put("teamList", getTeamList());
-        hashMap.put("equipmentList", getEquipmentList());
-        hashMap.put("batchCodeList", getBatchCodeList());
+
+
+//        hashMap.put("teamList", getTeamList());
+//        hashMap.put("equipmentList", getEquipmentList());
+//        hashMap.put("batchCodeList", getBatchCodeList());
+
+        List<String> teamList = getTeamList();
+        StringBuilder team = new StringBuilder();
+        for (int i = 0; i < teamList.size(); i++) {
+            team.append(teamList.get(i));
+            if (i < teamList.size() - 1){
+                team.append(",");
+            }
+        }
+
+        List<String> equipmentList = getEquipmentList();
+        StringBuilder equipment = new StringBuilder();
+        for (int i = 0; i < equipmentList.size(); i++) {
+            equipment.append(equipmentList.get(i));
+            if (i < equipmentList.size() - 1){
+                equipment.append(",");
+            }
+        }
+        List<String> batchCodeList = getBatchCodeList();
+        StringBuilder batchCode = new StringBuilder();
+        for (int i = 0; i < batchCodeList.size(); i++) {
+            batchCode.append(batchCodeList.get(i));
+            if (i < batchCodeList.size() - 1){
+                batchCode.append(",");
+            }
+        }
+
+        hashMap.put("teams", team.toString());
+        hashMap.put("equipments", equipment.toString());
+        hashMap.put("batchCodes", batchCode.toString());
+
 
         RequestBody requestBody = RequestBody.create(MediaType.parse("application/json;charset=utf-8"), new Gson().toJson(hashMap));
         RxUtils.getObservable(ServiceUrl.getUserApi().getMasterHandleOrder(requestBody))

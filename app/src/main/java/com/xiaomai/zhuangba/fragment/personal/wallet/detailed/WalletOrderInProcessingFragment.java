@@ -40,7 +40,7 @@ public class WalletOrderInProcessingFragment extends WalletOrderDetailFragment{
 
     @Override
     public List<WalletOrderDetailBean> getList(WalletDetailBean.ListBean bean) {
-        tvNumber.setText(String.format(getString(R.string.content_money), String.valueOf(bean.getAmount())));
+        tvNumber.setText(String.format(getString(R.string.content_money), String.valueOf( bean.getAmount() == 0 ? bean.getMasterOrderAmount() : bean.getAmount() )));
         List<WalletOrderDetailBean> list = new ArrayList<>();
         list.add(new WalletOrderDetailBean(getString(R.string.wallet_out_time), TextUtils.isEmpty(bean.getModifyTime()) ? bean.getTimes() : bean.getModifyTime()));
         list.add(new WalletOrderDetailBean(getString(R.string.wallet_out_account), bean.getWithdrawalsAccount()));
