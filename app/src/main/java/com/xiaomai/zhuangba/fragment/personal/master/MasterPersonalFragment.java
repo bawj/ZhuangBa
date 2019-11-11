@@ -3,6 +3,7 @@ package com.xiaomai.zhuangba.fragment.personal.master;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -68,7 +69,7 @@ public class MasterPersonalFragment extends PersonalFragment implements OnRefres
     @BindView(R.id.refreshBaseList)
     SmartRefreshLayout refreshBaseList;
 
-    private String status;
+    private String status = "";
     private String teamTile = "";
 
     public static MasterPersonalFragment newInstance() {
@@ -134,13 +135,13 @@ public class MasterPersonalFragment extends PersonalFragment implements OnRefres
                 break;
             case R.id.relPersonalTeam:
                 //我的团队  查询是否加入了团队  创建了团队
-                if (status.equals(String.valueOf(StaticExplain.NO_TEAM_WAS_CREATED_JOINED.getCode()))) {
+                if (!TextUtils.isEmpty(status) && status.equals(String.valueOf(StaticExplain.NO_TEAM_WAS_CREATED_JOINED.getCode()))) {
                     //没有创建或者加入团队
                     startFragment(CreateJoinFragment.newInstance());
-                } else if (status.equals(String.valueOf(StaticExplain.CREATE_TEAM.getCode()))) {
+                } else if (!TextUtils.isEmpty(status) && status.equals(String.valueOf(StaticExplain.CREATE_TEAM.getCode()))) {
                     //创建了团队
                     startFragmentForResult(TheTeamJoinedFragment.newInstance(), ForResultCode.START_FOR_RESULT_CODE.getCode());
-                } else if (status.equals(String.valueOf(StaticExplain.JOIN_THE_TEAM.getCode()))) {
+                } else if (!TextUtils.isEmpty(status) && status.equals(String.valueOf(StaticExplain.JOIN_THE_TEAM.getCode()))) {
                     //加入了团队
                     startFragment(JoinTheTeamFragment.newInstance(teamTile));
                 }

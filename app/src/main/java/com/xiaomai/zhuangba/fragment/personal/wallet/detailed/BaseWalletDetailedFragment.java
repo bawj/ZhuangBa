@@ -156,7 +156,7 @@ public class BaseWalletDetailedFragment extends BaseListFragment implements Expa
     private void expandGroup(List<String> groupList){
         //展开所有group
         for (int i = 0; i < groupList.size(); i++) {
-            expandableListView.expandGroup(i, true);
+            expandableListView.expandGroup(i, false);
         }
     }
 

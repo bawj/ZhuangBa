@@ -78,16 +78,16 @@ public class MasterCompleteFragment extends BeUnderConstructionFragment {
                 }
             });
         }
-//        String electronicSignature = deliveryContent.getElectronicSignature();
-//        if (!TextUtils.isEmpty(electronicSignature)) {
-//            //负责人签名
-//            tvMasterWorkerSignature.setVisibility(View.VISIBLE);
-//            ivMasterWorkerSignature.setVisibility(View.VISIBLE);
-//            GlideManager.loadImage(getActivity(), electronicSignature, ivMasterWorkerSignature);
-//        }else {
-//            tvMasterWorkerSignature.setVisibility(View.GONE);
-//            ivMasterWorkerSignature.setVisibility(View.GONE);
-//        }
+        String electronicSignature = deliveryContent.getElectronicSignature();
+        if (!TextUtils.isEmpty(electronicSignature)) {
+            //负责人签名
+            tvMasterWorkerSignature.setVisibility(View.VISIBLE);
+            ivMasterWorkerSignature.setVisibility(View.VISIBLE);
+            GlideManager.loadImage(getActivity(), electronicSignature, ivMasterWorkerSignature);
+        }else {
+            tvMasterWorkerSignature.setVisibility(View.GONE);
+            ivMasterWorkerSignature.setVisibility(View.GONE);
+        }
     }
 
 

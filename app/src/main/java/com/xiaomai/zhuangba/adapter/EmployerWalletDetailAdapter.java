@@ -32,7 +32,7 @@ public class EmployerWalletDetailAdapter extends BaseQuickAdapter<EmployerWallet
                 || wallerType == 32 || wallerType == 34) {
             tvOrderInfo.setText(mContext.getString(R.string.expenditure, String.valueOf(item.getAmount())));
             tvOrderInfo.setTextColor(mContext.getResources().getColor(R.color.tool_lib_red_EF2B2B));
-        } else if (wallerType == 4 || wallerType == 7 || wallerType == 9 || wallerType == 14 || wallerType == 19
+        } else if (wallerType == 1 ||wallerType == 4 || wallerType == 7 || wallerType == 9 || wallerType == 14 || wallerType == 19
                 || wallerType == 24 || wallerType == 25 || wallerType == 26 || wallerType == 27 || wallerType == 28) {
             tvOrderInfo.setText(mContext.getString(R.string.income, String.valueOf(item.getAmount())));
             tvOrderInfo.setTextColor(mContext.getResources().getColor(R.color.tool_lib_color_3AB960));
