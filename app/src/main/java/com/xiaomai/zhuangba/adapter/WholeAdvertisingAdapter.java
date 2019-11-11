@@ -48,7 +48,6 @@ public class WholeAdvertisingAdapter extends BaseQuickAdapter<OngoingOrdersList,
         //type
         TextView tvItemOrdersType = helper.getView(R.id.tvItemOrdersType);
 
-        tvItemOrdersTime.setText(mContext.getString(R.string.time, ongoingOrders.getSlottingStartLength()));
 
         TextView tvMaintenance = helper.getView(R.id.tvMaintenance);
 

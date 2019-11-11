@@ -151,6 +151,10 @@ public class ScreenDialog implements View.OnClickListener {
         if (itemIndex >= 0) {
             Log.e("第 " + sectionIndex + "组" + "-- 第" + itemIndex + "个");
             mAdapter.setSelect(sectionIndex, itemIndex);
+            // TODO: 2019/11/11 0011 多选 去掉
+            teamList = new ArrayList<>();
+            equipmentList = new ArrayList<>();
+            batchCodeList = new ArrayList<>();
             //刷新 界面  传入选中的数据
             switch (sectionIndex) {
                 case company:

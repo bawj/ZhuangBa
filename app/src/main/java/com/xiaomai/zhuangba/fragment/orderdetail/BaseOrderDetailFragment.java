@@ -297,7 +297,7 @@ public class BaseOrderDetailFragment<T extends IOrderDetailModule> extends BaseF
             String assigner = ongoingOrdersList.getAssigner();
             UserInfo unique = DBHelper.getInstance().getUserInfoDao().queryBuilder().unique();
             String phoneNumber = unique.getPhoneNumber();
-            flag = assigner.equals(phoneNumber);
+            flag = TextUtils.isEmpty(assigner) || phoneNumber.equals(assigner);
         }
         serviceItemsAdapter = new ServiceItemsAdapter(flag);
         recyclerServiceItems.setAdapter(serviceItemsAdapter);

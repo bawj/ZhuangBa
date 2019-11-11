@@ -36,12 +36,13 @@ public class TeamMessageAdapter extends BaseQuickAdapter<TeamMessageBean , BaseV
         tvTeamDate.setText(teamMessageBean.getCreateTime());
         TextView tvAgree = helper.getView(R.id.tvAgree);
         final int adapterPosition = helper.getAdapterPosition();
+        final int id = teamMessageBean.getId();
         tvAgree.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (null != mOnSwipeListener) {
                     //同意
-                    mOnSwipeListener.isAgree(userNumber,String.valueOf(StaticExplain.AGREE.getCode()), adapterPosition);
+                    mOnSwipeListener.isAgree(String.valueOf(id),String.valueOf(StaticExplain.AGREE.getCode()), adapterPosition);
                 }
             }
         });
@@ -52,7 +53,7 @@ public class TeamMessageAdapter extends BaseQuickAdapter<TeamMessageBean , BaseV
             public void onClick(View v) {
                 if (null != mOnSwipeListener) {
                     //不同意
-                    mOnSwipeListener.isAgree(userNumber,String.valueOf(StaticExplain.REFUSE.getCode()), adapterPosition);
+                    mOnSwipeListener.isAgree(String.valueOf(id),String.valueOf(StaticExplain.REFUSE.getCode()), adapterPosition);
                 }
             }
         });
@@ -71,10 +72,10 @@ public class TeamMessageAdapter extends BaseQuickAdapter<TeamMessageBean , BaseV
     public interface IOnSwipeListener {
         /**
          * 师傅加入团队
-         * @param userNumber 手机号
+         * @param id id
          * @param isAgree 3:拒绝;4同意
          * @param pos position
          */
-        void isAgree(String userNumber,String isAgree, int pos);
+        void isAgree(String id,String isAgree, int pos);
     }
 }

@@ -111,10 +111,25 @@
                     android:singleLine="true"
                     tools:text="杭州市江干钱江新城2390号" />
 
+                <ImageView
+                    android:id="@+id/ivItemMaintenanceTime"
+                    style="@style/item_ic"
+                    android:layout_below="@+id/tvItemOrdersLocation"
+                    android:src="@drawable/ic_time" />
+
+                <TextView
+                    android:id="@+id/tvItemOrdersMaintenanceTime"
+                    style="@style/item_text_content"
+                    android:layout_below="@+id/tvItemOrdersLocation"
+                    android:layout_alignBottom="@+id/ivItemMaintenanceTime"
+                    android:layout_toEndOf="@+id/ivItemMaintenanceTime"
+                    android:layout_toRightOf="@+id/ivItemMaintenanceTime"
+                    tools:text="预约时间：2019/06/07 13:30" />
+
                 <View
                     android:id="@+id/viewHorizontalLine"
                     style="@style/tool_lib_horizontal_line"
-                    android:layout_below="@+id/ivItemOrdersLocation"
+                    android:layout_below="@+id/ivItemMaintenanceTime"
                     android:layout_marginLeft="@dimen/tool_lib_12dp"
                     android:layout_marginTop="@dimen/tool_lib_14dp"
                     android:layout_marginRight="@dimen/tool_lib_12dp" />

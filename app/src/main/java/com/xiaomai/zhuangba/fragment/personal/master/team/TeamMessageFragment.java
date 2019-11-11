@@ -85,15 +85,15 @@ public class TeamMessageFragment extends BaseListFragment {
         teamMessageAdapter = new TeamMessageAdapter();
         teamMessageAdapter.setOnDelListener(new TeamMessageAdapter.IOnSwipeListener() {
             @Override
-            public void isAgree(String userNumber, String isAgree, int pos) {
-                updateTeam(userNumber, isAgree, pos);
+            public void isAgree(String id, String isAgree, int pos) {
+                updateTeam(id, isAgree, pos);
             }
         });
         return teamMessageAdapter;
     }
 
-    private void updateTeam(String userNumber, String isAgree, final int pos) {
-        RxUtils.getObservable(ServiceUrl.getUserApi().updateTeam(userNumber, isAgree))
+    private void updateTeam(String id, String isAgree, final int pos) {
+        RxUtils.getObservable(ServiceUrl.getUserApi().updateTeam(id, isAgree))
                 .compose(this.<HttpResult<Object>>bindToLifecycle())
                 .subscribe(new BaseHttpRxObserver<Object>(getActivity()) {
                     @Override
