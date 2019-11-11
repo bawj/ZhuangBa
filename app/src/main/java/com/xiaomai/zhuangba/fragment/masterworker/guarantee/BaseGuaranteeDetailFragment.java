@@ -162,9 +162,9 @@ public class BaseGuaranteeDetailFragment extends BaseFragment implements OnRefre
         tvBaseGuaranteeEndingTime.setText(endTime);
         //设备编号
         String orderType = guaranteeDeatil.getOrderType();
-        //如果orderType 是广告单 则 ServiceId代表 设备编号
+        //如果orderType 是广告单 则 code代表 设备编号
         if (orderType.equals(String.valueOf(StaticExplain.ADVERTISING_BILLS.getCode()))){
-            tvBaseGuaranteeEquipmentNumber.setText(guaranteeDeatil.getServiceId());
+            tvBaseGuaranteeEquipmentNumber.setText(String.valueOf(guaranteeDeatil.getCode()));
         }else {
             tvBaseGuaranteeEquipmentNumber.setText("--");
         }

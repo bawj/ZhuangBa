@@ -138,7 +138,7 @@ public class BaseAdvertisementFragment extends BaseFragment<IBaseAdvertisementMo
             String phoneNumber = unique.getPhoneNumber();
             if (TextUtils.isEmpty(assigner) || phoneNumber.equals(assigner)){
                 //总金额
-                tvBaseAdvertisementMoney.setText(getString(R.string.content_money , String.valueOf(ongoingOrdersList.getOrderAmount())));
+                tvBaseAdvertisementMoney.setText(getString(R.string.content_money , String.valueOf(ongoingOrdersList.getMasterOrderAmount())));
             }else {
                 tvBaseAdvertisementMoney.setText(getString(R.string.content_money , getString(R.string.asterisk)));
             }

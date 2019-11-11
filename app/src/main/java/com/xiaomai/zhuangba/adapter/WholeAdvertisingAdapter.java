@@ -45,7 +45,6 @@ public class WholeAdvertisingAdapter extends BaseQuickAdapter<OngoingOrdersList,
         tvItemOrdersNumber.setText(mContext.getString(R.string.task_number, String.valueOf(ongoingOrders.getNumber())));
         //money
         TextView tvItemOrdersMoney = helper.getView(R.id.tvItemOrdersMoney);
-        tvItemOrdersMoney.setText(String.valueOf(mContext.getString(R.string.content_money, String.valueOf(ongoingOrders.getOrderAmount()))));
         //type
         TextView tvItemOrdersType = helper.getView(R.id.tvItemOrdersType);
 
@@ -73,8 +72,7 @@ public class WholeAdvertisingAdapter extends BaseQuickAdapter<OngoingOrdersList,
             ivItemMaintenanceTime.setVisibility(View.VISIBLE);
             tvItemOrdersMaintenanceTime.setVisibility(View.VISIBLE);
             //维护时间
-            // TODO: 2019/11/8 0008 维护时间 段 没有数据
-            //tvItemOrdersMaintenanceTime.setText(mContext.getString(R.string.ending_date_ , ));
+            tvItemOrdersMaintenanceTime.setText(mContext.getString(R.string.ending_date_ , ongoingOrders.getSlottingStartLength()));
         }
         int orderStatus = ongoingOrders.getOrderStatus();
         AdvertisingStatusUtil.masterStatus(mContext , orderStatus ,tvItemOrdersType);
@@ -91,7 +89,7 @@ public class WholeAdvertisingAdapter extends BaseQuickAdapter<OngoingOrdersList,
         UserInfo unique = DBHelper.getInstance().getUserInfoDao().queryBuilder().unique();
         String phoneNumber = unique.getPhoneNumber();
         if (TextUtils.isEmpty(assigner) || phoneNumber.equals(assigner)){
-            tvItemOrdersMoney.setText(String.valueOf(mContext.getString(R.string.content_money, String.valueOf(ongoingOrders.getOrderAmount()))));
+            tvItemOrdersMoney.setText(String.valueOf(mContext.getString(R.string.content_money, String.valueOf(ongoingOrders.getMasterOrderAmount()))));
         }else {
             tvItemOrdersMoney.setText(String.valueOf(mContext.getString(R.string.asterisk)));
         }

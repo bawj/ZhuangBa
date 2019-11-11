@@ -29,6 +29,8 @@ public class MasterFrozenAmountAdapter extends BaseQuickAdapter<FrozenAmountBean
         TextView tvAccountingTime = helper.getView(R.id.tvAccountingTime);
         DateTime dateTime = DateUtil.strToDate(item.getEnterTime(), "yyyy-MM-dd");
         if (dateTime != null){
+            //往后推两天 为入账时间
+            dateTime = dateTime.plusDays(2);
             int dayOfYear = dateTime.getDayOfMonth();
             tvAccountingTime.setText(mContext.getString(R.string.accounting_time_symbol , String.valueOf(dayOfYear)));
         }

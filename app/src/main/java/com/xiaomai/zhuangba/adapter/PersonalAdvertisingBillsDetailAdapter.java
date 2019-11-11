@@ -1,5 +1,6 @@
 package com.xiaomai.zhuangba.adapter;
 
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -30,7 +31,7 @@ public class PersonalAdvertisingBillsDetailAdapter extends BaseQuickAdapter<Ongo
                 0.0f);
         //title
         TextView tvItemOrdersTitle = helper.getView(R.id.tvItemOrdersTitle);
-        tvItemOrdersTitle.setText(ongoingOrders.getServiceText());
+        tvItemOrdersTitle.setText(TextUtils.isEmpty(ongoingOrders.getServiceText()) ? mContext.getString(R.string.advertising_bills) : ongoingOrders.getServiceText());
         //time
         TextView tvItemOrdersTime = helper.getView(R.id.tvItemOrdersTime);
         tvItemOrdersTime.setText(mContext.getString(R.string.time, ongoingOrders.getAppointmentTime()));

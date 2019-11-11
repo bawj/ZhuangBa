@@ -19,8 +19,10 @@ import com.xiaomai.zhuangba.util.ShopCarUtil;
  */
 public class ServiceItemsAdapter extends BaseQuickAdapter<OrderServiceItem, BaseViewHolder> {
 
-    public ServiceItemsAdapter() {
+    private boolean flag;
+    public ServiceItemsAdapter(boolean flag) {
         super(R.layout.item_service_item, null);
+        this.flag = flag;
     }
 
     @Override
@@ -107,7 +109,11 @@ public class ServiceItemsAdapter extends BaseQuickAdapter<OrderServiceItem, Base
             tvAuxiliaryMaterials.setVisibility(View.GONE);
         }
 
-        tvItemServiceTotalMoney.setText(mContext.getString(R.string.content_money, String.valueOf(multiply)));
+        if (flag){
+            tvItemServiceTotalMoney.setText(mContext.getString(R.string.content_money, String.valueOf(multiply)));
+        }else {
+            tvItemServiceTotalMoney.setText(mContext.getString(R.string.asterisk));
+        }
         tvItemServiceTotalMoney.setTag(orderServiceItem);
     }
 }

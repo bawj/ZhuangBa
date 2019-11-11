@@ -22,7 +22,7 @@ public class InspectionSheetAdapter extends BaseQuickAdapter<InspectionSheetBean
     protected void convert(BaseViewHolder helper, InspectionSheetBean item) {
         //地址
         TextView tvItemOrdersTitle = helper.getView(R.id.tvItemOrdersTitle);
-        String villageName = item.getVillageNames();
+        String villageName = item.getVillageName();
         if (!TextUtils.isEmpty(villageName)) {
             tvItemOrdersTitle.setText(villageName);
         } else {

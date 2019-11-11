@@ -13,7 +13,6 @@ import com.xiaomai.zhuangba.adapter.MasterFrozenAmountAdapter;
 import com.xiaomai.zhuangba.data.bean.FrozenAmountBean;
 import com.xiaomai.zhuangba.data.bean.UserInfo;
 import com.xiaomai.zhuangba.data.db.DBHelper;
-import com.xiaomai.zhuangba.enums.StaticExplain;
 import com.xiaomai.zhuangba.fragment.base.BaseListFragment;
 import com.xiaomai.zhuangba.http.ServiceUrl;
 
@@ -41,11 +40,6 @@ public class MasterPersonalFrozenAmount extends BaseListFragment {
         requestSelectFreezeOrder();
     }
 
-    @Override
-    public void onBaseLoadMoreRequested() {
-        requestSelectFreezeOrder();
-    }
-
     private void requestSelectFreezeOrder() {
         //冻结金额
         UserInfo unique = DBHelper.getInstance().getUserInfoDao().queryBuilder().unique();
@@ -55,27 +49,14 @@ public class MasterPersonalFrozenAmount extends BaseListFragment {
                 .subscribe(new BaseHttpRxObserver<List<FrozenAmountBean>>() {
                     @Override
                     protected void onSuccess(List<FrozenAmountBean> frozenAmountBeanList) {
-                        if (getPage() != StaticExplain.PAGE_NUMBER.getCode()) {
-                            //加载
-                            masterFrozenAmountAdapter.addData(frozenAmountBeanList);
-                        } else {
-                            //刷新
-                            masterFrozenAmountAdapter.setNewData(frozenAmountBeanList);
-                            finishRefresh();
-                        }
-                        if (frozenAmountBeanList.size() < StaticExplain.PAGE_NUM.getCode()) {
-                            //加载结束
-                            loadMoreEnd();
-                        } else {
-                            //加载完成
-                            loadMoreComplete();
-                        }
+                        masterFrozenAmountAdapter.setNewData(frozenAmountBeanList);
+                        finishRefresh();
+                        masterFrozenAmountAdapter.setEnableLoadMore(false);
                     }
                     @Override
                     public void onError(ApiException apiException) {
                         super.onError(apiException);
                         finishRefresh();
-                        loadError();
                     }
                 });
     }
