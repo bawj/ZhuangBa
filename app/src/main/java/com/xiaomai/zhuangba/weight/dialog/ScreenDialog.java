@@ -229,6 +229,9 @@ public class ScreenDialog implements View.OnClickListener {
                 teamList = new ArrayList<>();
                 equipmentList = new ArrayList<>();
                 batchCodeList = new ArrayList<>();
+                if (mAdapter != null){
+                    mAdapter.setSelect(-100 , -100);
+                }
                 requestSearch();
                 break;
             case R.id.tvSearchComplete:
