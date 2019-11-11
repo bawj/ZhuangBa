@@ -506,6 +506,7 @@
     <string name="advertisement_start_construction_tip">注：务必上传高清照片</string>
     <string name="acceptance_rules">验收规则</string>
     <string name="advertising_bills">广告单</string>
+    <string name="advertisement_replacement">广告更换</string>
     <string name="application_for_acceptance_has_been_submitted">您的验收申请已提交</string>
     <string name="bulk_acceptance">批量接单</string>
     <string name="set_out">出发</string>

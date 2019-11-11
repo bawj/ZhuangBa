@@ -101,8 +101,8 @@ public class GuaranteeFragment extends BaseListFragment<IBaseModule , GuaranteeA
     }
 
     private void setGuaranteeNumberGrossIncome(OuterLayerMaintenanceOverman outerLayerMaintenanceOverman) {
-        int num = outerLayerMaintenanceOverman.getNum();
-        int amount = outerLayerMaintenanceOverman.getAmount();
+        double num = outerLayerMaintenanceOverman.getNum();
+        double amount = outerLayerMaintenanceOverman.getAmount();
         if (num == 0){
             tvGuaranteeNumber.setVisibility(View.GONE);
             tvGuaranteeGrossIncome.setVisibility(View.GONE);

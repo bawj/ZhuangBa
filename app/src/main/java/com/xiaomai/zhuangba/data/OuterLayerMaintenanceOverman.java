@@ -9,11 +9,11 @@ import com.xiaomai.zhuangba.data.bean.RefreshBaseList;
  */
 public class OuterLayerMaintenanceOverman {
 
-    private int num;
-    private int amount;
+    private double num;
+    private double amount;
     private RefreshBaseList<MaintenanceOverman> list;
 
-    public int getNum() {
+    public double getNum() {
         return num;
     }
 
@@ -21,7 +21,7 @@ public class OuterLayerMaintenanceOverman {
         this.num = num;
     }
 
-    public int getAmount() {
+    public double getAmount() {
         return amount;
     }
 

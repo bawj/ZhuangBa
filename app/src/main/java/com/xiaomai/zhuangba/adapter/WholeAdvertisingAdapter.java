@@ -33,10 +33,10 @@ public class WholeAdvertisingAdapter extends BaseQuickAdapter<OngoingOrdersList,
                 0.0f);
         //title
         TextView tvItemOrdersTitle = helper.getView(R.id.tvItemOrdersTitle);
-        tvItemOrdersTitle.setText(TextUtils.isEmpty(ongoingOrders.getServiceText()) ? mContext.getString(R.string.advertising_bills) : ongoingOrders.getServiceText());
+        tvItemOrdersTitle.setText(TextUtils.isEmpty(ongoingOrders.getServiceText()) ? mContext.getString(R.string.advertisement_replacement) : ongoingOrders.getServiceText());
         //time
         TextView tvItemOrdersTime = helper.getView(R.id.tvItemOrdersTime);
-        tvItemOrdersTime.setText(mContext.getString(R.string.time, ongoingOrders.getAppointmentTime()));
+        tvItemOrdersTime.setText(mContext.getString(R.string.time, ongoingOrders.getSlottingStartLength()));
         //location
         TextView tvItemOrdersLocation = helper.getView(R.id.tvItemOrdersLocation);
         tvItemOrdersLocation.setText(ongoingOrders.getAddress());
@@ -72,7 +72,7 @@ public class WholeAdvertisingAdapter extends BaseQuickAdapter<OngoingOrdersList,
             ivItemMaintenanceTime.setVisibility(View.VISIBLE);
             tvItemOrdersMaintenanceTime.setVisibility(View.VISIBLE);
             //维护时间
-            tvItemOrdersMaintenanceTime.setText(mContext.getString(R.string.ending_date_ , ongoingOrders.getSlottingStartLength()));
+            tvItemOrdersMaintenanceTime.setText(mContext.getString(R.string.ending_date_ , ongoingOrders.getSlottingEndLength()));
         }
         int orderStatus = ongoingOrders.getOrderStatus();
         AdvertisingStatusUtil.masterStatus(mContext , orderStatus ,tvItemOrdersType);

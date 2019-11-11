@@ -16,6 +16,7 @@ import com.example.toollib.data.base.BaseCallback;
 import com.example.toollib.http.HttpResult;
 import com.example.toollib.http.observer.BaseHttpZipRxObserver;
 import com.example.toollib.http.util.RxUtils;
+import com.example.toollib.util.ToastUtil;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
@@ -133,6 +134,7 @@ public class BaseGuaranteeDetailFragment extends BaseFragment implements OnRefre
             @Override
             public void onFail(Object obj) {
                 super.onFail(obj);
+                ToastUtil.showShort(obj != null ? obj.toString() : "");
                 refreshBaseList.finishRefresh();
             }
         });

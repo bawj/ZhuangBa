@@ -27,7 +27,7 @@ public class GuaranteeDeatil {
     private int serviceId;
     private String orderCode;
     private int number;
-    private int amount;
+    private double amount;
     private String employerName;
     private String employerPhone;
     private String serviceName;
@@ -72,11 +72,11 @@ public class GuaranteeDeatil {
         this.number = number;
     }
 
-    public int getAmount() {
+    public double getAmount() {
         return amount;
     }
 
-    public void setAmount(int amount) {
+    public void setAmount(double amount) {
         this.amount = amount;
     }
 
