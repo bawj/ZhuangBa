@@ -157,7 +157,6 @@ public class BasePatrolDetailFragment<T extends IBasePatrolModule> extends BaseF
         //设备编号
         tvBasePatrolEquipmentNumber.setText(ongoingOrdersList.getName());
 
-
         //总金额
         if (unique.getRole().equals(String.valueOf(StaticExplain.EMPLOYER.getCode()))){
             tvBaseOrderDetailTotalMoney.setText(getString(R.string.content_money,String.valueOf(ongoingOrdersList.getOrderAmount())));
