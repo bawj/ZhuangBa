@@ -27,7 +27,9 @@ public class InspectionSheetDetailAdapter extends BaseQuickAdapter<InspectionShe
         tvItemInspectionSheetTitle.setText(mContext.getString(R.string.patrol_title));
         //订单状态
         TextView tvItemInspectionSheetType = helper.getView(R.id.tvItemInspectionSheetType);
+
         PatrolStatusUtil.masterStatus(mContext , inspectionSheetDetailBean.getOrderStatus() , tvItemInspectionSheetType);
+
         //设备编号
         TextView tvItemInspectionSheetTime = helper.getView(R.id.tvItemInspectionSheetTime);
         tvItemInspectionSheetTime.setText(mContext.getString(R.string.device_number , inspectionSheetDetailBean.getName()));

@@ -1049,6 +1049,13 @@ public interface IApi {
     Observable<HttpResult<CreateTeamBean>> selectByTeam();
 
     /**
+     * 查询 是否加入了团队
+     * @return observable
+     */
+    @POST("user/getLevel")
+    Observable<HttpResult<Boolean>> getLevel();
+
+    /**
      * 创建团队
      * @param nameTeam 团队名称
      * @return observable
@@ -1187,13 +1194,13 @@ public interface IApi {
 
     /**
      * 是否同意师傅加入团队
-     * @param userNumber 师傅手机号
+     * @param id id
      * @param isAgree    3:拒绝:拒绝加入时将删除状态改为y;4同意;  不传 返回通知列表
      * @return observable
      */
     @FormUrlEncoded
     @POST("user/updateTeam")
-    Observable<HttpResult<Object>> updateTeam(@Field("userNumber") String userNumber , @Field("isAgree") String isAgree);
+    Observable<HttpResult<Object>> updateTeam(@Field("id") String id , @Field("isAgree") String isAgree);
 
     /**
      * 清空消息

@@ -8,6 +8,15 @@ public class MasterPersonalZip {
 
     private CreateTeamBean createTeamBean;
     private OrderStatistics orderStatistics;
+    private Boolean aBoolean;
+
+    public Boolean getaBoolean() {
+        return aBoolean;
+    }
+
+    public void setaBoolean(Boolean aBoolean) {
+        this.aBoolean = aBoolean;
+    }
 
     public CreateTeamBean getCreateTeamBean() {
         return createTeamBean;

@@ -41,7 +41,7 @@ import com.xiaomai.zhuangba.util.Util;
 import butterknife.BindView;
 import butterknife.OnClick;
 import io.reactivex.Observable;
-import io.reactivex.functions.BiFunction;
+import io.reactivex.functions.Function3;
 import io.reactivex.schedulers.Schedulers;
 
 /**
@@ -151,22 +151,29 @@ public class MasterPersonalFragment extends PersonalFragment implements OnRefres
     }
 
     private void refreshMasterPersonal() {
+        //查询该师傅是否已经是最高级别
+        Observable<HttpResult<Boolean>> getLevel = RxUtils.getObservable(ServiceUrl.getUserApi().getLevel())
+                .subscribeOn(Schedulers.io());
         //团队
         Observable<HttpResult<CreateTeamBean>> teamObservable = RxUtils.getObservable(ServiceUrl.getUserApi().selectByTeam())
                 .subscribeOn(Schedulers.io());
         //统计雇主和师傅
         Observable<HttpResult<OrderStatistics>> httpResultObservable = RxUtils.getObservable(ServiceUrl.getUserApi().getOrderStatistics())
                 .subscribeOn(Schedulers.io());
-        Observable<Object> objectObservable = Observable.zip(teamObservable, httpResultObservable, new BiFunction<HttpResult<CreateTeamBean>
-                , HttpResult<OrderStatistics>, Object>() {
+
+        Observable<Object> objectObservable = Observable.zip(teamObservable, httpResultObservable, getLevel, new Function3<HttpResult<CreateTeamBean>
+                , HttpResult<OrderStatistics>, HttpResult<Boolean>, Object>() {
             @Override
-            public Object apply(HttpResult<CreateTeamBean> createTeamBeanHttpResult, HttpResult<OrderStatistics> orderStatisticsHttpResult) {
+            public Object apply(HttpResult<CreateTeamBean> createTeamBeanHttpResult
+                    , HttpResult<OrderStatistics> orderStatisticsHttpResult, HttpResult<Boolean> booleanHttpResult) {
                 MasterPersonalZip masterPersonalZip = new MasterPersonalZip();
                 masterPersonalZip.setCreateTeamBean(createTeamBeanHttpResult.getData());
                 masterPersonalZip.setOrderStatistics(orderStatisticsHttpResult.getData());
+                masterPersonalZip.setaBoolean(booleanHttpResult.getData());
                 return masterPersonalZip;
             }
         }).compose(this.bindToLifecycle());
+
         BaseHttpZipRxObserver.getInstance().httpZipObserver(objectObservable, new BaseCallback() {
             @Override
             public void onSuccess(Object obj) {
@@ -203,6 +210,11 @@ public class MasterPersonalFragment extends PersonalFragment implements OnRefres
         tvPersonalTodayIncome.setText(Util.getZero(orderStatistics.getMasterOrderAmount()));
         //今日单数
         tvPersonalTodayNumbers.setText(String.valueOf(orderStatistics.getPendingDisposal()));
+        //是否显示 缴纳保证金
+        Boolean aBoolean = masterPersonalZip.getaBoolean();
+        if (aBoolean != null){
+            relPlatformMaster.setVisibility(aBoolean ? View.VISIBLE : View.GONE);
+        }
     }
 
     @Override

@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.toollib.fragment.ImgPreviewFragment;
@@ -41,6 +42,8 @@ public class EmployerCompleteFragment extends EmployerUnderConstructionFragment 
 
     @BindView(R.id.ivEmployerSignature)
     ImageView ivEmployerSignature;
+    @BindView(R.id.tvEmployerSignature)
+    TextView tvEmployerSignature;
 
     /**
      * 任务提交后的照片
@@ -89,7 +92,12 @@ public class EmployerCompleteFragment extends EmployerUnderConstructionFragment 
         String electronicSignature = deliveryContent.getElectronicSignature();
         if (!TextUtils.isEmpty(electronicSignature)) {
             //负责人签名
+            tvEmployerSignature.setVisibility(View.VISIBLE);
+            ivEmployerSignature.setVisibility(View.VISIBLE);
             GlideManager.loadImage(getActivity(), electronicSignature, ivEmployerSignature);
+        }else {
+            tvEmployerSignature.setVisibility(View.GONE);
+            ivEmployerSignature.setVisibility(View.GONE);
         }
     }
 

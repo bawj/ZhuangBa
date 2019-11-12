@@ -1,5 +1,6 @@
 package com.xiaomai.zhuangba.adapter;
 
+import android.annotation.SuppressLint;
 import android.text.TextUtils;
 import android.widget.TextView;
 
@@ -23,6 +24,7 @@ public class AdvertisingReplacementAdapter extends BaseQuickAdapter<AdvertisingL
         super(R.layout.item_advertising_replacement, null);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void convert(BaseViewHolder helper, AdvertisingList item) {
         //标题
@@ -50,7 +52,7 @@ public class AdvertisingReplacementAdapter extends BaseQuickAdapter<AdvertisingL
         TextView tvEndingTime = helper.getView(R.id.tvEndingTime);
         String startTime = item.getStartTime();
         if (!TextUtils.isEmpty(startTime)){
-            tvEndingTime.setText(DateUtil.dateToFormat(startTime , "yyyy-MM-dd" , "yyyy/MM/dd HH:mm"));
+            tvEndingTime.setText(startTime + "~" + item.getEndTime());
         }
         //地址
         TextView tvLocation = helper.getView(R.id.tvLocation);
