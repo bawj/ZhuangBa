@@ -69,6 +69,7 @@ public class BaseAdvertisementFragment extends BaseFragment<IBaseAdvertisementMo
     RelativeLayout layBaseOrderDetail;
 
     private OrderDateListAdapter orderDateListAdapter;
+
     @Override
     public void initView() {
         layBaseOrderDetail.setVisibility(View.GONE);
@@ -98,28 +99,28 @@ public class BaseAdvertisementFragment extends BaseFragment<IBaseAdvertisementMo
         //订单信息
         List<OrderDateList> orderDateLists = orderServiceDate.getOrderDateLists();
 
-        setOngoingOrder(ongoingOrdersList , orderDateLists);
+        setOngoingOrder(ongoingOrdersList, orderDateLists);
 
         for (DeliveryContent deliveryContent : deliveryContents) {
-            if (deliveryContent.getPicturesType().equals(String.valueOf(StaticExplain.BEFORE_THE_BEGINNING.getCode()))){
+            if (deliveryContent.getPicturesType().equals(String.valueOf(StaticExplain.BEFORE_THE_BEGINNING.getCode()))) {
                 setDeliveryContent(deliveryContent);
-            }else if (deliveryContent.getPicturesType().equals(String.valueOf(StaticExplain.UPON_COMPLETION.getCode()))){
+            } else if (deliveryContent.getPicturesType().equals(String.valueOf(StaticExplain.UPON_COMPLETION.getCode()))) {
                 setUponCompletion(deliveryContent);
             }
         }
     }
 
-    public void setOngoingOrder(OngoingOrdersList ongoingOrdersList , List<OrderDateList> orderDateLists) {
+    public void setOngoingOrder(OngoingOrdersList ongoingOrdersList, List<OrderDateList> orderDateLists) {
         //广告单 状态
         UserInfo unique = DBHelper.getInstance().getUserInfoDao().queryBuilder().unique();
         if (unique.getRole().equals(String.valueOf(StaticExplain.FU_FU_SHI.getCode())) && ongoingOrdersList != null) {
             //师傅端
             AdvertisingStatusUtil.masterStatus(getActivity(), ongoingOrdersList.getOrderStatus(), tvBaseOrderDetailItemOrdersType);
-        }else if (unique.getRole().equals(String.valueOf(StaticExplain.EMPLOYER.getCode())) && ongoingOrdersList != null) {
+        } else if (unique.getRole().equals(String.valueOf(StaticExplain.EMPLOYER.getCode())) && ongoingOrdersList != null) {
             //雇主端
             AdvertisingStatusUtil.employerStatus(getActivity(), ongoingOrdersList.getOrderStatus(), tvBaseOrderDetailItemOrdersType);
         }
-        if (ongoingOrdersList != null){
+        if (ongoingOrdersList != null) {
             //设备编号
             tvBaseEquipmentNumber.setText(ongoingOrdersList.getName());
             //更换位置
@@ -133,20 +134,24 @@ public class BaseAdvertisementFragment extends BaseFragment<IBaseAdvertisementMo
             //备注
             tvBaseAdvertisementNotes.setText(ongoingOrdersList.getEmployerDescribe());
 
-            //师傅得到的金额
-            String assigner = ongoingOrdersList.getAssigner();
-            String phoneNumber = unique.getPhoneNumber();
-            if (TextUtils.isEmpty(assigner) || phoneNumber.equals(assigner)){
-                //总金额
-                tvBaseAdvertisementMoney.setText(getString(R.string.content_money , String.valueOf(ongoingOrdersList.getMasterOrderAmount())));
-            }else {
-                tvBaseAdvertisementMoney.setText(getString(R.string.content_money , getString(R.string.asterisk)));
+            //总金额
+            if (unique.getRole().equals(String.valueOf(StaticExplain.EMPLOYER.getCode()))){
+                tvBaseAdvertisementMoney.setText(getString(R.string.content_money, String.valueOf(ongoingOrdersList.getOrderAmount())));
+            }else if (unique.getRole().equals(String.valueOf(StaticExplain.FU_FU_SHI.getCode()))){
+                String assigner = ongoingOrdersList.getAssigner();
+                String phoneNumber = unique.getPhoneNumber();
+                if (TextUtils.isEmpty(assigner) || phoneNumber.equals(assigner)) {
+                    tvBaseAdvertisementMoney.setText(getString(R.string.content_money, String.valueOf(ongoingOrdersList.getMasterOrderAmount())));
+                } else {
+                    tvBaseAdvertisementMoney.setText(getString(R.string.content_money, getString(R.string.asterisk)));
+                }
             }
+
 
             //安装地址
             tvBaseOrderDetailLocation.setText(ongoingOrdersList.getAddress());
             //广告图
-            GlideManager.loadImage(getActivity() ,ongoingOrdersList.getPicturesUrl() ,ivBaseReplacementOfAdvertisingDrawings);
+            GlideManager.loadImage(getActivity(), ongoingOrdersList.getPicturesUrl(), ivBaseReplacementOfAdvertisingDrawings);
 
             //订单时间信息
             orderDateLists.add(0, new OrderDateList(ongoingOrdersList.getOrderCode(), "", getString(R.string.order_code)));
@@ -190,7 +195,7 @@ public class BaseAdvertisementFragment extends BaseFragment<IBaseAdvertisementMo
 
     @Override
     public String getOrderCode() {
-        if (getArguments() != null){
+        if (getArguments() != null) {
             return getArguments().getString(ConstantUtil.ORDER_CODE);
         }
         return "";
@@ -198,7 +203,7 @@ public class BaseAdvertisementFragment extends BaseFragment<IBaseAdvertisementMo
 
     @Override
     public String getOrderType() {
-        if (getArguments() != null){
+        if (getArguments() != null) {
             return getArguments().getString(ConstantUtil.ORDER_TYPE);
         }
         return "";

@@ -158,7 +158,7 @@ public class NeedDealWithAdapter extends BaseQuickAdapter<OngoingOrdersList, Bas
         UserInfo unique = DBHelper.getInstance().getUserInfoDao().queryBuilder().unique();
         String phoneNumber = unique.getPhoneNumber();
         if (TextUtils.isEmpty(assigner) || phoneNumber.equals(assigner)){
-            tvItemOrdersMoney.setText(String.valueOf(mContext.getString(R.string.content_money, String.valueOf(ongoingOrders.getOrderAmount()))));
+            tvItemOrdersMoney.setText(String.valueOf(mContext.getString(R.string.content_money, String.valueOf(ongoingOrders.getMasterOrderAmount()))));
         }else {
             tvItemOrdersMoney.setText(String.valueOf(mContext.getString(R.string.asterisk)));
         }

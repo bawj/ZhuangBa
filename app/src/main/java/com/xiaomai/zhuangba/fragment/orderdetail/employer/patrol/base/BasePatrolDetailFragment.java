@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -155,8 +156,15 @@ public class BasePatrolDetailFragment<T extends IBasePatrolModule> extends BaseF
         }
         //设备编号
         tvBasePatrolEquipmentNumber.setText(ongoingOrdersList.getName());
-        //价格
-        tvBaseOrderDetailTotalMoney.setText(getString(R.string.content_money,String.valueOf(ongoingOrdersList.getOrderAmount())));
+
+
+        //总金额
+        if (unique.getRole().equals(String.valueOf(StaticExplain.EMPLOYER.getCode()))){
+            tvBaseOrderDetailTotalMoney.setText(getString(R.string.content_money,String.valueOf(ongoingOrdersList.getOrderAmount())));
+        }else if (unique.getRole().equals(String.valueOf(StaticExplain.FU_FU_SHI.getCode()))){
+            tvBaseOrderDetailTotalMoney.setText(getString(R.string.content_money,String.valueOf(ongoingOrdersList.getMasterOrderAmount())));
+        }
+
         //巡查区域
         String telephone = ongoingOrdersList.getTelephone();
         ///tvBasePatrolArea.setText(Util.getNoodles(getActivity() , telephone));

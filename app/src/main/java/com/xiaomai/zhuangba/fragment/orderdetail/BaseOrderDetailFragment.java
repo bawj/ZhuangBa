@@ -148,8 +148,11 @@ public class BaseOrderDetailFragment<T extends IOrderDetailModule> extends BaseF
      * 订单详细信息
      */
     private OrderDateListAdapter orderDateListAdapter;
-    /** 详细信息 */
+    /**
+     * 详细信息
+     */
     private OngoingOrdersList ongoingOrdersList;
+
     @Override
     protected T initModule() {
         return (T) new OrderDetailModule();
@@ -292,18 +295,22 @@ public class BaseOrderDetailFragment<T extends IOrderDetailModule> extends BaseF
             orderServiceItem.setIconUrl(PretendApplication.BASE_URL);
             orderServiceItems.add(0, orderServiceItem);
         }
-        boolean flag = false;
-        if (ongoingOrdersList != null){
-            String assigner = ongoingOrdersList.getAssigner();
-            UserInfo unique = DBHelper.getInstance().getUserInfoDao().queryBuilder().unique();
-            String phoneNumber = unique.getPhoneNumber();
-            flag = TextUtils.isEmpty(assigner) || phoneNumber.equals(assigner);
-        }
+        boolean flag = isFlag();
         serviceItemsAdapter = new ServiceItemsAdapter(flag);
         recyclerServiceItems.setAdapter(serviceItemsAdapter);
         serviceItemsAdapter.setOnItemClickListener(this);
         //服务项目
         serviceItemsAdapter.setNewData(orderServiceItems);
+    }
+
+    public boolean isFlag() {
+        if (ongoingOrdersList != null) {
+            String assigner = ongoingOrdersList.getAssigner();
+            UserInfo unique = DBHelper.getInstance().getUserInfoDao().queryBuilder().unique();
+            String phoneNumber = unique.getPhoneNumber();
+            return TextUtils.isEmpty(assigner) || phoneNumber.equals(assigner);
+        }
+        return false;
     }
 
     @Override
