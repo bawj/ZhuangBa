@@ -275,10 +275,12 @@ public interface IApi {
      * 根据大类ID查询小类，根据服务小类查询服务项目
      *
      * @param serviceId 服务大类ID
+     * @param province  省
+     * @param city 市
      * @return observable
      */
     @GET("userRole/getServiceSubcategory/{serviceId}")
-    Observable<HttpResult<List<ServiceSubcategory>>> getServiceSubcategory(@Path("serviceId") String serviceId);
+    Observable<HttpResult<List<ServiceSubcategory>>> getServiceSubcategory(@Path("serviceId") String serviceId , @Query("province") String province, @Query("city")String city);
 
 
     /**

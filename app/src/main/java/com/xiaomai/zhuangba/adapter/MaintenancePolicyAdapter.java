@@ -9,6 +9,7 @@ import com.qmuiteam.qmui.layout.QMUIButton;
 import com.xiaomai.zhuangba.R;
 import com.xiaomai.zhuangba.data.bean.MaintenancePolicyBean;
 import com.xiaomai.zhuangba.util.DateUtil;
+import com.xiaomai.zhuangba.util.GuaranteeUtil;
 import com.xiaomai.zhuangba.util.MaintenanceUtil;
 
 /**
@@ -32,7 +33,11 @@ public class MaintenancePolicyAdapter extends BaseQuickAdapter<MaintenancePolicy
         tvItemMaintenanceTitle.setText(item.getServiceName());
         //维保状态
         TextView tvItemMaintenanceType = helper.getView(R.id.tvItemMaintenanceType);
-        MaintenanceUtil.maintenanceType(mContext, item.getEndTime(), tvItemMaintenanceType);
+
+        String status = item.getStatus();
+        GuaranteeUtil.guaranteeStatus(mContext,status , tvItemMaintenanceType);
+        //MaintenanceUtil.maintenanceType(mContext, item.getEndTime(), tvItemMaintenanceType);
+
         //维保时长
         TextView tvChargeMaintenance = helper.getView(R.id.tvChargeMaintenance);
         tvChargeMaintenance.setText(mContext.getString(R.string.maintenance_time, String.valueOf(item.getNumber())));

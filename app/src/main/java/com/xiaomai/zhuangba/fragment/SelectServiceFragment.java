@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.toollib.util.Log;
 import com.example.toollib.util.ToastUtil;
+import com.google.gson.Gson;
 import com.qmuiteam.qmui.layout.QMUILinearLayout;
 import com.qmuiteam.qmui.widget.QMUITopBarLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -23,6 +24,7 @@ import com.xiaomai.zhuangba.adapter.ServiceContentAdapter;
 import com.xiaomai.zhuangba.adapter.ServiceTitleAdapter;
 import com.xiaomai.zhuangba.adapter.SheetBehaviorAdapter;
 import com.xiaomai.zhuangba.data.bean.Maintenance;
+import com.xiaomai.zhuangba.data.bean.OrderAddress;
 import com.xiaomai.zhuangba.data.bean.ServiceSubcategory;
 import com.xiaomai.zhuangba.data.bean.ServiceSubcategoryProject;
 import com.xiaomai.zhuangba.data.bean.Slotting;
@@ -210,6 +212,20 @@ public class SelectServiceFragment extends BaseListFragment<ISelectServiceModule
                     }
                 })
                 .showDialog();
+    }
+
+    @Override
+    public String getProvince() {
+        String orderAddressGson = getOrderAddressGson();
+        OrderAddress orderAddress = new Gson().fromJson(orderAddressGson , OrderAddress.class);
+        return orderAddress.getProvince();
+    }
+
+    @Override
+    public String getCity() {
+        String orderAddressGson = getOrderAddressGson();
+        OrderAddress orderAddress = new Gson().fromJson(orderAddressGson , OrderAddress.class);
+        return orderAddress.getCity();
     }
 
     private void startShopCarFragment() {

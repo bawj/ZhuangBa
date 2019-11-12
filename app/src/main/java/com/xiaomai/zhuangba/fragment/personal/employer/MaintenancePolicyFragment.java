@@ -126,11 +126,6 @@ public class MaintenancePolicyFragment extends BaseListFragment implements Maint
         return getString(R.string.maintenance_policy_title);
     }
 
-//    @Override
-//    public int getRightIcon() {
-//        return R.drawable.ic_question_mark;
-//    }
-
     @Override
     public int getIvNotDataBackground() {
         return R.drawable.bg_search_empty;

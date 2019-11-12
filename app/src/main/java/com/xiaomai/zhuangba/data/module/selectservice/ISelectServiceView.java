@@ -39,4 +39,16 @@ public interface ISelectServiceView extends IBaseListView {
      * @param slotting 必选项
      */
     void slottingAndDebugSuccess(Slotting slotting);
+
+    /**
+     * 省
+     * @return string
+     */
+    String getProvince();
+
+    /**
+     * 市
+     * @return string
+     */
+    String getCity();
 }

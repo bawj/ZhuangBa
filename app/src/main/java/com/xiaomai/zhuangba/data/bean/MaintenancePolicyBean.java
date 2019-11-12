@@ -54,7 +54,7 @@ public class MaintenancePolicyBean {
     private double earningsMoney;
 
     public String getId() {
-        return id;
+        return id == null ? "" : id;
     }
 
     public void setId(String id) {
@@ -62,7 +62,7 @@ public class MaintenancePolicyBean {
     }
 
     public String getServiceId() {
-        return serviceId;
+        return serviceId == null ? "" : serviceId;
     }
 
     public void setServiceId(String serviceId) {
@@ -70,7 +70,7 @@ public class MaintenancePolicyBean {
     }
 
     public String getOrderCode() {
-        return orderCode;
+        return orderCode == null ? "" : orderCode;
     }
 
     public void setOrderCode(String orderCode) {
@@ -86,7 +86,7 @@ public class MaintenancePolicyBean {
     }
 
     public String getAmount() {
-        return amount;
+        return amount == null ? "" : amount;
     }
 
     public void setAmount(String amount) {
@@ -94,7 +94,7 @@ public class MaintenancePolicyBean {
     }
 
     public String getResidualQuantity() {
-        return residualQuantity;
+        return residualQuantity == null ? "" : residualQuantity;
     }
 
     public void setResidualQuantity(String residualQuantity) {
@@ -102,7 +102,7 @@ public class MaintenancePolicyBean {
     }
 
     public String getResidualAmount() {
-        return residualAmount;
+        return residualAmount == null ? "" : residualAmount;
     }
 
     public void setResidualAmount(String residualAmount) {
@@ -110,23 +110,7 @@ public class MaintenancePolicyBean {
     }
 
     public String getOvermanName() {
-        return TextUtils.isEmpty(overmanName) ? "" : overmanName;
-    }
-
-    public String getEmployerName() {
-        return employerName;
-    }
-
-    public void setEmployerName(String employerName) {
-        this.employerName = employerName;
-    }
-
-    public String getEmployerPhone() {
-        return employerPhone;
-    }
-
-    public void setEmployerPhone(String employerPhone) {
-        this.employerPhone = employerPhone;
+        return overmanName == null ? "" : overmanName;
     }
 
     public void setOvermanName(String overmanName) {
@@ -134,15 +118,31 @@ public class MaintenancePolicyBean {
     }
 
     public String getOvermanPhone() {
-        return TextUtils.isEmpty(overmanPhone) ? "" : overmanPhone;
+        return overmanPhone == null ? "" : overmanPhone;
     }
 
     public void setOvermanPhone(String overmanPhone) {
         this.overmanPhone = overmanPhone;
     }
 
+    public String getEmployerName() {
+        return employerName == null ? "" : employerName;
+    }
+
+    public void setEmployerName(String employerName) {
+        this.employerName = employerName;
+    }
+
+    public String getEmployerPhone() {
+        return employerPhone == null ? "" : employerPhone;
+    }
+
+    public void setEmployerPhone(String employerPhone) {
+        this.employerPhone = employerPhone;
+    }
+
     public String getServiceName() {
-        return TextUtils.isEmpty(serviceName) ? "" : serviceName;
+        return serviceName == null ? "" : serviceName;
     }
 
     public void setServiceName(String serviceName) {
@@ -150,7 +150,7 @@ public class MaintenancePolicyBean {
     }
 
     public String getStartTime() {
-        return startTime;
+        return startTime == null ? "" : startTime;
     }
 
     public void setStartTime(String startTime) {
@@ -158,7 +158,7 @@ public class MaintenancePolicyBean {
     }
 
     public String getEndTime() {
-        return TextUtils.isEmpty(endTime) ? "" : endTime;
+        return endTime == null ? "" : endTime;
     }
 
     public void setEndTime(String endTime) {
@@ -166,7 +166,7 @@ public class MaintenancePolicyBean {
     }
 
     public String getStartDate() {
-        return startDate;
+        return startDate == null ? "" : startDate;
     }
 
     public void setStartDate(String startDate) {
@@ -174,7 +174,7 @@ public class MaintenancePolicyBean {
     }
 
     public String getEndDate() {
-        return endDate;
+        return endDate == null ? "" : endDate;
     }
 
     public void setEndDate(String endDate) {
@@ -182,7 +182,7 @@ public class MaintenancePolicyBean {
     }
 
     public String getStatus() {
-        return status;
+        return status == null ? "" : status;
     }
 
     public void setStatus(String status) {
@@ -190,7 +190,7 @@ public class MaintenancePolicyBean {
     }
 
     public String getServiceImg() {
-        return serviceImg;
+        return serviceImg == null ? "" : serviceImg;
     }
 
     public void setServiceImg(String serviceImg) {

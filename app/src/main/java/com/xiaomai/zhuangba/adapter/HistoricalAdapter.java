@@ -47,7 +47,18 @@ public class HistoricalAdapter extends BaseQuickAdapter<OngoingOrdersList, BaseV
         tvItemHistoricalOrdersTitle.setText(TextUtils.isEmpty(ordersList.getServiceText()) ? "" : ordersList.getServiceText());
         tvItemHistoricalOrdersLocation.setText(TextUtils.isEmpty(ordersList.getAddress()) ? "" : ordersList.getAddress());
         tvItemHistoricalOrdersNumber.setText(mContext.getString(R.string.task_number, String.valueOf(ordersList.getNumber())));
-        tvItemHistoricalOrdersMoney.setText(mContext.getString(R.string.content_money, String.valueOf(ordersList.getOrderAmount())));
+
+        //师傅得到的金额
+        String assigner = ordersList.getAssigner();
+        UserInfo unique = DBHelper.getInstance().getUserInfoDao().queryBuilder().unique();
+        String phoneNumber = unique.getPhoneNumber();
+
+        if (TextUtils.isEmpty(assigner) || phoneNumber.equals(assigner)){
+            tvItemHistoricalOrdersMoney.setText(mContext.getString(R.string.content_money, String.valueOf(ordersList.getOrderAmount())));
+        }else {
+            tvItemHistoricalOrdersMoney.setText(mContext.getString(R.string.asterisk));
+        }
+
         tvItemHistoricalOrdersMoney.setTag(ordersList);
 
         TextView tvHistoricalMaintenance = helper.getView(R.id.tvHistoricalMaintenance);

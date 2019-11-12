@@ -30,7 +30,10 @@ public class AdvertisingReplacementAdapter extends BaseQuickAdapter<AdvertisingL
         tvItemAdvertisingReplacementTitle.setText(mContext.getString(R.string.advertising_replacement));
         //进行中  已完成
         TextView tvItemAdvertisingReplacementType = helper.getView(R.id.tvItemAdvertisingReplacementType);
+
         MaintenanceUtil.maintenanceType(mContext, item.getEndTime(), tvItemAdvertisingReplacementType);
+
+
         //设备编号
         TextView tvEquipmentNumber = helper.getView(R.id.tvEquipmentNumber);
         tvEquipmentNumber.setText(item.getEquipmentNum());

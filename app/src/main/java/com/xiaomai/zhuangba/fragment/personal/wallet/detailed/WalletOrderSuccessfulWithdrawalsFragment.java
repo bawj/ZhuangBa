@@ -40,12 +40,12 @@ public class WalletOrderSuccessfulWithdrawalsFragment extends WalletOrderDetailF
 
     @Override
     public List<WalletOrderDetailBean> getList(WalletDetailBean.ListBean bean) {
-        tvNumber.setText(String.format(getString(R.string.content_money), String.valueOf(bean.getAmount())));
+        tvNumber.setText(String.format(getString(R.string.content_money), String.valueOf(bean.getAmount() == 0 ? bean.getMasterOrderAmount() : bean.getAmount())));
         List<WalletOrderDetailBean> list = new ArrayList<>();
         list.add(new WalletOrderDetailBean(getString(R.string.wallet_out_time), TextUtils.isEmpty(bean.getModifyTime()) ? bean.getTimes() : bean.getModifyTime()));
         list.add(new WalletOrderDetailBean(getString(R.string.wallet_out_account), bean.getWithdrawalsAccount()));
         list.add(new WalletOrderDetailBean(getString(R.string.wallet_out_status), getString(R.string.wallet_out_success)));
-        list.add(new WalletOrderDetailBean(getString(R.string.wallet_out_code), bean.getAccountNumber()));
+        list.add(new WalletOrderDetailBean(getString(R.string.wallet_out_code), TextUtils.isEmpty(bean.getAccountNumber()) ? bean.getOrderCode() : bean.getAccountNumber()));
         list.add(new WalletOrderDetailBean(getString(R.string.withdrawal_success_time), bean.getSuccessTimes()));
         return list;
     }

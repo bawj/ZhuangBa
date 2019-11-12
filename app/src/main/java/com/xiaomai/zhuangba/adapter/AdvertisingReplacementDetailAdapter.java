@@ -26,7 +26,9 @@ public class AdvertisingReplacementDetailAdapter extends BaseQuickAdapter<Advert
         tvEquipmentNumber.setText(item.getEquipmentNum());
         //状态 已完成 或 施工中
         TextView tvItemAdvertisingReplacementType = helper.getView(R.id.tvItemAdvertisingReplacementType);
+
         MaintenanceUtil.maintenanceType(mContext, item.getMakeEndTIme(), tvItemAdvertisingReplacementType);
+
         //跟换位置
         TextView tvChangePlaces = helper.getView(R.id.tvChangePlaces);
         tvChangePlaces.setText(item.getEquipmentSurface());

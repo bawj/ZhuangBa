@@ -146,15 +146,13 @@ public class EmployerAdvertisementAcceptanceFragment extends BaseAdvertisementFr
         if (deliveryContents != null) {
             String picturesUrl = deliveryContents.getPicturesUrl();
             if (!TextUtils.isEmpty(picturesUrl)) {
-                final List<String> urlList = Util.getList(picturesUrl);
+                final ArrayList<String> urlList = new ArrayList<>();
+                urlList.add(picturesUrl);
                 imgExhibitionAdapter.setNewData(urlList);
                 imgExhibitionAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
                     @Override
                     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                        ArrayList<String> url = (ArrayList<String>) urlList;
-                        if (url != null) {
-                            startFragment(ImgPreviewFragment.newInstance(position, url));
-                        }
+                        startFragment(ImgPreviewFragment.newInstance(position, urlList));
                     }
                 });
             }
@@ -168,15 +166,13 @@ public class EmployerAdvertisementAcceptanceFragment extends BaseAdvertisementFr
             //交付后的内容
             String picturesUrl = deliveryContent.getPicturesUrl();
             if (!TextUtils.isEmpty(picturesUrl)) {
-                final List<String> urlList = Util.getList(picturesUrl);
+                final ArrayList<String> urlList = new ArrayList<>();
+                urlList.add(picturesUrl);
                 imgExhibitionAfterAdapter.setNewData(urlList);
                 imgExhibitionAfterAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
                     @Override
                     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                        ArrayList<String> url = (ArrayList<String>) urlList;
-                        if (url != null) {
-                            startFragment(ImgPreviewFragment.newInstance(position, url));
-                        }
+                        startFragment(ImgPreviewFragment.newInstance(position, urlList));
                     }
                 });
             }
