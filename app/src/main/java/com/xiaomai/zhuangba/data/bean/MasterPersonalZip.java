@@ -9,6 +9,15 @@ public class MasterPersonalZip {
     private CreateTeamBean createTeamBean;
     private OrderStatistics orderStatistics;
     private Boolean aBoolean;
+    private UserInfo userInfo;
+
+    public UserInfo getUserInfo() {
+        return userInfo;
+    }
+
+    public void setUserInfo(UserInfo userInfo) {
+        this.userInfo = userInfo;
+    }
 
     public Boolean getaBoolean() {
         return aBoolean;

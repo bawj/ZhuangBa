@@ -41,7 +41,7 @@ import com.xiaomai.zhuangba.util.Util;
 import butterknife.BindView;
 import butterknife.OnClick;
 import io.reactivex.Observable;
-import io.reactivex.functions.Function3;
+import io.reactivex.functions.Function4;
 import io.reactivex.schedulers.Schedulers;
 
 /**
@@ -82,6 +82,14 @@ public class MasterPersonalFragment extends PersonalFragment implements OnRefres
     @Override
     public void initView() {
         super.initView();
+        initData();
+        //刷新
+        refreshBaseList.setOnRefreshListener(this);
+        //默认刷新
+        refreshBaseList.autoRefresh();
+    }
+
+    private void initData() {
         UserInfo userInfo = DBHelper.getInstance().getUserInfoDao().queryBuilder().unique();
         int authenticationStatue = userInfo.getAuthenticationStatue();
         if (authenticationStatue == StaticExplain.IN_AUDIT.getCode()
@@ -92,11 +100,6 @@ public class MasterPersonalFragment extends PersonalFragment implements OnRefres
         tvPersonalStatus.setText(userInfo.getMasterRankName());
         tvPersonalName.setText(userInfo.getUserText());
         GlideManager.loadCircleImage(getActivity(), userInfo.getBareHeadedPhotoUrl(), ivUserHead, R.drawable.bg_def_head);
-
-        //刷新
-        refreshBaseList.setOnRefreshListener(this);
-        //默认刷新
-        refreshBaseList.autoRefresh();
     }
 
     @Override
@@ -161,19 +164,24 @@ public class MasterPersonalFragment extends PersonalFragment implements OnRefres
         Observable<HttpResult<OrderStatistics>> httpResultObservable = RxUtils.getObservable(ServiceUrl.getUserApi().getOrderStatistics())
                 .subscribeOn(Schedulers.io());
 
-        Observable<Object> objectObservable = Observable.zip(teamObservable, httpResultObservable, getLevel, new Function3<HttpResult<CreateTeamBean>
-                , HttpResult<OrderStatistics>, HttpResult<Boolean>, Object>() {
-            @Override
-            public Object apply(HttpResult<CreateTeamBean> createTeamBeanHttpResult
-                    , HttpResult<OrderStatistics> orderStatisticsHttpResult, HttpResult<Boolean> booleanHttpResult) {
-                MasterPersonalZip masterPersonalZip = new MasterPersonalZip();
-                masterPersonalZip.setCreateTeamBean(createTeamBeanHttpResult.getData());
-                masterPersonalZip.setOrderStatistics(orderStatisticsHttpResult.getData());
-                masterPersonalZip.setaBoolean(booleanHttpResult.getData());
-                return masterPersonalZip;
-            }
-        }).compose(this.bindToLifecycle());
+        //刷新个人信息
+        Observable<HttpResult<UserInfo>> httpUserObservable = RxUtils.getObservable(ServiceUrl.getUserApi().getUser())
+                .subscribeOn(Schedulers.io());
 
+        Observable<Object> objectObservable = Observable.zip(teamObservable, httpResultObservable, getLevel, httpUserObservable
+                , new Function4<HttpResult<CreateTeamBean>, HttpResult<OrderStatistics>, HttpResult<Boolean>, HttpResult<UserInfo>, Object>() {
+                    @Override
+                    public Object apply(HttpResult<CreateTeamBean> createTeamBeanHttpResult
+                            , HttpResult<OrderStatistics> orderStatisticsHttpResult, HttpResult<Boolean> booleanHttpResult
+                            , HttpResult<UserInfo> userInfoHttpResult){
+                        MasterPersonalZip masterPersonalZip = new MasterPersonalZip();
+                        masterPersonalZip.setCreateTeamBean(createTeamBeanHttpResult.getData());
+                        masterPersonalZip.setOrderStatistics(orderStatisticsHttpResult.getData());
+                        masterPersonalZip.setaBoolean(booleanHttpResult.getData());
+                        masterPersonalZip.setUserInfo(userInfoHttpResult.getData());
+                        return masterPersonalZip;
+                    }
+                }).compose(this.bindToLifecycle());
         BaseHttpZipRxObserver.getInstance().httpZipObserver(objectObservable, new BaseCallback() {
             @Override
             public void onSuccess(Object obj) {
@@ -212,9 +220,13 @@ public class MasterPersonalFragment extends PersonalFragment implements OnRefres
         tvPersonalTodayNumbers.setText(String.valueOf(orderStatistics.getPendingDisposal()));
         //是否显示 缴纳保证金
         Boolean aBoolean = masterPersonalZip.getaBoolean();
-        if (aBoolean != null){
+        if (aBoolean != null) {
             relPlatformMaster.setVisibility(aBoolean ? View.VISIBLE : View.GONE);
         }
+        UserInfo userInfo = masterPersonalZip.getUserInfo();
+        DBHelper.getInstance().getUserInfoDao().deleteAll();
+        DBHelper.getInstance().getUserInfoDao().insert(userInfo);
+        initData();
     }
 
     @Override
