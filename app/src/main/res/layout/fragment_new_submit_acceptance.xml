@@ -63,16 +63,6 @@
 
         </LinearLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/tool_lib_12dp"
-            android:layout_marginTop="@dimen/tool_lib_16dp"
-            android:layout_marginRight="@dimen/tool_lib_12dp"
-            android:lineSpacingExtra="@dimen/tool_lib_6dp"
-            android:text="@string/start_construction_tip"
-            android:textColor="@color/tool_lib_red_EF2B2B"
-            android:textSize="@dimen/tool_lib_12sp" />
         <!-- ↓↓↓↓↓↓↓ 签名去掉 ↓↓↓↓↓↓↓ -->
         <TextView
             android:id="@+id/tvBaseAutographServiceTip"
@@ -121,5 +111,16 @@
             android:layout_marginRight="@dimen/tool_lib_12dp"
             android:layout_marginBottom="@dimen/tool_lib_12dp"
             android:text="@string/construction_submission" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/tool_lib_12dp"
+            android:layout_marginTop="@dimen/tool_lib_16dp"
+            android:layout_marginRight="@dimen/tool_lib_12dp"
+            android:lineSpacingExtra="@dimen/tool_lib_6dp"
+            android:text="@string/start_construction_tip_"
+            android:textColor="@color/tool_lib_red_EF2B2B"
+            android:textSize="@dimen/tool_lib_12sp" />
     </LinearLayout>
 </android.support.v4.widget.NestedScrollView>

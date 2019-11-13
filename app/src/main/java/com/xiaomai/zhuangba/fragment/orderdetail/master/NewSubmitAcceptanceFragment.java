@@ -234,7 +234,7 @@ public class NewSubmitAcceptanceFragment extends BaseAutographFragment {
 
     @Override
     public String getAutographImgTip() {
-        return getString(R.string.job_site_font_installation_img);
+        return getString(R.string.advertisement_start_construction_complete);
     }
 
     @Override
