@@ -1,5 +1,6 @@
 package com.xiaomai.zhuangba.fragment.personal.wallet;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.view.View;
@@ -24,6 +25,7 @@ import com.xiaomai.zhuangba.R;
 import com.xiaomai.zhuangba.data.bean.MessageEvent;
 import com.xiaomai.zhuangba.data.bean.WalletBean;
 import com.xiaomai.zhuangba.enums.EventBusEnum;
+import com.xiaomai.zhuangba.enums.ForResultCode;
 import com.xiaomai.zhuangba.enums.WalletOrderTypeEnum;
 import com.xiaomai.zhuangba.fragment.personal.master.MasterPersonalFrozenAmount;
 import com.xiaomai.zhuangba.fragment.personal.wallet.detailed.CashWithdrawalFragment;
@@ -193,7 +195,7 @@ public class WalletFragment extends BaseFragment implements OnRefreshListener {
             } else if (walletBeans.getPresentationPassword().equals("2")) {
                 ToastUtil.showShort(getString(R.string.please_wallet_set_trade_success));
             } else {
-                startFragment(EarnestFragment.newInstance());
+                startFragmentForResult(EarnestFragment.newInstance(), ForResultCode.START_FOR_RESULT_CODE.getCode());
             }
         }
     }
@@ -227,8 +229,18 @@ public class WalletFragment extends BaseFragment implements OnRefreshListener {
             if (walletBeans != null) {
                 walletBeans.setPresentationPassword(String.valueOf(WalletOrderTypeEnum.YES_PRESENTATION_PASSWORD.getCode()));
             }
-        } else if (messageEvent.getErrCode() == EventBusEnum.CASH_SUCCESS.getCode()) {
-            refreshLayout.autoRefresh();
+        }
+    }
+
+    @Override
+    protected void onFragmentResult(int requestCode, int resultCode, Intent data) {
+        super.onFragmentResult(requestCode, resultCode, data);
+        if (resultCode == ForResultCode.RESULT_OK.getCode()) {
+            if (requestCode == ForResultCode.START_FOR_RESULT_CODE.getCode()) {
+//                setFragmentResult(ForResultCode.RESULT_OK.getCode(), new Intent());
+//                popBackStack();
+                refreshLayout.autoRefresh();
+            }
         }
     }
 

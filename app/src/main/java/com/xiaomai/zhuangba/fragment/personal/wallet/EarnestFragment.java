@@ -1,5 +1,6 @@
 package com.xiaomai.zhuangba.fragment.personal.wallet;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 
@@ -10,13 +11,8 @@ import com.example.toollib.http.observer.BaseHttpRxObserver;
 import com.example.toollib.http.util.RxUtils;
 import com.xiaomai.zhuangba.R;
 import com.xiaomai.zhuangba.data.bean.EarnestBean;
-import com.xiaomai.zhuangba.data.bean.MessageEvent;
-import com.xiaomai.zhuangba.enums.EventBusEnum;
+import com.xiaomai.zhuangba.enums.ForResultCode;
 import com.xiaomai.zhuangba.http.ServiceUrl;
-
-import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -43,7 +39,6 @@ public class EarnestFragment extends BaseFragment {
 
     @Override
     public void initView() {
-        EventBus.getDefault().register(this);
         Observable<HttpResult<EarnestBean>> observable = ServiceUrl.getUserApi().getEarnest();
         RxUtils.getObservable(observable)
                 .compose(this.<HttpResult<EarnestBean>>bindToLifecycle())
@@ -63,15 +58,20 @@ public class EarnestFragment extends BaseFragment {
 
     @OnClick(R.id.tvReturn)
     public void onReturnClick(){
-        startFragment(EarnestPasswordFragment.newInstance());
+        startFragmentForResult(EarnestPasswordFragment.newInstance(), ForResultCode.START_FOR_RESULT_CODE.getCode());
     }
 
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onWeChatSuccess(MessageEvent messageEvent) {
-         if (messageEvent.getErrCode() == EventBusEnum.CASH_SUCCESS.getCode()) {
-             popBackStack();
+    @Override
+    protected void onFragmentResult(int requestCode, int resultCode, Intent data) {
+        super.onFragmentResult(requestCode, resultCode, data);
+        if (resultCode == ForResultCode.RESULT_OK.getCode()) {
+            if (requestCode == ForResultCode.START_FOR_RESULT_CODE.getCode()) {
+                setFragmentResult(ForResultCode.RESULT_OK.getCode(), new Intent());
+                popBackStack();
+            }
         }
     }
+
 
     @Override
     public int getContentView() {
@@ -86,11 +86,5 @@ public class EarnestFragment extends BaseFragment {
     @Override
     protected IBaseModule initModule() {
         return null;
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        EventBus.getDefault().unregister(this);
     }
 }

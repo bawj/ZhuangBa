@@ -1,5 +1,6 @@
 package com.xiaomai.zhuangba.fragment.personal.wallet;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 
@@ -10,15 +11,12 @@ import com.example.toollib.http.observer.BaseHttpRxObserver;
 import com.example.toollib.http.util.RxUtils;
 import com.example.toollib.util.ToastUtil;
 import com.xiaomai.zhuangba.R;
-import com.xiaomai.zhuangba.data.bean.MessageEvent;
 import com.xiaomai.zhuangba.data.bean.UserInfo;
 import com.xiaomai.zhuangba.data.db.DBHelper;
-import com.xiaomai.zhuangba.enums.EventBusEnum;
+import com.xiaomai.zhuangba.enums.ForResultCode;
 import com.xiaomai.zhuangba.enums.StaticExplain;
 import com.xiaomai.zhuangba.http.ServiceUrl;
 import com.xiaomai.zhuangba.weight.CodeEditText;
-
-import org.greenrobot.eventbus.EventBus;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -73,7 +71,8 @@ public class EarnestPasswordFragment extends BaseFragment {
                             UserInfo userInfo = DBHelper.getInstance().getUserInfoDao().queryBuilder().unique();
                             userInfo.setMasterRankId(String.valueOf(StaticExplain.OBSERVER.getCode()));
                             DBHelper.getInstance().getUserInfoDao().update(userInfo);
-                            EventBus.getDefault().post(new MessageEvent(EventBusEnum.CASH_SUCCESS.getCode()));
+                            setFragmentResult(ForResultCode.RESULT_OK.getCode(), new Intent());
+                            getBaseFragmentActivity().popBackStack(EarnestFragment.class);
                             popBackStack();
                         }
                     });
