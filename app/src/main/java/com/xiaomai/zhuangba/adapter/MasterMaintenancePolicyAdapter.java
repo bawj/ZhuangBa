@@ -59,7 +59,7 @@ public class MasterMaintenancePolicyAdapter extends BaseQuickAdapter<Maintenance
         if (!TextUtils.isEmpty(endTime)){
             DateTime dateTime = DateUtil.strToDate(endTime, "yyyy-MM-dd");
             //往后推两天 为入账时间
-            dateTime = dateTime.plusDays(2);
+            //dateTime = dateTime.plusDays(2);
             int dayOfYear = dateTime.getDayOfMonth();
             tvAccountingTime.setText(mContext.getString(R.string.accounting_time , String.valueOf(dayOfYear)));
         }

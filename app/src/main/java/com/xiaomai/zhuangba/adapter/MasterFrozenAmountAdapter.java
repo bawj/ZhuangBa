@@ -1,5 +1,6 @@
 package com.xiaomai.zhuangba.adapter;
 
+import android.text.TextUtils;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -27,10 +28,11 @@ public class MasterFrozenAmountAdapter extends BaseQuickAdapter<FrozenAmountBean
         tvOrderNumber.setText(mContext.getString(R.string.order_number_symbol , item.getOrderCode()));
         //入账时间
         TextView tvAccountingTime = helper.getView(R.id.tvAccountingTime);
-        DateTime dateTime = DateUtil.strToDate(item.getEnterTime(), "yyyy-MM-dd");
-        if (dateTime != null){
+        String enterTime = item.getEnterTime();
+        if (!TextUtils.isEmpty(enterTime)){
             //往后推两天 为入账时间
-            dateTime = dateTime.plusDays(2);
+            //dateTime = dateTime.plusDays(2);
+            DateTime dateTime = DateUtil.strToDate(item.getEnterTime(), "yyyy-MM-dd");
             int dayOfYear = dateTime.getDayOfMonth();
             tvAccountingTime.setText(mContext.getString(R.string.accounting_time_symbol , String.valueOf(dayOfYear)));
         }
