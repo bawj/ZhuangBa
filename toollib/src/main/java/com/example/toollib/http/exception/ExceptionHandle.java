@@ -1,7 +1,6 @@
 package com.example.toollib.http.exception;
 
 import android.net.ParseException;
-import android.util.Log;
 
 import com.google.gson.JsonParseException;
 import com.google.gson.stream.MalformedJsonException;

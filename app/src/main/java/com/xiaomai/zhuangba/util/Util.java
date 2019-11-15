@@ -361,4 +361,13 @@ public class Util {
         return title;
     }
 
+    public static String getAddress(String address) {
+        if (!TextUtils.isEmpty(address) && address.contains("/")){
+            address = address.replaceAll("/","");
+            if (address.contains("&")){
+                address = address.replaceAll("&" , "");
+            }
+        }
+        return address;
+    }
 }

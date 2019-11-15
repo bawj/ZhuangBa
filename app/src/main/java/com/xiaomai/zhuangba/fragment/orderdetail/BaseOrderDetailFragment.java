@@ -200,7 +200,8 @@ public class BaseOrderDetailFragment<T extends IOrderDetailModule> extends BaseF
     }
 
     public void startMap() {
-        MapUtils.mapNavigation(getActivity(), latitude, longitude);
+        String address = Util.getAddress(tvBaseOrderDetailLocation.getText().toString());
+        MapUtils.mapNavigation(getActivity(), latitude, longitude , address);
     }
 
     @Override

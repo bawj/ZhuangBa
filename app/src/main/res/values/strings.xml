@@ -605,4 +605,5 @@
     <string name="reset">重置</string>
     <string name="search_complete">完成（%1$s条信息）</string>
     <string name="receive_tasks">接任务</string>
+    <string name="no_result">对不起，没有搜索到相关数据！</string>
 </resources>

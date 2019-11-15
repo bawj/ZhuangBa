@@ -1,5 +1,6 @@
 package com.xiaomai.zhuangba.util;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
@@ -8,6 +9,7 @@ import android.graphics.Point;
 import android.location.Location;
 import android.location.LocationManager;
 import android.net.Uri;
+import android.support.v4.app.FragmentActivity;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
@@ -29,12 +31,21 @@ import com.amap.api.maps.model.MarkerOptions;
 import com.amap.api.maps.model.MyLocationStyle;
 import com.amap.api.services.core.AMapException;
 import com.amap.api.services.core.LatLonPoint;
+import com.amap.api.services.geocoder.GeocodeAddress;
+import com.amap.api.services.geocoder.GeocodeQuery;
+import com.amap.api.services.geocoder.GeocodeResult;
+import com.amap.api.services.geocoder.GeocodeSearch;
+import com.amap.api.services.geocoder.RegeocodeResult;
 import com.amap.api.services.help.Tip;
+import com.example.toollib.http.util.DialogUtil;
 import com.example.toollib.util.AmountUtil;
+import com.example.toollib.util.Log;
 import com.example.toollib.util.ToastUtil;
 import com.qmuiteam.qmui.widget.dialog.QMUIBottomSheet;
+import com.xiaomai.zhuangba.MainActivity;
 import com.xiaomai.zhuangba.R;
 import com.xiaomai.zhuangba.data.bean.LocationSearch;
+import com.xiaomai.zhuangba.enums.StaticExplain;
 import com.xiaomai.zhuangba.enums.StringTypeExplain;
 import com.zaaach.citypicker.db.DBManager;
 import com.zaaach.citypicker.model.City;
@@ -400,21 +411,20 @@ public class MapUtils {
     /**
      * 地图导航
      */
-    public static void mapNavigation(final Context mContext, final float latitude, final float longitude) {
+    public static void mapNavigation(final Context mContext, final float latitude, final float longitude, final String address) {
         new QMUIBottomSheet.BottomListSheetBuilder(mContext)
                 .addItem(mContext.getString(R.string.using_bai_du_map_navigation))
                 .addItem(mContext.getString(R.string.navigation_using_golden_map))
                 .addItem(mContext.getString(R.string.close))
                 .setOnSheetItemClickListener(new QMUIBottomSheet.BottomListSheetBuilder.OnSheetItemClickListener() {
                     @Override
-                    public void onClick(QMUIBottomSheet dialog, View itemView, int position, String tag) {
+                    public void onClick(QMUIBottomSheet dialog, View itemView, final int position, String tag) {
                         switch (position) {
                             case 0:
-                                LatLng latLng = MapUtils.GCJ2BD(new LatLng(latitude, longitude));
-                                startBaiDuMap(mContext, latLng.latitude, latLng.longitude);
+                                getLatitudeLongitude(mContext, address, position);
                                 break;
                             case 1:
-                                startGolden(mContext, latitude, longitude);
+                                getLatitudeLongitude(mContext, address, position);
                                 break;
                             case 2:
                                 dialog.dismiss();
@@ -456,6 +466,53 @@ public class MapUtils {
         } else {
             ToastUtil.showShort(mContext.getString(R.string.not_install_bai_du_map));
         }
+    }
+
+
+    private static void getLatitudeLongitude(final Context mContext,String address,  final int position) {
+        DialogUtil.getTipLoading((mContext), "").show();
+        GeocodeSearch geocodeSearch = new GeocodeSearch(mContext);
+        geocodeSearch.setOnGeocodeSearchListener(new GeocodeSearch.OnGeocodeSearchListener() {
+            @Override
+            public void onRegeocodeSearched(RegeocodeResult regeocodeResult, int i) {
+            }
+
+            @Override
+            public void onGeocodeSearched(GeocodeResult geocodeResult, int i) {
+                if (i == 1000) {
+                    if (geocodeResult != null && geocodeResult.getGeocodeAddressList() != null &&
+                            geocodeResult.getGeocodeAddressList().size() > 0) {
+                        List<GeocodeAddress> geocodeAddressList = geocodeResult.getGeocodeAddressList();
+                        GeocodeAddress geocodeAddress = geocodeAddressList.get(0);
+                        if (geocodeAddress != null) {
+                            //纬度
+                            double latitude = geocodeAddress.getLatLonPoint().getLatitude();
+                            //经度
+                            double longitude = geocodeAddress.getLatLonPoint().getLongitude();
+                            switch (position) {
+                                case 0:
+                                    LatLng latLng = MapUtils.GCJ2BD(new LatLng(latitude, longitude));
+                                    startBaiDuMap(mContext, latLng.latitude, latLng.longitude);
+                                    break;
+                                case 1:
+                                    startGolden(mContext, latitude, longitude);
+                                    break;
+                                default:
+                            }
+                            DialogUtil.tipLoadingDismiss();
+                        }
+                    } else {
+                        ToastUtil.showShort(mContext.getString(R.string.no_result));
+                        DialogUtil.tipLoadingDismiss();
+                    }
+                } else {
+                    ToastUtil.showShort(mContext.getString(R.string.no_result));
+                    DialogUtil.tipLoadingDismiss();
+                }
+            }
+        });
+        GeocodeQuery geocodeQuery = new GeocodeQuery(address, "");
+        geocodeSearch.getFromLocationNameAsyn(geocodeQuery);
     }
 
 
