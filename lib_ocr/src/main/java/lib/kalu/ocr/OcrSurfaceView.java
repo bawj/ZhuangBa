@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.graphics.PixelFormat;
-import android.graphics.Point;
 import android.hardware.Camera;
 import android.os.Handler;
 import android.os.HandlerThread;
@@ -12,14 +11,16 @@ import android.os.Looper;
 import android.os.Message;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.Surface;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.WindowManager;
 import android.widget.Toast;
 
-import java.util.ArrayList;
+import com.example.toollib.util.Log;
+
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import exocr.exocrengine.EXOCREngine;
@@ -61,34 +62,82 @@ public class OcrSurfaceView extends SurfaceView implements SurfaceHolder.Callbac
         getHolder().setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
     }
 
-//    int width = 640;
+    //    int width = 640;
 //    int height = 480;
-    int mWidth = 1920;
-    int mHeight = 1080;
-    @Override
-    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        //手机分辨率
-        DisplayMetrics dm = mContext.getResources().getDisplayMetrics();
-        Point screenRelsolution = new Point(dm.widthPixels, dm.heightPixels);
-        mWidth = screenRelsolution.x;
-        mHeight = screenRelsolution.y;
-        final int height = MeasureSpec.getSize(heightMeasureSpec);
-        final int width = mWidth * height / mHeight;
-        setMeasuredDimension(width, height);
+//    int mWidth = 1920;
+//    int mHeight = 1080;
+//    @Override
+//    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+////        int imageHeight = getScreenHeight(mContext);
+////        int imageWidth = getScreenWidth(mContext);
+////        Log.i("onMeasure " + imageHeight + "x" + imageWidth);
+//        setMeasuredDimension(4160, 3120);
+//    }
+
+    /**
+     * 获取屏幕宽度（px）
+     *
+     * @param context
+     * @return
+     */
+    public static int getScreenWidth(Context context) {
+        return context.getResources().getDisplayMetrics().widthPixels;
+    }
 
 
-//        final int canvasHeight = MeasureSpec.getSize(heightMeasureSpec);
-//        final int canvasWidth = MeasureSpec.getSize(widthMeasureSpec);
-//
-//        if (canvasWidth < canvasHeight) {
-//            final int layerWidth = (int) (canvasWidth * 0.85f);
-//            final int layerHeight = (int) (layerWidth / 1.6f);
-//            setMeasuredDimension(layerWidth, layerHeight);
-//        } else {
-//            final int layerHeight = (int) (canvasHeight * 0.85f);
-//            final int layerWidth = (int) (layerHeight * 1.6f);
-//            setMeasuredDimension(layerWidth, layerHeight);
-//        }
+    /**
+     * 获取屏幕高度（px）
+     *
+     * @param context
+     * @return
+     */
+    public static int getScreenHeight(Context context) {
+        return context.getResources().getDisplayMetrics().heightPixels;
+    }
+
+    /**
+     * 获取最佳预览大小
+     *
+     * @param sizes 所有支持的预览大小
+     * @param w     SurfaceView宽
+     * @param h     SurfaceView高
+     * @return
+     */
+    private Camera.Size getOptimalPreviewSize(List<Camera.Size> sizes, int w, int h) {
+        final double ASPECT_TOLERANCE = 0.1;
+        double targetRatio = (double) w / h;
+        if (sizes == null){
+            return null;
+        }
+
+        Camera.Size optimalSize = null;
+        double minDiff = Double.MAX_VALUE;
+
+        int targetHeight = h;
+
+        // Try to find an size match aspect ratio and size
+        for (Camera.Size size : sizes) {
+            double ratio = (double) size.width / size.height;
+            if (Math.abs(ratio - targetRatio) > ASPECT_TOLERANCE){
+                continue;
+            }
+            if (Math.abs(size.height - targetHeight) < minDiff) {
+                optimalSize = size;
+                minDiff = Math.abs(size.height - targetHeight);
+            }
+        }
+
+        // Cannot find the one match the aspect ratio, ignore the requirement
+        if (optimalSize == null) {
+            minDiff = Double.MAX_VALUE;
+            for (Camera.Size size : sizes) {
+                if (Math.abs(size.height - targetHeight) < minDiff) {
+                    optimalSize = size;
+                    minDiff = Math.abs(size.height - targetHeight);
+                }
+            }
+        }
+        return optimalSize;
     }
 
     /**********************************************************************************************/
@@ -99,7 +148,7 @@ public class OcrSurfaceView extends SurfaceView implements SurfaceHolder.Callbac
         final PackageManager pm = getContext().getPackageManager();
         final boolean hasACamera = pm.hasSystemFeature(PackageManager.FEATURE_CAMERA);
         if (!hasACamera) {
-            Log.e("kalu", "没有发现相机");
+            Log.e("没有发现相机");
             return;
         }
 
@@ -111,10 +160,32 @@ public class OcrSurfaceView extends SurfaceView implements SurfaceHolder.Callbac
             //设置照片的质量
             parameters.setJpegQuality(100);
 
+
+
+//            List<Camera.Size> previewSizes = parameters.getSupportedPreviewSizes();
+//            bestVideoSize(supportedVideoSizes, previewSizes.get(0).width);
+//            Camera.Size size = supportedVideoSizes.get(0);
+
+            List<Camera.Size> sizeList = parameters.getSupportedPreviewSizes();//获取所有支持的预览大小
+            Camera.Size bestSize = getOptimalPreviewSize(sizeList, getScreenWidth(mContext), getScreenHeight(mContext));
+
             //设置预览尺寸
-            parameters.setPreviewSize(mWidth, mHeight);
+            parameters.setPreviewSize(bestSize.width, bestSize.height);
             //设置照片尺寸
-            parameters.setPictureSize(mWidth, mHeight);
+            parameters.setPictureSize(bestSize.width, bestSize.height);
+            Log.i("设置的预览尺寸" + bestSize.width + "x" + bestSize.height);
+
+
+            List<Camera.Size> supportedVideoSizes = parameters.getSupportedPictureSizes();
+            StringBuilder s = new StringBuilder();
+            for (Camera.Size sizes : supportedVideoSizes) {
+                if (s.length() != 0) {
+                    s.append(",\n");
+                }
+                s.append(sizes.width).append('x').append(sizes.height);
+            }
+            Log.i("摄像头分辨率全部: " + "\n" + s);
+
             // 连续对焦模式
             parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE);
             mCamera.cancelAutoFocus();
@@ -156,7 +227,7 @@ public class OcrSurfaceView extends SurfaceView implements SurfaceHolder.Callbac
                 mCamera.setDisplayOrientation(result);
             }
             //通过SurfaceView显示取景画面
-            mCamera.setPreviewDisplay(getHolder());
+            mCamera.setPreviewDisplay(holder);
             mCamera.startPreview();//开始预览
 
             mCamera.setPreviewCallback(new Camera.PreviewCallback() {
@@ -173,16 +244,15 @@ public class OcrSurfaceView extends SurfaceView implements SurfaceHolder.Callbac
                     final Message obtain = Message.obtain();
                     obtain.obj = data;
                     //obtain.arg1 = 640;
-                    //obtain.arg2 = 480;
-                    obtain.arg1 = mWidth;
-                    obtain.arg2 = mHeight;
+                    //obtain.arg2 = 480;,
+                    obtain.arg1 = bestSize.width;
+                    obtain.arg2 = bestSize.height;
                     mHandler.removeCallbacksAndMessages(null);
                     mHandler.sendMessage(obtain);
                 }
             });
 
         } catch (Exception e) {
-            Log.e("kalu", e.getMessage(), e);
             if (mCamera != null) {
                 mCamera.setPreviewCallback(null);
                 mCamera.stopPreview();
@@ -242,7 +312,7 @@ public class OcrSurfaceView extends SurfaceView implements SurfaceHolder.Callbac
             final int height = msg.arg2;
 
             final EXOCRModel decode = EXOCREngine.decodeByte(data, width, height);
-            if (null == decode){
+            if (null == decode) {
                 return;
             }
 
