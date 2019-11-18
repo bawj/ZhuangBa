@@ -2,6 +2,7 @@ package com.xiaomai.zhuangba.fragment.service;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -330,6 +331,18 @@ public class LocationFragment extends BaseFragment implements TextWatcher, AMap.
     @Override
     protected String getActivityTitle() {
         return getString(R.string.location_title);
+    }
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        mapView.onSaveInstanceState(outState);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        mapView.onPause();
     }
 
     @Override

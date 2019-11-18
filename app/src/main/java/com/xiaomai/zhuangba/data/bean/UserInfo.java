@@ -64,6 +64,8 @@ public class UserInfo {
     private String emergencyContact;
     /** 紧急联系人地址 */
     private String contactAddress;
+    /** 雇主企业名称 */
+    private String companyName;
 
     private int startFlag;
     /** 是否缴了保证金 */
@@ -86,13 +88,14 @@ public class UserInfo {
     @Transient
     private List<SkillList> skills;
 
-    @Generated(hash = 826413739)
+    @Generated(hash = 1008065082)
     public UserInfo(Long id, String phoneNumber, String userText, String password, int lockFlag, String invitationCode,
             String token, String role, String registrationTime, String identityCard, String validityDataStart,
             String validityDataEnd, String idCardFrontPhoto, String idCardBackPhoto, String validityData,
             String bareHeadedPhotoUrl, int authenticationStatue, String authenticationTime, String address,
             double longitude, double latitude, String businessLicense, String emergencyContact, String contactAddress,
-            int startFlag, int payFlag, String masterRankId, String masterRankName, int roleId, String team, String push) {
+            String companyName, int startFlag, int payFlag, String masterRankId, String masterRankName, int roleId,
+            String team, String push) {
         this.id = id;
         this.phoneNumber = phoneNumber;
         this.userText = userText;
@@ -117,6 +120,7 @@ public class UserInfo {
         this.businessLicense = businessLicense;
         this.emergencyContact = emergencyContact;
         this.contactAddress = contactAddress;
+        this.companyName = companyName;
         this.startFlag = startFlag;
         this.payFlag = payFlag;
         this.masterRankId = masterRankId;
@@ -352,6 +356,14 @@ public class UserInfo {
 
     public void setEmergencyContact(String emergencyContact) {
         this.emergencyContact = emergencyContact;
+    }
+
+    public String getCompanyName() {
+        return companyName == null ? "" : companyName;
+    }
+
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
     }
 
     public String getContactAddress() {

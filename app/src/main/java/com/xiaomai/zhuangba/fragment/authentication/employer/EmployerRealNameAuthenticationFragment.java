@@ -39,6 +39,7 @@ public class EmployerRealNameAuthenticationFragment extends EmployerInformationF
     public void upload() {
         AuthenticationDialog.getInstance()
                 .initView(getActivity())
+                .setIvAuthenticationLog(R.drawable.ic_shape_log)
                 .setTvAuthenticationTitle(getString(R.string.selection_of_employer_account_number))
                 .setTvAuthenticationContent(getString(R.string.do_you_want_to_continue))
                 .setICallBase(new AuthenticationDialog.BaseCallback() {
@@ -54,19 +55,22 @@ public class EmployerRealNameAuthenticationFragment extends EmployerInformationF
         String employerName = editEmployerName.getText().toString();
         String phone = editPhone.getText().toString();
         String address = editAddress.getText().toString();
+        String enterpriseName = editEnterpriseName.getText().toString();
         if (TextUtils.isEmpty(employerName)){
             ToastUtil.showShort(getString(R.string.please_enter_the_employer_name));
         }else if (TextUtils.isEmpty(phone)){
             ToastUtil.showShort(getString(R.string.please_enter_your_contact_information));
         }else if (TextUtils.isEmpty(address)){
             ToastUtil.showShort(getString(R.string.please_check_service_address));
-        }else {
+        }else if (TextUtils.isEmpty(enterpriseName)){
+            ToastUtil.showShort(getString(R.string.please_input_enterprise_name));
+        } else {
             UserInfo userInfo = new UserInfo();
             userInfo.setUserText(employerName);
             userInfo.setEmergencyContact(phone);
             userInfo.setRole(String.valueOf(StaticExplain.EMPLOYER.getCode()));
             userInfo.setAddress(address);
-            userInfo.setContactAddress(editAddressDetail.getText().toString());
+            userInfo.setContactAddress(enterpriseName);
             RequestBody requestBody = RequestBody.create(MediaType.parse("application/json;charset=utf-8"), new Gson().toJson(userInfo));
             Observable<HttpResult<UserInfo>> observable = ServiceUrl.getUserApi().updateRegistrationInformation(requestBody);
             RxUtils.getObservable(observable)

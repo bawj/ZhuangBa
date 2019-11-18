@@ -57,10 +57,12 @@
 
     <uses-sdk tools:overrideLibrary="fm.jiecao.jcvideoplayer_lib" />
 
+    <!--android:hardwareAccelerated="true"  硬件加速  关闭会导致 高德地图 不显示-->
+
     <application
         android:name=".application.PretendApplication"
         android:allowBackup="true"
-        android:hardwareAccelerated="false"
+        android:hardwareAccelerated="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
@@ -68,7 +70,7 @@
         <!-- 高德地图 -->
         <meta-data
             android:name="com.amap.api.v2.apikey"
-            android:value="a13065143c4c79539bac08dd5f11d054" />
+            android:value="db879d99b3cbefed93bb15841ea441f0" />
 
         <!-- 定位需要的服务 -->
         <service android:name="com.amap.api.location.APSService" />

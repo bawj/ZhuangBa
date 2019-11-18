@@ -14,6 +14,7 @@ import com.example.toollib.data.base.BaseCallback;
 import com.example.toollib.http.HttpResult;
 import com.example.toollib.http.observer.BaseHttpRxObserver;
 import com.example.toollib.http.util.RxUtils;
+import com.example.toollib.util.ToastUtil;
 import com.example.toollib.util.spf.SPUtils;
 import com.example.toollib.util.spf.SpfConst;
 import com.google.gson.Gson;
@@ -47,6 +48,8 @@ public class EmployerInformationFragment extends BaseFragment {
     public TextView editAddress;
     @BindView(R.id.editAddressDetail)
     public EditText editAddressDetail;
+    @BindView(R.id.editEnterpriseName)
+    public EditText editEnterpriseName;
 
     public static final String BUSINESS_LICENSE_URL = "business_license_url";
 
@@ -81,29 +84,44 @@ public class EmployerInformationFragment extends BaseFragment {
     }
 
     public void upload() {
-        UserInfo userInfo = new UserInfo();
-        userInfo.setUserText(editEmployerName.getText().toString());
-        userInfo.setEmergencyContact(editPhone.getText().toString());
-        userInfo.setRole(String.valueOf(StaticExplain.EMPLOYER.getCode()));
-        userInfo.setBusinessLicense(getBusinessLicenseUrl());
-        userInfo.setAddress(editAddress.getText().toString());
-        userInfo.setContactAddress(editAddressDetail.getText().toString());
-        RequestBody requestBody = RequestBody.create(MediaType.parse("application/json;charset=utf-8"), new Gson().toJson(userInfo));
-        Observable<HttpResult<UserInfo>> observable = ServiceUrl.getUserApi().certification(requestBody);
-        RxUtils.getObservable(observable)
-                .compose(this.<HttpResult<UserInfo>>bindToLifecycle())
-                .subscribe(new BaseHttpRxObserver<UserInfo>(getActivity()) {
-                    @Override
-                    protected void onSuccess(UserInfo userInfo) {
-                        String token = userInfo.getToken();
-                        if (!TextUtils.isEmpty(token)) {
-                            SPUtils.getInstance().put(SpfConst.TOKEN, token);
+        String employerName = editEmployerName.getText().toString();
+        String phone = editPhone.getText().toString();
+        String address = editAddress.getText().toString();
+        String enterpriseName = editEnterpriseName.getText().toString();
+        if (TextUtils.isEmpty(employerName)) {
+            ToastUtil.showShort(getString(R.string.please_enter_the_employer_name));
+        } else if (TextUtils.isEmpty(phone)) {
+            ToastUtil.showShort(getString(R.string.please_enter_your_contact_information));
+        } else if (TextUtils.isEmpty(address)) {
+            ToastUtil.showShort(getString(R.string.please_check_service_address));
+        } else if (TextUtils.isEmpty(enterpriseName)) {
+            ToastUtil.showShort(getString(R.string.please_input_enterprise_name));
+        } else {
+            UserInfo userInfo = new UserInfo();
+            userInfo.setUserText(editEmployerName.getText().toString());
+            userInfo.setEmergencyContact(editPhone.getText().toString());
+            userInfo.setRole(String.valueOf(StaticExplain.EMPLOYER.getCode()));
+            userInfo.setBusinessLicense(getBusinessLicenseUrl());
+            userInfo.setAddress(editAddress.getText().toString());
+            userInfo.setCompanyName(editEmployerName.getText().toString());
+            userInfo.setContactAddress(editAddressDetail.getText().toString());
+            RequestBody requestBody = RequestBody.create(MediaType.parse("application/json;charset=utf-8"), new Gson().toJson(userInfo));
+            Observable<HttpResult<UserInfo>> observable = ServiceUrl.getUserApi().certification(requestBody);
+            RxUtils.getObservable(observable)
+                    .compose(this.<HttpResult<UserInfo>>bindToLifecycle())
+                    .subscribe(new BaseHttpRxObserver<UserInfo>(getActivity()) {
+                        @Override
+                        protected void onSuccess(UserInfo userInfo) {
+                            String token = userInfo.getToken();
+                            if (!TextUtils.isEmpty(token)) {
+                                SPUtils.getInstance().put(SpfConst.TOKEN, token);
+                            }
+                            DBHelper.getInstance().getUserInfoDao().deleteAll();
+                            DBHelper.getInstance().getUserInfoDao().insert(userInfo);
+                            startFragment(CertificationSuccessfulFragment.newInstance());
                         }
-                        DBHelper.getInstance().getUserInfoDao().deleteAll();
-                        DBHelper.getInstance().getUserInfoDao().insert(userInfo);
-                        startFragment(CertificationSuccessfulFragment.newInstance());
-                    }
-                });
+                    });
+        }
     }
 
     private void applyPermission() {

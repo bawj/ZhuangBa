@@ -606,4 +606,6 @@
     <string name="search_complete">完成（%1$s条信息）</string>
     <string name="receive_tasks">接任务</string>
     <string name="no_result">对不起，没有搜索到相关数据！</string>
+    <string name="enterprise_name">企业名称</string>
+    <string name="please_input_enterprise_name">请输入企业名称</string>
 </resources>

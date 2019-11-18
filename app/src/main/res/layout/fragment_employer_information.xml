@@ -74,6 +74,37 @@
 
         <View style="@style/tool_lib_horizontal_line" />
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/tool_lib_56dp"
+            android:background="@android:color/white"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/enterprise_name"
+                android:textColor="@color/tool_lib_gray_888888"
+                android:textSize="@dimen/tool_lib_14sp" />
+
+            <EditText
+                android:id="@+id/editEnterpriseName"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="@dimen/tool_lib_34dp"
+                android:layout_marginLeft="@dimen/tool_lib_34dp"
+                android:background="@null"
+                android:hint="@string/please_input_enterprise_name"
+                android:inputType="phone"
+                android:maxLength="11"
+                android:textColor="@color/tool_lib_gray_222222"
+                android:textSize="@dimen/tool_lib_14sp"
+                tools:text="杭州沙僧网络有限公司" />
+
+        </LinearLayout>
+
+        <View style="@style/tool_lib_horizontal_line" />
+
         <RelativeLayout
             android:id="@+id/relAddress"
             android:layout_width="match_parent"

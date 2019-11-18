@@ -48,13 +48,14 @@ public class UserInfoDao extends AbstractDao<UserInfo, Long> {
         public final static Property BusinessLicense = new Property(21, String.class, "businessLicense", false, "BUSINESS_LICENSE");
         public final static Property EmergencyContact = new Property(22, String.class, "emergencyContact", false, "EMERGENCY_CONTACT");
         public final static Property ContactAddress = new Property(23, String.class, "contactAddress", false, "CONTACT_ADDRESS");
-        public final static Property StartFlag = new Property(24, int.class, "startFlag", false, "START_FLAG");
-        public final static Property PayFlag = new Property(25, int.class, "payFlag", false, "PAY_FLAG");
-        public final static Property MasterRankId = new Property(26, String.class, "masterRankId", false, "MASTER_RANK_ID");
-        public final static Property MasterRankName = new Property(27, String.class, "masterRankName", false, "MASTER_RANK_NAME");
-        public final static Property RoleId = new Property(28, int.class, "roleId", false, "ROLE_ID");
-        public final static Property Team = new Property(29, String.class, "team", false, "TEAM");
-        public final static Property Push = new Property(30, String.class, "push", false, "PUSH");
+        public final static Property CompanyName = new Property(24, String.class, "companyName", false, "COMPANY_NAME");
+        public final static Property StartFlag = new Property(25, int.class, "startFlag", false, "START_FLAG");
+        public final static Property PayFlag = new Property(26, int.class, "payFlag", false, "PAY_FLAG");
+        public final static Property MasterRankId = new Property(27, String.class, "masterRankId", false, "MASTER_RANK_ID");
+        public final static Property MasterRankName = new Property(28, String.class, "masterRankName", false, "MASTER_RANK_NAME");
+        public final static Property RoleId = new Property(29, int.class, "roleId", false, "ROLE_ID");
+        public final static Property Team = new Property(30, String.class, "team", false, "TEAM");
+        public final static Property Push = new Property(31, String.class, "push", false, "PUSH");
     }
 
 
@@ -94,13 +95,14 @@ public class UserInfoDao extends AbstractDao<UserInfo, Long> {
                 "\"BUSINESS_LICENSE\" TEXT," + // 21: businessLicense
                 "\"EMERGENCY_CONTACT\" TEXT," + // 22: emergencyContact
                 "\"CONTACT_ADDRESS\" TEXT," + // 23: contactAddress
-                "\"START_FLAG\" INTEGER NOT NULL ," + // 24: startFlag
-                "\"PAY_FLAG\" INTEGER NOT NULL ," + // 25: payFlag
-                "\"MASTER_RANK_ID\" TEXT," + // 26: masterRankId
-                "\"MASTER_RANK_NAME\" TEXT," + // 27: masterRankName
-                "\"ROLE_ID\" INTEGER NOT NULL ," + // 28: roleId
-                "\"TEAM\" TEXT," + // 29: team
-                "\"PUSH\" TEXT);"); // 30: push
+                "\"COMPANY_NAME\" TEXT," + // 24: companyName
+                "\"START_FLAG\" INTEGER NOT NULL ," + // 25: startFlag
+                "\"PAY_FLAG\" INTEGER NOT NULL ," + // 26: payFlag
+                "\"MASTER_RANK_ID\" TEXT," + // 27: masterRankId
+                "\"MASTER_RANK_NAME\" TEXT," + // 28: masterRankName
+                "\"ROLE_ID\" INTEGER NOT NULL ," + // 29: roleId
+                "\"TEAM\" TEXT," + // 30: team
+                "\"PUSH\" TEXT);"); // 31: push
     }
 
     /** Drops the underlying database table. */
@@ -216,28 +218,33 @@ public class UserInfoDao extends AbstractDao<UserInfo, Long> {
         if (contactAddress != null) {
             stmt.bindString(24, contactAddress);
         }
-        stmt.bindLong(25, entity.getStartFlag());
-        stmt.bindLong(26, entity.getPayFlag());
+ 
+        String companyName = entity.getCompanyName();
+        if (companyName != null) {
+            stmt.bindString(25, companyName);
+        }
+        stmt.bindLong(26, entity.getStartFlag());
+        stmt.bindLong(27, entity.getPayFlag());
  
         String masterRankId = entity.getMasterRankId();
         if (masterRankId != null) {
-            stmt.bindString(27, masterRankId);
+            stmt.bindString(28, masterRankId);
         }
  
         String masterRankName = entity.getMasterRankName();
         if (masterRankName != null) {
-            stmt.bindString(28, masterRankName);
+            stmt.bindString(29, masterRankName);
         }
-        stmt.bindLong(29, entity.getRoleId());
+        stmt.bindLong(30, entity.getRoleId());
  
         String team = entity.getTeam();
         if (team != null) {
-            stmt.bindString(30, team);
+            stmt.bindString(31, team);
         }
  
         String push = entity.getPush();
         if (push != null) {
-            stmt.bindString(31, push);
+            stmt.bindString(32, push);
         }
     }
 
@@ -348,28 +355,33 @@ public class UserInfoDao extends AbstractDao<UserInfo, Long> {
         if (contactAddress != null) {
             stmt.bindString(24, contactAddress);
         }
-        stmt.bindLong(25, entity.getStartFlag());
-        stmt.bindLong(26, entity.getPayFlag());
+ 
+        String companyName = entity.getCompanyName();
+        if (companyName != null) {
+            stmt.bindString(25, companyName);
+        }
+        stmt.bindLong(26, entity.getStartFlag());
+        stmt.bindLong(27, entity.getPayFlag());
  
         String masterRankId = entity.getMasterRankId();
         if (masterRankId != null) {
-            stmt.bindString(27, masterRankId);
+            stmt.bindString(28, masterRankId);
         }
  
         String masterRankName = entity.getMasterRankName();
         if (masterRankName != null) {
-            stmt.bindString(28, masterRankName);
+            stmt.bindString(29, masterRankName);
         }
-        stmt.bindLong(29, entity.getRoleId());
+        stmt.bindLong(30, entity.getRoleId());
  
         String team = entity.getTeam();
         if (team != null) {
-            stmt.bindString(30, team);
+            stmt.bindString(31, team);
         }
  
         String push = entity.getPush();
         if (push != null) {
-            stmt.bindString(31, push);
+            stmt.bindString(32, push);
         }
     }
 
@@ -405,13 +417,14 @@ public class UserInfoDao extends AbstractDao<UserInfo, Long> {
             cursor.isNull(offset + 21) ? null : cursor.getString(offset + 21), // businessLicense
             cursor.isNull(offset + 22) ? null : cursor.getString(offset + 22), // emergencyContact
             cursor.isNull(offset + 23) ? null : cursor.getString(offset + 23), // contactAddress
-            cursor.getInt(offset + 24), // startFlag
-            cursor.getInt(offset + 25), // payFlag
-            cursor.isNull(offset + 26) ? null : cursor.getString(offset + 26), // masterRankId
-            cursor.isNull(offset + 27) ? null : cursor.getString(offset + 27), // masterRankName
-            cursor.getInt(offset + 28), // roleId
-            cursor.isNull(offset + 29) ? null : cursor.getString(offset + 29), // team
-            cursor.isNull(offset + 30) ? null : cursor.getString(offset + 30) // push
+            cursor.isNull(offset + 24) ? null : cursor.getString(offset + 24), // companyName
+            cursor.getInt(offset + 25), // startFlag
+            cursor.getInt(offset + 26), // payFlag
+            cursor.isNull(offset + 27) ? null : cursor.getString(offset + 27), // masterRankId
+            cursor.isNull(offset + 28) ? null : cursor.getString(offset + 28), // masterRankName
+            cursor.getInt(offset + 29), // roleId
+            cursor.isNull(offset + 30) ? null : cursor.getString(offset + 30), // team
+            cursor.isNull(offset + 31) ? null : cursor.getString(offset + 31) // push
         );
         return entity;
     }
@@ -442,13 +455,14 @@ public class UserInfoDao extends AbstractDao<UserInfo, Long> {
         entity.setBusinessLicense(cursor.isNull(offset + 21) ? null : cursor.getString(offset + 21));
         entity.setEmergencyContact(cursor.isNull(offset + 22) ? null : cursor.getString(offset + 22));
         entity.setContactAddress(cursor.isNull(offset + 23) ? null : cursor.getString(offset + 23));
-        entity.setStartFlag(cursor.getInt(offset + 24));
-        entity.setPayFlag(cursor.getInt(offset + 25));
-        entity.setMasterRankId(cursor.isNull(offset + 26) ? null : cursor.getString(offset + 26));
-        entity.setMasterRankName(cursor.isNull(offset + 27) ? null : cursor.getString(offset + 27));
-        entity.setRoleId(cursor.getInt(offset + 28));
-        entity.setTeam(cursor.isNull(offset + 29) ? null : cursor.getString(offset + 29));
-        entity.setPush(cursor.isNull(offset + 30) ? null : cursor.getString(offset + 30));
+        entity.setCompanyName(cursor.isNull(offset + 24) ? null : cursor.getString(offset + 24));
+        entity.setStartFlag(cursor.getInt(offset + 25));
+        entity.setPayFlag(cursor.getInt(offset + 26));
+        entity.setMasterRankId(cursor.isNull(offset + 27) ? null : cursor.getString(offset + 27));
+        entity.setMasterRankName(cursor.isNull(offset + 28) ? null : cursor.getString(offset + 28));
+        entity.setRoleId(cursor.getInt(offset + 29));
+        entity.setTeam(cursor.isNull(offset + 30) ? null : cursor.getString(offset + 30));
+        entity.setPush(cursor.isNull(offset + 31) ? null : cursor.getString(offset + 31));
      }
     
     @Override
