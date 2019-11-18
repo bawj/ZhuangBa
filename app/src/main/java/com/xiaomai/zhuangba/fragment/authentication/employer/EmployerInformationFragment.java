@@ -103,7 +103,7 @@ public class EmployerInformationFragment extends BaseFragment {
             userInfo.setRole(String.valueOf(StaticExplain.EMPLOYER.getCode()));
             userInfo.setBusinessLicense(getBusinessLicenseUrl());
             userInfo.setAddress(editAddress.getText().toString());
-            userInfo.setCompanyName(editEmployerName.getText().toString());
+            userInfo.setCompanyName(editEnterpriseName.getText().toString());
             userInfo.setContactAddress(editAddressDetail.getText().toString());
             RequestBody requestBody = RequestBody.create(MediaType.parse("application/json;charset=utf-8"), new Gson().toJson(userInfo));
             Observable<HttpResult<UserInfo>> observable = ServiceUrl.getUserApi().certification(requestBody);

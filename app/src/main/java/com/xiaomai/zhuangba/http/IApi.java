@@ -955,7 +955,7 @@ public interface IApi {
      *
      * @return observable
      */
-    @GET("/userRole/verifyAccountNumber")
+    @GET("userRole/verifyAccountNumber")
     Observable<HttpResult<String>> verifyAccountNumber();
 
 
@@ -978,16 +978,6 @@ public interface IApi {
      */
     @POST("order/getMasterHandleInspectionOrderList")
     Observable<HttpResult<RefreshBaseList<InspectionSheetDetailBean>>> getMasterHandleInspectionOrderList(@Body RequestBody requestBody);
-
-
-    /**
-     * 查询团队
-     *
-     * @param requestBody body
-     * @return observable
-     */
-    @POST("teamwork/selectByTeam")
-    Observable<HttpResult<Object>> selectByTeam(@Body RequestBody requestBody);
 
 
     /**

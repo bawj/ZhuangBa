@@ -95,8 +95,7 @@
                 android:layout_marginLeft="@dimen/tool_lib_34dp"
                 android:background="@null"
                 android:hint="@string/please_input_enterprise_name"
-                android:inputType="phone"
-                android:maxLength="11"
+                android:maxLength="40"
                 android:textColor="@color/tool_lib_gray_222222"
                 android:textSize="@dimen/tool_lib_14sp"
                 tools:text="杭州沙僧网络有限公司" />

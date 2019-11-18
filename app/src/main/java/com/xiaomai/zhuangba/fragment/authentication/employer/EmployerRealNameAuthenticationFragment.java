@@ -70,7 +70,8 @@ public class EmployerRealNameAuthenticationFragment extends EmployerInformationF
             userInfo.setEmergencyContact(phone);
             userInfo.setRole(String.valueOf(StaticExplain.EMPLOYER.getCode()));
             userInfo.setAddress(address);
-            userInfo.setContactAddress(enterpriseName);
+            userInfo.setContactAddress(address);
+            userInfo.setCompanyName(enterpriseName);
             RequestBody requestBody = RequestBody.create(MediaType.parse("application/json;charset=utf-8"), new Gson().toJson(userInfo));
             Observable<HttpResult<UserInfo>> observable = ServiceUrl.getUserApi().updateRegistrationInformation(requestBody);
             RxUtils.getObservable(observable)

@@ -42,7 +42,7 @@ public class PretendApplication extends Application {
 
 //   public static final String BASE_URL = "http://192.168.0.110:7966/";
 //   public static final String BASE_URL = "http://192.168.0.131:7966/";
-//   public static final String BASE_URL = "http://192.168.0.186:7966/";
+//   public static final String BASE_URL = "http://192.168.0.169:7966/";
 //   public static final String BASE_URL = "https://zb.hangzhouzhuangba.com/zhuangBas/";
      public static final String BASE_URL = "https://zb.hangzhouzhuangba.com/testZhuangBas/";
 
