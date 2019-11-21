@@ -22,9 +22,13 @@ import com.example.toollib.util.Log;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.SortedSet;
 
 import exocr.exocrengine.EXOCREngine;
 import exocr.exocrengine.EXOCRModel;
+import util.AspectRatio;
+import util.Size;
+import util.SizeMap;
 
 /**
  * description: 后置摄像头, ocr
@@ -141,10 +145,62 @@ public class OcrSurfaceView extends SurfaceView implements SurfaceHolder.Callbac
     }
 
     /**********************************************************************************************/
+    private final SizeMap mPreviewSizes = new SizeMap();
+    private final SizeMap mPictureSizes = new SizeMap();
+    AspectRatio aspectRatio = AspectRatio.DEFAULT;
+    /**
+     * 获取默认比例
+     */
+    private AspectRatio chooseDefaultAspectRatio() {
+        AspectRatio result = null;
+        for (AspectRatio ratio : mPreviewSizes.ratios()) {
+            result = ratio;
+            if (AspectRatio.DEFAULT.equals(ratio)) {
+                break;
+            }
+        }
+        return result;
+    }
+    /**
+     * 选择最合适的预览尺寸
+     */
+
+    int screenOrientationDegrees = 180;
+    int previewWidth, previewHeight;
+    private Size chooseOptimalPreviewSize(SortedSet<Size> sizes) {
+        int desiredWidth;
+        int desiredHeight;
+        if (isLandscape(screenOrientationDegrees)) {
+            desiredWidth = previewWidth;
+            desiredHeight = previewHeight;
+        } else {
+            desiredWidth = previewHeight;
+            desiredHeight = previewWidth;
+        }
+        Size result = null;
+        for (Size size : sizes) {
+            result = size;
+            // Iterate from small to large
+            if (desiredWidth <= size.getWidth() && desiredHeight <= size.getHeight()) {
+                break;
+            }
+        }
+        return result;
+    }
+    /**
+     * Constants of orientation
+     */
+    int LANDSCAPE_90 = 90;
+    int LANDSCAPE_270 = 270;
+    private boolean isLandscape(int screenOrientationDegrees) {
+        return (screenOrientationDegrees == LANDSCAPE_90
+                || screenOrientationDegrees == LANDSCAPE_270);
+    }
 
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
-
+        previewWidth = getScreenWidth(mContext);
+        previewHeight = getScreenHeight(mContext);
         final PackageManager pm = getContext().getPackageManager();
         final boolean hasACamera = pm.hasSystemFeature(PackageManager.FEATURE_CAMERA);
         if (!hasACamera) {
@@ -160,20 +216,45 @@ public class OcrSurfaceView extends SurfaceView implements SurfaceHolder.Callbac
             //设置照片的质量
             parameters.setJpegQuality(100);
 
-
-
 //            List<Camera.Size> previewSizes = parameters.getSupportedPreviewSizes();
 //            bestVideoSize(supportedVideoSizes, previewSizes.get(0).width);
 //            Camera.Size size = supportedVideoSizes.get(0);
 
-            List<Camera.Size> sizeList = parameters.getSupportedPreviewSizes();//获取所有支持的预览大小
-            Camera.Size bestSize = getOptimalPreviewSize(sizeList, getScreenWidth(mContext), getScreenHeight(mContext));
+//            List<Camera.Size> sizeList = parameters.getSupportedPreviewSizes();//获取所有支持的预览大小
+//            Camera.Size bestSize = getOptimalPreviewSize(sizeList, getScreenWidth(mContext), getScreenHeight(mContext));
+//            Log.i("设置的预览尺寸" + bestSize.width + "x" + bestSize.height);
 
-            //设置预览尺寸
-            parameters.setPreviewSize(bestSize.width, bestSize.height);
-            //设置照片尺寸
-            parameters.setPictureSize(bestSize.width, bestSize.height);
-            Log.i("设置的预览尺寸" + bestSize.width + "x" + bestSize.height);
+
+            mPreviewSizes.clear();
+            for (Camera.Size size : parameters.getSupportedPreviewSizes()) {
+                mPreviewSizes.add(new Size(size.width, size.height));
+            }
+            // 获取用户期望的比例的集合
+            SortedSet<Size> previewSizes = mPreviewSizes.sizes(aspectRatio);
+            if (previewSizes == null) {
+                // 用户期望的比例不存在, 获取默认比例
+                previewSizes = mPreviewSizes.sizes(chooseDefaultAspectRatio());
+            }
+            final Size previewSize = chooseOptimalPreviewSize(previewSizes);
+            parameters.setPreviewSize(previewSize.getWidth(), previewSize.getHeight());
+
+            /*
+             4. 设置拍照尺寸
+             */
+            // 采集所有照片的尺寸
+            mPictureSizes.clear();
+            for (Camera.Size size : parameters.getSupportedPictureSizes()) {
+                mPictureSizes.add(new Size(size.width, size.height));
+            }
+            // 获取用户期望的比例集合
+            SortedSet<Size> pictureSizes = mPictureSizes.sizes(aspectRatio);
+            if (pictureSizes == null) {
+                // 用户期望的尺寸不存在, 获取默认比例
+                pictureSizes = mPreviewSizes.sizes(chooseDefaultAspectRatio());
+            }
+            // 选择期望集合中, 尺寸最大的一个, 保证拍照后输出图像的清晰度
+            Size pictureSize = pictureSizes.last();
+            parameters.setPictureSize(pictureSize.getWidth(), pictureSize.getHeight());
 
 
             List<Camera.Size> supportedVideoSizes = parameters.getSupportedPictureSizes();
@@ -243,10 +324,10 @@ public class OcrSurfaceView extends SurfaceView implements SurfaceHolder.Callbac
 
                     final Message obtain = Message.obtain();
                     obtain.obj = data;
-                    //obtain.arg1 = 640;
-                    //obtain.arg2 = 480;,
-                    obtain.arg1 = bestSize.width;
-                    obtain.arg2 = bestSize.height;
+                    obtain.arg1 = previewSize.getWidth();
+                    obtain.arg2 = previewSize.getHeight();
+//                    obtain.arg1 = bestSize.width;
+//                    obtain.arg2 = bestSize.height;
                     mHandler.removeCallbacksAndMessages(null);
                     mHandler.sendMessage(obtain);
                 }

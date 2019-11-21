@@ -13,6 +13,11 @@ import android.view.SurfaceView;
 import com.xiaomai.zhuangba.weight.camera.utils.ScreenUtils;
 
 import java.util.List;
+import java.util.SortedSet;
+
+import util.AspectRatio;
+import util.Size;
+import util.SizeMap;
 
 /**
  * Author       wildma
@@ -60,6 +65,9 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
         mSensorControler = SensorControler.getInstance(context.getApplicationContext());
     }
 
+    private final SizeMap mPreviewSizes = new SizeMap();
+    private final SizeMap mPictureSizes = new SizeMap();
+    AspectRatio aspectRatio = AspectRatio.DEFAULT;
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
         camera = CameraUtils.openCamera();
@@ -76,9 +84,28 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
                     camera.setDisplayOrientation(0);
                     parameters.setRotation(0);
                 }
-                List<Camera.Size> sizeList = parameters.getSupportedPreviewSizes();//获取所有支持的预览大小
-                Camera.Size bestSize = getOptimalPreviewSize(sizeList, ScreenUtils.getScreenWidth(mContext), ScreenUtils.getScreenHeight(mContext));
-                parameters.setPreviewSize(bestSize.width, bestSize.height);//设置预览大小
+
+
+//                List<Camera.Size> sizeList = parameters.getSupportedPreviewSizes();//获取所有支持的预览大小
+//                Camera.Size bestSize = getOptimalPreviewSize(sizeList, ScreenUtils.getScreenWidth(mContext), ScreenUtils.getScreenHeight(mContext));
+//                parameters.setPreviewSize(bestSize.width, bestSize.height);//设置预览大小
+
+                previewWidth = getScreenWidth(mContext);
+                previewHeight = getScreenHeight(mContext);
+                mPreviewSizes.clear();
+                for (Camera.Size size : parameters.getSupportedPreviewSizes()) {
+                    mPreviewSizes.add(new Size(size.width, size.height));
+                }
+                // 获取用户期望的比例的集合
+                SortedSet<Size> previewSizes = mPreviewSizes.sizes(aspectRatio);
+                if (previewSizes == null) {
+                    // 用户期望的比例不存在, 获取默认比例
+                    previewSizes = mPreviewSizes.sizes(chooseDefaultAspectRatio());
+                }
+                final Size previewSize = chooseOptimalPreviewSize(previewSizes);
+                parameters.setPreviewSize(previewSize.getWidth(), previewSize.getHeight());
+
+
                 camera.setParameters(parameters);
                 camera.startPreview();
                 focus();//首次对焦
@@ -106,6 +133,75 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
             }
         }
     }
+
+    /**
+     * 获取屏幕宽度（px）
+     *
+     * @param context
+     * @return
+     */
+    public static int getScreenWidth(Context context) {
+        return context.getResources().getDisplayMetrics().widthPixels;
+    }
+
+
+    /**
+     * 获取屏幕高度（px）
+     *
+     * @param context
+     * @return
+     */
+    public static int getScreenHeight(Context context) {
+        return context.getResources().getDisplayMetrics().heightPixels;
+    }
+    /**
+     * 获取默认比例
+     */
+    private AspectRatio chooseDefaultAspectRatio() {
+        AspectRatio result = null;
+        for (AspectRatio ratio : mPreviewSizes.ratios()) {
+            result = ratio;
+            if (AspectRatio.DEFAULT.equals(ratio)) {
+                break;
+            }
+        }
+        return result;
+    }
+
+    /**
+     * 选择最合适的预览尺寸
+     */
+
+    int screenOrientationDegrees = 90;
+    int previewWidth, previewHeight;
+    private Size chooseOptimalPreviewSize(SortedSet<Size> sizes) {
+        int desiredWidth;
+        int desiredHeight;
+        if (isLandscape(screenOrientationDegrees)) {
+            desiredWidth = previewWidth;
+            desiredHeight = previewHeight;
+        } else {
+            desiredWidth = previewHeight;
+            desiredHeight = previewWidth;
+        }
+        Size result = null;
+        for (Size size : sizes) {
+            result = size;
+            // Iterate from small to large
+            if (desiredWidth <= size.getWidth() && desiredHeight <= size.getHeight()) {
+                break;
+            }
+        }
+        return result;
+    }
+
+    int LANDSCAPE_90 = 90;
+    int LANDSCAPE_270 = 270;
+    private boolean isLandscape(int screenOrientationDegrees) {
+        return (screenOrientationDegrees == LANDSCAPE_90
+                || screenOrientationDegrees == LANDSCAPE_270);
+    }
+
 
     /**
      * 获取最佳预览大小

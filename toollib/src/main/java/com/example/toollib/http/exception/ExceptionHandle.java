@@ -4,13 +4,13 @@ import android.net.ParseException;
 
 import com.google.gson.JsonParseException;
 import com.google.gson.stream.MalformedJsonException;
+import com.jakewharton.retrofit2.adapter.rxjava2.HttpException;
 
 import org.apache.http.conn.ConnectTimeoutException;
 import org.json.JSONException;
 
 import java.net.ConnectException;
 
-import retrofit2.HttpException;
 
 /**
  * @author Administrator
@@ -25,6 +25,7 @@ public class ExceptionHandle {
             return ex;
         } else if (e instanceof HttpException) {
             ex = new ApiException(e, HttpError.HTTP_ERROR.getCode());
+            ex.setMsg("没有可用的网络，请稍后再试");
             return ex;
         } else if (e instanceof JsonParseException
                 || e instanceof JSONException

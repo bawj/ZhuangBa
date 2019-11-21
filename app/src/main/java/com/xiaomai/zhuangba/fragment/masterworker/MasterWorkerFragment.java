@@ -62,7 +62,6 @@ public class MasterWorkerFragment extends BaseFragment {
         ExamplePagerAdapter mExamplePagerAdapter = new ExamplePagerAdapter(getChildFragmentManager(), fragmentList, mDataTitleName);
         mViewPager.setAdapter(mExamplePagerAdapter);
         initMagicIndicator(mDataTitleName, mDataTitleImgUnChecked, mDataTitleImgSelection);
-
     }
 
     private void initMagicIndicator(List<String> mDataTitleName, List<Integer> mDataTitleImgUnChecked, List<Integer> mDataTitleImgSelection) {

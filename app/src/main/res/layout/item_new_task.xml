@@ -6,10 +6,10 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center_horizontal"
+    android:layout_marginBottom="@dimen/tool_lib_12dp"
     android:background="@color/qmui_config_color_white"
     android:gravity="center"
     android:orientation="vertical"
-    android:layout_marginBottom="@dimen/tool_lib_12dp"
     app:qmui_borderColor="?attr/qmui_config_color_separator"
     app:qmui_outerNormalColor="?attr/qmui_config_color_background"
     app:qmui_showBorderOnlyBeforeL="true">
@@ -79,8 +79,8 @@
                 android:id="@+id/tvItemOrdersNumber"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/tool_lib_6dp"
-                android:layout_marginRight="@dimen/tool_lib_6dp"
+                android:layout_marginEnd="@dimen/tool_lib_12dp"
+                android:layout_marginRight="@dimen/tool_lib_12dp"
                 android:textColor="@color/tool_lib_gray_777777"
                 android:textSize="@dimen/tool_lib_11sp"
                 tools:text="共6项" />
@@ -91,7 +91,8 @@
                 android:layout_height="wrap_content"
                 android:text="项目总计："
                 android:textColor="@color/tool_lib_gray_222222"
-                android:textSize="@dimen/tool_lib_12sp" />
+                android:textSize="@dimen/tool_lib_12sp"
+                android:visibility="gone" />
 
             <TextView
                 android:id="@+id/tvItemOrdersMoney"
@@ -101,6 +102,7 @@
                 android:layout_marginRight="@dimen/tool_lib_12dp"
                 android:textColor="@color/tool_lib_red_EF2B2B"
                 android:textSize="@dimen/tool_lib_14sp"
+                android:visibility="gone"
                 tools:text="¥300.00" />
         </LinearLayout>
 
