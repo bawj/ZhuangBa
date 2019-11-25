@@ -2,14 +2,14 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/tool_lib_gray_F5F8FA"
     android:orientation="vertical">
 
     <net.lucode.hackware.magicindicator.MagicIndicator
         android:id="@+id/magicIndicator"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/tool_lib_40dp"
-        android:paddingLeft="@dimen/tool_lib_8dp"
-        android:paddingRight="@dimen/tool_lib_8dp" />
+        android:background="@android:color/white"
+        android:layout_height="@dimen/tool_lib_40dp" />
 
     <android.support.v4.view.ViewPager
         android:id="@+id/viewPager"

@@ -493,7 +493,7 @@ public interface IApi {
     Observable<HttpResult<Object>> uploadFile(@Body RequestBody body);
 
     /**
-     * 单图上传
+     * 单图上传 带水印
      *
      * @param body body
      * @return Observable

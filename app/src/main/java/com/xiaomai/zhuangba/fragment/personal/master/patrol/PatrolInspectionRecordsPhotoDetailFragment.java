@@ -176,7 +176,9 @@ public class PatrolInspectionRecordsPhotoDetailFragment extends BaseFragment {
             File file = new File(new URI("file:///" + imgUrl));
             builder.addFormDataPart("file", file.getName(),
                     RequestBody.create(MediaType.parse("multipart/form-data"), file));
-            Observable<HttpResult<Object>> responseBodyObservable = ServiceUrl.getUserApi().uploadImg(builder.build());
+            // TODO: 2019/11/25 0025 换成没有水印的图片上传接口
+            //Observable<HttpResult<Object>> responseBodyObservable = ServiceUrl.getUserApi().uploadImg(builder.build());
+            Observable<HttpResult<Object>> responseBodyObservable = ServiceUrl.getUserApi().uploadFile(builder.build());
             RxUtils.getObservable(responseBodyObservable)
                     .compose(this.<HttpResult<Object>>bindToLifecycle())
                     .subscribe(new BaseHttpRxObserver<Object>(getActivity()) {
