@@ -1,39 +1,12 @@
 package com.xiaomai.zhuangba.fragment.advertisement.master.having;
 
-import android.net.Uri;
-import android.os.Bundle;
-
-import com.example.toollib.data.IBaseModule;
-import com.example.toollib.http.HttpResult;
-import com.example.toollib.http.function.BaseHttpConsumer;
-import com.example.toollib.http.observer.BaseHttpRxObserver;
-import com.example.toollib.http.util.RxUtils;
-import com.example.toollib.util.Log;
-import com.example.toollib.util.ToastUtil;
-import com.xiaomai.zhuangba.R;
-import com.xiaomai.zhuangba.fragment.masterworker.MasterWorkerFragment;
-import com.xiaomai.zhuangba.fragment.orderdetail.master.base.BaseAutographFragment;
-import com.xiaomai.zhuangba.http.ServiceUrl;
-import com.xiaomai.zhuangba.util.ConstantUtil;
-
-import java.io.File;
-import java.net.URI;
-import java.util.ArrayList;
-import java.util.List;
-
-import io.reactivex.ObservableSource;
-import io.reactivex.functions.Function;
-import okhttp3.MediaType;
-import okhttp3.MultipartBody;
-import okhttp3.RequestBody;
-
 /**
  * @author Administrator
  * @date 2019/8/28 0028
  * <p>
  * 师傅 广告单 开始施工
  */
-public class MasterAdvertisementStartConstructionFragment extends BaseAutographFragment {
+public class MasterAdvertisementStartConstructionFragment {/*extends BaseAutographFragment {
 
 
     public static MasterAdvertisementStartConstructionFragment newInstance(String orderCode, String orderType) {
@@ -116,5 +89,5 @@ public class MasterAdvertisementStartConstructionFragment extends BaseAutographF
     @Override
     protected IBaseModule initModule() {
         return null;
-    }
+    }*/
 }

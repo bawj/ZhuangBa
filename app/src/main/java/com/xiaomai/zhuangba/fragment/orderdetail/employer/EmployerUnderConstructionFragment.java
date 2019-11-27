@@ -151,7 +151,15 @@ public class EmployerUnderConstructionFragment extends BaseEmployerDetailFragmen
         DBHelper.getInstance().getOrderServiceItemDao().deleteAll();
         if (!orderServiceItems.isEmpty()) {
             DBHelper.getInstance().getOrderServiceItemDao().insertInTx(orderServiceItems);
-            startFragment(AddMaintenanceFragment.newInstance());
+            String address = ongoingOrdersList.getAddress();
+            String[] provinceCity = Util.getProvinceCity(address);
+            String province;
+            String city = "";
+            province = provinceCity[0];
+            if (provinceCity.length > 1) {
+                city = provinceCity[1];
+            }
+            startFragment(AddMaintenanceFragment.newInstance(province , city));
         }
     }
 }

@@ -1,44 +1,12 @@
 package com.xiaomai.zhuangba.fragment.advertisement.master.beunder;
 
-import android.net.Uri;
-import android.os.Bundle;
-
-import com.example.toollib.http.HttpResult;
-import com.example.toollib.http.function.BaseHttpConsumer;
-import com.example.toollib.http.observer.BaseHttpRxObserver;
-import com.example.toollib.http.util.RxUtils;
-import com.example.toollib.util.Log;
-import com.example.toollib.util.ToastUtil;
-import com.google.gson.Gson;
-import com.xiaomai.zhuangba.R;
-import com.xiaomai.zhuangba.enums.AdvertisingEnum;
-import com.xiaomai.zhuangba.enums.OrdersEnum;
-import com.xiaomai.zhuangba.enums.StaticExplain;
-import com.xiaomai.zhuangba.fragment.advertisement.AdvertisementSubmitCompleteFragment;
-import com.xiaomai.zhuangba.fragment.masterworker.MasterWorkerFragment;
-import com.xiaomai.zhuangba.fragment.orderdetail.master.base.BaseAutographFragment;
-import com.xiaomai.zhuangba.http.ServiceUrl;
-import com.xiaomai.zhuangba.util.ConstantUtil;
-
-import java.io.File;
-import java.net.URI;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
-import io.reactivex.ObservableSource;
-import io.reactivex.functions.Function;
-import okhttp3.MediaType;
-import okhttp3.MultipartBody;
-import okhttp3.RequestBody;
-
 /**
  * @author Administrator
  * @date 2019/8/28 0028
  *
  * 师傅广告单 提交验收
  */
-public class MasterAdvertisementNewSubmitAcceptanceFragment extends BaseAutographFragment {
+public class MasterAdvertisementNewSubmitAcceptanceFragment {/*extends BaseAutographFragment {
 
     public static MasterAdvertisementNewSubmitAcceptanceFragment newInstance(String orderCode) {
         Bundle args = new Bundle();
@@ -117,5 +85,5 @@ public class MasterAdvertisementNewSubmitAcceptanceFragment extends BaseAutograp
     public int getContentView() {
         return R.layout.fragment_master_advertisement_new_submit_acceptance;
     }
-
+*/
 }

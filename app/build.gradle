@@ -86,6 +86,9 @@ dependencies {
     implementation libs["wechatPlay"]
     implementation libs["subsampling"]
     implementation libs["bugly"]
+    implementation libs["qiniu-android"]
+    implementation libs["qiniu-java"]
+    implementation libs["Luban"]
     annotationProcessor libs["butterknife-compiler"]
     implementation project(':toollib')
     implementation project(':citypicker')

@@ -42,8 +42,13 @@ import okhttp3.RequestBody;
  */
 public class AddMaintenanceFragment extends BaseContinuedMaintenanceFragment implements PayDialog.IHeadPortraitPopupCallBack{
 
-    public static AddMaintenanceFragment newInstance() {
+    public static final String PROVINCE = "province";
+    public static final String CITY = "city";
+
+    public static AddMaintenanceFragment newInstance(String province , String city) {
         Bundle args = new Bundle();
+        args.putString(PROVINCE , province);
+        args.putString(CITY , city);
         AddMaintenanceFragment fragment = new AddMaintenanceFragment();
         fragment.setArguments(args);
         return fragment;
@@ -203,6 +208,21 @@ public class AddMaintenanceFragment extends BaseContinuedMaintenanceFragment imp
         startFragment(EmployerFragment.newInstance());
     }
 
+    @Override
+    public String getProvince() {
+        if (getArguments() != null){
+            return getArguments().getString(PROVINCE);
+        }
+        return "";
+    }
+
+    @Override
+    public String getCity() {
+        if (getArguments() != null){
+            return getArguments().getString(CITY);
+        }
+        return "";
+    }
 
     @Override
     protected String getActivityTitle() {

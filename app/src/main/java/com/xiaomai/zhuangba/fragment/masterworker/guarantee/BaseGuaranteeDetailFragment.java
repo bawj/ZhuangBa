@@ -119,6 +119,7 @@ public class BaseGuaranteeDetailFragment extends BaseFragment implements OnRefre
                         return guaranteeAndOrderDate;
                     }
                 }).compose(this.bindToLifecycle());
+
         BaseHttpZipRxObserver.getInstance().httpZipObserver(compose, new BaseCallback() {
             @Override
             public void onSuccess(Object object) {

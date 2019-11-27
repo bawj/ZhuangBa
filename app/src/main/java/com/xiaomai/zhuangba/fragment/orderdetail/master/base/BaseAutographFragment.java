@@ -124,6 +124,36 @@ public class BaseAutographFragment extends BaseFragment implements MultiGraphSel
                 //拍照之后的处理
                 if (resultCode == RESULT_OK && getActivity() != null) {
                     resultUri = Uri.parse("file:///" + PhotoTool.getImageAbsolutePath(getActivity(), imageUriFromCamera));
+
+//                    Uri imagePathUri = PhotoTool.createImagePathUri(getActivity());
+//                    Luban.with(getActivity())
+//                            .load(resultUri)
+//                            .ignoreBy(100)
+//                            .setTargetDir(imagePathUri.getPath())
+//                            .filter(new CompressionPredicate() {
+//                                @Override
+//                                public boolean apply(String path) {
+//                                    return !(TextUtils.isEmpty(path) || path.toLowerCase().endsWith(".gif"));
+//                                }
+//                            })
+//                            .setCompressListener(new OnCompressListener() {
+//                                @Override
+//                                public void onStart() {
+//                                    // TODO 压缩开始前调用，可以在方法内启动 loading UI
+//                                }
+//
+//                                @Override
+//                                public void onSuccess(File file) {
+//                                    // TODO 压缩成功后调用，返回压缩后的图片文件
+//                                }
+//
+//                                @Override
+//                                public void onError(Throwable e) {
+//                                    // TODO 当压缩过程出现问题时调用
+//                                }
+//                            }).launch();
+
+
                     mediaSelectorFiles.add(0, resultUri.toString());
                     multiGraphSelectionAdapter.notifyDataSetChanged();
                 }

@@ -7,8 +7,6 @@ import com.example.toollib.util.Utils;
 import com.liulishuo.filedownloader.FileDownloader;
 import com.liulishuo.filedownloader.connection.FileDownloadUrlConnection;
 
-import okhttp3.Interceptor;
-
 /**
  * @author Administrator
  * @date 2019/6/24 0024
@@ -18,11 +16,11 @@ public class ToolLib {
     /** 全局上下文 */
     private Application mContext;
     /** 连接超时时长x秒 */
-    private int connectTimeOut = 30;
+    private int connectTimeOut = 60;
     /** 读数据超时时长x秒 */
-    private int readTimeOut = 30;
+    private int readTimeOut = 60;
     /** 写数据接超时时长x秒 */
-    private int writeTimeOut = 30;
+    private int writeTimeOut = 60;
 
     private String baseUrl ="";
 
@@ -55,8 +53,8 @@ public class ToolLib {
         FileDownloader.setupOnApplicationOnCreate(mApplication)
                 .connectionCreator(new FileDownloadUrlConnection
                         .Creator(new FileDownloadUrlConnection.Configuration()
-                        .connectTimeout(15_000)
-                        .readTimeout(15_000)))
+                        .connectTimeout(getConnectTimeOut())
+                        .readTimeout(getReadTimeOut())))
                 .commit();
         return this;
     }

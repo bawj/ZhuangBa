@@ -370,4 +370,19 @@ public class Util {
         }
         return address;
     }
+
+    /**
+     * @param address 省市数组
+     * @return string[]
+     */
+    public static String[] getProvinceCity(String address) {
+        if (!TextUtils.isEmpty(address) && address.contains("/")){
+            return address.split("/");
+        }
+        return new String[]{address};
+    }
+
+    public static String getProvinceCityArea(String province , String city , String area , String addressDeatil){
+        return province + "/" + city + "/" + area + "&" + addressDeatil;
+    }
 }

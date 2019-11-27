@@ -51,4 +51,10 @@ public interface ISelectServiceView extends IBaseListView {
      * @return string
      */
     String getCity();
+
+
+    /**
+     * @return 填写的信息
+     */
+    String getOrderAddressGson();
 }

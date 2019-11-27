@@ -12,9 +12,11 @@ import com.example.toollib.http.HttpResult;
 import com.example.toollib.http.observer.BaseHttpRxObserver;
 import com.example.toollib.http.util.RxUtils;
 import com.example.toollib.util.ToastUtil;
+import com.google.gson.Gson;
 import com.xiaomai.zhuangba.R;
 import com.xiaomai.zhuangba.adapter.ShopCarAdapter;
 import com.xiaomai.zhuangba.data.bean.Maintenance;
+import com.xiaomai.zhuangba.data.bean.OrderAddress;
 import com.xiaomai.zhuangba.data.bean.ShopCarData;
 import com.xiaomai.zhuangba.data.bean.Slotting;
 import com.xiaomai.zhuangba.data.bean.db.ShopAuxiliaryMaterialsDB;
@@ -43,7 +45,7 @@ import static com.xiaomai.zhuangba.fragment.SelectServiceFragment.SERVICE_TEXT;
  * <p>
  * 购物车
  */
-public class ShopCarFragment extends BaseFragment<IShopCarModule> implements ShopCarAdapter.IShopCarAdapterCallBack, View.OnClickListener , IShopCarView {
+public class ShopCarFragment extends BaseFragment<IShopCarModule> implements ShopCarAdapter.IShopCarAdapterCallBack, View.OnClickListener, IShopCarView {
 
     @BindView(R.id.rvShopCar)
     RecyclerView rvShopCar;
@@ -57,7 +59,7 @@ public class ShopCarFragment extends BaseFragment<IShopCarModule> implements Sho
         Bundle args = new Bundle();
         args.putString(SERVICE_ID, largeClassServiceId);
         args.putString(SERVICE_TEXT, serviceText);
-        args.putString(ORDER_ADDRESS_GSON , orderAddressGson);
+        args.putString(ORDER_ADDRESS_GSON, orderAddressGson);
         ShopCarFragment fragment = new ShopCarFragment();
         fragment.setArguments(args);
         return fragment;
@@ -146,6 +148,7 @@ public class ShopCarFragment extends BaseFragment<IShopCarModule> implements Sho
                         rvShopCar.setAdapter(shopCarAdapter);
                         setSelectServiceMoney();
                     }
+
                     @Override
                     public void calculationPrice() {
                     }
@@ -180,14 +183,18 @@ public class ShopCarFragment extends BaseFragment<IShopCarModule> implements Sho
     public void showMaintenanceDialog(final ShopCarData shopCarData) {
         //显示dialog
         String serviceId = shopCarData.getServiceId();
-        RxUtils.getObservable(ServiceUrl.getUserApi().getMaintenance(serviceId))
-                .compose(this.<HttpResult<List<Maintenance>>>bindToLifecycle())
-                .subscribe(new BaseHttpRxObserver<List<Maintenance>>(getActivity()) {
-                    @Override
-                    protected void onSuccess(List<Maintenance> maintenanceList) {
-                        showShopCarDialog(shopCarData, maintenanceList);
-                    }
-                });
+        OrderAddress orderAddress = new Gson().fromJson(getOrderAddressGson(), OrderAddress.class);
+        if (orderAddress != null) {
+            RxUtils.getObservable(ServiceUrl.getUserApi().getMaintenance(serviceId, orderAddress.getProvince(), orderAddress.getCity()))
+                    .compose(this.<HttpResult<List<Maintenance>>>bindToLifecycle())
+                    .subscribe(new BaseHttpRxObserver<List<Maintenance>>(getActivity()) {
+                        @Override
+                        protected void onSuccess(List<Maintenance> maintenanceList) {
+                            showShopCarDialog(shopCarData, maintenanceList);
+                        }
+                    });
+        }
+
     }
 
     private void showShopCarDialog(final ShopCarData shopCarData, List<Maintenance> maintenanceList) {
@@ -227,8 +234,8 @@ public class ShopCarFragment extends BaseFragment<IShopCarModule> implements Sho
     }
 
     @Override
-    public String getOrderAddressGson(){
-        if (getArguments() != null){
+    public String getOrderAddressGson() {
+        if (getArguments() != null) {
             return getArguments().getString(ORDER_ADDRESS_GSON);
         }
         return null;

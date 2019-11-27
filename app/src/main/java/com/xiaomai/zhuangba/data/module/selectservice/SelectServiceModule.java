@@ -5,7 +5,9 @@ import com.example.toollib.http.HttpResult;
 import com.example.toollib.http.exception.ApiException;
 import com.example.toollib.http.observer.BaseHttpRxObserver;
 import com.example.toollib.http.util.RxUtils;
+import com.google.gson.Gson;
 import com.xiaomai.zhuangba.data.bean.Maintenance;
+import com.xiaomai.zhuangba.data.bean.OrderAddress;
 import com.xiaomai.zhuangba.data.bean.ServiceSubcategory;
 import com.xiaomai.zhuangba.data.bean.ServiceSubcategoryProject;
 import com.xiaomai.zhuangba.data.bean.Slotting;
@@ -44,14 +46,19 @@ public class SelectServiceModule extends BaseModule<ISelectServiceView> implemen
 
     @Override
     public void requestMaintenance(final ServiceSubcategoryProject serviceSubcategoryProject) {
-        RxUtils.getObservable(ServiceUrl.getUserApi().getMaintenance(String.valueOf(serviceSubcategoryProject.getServiceId())))
-                .compose(mViewRef.get().<HttpResult<List<Maintenance>>>bindLifecycle())
-                .subscribe(new BaseHttpRxObserver<List<Maintenance>>(mContext.get()) {
-                    @Override
-                    protected void onSuccess(List<Maintenance> maintenanceList) {
-                        mViewRef.get().requestMaintenance(serviceSubcategoryProject,maintenanceList);
-                    }
-                });
+        String addressGson = mViewRef.get().getOrderAddressGson();
+        OrderAddress orderAddress = new Gson().fromJson(addressGson , OrderAddress.class);
+        if (orderAddress != null){
+            RxUtils.getObservable(ServiceUrl.getUserApi().getMaintenance(String.valueOf(serviceSubcategoryProject.getServiceId())
+                    , orderAddress.getProvince() , orderAddress.getCity()))
+                    .compose(mViewRef.get().<HttpResult<List<Maintenance>>>bindLifecycle())
+                    .subscribe(new BaseHttpRxObserver<List<Maintenance>>(mContext.get()) {
+                        @Override
+                        protected void onSuccess(List<Maintenance> maintenanceList) {
+                            mViewRef.get().requestMaintenance(serviceSubcategoryProject,maintenanceList);
+                        }
+                    });
+        }
     }
 
     @Override

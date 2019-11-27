@@ -24,6 +24,7 @@ import com.xiaomai.zhuangba.http.ServiceUrl;
 import com.xiaomai.zhuangba.util.ConstantUtil;
 import com.xiaomai.zhuangba.util.DateUtil;
 import com.xiaomai.zhuangba.util.ShopCarUtil;
+import com.xiaomai.zhuangba.util.Util;
 
 import java.io.File;
 import java.net.URI;
@@ -165,9 +166,12 @@ public class ShopCarModule extends BaseModule<IShopCarView> implements IShopCarM
         }
         hashMap.put("telephone", phoneNumber);
         //地址
-        String address = orderAddress.getAddress();
+        String province = orderAddress.getProvince();
+        String city = orderAddress.getCity();
+        String area = orderAddress.getArea();
         //详细地址
         String addressDetail = orderAddress.getAddressDetail();
+        String address = Util.getProvinceCityArea(province , city , area , addressDetail);
         if (TextUtils.isEmpty(address)) {
             mViewRef.get().showToast(mContext.get().getString(R.string.please_input_address));
             return null;

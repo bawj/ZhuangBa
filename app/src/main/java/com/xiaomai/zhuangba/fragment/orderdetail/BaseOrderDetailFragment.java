@@ -151,7 +151,7 @@ public class BaseOrderDetailFragment<T extends IOrderDetailModule> extends BaseF
     /**
      * 详细信息
      */
-    private OngoingOrdersList ongoingOrdersList;
+    public OngoingOrdersList ongoingOrdersList;
 
     @Override
     protected T initModule() {
@@ -200,7 +200,7 @@ public class BaseOrderDetailFragment<T extends IOrderDetailModule> extends BaseF
     }
 
     public void startMap() {
-        String address = Util.getAddress(tvBaseOrderDetailLocation.getText().toString());
+        String address = Util.getAddress(ongoingOrdersList.getAddress());
         MapUtils.mapNavigation(getActivity(), latitude, longitude , address);
     }
 
@@ -342,7 +342,7 @@ public class BaseOrderDetailFragment<T extends IOrderDetailModule> extends BaseF
         //预约时间
         tvBaseOrderDetailAppointment.setText(ongoingOrdersList.getAppointmentTime());
         //联系地址
-        tvBaseOrderDetailLocation.setText(ongoingOrdersList.getAddress());
+        tvBaseOrderDetailLocation.setText(Util.getAddress(ongoingOrdersList.getAddress()));
         //确认时间
         String confirmationTime = ongoingOrdersList.getConfirmationTime();
         if (!TextUtils.isEmpty(confirmationTime)) {

@@ -81,7 +81,9 @@ public class BaseContinuedMaintenanceFragment extends BaseFragment implements Ba
     @Override
     public void layShopCarMaintenanceClick(OrderServiceItem item) {
         int serviceId = item.getServiceId();
-        RxUtils.getObservable(ServiceUrl.getUserApi().getMaintenance(String.valueOf(serviceId)))
+        String province = getProvince();
+        String city = getCity();
+        RxUtils.getObservable(ServiceUrl.getUserApi().getMaintenance(String.valueOf(serviceId) , province , city))
                 .compose(this.<HttpResult<List<Maintenance>>>bindToLifecycle())
                 .subscribe(new BaseHttpRxObserver<List<Maintenance>>(getActivity()) {
                     @Override
@@ -165,6 +167,14 @@ public class BaseContinuedMaintenanceFragment extends BaseFragment implements Ba
 
     public void confirmationOfPayment() {
 
+    }
+
+    public String getCity() {
+        return "";
+    }
+
+    public String getProvince() {
+        return "";
     }
 
     @Override

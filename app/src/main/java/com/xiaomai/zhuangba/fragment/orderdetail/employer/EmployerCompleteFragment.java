@@ -54,7 +54,7 @@ public class EmployerCompleteFragment extends EmployerUnderConstructionFragment 
      */
     private List<OrderServiceItem> orderServiceItemList;
 
-    public static EmployerCompleteFragment newInstance(String orderCode , String orderType) {
+    public static EmployerCompleteFragment newInstance(String orderCode, String orderType) {
         Bundle args = new Bundle();
         args.putString(ConstantUtil.ORDER_CODE, orderCode);
         args.putString(ConstantUtil.ORDER_TYPE, orderType);
@@ -95,7 +95,7 @@ public class EmployerCompleteFragment extends EmployerUnderConstructionFragment 
             tvEmployerSignature.setVisibility(View.VISIBLE);
             ivEmployerSignature.setVisibility(View.VISIBLE);
             GlideManager.loadImage(getActivity(), electronicSignature, ivEmployerSignature);
-        }else {
+        } else {
             tvEmployerSignature.setVisibility(View.GONE);
             ivEmployerSignature.setVisibility(View.GONE);
         }
@@ -120,7 +120,15 @@ public class EmployerCompleteFragment extends EmployerUnderConstructionFragment 
         }
         if (!orderServiceItems.isEmpty()) {
             DBHelper.getInstance().getOrderServiceItemDao().insertInTx(orderServiceItems);
-            startFragment(AddMaintenanceFragment.newInstance());
+            String address = ongoingOrdersList.getAddress();
+            String[] provinceCity = Util.getProvinceCity(address);
+            String province;
+            String city = "";
+            province = provinceCity[0];
+            if (provinceCity.length > 1) {
+                city = provinceCity[1];
+            }
+            startFragment(AddMaintenanceFragment.newInstance(province , city));
         }
     }
 

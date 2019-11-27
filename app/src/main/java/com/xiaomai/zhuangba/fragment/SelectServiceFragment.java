@@ -353,6 +353,7 @@ public class SelectServiceFragment extends BaseListFragment<ISelectServiceModule
         return "";
     }
 
+    @Override
     public String getOrderAddressGson(){
         if (getArguments() != null){
             return getArguments().getString(ORDER_ADDRESS_GSON);

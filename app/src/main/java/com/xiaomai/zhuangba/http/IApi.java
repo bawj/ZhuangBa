@@ -653,11 +653,13 @@ public interface IApi {
      * 根据服务项目查询维保信息
      *
      * @param serviceId 小类服务ID
+     * @param province  省
+     * @param city  市
      * @return observable
      */
     @FormUrlEncoded
     @POST("maintenance/getMaintenance")
-    Observable<HttpResult<List<Maintenance>>> getMaintenance(@Field("serviceId") String serviceId);
+    Observable<HttpResult<List<Maintenance>>> getMaintenance(@Field("serviceId") String serviceId,@Field("province") String province,@Field("city") String city);
 
 
     /**
