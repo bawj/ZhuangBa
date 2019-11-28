@@ -4,6 +4,7 @@ apply plugin: 'org.greenrobot.greendao'
 def libs = rootProject.ext.dependencies
 def config = rootProject.ext.android
 
+
 def KEY_ALIAS = "xmkj"
 def KEY_PASSWORD = "xmkj.android"
 def STORE_PASSWORD = "xmkj.android"

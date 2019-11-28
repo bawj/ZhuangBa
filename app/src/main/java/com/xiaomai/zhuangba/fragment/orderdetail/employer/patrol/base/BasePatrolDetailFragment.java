@@ -23,11 +23,13 @@ import com.xiaomai.zhuangba.data.db.DBHelper;
 import com.xiaomai.zhuangba.enums.StaticExplain;
 import com.xiaomai.zhuangba.util.ConstantUtil;
 import com.xiaomai.zhuangba.util.DateUtil;
+import com.xiaomai.zhuangba.util.MapUtils;
 import com.xiaomai.zhuangba.util.PatrolStatusUtil;
 
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 /**
  * @author Administrator
@@ -186,6 +188,18 @@ public class BasePatrolDetailFragment<T extends IBasePatrolModule> extends BaseF
         tvBasePatrolNotes.setText(ongoingOrdersList.getEmployerDescribe());
         //地址
         tvBaseOrderDetailLocation.setText(ongoingOrdersList.getAddress());
+    }
+
+    @OnClick({R.id.relBaseOrderDetailLocation})
+    public void onViewBaseClicked(View view) {
+        switch (view.getId()) {
+            case R.id.relBaseOrderDetailLocation:
+                //定位
+                String address = tvBaseOrderDetailLocation.getText().toString();
+                MapUtils.mapNavigation(getActivity(), address);
+                break;
+            default:
+        }
     }
 
     public void orderDateListsSuccess(List<OrderDateList> orderDateLists) {

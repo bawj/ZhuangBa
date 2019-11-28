@@ -29,10 +29,12 @@ import com.xiaomai.zhuangba.enums.StaticExplain;
 import com.xiaomai.zhuangba.http.ServiceUrl;
 import com.xiaomai.zhuangba.util.DateUtil;
 import com.xiaomai.zhuangba.util.GuaranteeUtil;
+import com.xiaomai.zhuangba.util.MapUtils;
 
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 import io.reactivex.Observable;
 import io.reactivex.functions.BiFunction;
 import io.reactivex.schedulers.Schedulers;
@@ -181,6 +183,18 @@ public class BaseGuaranteeDetailFragment extends BaseFragment implements OnRefre
         //订单时间信息
         orderDateListList.add(0, new OrderDateList(guaranteeDeatil.getCode(), "", getString(R.string.order_code)));
         orderDateListAdapter.setNewData(orderDateListList);
+    }
+
+    @OnClick({R.id.relBaseOrderDetailLocation})
+    public void onViewBaseClicked(View view) {
+        switch (view.getId()) {
+            case R.id.relBaseOrderDetailLocation:
+                //定位
+                String address = tvBaseOrderDetailLocation.getText().toString();
+                MapUtils.mapNavigation(getActivity(), address);
+                break;
+            default:
+        }
     }
 
     @Override

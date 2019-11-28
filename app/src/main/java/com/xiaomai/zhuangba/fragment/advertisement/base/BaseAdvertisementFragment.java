@@ -28,10 +28,13 @@ import com.xiaomai.zhuangba.data.module.advertisement.IBaseAdvertisementView;
 import com.xiaomai.zhuangba.enums.StaticExplain;
 import com.xiaomai.zhuangba.util.AdvertisingStatusUtil;
 import com.xiaomai.zhuangba.util.ConstantUtil;
+import com.xiaomai.zhuangba.util.MapUtils;
+import com.xiaomai.zhuangba.util.Util;
 
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 /**
  * @author Administrator
@@ -81,6 +84,18 @@ public class BaseAdvertisementFragment extends BaseFragment<IBaseAdvertisementMo
         refreshBaseList.setOnRefreshListener(this);
         //默认刷新
         refreshBaseList.autoRefresh();
+    }
+
+    @OnClick({R.id.relBaseOrderDetailLocation})
+    public void onViewBaseClicked(View view) {
+        switch (view.getId()) {
+            case R.id.relBaseOrderDetailLocation:
+                //定位
+                String address = tvBaseOrderDetailLocation.getText().toString();
+                MapUtils.mapNavigation(getActivity(), address);
+                break;
+            default:
+        }
     }
 
     @Override

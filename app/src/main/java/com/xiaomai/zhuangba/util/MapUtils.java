@@ -411,7 +411,7 @@ public class MapUtils {
     /**
      * 地图导航
      */
-    public static void mapNavigation(final Context mContext, final float latitude, final float longitude, final String address) {
+    public static void mapNavigation(final Context mContext, final String address) {
         new QMUIBottomSheet.BottomListSheetBuilder(mContext)
                 .addItem(mContext.getString(R.string.using_bai_du_map_navigation))
                 .addItem(mContext.getString(R.string.navigation_using_golden_map))

@@ -57,7 +57,7 @@ public class OrderPoolFragment extends BaseMasterEmployerContentFragment {
         this.address = address;
         Log.d("筛选 = " + address + "-- page = " + getPage());
         //下拉刷新
-        if (StringTypeExplain.REFRESH_NEW_TASK_FRAGMENT.getCode().equals(code)) {
+        if (StringTypeExplain.REFRESH_NEW_TASK_FRAGMENT.getCode().equals(code) && iModule != null) {
             iModule.requestMasterNewTaskOrderList();
         }
     }
@@ -65,8 +65,10 @@ public class OrderPoolFragment extends BaseMasterEmployerContentFragment {
     @Override
     public void onBaseLoadMoreRequested() {
         Log.d("OrderPoolFragment 上拉加载  page = " + getPage());
-        //上拉加载
-        iModule.requestMasterNewTaskOrderList();
+        if (iModule != null) {
+            //上拉加载
+            iModule.requestMasterNewTaskOrderList();
+        }
     }
 
     @Override

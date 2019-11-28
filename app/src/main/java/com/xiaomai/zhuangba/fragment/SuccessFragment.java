@@ -56,4 +56,5 @@ public class SuccessFragment extends BaseFragment {
     protected String getActivityTitle() {
         return getString(R.string.apply_success);
     }
+
 }
