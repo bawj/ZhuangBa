@@ -33,8 +33,15 @@ public class QiNiuUtil {
     private static QiNiuUtil qiNiuUtil;
     private static final String accessKey = "0jyopzon2rvnQJsBsEDYspeeLo9grHoUmL_fFbuR";
     private static final String secretKey = "maSmlklPLx66YRShRzQ6dyPgll1MPTJ_xA0sE5vE";
-    private static final String bucket = "zhuangba-upload-image";
+    // TODO: 2019/11/27 0027 正式发布需要修改
+//    private static final String IMG_URL = "http://q1mh3knsr.bkt.clouddn.com/";
+//    private static final String bucket = "zhengshi-zhuangba";
+
+    //测试服 地址
     private static final String IMG_URL = "http://q1kc8zk9i.bkt.clouddn.com/";
+    private static final String bucket = "zhuangba-upload-image";
+
+
 
     public static QiNiuUtil newInstance() {
         if (qiNiuUtil == null) {
@@ -66,9 +73,9 @@ public class QiNiuUtil {
         Configuration.Builder config = new Configuration.Builder()
                 .chunkSize(512 * 1024)        // 分片上传时，每片的大小。 默认256K
                 .putThreshhold(1024 * 1024)   // 启用分片上传阀值。默认512K
-                .connectTimeout(10)           // 链接超时。默认10秒
+                .connectTimeout(30)           // 链接超时。默认10秒
                 .useHttps(true)               // 是否使用https 默认是false
-                .responseTimeout(60)          // 服务器响应超时。默认60秒
+                .responseTimeout(120)          // 服务器响应超时。默认60秒
                 .recorder(recorder)           // recorder分片上传时，已上传片记录器。默认null
                 .recorder(recorder, keyGen)   // keyGen 分片上传时，生成标识符，用于片记录器区分是那个文件的上传记录
                 .zone(FixedZone.zone2);// 设置区域，指定不同区域的上传域名、备用域名、备用IP。
