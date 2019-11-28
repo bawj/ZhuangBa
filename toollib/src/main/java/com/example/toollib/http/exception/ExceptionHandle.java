@@ -25,7 +25,7 @@ public class ExceptionHandle {
             return ex;
         } else if (e instanceof HttpException) {
             ex = new ApiException(e, HttpError.HTTP_ERROR.getCode());
-            ex.setMsg("没有可用的网络，请稍后再试");
+            ex.setMsg("服务器连接异常，请稍后再试");
             return ex;
         } else if (e instanceof JsonParseException
                 || e instanceof JSONException

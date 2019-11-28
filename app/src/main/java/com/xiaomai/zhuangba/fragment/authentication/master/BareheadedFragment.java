@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -26,6 +27,7 @@ import com.xiaomai.zhuangba.data.bean.MasterAuthenticationInfo;
 import com.xiaomai.zhuangba.http.ServiceUrl;
 import com.xiaomai.zhuangba.util.RxPermissionsUtils;
 import com.xiaomai.zhuangba.weight.PhotoTool;
+import com.xiaomai.zhuangba.weight.camera.global.Constant;
 import com.xiaomai.zhuangba.weight.dialog.NavigationDialog;
 
 import java.io.File;
@@ -38,6 +40,9 @@ import io.reactivex.Observable;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
+import top.zibin.luban.CompressionPredicate;
+import top.zibin.luban.Luban;
+import top.zibin.luban.OnCompressListener;
 
 import static com.xiaomai.zhuangba.weight.PhotoTool.GET_IMAGE_BY_CAMERA;
 import static com.xiaomai.zhuangba.weight.PhotoTool.GET_IMAGE_FROM_PHONE;
@@ -64,6 +69,8 @@ public class BareheadedFragment extends BaseFragment {
     public Uri resultUri = null;
     private Uri imageUriFromCamera;
     public static final String BAREHEADED = "bareheaded";
+    /** 压缩之后的照片 */
+    private String imgPath;
 
     public static BareheadedFragment newInstance(String masterAuthenticationInfo) {
         Bundle args = new Bundle();
@@ -109,12 +116,12 @@ public class BareheadedFragment extends BaseFragment {
     }
 
     private void next() {
-        if (resultUri == null) {
+        if (imgPath == null) {
             ToastUtil.showShort(getString(R.string.please_upload_photo));
         } else {
             MultipartBody.Builder builder = new MultipartBody.Builder().setType(MultipartBody.FORM);
             try {
-                File file = new File(new URI(resultUri.toString()));
+                File file = new File(new URI("file:///"+imgPath));
                 builder.addFormDataPart("file", file.getName(),
                         RequestBody.create(MediaType.parse("multipart/form-data"), file));
                 Observable<HttpResult<Object>> responseBodyObservable = ServiceUrl.getUserApi().uploadFile(builder.build());
@@ -196,26 +203,64 @@ public class BareheadedFragment extends BaseFragment {
                 //选择相册之后的处理
                 if (resultCode == RESULT_OK && getActivity() != null) {
                     String imageAbsolutePath = PhotoTool.getImageAbsolutePath(getActivity(), data.getData());
-                    resultUri = Uri.parse("file:///" + imageAbsolutePath);
-                    btnBareheaded.setText(getString(R.string.next));
-                    btnReUpload.setVisibility(View.VISIBLE);
-                    isUpload = true;
-                    GlideManager.loadUriImage(getActivity(), resultUri, ivBareheaded);
+                    initImage(imageAbsolutePath);
                 }
                 break;
             case GET_IMAGE_BY_CAMERA:
                 //拍照之后的处理
                 if (resultCode == RESULT_OK && getActivity() != null) {
-                    resultUri = Uri.parse("file:///" + PhotoTool.getImageAbsolutePath(getActivity(), imageUriFromCamera));
-                    btnBareheaded.setText(getString(R.string.next));
-                    btnReUpload.setVisibility(View.VISIBLE);
-                    isUpload = true;
-                    GlideManager.loadUriImage(getActivity(), resultUri, ivBareheaded);
+                    String imageAbsolutePath = PhotoTool.getImageAbsolutePath(getActivity(), imageUriFromCamera);
+                    initImage(imageAbsolutePath);
                 }
                 break;
             default:
                 break;
         }
+    }
+
+    private void initImage(String imageAbsolutePath) {
+        resultUri = Uri.parse("file:///" + imageAbsolutePath);
+        //压缩图片
+        Luban.with(getActivity())
+                .load(resultUri)
+                .ignoreBy(100)
+                .setTargetDir(Constant.DIR_ROOT)
+                .filter(new CompressionPredicate() {
+                    @Override
+                    public boolean apply(String path) {
+                        return !(TextUtils.isEmpty(path) || path.toLowerCase().endsWith(".gif"));
+                    }
+                })
+                .setCompressListener(new OnCompressListener() {
+                    @Override
+                    public void onStart() {
+                        //压缩开始前调用，可以在方法内启动 loading UI
+                        Log.e("开始压缩 时间 = " + System.currentTimeMillis());
+                    }
+
+                    @Override
+                    public void onSuccess(File file) {
+                        //压缩成功后调用，返回压缩后的图片文件
+                        Log.e("压缩成功 时间 = " + System.currentTimeMillis());
+                        Log.e("压缩图片地址 = " + file.getPath());
+                        imgPath = file.getPath();
+                        btnBareheaded.setText(getString(R.string.next));
+                        btnReUpload.setVisibility(View.VISIBLE);
+                        isUpload = true;
+                        GlideManager.loadUriImage(getActivity(), imgPath, ivBareheaded);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        //当压缩过程出现问题时调用
+                        Log.e("压缩失败 error " + e);
+                        btnBareheaded.setText(getString(R.string.next));
+                        btnReUpload.setVisibility(View.VISIBLE);
+                        isUpload = true;
+                        GlideManager.loadUriImage(getActivity(), resultUri, ivBareheaded);
+                        imgPath = resultUri.toString();
+                    }
+                }).launch();
     }
 
     @Override

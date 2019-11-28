@@ -3,7 +3,6 @@ package com.example.toollib.manager;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.net.Uri;
-import android.text.TextUtils;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
@@ -96,7 +95,8 @@ public class GlideManager {
     public static void loadUriImage(Context mContext, Uri uri, ImageView imageView) {
         RequestOptions options = new RequestOptions()
                 //禁止Glide硬盘缓存缓存
-                .diskCacheStrategy(DiskCacheStrategy.RESOURCE);
+                .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
+                .dontAnimate();
         Glide.with(mContext).load(uri).apply(options)
                 .thumbnail(0.5f).into(imageView);
     }
