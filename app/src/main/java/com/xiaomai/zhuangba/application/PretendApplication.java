@@ -10,6 +10,7 @@ import com.example.toollib.util.Log;
 import com.google.gson.Gson;
 import com.qmuiteam.qmui.arch.QMUISwipeBackActivityManager;
 import com.tencent.bugly.Bugly;
+import com.umeng.analytics.MobclickAgent;
 import com.umeng.commonsdk.UMConfigure;
 import com.umeng.message.IUmengRegisterCallback;
 import com.umeng.message.PushAgent;
@@ -41,9 +42,9 @@ public class PretendApplication extends Application {
     private static PretendApplication pretendApplication;
 
 //   public static final String BASE_URL = "http://192.168.0.110:7966/";
-//   public static final String BASE_URL = "http://192.168.0.168:7966/";
+   public static final String BASE_URL = "http://192.168.0.168:7966/";
 //   public static final String BASE_URL = "http://192.168.0.109:7966/";
-   public static final String BASE_URL = "https://zb.hangzhouzhuangba.com/zhuangBas/";
+//   public static final String BASE_URL = "https://zb.hangzhouzhuangba.com/zhuangBas/";
 //   public static final String BASE_URL = "http://zb.hangzhouzhuangba.com:8085/testZhuangBas/";
 //     public static final String BASE_URL = "https://zb.hangzhouzhuangba.com/testZhuangBas/";
 
@@ -148,6 +149,8 @@ public class PretendApplication extends Application {
 
     private void initUMeng(PushAgent instance) {
         UMConfigure.init(this, U_MENG_APP_KEY, "Umeng", UMConfigure.DEVICE_TYPE_PHONE, U_MENG_MESSAGE_SECRET);
+        // 选用AUTO页面采集模式
+        MobclickAgent.setPageCollectionMode(MobclickAgent.PageMode.AUTO);
         instance.register(new IUmengRegisterCallback() {
             @Override
             public void onSuccess(String deviceToken) {

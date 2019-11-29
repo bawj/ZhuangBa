@@ -18,6 +18,7 @@ import com.xiaomai.zhuangba.data.bean.OngoingOrdersList;
 import com.xiaomai.zhuangba.data.bean.OrderDateList;
 import com.xiaomai.zhuangba.fragment.advertisement.base.BaseAdvertisementFragment;
 import com.xiaomai.zhuangba.util.ConstantUtil;
+import com.xiaomai.zhuangba.util.Util;
 import com.xiaomai.zhuangba.weight.GridSpacingItemDecoration;
 
 import java.util.ArrayList;
@@ -85,9 +86,9 @@ public class EmployerAdvertisementNoPassageFragment extends BaseAdvertisementFra
         if (deliveryContents != null) {
             String picturesUrl = deliveryContents.getPicturesUrl();
             if (!TextUtils.isEmpty(picturesUrl)) {
-                ///final List<String> urlList = Util.getList(picturesUrl);
-                final List<String> urlList = new ArrayList<>();
-                urlList.add(picturesUrl);
+                final List<String> urlList = Util.getList(picturesUrl);
+                //final List<String> urlList = new ArrayList<>();
+                //urlList.add(picturesUrl);
                 imgExhibitionAdapter.setNewData(urlList);
                 imgExhibitionAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
                     @Override
@@ -108,9 +109,9 @@ public class EmployerAdvertisementNoPassageFragment extends BaseAdvertisementFra
             //交付后的内容
             String picturesUrl = deliveryContent.getPicturesUrl();
             if (!TextUtils.isEmpty(picturesUrl)) {
-///                final List<String> urlList = Util.getList(picturesUrl);
-                final List<String> urlList = new ArrayList<>();
-                urlList.add(picturesUrl);
+                final List<String> urlList = Util.getList(picturesUrl);
+                //final List<String> urlList = new ArrayList<>();
+                //urlList.add(picturesUrl);
                 imgExhibitionAfterAdapter.setNewData(urlList);
                 imgExhibitionAfterAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
                     @Override

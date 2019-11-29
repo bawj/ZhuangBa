@@ -23,6 +23,8 @@ allprojects {
         maven {
             url "https://jitpack.io"
         }
+        //友盟统计
+        maven { url 'https://dl.bintray.com/umsdk/release' }
     }
 }
 

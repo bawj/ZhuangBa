@@ -115,7 +115,7 @@ public class WithdrawFragment extends BaseFragment implements TextWatcher {
                 startFragmentForResult(AliPayAccountFragment.newInstance(2), ForResultCode.START_FOR_RESULT_CODE_.getCode());
                 break;
             case R.id.tv_withdraw:
-                startToPassword();
+                startToPassword(view);
                 break;
             default:
         }
@@ -143,7 +143,8 @@ public class WithdrawFragment extends BaseFragment implements TextWatcher {
     /**
      * 跳转到校验密码
      */
-    private void startToPassword() {
+    private void startToPassword(View view) {
+        hideKeyboard(view);
         String name = tvName.getText().toString();
         String account = tvAccount.getText().toString();
         double amount;

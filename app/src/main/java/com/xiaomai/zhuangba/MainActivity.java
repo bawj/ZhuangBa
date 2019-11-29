@@ -12,6 +12,8 @@ import com.example.toollib.util.spf.SPUtils;
 import com.example.toollib.util.spf.SpfConst;
 import com.example.toollib.weight.dialog.CommonlyDialog;
 import com.qmuiteam.qmui.arch.QMUIFragment;
+import com.umeng.analytics.MobclickAgent;
+import com.umeng.commonsdk.UMConfigure;
 import com.xiaomai.zhuangba.data.bean.UserInfo;
 import com.xiaomai.zhuangba.data.db.DBHelper;
 import com.xiaomai.zhuangba.enums.StaticExplain;
@@ -159,6 +161,17 @@ public class MainActivity extends BaseActivity {
     private void startUpdateVersion(String downLoadUrl) {
         UpdateVersionDialog.getInstance().initView(this, downLoadUrl)
                 .showDialog(this);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(this);
+    }
+    @Override
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
     }
 
     @Override

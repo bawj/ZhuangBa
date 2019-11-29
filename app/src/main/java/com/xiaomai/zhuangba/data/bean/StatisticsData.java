@@ -1,5 +1,7 @@
 package com.xiaomai.zhuangba.data.bean;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  * @author Administrator
  * @date 2019/7/20 0020
@@ -7,9 +9,12 @@ package com.xiaomai.zhuangba.data.bean;
 public class StatisticsData {
 
     private double totalAmount;
-    private int orderNumber;
-    private int userNumber;
-    private int employerNumber;
+    private long orderNumber;
+    private long userNumber;
+    private long employerNumber;
+    private long exclusiveNumber;
+    @SerializedName("crowdsourcingNumber")
+    private long crowdSourcingNumber;
 
     public double getTotalAmount() {
         return totalAmount;
@@ -19,7 +24,7 @@ public class StatisticsData {
         this.totalAmount = totalAmount;
     }
 
-    public int getOrderNumber() {
+    public long getOrderNumber() {
         return orderNumber;
     }
 
@@ -27,7 +32,7 @@ public class StatisticsData {
         this.orderNumber = orderNumber;
     }
 
-    public int getUserNumber() {
+    public long getUserNumber() {
         return userNumber;
     }
 
@@ -35,11 +40,27 @@ public class StatisticsData {
         this.userNumber = userNumber;
     }
 
-    public int getEmployerNumber() {
+    public long getEmployerNumber() {
         return employerNumber;
     }
 
-    public void setEmployerNumber(int employerNumber) {
+    public void setEmployerNumber(long employerNumber) {
         this.employerNumber = employerNumber;
+    }
+
+    public long getExclusiveNumber() {
+        return exclusiveNumber;
+    }
+
+    public void setExclusiveNumber(long exclusiveNumber) {
+        this.exclusiveNumber = exclusiveNumber;
+    }
+
+    public long getCrowdSourcingNumber() {
+        return crowdSourcingNumber;
+    }
+
+    public void setCrowdsourcingNumber(long crowdSourcingNumber) {
+        this.crowdSourcingNumber = crowdSourcingNumber;
     }
 }

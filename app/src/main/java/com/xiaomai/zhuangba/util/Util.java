@@ -330,7 +330,7 @@ public class Util {
      * @param string1 标题
      * @param number 数量
      */
-    public static void setTenThousand(TextView title , TextView content ,String string,String string1, int number){
+    public static void setTenThousand(TextView title , TextView content ,String string,String string1, long number){
         if (number > 9999) {
             double div = AmountUtil.div(number, 10000, 2);
             content.setText(String.valueOf(div));

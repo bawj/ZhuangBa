@@ -44,6 +44,9 @@ public class SetTradePasswordFragment extends BaseFragment {
 
     @Override
     public void initView() {
+        codeTxt.setFocusable(true);
+        codeTxt.setFocusableInTouchMode(true);
+        codeTxt.requestFocus();
         codeTxt.setOnTextChangeListener(new CodeEditText.OnTextChangeListener() {
             @Override
             public void onTextChange(String pwd) {

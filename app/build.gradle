@@ -90,6 +90,8 @@ dependencies {
     implementation libs["qiniu-android"]
     implementation libs["qiniu-java"]
     implementation libs["Luban"]
+    implementation libs["analytics"]
+    implementation libs["umsdk-common"]
     annotationProcessor libs["butterknife-compiler"]
     implementation project(':toollib')
     implementation project(':citypicker')

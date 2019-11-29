@@ -57,4 +57,12 @@ public class SuccessFragment extends BaseFragment {
         return getString(R.string.apply_success);
     }
 
+    public boolean isBackArrow() {
+        return false;
+    }
+
+    @Override
+    public boolean isInSwipeBack() {
+        return true;
+    }
 }

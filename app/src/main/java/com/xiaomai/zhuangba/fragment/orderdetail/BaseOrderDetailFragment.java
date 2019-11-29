@@ -110,7 +110,7 @@ public class BaseOrderDetailFragment<T extends IOrderDetailModule> extends BaseF
      * 服务项目
      */
     @BindView(R.id.recyclerServiceItems)
-    RecyclerView recyclerServiceItems;
+    public RecyclerView recyclerServiceItems;
     /**
      * 订单信息
      */
@@ -143,7 +143,7 @@ public class BaseOrderDetailFragment<T extends IOrderDetailModule> extends BaseF
     /**
      * 服务项目
      */
-    private ServiceItemsAdapter serviceItemsAdapter;
+    ServiceItemsAdapter serviceItemsAdapter;
     /**
      * 订单详细信息
      */

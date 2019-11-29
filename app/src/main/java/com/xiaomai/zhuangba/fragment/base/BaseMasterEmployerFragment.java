@@ -85,6 +85,14 @@ public class BaseMasterEmployerFragment extends BaseFragment<IMasterEmployerModu
     TextView tvNumberOfEmployers;
     @BindView(R.id.tvNumberOfEmployers_)
     TextView tvNumberOfEmployers_;
+    @BindView(R.id.tvExclusiveNumber_)
+    TextView tvExclusiveNumber_;
+    @BindView(R.id.tvExclusiveNumber)
+    TextView tvExclusiveNumber;
+    @BindView(R.id.tvCrowdSourcingNumber_)
+    TextView tvCrowdSourcingNumber_;
+    @BindView(R.id.tvCrowdSourcingNumber)
+    TextView tvCrowdSourcingNumber;
     /**
      * 观察者管理
      */
@@ -285,9 +293,12 @@ public class BaseMasterEmployerFragment extends BaseFragment<IMasterEmployerModu
                 getString(R.string.order_quantity) , statisticsData.getOrderNumber());
         Util.setTenThousand(tvNumberOfEmployers_ , tvNumberOfEmployers, getString(R.string.number_of_employers_),
                 getString(R.string.number_of_employers)  , statisticsData.getEmployerNumber());
-//        tvNumberOfTeachers.setText(String.valueOf(statisticsData.getUserNumber()));
-//        tvOrderQuantity.setText(String.valueOf(statisticsData.getOrderNumber()));
-//        tvNumberOfEmployers.setText(String.valueOf(statisticsData.getEmployerNumber()));
+        Util.setTenThousand(tvExclusiveNumber_ , tvExclusiveNumber , getString(R.string.exclusive_number_)
+                , getString(R.string.exclusive_number), statisticsData.getExclusiveNumber());
+        Util.setTenThousand(tvCrowdSourcingNumber_ , tvCrowdSourcingNumber , getString(R.string.crowd_sourcing_number_)
+                , getString(R.string.crowd_sourcing_number), statisticsData.getCrowdSourcingNumber());
+
+
     }
 
     @Override

@@ -109,8 +109,7 @@
                                         android:layout_height="wrap_content"
                                         android:layout_marginLeft="@dimen/tool_lib_30dp"
                                         android:layout_marginRight="@dimen/tool_lib_30dp"
-                                        android:layout_below="@+id/toolbarMasterWorker"
-                                        android:layout_marginTop="@dimen/tool_lib_21dp" />
+                                        android:layout_below="@+id/toolbarMasterWorker" />
                                 </RelativeLayout>
 
                                 <include

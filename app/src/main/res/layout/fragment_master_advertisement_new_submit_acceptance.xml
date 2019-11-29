@@ -20,6 +20,7 @@
             android:layout_marginTop="@dimen/tool_lib_30dp"
             android:textColor="@color/tool_lib_gray_222222"
             android:textSize="@dimen/tool_lib_12sp"
+            android:visibility="gone"
             tools:text="请上传开始前工作现场的照片" />
 
         <android.support.v7.widget.RecyclerView

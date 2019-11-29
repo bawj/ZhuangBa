@@ -1,10 +1,12 @@
 package com.example.toollib.base;
 
+import android.content.Context;
 import android.graphics.Color;
 import android.support.annotation.LayoutRes;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.FrameLayout;
 
@@ -254,5 +256,12 @@ public abstract class BaseFragment<M extends IBaseModule> extends BaseRxFragment
         }
         super.onDestroy();
         topBarBase = null;
+    }
+
+    /** 隐藏键盘 */
+    public void hideKeyboard(View view) {
+        InputMethodManager imm = (InputMethodManager)  getBaseFragmentActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.showSoftInput(view,InputMethodManager.SHOW_FORCED);
+        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 }

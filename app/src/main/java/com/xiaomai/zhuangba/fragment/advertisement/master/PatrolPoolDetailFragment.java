@@ -32,6 +32,11 @@ public class PatrolPoolDetailFragment extends BasePatrolDetailFragment {
     }
 
     @Override
+    public int getContentView() {
+        return R.layout.fragment_base_patrol_pool_detail;
+    }
+
+    @Override
     public void requestOrderDetailSuccess(OrderServiceDate orderServiceDate) {
         super.requestOrderDetailSuccess(orderServiceDate);
         tvBasePatrolOrdersType.setVisibility(View.GONE);

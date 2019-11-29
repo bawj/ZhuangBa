@@ -202,12 +202,12 @@
     <string name="wallet_earnest_money_hint">保证金暂时被冻结，可以点击申请退保证金</string>
     <string name="wallet_income">收入</string>
     <string name="wallet_was_withdraw">已提现</string>
-    <string name="number_of_teachers">师傅数量</string>
-    <string name="number_of_teachers_">师傅数量(万)</string>
-    <string name="order_quantity">订单数量</string>
-    <string name="order_quantity_">订单数量(万)</string>
-    <string name="task_amount">任务金额(元)</string>
-    <string name="task_amount_">任务金额(万元)</string>
+    <string name="number_of_teachers">总师傅数量</string>
+    <string name="number_of_teachers_">总师傅数量(万)</string>
+    <string name="order_quantity">总订单数量</string>
+    <string name="order_quantity_">总订单数量(万)</string>
+    <string name="task_amount">总任务金额(元)</string>
+    <string name="task_amount_">总任务金额(万元)</string>
     <string name="wallet_detail_query">自定义查询</string>
     <string name="has_been_proposed">已提现</string>
     <string name="wallet_withdraw_detail">提现详情</string>
@@ -422,8 +422,8 @@
     <string name="accounting_time">入账时间：每月%1$s号</string>
     <string name="accounting_time_null">入账时间：%1$s</string>
     <string name="accounting_amount">入账金额：¥%1$s/月</string>
-    <string name="number_of_employers">雇主数量</string>
-    <string name="number_of_employers_">雇主数量(万)</string>
+    <string name="number_of_employers">总雇主数量</string>
+    <string name="number_of_employers_">总雇主数量(万)</string>
     <string name="frozen_amount">冻结金额(元)</string>
     <string name="frozen_amount_title">冻结金额</string>
     <string name="data_details">数据详情</string>
@@ -608,4 +608,8 @@
     <string name="no_result">对不起，没有搜索到相关数据！</string>
     <string name="enterprise_name">企业名称</string>
     <string name="please_input_enterprise_name">请输入企业名称</string>
+    <string name="exclusive_number">专属师傅数</string>
+    <string name="exclusive_number_">专属师傅数(万)</string>
+    <string name="crowd_sourcing_number">众包师傅数</string>
+    <string name="crowd_sourcing_number_">众包师傅数(万)</string>
 </resources>

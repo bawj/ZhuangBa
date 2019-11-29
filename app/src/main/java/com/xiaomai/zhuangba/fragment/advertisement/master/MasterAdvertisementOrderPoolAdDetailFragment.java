@@ -34,6 +34,11 @@ public class MasterAdvertisementOrderPoolAdDetailFragment extends BaseAdvertisem
     }
 
     @Override
+    public int getContentView() {
+        return R.layout.fragment_base_master_advertisement_order_poolad_detail;
+    }
+
+    @Override
     public void requestOrderDetailSuccess(Object object) {
         super.requestOrderDetailSuccess(object);
         tvBaseOrderDetailItemOrdersType.setVisibility(View.GONE);

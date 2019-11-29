@@ -16,6 +16,7 @@ import com.example.toollib.http.HttpResult;
 import com.example.toollib.http.observer.BaseHttpRxObserver;
 import com.example.toollib.http.util.RxUtils;
 import com.example.toollib.manager.GlideManager;
+import com.example.toollib.util.Log;
 import com.example.toollib.util.ToastUtil;
 import com.example.toollib.weight.dialog.CommonlyDialog;
 import com.qmuiteam.qmui.layout.QMUIButton;
@@ -25,6 +26,7 @@ import com.xiaomai.zhuangba.http.ServiceUrl;
 import com.xiaomai.zhuangba.util.ConstantUtil;
 import com.xiaomai.zhuangba.util.RxPermissionsUtils;
 import com.xiaomai.zhuangba.weight.PhotoTool;
+import com.xiaomai.zhuangba.weight.camera.global.Constant;
 
 import java.io.File;
 import java.net.URI;
@@ -35,6 +37,9 @@ import io.reactivex.Observable;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
+import top.zibin.luban.CompressionPredicate;
+import top.zibin.luban.Luban;
+import top.zibin.luban.OnCompressListener;
 
 import static com.xiaomai.zhuangba.weight.PhotoTool.GET_IMAGE_BY_CAMERA;
 
@@ -55,10 +60,14 @@ public class MasterAdvertisementStartConstructionSingleFragment extends BaseFrag
     @BindView(R.id.btnPhotoSave)
     QMUIButton btnPhotoSave;
 
-    /** 提交到服务器后返回的图片地址 */
+    /**
+     * 提交到服务器后返回的图片地址
+     */
     public String requestImgUrl = "";
     private Uri imageUriFromCamera;
-    /** 提交图片前的本地地址 */
+    /**
+     * 提交图片前的本地地址
+     */
     public Uri resultUri = null;
 
     public static MasterAdvertisementStartConstructionSingleFragment newInstance(String orderCode, String orderType) {
@@ -156,7 +165,7 @@ public class MasterAdvertisementStartConstructionSingleFragment extends BaseFrag
     @Override
     public void rightTitleClick(View v) {
         //完成 提交
-        if (!TextUtils.isEmpty(requestImgUrl)){
+        if (!TextUtils.isEmpty(requestImgUrl)) {
             RxUtils.getObservable(ServiceUrl.getUserApi().startTaskAdvertisingOrder(getOrderCode(), requestImgUrl))
                     .compose(this.<HttpResult<Object>>bindToLifecycle())
                     .subscribe(new BaseHttpRxObserver<Object>(getActivity()) {
@@ -165,9 +174,9 @@ public class MasterAdvertisementStartConstructionSingleFragment extends BaseFrag
                             startFragment(MasterWorkerFragment.newInstance());
                         }
                     });
-        }else if (resultUri == null){
+        } else if (resultUri == null) {
             ToastUtil.showShort(getString(R.string.please_shot_img));
-        }else {
+        } else {
             ToastUtil.showShort(getString(R.string.please_save_shot_img));
         }
     }
@@ -179,9 +188,45 @@ public class MasterAdvertisementStartConstructionSingleFragment extends BaseFrag
             case GET_IMAGE_BY_CAMERA:
                 //拍照之后的处理
                 if (resultCode == RESULT_OK && getActivity() != null) {
-                    resultUri = Uri.parse("file:///" + PhotoTool.getImageAbsolutePath(getActivity(), imageUriFromCamera));
-                    GlideManager.loadUriImage(getActivity(), resultUri, ivPhotoImg);
-                    isVisibility();
+                    String imageAbsolutePath = PhotoTool.getImageAbsolutePath(getActivity(), imageUriFromCamera);
+                    //压缩图片
+                    Luban.with(getActivity())
+                            .load(imageAbsolutePath)
+                            .ignoreBy(100)
+                            .setTargetDir(Constant.DIR_ROOT)
+                            .filter(new CompressionPredicate() {
+                                @Override
+                                public boolean apply(String path) {
+                                    return !(TextUtils.isEmpty(path) || path.toLowerCase().endsWith(".gif"));
+                                }
+                            })
+                            .setCompressListener(new OnCompressListener() {
+                                @Override
+                                public void onStart() {
+                                    //压缩开始前调用，可以在方法内启动 loading UI
+                                    Log.e("开始压缩 时间 = " + System.currentTimeMillis());
+                                }
+
+                                @Override
+                                public void onSuccess(File file) {
+                                    //压缩成功后调用，返回压缩后的图片文件
+                                    Log.e("压缩成功 时间 = " + System.currentTimeMillis());
+                                    Log.e("压缩图片地址 = " + file.getPath());
+                                    resultUri = Uri.parse("file:///" + file.getPath());
+                                    GlideManager.loadUriImage(getActivity(), resultUri, ivPhotoImg);
+                                    isVisibility();
+                                }
+
+                                @Override
+                                public void onError(Throwable e) {
+                                    //当压缩过程出现问题时调用
+                                    Log.e("压缩失败 error " + e);
+                                    resultUri = Uri.parse("file:///" + PhotoTool.getImageAbsolutePath(getActivity(), imageUriFromCamera));
+                                    GlideManager.loadUriImage(getActivity(), resultUri, ivPhotoImg);
+                                    isVisibility();
+                                }
+                            }).launch();
+
                 }
                 break;
             default:

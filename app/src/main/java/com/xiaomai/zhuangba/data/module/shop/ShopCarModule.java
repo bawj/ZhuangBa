@@ -20,9 +20,11 @@ import com.xiaomai.zhuangba.data.bean.ShopCarData;
 import com.xiaomai.zhuangba.data.bean.db.ShopAuxiliaryMaterialsDB;
 import com.xiaomai.zhuangba.data.db.DBHelper;
 import com.xiaomai.zhuangba.enums.StaticExplain;
+import com.xiaomai.zhuangba.fragment.masterworker.MasterWorkerFragment;
 import com.xiaomai.zhuangba.http.ServiceUrl;
 import com.xiaomai.zhuangba.util.ConstantUtil;
 import com.xiaomai.zhuangba.util.DateUtil;
+import com.xiaomai.zhuangba.util.QiNiuUtil;
 import com.xiaomai.zhuangba.util.ShopCarUtil;
 import com.xiaomai.zhuangba.util.Util;
 
@@ -35,6 +37,7 @@ import java.util.List;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
+import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -56,31 +59,55 @@ public class ShopCarModule extends BaseModule<IShopCarView> implements IShopCarM
         List<String> mediaSelectorFiles = orderAddress.getImgList();
         List<String> uriList = new ArrayList<>(mediaSelectorFiles);
         uriList.remove(uriList.size() - 1);
-        List<MultipartBody.Part> parts = new ArrayList<>();
-        for (int i = 0; i < uriList.size(); i++) {
-            Uri compressPath = Uri.parse(uriList.get(i));
-            try {
-                File file = new File(new URI(compressPath.toString()));
-                RequestBody requestBody = RequestBody.create(MediaType.parse("multipart/form-data"), file);
-                MultipartBody.Part body = MultipartBody.Part.createFormData("files", file.getName(), requestBody);
-                parts.add(body);
-            } catch (URISyntaxException e) {
-                e.printStackTrace();
-            }
-        }
+//        List<MultipartBody.Part> parts = new ArrayList<>();
+//        for (int i = 0; i < uriList.size(); i++) {
+//            Uri compressPath = Uri.parse(uriList.get(i));
+//            try {
+//                File file = new File(new URI(compressPath.toString()));
+//                RequestBody requestBody = RequestBody.create(MediaType.parse("multipart/form-data"), file);
+//                MultipartBody.Part body = MultipartBody.Part.createFormData("files", file.getName(), requestBody);
+//                parts.add(body);
+//            } catch (URISyntaxException e) {
+//                e.printStackTrace();
+//            }
+//        }
         hashMap = getSubmissionOrder(orderAddress);
-        if (hashMap != null && parts.isEmpty()) {
+        if (hashMap != null && uriList.isEmpty()) {
             postGenerateOrder();
         } else if (hashMap != null) {
-            postImgGenerateOrder(parts);
+            //postImgGenerateOrder(parts);
+            postImgGenerateOrder(uriList);
         }
     }
 
     /**
      * 带图片
      */
-    private void postImgGenerateOrder(List<MultipartBody.Part> parts) {
-        Observable<HttpResult<Object>> httpResultObservable1 = ServiceUrl.getUserApi().uploadFiles(parts);
+    private void postImgGenerateOrder(List<String> uriList /*List<MultipartBody.Part> parts*/) {
+        RxUtils.getObservable(QiNiuUtil.newInstance().getObservable(uriList))
+                .compose(mViewRef.get().<List<String>>bindLifecycle())
+                .doOnNext(new Consumer<List<String>>() {
+                    @Override
+                    public void accept(List<String> strings) {
+                    }
+                }).concatMap(new Function<List<String>, ObservableSource<HttpResult<String>>>() {
+            @Override
+            public ObservableSource<HttpResult<String>> apply(List<String> imgUrlList){
+                hashMap.put("picturesUrl", new Gson().toJson(imgUrlList));
+                String requestBodyString = new Gson().toJson(hashMap);
+                RequestBody requestBody = RequestBody.create(MediaType.parse("application/json;charset=utf-8"), requestBodyString);
+                return RxUtils.getObservable(ServiceUrl.getUserApi().postGenerateOrder(requestBody));
+            }
+        }).subscribe(new BaseHttpRxObserver<String>(mContext.get()) {
+            @Override
+            protected void onSuccess(String response) {
+                hashMap.put("orderCode", response);
+                hashMap.put("orderType", String.valueOf(StaticExplain.INSTALLATION_LIST.getCode()));
+                mViewRef.get().placeOrderSuccess(new Gson().toJson(hashMap));
+            }
+        });
+
+        /*Observable<HttpResult<Object>> httpResultObservable1 = ServiceUrl.getUserApi().uploadFiles(parts);
         RxUtils.getObservable(httpResultObservable1)
                 .compose(mViewRef.get().<HttpResult<Object>>bindLifecycle())
                 .doOnNext(new BaseHttpConsumer<Object>() {
@@ -105,7 +132,7 @@ public class ShopCarModule extends BaseModule<IShopCarView> implements IShopCarM
                         hashMap.put("orderType", String.valueOf(StaticExplain.INSTALLATION_LIST.getCode()));
                         mViewRef.get().placeOrderSuccess(new Gson().toJson(hashMap));
                     }
-                });
+                });*/
     }
 
     /**

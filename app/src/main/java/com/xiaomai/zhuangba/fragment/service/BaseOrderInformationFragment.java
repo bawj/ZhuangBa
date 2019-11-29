@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -23,6 +24,7 @@ import com.bigkoo.pickerview.listener.OnTimeSelectListener;
 import com.bigkoo.pickerview.view.OptionsPickerView;
 import com.example.toollib.base.BaseFragment;
 import com.example.toollib.data.base.BaseCallback;
+import com.example.toollib.util.Log;
 import com.xiaomai.zhuangba.R;
 import com.xiaomai.zhuangba.adapter.MultiGraphSelectionAdapter;
 import com.xiaomai.zhuangba.data.bean.District;
@@ -34,9 +36,11 @@ import com.xiaomai.zhuangba.util.RxPermissionsUtils;
 import com.xiaomai.zhuangba.util.Util;
 import com.xiaomai.zhuangba.weight.GridSpacingItemDecoration;
 import com.xiaomai.zhuangba.weight.PhotoTool;
+import com.xiaomai.zhuangba.weight.camera.global.Constant;
 
 import org.joda.time.DateTime;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -44,6 +48,9 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import top.zibin.luban.CompressionPredicate;
+import top.zibin.luban.Luban;
+import top.zibin.luban.OnCompressListener;
 
 import static com.xiaomai.zhuangba.weight.PhotoTool.GET_IMAGE_BY_CAMERA;
 
@@ -177,8 +184,42 @@ public class BaseOrderInformationFragment extends BaseFragment<IOrderInformation
                 //拍照之后的处理
                 if (resultCode == RESULT_OK && getActivity() != null) {
                     resultUri = Uri.parse("file:///" + PhotoTool.getImageAbsolutePath(getActivity(), imageUriFromCamera));
-                    mediaSelectorFiles.add(0, resultUri.toString());
-                    multiGraphSelectionAdapter.notifyDataSetChanged();
+                    //压缩图片
+                    Luban.with(getActivity())
+                            .load(resultUri)
+                            .ignoreBy(100)
+                            .setTargetDir(Constant.DIR_ROOT)
+                            .filter(new CompressionPredicate() {
+                                @Override
+                                public boolean apply(String path) {
+                                    return !(TextUtils.isEmpty(path) || path.toLowerCase().endsWith(".gif"));
+                                }
+                            })
+                            .setCompressListener(new OnCompressListener() {
+                                @Override
+                                public void onStart() {
+                                    //压缩开始前调用，可以在方法内启动 loading UI
+                                    Log.e("开始压缩 时间 = " + System.currentTimeMillis());
+                                }
+
+                                @Override
+                                public void onSuccess(File file) {
+                                    //压缩成功后调用，返回压缩后的图片文件
+                                    Log.e("压缩成功 时间 = " + System.currentTimeMillis());
+                                    Log.e("压缩图片地址 = " + file.getPath());
+                                    mediaSelectorFiles.add(0, "file:///" +file.getPath());
+                                    multiGraphSelectionAdapter.notifyDataSetChanged();
+                                }
+
+                                @Override
+                                public void onError(Throwable e) {
+                                    //当压缩过程出现问题时调用
+                                    Log.e("压缩失败 error " + e);
+                                    mediaSelectorFiles.add(0, "file:///" +resultUri.toString());
+                                    multiGraphSelectionAdapter.notifyDataSetChanged();
+                                }
+                            }).launch();
+
                 }
                 break;
             default:
@@ -388,10 +429,4 @@ public class BaseOrderInformationFragment extends BaseFragment<IOrderInformation
         return editInstallationNotes.getText().toString();
     }
 
-    /** 隐藏键盘 */
-    public void hideKeyboard(View view) {
-        InputMethodManager imm = (InputMethodManager)  getBaseFragmentActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm.showSoftInput(view,InputMethodManager.SHOW_FORCED);
-        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
-    }
 }

@@ -44,11 +44,6 @@ public class WithdrawPasswordFragment extends SetTradePasswordFragment {
     }
 
     @Override
-    public void initView() {
-        super.initView();
-    }
-
-    @Override
     public void submission() {
         String account = withdrawalsAccount();
         String name = getName();

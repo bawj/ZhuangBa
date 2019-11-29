@@ -68,6 +68,7 @@
                         android:id="@+id/tvBaseOrderDetailTotalMoney"
                         style="@style/order_money"
                         android:layout_below="@+id/tvBaseOrderDetailItemOrdersTitle"
+                        android:visibility="gone"
                         tools:text="¥3200.00" />
 
                     <TextView
@@ -138,7 +139,8 @@
                         android:layout_marginBottom="@dimen/tool_lib_12dp"
                         android:background="@drawable/bg_divide_into_columns_bg"
                         android:gravity="center_vertical"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:visibility="gone">
 
                         <ImageView
                             android:layout_width="@dimen/tool_lib_16dp"
@@ -166,6 +168,7 @@
                         style="@style/tool_lib_horizontal_line"
                         android:layout_below="@+id/layBaseOrderDetailDivideIntoColumns"
                         android:layout_marginLeft="@dimen/tool_lib_12dp"
+                        android:layout_marginTop="@dimen/tool_lib_12dp"
                         android:layout_marginRight="@dimen/tool_lib_12dp" />
 
                     <RelativeLayout
@@ -190,12 +193,14 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
-                            android:layout_marginLeft="@dimen/tool_lib_6dp"
-                            android:layout_marginRight="@dimen/tool_lib_6dp"
+                            android:layout_marginLeft="@dimen/tool_lib_3dp"
+                            android:layout_marginRight="@dimen/tool_lib_3dp"
                             android:layout_toStartOf="@+id/ivBaseOrderDetailRight"
                             android:layout_toLeftOf="@+id/ivBaseOrderDetailRight"
                             android:layout_toEndOf="@+id/ivBaseOrderDetailLocation"
                             android:layout_toRightOf="@+id/ivBaseOrderDetailLocation"
+                            android:maxLines="1"
+                            android:singleLine="true"
                             android:textColor="@color/tool_lib_gray_222222"
                             android:textSize="@dimen/tool_lib_12sp"
                             tools:text="杭州市余杭区西溪北苑西区38幢3单元1502" />

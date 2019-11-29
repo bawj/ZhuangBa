@@ -24,7 +24,9 @@
                 android:layout_height="match_parent"
                 android:layout_above="@+id/relInstallationAssignmentTask"
                 android:layout_marginTop="@dimen/tool_lib_12dp"
-                android:layout_marginBottom="@dimen/tool_lib_6dp" />
+                android:layout_marginBottom="@dimen/tool_lib_6dp"
+                android:paddingLeft="@dimen/tool_lib_12dp"
+                android:paddingRight="@dimen/tool_lib_12dp" />
 
 
             <RelativeLayout
