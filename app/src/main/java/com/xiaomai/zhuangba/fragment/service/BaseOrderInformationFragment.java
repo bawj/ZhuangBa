@@ -230,7 +230,7 @@ public class BaseOrderInformationFragment extends BaseFragment<IOrderInformation
 
     private void timePickerView() {
         //开始时间 两小时后的时间
-        Calendar startDate = DateUtil.getHours(2, "yyyy-MM-dd HH:mm:ss");
+        Calendar startDate = DateUtil.getHours(0, "yyyy-MM-dd HH:mm:ss");
         //结束 一个月内的时间
         Calendar endDate = DateUtil.getMonth(1, "yyyy-MM-dd HH:mm:ss");
 
@@ -279,7 +279,7 @@ public class BaseOrderInformationFragment extends BaseFragment<IOrderInformation
                 //取消按钮文字颜色
                 .setCancelColor(getResources().getColor(R.color.tool_lib_red_EF2B2B))
                 //起始终止年月日设定
-                .setRangDate(startDate, endDate)
+                .setRangDate(startDate, null)
                 //是否只显示中间选中项的label文字，false则每项item全部都带有label。
                 .isCenterLabel(true)
                 //是否显示为对话框样式

@@ -34,6 +34,7 @@ import com.xiaomai.zhuangba.enums.ForResultCode;
 import com.xiaomai.zhuangba.http.ServiceUrl;
 import com.xiaomai.zhuangba.util.RxPermissionsUtils;
 import com.xiaomai.zhuangba.util.ShopCarUtil;
+import com.xiaomai.zhuangba.util.Util;
 import com.xiaomai.zhuangba.weight.PayPassView;
 import com.xiaomai.zhuangba.weight.ShopPayCheckBox;
 import com.xiaomai.zhuangba.weight.dialog.PayPassDialog;
@@ -132,7 +133,7 @@ public class PaymentDetailsFragment extends BaseFragment<IPaymentDetailsModule> 
                 tvPaymentAppointment.setText(submissionOrder.getAppointmentTime());
                 //地址 + 详细地址
                 String addressDetail = submissionOrder.getAddress() + submissionOrder.getAddressDetail();
-                tvPaymentLocation.setText(addressDetail);
+                tvPaymentLocation.setText(Util.getAddress(addressDetail));
                 //订单编号
                 tvPaymentTaskOrderCode.setText(submissionOrder.getOrderCode());
             }

@@ -612,4 +612,5 @@
     <string name="exclusive_number_">专属师傅数(万)</string>
     <string name="crowd_sourcing_number">众包师傅数</string>
     <string name="crowd_sourcing_number_">众包师傅数(万)</string>
+    <string name="whether_to_dismiss_the_team">是否解散该团队?</string>
 </resources>

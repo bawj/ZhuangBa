@@ -16,6 +16,7 @@ import com.example.toollib.http.util.RxUtils;
 import com.example.toollib.util.DensityUtil;
 import com.example.toollib.util.RegexUtils;
 import com.example.toollib.util.ToastUtil;
+import com.example.toollib.weight.dialog.CommonlyDialog;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.xiaomai.zhuangba.R;
 import com.xiaomai.zhuangba.adapter.TeamJoinedAdapter;
@@ -152,21 +153,28 @@ public class TheTeamJoinedFragment extends BaseListFragment {
 
     @Override
     public void rightTitleClick(View v) {
-        //解散团队
-        RxUtils.getObservable(ServiceUrl.getUserApi().dissolutionTeam(String.valueOf(StaticExplain.REGIMENTAL_COMMANDER.getCode())))
-                .compose(this.<HttpResult<Object>>bindToLifecycle())
-                .subscribe(new BaseHttpRxObserver<Object>(getActivity()) {
+        CommonlyDialog.getInstance().initView(getActivity())
+                .setTvDialogCommonlyContent(getString(R.string.whether_to_dismiss_the_team))
+                .setICallBase(new CommonlyDialog.BaseCallback() {
                     @Override
-                    public void onNext(HttpResult<Object> httpResult) {
-                        super.onNext(httpResult);
-                        setFragmentResult(ForResultCode.RESULT_OK.getCode() , new Intent());
-                        popBackStack();
-                    }
+                    public void sure() {
+                        //解散团队
+                        RxUtils.getObservable(ServiceUrl.getUserApi().dissolutionTeam(String.valueOf(StaticExplain.REGIMENTAL_COMMANDER.getCode())))
+                                .compose(TheTeamJoinedFragment.this.<HttpResult<Object>>bindToLifecycle())
+                                .subscribe(new BaseHttpRxObserver<Object>(getActivity()) {
+                                    @Override
+                                    public void onNext(HttpResult<Object> httpResult) {
+                                        super.onNext(httpResult);
+                                        setFragmentResult(ForResultCode.RESULT_OK.getCode() , new Intent());
+                                        popBackStack();
+                                    }
+                                    @Override
+                                    protected void onSuccess(Object response) {
+                                    }
+                                });
 
-                    @Override
-                    protected void onSuccess(Object response) {
                     }
-                });
+                }).showDialog();
 
     }
 

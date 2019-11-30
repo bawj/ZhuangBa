@@ -117,7 +117,7 @@ public class QiNiuUtil {
                                         throw new ApiException(Integer.parseInt(String.valueOf(info.statusCode)), info.error, response.toString());
                                     }
                                 }
-                            }, null);
+                            },null);
                 }
             }
         }).subscribeOn(Schedulers.io())

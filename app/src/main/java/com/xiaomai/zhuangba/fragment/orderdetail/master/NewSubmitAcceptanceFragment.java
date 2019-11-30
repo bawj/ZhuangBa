@@ -19,8 +19,10 @@ import com.xiaomai.zhuangba.util.QiNiuUtil;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
+import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
@@ -69,6 +71,7 @@ public class NewSubmitAcceptanceFragment extends BaseAutographFragment {
     }
 
     private void uploadImg(List<String> uriList) {
+        Observable<List<String>> observable = QiNiuUtil.newInstance().getObservable(uriList);
         RxUtils.getObservable(QiNiuUtil.newInstance().getObservable(uriList))
                 .compose(this.<List<String>>bindToLifecycle())
                 .doOnNext(new Consumer<List<String>>() {
