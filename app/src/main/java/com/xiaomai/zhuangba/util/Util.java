@@ -316,7 +316,9 @@ public class Util {
             urlList = gson.fromJson(je, new TypeToken<List<String>>() {
             }.getType());
         } catch (Exception e) {
+            //兼容 string 的图
             urlList = new ArrayList<>();
+            urlList.add(s);
         }
         return urlList;
     }

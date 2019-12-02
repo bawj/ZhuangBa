@@ -56,7 +56,6 @@ public class MasterAdvertisementNewSubmitAcceptanceFragment extends BaseAutograp
                     }).concatMap(new Function<List<String>, ObservableSource<HttpResult<Object>>>() {
                 @Override
                 public ObservableSource<HttpResult<Object>> apply(List<String> imgUrlList){
-
                     HashMap<String, Object> hashMap = new HashMap<>();
                     //订单编号
                     hashMap.put("orderCode", getOrderCode());

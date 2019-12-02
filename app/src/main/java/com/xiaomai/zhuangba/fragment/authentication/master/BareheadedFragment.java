@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -25,9 +24,9 @@ import com.qmuiteam.qmui.layout.QMUIButton;
 import com.xiaomai.zhuangba.R;
 import com.xiaomai.zhuangba.data.bean.MasterAuthenticationInfo;
 import com.xiaomai.zhuangba.http.ServiceUrl;
+import com.xiaomai.zhuangba.util.LuBanUtil;
 import com.xiaomai.zhuangba.util.RxPermissionsUtils;
 import com.xiaomai.zhuangba.weight.PhotoTool;
-import com.xiaomai.zhuangba.weight.camera.global.Constant;
 import com.xiaomai.zhuangba.weight.dialog.NavigationDialog;
 
 import java.io.File;
@@ -40,9 +39,6 @@ import io.reactivex.Observable;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
-import top.zibin.luban.CompressionPredicate;
-import top.zibin.luban.Luban;
-import top.zibin.luban.OnCompressListener;
 
 import static com.xiaomai.zhuangba.weight.PhotoTool.GET_IMAGE_BY_CAMERA;
 import static com.xiaomai.zhuangba.weight.PhotoTool.GET_IMAGE_FROM_PHONE;
@@ -220,47 +216,16 @@ public class BareheadedFragment extends BaseFragment {
 
     private void initImage(String imageAbsolutePath) {
         resultUri = Uri.parse("file:///" + imageAbsolutePath);
-        //压缩图片
-        Luban.with(getActivity())
-                .load(resultUri)
-                .ignoreBy(100)
-                .setTargetDir(Constant.DIR_ROOT)
-                .filter(new CompressionPredicate() {
-                    @Override
-                    public boolean apply(String path) {
-                        return !(TextUtils.isEmpty(path) || path.toLowerCase().endsWith(".gif"));
-                    }
-                })
-                .setCompressListener(new OnCompressListener() {
-                    @Override
-                    public void onStart() {
-                        //压缩开始前调用，可以在方法内启动 loading UI
-                        Log.e("开始压缩 时间 = " + System.currentTimeMillis());
-                    }
-
-                    @Override
-                    public void onSuccess(File file) {
-                        //压缩成功后调用，返回压缩后的图片文件
-                        Log.e("压缩成功 时间 = " + System.currentTimeMillis());
-                        Log.e("压缩图片地址 = " + file.getPath());
-                        imgPath = file.getPath();
-                        btnBareheaded.setText(getString(R.string.next));
-                        btnReUpload.setVisibility(View.VISIBLE);
-                        isUpload = true;
-                        GlideManager.loadUriImage(getActivity(), imgPath, ivBareheaded);
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        //当压缩过程出现问题时调用
-                        Log.e("压缩失败 error " + e);
-                        btnBareheaded.setText(getString(R.string.next));
-                        btnReUpload.setVisibility(View.VISIBLE);
-                        isUpload = true;
-                        GlideManager.loadUriImage(getActivity(), resultUri, ivBareheaded);
-                        imgPath = resultUri.toString();
-                    }
-                }).launch();
+        LuBanUtil.getInstance().compress(getActivity(), imageAbsolutePath, new BaseCallback<String>() {
+            @Override
+            public void onSuccess(String obj) {
+                imgPath = obj;
+                btnBareheaded.setText(getString(R.string.next));
+                btnReUpload.setVisibility(View.VISIBLE);
+                isUpload = true;
+                GlideManager.loadUriImage(getActivity(), imgPath, ivBareheaded);
+            }
+        });
     }
 
     @Override

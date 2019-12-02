@@ -104,6 +104,9 @@ public class OrderPoolDetailAdapter extends BaseQuickAdapter<OrderServiceItem, B
         }
 
         tvItemServiceTotalMoney.setVisibility(View.GONE);
+        tvItemServiceMoney.setVisibility(View.GONE);
+        tvServiceItemNumber.setVisibility(View.GONE);
+
         tvItemServiceTotalMoney.setTag(orderServiceItem);
     }
 }

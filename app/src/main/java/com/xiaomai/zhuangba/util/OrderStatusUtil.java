@@ -15,6 +15,7 @@ import com.xiaomai.zhuangba.fragment.orderdetail.employer.EmployerHavingSetOutFr
 import com.xiaomai.zhuangba.fragment.orderdetail.employer.EmployerToBeStartedFragment;
 import com.xiaomai.zhuangba.fragment.orderdetail.employer.EmployerUnderConstructionFragment;
 import com.xiaomai.zhuangba.fragment.orderdetail.master.BeUnderConstructionFragment;
+import com.xiaomai.zhuangba.fragment.orderdetail.master.FailureOfAcceptanceDetailFragment;
 import com.xiaomai.zhuangba.fragment.orderdetail.master.HavingSetOutFragment;
 import com.xiaomai.zhuangba.fragment.orderdetail.master.MasterCompleteFragment;
 import com.xiaomai.zhuangba.fragment.orderdetail.master.NewTaskDetailFragment;
@@ -182,8 +183,8 @@ public class OrderStatusUtil {
             //已完成
             qmuiFragment.startFragment(MasterCompleteFragment.newInstance(orderCode, orderType));
         } else if (orderStatus == OrdersEnum.MASTER_COMPLETED_CANCEL.getCode()) {
-            //验收不通过
-            qmuiFragment.startFragment(BeUnderConstructionFragment.newInstance(orderCode, orderType));
+            //验收不通过 和已完成一样 但是可以重复提交验收
+            qmuiFragment.startFragment(FailureOfAcceptanceDetailFragment.newInstance(orderCode, orderType));
         } else if (orderStatus == OrdersEnum.MASTER_EXPIRED.getCode()) {
             //已过期
             ToastUtil.showShort(qmuiFragment.getString(R.string.order_expired));

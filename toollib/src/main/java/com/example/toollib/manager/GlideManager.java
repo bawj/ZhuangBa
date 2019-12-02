@@ -83,6 +83,7 @@ public class GlideManager {
             options.placeholder(defImage[0]);
             options.error(defImage[0]);
         }
+        options.dontAnimate();
         options.diskCacheStrategy(DiskCacheStrategy.RESOURCE);
         Glide.with(mContext).load(url).apply(options)
                 .thumbnail(0.5f).into(imageView);

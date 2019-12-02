@@ -68,6 +68,12 @@ public class EmployerInformationFragment extends BaseFragment {
 
     @Override
     public void initView() {
+        UserInfo unique = DBHelper.getInstance().getUserInfoDao().queryBuilder().unique();
+        editEmployerName.setText(unique.getUserText());
+        editPhone.setText(unique.getEmergencyContact());
+        editAddress.setText(unique.getAddress());
+        editEnterpriseName.setText(unique.getCompanyName());
+        editAddressDetail.setText(unique.getContactAddress());
     }
 
     @OnClick({R.id.btnUpload, R.id.relAddress})

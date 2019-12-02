@@ -24,9 +24,9 @@ import com.xiaomai.zhuangba.R;
 import com.xiaomai.zhuangba.fragment.masterworker.MasterWorkerFragment;
 import com.xiaomai.zhuangba.http.ServiceUrl;
 import com.xiaomai.zhuangba.util.ConstantUtil;
+import com.xiaomai.zhuangba.util.LuBanUtil;
 import com.xiaomai.zhuangba.util.RxPermissionsUtils;
 import com.xiaomai.zhuangba.weight.PhotoTool;
-import com.xiaomai.zhuangba.weight.camera.global.Constant;
 
 import java.io.File;
 import java.net.URI;
@@ -37,9 +37,6 @@ import io.reactivex.Observable;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
-import top.zibin.luban.CompressionPredicate;
-import top.zibin.luban.Luban;
-import top.zibin.luban.OnCompressListener;
 
 import static com.xiaomai.zhuangba.weight.PhotoTool.GET_IMAGE_BY_CAMERA;
 
@@ -189,44 +186,17 @@ public class MasterAdvertisementStartConstructionSingleFragment extends BaseFrag
                 //拍照之后的处理
                 if (resultCode == RESULT_OK && getActivity() != null) {
                     String imageAbsolutePath = PhotoTool.getImageAbsolutePath(getActivity(), imageUriFromCamera);
-                    //压缩图片
-                    Luban.with(getActivity())
-                            .load(imageAbsolutePath)
-                            .ignoreBy(100)
-                            .setTargetDir(Constant.DIR_ROOT)
-                            .filter(new CompressionPredicate() {
-                                @Override
-                                public boolean apply(String path) {
-                                    return !(TextUtils.isEmpty(path) || path.toLowerCase().endsWith(".gif"));
-                                }
-                            })
-                            .setCompressListener(new OnCompressListener() {
-                                @Override
-                                public void onStart() {
-                                    //压缩开始前调用，可以在方法内启动 loading UI
-                                    Log.e("开始压缩 时间 = " + System.currentTimeMillis());
-                                }
-
-                                @Override
-                                public void onSuccess(File file) {
-                                    //压缩成功后调用，返回压缩后的图片文件
-                                    Log.e("压缩成功 时间 = " + System.currentTimeMillis());
-                                    Log.e("压缩图片地址 = " + file.getPath());
-                                    resultUri = Uri.parse("file:///" + file.getPath());
-                                    GlideManager.loadUriImage(getActivity(), resultUri, ivPhotoImg);
-                                    isVisibility();
-                                }
-
-                                @Override
-                                public void onError(Throwable e) {
-                                    //当压缩过程出现问题时调用
-                                    Log.e("压缩失败 error " + e);
-                                    resultUri = Uri.parse("file:///" + PhotoTool.getImageAbsolutePath(getActivity(), imageUriFromCamera));
-                                    GlideManager.loadUriImage(getActivity(), resultUri, ivPhotoImg);
-                                    isVisibility();
-                                }
-                            }).launch();
-
+                    LuBanUtil.getInstance().compress(getActivity(), imageAbsolutePath, new BaseCallback<String>() {
+                        @Override
+                        public void onSuccess(String obj) {
+                            //压缩成功后调用，返回压缩后的图片文件
+                            Log.e("压缩成功 时间 = " + System.currentTimeMillis());
+                            Log.e("压缩图片地址 = " + obj);
+                            resultUri = Uri.parse("file:///" + obj);
+                            GlideManager.loadUriImage(getActivity(), resultUri, ivPhotoImg);
+                            isVisibility();
+                        }
+                    });
                 }
                 break;
             default:
