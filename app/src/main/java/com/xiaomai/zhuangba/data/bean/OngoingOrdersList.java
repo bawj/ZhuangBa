@@ -4,8 +4,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.text.TextUtils;
 
-import com.xiaomai.zhuangba.util.DateUtil;
-
 import java.util.List;
 
 /**
@@ -45,7 +43,7 @@ public class OngoingOrdersList implements Parcelable{
 
     /** 师傅端的部分字段 */
     /**  */
-    private String masterOrderAmount;
+    private double masterOrderAmount;
     /** 师傅确认时间 */
     private String confirmationTime;
     /** 修改时间 */
@@ -107,7 +105,7 @@ public class OngoingOrdersList implements Parcelable{
         longitude = in.readFloat();
         latitude = in.readFloat();
         publisher = in.readString();
-        masterOrderAmount = in.readString();
+        masterOrderAmount = in.readDouble();
         modifyTime = in.readString();
         expireTime = in.readString();
     }
@@ -269,8 +267,8 @@ public class OngoingOrdersList implements Parcelable{
         this.publisher = publisher;
     }
 
-    public String getMasterOrderAmount() {
-        return TextUtils.isEmpty(masterOrderAmount) ? "" : masterOrderAmount;
+    public double getMasterOrderAmount() {
+        return masterOrderAmount;
     }
 
     public String getDebugging() {
@@ -281,7 +279,7 @@ public class OngoingOrdersList implements Parcelable{
         this.debugging = debugging;
     }
 
-    public void setMasterOrderAmount(String masterOrderAmount) {
+    public void setMasterOrderAmount(double masterOrderAmount) {
         this.masterOrderAmount = masterOrderAmount;
     }
 
@@ -417,7 +415,7 @@ public class OngoingOrdersList implements Parcelable{
         dest.writeFloat(longitude);
         dest.writeFloat(latitude);
         dest.writeString(publisher);
-        dest.writeString(masterOrderAmount);
+        dest.writeDouble(masterOrderAmount);
         dest.writeString(modifyTime);
         dest.writeString(expireTime);
     }

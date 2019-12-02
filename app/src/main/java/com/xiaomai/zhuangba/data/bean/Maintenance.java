@@ -1,5 +1,8 @@
 package com.xiaomai.zhuangba.data.bean;
 
+import com.example.toollib.util.DensityUtil;
+import com.example.toollib.util.DensityUtils;
+
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Generated;
 
@@ -21,13 +24,13 @@ public class Maintenance {
     private Integer number;
 
     /** 维保金额 */
-    private Double amount;
+    private double amount;
 
     /** 剩余维保数量 */
     private Integer residualQuantity;
 
     /** 剩余维保金额 */
-    private Double residualAmount;
+    private double residualAmount;
 
     /** 师傅姓名 */
     private String overmanName;
@@ -100,11 +103,12 @@ public class Maintenance {
         this.number = number;
     }
 
-    public Double getAmount() {
-        return amount == null ? 0 : amount;
+    public double getAmount() {
+        //return DensityUtils.stringTypeDouble(DensityUtil.getDecimalFormat(amount));
+        return amount;
     }
 
-    public void setAmount(Double amount) {
+    public void setAmount(double amount) {
         this.amount = amount;
     }
 
@@ -116,11 +120,11 @@ public class Maintenance {
         this.residualQuantity = residualQuantity;
     }
 
-    public Double getResidualAmount() {
+    public double getResidualAmount() {
         return residualAmount;
     }
 
-    public void setResidualAmount(Double residualAmount) {
+    public void setResidualAmount(double residualAmount) {
         this.residualAmount = residualAmount;
     }
 

@@ -11,8 +11,6 @@ import com.example.toollib.util.ToastUtil;
 import com.google.gson.Gson;
 import com.xiaomai.zhuangba.R;
 import com.xiaomai.zhuangba.data.bean.MasterAuthenticationInfo;
-import com.xiaomai.zhuangba.data.bean.UserInfo;
-import com.xiaomai.zhuangba.data.db.DBHelper;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -56,9 +54,14 @@ public class RealNameAuthenticationFragment extends BaseFragment {
             ToastUtil.showShort(getString(R.string.please_fill_in_the_address_));
             return;
         }
+        String emergencyContact = editEmergencyContact.getText().toString();
+        if (TextUtils.isEmpty(emergencyContact)){
+            ToastUtil.showShort(getString(R.string.please_fill_in_the_emergency_contact_number));
+            return;
+        }
         MasterAuthenticationInfo masterAuthenticationInfo = new MasterAuthenticationInfo();
         masterAuthenticationInfo.setUserText(editAuthenticationName.getText().toString());
-        String emergencyContact = editEmergencyContact.getText().toString();
+
         masterAuthenticationInfo.setEmergencyContact(emergencyContact);
         masterAuthenticationInfo.setContactAddress(address);
         startFragment(BareheadedFragment.newInstance(new Gson().toJson(masterAuthenticationInfo)));

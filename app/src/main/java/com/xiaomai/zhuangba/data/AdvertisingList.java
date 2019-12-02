@@ -27,12 +27,12 @@ public class AdvertisingList {
     private String endTime;
 
     /** 订单金额 */
-    private Double orderAmount;
+    private double orderAmount;
 
     /** 设备面 */
     private String equipmentSurface;
     /** 每月入账金额 */
-    private Double monthMoney;
+    private double monthMoney;
 
 
     public String getOrderCode() {
@@ -83,19 +83,19 @@ public class AdvertisingList {
         this.endTime = endTime;
     }
 
-    public Double getOrderAmount() {
-        return orderAmount == null ? 0 : orderAmount;
+    public double getOrderAmount() {
+        return orderAmount;
     }
 
-    public void setOrderAmount(Double orderAmount) {
+    public void setOrderAmount(double orderAmount) {
         this.orderAmount = orderAmount;
     }
 
-    public Double getMonthMoney() {
-        return monthMoney;
+    public double getMonthMoney() {
+         return monthMoney;
     }
 
-    public void setMonthMoney(Double monthMoney) {
+    public void setMonthMoney(double monthMoney) {
         this.monthMoney = monthMoney;
     }
 

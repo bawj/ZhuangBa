@@ -85,11 +85,18 @@ public class ServiceItemsAdapter extends BaseQuickAdapter<OrderServiceItem, Base
             tvServiceItemNumber.setText("");
             tvOrderDetailMaintenance.setVisibility(View.GONE);
         }else {
-            //项目金额
-            tvItemServiceMoney.setText(mContext.getString(R.string.content_money, String.valueOf(orderServiceItem.getAmount())));
-            //项目数量
-            tvServiceItemNumber.setText(mContext.getString(R.string.number, String.valueOf(orderServiceItem.getNumber())));
             tvOrderDetailMaintenance.setVisibility(View.VISIBLE);
+            if (flag){
+                //项目金额
+                tvItemServiceMoney.setText(mContext.getString(R.string.content_money, String.valueOf(orderServiceItem.getAmount())));
+                //项目数量
+                tvServiceItemNumber.setText(mContext.getString(R.string.number, String.valueOf(orderServiceItem.getNumber())));
+            }else {
+                //项目金额
+                tvItemServiceMoney.setText(mContext.getString(R.string.asterisk));
+                //项目数量
+                tvServiceItemNumber.setText(mContext.getString(R.string.asterisk));
+            }
         }
 
         //debugging 调试

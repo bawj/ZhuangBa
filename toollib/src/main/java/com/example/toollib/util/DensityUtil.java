@@ -4,6 +4,9 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.util.DisplayMetrics;
 
+import java.math.BigDecimal;
+import java.text.DecimalFormat;
+
 /**
  * @author Administrator
  * @date 2019/7/5 0005
@@ -80,5 +83,15 @@ public class DensityUtil {
      */
     public static DisplayMetrics getScreenSize(Context context) {
         return context.getResources().getDisplayMetrics();
+    }
+
+    /**
+     * 保留两位小数
+     * @param number double
+     * @return string
+     */
+    public static String getDecimalFormat(double number){
+        DecimalFormat df = new DecimalFormat("0.00");
+        return df.format(number);
     }
 }

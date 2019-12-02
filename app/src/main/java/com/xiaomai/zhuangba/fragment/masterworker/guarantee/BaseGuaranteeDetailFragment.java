@@ -7,7 +7,6 @@ import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.toollib.base.BaseFragment;
@@ -25,6 +24,8 @@ import com.xiaomai.zhuangba.adapter.OrderDateListAdapter;
 import com.xiaomai.zhuangba.data.bean.GuaranteeAndOrderDate;
 import com.xiaomai.zhuangba.data.bean.GuaranteeDeatil;
 import com.xiaomai.zhuangba.data.bean.OrderDateList;
+import com.xiaomai.zhuangba.data.bean.UserInfo;
+import com.xiaomai.zhuangba.data.db.DBHelper;
 import com.xiaomai.zhuangba.enums.StaticExplain;
 import com.xiaomai.zhuangba.http.ServiceUrl;
 import com.xiaomai.zhuangba.util.DateUtil;
@@ -173,8 +174,16 @@ public class BaseGuaranteeDetailFragment extends BaseFragment implements OnRefre
         }else {
             tvBaseGuaranteeEquipmentNumber.setText("--");
         }
-        //项目金额
-        tvBaseGuaranteeMoney.setText(getString(R.string.content_money , String.valueOf(guaranteeDeatil.getAmount())));
+
+        UserInfo unique = DBHelper.getInstance().getUserInfoDao().queryBuilder().unique();
+        String phoneNumber = unique.getPhoneNumber();
+        String assigner = guaranteeDeatil.getAssigner();
+        if (TextUtils.isEmpty(assigner) || phoneNumber.equals(assigner)){
+            //项目金额
+            tvBaseGuaranteeMoney.setText(getString(R.string.content_money , String.valueOf(guaranteeDeatil.getAmount())));
+        }else {
+            tvBaseGuaranteeMoney.setText(getString(R.string.asterisk));
+        }
         //服务地址
         tvBaseOrderDetailLocation.setText(guaranteeDeatil.getAddress());
     }

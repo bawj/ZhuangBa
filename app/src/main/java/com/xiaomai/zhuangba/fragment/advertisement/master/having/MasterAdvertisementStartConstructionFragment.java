@@ -83,7 +83,7 @@ public class MasterAdvertisementStartConstructionFragment extends BaseAutographF
 
     @Override
     public String getAutographImgTip() {
-        return getString(R.string.advertisement_start_construction);
+        return getString(R.string.please_upload_clear_photos_for_next_issue);
     }
 
     @Override

@@ -12,7 +12,6 @@ import com.example.toollib.http.exception.ApiException;
 import com.example.toollib.http.observer.BaseHttpRxObserver;
 import com.example.toollib.http.util.RxUtils;
 import com.example.toollib.util.Log;
-import com.qmuiteam.qmui.arch.QMUIFragment;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.xiaomai.zhuangba.R;
 import com.xiaomai.zhuangba.adapter.GuaranteeAdapter;
@@ -26,7 +25,6 @@ import com.xiaomai.zhuangba.fragment.masterworker.guarantee.HaveInHandGuaranteeF
 import com.xiaomai.zhuangba.fragment.masterworker.guarantee.NewTaskGuaranteeDetailFragment;
 import com.xiaomai.zhuangba.fragment.masterworker.guarantee.NotYetBegunGuaranteeFragment;
 import com.xiaomai.zhuangba.http.ServiceUrl;
-import com.xiaomai.zhuangba.util.GuaranteeUtil;
 
 import java.util.List;
 

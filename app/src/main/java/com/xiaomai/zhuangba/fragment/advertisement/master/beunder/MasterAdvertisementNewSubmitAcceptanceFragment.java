@@ -82,6 +82,11 @@ public class MasterAdvertisementNewSubmitAcceptanceFragment extends BaseAutograp
     }
 
     @Override
+    public String getAutographImgTip() {
+        return getString(R.string.please_upload_clear_photos_of_last_issue);
+    }
+
+    @Override
     protected String getActivityTitle() {
         return getString(R.string.post_construction_photos);
     }

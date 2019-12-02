@@ -37,7 +37,7 @@ public class GuaranteeDeatil {
     private String earningsMoney;
     private String orderType;
     private String address;
-
+    private String assigner;
     private String code;
 
     public String getId() {
@@ -158,5 +158,13 @@ public class GuaranteeDeatil {
 
     public void setCode(String code) {
         this.code = code;
+    }
+
+    public String getAssigner() {
+        return assigner;
+    }
+
+    public void setAssigner(String assigner) {
+        this.assigner = assigner;
     }
 }

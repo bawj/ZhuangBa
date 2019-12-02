@@ -53,9 +53,9 @@ public class BaseMasterOrderDetailFragment extends BaseOrderDetailFragment<IMast
 
         String percentage;
         if (TextUtils.isEmpty(assigner) || phoneNumber.equals(assigner)){
-            tvBaseOrderDetailTotalMoney.setText(getString(R.string.content_money, ongoingOrdersList.getMasterOrderAmount()));
+            tvBaseOrderDetailTotalMoney.setText(getString(R.string.content_money, String.valueOf(ongoingOrdersList.getMasterOrderAmount())));
             //总金额
-            percentage = AmountUtil.percentage(DensityUtils.stringTypeDouble(ongoingOrdersList.getMasterOrderAmount()),
+            percentage = AmountUtil.percentage(ongoingOrdersList.getMasterOrderAmount(),
                     DensityUtils.stringTypeDouble(String.valueOf(ongoingOrdersList.getOrderAmount())));
             percentage = getString(R.string.proportion, String.valueOf(ongoingOrdersList.getOrderAmount()), percentage) + "%";
         }else {

@@ -1,12 +1,15 @@
 package com.xiaomai.zhuangba.adapter;
 
 import android.text.TextUtils;
+import android.view.View;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.xiaomai.zhuangba.R;
 import com.xiaomai.zhuangba.data.bean.MaintenanceOverman;
+import com.xiaomai.zhuangba.data.bean.UserInfo;
+import com.xiaomai.zhuangba.data.db.DBHelper;
 import com.xiaomai.zhuangba.util.DateUtil;
 import com.xiaomai.zhuangba.util.GuaranteeUtil;
 
@@ -62,10 +65,25 @@ public class GuaranteeAdapter extends BaseQuickAdapter<MaintenanceOverman, BaseV
         }
         tvEndTime.setText(mContext.getString(R.string.end_time, endTime));
         tvAccountingTime.setText(accountingTime);
+
+        //如果 assigner == 登录账号 则是 团长 显示金额 否则不显示
         //维保总计
         TextView tvItemOrdersMoney = holder.getView(R.id.tvItemOrdersMoney);
-        tvItemOrdersMoney.setText(String.valueOf(maintenanceOverman.getAmount()));
-
+        UserInfo unique = DBHelper.getInstance().getUserInfoDao().queryBuilder().unique();
+        String phoneNumber = unique.getPhoneNumber();
+        String assigner = maintenanceOverman.getAssigner();
+        if (TextUtils.isEmpty(assigner) || phoneNumber.equals(assigner)){
+            tvItemOrdersMoney.setText(mContext.getString(R.string.content_money,String.valueOf(maintenanceOverman.getAmount())));
+        }else {
+            tvItemOrdersMoney.setText(String.valueOf(mContext.getString(R.string.asterisk)));
+        }
+        //团队标签
+        TextView tvMaintenanceTeam = holder.getView(R.id.tvMaintenanceTeam);
+        if (!TextUtils.isEmpty(assigner)){
+            tvMaintenanceTeam.setVisibility(View.VISIBLE);
+        }else {
+            tvMaintenanceTeam.setVisibility(View.GONE);
+        }
         tvItemOrdersMoney.setTag(maintenanceOverman);
     }
 }

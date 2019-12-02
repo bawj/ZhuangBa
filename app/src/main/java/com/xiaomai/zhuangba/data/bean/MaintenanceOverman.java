@@ -1,10 +1,12 @@
 package com.xiaomai.zhuangba.data.bean;
 
+import android.text.TextUtils;
+
 /**
  * @author Administrator
  * @date 2019/11/7 0007
  */
-public class MaintenanceOverman {
+public class MaintenanceOverman{
 
     /**"主键id"*/
     private Integer id;
@@ -16,10 +18,10 @@ public class MaintenanceOverman {
     private String orderCode;
 
     /**"维保数量(月份)"*/
-    private Integer number;
+    private int number;
 
     /**"维保金额"*/
-    private Double amount;
+    private double amount;
 
     /**"雇主姓名"*/
     private String employerName;
@@ -43,7 +45,10 @@ public class MaintenanceOverman {
     private String orderType;
 
     /**"每月的收益金额"*/
-    private Double earningsMoney;
+    private double earningsMoney;
+
+    private String assigner;
+
 
     public Integer getId() {
         return id;
@@ -69,19 +74,19 @@ public class MaintenanceOverman {
         this.orderCode = orderCode;
     }
 
-    public Integer getNumber() {
+    public int getNumber() {
         return number;
     }
 
-    public void setNumber(Integer number) {
+    public void setNumber(int number) {
         this.number = number;
     }
 
-    public Double getAmount() {
+    public double getAmount() {
         return amount;
     }
 
-    public void setAmount(Double amount) {
+    public void setAmount(double amount) {
         this.amount = amount;
     }
 
@@ -141,11 +146,21 @@ public class MaintenanceOverman {
         this.orderType = orderType;
     }
 
-    public Double getEarningsMoney() {
+    public double getEarningsMoney() {
+        //return DensityUtils.stringTypeDouble(DensityUtil.getDecimalFormat(earningsMoney));
         return earningsMoney;
     }
 
-    public void setEarningsMoney(Double earningsMoney) {
+    public void setEarningsMoney(double earningsMoney) {
         this.earningsMoney = earningsMoney;
     }
+
+    public String getAssigner() {
+        return TextUtils.isEmpty(assigner) ? "" : assigner;
+    }
+
+    public void setAssigner(String assigner) {
+        this.assigner = assigner;
+    }
+
 }
