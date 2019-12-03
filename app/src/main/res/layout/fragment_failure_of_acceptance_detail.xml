@@ -332,6 +332,7 @@
                             android:layout_marginLeft="@dimen/tool_lib_12dp"
                             android:layout_marginTop="@dimen/tool_lib_8dp"
                             android:layout_marginRight="@dimen/tool_lib_12dp"
+                            android:layout_marginBottom="@dimen/tool_lib_8dp"
                             android:descendantFocusability="blocksDescendants" />
                     </RelativeLayout>
                     <!--现场描述-->
@@ -355,6 +356,7 @@
                             android:layout_marginLeft="@dimen/tool_lib_16dp"
                             android:layout_marginTop="@dimen/tool_lib_8dp"
                             android:layout_marginRight="@dimen/tool_lib_16dp"
+                            android:layout_marginBottom="@dimen/tool_lib_8dp"
                             android:background="@drawable/gray_field_description_bg"
                             android:ellipsize="end"
                             android:maxLines="6"
@@ -381,6 +383,7 @@
                             android:layout_marginLeft="@dimen/tool_lib_12dp"
                             android:layout_marginTop="@dimen/tool_lib_8dp"
                             android:layout_marginRight="@dimen/tool_lib_12dp"
+                            android:layout_marginBottom="@dimen/tool_lib_8dp"
                             android:descendantFocusability="blocksDescendants" />
                     </RelativeLayout>
 

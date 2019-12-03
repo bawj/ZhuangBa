@@ -42,7 +42,7 @@ public class BaseContinuedMaintenanceFragment extends BaseFragment implements Ba
     /**
      * 维保总价格
      */
-    private Double totalPrice = 0d;
+    public Double totalPrice = 0d;
 
     private BaseContinuedMaintenanceAdapter baseContinuedMaintenanceAdapter;
 

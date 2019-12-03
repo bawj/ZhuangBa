@@ -132,7 +132,7 @@ public class PaymentDetailsFragment extends BaseFragment<IPaymentDetailsModule> 
                 //预约时间
                 tvPaymentAppointment.setText(submissionOrder.getAppointmentTime());
                 //地址 + 详细地址
-                String addressDetail = submissionOrder.getAddress() + submissionOrder.getAddressDetail();
+                String addressDetail = submissionOrder.getAddress() /*+ submissionOrder.getAddressDetail()*/;
                 tvPaymentLocation.setText(Util.getAddress(addressDetail));
                 //订单编号
                 tvPaymentTaskOrderCode.setText(submissionOrder.getOrderCode());
@@ -274,9 +274,9 @@ public class PaymentDetailsFragment extends BaseFragment<IPaymentDetailsModule> 
     public SubmissionOrder getSubmissionOrder() {
         String orderData = getOrderData();
         if (getOrderData() != null) {
-            SubmissionOrder submissionOrder = new Gson().fromJson(orderData, SubmissionOrder.class);
-            submissionOrder.setAddress(tvPaymentLocation.getText().toString());
-            return submissionOrder;
+            //SubmissionOrder submissionOrder = new Gson().fromJson(orderData, SubmissionOrder.class);
+            //submissionOrder.setAddress(tvPaymentLocation.getText().toString());
+            return new Gson().fromJson(orderData, SubmissionOrder.class);
         }
         return null;
     }

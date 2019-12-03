@@ -14,11 +14,14 @@ import com.qmuiteam.qmui.layout.QMUIButton;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.xiaomai.zhuangba.R;
 import com.xiaomai.zhuangba.data.bean.OngoingOrdersList;
+import com.xiaomai.zhuangba.data.bean.OrderDateList;
 import com.xiaomai.zhuangba.data.bean.OrderServiceDate;
 import com.xiaomai.zhuangba.enums.ForResultCode;
 import com.xiaomai.zhuangba.fragment.orderdetail.master.base.BaseMasterOrderDetailFragment;
 import com.xiaomai.zhuangba.http.ServiceUrl;
 import com.xiaomai.zhuangba.util.ConstantUtil;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -41,6 +44,7 @@ public class StartTheMissionFragment extends BaseMasterOrderDetailFragment {
     @BindView(R.id.tvBaseOrderConfirmationTime_)
     TextView tvBaseOrderConfirmationTime_;
     private OngoingOrdersList ongoingOrdersList;
+    private List<OrderDateList> orderDateLists;
 
     public static StartTheMissionFragment newInstance(String orderCode , String orderType) {
         Bundle args = new Bundle();
@@ -77,9 +81,12 @@ public class StartTheMissionFragment extends BaseMasterOrderDetailFragment {
                         }).showDialog();
                 break;
             case R.id.btnConfirmationTime:
-                if (TextUtils.isEmpty(ongoingOrdersList.getConfirmationTime())) {
+                if (TextUtils.isEmpty(ongoingOrdersList.getConfirmationTime()) && orderDateLists != null && !orderDateLists.isEmpty()) {
                     //确认时间
-                    startFragmentForResult(ConfirmationTimeFragment.newInstance(ongoingOrdersList), ForResultCode.START_FOR_RESULT_CODE.getCode());
+                    OrderDateList orderDateList = orderDateLists.get(1);
+                    //发布时间
+                    String time = orderDateList.getTime();
+                    startFragmentForResult(ConfirmationTimeFragment.newInstance(ongoingOrdersList , time), ForResultCode.START_FOR_RESULT_CODE.getCode());
                 } else {
                     //现在出发
                     requestWeLeaveNow();
@@ -112,6 +119,13 @@ public class StartTheMissionFragment extends BaseMasterOrderDetailFragment {
                 }
             }
         }
+    }
+
+
+    @Override
+    public void orderDateListsSuccess(List<OrderDateList> orderDateLists) {
+        super.orderDateListsSuccess(orderDateLists);
+        this.orderDateLists = orderDateLists;
     }
 
     @Override

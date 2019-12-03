@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@color/tool_lib_gray_F5F6FA"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/tool_lib_gray_F5F6FA">
 
     <com.scwang.smartrefresh.layout.SmartRefreshLayout
         android:id="@+id/refreshBaseList"
@@ -221,8 +221,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/tool_lib_8dp"
-                        android:visibility="gone"
-                        android:background="@android:color/white">
+                        android:background="@android:color/white"
+                        android:visibility="gone">
 
                         <TextView
                             android:id="@+id/tvLivePhotos"
@@ -237,6 +237,7 @@
                             android:layout_marginLeft="@dimen/tool_lib_12dp"
                             android:layout_marginTop="@dimen/tool_lib_8dp"
                             android:layout_marginRight="@dimen/tool_lib_12dp"
+                            android:layout_marginBottom="@dimen/tool_lib_8dp"
                             android:descendantFocusability="blocksDescendants" />
                     </RelativeLayout>
                     <!--现场描述-->
@@ -245,8 +246,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/tool_lib_8dp"
-                        android:visibility="gone"
-                        android:background="@android:color/white">
+                        android:background="@android:color/white"
+                        android:visibility="gone">
 
                         <TextView
                             android:id="@+id/tvFiledDescription_"
@@ -261,6 +262,7 @@
                             android:layout_marginLeft="@dimen/tool_lib_16dp"
                             android:layout_marginTop="@dimen/tool_lib_8dp"
                             android:layout_marginRight="@dimen/tool_lib_16dp"
+                            android:layout_marginBottom="@dimen/tool_lib_8dp"
                             android:background="@drawable/gray_field_description_bg"
                             android:ellipsize="end"
                             android:maxLines="6"
@@ -287,6 +289,7 @@
                             android:layout_marginLeft="@dimen/tool_lib_12dp"
                             android:layout_marginTop="@dimen/tool_lib_8dp"
                             android:layout_marginRight="@dimen/tool_lib_12dp"
+                            android:layout_marginBottom="@dimen/tool_lib_8dp"
                             android:descendantFocusability="blocksDescendants" />
                     </RelativeLayout>
 

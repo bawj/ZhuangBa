@@ -8,8 +8,10 @@ import com.xiaomai.zhuangba.R;
 import com.xiaomai.zhuangba.data.bean.OrderServiceDate;
 import com.xiaomai.zhuangba.fragment.orderdetail.employer.patrol.base.BasePatrolDetailFragment;
 import com.xiaomai.zhuangba.util.ConstantUtil;
+import com.xiaomai.zhuangba.util.MapUtils;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 /**
  * @author Administrator
@@ -34,6 +36,15 @@ public class PatrolPoolDetailFragment extends BasePatrolDetailFragment {
     @Override
     public int getContentView() {
         return R.layout.fragment_base_patrol_pool_detail;
+    }
+
+    @OnClick({R.id.relBaseOrderDetailLocation})
+    public void onViewBaseClicked(View view) {
+        switch (view.getId()) {
+            case R.id.relBaseOrderDetailLocation:
+                break;
+            default:
+        }
     }
 
     @Override

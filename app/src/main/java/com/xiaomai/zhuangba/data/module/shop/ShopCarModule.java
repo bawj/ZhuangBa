@@ -195,7 +195,7 @@ public class ShopCarModule extends BaseModule<IShopCarView> implements IShopCarM
             mViewRef.get().showToast(mContext.get().getString(R.string.please_input_address));
             return null;
         }
-        hashMap.put("address", address + addressDetail);
+        hashMap.put("address", address);
         //预约时间
         String appointmentTime = orderAddress.getAppointmentTime();
         if (TextUtils.isEmpty(appointmentTime)) {

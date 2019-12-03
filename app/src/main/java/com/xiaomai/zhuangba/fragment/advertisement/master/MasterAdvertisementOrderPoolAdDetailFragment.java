@@ -11,6 +11,7 @@ import com.xiaomai.zhuangba.fragment.advertisement.base.BaseAdvertisementFragmen
 import com.xiaomai.zhuangba.util.ConstantUtil;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 /**
  * @author Administrator
@@ -31,6 +32,15 @@ public class MasterAdvertisementOrderPoolAdDetailFragment extends BaseAdvertisem
         MasterAdvertisementOrderPoolAdDetailFragment fragment = new MasterAdvertisementOrderPoolAdDetailFragment();
         fragment.setArguments(args);
         return fragment;
+    }
+
+    @OnClick({R.id.relBaseOrderDetailLocation})
+    public void onViewBaseClicked(View view) {
+        switch (view.getId()) {
+            case R.id.relBaseOrderDetailLocation:
+                break;
+            default:
+        }
     }
 
     @Override

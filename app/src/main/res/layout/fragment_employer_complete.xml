@@ -305,6 +305,7 @@
                             android:layout_below="@+id/tvLivePhotos"
                             android:layout_marginLeft="@dimen/tool_lib_12dp"
                             android:layout_marginTop="@dimen/tool_lib_8dp"
+                            android:layout_marginBottom="@dimen/tool_lib_8dp"
                             android:layout_marginRight="@dimen/tool_lib_12dp"
                             android:descendantFocusability="blocksDescendants" />
                     </RelativeLayout>
@@ -330,6 +331,7 @@
                             android:layout_marginLeft="@dimen/tool_lib_16dp"
                             android:layout_marginTop="@dimen/tool_lib_8dp"
                             android:layout_marginRight="@dimen/tool_lib_16dp"
+                            android:layout_marginBottom="@dimen/tool_lib_8dp"
                             android:background="@drawable/gray_field_description_bg"
                             android:ellipsize="end"
                             android:maxLines="6"
@@ -356,6 +358,7 @@
                             android:layout_below="@+id/tvBaseOrderDetailServiceItems"
                             android:layout_marginLeft="@dimen/tool_lib_12dp"
                             android:layout_marginTop="@dimen/tool_lib_8dp"
+                            android:layout_marginBottom="@dimen/tool_lib_8dp"
                             android:layout_marginRight="@dimen/tool_lib_12dp"
                             android:descendantFocusability="blocksDescendants" />
                     </RelativeLayout>

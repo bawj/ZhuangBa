@@ -73,15 +73,16 @@ public class AddMaintenanceFragment extends BaseContinuedMaintenanceFragment imp
     public Double calculateThePrice() {
         List<OrderServiceItem> maintenanceList = DBHelper.getInstance()
                 .getOrderServiceItemDao().queryBuilder().list();
-        double totalPrice = 0;
+        double price = 0;
         for (OrderServiceItem orderServiceItem : maintenanceList) {
             //服务数量
             int number = orderServiceItem.getNumber();
             //维保金额
             double maintenanceAmount = orderServiceItem.getMaintenanceAmount();
-            totalPrice += number * maintenanceAmount;
+            price += number * maintenanceAmount;
         }
-        return totalPrice;
+        totalPrice = price;
+        return price;
     }
 
     @Override
@@ -178,7 +179,9 @@ public class AddMaintenanceFragment extends BaseContinuedMaintenanceFragment imp
             maintenanceProjects.setAmout(number * maintenanceAmount);
             //服务项目ID
             maintenanceProjects.setServiceId(orderServiceItem.getServiceId());
-            maintenanceProjectsList.add(maintenanceProjects);
+            if (maintenanceAmount > 0){
+                maintenanceProjectsList.add(maintenanceProjects);
+            }
         }
 
         hashMap.put("maintenanceProjects" , maintenanceProjectsList);

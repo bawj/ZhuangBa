@@ -134,9 +134,9 @@
                         <View
                             android:id="@+id/viewHorizontalLine"
                             style="@style/tool_lib_horizontal_line"
-                            android:layout_marginTop="@dimen/tool_lib_12dp"
                             android:layout_below="@+id/tvBaseOrderConfirmationTime"
                             android:layout_marginLeft="@dimen/tool_lib_12dp"
+                            android:layout_marginTop="@dimen/tool_lib_12dp"
                             android:layout_marginRight="@dimen/tool_lib_12dp" />
 
                         <RelativeLayout
@@ -191,8 +191,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/tool_lib_8dp"
-                        android:visibility="gone"
-                        android:background="@android:color/white">
+                        android:background="@android:color/white"
+                        android:visibility="gone">
 
                         <TextView
                             android:id="@+id/tvLivePhotos"
@@ -207,6 +207,7 @@
                             android:layout_marginLeft="@dimen/tool_lib_12dp"
                             android:layout_marginTop="@dimen/tool_lib_8dp"
                             android:layout_marginRight="@dimen/tool_lib_12dp"
+                            android:layout_marginBottom="@dimen/tool_lib_8dp"
                             android:descendantFocusability="blocksDescendants" />
                     </RelativeLayout>
                     <!--现场描述-->
@@ -215,8 +216,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/tool_lib_8dp"
-                        android:visibility="gone"
-                        android:background="@android:color/white">
+                        android:background="@android:color/white"
+                        android:visibility="gone">
 
                         <TextView
                             android:id="@+id/tvFiledDescription_"
@@ -231,6 +232,7 @@
                             android:layout_marginLeft="@dimen/tool_lib_16dp"
                             android:layout_marginTop="@dimen/tool_lib_8dp"
                             android:layout_marginRight="@dimen/tool_lib_16dp"
+                            android:layout_marginBottom="@dimen/tool_lib_8dp"
                             android:background="@drawable/gray_field_description_bg"
                             android:ellipsize="end"
                             android:maxLines="6"
@@ -258,6 +260,7 @@
                             android:layout_marginLeft="@dimen/tool_lib_12dp"
                             android:layout_marginTop="@dimen/tool_lib_8dp"
                             android:layout_marginRight="@dimen/tool_lib_12dp"
+                            android:layout_marginBottom="@dimen/tool_lib_8dp"
                             android:descendantFocusability="blocksDescendants" />
                     </RelativeLayout>
 

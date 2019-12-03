@@ -16,6 +16,7 @@ import com.example.toollib.http.util.RxUtils;
 import com.example.toollib.util.ToastUtil;
 import com.xiaomai.zhuangba.R;
 import com.xiaomai.zhuangba.data.bean.OngoingOrdersList;
+import com.xiaomai.zhuangba.data.bean.OrderDateList;
 import com.xiaomai.zhuangba.enums.ForResultCode;
 import com.xiaomai.zhuangba.http.ServiceUrl;
 import com.xiaomai.zhuangba.util.DateUtil;
@@ -25,6 +26,7 @@ import org.joda.time.DateTime;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -39,6 +41,8 @@ import io.reactivex.Observable;
 public class ConfirmationTimeFragment extends BaseFragment {
 
     public static final String MORE_TIME = "more_time";
+    public static final String TIME = "time";
+
     @BindView(R.id.tvName)
     TextView tvName;
     @BindView(R.id.tvPhone)
@@ -50,9 +54,10 @@ public class ConfirmationTimeFragment extends BaseFragment {
     private Date selectionDate;
     private String time;
 
-    public static ConfirmationTimeFragment newInstance(OngoingOrdersList ongoingOrdersList) {
+    public static ConfirmationTimeFragment newInstance(OngoingOrdersList ongoingOrdersList , String time) {
         Bundle args = new Bundle();
         args.putParcelable(MORE_TIME, ongoingOrdersList);
+        args.putString(TIME, time);
         ConfirmationTimeFragment fragment = new ConfirmationTimeFragment();
         fragment.setArguments(args);
         return fragment;
@@ -97,16 +102,23 @@ public class ConfirmationTimeFragment extends BaseFragment {
     private void upload() {
         OngoingOrdersList ongoingOrdersList = getOngoingOrdersList();
         if (ongoingOrdersList != null) {
-            //预约时间
-            String appointmentTime = ongoingOrdersList.getAppointmentTime();
-            Long aLong = DateUtil.dateToCurrentTimeMilli(appointmentTime, "yyyy-MM-dd HH:mm:ss");
+            //最后修改时间
+            String appointmentTime = ongoingOrdersList.getModifyTime();
+            //发布时间 如果发布时间为空 则用最后修改时间
+            String time = getTime();
+            Long aLong;
+            if (!TextUtils.isEmpty(time)){
+                aLong = DateUtil.dateToCurrentTimeMilli(time, "yyyy-MM-dd HH:mm:ss");
+            }else {
+                aLong = DateUtil.dateToCurrentTimeMilli(appointmentTime, "yyyy-MM-dd HH:mm:ss");
+            }
             //确认时间
             String date = tvDate.getText().toString();
             Long aLong1 = DateUtil.dateToCurrentTimeMilli(date, "yyyy-MM-dd HH:mm:ss");
-//            if (aLong1 < aLong) {
-//                ToastUtil.showShort(getString(R.string.order_time_tip));
-//                return;
-//            }
+            if (aLong1 < aLong) {
+                ToastUtil.showShort(getString(R.string.order_time_tip));
+                return;
+            }
             String orderCode = ongoingOrdersList.getOrderCode();
             Observable<HttpResult<Object>> confirmationOrder = ServiceUrl.getUserApi().getConfirmationOrder(orderCode, date);
             RxUtils.getObservable(confirmationOrder)
@@ -185,6 +197,13 @@ public class ConfirmationTimeFragment extends BaseFragment {
     private OngoingOrdersList getOngoingOrdersList() {
         if (getArguments() != null) {
             return getArguments().getParcelable(MORE_TIME);
+        }
+        return null;
+    }
+
+    private String getTime(){
+        if (getArguments() != null) {
+            return getArguments().getString(TIME);
         }
         return null;
     }

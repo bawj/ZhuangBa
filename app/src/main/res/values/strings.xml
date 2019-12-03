@@ -350,7 +350,7 @@
     <string name="customer_name_">客户姓名：</string>
     <string name="contact_address">客户地址</string>
     <string name="specific_travel_time">具体前往时间</string>
-    <string name="order_time_tip">确认时间必须大于预约时间</string>
+    <string name="order_time_tip">确认时间必须大于发布时间</string>
     <string name="confirmation_date">确认时间:</string>
     <string name="we_leave_now">现在出发</string>
     <string name="start_construction">开始施工</string>
