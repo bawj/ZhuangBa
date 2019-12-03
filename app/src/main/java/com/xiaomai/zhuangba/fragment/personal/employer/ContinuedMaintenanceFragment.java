@@ -89,6 +89,7 @@ public class ContinuedMaintenanceFragment extends BaseContinuedMaintenanceFragme
     public Double calculateThePrice() {
         List<OrderServiceItem> maintenanceList = DBHelper.getInstance()
                 .getOrderServiceItemDao().queryBuilder().list();
+        double totalPrice = 0d;
         for (OrderServiceItem orderServiceItem : maintenanceList) {
             //服务数量
             int number = orderServiceItem.getNumber();

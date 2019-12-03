@@ -103,10 +103,10 @@ public class ConfirmationTimeFragment extends BaseFragment {
             //确认时间
             String date = tvDate.getText().toString();
             Long aLong1 = DateUtil.dateToCurrentTimeMilli(date, "yyyy-MM-dd HH:mm:ss");
-            if (aLong1 < aLong) {
-                ToastUtil.showShort(getString(R.string.order_time_tip));
-                return;
-            }
+//            if (aLong1 < aLong) {
+//                ToastUtil.showShort(getString(R.string.order_time_tip));
+//                return;
+//            }
             String orderCode = ongoingOrdersList.getOrderCode();
             Observable<HttpResult<Object>> confirmationOrder = ServiceUrl.getUserApi().getConfirmationOrder(orderCode, date);
             RxUtils.getObservable(confirmationOrder)

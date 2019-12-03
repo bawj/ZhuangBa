@@ -46,7 +46,7 @@ public class InstallationAssignmentTaskAdapter extends BaseQuickAdapter<OngoingO
         tvItemOrdersNumber.setText(mContext.getString(R.string.task_number, String.valueOf(ongoingOrders.getNumber())));
         //money
         TextView tvItemOrdersMoney = helper.getView(R.id.tvItemOrdersMoney);
-        tvItemOrdersMoney.setText(String.valueOf(mContext.getString(R.string.content_money, String.valueOf(ongoingOrders.getOrderAmount()))));
+        tvItemOrdersMoney.setText(String.valueOf(mContext.getString(R.string.content_money, String.valueOf(ongoingOrders.getMasterOrderAmount()))));
         //type
         TextView tvItemOrdersType = helper.getView(R.id.tvItemOrdersType);
 

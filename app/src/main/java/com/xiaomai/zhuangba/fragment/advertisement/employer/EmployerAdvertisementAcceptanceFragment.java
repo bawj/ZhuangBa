@@ -146,8 +146,9 @@ public class EmployerAdvertisementAcceptanceFragment extends BaseAdvertisementFr
         if (deliveryContents != null) {
             String picturesUrl = deliveryContents.getPicturesUrl();
             if (!TextUtils.isEmpty(picturesUrl)) {
-                final ArrayList<String> urlList = new ArrayList<>();
-                urlList.add(picturesUrl);
+                //final ArrayList<String> urlList = new ArrayList<>();
+                //urlList.add(picturesUrl);
+                final ArrayList<String> urlList = (ArrayList<String>) Util.getList(picturesUrl);
                 imgExhibitionAdapter.setNewData(urlList);
                 imgExhibitionAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
                     @Override
@@ -166,8 +167,9 @@ public class EmployerAdvertisementAcceptanceFragment extends BaseAdvertisementFr
             //交付后的内容
             String picturesUrl = deliveryContent.getPicturesUrl();
             if (!TextUtils.isEmpty(picturesUrl)) {
-                final ArrayList<String> urlList = new ArrayList<>();
-                urlList.add(picturesUrl);
+                //final ArrayList<String> urlList = new ArrayList<>();
+                final ArrayList<String> urlList = (ArrayList<String>) Util.getList(picturesUrl);
+                //urlList.add(picturesUrl);
                 imgExhibitionAfterAdapter.setNewData(urlList);
                 imgExhibitionAfterAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
                     @Override
