@@ -121,12 +121,14 @@ public class PushNotification {
 
             /**  type = 2   code = 订单编号 */
             private String code;
-            /** 页面跳转   1 首页 2订单详情 3提现详情 */
+            /** 页面跳转   1 首页 订单详情 3提现详情 */
             private String type;
             /** 时间 */
             private String time;
             /** 1安装单 2 广告单 */
             private String orderType;
+            /** 4 新任务 是否播放声音 */
+            private String newTask;
 
             public String getCode() {
                 return TextUtils.isEmpty(code) ? "" : code;
@@ -154,6 +156,14 @@ public class PushNotification {
 
             public String getOrderType() {
                 return orderType;
+            }
+
+            public String getNewTask() {
+                return newTask;
+            }
+
+            public void setNewTask(String newTask) {
+                this.newTask = newTask;
             }
 
             public void setOrderType(String orderType) {

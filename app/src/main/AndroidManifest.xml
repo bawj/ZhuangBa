@@ -66,7 +66,8 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/tool_lib_QMUI_AppTheme">
+        android:theme="@style/tool_lib_QMUI_AppTheme"
+        tools:replace="android:allowBackup">
         <!-- 高德地图 -->
         <meta-data
             android:name="com.amap.api.v2.apikey"
@@ -74,7 +75,19 @@
 
         <!-- 定位需要的服务 -->
         <service android:name="com.amap.api.location.APSService" />
-
+        <!--华为推送-->
+        <meta-data
+            android:name="com.huawei.hms.client.appid"
+            android:value="appid=101431691" />
+        <!--vivo push参数声明 -->
+        <!-- vivo start-->
+        <meta-data
+            android:name="com.vivo.push.api_key"
+            android:value="xxxxxx" />
+        <meta-data
+            android:name="com.vivo.push.app_id"
+            android:value="xxxxxx" />
+        <!-- VIVO end-->
         <activity
             android:name=".MainActivity"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize"
@@ -110,6 +123,11 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>
+
+        <activity
+            android:name=".push.MipushTestActivity"
+            android:exported="true"
+            android:launchMode="singleTask" />
     </application>
 
 </manifest>

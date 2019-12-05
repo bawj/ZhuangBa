@@ -1,9 +1,12 @@
 package com.xiaomai.zhuangba.application;
 
 import android.app.Application;
+import android.app.Notification;
 import android.content.Context;
 import android.content.Intent;
 import android.support.multidex.MultiDex;
+import android.text.TextUtils;
+import android.widget.RemoteViews;
 
 import com.example.toollib.ToolLib;
 import com.example.toollib.util.Log;
@@ -19,14 +22,22 @@ import com.umeng.message.UmengNotificationClickHandler;
 import com.umeng.message.entity.UMessage;
 import com.xiaomai.zhuangba.MainActivity;
 import com.xiaomai.zhuangba.PushNotificationDBDao;
+import com.xiaomai.zhuangba.R;
 import com.xiaomai.zhuangba.data.bean.MessageEvent;
 import com.xiaomai.zhuangba.data.bean.PushNotification;
 import com.xiaomai.zhuangba.data.bean.PushNotificationDB;
 import com.xiaomai.zhuangba.data.bean.UserInfo;
 import com.xiaomai.zhuangba.data.db.DBHelper;
 import com.xiaomai.zhuangba.enums.EventBusEnum;
+import com.xiaomai.zhuangba.util.ConstantUtil;
+import com.xiaomai.zhuangba.util.MediaPlayerUtil;
 import com.xiaomai.zhuangba.util.Util;
+import com.xiaomai.zhuangba.weight.camera.global.Constant;
 
+import org.android.agoo.huawei.HuaWeiRegister;
+import org.android.agoo.oppo.OppoRegister;
+import org.android.agoo.vivo.VivoRegister;
+import org.android.agoo.xiaomi.MiPushRegistar;
 import org.greenrobot.eventbus.EventBus;
 import org.json.JSONObject;
 
@@ -67,7 +78,16 @@ public class PretendApplication extends Application {
 
         Bugly.init(this, BUG_LY_APP_ID, false);
 
+        //小米推送
+        MiPushRegistar.register(getApplicationContext(),ConstantUtil.XIAO_MI_ID, ConstantUtil.XIAO_MI_KEY);
+        //华为
+        HuaWeiRegister.register(this);
+        //oppo
+        OppoRegister.register(this, ConstantUtil.OPPO_APP_KEY, ConstantUtil.OPPO_APP_SECRET);
+        //vivo
+        VivoRegister.register(this);
         PushAgent mPushAgent = PushAgent.getInstance(this);
+        mPushAgent.setNotificaitonOnForeground(true);
         //友盟初始化
         initUMeng(mPushAgent);
         //自定义通知栏打开
@@ -88,38 +108,74 @@ public class PretendApplication extends Application {
             public void dealWithNotificationMessage(Context context, UMessage msg) {
                 //调用super则会走通知展示流程，不调用super则不展示通知
                 super.dealWithNotificationMessage(context, msg);
-                JSONObject raw = msg.getRaw();
-                PushNotification.PayloadBean pushNotification = new Gson().fromJson(raw.toString(), PushNotification.PayloadBean.class);
-                PushNotificationDB pushNotificationDB = new PushNotificationDB();
-                if (pushNotification != null) {
-                    pushNotificationDB.setDisplayType(pushNotification.getDisplayType());
-                    PushNotification.PayloadBean.ExtraBean extra = pushNotification.getExtra();
-                    if (extra != null) {
-                        pushNotificationDB.setOrderCode(extra.getCode());
-                        pushNotificationDB.setOrderType(extra.getOrderType());
-                        pushNotificationDB.setType(extra.getType());
-                        pushNotificationDB.setTime(extra.getTime());
-                    }
-                    PushNotification.PayloadBean.BodyBean body = pushNotification.getBody();
-                    if (body != null) {
-                        pushNotificationDB.setAfterOpen(body.getAfterOpen());
-                        pushNotificationDB.setTicker(body.getTicker());
-                        pushNotificationDB.setText(body.getText());
-                        pushNotificationDB.setTitle(body.getTitle());
-                    }
-                }
-                UserInfo unique = DBHelper.getInstance().getUserInfoDao().queryBuilder().unique();
-                if (unique != null) {
-                    String phoneNumber = unique.getPhoneNumber();
-                    pushNotificationDB.setPhone(phoneNumber);
-                    PushNotificationDBDao pushNotificationDBDao = DBHelper.getInstance().getPushNotificationDBDao();
-                    pushNotificationDBDao.insert(pushNotificationDB);
-                    //通知 通知列表 刷新数据
-                    EventBus.getDefault().post(new MessageEvent(EventBusEnum.NOTIFICATION_REFRESH.getCode()));
+                //savePushMessage(msg);
+            }
+
+            @Override
+            public Notification getNotification(Context context, UMessage msg) {
+                switch (msg.builder_id) {
+                    case 1:
+                        Notification.Builder builder = new Notification.Builder(context);
+                        RemoteViews myNotificationView = new RemoteViews(context.getPackageName(),
+                                R.layout.notification_view);
+                        myNotificationView.setTextViewText(R.id.notification_title, msg.title);
+                        myNotificationView.setTextViewText(R.id.notification_text, msg.text);
+                        myNotificationView.setImageViewBitmap(R.id.notification_large_icon1,
+                                getLargeIcon(context, msg));
+                        myNotificationView.setImageViewResource(R.id.notification_large_icon1,
+                                getSmallIconId(context, msg));
+                        builder.setContent(myNotificationView)
+                                .setSmallIcon(getSmallIconId(context, msg))
+                                .setTicker(msg.ticker)
+                                .setAutoCancel(true);
+                        savePushMessage(msg);
+                        return builder.getNotification();
+                    default:
+                        savePushMessage(msg);
+                        //默认为0，若填写的builder_id并不存在，也使用默认。
+                        return super.getNotification(context, msg);
                 }
             }
         };
         mPushAgent.setMessageHandler(messageHandler);
+    }
+
+    private void savePushMessage(UMessage msg) {
+        JSONObject raw = msg.getRaw();
+        PushNotification.PayloadBean pushNotification = new Gson().fromJson(raw.toString(), PushNotification.PayloadBean.class);
+        PushNotificationDB pushNotificationDB = new PushNotificationDB();
+        if (pushNotification != null) {
+            pushNotificationDB.setDisplayType(pushNotification.getDisplayType());
+            PushNotification.PayloadBean.ExtraBean extra = pushNotification.getExtra();
+            if (extra != null) {
+                String type = extra.getType();
+                pushNotificationDB.setOrderCode(extra.getCode());
+                pushNotificationDB.setOrderType(extra.getOrderType());
+                pushNotificationDB.setType(type);
+                pushNotificationDB.setTime(extra.getTime());
+                String newTask = extra.getNewTask();
+                //如果type 等于2 代表新任务
+                if (!TextUtils.isEmpty(newTask) && newTask.equals("4")){
+                    MediaPlayerUtil.getMediaPlayerUtil().switchPlayer(getApplicationContext());
+                }
+            }
+            PushNotification.PayloadBean.BodyBean body = pushNotification.getBody();
+            if (body != null) {
+                pushNotificationDB.setAfterOpen(body.getAfterOpen());
+                pushNotificationDB.setTicker(body.getTicker());
+                pushNotificationDB.setText(body.getText());
+                pushNotificationDB.setTitle(body.getTitle());
+            }
+        }
+        UserInfo unique = DBHelper.getInstance().getUserInfoDao().queryBuilder().unique();
+        if (unique != null) {
+            String phoneNumber = unique.getPhoneNumber();
+            pushNotificationDB.setPhone(phoneNumber);
+            PushNotificationDBDao pushNotificationDBDao = DBHelper.getInstance().getPushNotificationDBDao();
+            pushNotificationDBDao.insert(pushNotificationDB);
+            //通知 通知列表 刷新数据
+            EventBus.getDefault().post(new MessageEvent(EventBusEnum.NOTIFICATION_REFRESH.getCode()));
+        }
     }
 
     private void uMengNotificationClick(PushAgent instance) {

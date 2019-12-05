@@ -4,10 +4,10 @@ ext {
             compileSdkVersion: 28,
             buildToolsVersion: "28.0.3",
             applicationId    : "com.xiaomai.zhuangba",
-            minSdkVersion    : 15,
+            minSdkVersion    : 17,
             targetSdkVersion : 28,
-            versionCode      : 16,
-            versionName      : "1.5.4",
+            versionCode      : 17,
+            versionName      : "1.6.0",
     ]
 
     //version配置
@@ -50,8 +50,6 @@ ext {
             "rxlifecycle-android"          : "com.trello.rxlifecycle2:rxlifecycle-android:2.2.1",
             "glide"                        : "com.github.bumptech.glide:glide:4.8.0",
             "leakcanary"                   : "com.squareup.leakcanary:leakcanary-android:1.5",
-            "umsdkcommon"                  : "com.umeng.umsdk:common:1.5.4",
-            "umsdkpush"                    : "com.umeng.umsdk:push:5.0.2",
             "eventBus"                     : "org.greenrobot:eventbus:3.0.0",
             "download"                     : "com.liulishuo.filedownloader:library:1.7.6",
             "SmartRefreshLayout"           : "com.scwang.smartrefresh:SmartRefreshLayout:1.1.0-alpha-25",
@@ -75,9 +73,24 @@ ext {
             "qiniu-java"                   : 'com.qiniu:qiniu-java-sdk:7.0.0',
             //图片压缩
             "Luban"                        : 'top.zibin:Luban:1.1.8',
-            //友盟统计
+            //友盟统计和推送
             "analytics"                    : 'com.umeng.umsdk:analytics:8.0.0',
-            "umsdk-common"                 : 'com.umeng.umsdk:common:2.0.0'
+            "umsdkcommon"                  : "com.umeng.umsdk:common:2.1.0",
+            "umsdk-utdid"                  : 'com.umeng.umsdk:utdid:1.1.5.3',
+            "umsdkpush"                    : "com.umeng.umsdk:push:6.0.1",
+            //小米Push通道
+            "xiaomi-push"                  : 'com.umeng.umsdk:xiaomi-push:3.6.17',
+            "xiaomi-umengaccs"             : 'com.umeng.umsdk:xiaomi-umengaccs:1.1.0',
+            //华为
+            "huawei-basetb"                : 'com.umeng.umsdk:huawei-basetb:2.6.3.305',
+            "huawei-pushtb"                : 'com.umeng.umsdk:huawei-pushtb:2.6.3.305',
+            "huawei-umengaccs"             : 'com.umeng.umsdk:huawei-umengaccs:1.2.1',
+            //oppo
+            "oppo-push"                    : "com.umeng.umsdk:oppo-push:1.0.1",
+            "oppo-umengaccs"               : "com.umeng.umsdk:oppo-umengaccs:1.0.3",
+            //vivo
+            "vivo-push"                    : 'com.umeng.umsdk:vivo-push:2.3.1',
+            "vivo-umengaccs"               : 'com.umeng.umsdk:vivo-umengaccs:1.0.4'
     ]
     //数据库框架
     database = [

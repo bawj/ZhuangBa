@@ -59,4 +59,15 @@ public class ConstantUtil {
      * 隐私协议
      */
     public static final String PRIVACY_PROTOCOL = "https://zb.hangzhouzhuangba.com/testZhuangBaManagerPages/yinsi";
+
+
+    /** 小米推送 id key*/
+    public static final String XIAO_MI_ID = "2882303761518120032";
+    public static final String XIAO_MI_KEY = "5561812034032";
+    /** oppo 推送 key*/
+    public static final String OPPO_APP_KEY = "0b396b98e2dd43a487e346eeabae2377";
+    public static final String OPPO_APP_SECRET = "1656fd20856c4fd088c3bd7d21cd2855";
+
+
+
 }

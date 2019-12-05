@@ -35,12 +35,12 @@ public class QiNiuUtil {
     private static final String secretKey = "maSmlklPLx66YRShRzQ6dyPgll1MPTJ_xA0sE5vE";
 
     // TODO: 2019/11/27 0027 正式发布需要修改
-    private static final String IMG_URL = "http://pic.hangzhouzhuangba.com/";
-    private static final String bucket = "zhengshi-zhuangba";
+//    private static final String IMG_URL = "http://pic.hangzhouzhuangba.com/";
+//    private static final String bucket = "zhengshi-zhuangba";
 
     //测试服 地址
-//    private static final String IMG_URL = "http://testpic.hangzhouzhuangba.com/";
-//    private static final String bucket = "zhuangba-upload-image";
+    private static final String IMG_URL = "http://testpic.hangzhouzhuangba.com/";
+    private static final String bucket = "zhuangba-upload-image";
 
 
     public static QiNiuUtil newInstance() {

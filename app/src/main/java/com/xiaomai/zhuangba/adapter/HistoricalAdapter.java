@@ -54,7 +54,7 @@ public class HistoricalAdapter extends BaseQuickAdapter<OngoingOrdersList, BaseV
         String phoneNumber = unique.getPhoneNumber();
 
         if (TextUtils.isEmpty(assigner) || phoneNumber.equals(assigner)){
-            tvItemHistoricalOrdersMoney.setText(mContext.getString(R.string.content_money, String.valueOf(ordersList.getOrderAmount())));
+            tvItemHistoricalOrdersMoney.setText(mContext.getString(R.string.content_money, String.valueOf(ordersList.getMasterOrderAmount())));
         }else {
             tvItemHistoricalOrdersMoney.setText(mContext.getString(R.string.asterisk));
         }

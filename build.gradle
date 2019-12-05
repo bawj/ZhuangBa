@@ -5,11 +5,14 @@ buildscript {
         google()
         jcenter()
         maven { url 'https://dl.bintray.com/umsdk/release' }
+        maven { url 'http://developer.huawei.com/repo/' }
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.2.1'
         classpath 'org.greenrobot:greendao-gradle-plugin:3.2.2'
         classpath 'com.jakewharton:butterknife-gradle-plugin:8.4.0'
+        //华为
+        classpath 'com.huawei.agconnect:agcp:1.0.0.300'
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
@@ -19,12 +22,13 @@ allprojects {
     repositories {
         google()
         jcenter()
-        maven { url 'https://dl.bintray.com/umsdk/release' }
         maven {
             url "https://jitpack.io"
         }
-        //友盟统计
+        //友盟
         maven { url 'https://dl.bintray.com/umsdk/release' }
+        //华为
+        maven {url 'http://developer.huawei.com/repo/'}
     }
 }
 
