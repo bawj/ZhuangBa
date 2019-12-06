@@ -7,6 +7,7 @@ import org.greenrobot.greendao.annotation.Generated;
 import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.Transient;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -143,7 +144,7 @@ public class UserInfo {
     }
 
     public String getPhoneNumber() {
-        return phoneNumber;
+        return TextUtils.isEmpty(phoneNumber) ? "" : phoneNumber;
     }
 
     public void setPhoneNumber(String phoneNumber) {
@@ -159,7 +160,7 @@ public class UserInfo {
     }
 
     public String getPassword() {
-        return password;
+        return TextUtils.isEmpty(password) ? "" : password;
     }
 
     public void setPassword(String password) {
@@ -175,7 +176,7 @@ public class UserInfo {
     }
 
     public String getInvitationCode() {
-        return invitationCode;
+        return TextUtils.isEmpty(invitationCode) ? "" : invitationCode;
     }
 
     public void setInvitationCode(String invitationCode) {
@@ -183,7 +184,7 @@ public class UserInfo {
     }
 
     public String getToken() {
-        return token;
+        return TextUtils.isEmpty(token) ? "" : token;
     }
 
     public void setToken(String token) {
@@ -199,7 +200,7 @@ public class UserInfo {
     }
 
     public String getRegistrationTime() {
-        return registrationTime;
+        return TextUtils.isEmpty(registrationTime) ? "" : registrationTime;
     }
 
     public void setRegistrationTime(String registrationTime) {
@@ -207,7 +208,7 @@ public class UserInfo {
     }
 
     public String getIdentityCard() {
-        return identityCard;
+        return TextUtils.isEmpty(identityCard) ? "" : identityCard;
     }
 
     public void setIdentityCard(String identityCard) {
@@ -215,7 +216,7 @@ public class UserInfo {
     }
 
     public String getValidityDataStart() {
-        return validityDataStart;
+        return TextUtils.isEmpty(validityDataStart) ? "" : validityDataStart;
     }
 
     public void setValidityDataStart(String validityDataStart) {
@@ -223,7 +224,7 @@ public class UserInfo {
     }
 
     public String getValidityDataEnd() {
-        return validityDataEnd;
+        return TextUtils.isEmpty(validityDataEnd) ? "" : validityDataEnd;
     }
 
     public void setValidityDataEnd(String validityDataEnd) {
@@ -231,7 +232,7 @@ public class UserInfo {
     }
 
     public String getIdCardFrontPhoto() {
-        return idCardFrontPhoto;
+        return TextUtils.isEmpty(idCardFrontPhoto) ? "" : idCardFrontPhoto;
     }
 
     public void setIdCardFrontPhoto(String idCardFrontPhoto) {
@@ -239,7 +240,7 @@ public class UserInfo {
     }
 
     public String getIdCardBackPhoto() {
-        return idCardBackPhoto;
+        return TextUtils.isEmpty(idCardBackPhoto) ? "" : idCardBackPhoto;
     }
 
     public void setIdCardBackPhoto(String idCardBackPhoto) {
@@ -247,7 +248,7 @@ public class UserInfo {
     }
 
     public String getValidityData() {
-        return validityData;
+        return TextUtils.isEmpty(validityData) ? "" : validityData;
     }
 
     public void setValidityData(String validityData) {
@@ -271,7 +272,7 @@ public class UserInfo {
     }
 
     public String getAuthenticationTime() {
-        return authenticationTime;
+        return TextUtils.isEmpty(authenticationTime) ? "" : authenticationTime;
     }
 
     public void setAuthenticationTime(String authenticationTime) {
@@ -319,7 +320,7 @@ public class UserInfo {
     }
 
     public List<SkillList> getSkillLists() {
-        return skills;
+        return skills == null ? new ArrayList<SkillList>() : skills;
     }
 
     public void setSkillLists(List<SkillList> skillLists) {
@@ -327,7 +328,7 @@ public class UserInfo {
     }
 
     public String getBusinessLicense() {
-        return businessLicense;
+        return TextUtils.isEmpty(businessLicense) ? "" : businessLicense;
     }
 
     public void setBusinessLicense(String businessLicense) {

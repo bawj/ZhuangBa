@@ -4,8 +4,8 @@ package com.example.toollib.http.interceptor;
 import android.support.annotation.NonNull;
 
 import com.example.toollib.util.Log;
-import com.example.toollib.util.spf.SPUtils;
 import com.example.toollib.util.Utils;
+import com.example.toollib.util.spf.SPUtils;
 import com.example.toollib.util.spf.SpfConst;
 
 import java.io.IOException;
@@ -32,6 +32,7 @@ public class SaveCookiesInterceptor implements Interceptor {
         Log.e("拦截器 authorization = " + authorization);
         request.addHeader("Authorization" , authorization);
         String cookie = SPUtils.getInstance().getString("cookie");
+        Log.e("读取cookie = " + cookie);
         request.addHeader("Cookie" , cookie);
         //版本号
         request.addHeader("VersionNumber" , String.valueOf(Utils.getVersionCode()));

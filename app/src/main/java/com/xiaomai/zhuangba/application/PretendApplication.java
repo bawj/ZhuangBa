@@ -52,9 +52,9 @@ public class PretendApplication extends Application {
 //   public static final String BASE_URL = "http://192.168.0.110:7966/";
 //   public static final String BASE_URL = "http://192.168.0.168:7966/";
 //   public static final String BASE_URL = "http://192.168.0.109:7966/";
-   public static final String BASE_URL = "https://zb.hangzhouzhuangba.com/zhuangBas/";
+//   public static final String BASE_URL = "https://zb.hangzhouzhuangba.com/zhuangBas/";
 //   public static final String BASE_URL = "http://zb.hangzhouzhuangba.com:8085/testZhuangBas/";
-//   public static final String BASE_URL = "https://zb.hangzhouzhuangba.com/testZhuangBas/";
+   public static final String BASE_URL = "https://zb.hangzhouzhuangba.com/testZhuangBas/";
 
     public static PretendApplication getInstance() {
         return pretendApplication;
@@ -77,11 +77,11 @@ public class PretendApplication extends Application {
 
         //小米推送
         MiPushRegistar.register(this,ConstantUtil.XIAO_MI_ID, ConstantUtil.XIAO_MI_KEY);
-//        //华为
+        //华为
         HuaWeiRegister.register(this);
-//        //oppo
+        //oppo
         OppoRegister.register(this, ConstantUtil.OPPO_APP_KEY, ConstantUtil.OPPO_APP_SECRET);
-//        //vivo
+        //vivo
         VivoRegister.register(this);
 
         PushAgent mPushAgent = PushAgent.getInstance(this);

@@ -30,6 +30,7 @@ public class ReceivedCookiesInterceptor implements Interceptor {
         if ((url.indexOf("userLogin/login")) != -1){
             String cookie = response.headers().get("Set-Cookie");
             if (cookie != null){
+                Log.e("保存 cookie = " + cookie);
                 SPUtils.getInstance().put("cookie" , cookie);
             }
         }

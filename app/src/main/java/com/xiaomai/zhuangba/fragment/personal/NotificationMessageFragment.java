@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.LinearLayout;
 
@@ -86,8 +87,9 @@ public class NotificationMessageFragment extends BaseFragment {
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 PushNotificationDB pushNotificationDB = (PushNotificationDB)
                         view.findViewById(R.id.tvNotificationContent).getTag();
+                String type = pushNotificationDB.getType();
                 if (userInfo != null) {
-                    if (pushNotificationDB.getType().equals(StringTypeExplain.ORDER_STATUS.getCode())) {
+                    if (!TextUtils.isEmpty(type) && type.equals(StringTypeExplain.ORDER_STATUS.getCode())) {
                         startOrderDetail(pushNotificationDB);
                     }
                 }
