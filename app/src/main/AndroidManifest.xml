@@ -80,13 +80,13 @@
             android:name="com.huawei.hms.client.appid"
             android:value="appid=101431691" />
         <!--vivo push参数声明 -->
-        <!-- vivo start-->
         <meta-data
             android:name="com.vivo.push.api_key"
-            android:value="xxxxxx" />
+            android:value="3c901401-c5f7-4516-b167-73fb75878349" />
         <meta-data
             android:name="com.vivo.push.app_id"
-            android:value="xxxxxx" />
+            android:value="17522" />
+
         <!-- VIVO end-->
         <activity
             android:name=".MainActivity"

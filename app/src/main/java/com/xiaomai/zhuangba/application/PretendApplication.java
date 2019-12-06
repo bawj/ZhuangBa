@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.multidex.MultiDex;
 import android.text.TextUtils;
-import android.widget.RemoteViews;
 
 import com.example.toollib.ToolLib;
 import com.example.toollib.util.Log;
@@ -22,7 +21,6 @@ import com.umeng.message.UmengNotificationClickHandler;
 import com.umeng.message.entity.UMessage;
 import com.xiaomai.zhuangba.MainActivity;
 import com.xiaomai.zhuangba.PushNotificationDBDao;
-import com.xiaomai.zhuangba.R;
 import com.xiaomai.zhuangba.data.bean.MessageEvent;
 import com.xiaomai.zhuangba.data.bean.PushNotification;
 import com.xiaomai.zhuangba.data.bean.PushNotificationDB;
@@ -32,7 +30,6 @@ import com.xiaomai.zhuangba.enums.EventBusEnum;
 import com.xiaomai.zhuangba.util.ConstantUtil;
 import com.xiaomai.zhuangba.util.MediaPlayerUtil;
 import com.xiaomai.zhuangba.util.Util;
-import com.xiaomai.zhuangba.weight.camera.global.Constant;
 
 import org.android.agoo.huawei.HuaWeiRegister;
 import org.android.agoo.oppo.OppoRegister;
@@ -79,15 +76,15 @@ public class PretendApplication extends Application {
         Bugly.init(this, BUG_LY_APP_ID, false);
 
         //小米推送
-        MiPushRegistar.register(getApplicationContext(),ConstantUtil.XIAO_MI_ID, ConstantUtil.XIAO_MI_KEY);
-        //华为
+        MiPushRegistar.register(this,ConstantUtil.XIAO_MI_ID, ConstantUtil.XIAO_MI_KEY);
+//        //华为
         HuaWeiRegister.register(this);
-        //oppo
+//        //oppo
         OppoRegister.register(this, ConstantUtil.OPPO_APP_KEY, ConstantUtil.OPPO_APP_SECRET);
-        //vivo
+//        //vivo
         VivoRegister.register(this);
+
         PushAgent mPushAgent = PushAgent.getInstance(this);
-        mPushAgent.setNotificaitonOnForeground(true);
         //友盟初始化
         initUMeng(mPushAgent);
         //自定义通知栏打开
@@ -107,34 +104,14 @@ public class PretendApplication extends Application {
             @Override
             public void dealWithNotificationMessage(Context context, UMessage msg) {
                 //调用super则会走通知展示流程，不调用super则不展示通知
+                savePushMessage(msg);
                 super.dealWithNotificationMessage(context, msg);
-                //savePushMessage(msg);
             }
-
             @Override
             public Notification getNotification(Context context, UMessage msg) {
-                switch (msg.builder_id) {
-                    case 1:
-                        Notification.Builder builder = new Notification.Builder(context);
-                        RemoteViews myNotificationView = new RemoteViews(context.getPackageName(),
-                                R.layout.notification_view);
-                        myNotificationView.setTextViewText(R.id.notification_title, msg.title);
-                        myNotificationView.setTextViewText(R.id.notification_text, msg.text);
-                        myNotificationView.setImageViewBitmap(R.id.notification_large_icon1,
-                                getLargeIcon(context, msg));
-                        myNotificationView.setImageViewResource(R.id.notification_large_icon1,
-                                getSmallIconId(context, msg));
-                        builder.setContent(myNotificationView)
-                                .setSmallIcon(getSmallIconId(context, msg))
-                                .setTicker(msg.ticker)
-                                .setAutoCancel(true);
-                        savePushMessage(msg);
-                        return builder.getNotification();
-                    default:
-                        savePushMessage(msg);
-                        //默认为0，若填写的builder_id并不存在，也使用默认。
-                        return super.getNotification(context, msg);
-                }
+                savePushMessage(msg);
+                //默认为0，若填写的builder_id并不存在，也使用默认。
+                return super.getNotification(context, msg);
             }
         };
         mPushAgent.setMessageHandler(messageHandler);
