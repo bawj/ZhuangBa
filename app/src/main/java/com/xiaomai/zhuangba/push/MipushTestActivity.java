@@ -5,7 +5,6 @@ import android.os.Bundle;
 
 import com.example.toollib.util.Log;
 import com.umeng.message.UmengNotifyClickActivity;
-import com.xiaomai.zhuangba.R;
 
 import org.android.agoo.common.AgooConstants;
 
