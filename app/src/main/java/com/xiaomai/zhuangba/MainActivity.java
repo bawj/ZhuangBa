@@ -11,6 +11,8 @@ import com.example.toollib.util.ToastUtil;
 import com.example.toollib.util.spf.SPUtils;
 import com.example.toollib.util.spf.SpfConst;
 import com.example.toollib.weight.dialog.CommonlyDialog;
+import com.liulishuo.filedownloader.FileDownloader;
+import com.liulishuo.filedownloader.connection.FileDownloadUrlConnection;
 import com.qmuiteam.qmui.arch.QMUIFragment;
 import com.umeng.analytics.MobclickAgent;
 import com.umeng.commonsdk.UMConfigure;
@@ -159,6 +161,12 @@ public class MainActivity extends BaseActivity {
     }
 
     private void startUpdateVersion(String downLoadUrl) {
+        FileDownloader.setupOnApplicationOnCreate(getApplication())
+                .connectionCreator(new FileDownloadUrlConnection
+                        .Creator(new FileDownloadUrlConnection.Configuration()
+                        .connectTimeout(60)
+                        .readTimeout(60)))
+                .commit();
         UpdateVersionDialog.getInstance().initView(this, downLoadUrl)
                 .showDialog(this);
     }
