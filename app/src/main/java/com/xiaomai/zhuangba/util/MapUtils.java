@@ -1,6 +1,5 @@
 package com.xiaomai.zhuangba.util;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
@@ -9,7 +8,6 @@ import android.graphics.Point;
 import android.location.Location;
 import android.location.LocationManager;
 import android.net.Uri;
-import android.support.v4.app.FragmentActivity;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
@@ -39,13 +37,10 @@ import com.amap.api.services.geocoder.RegeocodeResult;
 import com.amap.api.services.help.Tip;
 import com.example.toollib.http.util.DialogUtil;
 import com.example.toollib.util.AmountUtil;
-import com.example.toollib.util.Log;
 import com.example.toollib.util.ToastUtil;
 import com.qmuiteam.qmui.widget.dialog.QMUIBottomSheet;
-import com.xiaomai.zhuangba.MainActivity;
 import com.xiaomai.zhuangba.R;
 import com.xiaomai.zhuangba.data.bean.LocationSearch;
-import com.xiaomai.zhuangba.enums.StaticExplain;
 import com.xiaomai.zhuangba.enums.StringTypeExplain;
 import com.zaaach.citypicker.db.DBManager;
 import com.zaaach.citypicker.model.City;

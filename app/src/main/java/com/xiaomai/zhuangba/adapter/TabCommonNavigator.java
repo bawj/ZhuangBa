@@ -42,7 +42,7 @@ public class TabCommonNavigator extends CommonNavigatorAdapter {
     public IPagerTitleView getTitleView(Context context, final int index) {
         SimplePagerTitleView simplePagerTitleView = new ScaleTransitionPagerTitleView(context);
         simplePagerTitleView.setText(dataList.get(index));
-        simplePagerTitleView.setTextSize(18);
+        simplePagerTitleView.setTextSize(context.getResources().getDimension(R.dimen.tool_lib_5sp));
         simplePagerTitleView.setNormalColor(context.getResources().getColor(R.color.tool_lib_gray_777777));
         simplePagerTitleView.setSelectedColor(context.getResources().getColor(R.color.tool_lib_gray_222222));
 

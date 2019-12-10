@@ -33,6 +33,11 @@ public class AdvertisingBillsBean implements Serializable {
     private int pageSize;
     private String phoneNumber;
     private String orderStatus;
+    private int distance;
+    /** 纬度 */
+    private float lat;
+    /** 经度 */
+    private float lon;
 
     public String getProvince() {
         return TextUtils.isEmpty(province) ? "" : province;
@@ -112,5 +117,29 @@ public class AdvertisingBillsBean implements Serializable {
 
     public void setOrderStatus(String orderStatus) {
         this.orderStatus = orderStatus;
+    }
+
+    public int getDistance() {
+        return distance;
+    }
+
+    public void setDistance(int distance) {
+        this.distance = distance;
+    }
+
+    public float getLat() {
+        return lat;
+    }
+
+    public void setLat(float lat) {
+        this.lat = lat;
+    }
+
+    public float getLon() {
+        return lon;
+    }
+
+    public void setLon(float lon) {
+        this.lon = lon;
     }
 }

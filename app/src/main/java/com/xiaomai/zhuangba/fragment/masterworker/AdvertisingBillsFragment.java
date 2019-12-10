@@ -15,10 +15,12 @@ import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.xiaomai.zhuangba.R;
 import com.xiaomai.zhuangba.adapter.AdvertisingBillsAdapter;
 import com.xiaomai.zhuangba.data.AdvertisingBillsBean;
+import com.xiaomai.zhuangba.data.bean.LatAndLon;
 import com.xiaomai.zhuangba.data.bean.OuterLayerAdvertisingBills;
 import com.xiaomai.zhuangba.enums.StaticExplain;
 import com.xiaomai.zhuangba.fragment.base.BaseListFragment;
-import com.xiaomai.zhuangba.fragment.masterworker.advertising.AdvertisingBillDetailFragment;
+import com.xiaomai.zhuangba.fragment.masterworker.advertising.AllocationListFragment;
+import com.xiaomai.zhuangba.fragment.masterworker.map.PlotDistributionFragment;
 import com.xiaomai.zhuangba.http.ServiceUrl;
 
 import java.util.ArrayList;
@@ -26,6 +28,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
 
@@ -49,8 +52,11 @@ public class AdvertisingBillsFragment extends BaseListFragment<IBaseModule, Adve
      */
     private List<String> batchCodeList = new ArrayList<>();
     private AdvertisingBillsAdapter advertisingBillsAdapter;
+
     @BindView(R.id.tvAdvertisingNumber)
     TextView tvAdvertisingNumber;
+    @BindView(R.id.tvPlotDistribution)
+    TextView tvPlotDistribution;
 
     public static AdvertisingBillsFragment newInstance() {
         Bundle args = new Bundle();
@@ -74,8 +80,6 @@ public class AdvertisingBillsFragment extends BaseListFragment<IBaseModule, Adve
         HashMap<String, Object> hashMap = new HashMap<>();
         hashMap.put("pageNum", getPage());
         hashMap.put("pageSize", StaticExplain.PAGE_NUM.getCode());
-
-
 //        hashMap.put("teamList", getTeamList());
 //        hashMap.put("equipmentList", getEquipmentList());
 //        hashMap.put("batchCodeList", getBatchCodeList());
@@ -84,7 +88,7 @@ public class AdvertisingBillsFragment extends BaseListFragment<IBaseModule, Adve
         StringBuilder team = new StringBuilder();
         for (int i = 0; i < teamList.size(); i++) {
             team.append(teamList.get(i));
-            if (i < teamList.size() - 1){
+            if (i < teamList.size() - 1) {
                 team.append(",");
             }
         }
@@ -93,7 +97,7 @@ public class AdvertisingBillsFragment extends BaseListFragment<IBaseModule, Adve
         StringBuilder equipment = new StringBuilder();
         for (int i = 0; i < equipmentList.size(); i++) {
             equipment.append(equipmentList.get(i));
-            if (i < equipmentList.size() - 1){
+            if (i < equipmentList.size() - 1) {
                 equipment.append(",");
             }
         }
@@ -101,7 +105,7 @@ public class AdvertisingBillsFragment extends BaseListFragment<IBaseModule, Adve
         StringBuilder batchCode = new StringBuilder();
         for (int i = 0; i < batchCodeList.size(); i++) {
             batchCode.append(batchCodeList.get(i));
-            if (i < batchCodeList.size() - 1){
+            if (i < batchCodeList.size() - 1) {
                 batchCode.append(",");
             }
         }
@@ -118,11 +122,13 @@ public class AdvertisingBillsFragment extends BaseListFragment<IBaseModule, Adve
                     @Override
                     protected void onSuccess(OuterLayerAdvertisingBills response) {
                         int num = response.getNum();
-                        if (num == 0){
+                        if (num == 0) {
+                            tvPlotDistribution.setVisibility(View.GONE);
                             tvAdvertisingNumber.setVisibility(View.GONE);
-                        }else {
+                        } else {
+                            tvPlotDistribution.setVisibility(View.VISIBLE);
                             tvAdvertisingNumber.setVisibility(View.VISIBLE);
-                            tvAdvertisingNumber.setText(getString(R.string.total_quantity , String.valueOf(num)));
+                            tvAdvertisingNumber.setText(getString(R.string.total_quantity, String.valueOf(num)));
                         }
                         List<AdvertisingBillsBean> advertisingBillsBeans = response.getList().getList();
                         if (getPage() == StaticExplain.PAGE_NUMBER.getCode()) {
@@ -156,6 +162,24 @@ public class AdvertisingBillsFragment extends BaseListFragment<IBaseModule, Adve
         return R.layout.fragment_advertising_bills;
     }
 
+    @OnClick(R.id.tvPlotDistribution)
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.tvPlotDistribution:
+                //小区分布
+                RxUtils.getObservable(ServiceUrl.getUserApi().getMasterHandleAdvertisingOrderLatAndLon())
+                        .compose(this.<HttpResult<List<LatAndLon>>>bindToLifecycle())
+                        .subscribe(new BaseHttpRxObserver<List<LatAndLon>>(getActivity()) {
+                            @Override
+                            protected void onSuccess(List<LatAndLon> latAndLonList) {
+                                startFragment(PlotDistributionFragment.newInstance(getString(R.string.plot_distribution) , latAndLonList));
+                            }
+                        });
+                break;
+            default:
+        }
+    }
+
     public void refreshAdvertisingSuccess(List<AdvertisingBillsBean> advertisingBillsBeans) {
         if (advertisingBillsAdapter != null) {
             advertisingBillsAdapter.setNewData(advertisingBillsBeans);
@@ -172,7 +196,9 @@ public class AdvertisingBillsFragment extends BaseListFragment<IBaseModule, Adve
     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
         super.onItemClick(adapter, view, position);
         AdvertisingBillsBean advertisingBillsBean = (AdvertisingBillsBean) view.findViewById(R.id.tvItemOrdersTitle).getTag();
-        startFragment(AdvertisingBillDetailFragment.newInstance(advertisingBillsBean));
+        //startFragment(AdvertisingBillDetailFragment.newInstance(advertisingBillsBean));
+        // TODO: 2019/12/9 0009 dev-1.7.0 修改
+        startFragment(AllocationListFragment.newInstance(advertisingBillsBean));
     }
 
     @Override
@@ -215,7 +241,7 @@ public class AdvertisingBillsFragment extends BaseListFragment<IBaseModule, Adve
         this.batchCodeList = batchCodeList;
     }
 
-    public void refrshAdvertisingBills(){
+    public void refrshAdvertisingBills() {
         refresh();
     }
 

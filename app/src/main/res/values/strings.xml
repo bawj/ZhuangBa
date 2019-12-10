@@ -615,4 +615,7 @@
     <string name="whether_to_dismiss_the_team">是否解散该团队?</string>
     <string name="please_upload_clear_photos_for_next_issue">请上传清晰的下刊照片</string>
     <string name="please_upload_clear_photos_of_last_issue">请上传清晰的上刊照片</string>
+    <string name="plot_distribution">小区分布</string>
+    <string name="distribution_point">分布点</string>
+    <string name="acceptance_receipt">接单</string>
 </resources>

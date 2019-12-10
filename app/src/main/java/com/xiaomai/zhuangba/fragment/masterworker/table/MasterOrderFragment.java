@@ -3,7 +3,8 @@ package com.xiaomai.zhuangba.fragment.masterworker.table;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.view.View;
-import android.widget.TextView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import com.example.toollib.base.BaseFragment;
 import com.example.toollib.data.IBaseModule;
@@ -46,8 +47,8 @@ public class MasterOrderFragment extends BaseFragment implements ViewPager.OnPag
     MagicIndicator magicIndicator;
     @BindView(R.id.viewPager)
     ViewPager mViewPager;
-    @BindView(R.id.tvScreen)
-    TextView tvScreen;
+    @BindView(R.id.relScreen)
+    LinearLayout relScreen;
 
     /**
      * 筛选条件
@@ -98,13 +99,13 @@ public class MasterOrderFragment extends BaseFragment implements ViewPager.OnPag
     @Override
     public void onPageSelected(int i) {
         if (/*i == 1 ||*/ i == 2) {
-            tvScreen.setVisibility(View.VISIBLE);
+            relScreen.setVisibility(View.VISIBLE);
         } else {
-            tvScreen.setVisibility(View.GONE);
+            relScreen.setVisibility(View.GONE);
         }
     }
 
-    @OnClick(R.id.tvScreen)
+    @OnClick(R.id.relScreen)
     public void onViewClicked() {
         HashMap<String, Object> hashMap = new HashMap<>();
         hashMap.put("type", "1");

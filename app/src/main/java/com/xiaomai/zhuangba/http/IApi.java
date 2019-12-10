@@ -10,6 +10,7 @@ import com.xiaomai.zhuangba.data.bean.AliPayAccountBean;
 import com.xiaomai.zhuangba.data.bean.CreateTeamBean;
 import com.xiaomai.zhuangba.data.bean.DataDetailsContent;
 import com.xiaomai.zhuangba.data.bean.DeliveryContent;
+import com.xiaomai.zhuangba.data.bean.DeviceOrder;
 import com.xiaomai.zhuangba.data.bean.EarnestBean;
 import com.xiaomai.zhuangba.data.bean.EmployerAdvertisingReplacement;
 import com.xiaomai.zhuangba.data.bean.EmployerWalletBean;
@@ -18,6 +19,7 @@ import com.xiaomai.zhuangba.data.bean.FrozenAmountBean;
 import com.xiaomai.zhuangba.data.bean.GuaranteeDeatil;
 import com.xiaomai.zhuangba.data.bean.InspectionSheetBean;
 import com.xiaomai.zhuangba.data.bean.InspectionSheetDetailBean;
+import com.xiaomai.zhuangba.data.bean.LatAndLon;
 import com.xiaomai.zhuangba.data.bean.Maintenance;
 import com.xiaomai.zhuangba.data.bean.MaintenanceBean;
 import com.xiaomai.zhuangba.data.bean.OngoingOrdersList;
@@ -1280,5 +1282,28 @@ public interface IApi {
      */
     @POST("search/getAllSearchCondition")
     Observable<HttpResult<SearchCondition>> getAllSearchCondition(@Body RequestBody requestBody);
+
+
+    /**
+     * 小区分布
+     * @return observable
+     */
+    @POST("order/getMasterHandleAdvertisingOrderLatAndLon")
+    Observable<HttpResult<List<LatAndLon>>> getMasterHandleAdvertisingOrderLatAndLon();
+
+    /**
+     * 设配分布
+     * @return observable
+     */
+    @POST("order/getMasterHandleAdEquipmentDistributionPoint")
+    Observable<HttpResult<List<LatAndLon>>> getMasterHandleAdEquipmentDistributionPoint(@Body RequestBody requestBody);
+
+
+    /**
+     * 设配列表
+     * @return observable
+     */
+    @POST("order/getMasterHandleAdvertisingOrderListByEquipment")
+    Observable<HttpResult<RefreshBaseList<DeviceOrder>>> getMasterHandleAdvertisingOrderListByEquipment(@Body RequestBody requestBody);
 
 }

@@ -25,17 +25,34 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/tvAdvertisingNumber"
-                android:layout_width="wrap_content"
+            <RelativeLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:visibility="gone"
                 android:layout_marginLeft="@dimen/tool_lib_16dp"
                 android:layout_marginTop="@dimen/tool_lib_14dp"
-                android:layout_marginRight="@dimen/tool_lib_16dp"
-                android:textColor="@color/tool_lib_gray_777777"
-                android:textSize="@dimen/tool_lib_14sp"
-                tools:text="总数量：2000" />
+                android:layout_marginRight="@dimen/tool_lib_16dp">
+
+                <TextView
+                    android:id="@+id/tvAdvertisingNumber"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/tool_lib_gray_777777"
+                    android:textSize="@dimen/tool_lib_14sp"
+                    android:visibility="gone"
+                    tools:text="总数量：2000" />
+
+                <TextView
+                    android:id="@+id/tvPlotDistribution"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:drawableStart="@drawable/ic_location_black"
+                    android:drawablePadding="@dimen/tool_lib_3dp"
+                    android:text="@string/plot_distribution"
+                    android:textSize="@dimen/tool_lib_14sp"
+                    android:visibility="gone" />
+            </RelativeLayout>
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rvBaseList"

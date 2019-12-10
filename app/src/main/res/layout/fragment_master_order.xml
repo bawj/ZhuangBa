@@ -30,23 +30,31 @@
                 android:layout_height="@dimen/tool_lib_46dp"
                 android:background="@android:color/white" />
 
-            <TextView
-                android:id="@+id/tvScreen"
+            <LinearLayout
+                android:id="@+id/relScreen"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:layout_marginEnd="@dimen/tool_lib_16dp"
-                android:layout_marginRight="@dimen/tool_lib_16dp"
-                android:drawableStart="@drawable/ic_screen"
-                android:drawableLeft="@drawable/ic_screen"
-                android:drawablePadding="@dimen/tool_lib_12dp"
-                android:gravity="center_vertical"
-                android:text="@string/screen"
-                android:textColor="@color/tool_lib_gray_777777"
-                android:textSize="@dimen/tool_lib_12sp"
-                android:visibility="gone" />
+                android:layout_marginEnd="@dimen/tool_lib_16dp">
+
+                <ImageView
+                    android:layout_width="@dimen/tool_lib_16dp"
+                    android:layout_height="@dimen/tool_lib_15dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginEnd="@dimen/tool_lib_3dp"
+                    android:src="@drawable/ic_screen" />
+
+                <TextView
+                    android:id="@+id/tvScreen"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:text="@string/screen"
+                    android:textColor="@color/tool_lib_gray_777777"
+                    android:textSize="@dimen/tool_lib_12sp" />
+            </LinearLayout>
+
         </RelativeLayout>
 
         <android.support.v4.view.ViewPager
