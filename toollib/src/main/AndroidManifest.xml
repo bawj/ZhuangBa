@@ -2,57 +2,57 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.toollib">
 
-    <!--<uses-permission android:name="android.permission.INTERNET" />-->
-    <!--<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />-->
-    <!--<uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />-->
-    <!--<uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />-->
-    <!--<uses-permission android:name="android.permission.CHANGE_WIFI_MULTICAST_STATE" />-->
-    <!--<uses-permission android:name="android.permission.RECEIVE_SMS" />-->
-    <!--<uses-permission android:name="android.permission.READ_SMS" />-->
-    <!--&lt;!&ndash; 往SDCard写入数据权限 &ndash;&gt;-->
-    <!--<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />-->
-    <!--&lt;!&ndash; 请求访问使用照相设备 &ndash;&gt;-->
-    <!--<uses-permission android:name="android.permission.CAMERA" />-->
-    <!--<uses-permission android:name="android.permission.CALL_PHONE" />-->
-    <!--<uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />-->
-    <!--&lt;!&ndash; 用于读取手机当前的状态 &ndash;&gt;-->
-    <!--<uses-permission android:name="android.permission.GET_PACKAGE_SIZE" />-->
-    <!--<uses-permission android:name="android.permission.GET_TASKS" />-->
-    <!--<uses-permission android:name="android.permission.FLASHLIGHT" />-->
-    <!--<uses-permission android:name="android.permission.READ_CONTACTS" />-->
-    <!--<uses-permission android:name="android.permission.WRITE_CONTACTS" />-->
-    <!--<uses-permission android:name="android.permission.VIBRATE" />-->
-    <!--<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />-->
-    <!--<uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />-->
-    <!--&lt;!&ndash; 这个权限用于进行网络定位 &ndash;&gt;-->
-    <!--<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />-->
-    <!--&lt;!&ndash; 这个权限用于访问GPS定位 &ndash;&gt;-->
-    <!--<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />-->
-    <!--<uses-permission android:name="android.permission.BLUETOOTH" />-->
-    <!--<uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />-->
-    <!--&lt;!&ndash; 需要运行时注册的权限 &ndash;&gt;-->
-    <!--&lt;!&ndash; 用于提高GPS定位速度 &ndash;&gt;-->
-    <!--<uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />-->
-    <!--&lt;!&ndash; 读取缓存数据 &ndash;&gt;-->
-    <!--&lt;!&ndash;<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />&ndash;&gt;-->
-    <!--&lt;!&ndash; Optional for location &ndash;&gt;-->
-    <!--<uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />-->
-    <!--&lt;!&ndash; 进行网络访问和网络状态监控相关的权限声明 &ndash;&gt;-->
-    <!--<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />-->
-    <!--&lt;!&ndash; 网络库使用，当网络操作时需要确保事务完成不被杀掉 &ndash;&gt;-->
-    <!--<uses-permission android:name="android.permission.WAKE_LOCK" />-->
-    <!--&lt;!&ndash; 用于读取手机硬件信息等，用于机型过滤 &ndash;&gt;-->
-    <!--<uses-permission android:name="android.permission.READ_PHONE_STATE" />-->
-    <!--&lt;!&ndash; 允许监听启动完成事件 &ndash;&gt;-->
-    <!--<uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />-->
-    <!--&lt;!&ndash; 允许访问震动器 &ndash;&gt;-->
-    <!--&lt;!&ndash;<uses-permission android:name="android.permission.VIBRATE" />&ndash;&gt;-->
-    <!--&lt;!&ndash; 允许task重排序 &ndash;&gt;-->
-    <!--&lt;!&ndash;<uses-permission android:name="android.permission.FLASHLIGHT" />&ndash;&gt;-->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_MULTICAST_STATE" />
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
+    <uses-permission android:name="android.permission.READ_SMS" />
+    <!-- 往SDCard写入数据权限 -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <!-- 请求访问使用照相设备 -->
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+    <!-- 用于读取手机当前的状态 -->
+    <uses-permission android:name="android.permission.GET_PACKAGE_SIZE" />
+    <uses-permission android:name="android.permission.GET_TASKS" />
+    <uses-permission android:name="android.permission.FLASHLIGHT" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.WRITE_CONTACTS" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
+    <!-- 这个权限用于进行网络定位 -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <!-- 这个权限用于访问GPS定位 -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <!-- 需要运行时注册的权限 -->
+    <!-- 用于提高GPS定位速度 -->
+    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
+    <!-- 读取缓存数据 -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <!-- Optional for location -->
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <!-- 进行网络访问和网络状态监控相关的权限声明 -->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <!-- 网络库使用，当网络操作时需要确保事务完成不被杀掉 -->
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <!-- 用于读取手机硬件信息等，用于机型过滤 -->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <!-- 允许监听启动完成事件 -->
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <!-- 允许访问震动器 -->
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <!-- 允许task重排序 -->
+    <uses-permission android:name="android.permission.FLASHLIGHT" />
 
-    <!--<uses-permission-->
-        <!--android:name="android.permission.READ_LOGS"-->
-        <!--tools:ignore="ProtectedPermissions" />-->
+    <uses-permission
+        android:name="android.permission.READ_LOGS"
+        tools:ignore="ProtectedPermissions" />
 
     <application
         android:networkSecurityConfig="@xml/tool_lib_network_security_config"

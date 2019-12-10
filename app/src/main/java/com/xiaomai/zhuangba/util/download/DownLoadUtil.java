@@ -13,7 +13,9 @@ import com.example.toollib.util.ToastUtil;
 import com.liulishuo.filedownloader.BaseDownloadTask;
 import com.liulishuo.filedownloader.FileDownloadSampleListener;
 import com.liulishuo.filedownloader.FileDownloader;
+import com.liulishuo.filedownloader.connection.FileDownloadUrlConnection;
 import com.liulishuo.filedownloader.util.FileDownloadUtils;
+import com.xiaomai.zhuangba.application.PretendApplication;
 
 import java.io.File;
 

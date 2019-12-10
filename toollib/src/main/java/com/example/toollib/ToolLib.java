@@ -49,16 +49,6 @@ public class ToolLib {
         return mContext.getApplicationContext();
     }
 
-    public ToolLib initDownLoad(Application mApplication){
-        FileDownloader.setupOnApplicationOnCreate(mApplication)
-                .connectionCreator(new FileDownloadUrlConnection
-                        .Creator(new FileDownloadUrlConnection.Configuration()
-                        .connectTimeout(getConnectTimeOut())
-                        .readTimeout(getReadTimeOut())))
-                .commit();
-        return this;
-    }
-
     public int getConnectTimeOut() {
         return connectTimeOut;
     }
