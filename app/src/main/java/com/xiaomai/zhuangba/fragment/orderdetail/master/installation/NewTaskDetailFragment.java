@@ -1,10 +1,9 @@
-package com.xiaomai.zhuangba.fragment.orderdetail.master;
+package com.xiaomai.zhuangba.fragment.orderdetail.master.installation;
 
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
-import com.example.toollib.weight.dialog.CommonlyDialog;
 import com.qmuiteam.qmui.widget.QMUITopBarLayout;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.xiaomai.zhuangba.R;

@@ -1,4 +1,4 @@
-package com.xiaomai.zhuangba.fragment.orderdetail.master;
+package com.xiaomai.zhuangba.fragment.orderdetail.master.installation;
 
 import android.content.Intent;
 import android.os.Bundle;

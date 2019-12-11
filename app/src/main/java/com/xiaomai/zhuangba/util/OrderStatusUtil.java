@@ -14,13 +14,13 @@ import com.xiaomai.zhuangba.fragment.orderdetail.employer.EmployerDistributionFr
 import com.xiaomai.zhuangba.fragment.orderdetail.employer.EmployerHavingSetOutFragment;
 import com.xiaomai.zhuangba.fragment.orderdetail.employer.EmployerToBeStartedFragment;
 import com.xiaomai.zhuangba.fragment.orderdetail.employer.EmployerUnderConstructionFragment;
-import com.xiaomai.zhuangba.fragment.orderdetail.master.BeUnderConstructionFragment;
-import com.xiaomai.zhuangba.fragment.orderdetail.master.FailureOfAcceptanceDetailFragment;
-import com.xiaomai.zhuangba.fragment.orderdetail.master.HavingSetOutFragment;
-import com.xiaomai.zhuangba.fragment.orderdetail.master.MasterCompleteFragment;
-import com.xiaomai.zhuangba.fragment.orderdetail.master.NewTaskDetailFragment;
-import com.xiaomai.zhuangba.fragment.orderdetail.master.StartTheMissionFragment;
-import com.xiaomai.zhuangba.fragment.orderdetail.master.ToBeStartedFragment;
+import com.xiaomai.zhuangba.fragment.orderdetail.master.installation.BeUnderConstructionFragment;
+import com.xiaomai.zhuangba.fragment.orderdetail.master.installation.FailureOfAcceptanceDetailFragment;
+import com.xiaomai.zhuangba.fragment.orderdetail.master.installation.HavingSetOutFragment;
+import com.xiaomai.zhuangba.fragment.orderdetail.master.installation.MasterCompleteFragment;
+import com.xiaomai.zhuangba.fragment.orderdetail.master.installation.NewTaskDetailFragment;
+import com.xiaomai.zhuangba.fragment.orderdetail.master.installation.StartTheMissionFragment;
+import com.xiaomai.zhuangba.fragment.orderdetail.master.installation.ToBeStartedFragment;
 
 /**
  * @author Administrator

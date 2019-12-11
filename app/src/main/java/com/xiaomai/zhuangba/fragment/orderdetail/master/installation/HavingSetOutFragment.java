@@ -1,4 +1,4 @@
-package com.xiaomai.zhuangba.fragment.orderdetail.master;
+package com.xiaomai.zhuangba.fragment.orderdetail.master.installation;
 
 import android.Manifest;
 import android.os.Bundle;
@@ -7,9 +7,7 @@ import android.view.View;
 import com.example.toollib.data.base.BaseCallback;
 import com.example.toollib.weight.dialog.CommonlyDialog;
 import com.xiaomai.zhuangba.R;
-import com.xiaomai.zhuangba.enums.ForResultCode;
 import com.xiaomai.zhuangba.fragment.orderdetail.master.base.BaseMasterOrderDetailFragment;
-import com.xiaomai.zhuangba.fragment.service.LocationFragment;
 import com.xiaomai.zhuangba.util.ConstantUtil;
 import com.xiaomai.zhuangba.util.RxPermissionsUtils;
 

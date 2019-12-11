@@ -57,6 +57,7 @@ public class BaseListFragment<M extends IBaseModule, T extends BaseQuickAdapter>
                 rvBaseList.setAdapter(baseListAdapter);
                 View notDataView = getEmptyView();
                 baseListAdapter.setEmptyView(notDataView);
+                baseListAdapter.setEnableLoadMore(getEnableLoadMore());
                 baseListAdapter.setOnItemClickListener(this);
                 baseListAdapter.setOnLoadMoreListener(this, rvBaseList);
             }
@@ -114,7 +115,7 @@ public class BaseListFragment<M extends IBaseModule, T extends BaseQuickAdapter>
         //刷新完成 可以上拉加载
         refreshLayout.finishRefresh();
         if (baseListAdapter != null) {
-            baseListAdapter.setEnableLoadMore(true);
+            baseListAdapter.setEnableLoadMore(getEnableLoadMore());
         }
     }
 
@@ -165,6 +166,14 @@ public class BaseListFragment<M extends IBaseModule, T extends BaseQuickAdapter>
             tvNotData.setText(tvNotData1);
         }
         return view;
+    }
+
+    /**
+     * 是否开启上拉加载  默认开启
+     * @return boolean
+     */
+    public boolean getEnableLoadMore(){
+        return true;
     }
 
     public int getIvNotDataBackground(){

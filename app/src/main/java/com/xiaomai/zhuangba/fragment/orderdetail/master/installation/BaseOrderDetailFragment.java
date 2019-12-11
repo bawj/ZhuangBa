@@ -1,4 +1,4 @@
-package com.xiaomai.zhuangba.fragment.orderdetail;
+package com.xiaomai.zhuangba.fragment.orderdetail.master.installation;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.GridLayoutManager;

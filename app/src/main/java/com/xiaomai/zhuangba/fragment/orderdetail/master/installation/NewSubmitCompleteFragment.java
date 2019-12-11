@@ -1,11 +1,9 @@
-package com.xiaomai.zhuangba.fragment.orderdetail.master;
+package com.xiaomai.zhuangba.fragment.orderdetail.master.installation;
 
 import android.os.Bundle;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.xiaomai.zhuangba.R;
-import com.xiaomai.zhuangba.fragment.orderdetail.CompleteFragment;
 import com.xiaomai.zhuangba.util.ConstantUtil;
 
 import butterknife.BindView;

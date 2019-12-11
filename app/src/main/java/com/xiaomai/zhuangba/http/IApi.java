@@ -4,6 +4,7 @@ import com.example.toollib.http.HttpResult;
 import com.xiaomai.zhuangba.data.AdvertisingBillsBean;
 import com.xiaomai.zhuangba.data.OuterLayerMaintenanceOverman;
 import com.xiaomai.zhuangba.data.Patrol;
+import com.xiaomai.zhuangba.data.bean.AdOrderInformation;
 import com.xiaomai.zhuangba.data.bean.AdvertisingReplacementBean;
 import com.xiaomai.zhuangba.data.bean.AdvertisingReplacementDetailBean;
 import com.xiaomai.zhuangba.data.bean.AliPayAccountBean;
@@ -1288,14 +1289,14 @@ public interface IApi {
      * 小区分布
      * @return observable
      */
-    @POST("order/getMasterHandleAdvertisingOrderLatAndLon")
+    @POST("adOrder/getMasterHandleAdvertisingOrderLatAndLon")
     Observable<HttpResult<List<LatAndLon>>> getMasterHandleAdvertisingOrderLatAndLon();
 
     /**
      * 设配分布
      * @return observable
      */
-    @POST("order/getMasterHandleAdEquipmentDistributionPoint")
+    @POST("adOrder/getMasterHandleAdEquipmentDistributionPoint")
     Observable<HttpResult<List<LatAndLon>>> getMasterHandleAdEquipmentDistributionPoint(@Body RequestBody requestBody);
 
 
@@ -1303,7 +1304,16 @@ public interface IApi {
      * 设配列表
      * @return observable
      */
-    @POST("order/getMasterHandleAdvertisingOrderListByEquipment")
+    @POST("adOrder/getMasterHandleAdvertisingOrderListByEquipment")
     Observable<HttpResult<RefreshBaseList<DeviceOrder>>> getMasterHandleAdvertisingOrderListByEquipment(@Body RequestBody requestBody);
+
+
+    /**
+     * 根据订单编号集合查询订单的详细信息
+     * @return observable
+     */
+    @FormUrlEncoded
+    @POST("adOrder/getMasterHandleAdEquipmentInformation")
+    Observable<HttpResult<List<AdOrderInformation>>> getMasterHandleAdEquipmentInformation(@Field("orderCodes") String orderCodes);
 
 }

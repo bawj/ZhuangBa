@@ -1,4 +1,4 @@
-package com.xiaomai.zhuangba.fragment.orderdetail.master;
+package com.xiaomai.zhuangba.fragment.orderdetail.master.installation;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,7 +16,6 @@ import com.example.toollib.http.util.RxUtils;
 import com.example.toollib.util.ToastUtil;
 import com.xiaomai.zhuangba.R;
 import com.xiaomai.zhuangba.data.bean.OngoingOrdersList;
-import com.xiaomai.zhuangba.data.bean.OrderDateList;
 import com.xiaomai.zhuangba.enums.ForResultCode;
 import com.xiaomai.zhuangba.http.ServiceUrl;
 import com.xiaomai.zhuangba.util.DateUtil;
@@ -26,7 +25,6 @@ import org.joda.time.DateTime;
 
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;

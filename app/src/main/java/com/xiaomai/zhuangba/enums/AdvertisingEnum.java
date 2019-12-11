@@ -3,6 +3,7 @@ package com.xiaomai.zhuangba.enums;
 /**
  * @author Administrator
  * @date 2019/8/28 0028
+ * 广告单
  */
 public enum AdvertisingEnum {
     /**

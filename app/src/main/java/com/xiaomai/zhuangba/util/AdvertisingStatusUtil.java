@@ -8,7 +8,6 @@ import com.qmuiteam.qmui.arch.QMUIFragmentActivity;
 import com.xiaomai.zhuangba.R;
 import com.xiaomai.zhuangba.enums.AdvertisingEnum;
 import com.xiaomai.zhuangba.enums.OrdersEnum;
-import com.xiaomai.zhuangba.fragment.SelectServiceFragment;
 import com.xiaomai.zhuangba.fragment.advertisement.employer.EmployerAdvertisementAcceptanceFragment;
 import com.xiaomai.zhuangba.fragment.advertisement.employer.EmployerAdvertisementAcceptedOrdersFragment;
 import com.xiaomai.zhuangba.fragment.advertisement.employer.EmployerAdvertisementCancelledFragment;
@@ -22,11 +21,11 @@ import com.xiaomai.zhuangba.fragment.advertisement.master.beunder.MasterAdvertis
 import com.xiaomai.zhuangba.fragment.advertisement.master.having.MasterAdvertisementHavingSetOutFragment;
 import com.xiaomai.zhuangba.fragment.advertisement.master.MasterAdvertisementNewTaskDetailFragment;
 import com.xiaomai.zhuangba.fragment.advertisement.master.MasterAdvertisementStartTheMissionFragment;
-import com.xiaomai.zhuangba.fragment.orderdetail.master.BeUnderConstructionFragment;
 
 /**
  * @author Administrator
- * @date 2019/8/28 0028
+ * 2019/8/28 0028
+ * 广告单
  */
 public class AdvertisingStatusUtil {
 
@@ -135,6 +134,7 @@ public class AdvertisingStatusUtil {
         }
     }
 
+    //------------------------------------------------1.6.0 start-----------------------------------------------------------
     /**
      * 雇主
      * 跳转到广告单详情
@@ -220,4 +220,26 @@ public class AdvertisingStatusUtil {
             ToastUtil.showShort(qmuiFragment.getString(R.string.order_cancelled));
         }
     }
+
+    //------------------------------------------------1.6.0 end-------------------------------------------------------------
+
+
+    //------------------------------------------------1.7.0 start-----------------------------------------------------------
+    /**
+     * 师傅端跳转到订单详情
+     *
+     * @param qmuiFragment baseFragment
+     * @param orderCode    订单编号
+     * @param orderStatus  订单状态
+     */
+    public static void startMasterOrderDetail(QMUIFragmentActivity qmuiFragment, String orderCode, int orderStatus){
+        if (orderStatus == OrdersEnum.MASTER_NEW_TASK.getCode()) {
+            //新任务 -- > 已接单
+            //qmuiFragment.startFragment(MasterAdvertisementNewTaskDetailFragment.newInstance(orderCode));
+        }
+    }
+
+
+
+    //------------------------------------------------1.7.0 end-------------------------------------------------------------
 }

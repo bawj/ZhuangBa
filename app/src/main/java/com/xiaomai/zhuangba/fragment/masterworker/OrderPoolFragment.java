@@ -16,7 +16,7 @@ import com.xiaomai.zhuangba.enums.StringTypeExplain;
 import com.xiaomai.zhuangba.fragment.advertisement.master.MasterAdvertisementOrderPoolAdDetailFragment;
 import com.xiaomai.zhuangba.fragment.advertisement.master.PatrolPoolDetailFragment;
 import com.xiaomai.zhuangba.fragment.base.BaseMasterEmployerContentFragment;
-import com.xiaomai.zhuangba.fragment.orderdetail.master.OrderPoolDetailFragment;
+import com.xiaomai.zhuangba.fragment.orderdetail.master.installation.OrderPoolDetailFragment;
 
 import java.util.List;
 

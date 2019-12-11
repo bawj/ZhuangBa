@@ -8,7 +8,6 @@ import com.example.toollib.base.BaseFragment;
 import com.example.toollib.data.IBaseModule;
 import com.xiaomai.zhuangba.R;
 import com.xiaomai.zhuangba.fragment.employer.EmployerFragment;
-import com.xiaomai.zhuangba.fragment.orderdetail.DistributionDetailFragment;
 import com.xiaomai.zhuangba.fragment.orderdetail.employer.EmployerDistributionFragment;
 import com.xiaomai.zhuangba.util.ConstantUtil;
 

@@ -1,4 +1,4 @@
-package com.xiaomai.zhuangba.fragment.orderdetail.master;
+package com.xiaomai.zhuangba.fragment.orderdetail.master.installation;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -8,7 +8,6 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.xiaomai.zhuangba.R;
 import com.xiaomai.zhuangba.adapter.OrderPoolDetailAdapter;
-import com.xiaomai.zhuangba.adapter.ServiceItemsAdapter;
 import com.xiaomai.zhuangba.application.PretendApplication;
 import com.xiaomai.zhuangba.data.bean.OrderServiceItem;
 import com.xiaomai.zhuangba.fragment.orderdetail.master.base.BaseMasterOrderDetailFragment;

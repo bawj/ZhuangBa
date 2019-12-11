@@ -7,6 +7,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.toollib.http.HttpResult;
 import com.example.toollib.http.exception.ApiException;
 import com.example.toollib.http.observer.BaseHttpRxObserver;
@@ -25,6 +26,7 @@ import com.xiaomai.zhuangba.data.bean.RefreshBaseList;
 import com.xiaomai.zhuangba.enums.StaticExplain;
 import com.xiaomai.zhuangba.fragment.base.BaseListFragment;
 import com.xiaomai.zhuangba.fragment.masterworker.map.PlotDistributionFragment;
+import com.xiaomai.zhuangba.fragment.orderdetail.master.advertising.BaseAdvertisingBillDetailFragment;
 import com.xiaomai.zhuangba.http.ServiceUrl;
 import com.xiaomai.zhuangba.util.ConstantUtil;
 
@@ -32,7 +34,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.function.BiConsumer;
 
-import io.reactivex.Observable;
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
 
@@ -159,6 +160,13 @@ public class AllocationListFragment extends BaseListFragment {
                         startFragment(PlotDistributionFragment.newInstance(getString(R.string.distribution_point) , latAndLonList));
                     }
                 });
+    }
+
+    @Override
+    public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+        DeviceOrder deviceOrder = (DeviceOrder) view.findViewById(R.id.tvItemOrdersType).getTag();
+        String orderCodes = deviceOrder.getOrderCodes();
+        startFragment(BaseAdvertisingBillDetailFragment.newInstance(orderCodes));
     }
 
     @Override

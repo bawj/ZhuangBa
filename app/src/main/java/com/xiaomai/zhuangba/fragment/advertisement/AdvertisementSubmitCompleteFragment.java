@@ -3,7 +3,7 @@ package com.xiaomai.zhuangba.fragment.advertisement;
 import android.os.Bundle;
 
 import com.xiaomai.zhuangba.fragment.advertisement.master.MasterAdvertisementAcceptanceFragment;
-import com.xiaomai.zhuangba.fragment.orderdetail.master.NewSubmitCompleteFragment;
+import com.xiaomai.zhuangba.fragment.orderdetail.master.installation.NewSubmitCompleteFragment;
 import com.xiaomai.zhuangba.util.ConstantUtil;
 
 /**

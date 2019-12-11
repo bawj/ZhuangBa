@@ -1,4 +1,4 @@
-package com.xiaomai.zhuangba.fragment.orderdetail;
+package com.xiaomai.zhuangba.fragment.orderdetail.master.installation;
 
 import android.os.Bundle;
 

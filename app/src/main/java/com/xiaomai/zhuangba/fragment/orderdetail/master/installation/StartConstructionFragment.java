@@ -1,4 +1,4 @@
-package com.xiaomai.zhuangba.fragment.orderdetail.master;
+package com.xiaomai.zhuangba.fragment.orderdetail.master.installation;
 
 import android.os.Bundle;
 import android.widget.TextView;
@@ -17,25 +17,20 @@ import com.xiaomai.zhuangba.util.MapUtils;
 import com.xiaomai.zhuangba.util.QiNiuUtil;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
-import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
-import okhttp3.MediaType;
-import okhttp3.RequestBody;
 
 /**
  * @author Administrator
  * @date 2019/8/5 0005
  * <p>
- * 验收确认
+ * 开始施工
  */
-public class NewSubmitAcceptanceFragment extends BaseAutographFragment {
+public class StartConstructionFragment extends BaseAutographFragment {
 
     /**
      * 定位点
@@ -43,11 +38,12 @@ public class NewSubmitAcceptanceFragment extends BaseAutographFragment {
     @BindView(R.id.tvStartConstructionLocation)
     TextView tvStartConstructionLocation;
 
-    public static NewSubmitAcceptanceFragment newInstance(String orderCode, String orderType) {
+
+    public static StartConstructionFragment newInstance(String orderCode, String orderType) {
         Bundle args = new Bundle();
         args.putString(ConstantUtil.ORDER_CODE, orderCode);
         args.putString(ConstantUtil.ORDER_TYPE, orderType);
-        NewSubmitAcceptanceFragment fragment = new NewSubmitAcceptanceFragment();
+        StartConstructionFragment fragment = new StartConstructionFragment();
         fragment.setArguments(args);
         return fragment;
     }
@@ -64,14 +60,13 @@ public class NewSubmitAcceptanceFragment extends BaseAutographFragment {
         uriList.remove(uriList.size() - 1);
         if (uriList.isEmpty()) {
             ToastUtil.showShort(getString(R.string.job_site_font_installation_img));
-        }  else {
+        } else {
             //图片集合
             uploadImg(uriList);
         }
     }
 
     private void uploadImg(List<String> uriList) {
-        Observable<List<String>> observable = QiNiuUtil.newInstance().getObservable(uriList);
         RxUtils.getObservable(QiNiuUtil.newInstance().getObservable(uriList))
                 .compose(this.<List<String>>bindToLifecycle())
                 .doOnNext(new Consumer<List<String>>() {
@@ -81,15 +76,8 @@ public class NewSubmitAcceptanceFragment extends BaseAutographFragment {
                 }).concatMap(new Function<List<String>, ObservableSource<HttpResult<Object>>>() {
             @Override
             public ObservableSource<HttpResult<Object>> apply(List<String> imgUrlList) throws Exception {
-                HashMap<String, Object> hashMap = new HashMap<>();
-                //现场负责人签名图片
-                hashMap.put("electronicSignature", tvStartConstructionLocation.getText().toString());
-                //订单编号
-                hashMap.put("orderCode", getOrderCode());
-                //图片地址
-                hashMap.put("picturesUrl", new Gson().toJson(imgUrlList));
-                RequestBody requestBody = RequestBody.create(MediaType.parse("application/json;charset=utf-8"), new Gson().toJson(hashMap));
-                return  RxUtils.getObservable(ServiceUrl.getUserApi().submitValidation(requestBody));
+                return RxUtils.getObservable(ServiceUrl.getUserApi().startTaskOrder(getOrderCode(),
+                        new Gson().toJson(imgUrlList), tvStartConstructionLocation.getText().toString()));
             }
         }).subscribe(new BaseHttpRxObserver<Object>(getActivity()) {
             @Override
@@ -116,17 +104,17 @@ public class NewSubmitAcceptanceFragment extends BaseAutographFragment {
 
     @Override
     protected String getActivityTitle() {
-        return getString(R.string.acceptance_confirmation);
+        return getString(R.string.startup_confirmation);
     }
 
     @Override
     public int getContentView() {
-        return R.layout.fragment_new_submit_acceptance;
+        return R.layout.fragment_start_construction;
     }
 
     @Override
     public String getAutographImgTip() {
-        return getString(R.string.advertisement_start_construction_complete);
+        return getString(R.string.job_site_font_installation_img);
     }
 
     @Override
@@ -134,4 +122,10 @@ public class NewSubmitAcceptanceFragment extends BaseAutographFragment {
         return getString(R.string.agree_to_start_work);
     }
 
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        MapUtils.stopLocation();
+    }
 }

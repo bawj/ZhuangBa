@@ -71,7 +71,9 @@ public class PlotDistributionFragment extends BaseFragment {
         MapUtil.location(aMap, getActivity());
         List<LatAndLon> latAndLon = getLatAndLon();
         for (LatAndLon andLon : latAndLon) {
-            aMap.addMarker(MapUtil.getMarkerOption(andLon.getLat(), andLon.getLon()));
+            if (andLon != null){
+                aMap.addMarker(MapUtil.getMarkerOption(andLon.getLat(), andLon.getLon()));
+            }
         }
     }
 

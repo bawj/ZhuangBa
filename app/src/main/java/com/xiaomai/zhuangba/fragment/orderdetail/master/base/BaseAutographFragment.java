@@ -18,7 +18,7 @@ import com.example.toollib.manager.GlideManager;
 import com.xiaomai.zhuangba.R;
 import com.xiaomai.zhuangba.adapter.MultiGraphSelectionAdapter;
 import com.xiaomai.zhuangba.enums.ForResultCode;
-import com.xiaomai.zhuangba.fragment.orderdetail.master.DescriptionContentFragment;
+import com.xiaomai.zhuangba.fragment.orderdetail.master.installation.DescriptionContentFragment;
 import com.xiaomai.zhuangba.util.LuBanUtil;
 import com.xiaomai.zhuangba.util.RxPermissionsUtils;
 import com.xiaomai.zhuangba.weight.GridSpacingItemDecoration;
@@ -30,7 +30,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.OnClick;
 
-import static com.xiaomai.zhuangba.fragment.orderdetail.master.DescriptionContentFragment.PHOTO_PATH;
+import static com.xiaomai.zhuangba.fragment.orderdetail.master.installation.DescriptionContentFragment.PHOTO_PATH;
 import static com.xiaomai.zhuangba.weight.PhotoTool.GET_IMAGE_BY_CAMERA;
 
 /**

@@ -47,7 +47,7 @@ public class MasterOrderFragment extends BaseFragment implements ViewPager.OnPag
     MagicIndicator magicIndicator;
     @BindView(R.id.viewPager)
     ViewPager mViewPager;
-    @BindView(R.id.relScreen)
+    @BindView(R.id.layScreen)
     LinearLayout relScreen;
 
     /**
@@ -105,7 +105,7 @@ public class MasterOrderFragment extends BaseFragment implements ViewPager.OnPag
         }
     }
 
-    @OnClick(R.id.relScreen)
+    @OnClick(R.id.layScreen)
     public void onViewClicked() {
         HashMap<String, Object> hashMap = new HashMap<>();
         hashMap.put("type", "1");
