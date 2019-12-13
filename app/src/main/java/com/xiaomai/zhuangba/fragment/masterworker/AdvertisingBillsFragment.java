@@ -19,7 +19,7 @@ import com.xiaomai.zhuangba.data.bean.LatAndLon;
 import com.xiaomai.zhuangba.data.bean.OuterLayerAdvertisingBills;
 import com.xiaomai.zhuangba.enums.StaticExplain;
 import com.xiaomai.zhuangba.fragment.base.BaseListFragment;
-import com.xiaomai.zhuangba.fragment.masterworker.advertising.AllocationListFragment;
+import com.xiaomai.zhuangba.fragment.orderdetail.master.advertising.AllocationListFragment;
 import com.xiaomai.zhuangba.fragment.masterworker.map.PlotDistributionFragment;
 import com.xiaomai.zhuangba.http.ServiceUrl;
 

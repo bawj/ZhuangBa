@@ -1,5 +1,7 @@
 package com.xiaomai.zhuangba.data.bean;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,9 +12,23 @@ public class DeviceSurfaceInformation {
     private String deviceSurface;
     private String oldAdName;
     private String oldAdUrl;
+
+    /**
+     * 上刊默认图
+     */
+    private String publishedPhotos;
+    /**
+     * 下刊默认图
+     */
+    private String nextIssuePhotos;
+
+    @SerializedName("newlyAdName")
     private String newAdName;
+    @SerializedName("newlyAdUrl")
     private String newAdUrl;
-    private List<OrderDateListBean> orderDateList;
+    /** 上刊或下刊 或 上下刊 */
+    private String type;
+    private List<OrderDateList> orderDateList;
 
     public String getOrderCode() {
         return orderCode == null ? "" : orderCode;
@@ -70,14 +86,38 @@ public class DeviceSurfaceInformation {
         this.newAdUrl = newAdUrl;
     }
 
-    public List<OrderDateListBean> getOrderDateList() {
+    public String getType() {
+        return type == null ? "" : type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getPublishedPhotos() {
+        return publishedPhotos == null ? "" : publishedPhotos;
+    }
+
+    public void setPublishedPhotos(String publishedPhotos) {
+        this.publishedPhotos = publishedPhotos;
+    }
+
+    public String getNextIssuePhotos() {
+        return nextIssuePhotos == null ? "" : nextIssuePhotos;
+    }
+
+    public void setNextIssuePhotos(String nextIssuePhotos) {
+        this.nextIssuePhotos = nextIssuePhotos;
+    }
+
+    public List<OrderDateList> getOrderDateList() {
         if (orderDateList == null) {
             return new ArrayList<>();
         }
         return orderDateList;
     }
 
-    public void setOrderDateList(List<OrderDateListBean> orderDateList) {
+    public void setOrderDateList(List<OrderDateList> orderDateList) {
         this.orderDateList = orderDateList;
     }
 }

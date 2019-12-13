@@ -30,7 +30,7 @@ public class DeviceOrder {
     private String orderCodes;
 
     /** 订单状态 */
-    private Integer orderStatus;
+    private int orderStatus;
 
     /** 预约时间 */
     private String reservation;
@@ -107,11 +107,11 @@ public class DeviceOrder {
         this.orderCodes = orderCodes;
     }
 
-    public Integer getOrderStatus() {
+    public int getOrderStatus() {
         return orderStatus;
     }
 
-    public void setOrderStatus(Integer orderStatus) {
+    public void setOrderStatus(int orderStatus) {
         this.orderStatus = orderStatus;
     }
 

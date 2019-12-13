@@ -24,12 +24,12 @@ android {
     }
     buildTypes {
         release {
-            minifyEnabled true
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            minifyEnabled false
+            //proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             //压缩
             zipAlignEnabled true
             //是否移除无用资源
-            shrinkResources true
+            shrinkResources false
         }
     }
 

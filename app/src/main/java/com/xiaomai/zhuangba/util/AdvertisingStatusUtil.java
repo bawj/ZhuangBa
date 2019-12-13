@@ -21,6 +21,8 @@ import com.xiaomai.zhuangba.fragment.advertisement.master.beunder.MasterAdvertis
 import com.xiaomai.zhuangba.fragment.advertisement.master.having.MasterAdvertisementHavingSetOutFragment;
 import com.xiaomai.zhuangba.fragment.advertisement.master.MasterAdvertisementNewTaskDetailFragment;
 import com.xiaomai.zhuangba.fragment.advertisement.master.MasterAdvertisementStartTheMissionFragment;
+import com.xiaomai.zhuangba.fragment.orderdetail.master.advertising.MasterAdvertisementNewTaskFragment;
+import com.xiaomai.zhuangba.fragment.orderdetail.master.advertising.MasterAdvertisementReceivedOrdersFragment;
 
 /**
  * @author Administrator
@@ -229,13 +231,16 @@ public class AdvertisingStatusUtil {
      * 师傅端跳转到订单详情
      *
      * @param qmuiFragment baseFragment
-     * @param orderCode    订单编号
+     * @param orderCodes   订单编号 array
      * @param orderStatus  订单状态
      */
-    public static void startMasterOrderDetail(QMUIFragmentActivity qmuiFragment, String orderCode, int orderStatus){
+    public static void startMasterOrderDetail(QMUIFragmentActivity qmuiFragment, String orderCodes, int orderStatus){
         if (orderStatus == OrdersEnum.MASTER_NEW_TASK.getCode()) {
             //新任务 -- > 已接单
-            //qmuiFragment.startFragment(MasterAdvertisementNewTaskDetailFragment.newInstance(orderCode));
+            qmuiFragment.startFragment(MasterAdvertisementNewTaskFragment.newInstance(orderCodes));
+        }else if (orderStatus == OrdersEnum.MASTER_PENDING_DISPOSAL.getCode()){
+            //已接单
+            qmuiFragment.startFragment(MasterAdvertisementReceivedOrdersFragment.newInstance(orderCodes));
         }
     }
 

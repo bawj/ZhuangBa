@@ -132,3 +132,7 @@ public static java.lang.String TABLENAME;
 -keep class xxx.xxx.xxx.PushMessageReceiverImpl{*;}
 #oppo
 -keep public class * extends android.app.Service
+#QMUI
+-keep class **_FragmentFinder { *; }
+-keep class com.qmuiteam.qmui.arch.record.** { *; }
+-keep class androidx.fragment.app.* { *; }

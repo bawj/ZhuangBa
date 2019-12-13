@@ -618,4 +618,20 @@
     <string name="plot_distribution">小区分布</string>
     <string name="distribution_point">分布点</string>
     <string name="acceptance_receipt">接单</string>
+    <string name="old_advertisement">旧广告：</string>
+    <string name="new_advertisement">新广告：</string>
+    <string name="last_photo">上刊照片：</string>
+    <string name="next_issue_photo">下刊照片：</string>
+    <string name="photo_taken_in_next_issue">下刊拍照</string>
+    <string name="photo_taken_in_last_issue">上刊拍照</string>
+    <string name="complete_submission">完成提交</string>
+    <string name="please_take_a_panorama">请拍全景图</string>
+    <string name="please_take_close_up_with_newspaper">请拍带报头的近景图</string>
+    <string name="please_take_foreground_of_header">请拍带报头的远景图</string>
+    <string name="please_take_other_pictures">请拍其它图</string>
+    <string name="panorama">全景</string>
+    <string name="with_head_close_up">带报头-近景</string>
+    <string name="with_head_vision">带报头-远景</string>
+    <string name="other">其它</string>
+    <string name="problem_feedback">问题反馈</string>
 </resources>

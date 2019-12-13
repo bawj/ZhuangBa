@@ -25,6 +25,12 @@ public enum AdvertisingEnum {
      */
     MASTER_NEW_TASK(0, "师傅端 新任务"),
     MASTER_PENDING_DISPOSAL(1, "已接单"),
+    MASTER_PENDING_DISPOSAL_NEXT_ISSUE(1, "已接单 按钮展示 --- 下刊"),
+    MASTER_PENDING_DISPOSAL_LAST_ISSUE(2, "已接单 按钮展示--- 上刊"),
+    MASTER_PENDING_DISPOSAL_LAST_ISSUE_OR_NEXT_NOODLES(1, "已接单 设备面 上下刊"),
+    MASTER_PENDING_DISPOSAL_NEXT_ISSUE_NOODLES(2, "已接单 设备面 上刊"),
+    MASTER_PENDING_DISPOSAL_LAST_ISSUE_NOODLES(3, "已接单 设备面 下刊"),
+
     MASTER_IN_PROCESSING(2, "已出发"),
     MASTER_BE_UNDER_CONSTRUCTION(3, "施工中"),
     MASTER_COMPLETED(4, "已取消"),

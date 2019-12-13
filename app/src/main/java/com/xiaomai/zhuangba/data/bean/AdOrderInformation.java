@@ -24,14 +24,19 @@ public class AdOrderInformation {
     private String orderCodes;
     private String equipmentNum;
     private String address;
-    private int orderAmount;
-    private int masterOrderAmount;
+    private double orderAmount;
+    private double masterOrderAmount;
     private int orderStatus;
     private String reservation;
     private String equipmentSurface;
     private String batchCode;
     private String serviceCycle;
     private String remark;
+    private float lat;
+    private float lon;
+    private String userText;
+    /** 1：下刊 2：上刊  */
+    private String operating;
     private List<DeviceSurfaceInformation> list;
 
     public String getOrderCodes() {
@@ -58,19 +63,19 @@ public class AdOrderInformation {
         this.address = address;
     }
 
-    public int getOrderAmount() {
+    public double getOrderAmount() {
         return orderAmount;
     }
 
-    public void setOrderAmount(int orderAmount) {
+    public void setOrderAmount(double orderAmount) {
         this.orderAmount = orderAmount;
     }
 
-    public int getMasterOrderAmount() {
+    public double getMasterOrderAmount() {
         return masterOrderAmount;
     }
 
-    public void setMasterOrderAmount(int masterOrderAmount) {
+    public void setMasterOrderAmount(double masterOrderAmount) {
         this.masterOrderAmount = masterOrderAmount;
     }
 
@@ -131,5 +136,37 @@ public class AdOrderInformation {
 
     public void setList(List<DeviceSurfaceInformation> list) {
         this.list = list;
+    }
+
+    public float getLat() {
+        return lat;
+    }
+
+    public void setLat(float lat) {
+        this.lat = lat;
+    }
+
+    public float getLon() {
+        return lon;
+    }
+
+    public void setLon(float lon) {
+        this.lon = lon;
+    }
+
+    public String getUserText() {
+        return userText == null ? "" : userText;
+    }
+
+    public void setUserText(String userText) {
+        this.userText = userText;
+    }
+
+    public String getOperating() {
+        return operating == null ? "" : operating;
+    }
+
+    public void setOperating(String operating) {
+        this.operating = operating;
     }
 }

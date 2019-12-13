@@ -1314,6 +1314,23 @@ public interface IApi {
      */
     @FormUrlEncoded
     @POST("adOrder/getMasterHandleAdEquipmentInformation")
-    Observable<HttpResult<List<AdOrderInformation>>> getMasterHandleAdEquipmentInformation(@Field("orderCodes") String orderCodes);
+    Observable<HttpResult<AdOrderInformation>> getMasterHandleAdEquipmentInformation(@Field("orderCodes") String orderCodes);
+
+    /**
+     * 根据订单编号集合进行接单
+     * @return observable
+     */
+    @FormUrlEncoded
+    @POST("adOrder/acceptOrder")
+    Observable<HttpResult<Object>> adOrderAcceptOrder(@Field("orderCodes") String orderCodes);
+
+
+    /**
+     * 根据订单编号取消广告订单
+     * @return observable
+     */
+    @FormUrlEncoded
+    @POST("adOrder/cancelAdOrder")
+    Observable<HttpResult<Object>> adOrderCancelAdOrder(@Field("orderCodes") String orderCodes);
 
 }

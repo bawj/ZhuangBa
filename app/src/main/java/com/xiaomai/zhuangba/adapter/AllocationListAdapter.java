@@ -23,7 +23,7 @@ public class AllocationListAdapter extends BaseQuickAdapter<DeviceOrder, BaseVie
     }
 
     @Override
-    protected void convert(BaseViewHolder helper, DeviceOrder deviceOrder) {
+    protected void convert(BaseViewHolder helper,final DeviceOrder deviceOrder) {
         QMUILinearLayout itemOrderLayoutFor = helper.getView(R.id.itemOrderLayoutFor);
         itemOrderLayoutFor.setRadiusAndShadow(QMUIDisplayHelper.dp2px(mContext, 15), QMUIDisplayHelper.dp2px(mContext, 14),
                 0.0f);
@@ -71,13 +71,21 @@ public class AllocationListAdapter extends BaseQuickAdapter<DeviceOrder, BaseVie
             //tvItemOrdersMaintenanceTime.setText(mContext.getString(R.string.ending_date_ , ongoingOrders.getSlottingEndLength()));
         }
         // TODO: 2019/12/9 0009 订单状态 新任务状态 显示 接单按钮
-        int orderStatus = deviceOrder.getOrderStatus();
+        final int orderStatus = deviceOrder.getOrderStatus();
         AdvertisingStatusUtil.masterStatus(mContext , orderStatus ,tvItemOrdersType);
 
         //是否是新任务 true  显示按钮 false 隐藏
         QMUIButton button = helper.getView(R.id.btnAcceptanceReceipt);
         if (orderStatus == AdvertisingEnum.MASTER_NEW_TASK.getCode()) {
             button.setVisibility(View.VISIBLE);
+            button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (iAllocationListAdapterCallBack != null){
+                        iAllocationListAdapterCallBack.acceptanceReceipt(deviceOrder.getOrderCodes());
+                    }
+                }
+            });
         }else {
             button.setVisibility(View.GONE);
         }
@@ -104,4 +112,17 @@ public class AllocationListAdapter extends BaseQuickAdapter<DeviceOrder, BaseVie
 
         tvItemOrdersType.setTag(deviceOrder);
     }
+
+
+    public interface IAllocationListAdapterCallBack{
+
+        void acceptanceReceipt(String orderCodes);
+
+    }
+
+    private IAllocationListAdapterCallBack iAllocationListAdapterCallBack;
+    public void setIAllocationListAdapterCallBack(IAllocationListAdapterCallBack iAllocationListAdapterCallBack){
+        this.iAllocationListAdapterCallBack = iAllocationListAdapterCallBack;
+    }
+
 }
