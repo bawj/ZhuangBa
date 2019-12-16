@@ -32,6 +32,7 @@ public class AdOrderInformation {
     private String batchCode;
     private String serviceCycle;
     private String remark;
+    private Integer serviceId;
     private float lat;
     private float lon;
     private String userText;
@@ -168,5 +169,13 @@ public class AdOrderInformation {
 
     public void setOperating(String operating) {
         this.operating = operating;
+    }
+
+    public Integer getServiceId() {
+        return serviceId;
+    }
+
+    public void setServiceId(Integer serviceId) {
+        this.serviceId = serviceId;
     }
 }

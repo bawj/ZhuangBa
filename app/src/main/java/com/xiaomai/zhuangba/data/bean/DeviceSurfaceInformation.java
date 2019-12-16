@@ -12,7 +12,6 @@ public class DeviceSurfaceInformation {
     private String deviceSurface;
     private String oldAdName;
     private String oldAdUrl;
-
     /**
      * 上刊默认图
      */

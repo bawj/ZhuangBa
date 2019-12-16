@@ -2,6 +2,7 @@ package com.xiaomai.zhuangba.fragment.orderdetail.master.advertising.photo;
 
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
+import android.view.View;
 
 import com.example.toollib.base.BaseFragment;
 import com.example.toollib.data.IBaseModule;
@@ -30,9 +31,14 @@ public class BaseAdvertisementPhotoFragment<T extends BaseAdvertisementPhotoTabF
     @BindView(R.id.viewPager)
     ViewPager mViewPager;
 
-    public static BaseAdvertisementPhotoFragment newInstance(String deviceSurfaceInformationListString) {
+    /**
+     * @param serviceId serviceId
+     * @param deviceSurfaceInformationListString 集合 所有面的数据
+     */
+    public static BaseAdvertisementPhotoFragment newInstance(String serviceId , String deviceSurfaceInformationListString) {
         Bundle args = new Bundle();
         args.putString(DEVICE_SURFACE_INFORMATION_LIST_STRING, deviceSurfaceInformationListString);
+        args.putString(PhotoStyleFragment.SERVICE_ID , serviceId);
         BaseAdvertisementPhotoFragment fragment = new BaseAdvertisementPhotoFragment();
         fragment.setArguments(args);
         return fragment;
@@ -65,12 +71,8 @@ public class BaseAdvertisementPhotoFragment<T extends BaseAdvertisementPhotoTabF
     }
 
     public T getBaseAdvertisementPhotoTabFragment(String deviceSurfaceInformationString) {
-        return (T) BaseAdvertisementPhotoTabFragment.newInstance(deviceSurfaceInformationString);
+        return null;
     }
-
-//    public <T extends BaseAdvertisementPhotoTabFragment> getBaseAdvertisementPhotoTabFragment(String deviceSurfaceInformationString) {
-//        return BaseAdvertisementPhotoTabFragment.newInstance(deviceSurfaceInformationString);
-//    }
 
     @Override
     public int getContentView() {
@@ -84,6 +86,23 @@ public class BaseAdvertisementPhotoFragment<T extends BaseAdvertisementPhotoTabF
             }.getType());
         }
         return new ArrayList<>();
+    }
+
+    @Override
+    public int getRightIcon() {
+        return R.drawable.ic_question_mark_gray;
+    }
+
+    @Override
+    public void rightIconClick(View view) {
+        startFragment(PhotoStyleFragment.newInstance(getServiceId()));
+    }
+
+    private String getServiceId(){
+        if (getArguments() != null){
+            return getArguments().getString(PhotoStyleFragment.SERVICE_ID);
+        }
+        return "";
     }
 
     @Override

@@ -22,6 +22,7 @@ import com.example.toollib.manager.GlideManager;
 import com.example.toollib.util.Log;
 import com.example.toollib.util.ToastUtil;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.xiaomai.zhuangba.R;
 import com.xiaomai.zhuangba.adapter.BaseAdvertisementPhotoTabAdapter;
 import com.xiaomai.zhuangba.data.bean.BaseAdvertisementPhotoTabEntity;
@@ -39,6 +40,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.OnClick;
 
+import static com.xiaomai.zhuangba.fragment.orderdetail.master.advertising.photo.BaseAdvertisementPhotoFragment.DEVICE_SURFACE_INFORMATION_LIST_STRING;
 import static com.xiaomai.zhuangba.weight.PhotoTool.GET_IMAGE_BY_CAMERA;
 import static com.xiaomai.zhuangba.weight.PhotoTool.GET_IMAGE_FROM_PHONE;
 
@@ -65,8 +67,9 @@ public class BaseAdvertisementPhotoTabFragment extends BaseFragment implements B
     private StayUrl stayUrl = new StayUrl();
     private BaseAdvertisementPhotoTabAdapter baseAdvertisementPhotoTabAdapter;
 
-    public static BaseAdvertisementPhotoTabFragment newInstance(String deviceSurfaceInformationString) {
+    public static BaseAdvertisementPhotoTabFragment newInstance(String deviceSurfaceInformationListString, String deviceSurfaceInformationString) {
         Bundle args = new Bundle();
+        args.putString(DEVICE_SURFACE_INFORMATION_LIST_STRING, deviceSurfaceInformationListString);
         args.putString(DEVICE_SURFACE_INFORMATION, deviceSurfaceInformationString);
         BaseAdvertisementPhotoTabFragment fragment = new BaseAdvertisementPhotoTabFragment();
         fragment.setArguments(args);
@@ -170,6 +173,15 @@ public class BaseAdvertisementPhotoTabFragment extends BaseFragment implements B
             return new Gson().fromJson(string, DeviceSurfaceInformation.class);
         }
         return new DeviceSurfaceInformation();
+    }
+
+    public List<DeviceSurfaceInformation> getDeviceSurfaceInformationList() {
+        if (getArguments() != null) {
+            return new Gson().fromJson(getArguments().getString(DEVICE_SURFACE_INFORMATION_LIST_STRING)
+                    , new TypeToken<List<DeviceSurfaceInformation>>() {
+                    }.getType());
+        }
+        return new ArrayList<>();
     }
 
     public List<BaseAdvertisementPhotoTabEntity> getList() {

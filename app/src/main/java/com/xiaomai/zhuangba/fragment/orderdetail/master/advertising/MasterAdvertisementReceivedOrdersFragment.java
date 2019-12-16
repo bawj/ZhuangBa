@@ -29,17 +29,25 @@ import butterknife.OnClick;
 /**
  * 广告单已接单
  */
-public class MasterAdvertisementReceivedOrdersFragment extends BaseAdvertisingBillDetailFragment{
+public class MasterAdvertisementReceivedOrdersFragment extends BaseAdvertisingBillDetailFragment {
 
     @BindView(R.id.relNewTaskOrderDetailBottom)
     RelativeLayout relNewTaskOrderDetailBottom;
-    /** 可能是下刊拍照 也可能是上刊拍照 */
+    /**
+     * 可能是下刊拍照 也可能是上刊拍照
+     */
     @BindView(R.id.btnPhotoNextOrLastAdvertisement)
     QMUIButton btnPhotoNextOrLastAdvertisement;
-    /** 1：下刊 2：上刊 */
+    /**
+     * 1：下刊 2：上刊
+     */
     private String operating;
-    /** 广告面 */
-    private  List<DeviceSurfaceInformation> deviceSurfaceInformationList;
+    /**
+     * 广告面
+     */
+    private List<DeviceSurfaceInformation> deviceSurfaceInformationList;
+    private Integer serviceId;
+
     public static MasterAdvertisementReceivedOrdersFragment newInstance(String orderCodes) {
         Bundle args = new Bundle();
         args.putString(ORDER_CODES, orderCodes);
@@ -63,13 +71,13 @@ public class MasterAdvertisementReceivedOrdersFragment extends BaseAdvertisingBi
     public void setViewData(AdOrderInformation adOrderInformationList) {
         super.setViewData(adOrderInformationList);
         relNewTaskOrderDetailBottom.setVisibility(View.VISIBLE);
-
+        serviceId = adOrderInformationList.getServiceId();
         operating = adOrderInformationList.getOperating();
         deviceSurfaceInformationList = adOrderInformationList.getList();
-        if (operating.equals(String.valueOf(AdvertisingEnum.MASTER_PENDING_DISPOSAL_NEXT_ISSUE.getCode()))){
+        if (operating.equals(String.valueOf(AdvertisingEnum.MASTER_PENDING_DISPOSAL_NEXT_ISSUE.getCode()))) {
             //下刊
             btnPhotoNextOrLastAdvertisement.setText(getString(R.string.photo_taken_in_next_issue));
-        }else if (operating.equals(String.valueOf(AdvertisingEnum.MASTER_PENDING_DISPOSAL_LAST_ISSUE.getCode()))){
+        } else if (operating.equals(String.valueOf(AdvertisingEnum.MASTER_PENDING_DISPOSAL_LAST_ISSUE.getCode()))) {
             //上刊
             btnPhotoNextOrLastAdvertisement.setText(getString(R.string.photo_taken_in_last_issue));
         }
@@ -91,10 +99,10 @@ public class MasterAdvertisementReceivedOrdersFragment extends BaseAdvertisingBi
                         });
                 break;
             case R.id.btnPhotoNextOrLastAdvertisement:
-                if (operating.equals(String.valueOf(AdvertisingEnum.MASTER_PENDING_DISPOSAL_NEXT_ISSUE.getCode()))){
+                if (operating.equals(String.valueOf(AdvertisingEnum.MASTER_PENDING_DISPOSAL_NEXT_ISSUE.getCode()))) {
                     //下刊拍照
                     nextAdvertisement();
-                }else if (operating.equals(String.valueOf(AdvertisingEnum.MASTER_PENDING_DISPOSAL_LAST_ISSUE.getCode()))){
+                } else if (operating.equals(String.valueOf(AdvertisingEnum.MASTER_PENDING_DISPOSAL_LAST_ISSUE.getCode()))) {
                     //上刊
                     lastAdvertisement();
                 }
@@ -107,33 +115,51 @@ public class MasterAdvertisementReceivedOrdersFragment extends BaseAdvertisingBi
      * 下刊拍照
      */
     private void nextAdvertisement() {
-        List<DeviceSurfaceInformation> deviceSurfaceInformationList = getDeviceSurfaceInformationList();
-        startFragment(NextAdvertisementPhotoFragment.newInstance(new Gson().toJson(deviceSurfaceInformationList)));
+        List<DeviceSurfaceInformation> deviceSurfaceInformationList = getNextDeviceSurfaceInformationList();
+        startFragment(NextAdvertisementPhotoFragment.newInstance(String.valueOf(serviceId), new Gson().toJson(deviceSurfaceInformationList)));
     }
 
     /**
      * 上刊拍照
      */
     private void lastAdvertisement() {
-        List<DeviceSurfaceInformation> deviceSurfaceInformationList = getDeviceSurfaceInformationList();
+        List<DeviceSurfaceInformation> deviceSurfaceInformationList = getLastNextDeviceSurfaceInformationList();
+
     }
 
 
     /**
-     * 返回上刊 或 下刊 list
+     * 返回下刊list
+     *
      * @return list
      */
-    private List<DeviceSurfaceInformation> getDeviceSurfaceInformationList(){
+    private List<DeviceSurfaceInformation> getNextDeviceSurfaceInformationList() {
+        List<DeviceSurfaceInformation> informationList = new ArrayList<>();
+        for (DeviceSurfaceInformation deviceSurfaceInformation : deviceSurfaceInformationList) {
+            //1.上下刊 3.下刊
+            String type = deviceSurfaceInformation.getType();
+            if (type.equals(String.valueOf(AdvertisingEnum.MASTER_PENDING_DISPOSAL_LAST_ISSUE_OR_NEXT_NOODLES.getCode())) ||
+                    type.equals(String.valueOf(AdvertisingEnum.MASTER_PENDING_DISPOSAL_LAST_ISSUE_NOODLES.getCode()))) {
+                //下刊
+                informationList.add(deviceSurfaceInformation);
+            }
+        }
+        return informationList;
+    }
+
+
+    /**
+     * 返回上刊
+     *
+     * @return list
+     */
+    private List<DeviceSurfaceInformation> getLastNextDeviceSurfaceInformationList() {
         List<DeviceSurfaceInformation> informationList = new ArrayList<>();
         for (DeviceSurfaceInformation deviceSurfaceInformation : deviceSurfaceInformationList) {
             //1.上下刊；2.上刊；3.下刊
             String type = deviceSurfaceInformation.getType();
             if (type.equals(String.valueOf(AdvertisingEnum.MASTER_PENDING_DISPOSAL_LAST_ISSUE_OR_NEXT_NOODLES.getCode())) ||
-                    type.equals(String.valueOf(AdvertisingEnum.MASTER_PENDING_DISPOSAL_LAST_ISSUE_NOODLES.getCode()))){
-                //下刊
-                informationList.add(deviceSurfaceInformation);
-            }else if (type.equals(String.valueOf(AdvertisingEnum.MASTER_PENDING_DISPOSAL_LAST_ISSUE_OR_NEXT_NOODLES.getCode())) ||
-                    type.equals(String.valueOf(AdvertisingEnum.MASTER_PENDING_DISPOSAL_NEXT_ISSUE_NOODLES.getCode()))){
+                    type.equals(String.valueOf(AdvertisingEnum.MASTER_PENDING_DISPOSAL_NEXT_ISSUE_NOODLES.getCode()))) {
                 //上刊
                 informationList.add(deviceSurfaceInformation);
             }

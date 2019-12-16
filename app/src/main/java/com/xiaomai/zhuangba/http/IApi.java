@@ -36,6 +36,7 @@ import com.xiaomai.zhuangba.data.bean.PayData;
 import com.xiaomai.zhuangba.data.bean.PayDepositBean;
 import com.xiaomai.zhuangba.data.bean.ProvincialBean;
 import com.xiaomai.zhuangba.data.bean.RefreshBaseList;
+import com.xiaomai.zhuangba.data.bean.Rules;
 import com.xiaomai.zhuangba.data.bean.SearchCondition;
 import com.xiaomai.zhuangba.data.bean.ServiceData;
 import com.xiaomai.zhuangba.data.bean.ServiceSubcategory;
@@ -1332,5 +1333,13 @@ public interface IApi {
     @FormUrlEncoded
     @POST("adOrder/cancelAdOrder")
     Observable<HttpResult<Object>> adOrderCancelAdOrder(@Field("orderCodes") String orderCodes);
+
+    /**
+     * 广告订单查询上刊和下刊拍照样式和说明
+     * @return observable
+     */
+    @FormUrlEncoded
+    @POST("adOrder/getPhotoRules")
+    Observable<HttpResult<Rules>> getPhotoRules(@Field("orderCodes") String orderCodes);
 
 }
