@@ -212,6 +212,19 @@ public class ShopCarModule extends BaseModule<IShopCarView> implements IShopCarM
         //经纬度
         hashMap.put("longitude", orderAddress.getLongitude());
         hashMap.put("latitude", orderAddress.getLatitude());
+        //合同编号
+        hashMap.put("contractNo" , orderAddress.getContractNo());
+        // 客户经理
+        hashMap.put("accountManager" , orderAddress.getAccountManager());
+        // 项目名称
+        hashMap.put("projectName" , orderAddress.getProjectName());
+        // 项目特点
+        hashMap.put("projectFeatures" , orderAddress.getProjectFeatures());
+        // 店铺名称
+        hashMap.put("shopName" , orderAddress.getShopName());
+        // 第三方订单编号
+        hashMap.put("orderNumber" , orderAddress.getOrderNumber());
+
         //是否有维保 0：没有维保；1：有维保
         List<ShopCarData> list = DBHelper.getInstance().getShopCarDataDao().queryBuilder()
                 .where(ShopCarDataDao.Properties.MaintenanceId.notEq(String.valueOf(ConstantUtil.DEF_MAINTENANCE)))

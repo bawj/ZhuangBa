@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/tool_lib_16dp"
+        android:paddingRight="@dimen/tool_lib_16dp"
+        android:text="@string/more_information"
+        android:textColor="@color/tool_lib_gray_222222"
+        android:textSize="@dimen/tool_lib_12sp" />
+    <!--合同编号-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/tool_lib_55dp"
+        android:layout_marginTop="@dimen/tool_lib_10dp"
+        android:background="@android:color/white"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/tool_lib_16dp"
+        android:paddingRight="@dimen/tool_lib_16dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:text="@string/contract_number"
+            android:textColor="@color/tool_lib_gray_888888"
+            android:textSize="@dimen/tool_lib_14sp" />
+
+        <EditText
+            android:id="@+id/editContractNumber"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/tool_lib_34dp"
+            android:background="@null"
+            android:gravity="center_vertical"
+            android:hint="@string/please_enter_the_contract_number"
+            android:inputType="number"
+            android:textColor="@color/tool_lib_gray_222222"
+            android:textSize="@dimen/tool_lib_14sp" />
+    </LinearLayout>
+
+    <View
+        style="@style/tool_lib_horizontal_line"
+        android:layout_marginLeft="@dimen/tool_lib_16dp"
+        android:layout_marginRight="@dimen/tool_lib_16dp" />
+    <!--客户经理-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/tool_lib_55dp"
+        android:background="@android:color/white"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/tool_lib_16dp"
+        android:paddingRight="@dimen/tool_lib_16dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:text="@string/account_manager"
+            android:textColor="@color/tool_lib_gray_888888"
+            android:textSize="@dimen/tool_lib_14sp" />
+
+        <EditText
+            android:id="@+id/editAccountManager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/tool_lib_34dp"
+            android:background="@null"
+            android:gravity="center_vertical"
+            android:hint="@string/please_enter_account_manager_name"
+            android:textColor="@color/tool_lib_gray_222222"
+            android:textSize="@dimen/tool_lib_14sp" />
+    </LinearLayout>
+
+    <View
+        style="@style/tool_lib_horizontal_line"
+        android:layout_marginLeft="@dimen/tool_lib_16dp"
+        android:layout_marginRight="@dimen/tool_lib_16dp" />
+
+    <!--项目名称-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/tool_lib_55dp"
+        android:background="@android:color/white"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/tool_lib_16dp"
+        android:paddingRight="@dimen/tool_lib_16dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:text="@string/entry_name"
+            android:textColor="@color/tool_lib_gray_888888"
+            android:textSize="@dimen/tool_lib_14sp" />
+
+        <EditText
+            android:id="@+id/editEntryName"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/tool_lib_34dp"
+            android:background="@null"
+            android:gravity="center_vertical"
+            android:hint="@string/please_enter_project_name"
+            android:textColor="@color/tool_lib_gray_222222"
+            android:textSize="@dimen/tool_lib_14sp" />
+    </LinearLayout>
+
+    <View
+        style="@style/tool_lib_horizontal_line"
+        android:layout_marginLeft="@dimen/tool_lib_16dp"
+        android:layout_marginRight="@dimen/tool_lib_16dp" />
+
+    <!--项目特点-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/tool_lib_55dp"
+        android:background="@android:color/white"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/tool_lib_16dp"
+        android:paddingRight="@dimen/tool_lib_16dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:text="@string/project_characteristics"
+            android:textColor="@color/tool_lib_gray_888888"
+            android:textSize="@dimen/tool_lib_14sp" />
+
+        <EditText
+            android:id="@+id/editProjectCharacteristics"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/tool_lib_34dp"
+            android:background="@null"
+            android:gravity="center_vertical"
+            android:hint="@string/please_enter_project_characteristics"
+            android:textColor="@color/tool_lib_gray_222222"
+            android:textSize="@dimen/tool_lib_14sp" />
+    </LinearLayout>
+
+    <View
+        style="@style/tool_lib_horizontal_line"
+        android:layout_marginLeft="@dimen/tool_lib_16dp"
+        android:layout_marginRight="@dimen/tool_lib_16dp" />
+
+    <!--店铺名称-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/tool_lib_55dp"
+        android:background="@android:color/white"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/tool_lib_16dp"
+        android:paddingRight="@dimen/tool_lib_16dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:text="@string/shop_name"
+            android:textColor="@color/tool_lib_gray_888888"
+            android:textSize="@dimen/tool_lib_14sp" />
+
+        <EditText
+            android:id="@+id/editShopName"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/tool_lib_34dp"
+            android:background="@null"
+            android:gravity="center_vertical"
+            android:hint="@string/please_enter_the_store_name"
+            android:textColor="@color/tool_lib_gray_222222"
+            android:textSize="@dimen/tool_lib_14sp" />
+    </LinearLayout>
+
+    <View
+        style="@style/tool_lib_horizontal_line"
+        android:layout_marginLeft="@dimen/tool_lib_16dp"
+        android:layout_marginRight="@dimen/tool_lib_16dp" />
+
+    <!--订单编号-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/tool_lib_55dp"
+        android:background="@android:color/white"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/tool_lib_16dp"
+        android:paddingRight="@dimen/tool_lib_16dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:text="@string/order_code"
+            android:textColor="@color/tool_lib_gray_888888"
+            android:textSize="@dimen/tool_lib_14sp" />
+
+        <EditText
+            android:id="@+id/editOrderCode"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/tool_lib_34dp"
+            android:background="@null"
+            android:gravity="center_vertical"
+            android:hint="@string/please_enter_the_third_party_order_number"
+            android:inputType="number"
+            android:textColor="@color/tool_lib_gray_222222"
+            android:textSize="@dimen/tool_lib_14sp" />
+    </LinearLayout>
+</LinearLayout>

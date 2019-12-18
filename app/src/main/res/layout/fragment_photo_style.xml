@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools">
+    android:layout_height="match_parent">
 
     <com.scwang.smartrefresh.layout.SmartRefreshLayout
         android:id="@+id/refreshBaseList"
@@ -34,6 +34,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginStart="@dimen/tool_lib_16dp"
+                    android:layout_marginTop="@dimen/tool_lib_12dp"
                     android:layout_marginEnd="@dimen/tool_lib_16dp" />
 
                 <TextView
@@ -43,9 +44,9 @@
                     android:layout_marginStart="@dimen/tool_lib_16dp"
                     android:layout_marginTop="@dimen/tool_lib_13dp"
                     android:layout_marginEnd="@dimen/tool_lib_16dp"
-                    tools:text="拍照样式拍照样式拍照样式拍照样式拍照样式拍照样式拍照样式拍照样式拍照样式"
                     android:textColor="@color/tool_lib_gray_777777"
-                    android:textSize="@dimen/tool_lib_16sp" />
+                    android:textSize="@dimen/tool_lib_16sp"
+                    tools:text="拍照样式拍照样式拍照样式拍照样式拍照样式拍照样式拍照样式拍照样式拍照样式" />
             </LinearLayout>
 
         </android.support.v4.widget.NestedScrollView>

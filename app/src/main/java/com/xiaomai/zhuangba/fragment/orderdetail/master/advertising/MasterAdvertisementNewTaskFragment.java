@@ -18,6 +18,9 @@ import org.greenrobot.eventbus.EventBus;
 import butterknife.BindView;
 import butterknife.OnClick;
 
+/**
+ * 广告单 新任务
+ */
 public class MasterAdvertisementNewTaskFragment extends BaseAdvertisingBillDetailFragment {
 
     @BindView(R.id.relNewTaskOrderDetailBottom)

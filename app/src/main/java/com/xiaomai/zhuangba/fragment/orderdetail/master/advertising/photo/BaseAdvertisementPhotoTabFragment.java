@@ -25,22 +25,25 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.xiaomai.zhuangba.R;
 import com.xiaomai.zhuangba.adapter.BaseAdvertisementPhotoTabAdapter;
-import com.xiaomai.zhuangba.data.bean.BaseAdvertisementPhotoTabEntity;
 import com.xiaomai.zhuangba.data.bean.DeviceSurfaceInformation;
-import com.xiaomai.zhuangba.data.bean.StayUrl;
+import com.xiaomai.zhuangba.data.bean.ServiceSampleEntity;
 import com.xiaomai.zhuangba.util.LuBanUtil;
 import com.xiaomai.zhuangba.util.MapUtils;
+import com.xiaomai.zhuangba.util.QiNiuUtil;
 import com.xiaomai.zhuangba.util.RxPermissionsUtils;
 import com.xiaomai.zhuangba.weight.PhotoTool;
 import com.xiaomai.zhuangba.weight.dialog.NavigationDialog;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
 
+import static com.xiaomai.zhuangba.fragment.orderdetail.master.advertising.BaseAdvertisingBillDetailFragment.ORDER_CODES;
 import static com.xiaomai.zhuangba.fragment.orderdetail.master.advertising.photo.BaseAdvertisementPhotoFragment.DEVICE_SURFACE_INFORMATION_LIST_STRING;
+import static com.xiaomai.zhuangba.fragment.orderdetail.master.advertising.photo.BaseAdvertisementPhotoFragment.SERVICE_SAMPLE;
 import static com.xiaomai.zhuangba.weight.PhotoTool.GET_IMAGE_BY_CAMERA;
 import static com.xiaomai.zhuangba.weight.PhotoTool.GET_IMAGE_FROM_PHONE;
 
@@ -57,20 +60,27 @@ public class BaseAdvertisementPhotoTabFragment extends BaseFragment implements B
     @BindView(R.id.editAdvertisingRemark)
     EditText editAdvertisingRemark;
 
-    private Integer position;
+    private Integer position = 0;
     private AMapLocation mapLocation;
     public Uri resultUri = null;
     private Uri imageUriFromCamera;
     /**
      * 待上传到服务器的图片
      */
-    private StayUrl stayUrl = new StayUrl();
+    private List<ServiceSampleEntity> waitForServiceSampleEntities = new ArrayList<>();
     private BaseAdvertisementPhotoTabAdapter baseAdvertisementPhotoTabAdapter;
 
-    public static BaseAdvertisementPhotoTabFragment newInstance(String deviceSurfaceInformationListString, String deviceSurfaceInformationString) {
+    /**
+     * @param serviceSample                      默认样图
+     * @param deviceSurfaceInformationListString 集合 所有面的数据
+     * @param deviceSurfaceInformationString     单个 当前面的数据
+     */
+    public static BaseAdvertisementPhotoTabFragment newInstance(String orderCodes,String serviceSample, String deviceSurfaceInformationListString, String deviceSurfaceInformationString) {
         Bundle args = new Bundle();
         args.putString(DEVICE_SURFACE_INFORMATION_LIST_STRING, deviceSurfaceInformationListString);
         args.putString(DEVICE_SURFACE_INFORMATION, deviceSurfaceInformationString);
+        args.putString(SERVICE_SAMPLE, serviceSample);
+        args.putString(ORDER_CODES, orderCodes);
         BaseAdvertisementPhotoTabFragment fragment = new BaseAdvertisementPhotoTabFragment();
         fragment.setArguments(args);
         return fragment;
@@ -86,9 +96,14 @@ public class BaseAdvertisementPhotoTabFragment extends BaseFragment implements B
         baseAdvertisementPhotoTabAdapter = new BaseAdvertisementPhotoTabAdapter();
         relPhoto.setLayoutManager(new LinearLayoutManager(getActivity()));
         relPhoto.setAdapter(baseAdvertisementPhotoTabAdapter);
-        baseAdvertisementPhotoTabAdapter.setNewData(getList());
+        //样式图  或者 默认图
+        List<ServiceSampleEntity> serviceSample = getDataInit();
+        if (!serviceSample.isEmpty()) {
+            GlideManager.loadImage(getActivity(), serviceSample.get(1).getPicUrl()
+                    , ivAdvertisementPhoto, R.drawable.ic_notice_img_add);
+        }
+        baseAdvertisementPhotoTabAdapter.setNewData(serviceSample);
         baseAdvertisementPhotoTabAdapter.setOnItemClickListener(this);
-
         MapUtils.location(getActivity(), new BaseCallback<AMapLocation>() {
             @Override
             public void onSuccess(AMapLocation aMapLocation) {
@@ -109,33 +124,29 @@ public class BaseAdvertisementPhotoTabFragment extends BaseFragment implements B
         });
     }
 
-    @OnClick({R.id.btnCompleteSubmission, R.id.ivAdvertisementShot})
+    @OnClick({R.id.btnPhotoSave, R.id.ivAdvertisementShot})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.ivAdvertisementShot:
                 //拍摄
                 showUploadDialog();
                 break;
-            case R.id.btnCompleteSubmission:
+            case R.id.btnPhotoSave:
                 //完成提交
                 String address = tvAdvertisementAddress.getText().toString();
                 String remark = editAdvertisingRemark.getText().toString();
-                DeviceSurfaceInformation deviceSurfaceInformation = getDeviceSurfaceInformation();
-                String panorama = stayUrl.getPanorama();
-                String headerCloseRange = stayUrl.getHeaderCloseRange();
-                String headerProspect = stayUrl.getHeaderProspect();
-                String other = stayUrl.getOther();
-                if (TextUtils.isEmpty(panorama)) {
-                    ToastUtil.showShort(getString(R.string.please_take_a_panorama));
-                } else if (TextUtils.isEmpty(headerCloseRange)) {
-                    ToastUtil.showShort(getString(R.string.please_take_close_up_with_newspaper));
-                } else if (TextUtils.isEmpty(headerProspect)) {
-                    ToastUtil.showShort(getString(R.string.please_take_foreground_of_header));
-                } else if (TextUtils.isEmpty(other)) {
-                    ToastUtil.showShort(getString(R.string.please_take_other_pictures));
-                } else {
-                    completeSubmission(deviceSurfaceInformation, mapLocation, address, remark, stayUrl);
+                //判断是否所有的照片都拍完了
+                //模板照片
+                for (ServiceSampleEntity waitForServiceSampleEntity : waitForServiceSampleEntities) {
+                    String picUrl = waitForServiceSampleEntity.getPicUrl();
+                    //判断照片是否存在
+                    if (TextUtils.isEmpty(picUrl)) {
+                        ToastUtil.showShort(getString(R.string.please_take_tip, waitForServiceSampleEntity.getAdverName()));
+                        return;
+                    }
                 }
+                DeviceSurfaceInformation deviceSurfaceInformation = getDeviceSurfaceInformation();
+                completeSubmission(deviceSurfaceInformation, waitForServiceSampleEntities, mapLocation, address, remark);
                 break;
             default:
         }
@@ -144,10 +155,10 @@ public class BaseAdvertisementPhotoTabFragment extends BaseFragment implements B
     @Override
     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
         this.position = position;
-        List<BaseAdvertisementPhotoTabEntity> data = baseAdvertisementPhotoTabAdapter.getData();
+        List<ServiceSampleEntity> data = baseAdvertisementPhotoTabAdapter.getData();
         baseAdvertisementPhotoTabAdapter.setCheckPosition(position);
-        BaseAdvertisementPhotoTabEntity baseAdvertisementPhotoTabEntity = data.get(position);
-        String url = baseAdvertisementPhotoTabEntity.getUrl();
+        ServiceSampleEntity serviceSampleEntity = data.get(position);
+        String url = serviceSampleEntity.getPicUrl();
         GlideManager.loadImage(getActivity(), url, ivAdvertisementPhoto, R.drawable.ic_notice_img_add);
         ivAdvertisementPhoto.setBackground(getResources().getDrawable(R.drawable.ic_green_frame));
     }
@@ -167,6 +178,13 @@ public class BaseAdvertisementPhotoTabFragment extends BaseFragment implements B
         return false;
     }
 
+    public String getOrderCodes() {
+        if (getArguments() != null) {
+            return getArguments().getString(ORDER_CODES);
+        }
+        return "";
+    }
+
     public DeviceSurfaceInformation getDeviceSurfaceInformation() {
         if (getArguments() != null) {
             String string = getArguments().getString(DEVICE_SURFACE_INFORMATION);
@@ -182,15 +200,6 @@ public class BaseAdvertisementPhotoTabFragment extends BaseFragment implements B
                     }.getType());
         }
         return new ArrayList<>();
-    }
-
-    public List<BaseAdvertisementPhotoTabEntity> getList() {
-        List<BaseAdvertisementPhotoTabEntity> urlList = new ArrayList<>();
-        urlList.add(new BaseAdvertisementPhotoTabEntity(null, getString(R.string.panorama)));
-        urlList.add(new BaseAdvertisementPhotoTabEntity(null, getString(R.string.with_head_close_up)));
-        urlList.add(new BaseAdvertisementPhotoTabEntity(null, getString(R.string.with_head_vision)));
-        urlList.add(new BaseAdvertisementPhotoTabEntity(null, getString(R.string.other)));
-        return urlList;
     }
 
     private void showUploadDialog() {
@@ -271,33 +280,111 @@ public class BaseAdvertisementPhotoTabFragment extends BaseFragment implements B
         LuBanUtil.getInstance().compress(getActivity(), imageAbsolutePath, new BaseCallback<String>() {
             @Override
             public void onSuccess(String obj) {
-                List<BaseAdvertisementPhotoTabEntity> data = baseAdvertisementPhotoTabAdapter.getData();
-                BaseAdvertisementPhotoTabEntity baseAdvertisementPhotoTabEntity = data.get(position);
-                baseAdvertisementPhotoTabEntity.setUrl(obj);
-                saveStayUrl(position, obj);
+                List<ServiceSampleEntity> data = baseAdvertisementPhotoTabAdapter.getData();
+                ServiceSampleEntity serviceSampleEntity = data.get(position);
+                serviceSampleEntity.setPicUrl(obj);
+                //保存到 待上传
+                if (waitForServiceSampleEntities.size() >= position) {
+                    waitForServiceSampleEntities.get(position).setPicUrl(obj);
+                }
                 GlideManager.loadImage(getActivity(), obj, ivAdvertisementPhoto);
                 baseAdvertisementPhotoTabAdapter.notifyDataSetChanged();
             }
         });
     }
 
-    private void saveStayUrl(Integer position, String url) {
-        if (position == 0) {
-            //全景
-            stayUrl.setPanorama(url);
-        } else if (position == 1) {
-            //带报头 近景
-            stayUrl.setHeaderCloseRange(url);
-        } else if (position == 2) {
-            //带报头 远景
-            stayUrl.setHeaderProspect(url);
-        } else if (position == 3) {
-            //其它
-            stayUrl.setOther(url);
+    public List<ServiceSampleEntity> getServiceSample() {
+        if (getArguments() != null) {
+            return new Gson().fromJson(getArguments().getString(SERVICE_SAMPLE), new TypeToken<List<ServiceSampleEntity>>() {
+            }.getType());
         }
+        return new ArrayList<>();
     }
 
-    public void completeSubmission(DeviceSurfaceInformation deviceSurfaceInformation, AMapLocation mapLocation, String address, String remark, StayUrl stayUrl) {
-        //完成提交
+    private List<ServiceSampleEntity> getDataInit() {
+        //样式图
+        List<ServiceSampleEntity> serviceSample = getServiceSample();
+        //拍过的图片
+        List<ServiceSampleEntity> serviceSampleEntities = getServiceSampleEntities();
+        if (!serviceSampleEntities.isEmpty()) {
+            waitForServiceSampleEntities.addAll(serviceSampleEntities);
+            return serviceSampleEntities;
+        }
+        if (serviceSample != null){
+            for (ServiceSampleEntity serviceSampleEntity : serviceSample) {
+                waitForServiceSampleEntities.add(new ServiceSampleEntity("", serviceSampleEntity.getAdverName()));
+            }
+        }
+        return serviceSample;
+    }
+
+    /**
+     * 回显的图片
+     *
+     * @return list
+     */
+    public List<ServiceSampleEntity> getServiceSampleEntities() {
+        return new ArrayList<>();
+    }
+
+    /**
+     * @param deviceSurfaceInformation 当前面的数据
+     * @param serviceSampleEntities    待提交的数据
+     * @param mapLocation              经纬度
+     * @param address                  地址
+     * @param remark                   描述
+     */
+    private void completeSubmission(DeviceSurfaceInformation deviceSurfaceInformation, List<ServiceSampleEntity> serviceSampleEntities,
+                                   AMapLocation mapLocation, String address, String remark) {
+        //所有面的数据
+        List<DeviceSurfaceInformation> deviceSurfaceInformationList = getDeviceSurfaceInformationList();
+        HashMap<String, Object> hashMap = new HashMap<>();
+        //当前面的订单编号
+        String orderCode = deviceSurfaceInformation.getOrderCode();
+        hashMap.put("orderCode", deviceSurfaceInformation.getOrderCode());
+        //除拍照外的订单编号集合，以逗号分隔
+        StringBuilder otherOrderCodes = new StringBuilder();
+        for (DeviceSurfaceInformation surfaceInformation : deviceSurfaceInformationList) {
+            String otherOrderCode = surfaceInformation.getOrderCode();
+            if (!otherOrderCode.equals(orderCode)) {
+                otherOrderCodes.append(",").append(otherOrderCode);
+            }
+        }
+        hashMap.put("orderCodes", otherOrderCodes.toString());
+        //经纬度
+        hashMap.put("lon", mapLocation.getLongitude());
+        hashMap.put("lat", mapLocation.getLatitude());
+        //定位
+        hashMap.put("address", address);
+        //备注
+        hashMap.put("remark", remark);
+        //这里有两个集合 已经提交  域名+图片名称  未提交只有本地图片的路径
+        List<ServiceSampleEntity> submitted = new ArrayList<>();
+        //这个是需要提交的
+        List<ServiceSampleEntity> notSubmitted = new ArrayList<>();
+
+        //判断 是否是重复的图片 已经提交过的 不提交到七牛云
+        for (ServiceSampleEntity serviceSampleEntity : serviceSampleEntities) {
+            String picUrl = serviceSampleEntity.getPicUrl();
+            if (!TextUtils.isEmpty(picUrl) && !picUrl.contains(QiNiuUtil.IMG_URL)) {
+                //已经提交的
+                String imgName = QiNiuUtil.newInstance().getImgName();
+                submitted.add(new ServiceSampleEntity(QiNiuUtil.IMG_URL + imgName, serviceSampleEntity.getAdverName()));
+                //需要提交的
+                notSubmitted.add(new ServiceSampleEntity(serviceSampleEntity.getPicUrl(), serviceSampleEntity.getAdverName(), imgName));
+            } else {
+                submitted.add(serviceSampleEntity);
+            }
+        }
+        submitAdvertisementPhoto(submitted, notSubmitted, hashMap);
+    }
+
+    /**
+     * @param submitted 已经提交
+     * @param notSubmitted 未提交
+     * @param hashMap 待提交的参数
+     */
+    public void submitAdvertisementPhoto(List<ServiceSampleEntity> submitted, List<ServiceSampleEntity> notSubmitted, HashMap<String, Object> hashMap) {
+
     }
 }

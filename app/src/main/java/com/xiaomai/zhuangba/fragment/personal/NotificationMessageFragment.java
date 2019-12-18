@@ -161,8 +161,10 @@ public class NotificationMessageFragment extends BaseFragment {
                     , orderType, ongoingOrdersList.getOrderStatus());
         } else if (orderType.equals(String.valueOf(StaticExplain.ADVERTISING_BILLS.getCode()))) {
             //广告单
-            AdvertisingStatusUtil.startEmployerAdvertisingBills(getBaseFragmentActivity(), ongoingOrdersList.getOrderCode()
-                    , orderType, ongoingOrdersList.getOrderStatus());
+//            AdvertisingStatusUtil.startEmployerAdvertisingBills(getBaseFragmentActivity(), ongoingOrdersList.getOrderCode()
+//                    , orderType, ongoingOrdersList.getOrderStatus());
+            AdvertisingStatusUtil.startEmployerAdvertisinOrderDetail(getBaseFragmentActivity(),
+                    ongoingOrdersList.getOrderCode(), ongoingOrdersList.getOrderStatus());
             //巡查单
         }else if (orderType.equals(String.valueOf(StaticExplain.PATROL.getCode()))){
             PatrolStatusUtil.startEmployerPatrol(getBaseFragmentActivity(), ongoingOrdersList.getOrderCode(), orderType,

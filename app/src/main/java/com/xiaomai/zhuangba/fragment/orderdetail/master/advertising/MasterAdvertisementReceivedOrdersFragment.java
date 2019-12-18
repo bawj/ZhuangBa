@@ -15,6 +15,7 @@ import com.xiaomai.zhuangba.data.bean.DeviceSurfaceInformation;
 import com.xiaomai.zhuangba.data.bean.MessageEvent;
 import com.xiaomai.zhuangba.enums.AdvertisingEnum;
 import com.xiaomai.zhuangba.enums.EventBusEnum;
+import com.xiaomai.zhuangba.fragment.orderdetail.master.advertising.photo.LastAdvertisementPhotoFragment;
 import com.xiaomai.zhuangba.fragment.orderdetail.master.advertising.photo.NextAdvertisementPhotoFragment;
 import com.xiaomai.zhuangba.http.ServiceUrl;
 
@@ -47,6 +48,7 @@ public class MasterAdvertisementReceivedOrdersFragment extends BaseAdvertisingBi
      */
     private List<DeviceSurfaceInformation> deviceSurfaceInformationList;
     private Integer serviceId;
+    private String serviceSample;
 
     public static MasterAdvertisementReceivedOrdersFragment newInstance(String orderCodes) {
         Bundle args = new Bundle();
@@ -73,6 +75,7 @@ public class MasterAdvertisementReceivedOrdersFragment extends BaseAdvertisingBi
         relNewTaskOrderDetailBottom.setVisibility(View.VISIBLE);
         serviceId = adOrderInformationList.getServiceId();
         operating = adOrderInformationList.getOperating();
+        serviceSample = adOrderInformationList.getServiceSample();
         deviceSurfaceInformationList = adOrderInformationList.getList();
         if (operating.equals(String.valueOf(AdvertisingEnum.MASTER_PENDING_DISPOSAL_NEXT_ISSUE.getCode()))) {
             //下刊
@@ -116,7 +119,7 @@ public class MasterAdvertisementReceivedOrdersFragment extends BaseAdvertisingBi
      */
     private void nextAdvertisement() {
         List<DeviceSurfaceInformation> deviceSurfaceInformationList = getNextDeviceSurfaceInformationList();
-        startFragment(NextAdvertisementPhotoFragment.newInstance(String.valueOf(serviceId), new Gson().toJson(deviceSurfaceInformationList)));
+        startFragment(NextAdvertisementPhotoFragment.newInstance(getOrderCodes(),String.valueOf(serviceId), serviceSample, new Gson().toJson(deviceSurfaceInformationList)));
     }
 
     /**
@@ -124,7 +127,7 @@ public class MasterAdvertisementReceivedOrdersFragment extends BaseAdvertisingBi
      */
     private void lastAdvertisement() {
         List<DeviceSurfaceInformation> deviceSurfaceInformationList = getLastNextDeviceSurfaceInformationList();
-
+        startFragment(LastAdvertisementPhotoFragment.newInstance(getOrderCodes(),String.valueOf(serviceId), serviceSample, new Gson().toJson(deviceSurfaceInformationList)));
     }
 
 

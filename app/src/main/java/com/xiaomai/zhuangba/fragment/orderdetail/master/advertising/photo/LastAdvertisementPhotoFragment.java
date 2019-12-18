@@ -1,17 +1,17 @@
 package com.xiaomai.zhuangba.fragment.orderdetail.master.advertising.photo;
 
-
 import android.os.Bundle;
 
 import com.xiaomai.zhuangba.R;
 
 import static com.xiaomai.zhuangba.fragment.orderdetail.master.advertising.BaseAdvertisingBillDetailFragment.ORDER_CODES;
 
-
 /**
- * 下刊拍照
+ * Author: Bawj
+ * CreateDate: 2019/12/16 0016 20:56
+ * 上刊拍照
  */
-public class NextAdvertisementPhotoFragment extends BaseAdvertisementPhotoFragment<NextAdvertisementPhotoTabFragment> {
+public class LastAdvertisementPhotoFragment extends BaseAdvertisementPhotoFragment<LastAdvertisementPhotoTabFragment>{
 
     /**
      * @param orderCodes                         订单编号
@@ -20,20 +20,20 @@ public class NextAdvertisementPhotoFragment extends BaseAdvertisementPhotoFragme
      * @param deviceSurfaceInformationListString 集合 所有面的数据
      * @return
      */
-    public static NextAdvertisementPhotoFragment newInstance(String orderCodes,String serviceId, String serviceSample, String deviceSurfaceInformationListString) {
+    public static LastAdvertisementPhotoFragment newInstance(String orderCodes,String serviceId, String serviceSample, String deviceSurfaceInformationListString) {
         Bundle args = new Bundle();
         args.putString(DEVICE_SURFACE_INFORMATION_LIST_STRING, deviceSurfaceInformationListString);
         args.putString(PhotoStyleFragment.SERVICE_ID, serviceId);
         args.putString(SERVICE_SAMPLE, serviceSample);
         args.putString(ORDER_CODES , orderCodes);
-        NextAdvertisementPhotoFragment fragment = new NextAdvertisementPhotoFragment();
+        LastAdvertisementPhotoFragment fragment = new LastAdvertisementPhotoFragment();
         fragment.setArguments(args);
         return fragment;
     }
 
     @Override
-    public NextAdvertisementPhotoTabFragment getBaseAdvertisementPhotoTabFragment(String deviceSurfaceInformationString) {
-        return NextAdvertisementPhotoTabFragment.newInstance(getOrderCodes(),getServiceSample(),getDeviceSurfaceInformationS(), deviceSurfaceInformationString);
+    public LastAdvertisementPhotoTabFragment getBaseAdvertisementPhotoTabFragment(String deviceSurfaceInformationString) {
+        return LastAdvertisementPhotoTabFragment.newInstance(getOrderCodes(),getServiceSample(),getDeviceSurfaceInformationS(), deviceSurfaceInformationString);
     }
 
     public String getDeviceSurfaceInformationS() {
@@ -45,6 +45,7 @@ public class NextAdvertisementPhotoFragment extends BaseAdvertisementPhotoFragme
 
     @Override
     public String getTitle() {
-        return getString(R.string.photo_taken_in_next_issue);
+        return getString(R.string.photo_taken_in_last_issue);
     }
+
 }

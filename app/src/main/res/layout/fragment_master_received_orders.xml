@@ -265,9 +265,7 @@
                         android:id="@+id/viewPager"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/tool_lib_12dp"
-                        android:paddingLeft="@dimen/tool_lib_16dp"
-                        android:paddingRight="@dimen/tool_lib_16dp" />
+                        android:layout_marginTop="@dimen/tool_lib_12dp" />
                 </LinearLayout>
             </android.support.design.widget.CoordinatorLayout>
 

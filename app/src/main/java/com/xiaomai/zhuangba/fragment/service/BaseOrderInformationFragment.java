@@ -69,6 +69,19 @@ public class BaseOrderInformationFragment extends BaseFragment<IOrderInformation
     TextView tvOrderInformationClickServiceAddress;
     @BindView(R.id.tvOrderInformationDate)
     TextView tvOrderInformationDate;
+    @BindView(R.id.editContractNumber)
+    EditText editContractNumber;
+    @BindView(R.id.editAccountManager)
+    EditText editAccountManager;
+    @BindView(R.id.editEntryName)
+    EditText editEntryName;
+    @BindView(R.id.editProjectCharacteristics)
+    EditText editProjectCharacteristics;
+    @BindView(R.id.editShopName)
+    EditText editShopName;
+    @BindView(R.id.editOrderCode)
+    EditText editOrderCode;
+
 
     @BindView(R.id.recyclerNotes)
     RecyclerView recyclerNotes;
@@ -138,10 +151,12 @@ public class BaseOrderInformationFragment extends BaseFragment<IOrderInformation
                 break;
             case R.id.btnOrderInformation:
                 //提交 或 修改信息
+                hideKeyboard(view);
                 btnOrderInformationClick();
                 break;
             case R.id.relOrderInformationTime:
                 //点击选择预约时间
+                hideKeyboard(view);
                 timePickerView();
                 break;
             default:
@@ -370,6 +385,36 @@ public class BaseOrderInformationFragment extends BaseFragment<IOrderInformation
     @Override
     public String getLatitude() {
         return String.valueOf(latitude);
+    }
+
+    @Override
+    public String getContractNo() {
+        return editContractNumber.getText().toString();
+    }
+
+    @Override
+    public String getAccountManager() {
+        return editAccountManager.getText().toString();
+    }
+
+    @Override
+    public String getProjectName() {
+        return editEntryName.getText().toString();
+    }
+
+    @Override
+    public String getProjectFeatures() {
+        return editProjectCharacteristics.getText().toString();
+    }
+
+    @Override
+    public String getShopName() {
+        return editShopName.getText().toString();
+    }
+
+    @Override
+    public String getOrderNumber() {
+        return editOrderCode.getText().toString();
     }
 
     @Override

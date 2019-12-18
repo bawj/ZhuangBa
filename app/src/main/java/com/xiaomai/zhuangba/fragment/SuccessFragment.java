@@ -57,6 +57,7 @@ public class SuccessFragment extends BaseFragment {
         return getString(R.string.apply_success);
     }
 
+    @Override
     public boolean isBackArrow() {
         return false;
     }

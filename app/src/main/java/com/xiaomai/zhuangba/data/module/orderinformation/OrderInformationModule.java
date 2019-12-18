@@ -70,6 +70,20 @@ public class OrderInformationModule extends BaseModule<IOrderInformationView> im
         hashMap.put("latitude", DensityUtils.stringTypeFloat(latitude));
         //订单编号
         hashMap.put("orderCode", mViewRef.get().getOrderCode());
+
+        //合同编号
+        hashMap.put("contractNo" , mViewRef.get().getContractNo());
+        // 客户经理
+        hashMap.put("accountManager" , mViewRef.get().getAccountManager());
+        // 项目名称
+        hashMap.put("projectName" , mViewRef.get().getProjectName());
+        // 项目特点
+        hashMap.put("projectFeatures" , mViewRef.get().getProjectFeatures());
+        // 店铺名称
+        hashMap.put("shopName" , mViewRef.get().getShopName());
+        // 第三方订单编号
+        hashMap.put("orderNumber" , mViewRef.get().getOrderNumber());
+
         String s = new Gson().toJson(hashMap);
         RequestBody requestBody = RequestBody.create(MediaType.parse("application/json;charset=utf-8"), s);
 

@@ -17,15 +17,25 @@ public class DeviceSurfaceInformation {
      */
     private String publishedPhotos;
     /**
+     * 上刊描述
+     */
+    private String publishedRemark;
+    /**
      * 下刊默认图
      */
     private String nextIssuePhotos;
+    /**
+     * 下刊描述
+     */
+    private String nextIssueRemark;
 
     @SerializedName("newlyAdName")
     private String newAdName;
     @SerializedName("newlyAdUrl")
     private String newAdUrl;
-    /** 上刊或下刊 或 上下刊 */
+    /**
+     * 上刊或下刊 或 上下刊
+     */
     private String type;
     private List<OrderDateList> orderDateList;
 
@@ -107,6 +117,22 @@ public class DeviceSurfaceInformation {
 
     public void setNextIssuePhotos(String nextIssuePhotos) {
         this.nextIssuePhotos = nextIssuePhotos;
+    }
+
+    public String getPublishedRemark() {
+        return publishedRemark == null ? "" : publishedRemark;
+    }
+
+    public void setPublishedRemark(String publishedRemark) {
+        this.publishedRemark = publishedRemark;
+    }
+
+    public String getNextIssueRemark() {
+        return nextIssueRemark == null ? "" : nextIssueRemark;
+    }
+
+    public void setNextIssueRemark(String nextIssueRemark) {
+        this.nextIssueRemark = nextIssueRemark;
     }
 
     public List<OrderDateList> getOrderDateList() {

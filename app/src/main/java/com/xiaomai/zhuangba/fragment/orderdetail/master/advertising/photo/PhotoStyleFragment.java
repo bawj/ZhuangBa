@@ -13,18 +13,17 @@ import com.example.toollib.http.exception.ApiException;
 import com.example.toollib.http.observer.BaseHttpRxObserver;
 import com.example.toollib.http.util.RxUtils;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.xiaomai.zhuangba.R;
 import com.xiaomai.zhuangba.adapter.PhotoStyleAdapter;
-import com.xiaomai.zhuangba.data.bean.BaseAdvertisementPhotoTabEntity;
 import com.xiaomai.zhuangba.data.bean.Rules;
-import com.xiaomai.zhuangba.data.bean.StayUrl;
+import com.xiaomai.zhuangba.data.bean.ServiceSampleEntity;
 import com.xiaomai.zhuangba.http.ServiceUrl;
 import com.xiaomai.zhuangba.weight.GridSpacingItemDecoration;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -47,7 +46,7 @@ public class PhotoStyleFragment extends BaseFragment implements OnRefreshListene
 
     public static PhotoStyleFragment newInstance(String serviceId) {
         Bundle args = new Bundle();
-        args.putString(SERVICE_ID , serviceId);
+        args.putString(SERVICE_ID, serviceId);
         PhotoStyleFragment fragment = new PhotoStyleFragment();
         fragment.setArguments(args);
         return fragment;
@@ -56,10 +55,10 @@ public class PhotoStyleFragment extends BaseFragment implements OnRefreshListene
     @Override
     public void initView() {
         refreshLayout.setOnRefreshListener(this);
-        rvBaseList.setLayoutManager(new GridLayoutManager(getActivity() , 2));
+        rvBaseList.setLayoutManager(new GridLayoutManager(getActivity(), 3));
         photoStyleAdapter = new PhotoStyleAdapter();
         rvBaseList.setAdapter(photoStyleAdapter);
-        rvBaseList.addItemDecoration(new GridSpacingItemDecoration(2, 11, false));
+        rvBaseList.addItemDecoration(new GridSpacingItemDecoration(3, 11, false));
         refreshLayout.autoRefresh();
     }
 
@@ -72,15 +71,12 @@ public class PhotoStyleFragment extends BaseFragment implements OnRefreshListene
                     protected void onSuccess(Rules rules) {
                         tvPhotoExplain.setText(rules.getNotice());
                         String pictUrl = rules.getPictUrl();
-                        StayUrl stayUrl = new Gson().fromJson(pictUrl , StayUrl.class);
-                        List<BaseAdvertisementPhotoTabEntity> photoTabEntityList = new ArrayList<>();
-                        photoTabEntityList.add(new BaseAdvertisementPhotoTabEntity(stayUrl.getHeaderCloseRange() , getString(R.string.panorama)));
-                        photoTabEntityList.add(new BaseAdvertisementPhotoTabEntity(stayUrl.getHeaderProspect() , getString(R.string.with_head_close_up)));
-                        photoTabEntityList.add(new BaseAdvertisementPhotoTabEntity(stayUrl.getHeaderProspect() , getString(R.string.with_head_vision)));
-                        photoTabEntityList.add(new BaseAdvertisementPhotoTabEntity(stayUrl.getOther() , getString(R.string.other)));
+                        List<ServiceSampleEntity> photoTabEntityList = new Gson().fromJson(pictUrl, new TypeToken<List<ServiceSampleEntity>>() {
+                        }.getType());
                         photoStyleAdapter.setNewData(photoTabEntityList);
                         refreshLayout.finishRefresh();
                     }
+
                     @Override
                     public void onError(ApiException apiException) {
                         super.onError(apiException);
@@ -94,8 +90,8 @@ public class PhotoStyleFragment extends BaseFragment implements OnRefreshListene
         return R.layout.fragment_photo_style;
     }
 
-    private String getServiceId(){
-        if (getArguments() != null){
+    private String getServiceId() {
+        if (getArguments() != null) {
             return getArguments().getString(SERVICE_ID);
         }
         return "";

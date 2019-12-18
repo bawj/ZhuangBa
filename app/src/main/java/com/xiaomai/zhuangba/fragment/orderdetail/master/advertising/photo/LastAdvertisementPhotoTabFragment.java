@@ -31,9 +31,11 @@ import static com.xiaomai.zhuangba.fragment.orderdetail.master.advertising.photo
 import static com.xiaomai.zhuangba.fragment.orderdetail.master.advertising.photo.BaseAdvertisementPhotoFragment.SERVICE_SAMPLE;
 
 /**
- * 下刊
+ * Author: Bawj
+ * CreateDate: 2019/12/16 0016 20:57
+ * 上刊 tab
  */
-public class NextAdvertisementPhotoTabFragment extends BaseAdvertisementPhotoTabFragment {
+public class LastAdvertisementPhotoTabFragment extends BaseAdvertisementPhotoTabFragment{
 
     /**
      * @param serviceSample                      默认样图
@@ -41,29 +43,24 @@ public class NextAdvertisementPhotoTabFragment extends BaseAdvertisementPhotoTab
      * @param deviceSurfaceInformationString     单个 当前面的数据
      * @return
      */
-    public static NextAdvertisementPhotoTabFragment newInstance(String orderCodes,String serviceSample, String deviceSurfaceInformationListString, String deviceSurfaceInformationString) {
+    public static LastAdvertisementPhotoTabFragment newInstance(String orderCodes,String serviceSample, String deviceSurfaceInformationListString, String deviceSurfaceInformationString) {
         Bundle args = new Bundle();
         args.putString(DEVICE_SURFACE_INFORMATION_LIST_STRING, deviceSurfaceInformationListString);
         args.putString(DEVICE_SURFACE_INFORMATION, deviceSurfaceInformationString);
         args.putString(SERVICE_SAMPLE, serviceSample);
         args.putString(ORDER_CODES, orderCodes);
-        NextAdvertisementPhotoTabFragment fragment = new NextAdvertisementPhotoTabFragment();
+        LastAdvertisementPhotoTabFragment fragment = new LastAdvertisementPhotoTabFragment();
         fragment.setArguments(args);
         return fragment;
-    }
-
-    @Override
-    public int getContentView() {
-        return R.layout.fragment_next_advertisement_photo_tab;
     }
 
     @Override
     public List<ServiceSampleEntity> getServiceSampleEntities() {
         //拍过得图 回显下刊图
         DeviceSurfaceInformation deviceSurfaceInformation = getDeviceSurfaceInformation();
-        String nextIssuePhotos = deviceSurfaceInformation.getNextIssuePhotos();
-        if (!TextUtils.isEmpty(nextIssuePhotos)) {
-            return new Gson().fromJson(nextIssuePhotos, new TypeToken<List<ServiceSampleEntity>>() {
+        String publishedPhotos = deviceSurfaceInformation.getPublishedPhotos();
+        if (!TextUtils.isEmpty(publishedPhotos)) {
+            return new Gson().fromJson(publishedPhotos, new TypeToken<List<ServiceSampleEntity>>() {
             }.getType());
         }
         return new ArrayList<>();
@@ -91,7 +88,7 @@ public class NextAdvertisementPhotoTabFragment extends BaseAdvertisementPhotoTab
             public ObservableSource<HttpResult<Object>> apply(List<ServiceSampleEntity> imgUrlList){
                 hashMap.put("pictureUrl" ,new Gson().toJson(submitted));
                 RequestBody requestBody = RequestBody.create(MediaType.parse("application/json;charset=utf-8"), new Gson().toJson(hashMap));
-                return RxUtils.getObservable(ServiceUrl.getUserApi().nextIssuePicture(requestBody));
+                return RxUtils.getObservable(ServiceUrl.getUserApi().publishedPicture(requestBody));
             }
         }).subscribe(new BaseHttpRxObserver<Object>(getActivity()) {
             @Override

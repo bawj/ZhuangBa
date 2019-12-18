@@ -8,6 +8,7 @@ import com.xiaomai.zhuangba.data.bean.AdOrderInformation;
 import com.xiaomai.zhuangba.data.bean.AdvertisingReplacementBean;
 import com.xiaomai.zhuangba.data.bean.AdvertisingReplacementDetailBean;
 import com.xiaomai.zhuangba.data.bean.AliPayAccountBean;
+import com.xiaomai.zhuangba.data.bean.Cause;
 import com.xiaomai.zhuangba.data.bean.CreateTeamBean;
 import com.xiaomai.zhuangba.data.bean.DataDetailsContent;
 import com.xiaomai.zhuangba.data.bean.DeliveryContent;
@@ -1336,10 +1337,52 @@ public interface IApi {
 
     /**
      * 广告订单查询上刊和下刊拍照样式和说明
+     * @param serviceId serviceId
      * @return observable
      */
-    @FormUrlEncoded
-    @POST("adOrder/getPhotoRules")
-    Observable<HttpResult<Rules>> getPhotoRules(@Field("orderCodes") String orderCodes);
+    @GET("adOrder/getPhotoRules/{serviceId}")
+    Observable<HttpResult<Rules>> getPhotoRules(@Path("serviceId") String serviceId);
+
+    /**
+     * 师傅上传下刊图片
+     * @return observable
+     */
+    @POST("adOrder/nextIssuePicture")
+    Observable<HttpResult<Object>> nextIssuePicture(@Body RequestBody body);
+
+    /**
+     * 师傅上传上刊图片
+     * @return observable
+     */
+    @POST("adOrder/publishedPicture")
+    Observable<HttpResult<Object>> publishedPicture(@Body RequestBody body);
+
+    /**
+     * 查询验收不通过理由
+     * @return observable
+     */
+    @GET("communal/getNotPassReasons")
+    Observable<HttpResult<List<Cause>>> getNotPassReasons();
+
+    /**
+     * 广告订单通过
+     * @param orderCodes 订单编号集合
+     * @return observable
+     */
+    @GET("adOrder/passedAdvertisingOrder")
+    Observable<HttpResult<Object>> adPassedAdvertisingOrder(@Query("orderCodes") String orderCodes);
+
+    /**
+     * 广告单验收不通过
+     *
+     * @param orderCodes        订单编号
+     * @param causes 选择的不通过理由，多个用逗号隔开
+     * @param employerDescribe  验收不通过说明
+     * @return observable
+     */
+    @GET("adOrder/notPassedAdOrder")
+    Observable<HttpResult<Object>> notPassedAdvertisingOrder(@Query("orderCodes") String orderCodes
+            , @Query("causes") String causes, @Query("employerDescribe") String employerDescribe);
+
 
 }

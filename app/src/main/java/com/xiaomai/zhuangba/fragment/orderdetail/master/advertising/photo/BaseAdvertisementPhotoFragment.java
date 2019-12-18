@@ -22,23 +22,29 @@ import java.util.List;
 
 import butterknife.BindView;
 
+import static com.xiaomai.zhuangba.fragment.orderdetail.master.advertising.BaseAdvertisingBillDetailFragment.ORDER_CODES;
+
 public class BaseAdvertisementPhotoFragment<T extends BaseAdvertisementPhotoTabFragment> extends BaseFragment {
 
     public static final String DEVICE_SURFACE_INFORMATION_LIST_STRING = "device_surface_information_list_string";
-
+    public static final String SERVICE_SAMPLE = "service_sample";
     @BindView(R.id.magicIndicator)
     MagicIndicator magicIndicator;
     @BindView(R.id.viewPager)
     ViewPager mViewPager;
 
     /**
-     * @param serviceId serviceId
+     * @param serviceId                          serviceId
+     * @param serviceSample                      默认图
      * @param deviceSurfaceInformationListString 集合 所有面的数据
+     * @return
      */
-    public static BaseAdvertisementPhotoFragment newInstance(String serviceId , String deviceSurfaceInformationListString) {
+    public static BaseAdvertisementPhotoFragment newInstance(String orderCodes, String serviceId, String serviceSample, String deviceSurfaceInformationListString) {
         Bundle args = new Bundle();
         args.putString(DEVICE_SURFACE_INFORMATION_LIST_STRING, deviceSurfaceInformationListString);
-        args.putString(PhotoStyleFragment.SERVICE_ID , serviceId);
+        args.putString(PhotoStyleFragment.SERVICE_ID, serviceId);
+        args.putString(SERVICE_SAMPLE, serviceSample);
+        args.putString(ORDER_CODES, orderCodes);
         BaseAdvertisementPhotoFragment fragment = new BaseAdvertisementPhotoFragment();
         fragment.setArguments(args);
         return fragment;
@@ -98,9 +104,23 @@ public class BaseAdvertisementPhotoFragment<T extends BaseAdvertisementPhotoTabF
         startFragment(PhotoStyleFragment.newInstance(getServiceId()));
     }
 
-    private String getServiceId(){
-        if (getArguments() != null){
+    private String getServiceId() {
+        if (getArguments() != null) {
             return getArguments().getString(PhotoStyleFragment.SERVICE_ID);
+        }
+        return "";
+    }
+
+    public String getServiceSample() {
+        if (getArguments() != null) {
+            return getArguments().getString(SERVICE_SAMPLE);
+        }
+        return "";
+    }
+
+    public String getOrderCodes() {
+        if (getArguments() != null) {
+            return getArguments().getString(ORDER_CODES);
         }
         return "";
     }

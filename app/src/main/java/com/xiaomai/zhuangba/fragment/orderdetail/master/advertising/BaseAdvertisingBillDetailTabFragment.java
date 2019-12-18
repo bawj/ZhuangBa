@@ -1,22 +1,31 @@
 package com.xiaomai.zhuangba.fragment.orderdetail.master.advertising;
 
 import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.toollib.base.BaseFragment;
 import com.example.toollib.data.IBaseModule;
+import com.example.toollib.fragment.ImgPreviewFragment;
 import com.example.toollib.manager.GlideManager;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.xiaomai.zhuangba.R;
+import com.xiaomai.zhuangba.adapter.NextLastIssuePhotoAdapter;
 import com.xiaomai.zhuangba.adapter.OrderDateListAdapter;
 import com.xiaomai.zhuangba.data.bean.DeviceSurfaceInformation;
 import com.xiaomai.zhuangba.data.bean.OrderDateList;
+import com.xiaomai.zhuangba.data.bean.ServiceSampleEntity;
+import com.xiaomai.zhuangba.weight.GridSpacingItemDecoration;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -34,6 +43,8 @@ public class BaseAdvertisingBillDetailTabFragment extends BaseFragment {
     RecyclerView recyclerLastPhoto;
     @BindView(R.id.tvLastPhotoRemark)
     TextView tvLastPhotoRemark;
+    @BindView(R.id.tvLastPhoto)
+    TextView tvLastPhoto;
     /**
      * 下刊
      */
@@ -43,6 +54,8 @@ public class BaseAdvertisingBillDetailTabFragment extends BaseFragment {
     RecyclerView recyclerNextIssuePhoto;
     @BindView(R.id.tvNextIssuePhotoRemark)
     TextView tvNextIssuePhotoRemark;
+    @BindView(R.id.tvNextIssuePhoto)
+    TextView tvNextIssuePhoto;
     /**
      * 旧广告
      */
@@ -74,10 +87,78 @@ public class BaseAdvertisingBillDetailTabFragment extends BaseFragment {
     @Override
     public void initView() {
         DeviceSurfaceInformation deviceSurfaceInformation = getDeviceSurfaceInformation();
-        // TODO: 2019/12/11 0011  上刊照片
-        layLastPhoto.setVisibility(View.GONE);
-        // TODO: 2019/12/11 0011 下刊照片
-        layNextIssuePhoto.setVisibility(View.GONE);
+        //下刊照片
+        String nextIssuePhotos = deviceSurfaceInformation.getNextIssuePhotos();
+        if (TextUtils.isEmpty(nextIssuePhotos)){
+            tvNextIssuePhoto.setVisibility(View.GONE);
+            recyclerNextIssuePhoto.setVisibility(View.GONE);
+        }else {
+            tvNextIssuePhoto.setVisibility(View.VISIBLE);
+            recyclerNextIssuePhoto.setVisibility(View.VISIBLE);
+            recyclerNextIssuePhoto.setLayoutManager(new GridLayoutManager(getActivity() , 4));
+            recyclerNextIssuePhoto.addItemDecoration(new GridSpacingItemDecoration(4, 32, false));
+            final List<ServiceSampleEntity> sampleEntityList= new Gson().fromJson(nextIssuePhotos, new TypeToken<List<ServiceSampleEntity>>(){}.getType());
+            NextLastIssuePhotoAdapter nextIssuePhotoAdapter = new NextLastIssuePhotoAdapter();
+            recyclerNextIssuePhoto.setAdapter(nextIssuePhotoAdapter);
+            nextIssuePhotoAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+                @Override
+                public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                    ArrayList<String> url = new ArrayList<>();
+                    for (ServiceSampleEntity serviceSampleEntity : sampleEntityList) {
+                        url.add(serviceSampleEntity.getPicUrl());
+                    }
+                    if (url != null) {
+                        startFragment(ImgPreviewFragment.newInstance(position, url));
+                    }
+                }
+            });
+            nextIssuePhotoAdapter.setNewData(sampleEntityList);
+        }
+        //下刊备注
+        String nextIssueRemark = deviceSurfaceInformation.getNextIssueRemark();
+        if (TextUtils.isEmpty(nextIssueRemark)){
+            tvNextIssuePhotoRemark.setVisibility(View.GONE);
+        }else {
+            tvNextIssuePhotoRemark.setVisibility(View.VISIBLE);
+            tvNextIssuePhotoRemark.setText(nextIssueRemark);
+        }
+
+        //上刊照片
+        String publishedPhotos = deviceSurfaceInformation.getPublishedPhotos();
+        if (TextUtils.isEmpty(publishedPhotos)){
+            tvLastPhoto.setVisibility(View.GONE);
+            recyclerLastPhoto.setVisibility(View.GONE);
+        }else {
+            tvLastPhoto.setVisibility(View.VISIBLE);
+            recyclerLastPhoto.setVisibility(View.VISIBLE);
+            recyclerLastPhoto.setLayoutManager(new GridLayoutManager(getActivity() , 4));
+            recyclerLastPhoto.addItemDecoration(new GridSpacingItemDecoration(4, 32, false));
+            final List<ServiceSampleEntity> sampleEntityList= new Gson().fromJson(publishedPhotos, new TypeToken<List<ServiceSampleEntity>>(){}.getType());
+            NextLastIssuePhotoAdapter nextIssuePhotoAdapter = new NextLastIssuePhotoAdapter();
+            recyclerLastPhoto.setAdapter(nextIssuePhotoAdapter);
+            nextIssuePhotoAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+                @Override
+                public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                    ArrayList<String> url = new ArrayList<>();
+                    for (ServiceSampleEntity serviceSampleEntity : sampleEntityList) {
+                        url.add(serviceSampleEntity.getPicUrl());
+                    }
+                    if (url != null) {
+                        startFragment(ImgPreviewFragment.newInstance(position, url));
+                    }
+                }
+            });
+            nextIssuePhotoAdapter.setNewData(sampleEntityList);
+        }
+        //上刊备注
+        String publishedRemark = deviceSurfaceInformation.getPublishedRemark();
+        if (TextUtils.isEmpty(publishedRemark)){
+            tvLastPhotoRemark.setVisibility(View.GONE);
+        }else {
+            tvLastPhotoRemark.setVisibility(View.VISIBLE);
+            tvLastPhotoRemark.setText(publishedRemark);
+        }
+
         //旧广告
         String oldAdName = deviceSurfaceInformation.getOldAdName();
         tvOldAdvertisementName.setText(getString(R.string.colon, oldAdName));

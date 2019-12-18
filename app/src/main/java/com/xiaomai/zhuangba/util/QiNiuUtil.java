@@ -13,6 +13,7 @@ import com.qiniu.android.storage.UpCompletionHandler;
 import com.qiniu.android.storage.UploadManager;
 import com.qiniu.android.storage.persistent.FileRecorder;
 import com.qiniu.util.Auth;
+import com.xiaomai.zhuangba.data.bean.ServiceSampleEntity;
 
 import org.json.JSONObject;
 
@@ -38,8 +39,10 @@ public class QiNiuUtil {
 //    private static final String IMG_URL = "http://pic.hangzhouzhuangba.com/";
 //    private static final String bucket = "zhengshi-zhuangba";
 
-    //测试服 地址
-    private static final String IMG_URL = "http://testpic.hangzhouzhuangba.com/";
+    /**
+     * 测试服 地址
+     */
+    public static final String IMG_URL = "http://testpic.hangzhouzhuangba.com/";
     private static final String bucket = "zhuangba-upload-image";
 
 
@@ -117,13 +120,52 @@ public class QiNiuUtil {
                                         throw new ApiException(Integer.parseInt(String.valueOf(info.statusCode)), info.error, response.toString());
                                     }
                                 }
-                            },null);
+                            }, null);
                 }
             }
         }).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
+
+    /**
+     * 广告单提交
+     *
+     * @param uriList 广告单
+     * @return observable
+     */
+    public Observable<List<ServiceSampleEntity>> getAdvertisementPhotoObservable(final List<ServiceSampleEntity> uriList) {
+        final String token = Auth.create(QiNiuUtil.accessKey, QiNiuUtil.secretKey).uploadToken(QiNiuUtil.bucket);
+        return Observable.create(new ObservableOnSubscribe<List<ServiceSampleEntity>>() {
+            @Override
+            public void subscribe(final ObservableEmitter<List<ServiceSampleEntity>> emitter) throws URISyntaxException {
+                for (ServiceSampleEntity serviceSampleEntity : uriList) {
+                    String picUrl = serviceSampleEntity.getPicUrl();
+                    String imgName = serviceSampleEntity.getImgName();
+                    Uri compressPath = Uri.parse("file:///" + picUrl);
+                    File file = new File(new URI(compressPath.toString()));
+                    String path = file.getPath();
+                    Log.e("path = " + path);
+                    Log.e("absolutePath = " + path);
+                    getUploadManager(path)
+                            .put(path, imgName, token, new UpCompletionHandler() {
+                                @Override
+                                public void complete(String key, ResponseInfo info, JSONObject response) {
+                                    Log.e("key：" + key + "\ninfo：" + info + "\nres：" + response);
+                                    if (info.isOK()) {
+                                        Log.e("上传结果：Upload Success");
+                                        emitter.onNext(new ArrayList<ServiceSampleEntity>());
+                                    } else {
+                                        Log.e("上传结果：Upload Fail");
+                                        throw new ApiException(Integer.parseInt(String.valueOf(info.statusCode)), info.error, response.toString());
+                                    }
+                                }
+                            }, null);
+                }
+            }
+        }).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
 
     /**
      * @return 上传到服务器的文件名

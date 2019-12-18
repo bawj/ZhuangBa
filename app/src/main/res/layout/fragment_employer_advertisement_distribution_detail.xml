@@ -21,10 +21,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
             <RelativeLayout
-                android:id="@+id/relAdvertisementNewTask"
+                android:id="@+id/layAdvertisementNewTask"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginBottom="@dimen/tool_lib_62dp"
                 android:orientation="vertical">
 
                 <android.support.design.widget.CoordinatorLayout
@@ -268,40 +273,31 @@
                             android:layout_marginTop="@dimen/tool_lib_12dp" />
                     </LinearLayout>
                 </android.support.design.widget.CoordinatorLayout>
-
-                <RelativeLayout
-                    android:id="@+id/relNewTaskOrderDetailBottom"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/tool_lib_56dp"
-                    android:layout_alignParentBottom="true"
-                    android:background="@android:color/white">
-
-                    <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
-                        android:id="@+id/btnCancelAdvertisementOrder"
-                        android:layout_width="@dimen/tool_lib_90dp"
-                        android:layout_height="@dimen/tool_lib_40dp"
-                        android:layout_centerVertical="true"
-                        android:layout_marginEnd="@dimen/tool_lib_16dp"
-                        android:layout_toStartOf="@+id/btnAcceptanceReceiptAdvertisement"
-                        android:text="@string/cancel_order"
-                        android:textColor="@color/tool_lib_gray_777777"
-                        android:textSize="@dimen/tool_lib_14sp"
-                        app:qmui_backgroundColor="@android:color/white"
-                        app:qmui_borderColor="@color/tool_lib_gray_E8E8E8"
-                        app:qmui_borderWidth="@dimen/tool_lib_1dp" />
-
-                    <com.qmuiteam.qmui.layout.QMUIButton
-                        android:id="@+id/btnAcceptanceReceiptAdvertisement"
-                        style="@style/base_btn"
-                        android:layout_width="@dimen/tool_lib_90dp"
-                        android:layout_height="@dimen/tool_lib_40dp"
-                        android:layout_alignParentEnd="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginEnd="@dimen/tool_lib_16dp"
-                        android:text="@string/acceptance_receipt" />
-                </RelativeLayout>
             </RelativeLayout>
 
+            <RelativeLayout
+                android:id="@+id/relNewTaskOrderDetailBottom"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/tool_lib_56dp"
+                android:layout_alignParentBottom="true"
+                android:background="@android:color/white">
+
+                <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
+                    android:id="@+id/btnCancelOrder"
+                    android:layout_width="@dimen/tool_lib_90dp"
+                    android:layout_height="@dimen/tool_lib_40dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="@dimen/tool_lib_16dp"
+                    android:text="@string/cancel_order"
+                    android:textColor="@color/tool_lib_gray_777777"
+                    android:textSize="@dimen/tool_lib_14sp"
+                    app:qmui_backgroundColor="@android:color/white"
+                    app:qmui_borderColor="@color/tool_lib_gray_E8E8E8"
+                    app:qmui_borderWidth="@dimen/tool_lib_1dp" />
+
+            </RelativeLayout>
+        </RelativeLayout>
     </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 
 

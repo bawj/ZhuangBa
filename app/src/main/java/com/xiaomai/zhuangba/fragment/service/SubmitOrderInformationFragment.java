@@ -2,8 +2,10 @@ package com.xiaomai.zhuangba.fragment.service;
 
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -22,6 +24,7 @@ import com.xiaomai.zhuangba.util.DateUtil;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 /**
  * @author Administrator
@@ -44,6 +47,10 @@ public class SubmitOrderInformationFragment extends BaseOrderInformationFragment
     TextView tvOrderInformationClickServiceAddress;
     @BindView(R.id.tvOrderInformationDate)
     TextView tvOrderInformationDate;
+    @BindView(R.id.layMoreInformation)
+    LinearLayout layMoreInformation;
+    @BindView(R.id.tvFillInMoreInformation)
+    TextView tvFillInMoreInformation;
 
     public static SubmitOrderInformationFragment newInstance() {
         Bundle args = new Bundle();
@@ -55,7 +62,21 @@ public class SubmitOrderInformationFragment extends BaseOrderInformationFragment
     @Override
     public void initView() {
         super.initView();
+        //更多信息默认隐藏
+        layMoreInformation.setVisibility(View.GONE);
         btnOrderInformation.setText(getString(R.string.next));
+    }
+
+    @OnClick({R.id.tvFillInMoreInformation})
+    public void onViewClickedMoreInformation(View view) {
+        switch (view.getId()) {
+            case R.id.tvFillInMoreInformation:
+                //更多信息
+                tvFillInMoreInformation.setVisibility(View.GONE);
+                layMoreInformation.setVisibility(View.VISIBLE);
+                break;
+            default:
+        }
     }
 
     @Override
@@ -111,6 +132,18 @@ public class SubmitOrderInformationFragment extends BaseOrderInformationFragment
                                 orderAddress.setAppointmentTime(appointmentTime);
                                 orderAddress.setEmployerDescribe(employerDescribe);
                                 orderAddress.setImgList(getMediaSelectorFiles());
+                                //合同编号
+                                orderAddress.setContractNo(getContractNo());
+                                // 客户经理
+                                orderAddress.setAccountManager(getAccountManager());
+                                // 项目名称
+                                orderAddress.setProjectName(getProjectName());
+                                // 项目特点
+                                orderAddress.setProjectFeatures(getProjectFeatures());
+                                // 店铺名称
+                                orderAddress.setShopName(getShopName());
+                                // 第三方订单编号
+                                orderAddress.setOrderNumber(getOrderNumber());
                                 String orderAddressGson = new Gson().toJson(orderAddress);
                                 ServiceData serviceData = serviceDataList.get(0);
                                 startFragment(SelectServiceFragment.newInstance(

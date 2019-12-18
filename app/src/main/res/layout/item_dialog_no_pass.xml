@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/tvReason"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/tool_lib_3dp"
+        android:layout_marginBottom="@dimen/tool_lib_3dp"
+        android:background="@drawable/gray_field_description_bg"
+        android:paddingStart="@dimen/tool_lib_16dp"
+        android:paddingTop="@dimen/tool_lib_7dp"
+        android:paddingEnd="@dimen/tool_lib_16dp"
+        android:paddingBottom="@dimen/tool_lib_7dp"
+        android:textColor="@color/tool_lib_gray_222222"
+        android:textSize="@dimen/tool_lib_14sp"
+        tools:text="A原因A原因A原因A原因A原因A原因" />
+
+</RelativeLayout>

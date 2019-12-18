@@ -46,8 +46,6 @@ public class BaseAdvertisingBillDetailFragment extends BaseFragment implements O
 
     @BindView(R.id.layOrderInfo)
     LinearLayout layOrderInfo;
-    @BindView(R.id.relAdvertisementNewTask)
-    RelativeLayout relAdvertisementNewTask;
     @BindView(R.id.tvBaseOrderDetailItemOrdersTitle)
     TextView tvBaseOrderDetailItemOrdersTitle;
     @BindView(R.id.tvBaseEquipmentNumber)
@@ -83,6 +81,7 @@ public class BaseAdvertisingBillDetailFragment extends BaseFragment implements O
         return fragment;
     }
 
+    @Override
     public void initView() {
         layOrderInfo.setVisibility(View.GONE);
         refreshBaseList.setOnRefreshListener(this);

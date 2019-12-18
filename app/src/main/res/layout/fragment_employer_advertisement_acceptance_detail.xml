@@ -21,8 +21,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
             <RelativeLayout
-                android:id="@+id/relAdvertisementNewTask"
+                android:id="@+id/layAdvertisementNewTask"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
@@ -268,40 +272,66 @@
                             android:layout_marginTop="@dimen/tool_lib_12dp" />
                     </LinearLayout>
                 </android.support.design.widget.CoordinatorLayout>
-
-                <RelativeLayout
-                    android:id="@+id/relNewTaskOrderDetailBottom"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/tool_lib_56dp"
-                    android:layout_alignParentBottom="true"
-                    android:background="@android:color/white">
-
-                    <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
-                        android:id="@+id/btnCancelAdvertisementOrder"
-                        android:layout_width="@dimen/tool_lib_90dp"
-                        android:layout_height="@dimen/tool_lib_40dp"
-                        android:layout_centerVertical="true"
-                        android:layout_marginEnd="@dimen/tool_lib_16dp"
-                        android:layout_toStartOf="@+id/btnAcceptanceReceiptAdvertisement"
-                        android:text="@string/cancel_order"
-                        android:textColor="@color/tool_lib_gray_777777"
-                        android:textSize="@dimen/tool_lib_14sp"
-                        app:qmui_backgroundColor="@android:color/white"
-                        app:qmui_borderColor="@color/tool_lib_gray_E8E8E8"
-                        app:qmui_borderWidth="@dimen/tool_lib_1dp" />
-
-                    <com.qmuiteam.qmui.layout.QMUIButton
-                        android:id="@+id/btnAcceptanceReceiptAdvertisement"
-                        style="@style/base_btn"
-                        android:layout_width="@dimen/tool_lib_90dp"
-                        android:layout_height="@dimen/tool_lib_40dp"
-                        android:layout_alignParentEnd="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginEnd="@dimen/tool_lib_16dp"
-                        android:text="@string/acceptance_receipt" />
-                </RelativeLayout>
             </RelativeLayout>
 
+            <RelativeLayout
+                android:id="@+id/relNewTaskOrderDetailBottom"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/tool_lib_56dp"
+                android:layout_alignParentBottom="true"
+                android:background="@android:color/white"
+                android:paddingStart="@dimen/tool_lib_16dp"
+                android:paddingEnd="@dimen/tool_lib_16dp">
+
+                <ImageView
+                    android:id="@+id/ivEmployerDetailMasterHeader"
+                    android:layout_width="@dimen/tool_lib_34dp"
+                    android:layout_height="@dimen/tool_lib_34dp"
+                    android:layout_centerVertical="true"
+                    tools:src="@drawable/bg_def_head" />
+
+                <ImageView
+                    android:id="@+id/ivEmployerDetailMasterLog"
+                    android:layout_width="@dimen/tool_lib_16dp"
+                    android:layout_height="@dimen/tool_lib_16dp"
+                    android:layout_alignBottom="@+id/ivEmployerDetailMasterHeader"
+                    android:layout_marginStart="@dimen/tool_lib_24dp"
+                    android:src="@drawable/ic_master_log" />
+
+                <TextView
+                    android:id="@+id/tvEmployerDetailMasterName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="@dimen/tool_lib_12dp"
+                    android:layout_toEndOf="@+id/ivEmployerDetailMasterHeader"
+                    tools:text="康师傅" />
+
+                <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
+                    android:id="@+id/btnAdvertisementNoPassage"
+                    android:layout_width="@dimen/tool_lib_90dp"
+                    android:layout_height="@dimen/tool_lib_40dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="@dimen/tool_lib_16dp"
+                    android:layout_toStartOf="@+id/btnAcceptanceApproval"
+                    android:text="@string/no_passage"
+                    android:textColor="@color/tool_lib_gray_777777"
+                    android:textSize="@dimen/tool_lib_14sp"
+                    app:qmui_backgroundColor="@android:color/white"
+                    app:qmui_borderColor="@color/tool_lib_gray_E8E8E8"
+                    app:qmui_borderWidth="@dimen/tool_lib_1dp" />
+
+                <com.qmuiteam.qmui.layout.QMUIButton
+                    android:id="@+id/btnAcceptanceApproval"
+                    style="@style/base_btn"
+                    android:layout_width="@dimen/tool_lib_90dp"
+                    android:layout_height="@dimen/tool_lib_40dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="@dimen/tool_lib_16dp"
+                    android:text="@string/acceptance_and_approval" />
+            </RelativeLayout>
+        </RelativeLayout>
     </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 
 

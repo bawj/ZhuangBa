@@ -303,10 +303,40 @@
             android:layout_marginEnd="@dimen/tool_lib_5dp"
             android:layout_marginRight="@dimen/tool_lib_5dp" />
 
+        <!--更多信息-->
+
+        <LinearLayout
+            android:id="@+id/layFillInMoreInformation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/recyclerNotes"
+            android:layout_marginTop="@dimen/tool_lib_16dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvFillInMoreInformation"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/tool_lib_40dp"
+                android:background="@android:color/white"
+                android:gravity="center"
+                android:text="@string/fill_in_more_information"
+                android:textColor="@color/tool_lib_red_EF2B2B"
+                android:textSize="@dimen/tool_lib_14sp" />
+
+            <LinearLayout
+                android:id="@+id/layMoreInformation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <include layout="@layout/include_more_information" />
+            </LinearLayout>
+
+        </LinearLayout>
+
         <Button
             android:id="@+id/btnOrderInformation"
             style="@style/base_btn"
-            android:layout_below="@+id/recyclerNotes"
+            android:layout_below="@+id/layFillInMoreInformation"
             android:layout_marginLeft="@dimen/tool_lib_16dp"
             android:layout_marginTop="@dimen/tool_lib_35dp"
             android:layout_marginRight="@dimen/tool_lib_16dp"

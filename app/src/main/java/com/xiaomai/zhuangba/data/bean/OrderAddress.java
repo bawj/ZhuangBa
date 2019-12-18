@@ -34,6 +34,24 @@ public class OrderAddress {
     /** 图片 */
     private List<String> imgList;
 
+    /** 合同编号 */
+    private String contractNo;
+
+    /** 客户经理 */
+    private String accountManager;
+
+    /** 项目名称 */
+    private String projectName;
+
+    /** 项目特点 */
+    private String projectFeatures;
+
+    /** 店铺名称 */
+    private String shopName;
+
+    /** 第三方订单编号 */
+    private String orderNumber;
+
     public String getUserText() {
         return userText == null ? "" : userText;
     }
@@ -131,5 +149,53 @@ public class OrderAddress {
 
     public void setImgList(List<String> imgList) {
         this.imgList = imgList;
+    }
+
+    public String getContractNo() {
+        return contractNo == null ? "" : contractNo;
+    }
+
+    public void setContractNo(String contractNo) {
+        this.contractNo = contractNo;
+    }
+
+    public String getAccountManager() {
+        return accountManager == null ? "" : accountManager;
+    }
+
+    public void setAccountManager(String accountManager) {
+        this.accountManager = accountManager;
+    }
+
+    public String getProjectName() {
+        return projectName == null ? "" : projectName;
+    }
+
+    public void setProjectName(String projectName) {
+        this.projectName = projectName;
+    }
+
+    public String getProjectFeatures() {
+        return projectFeatures == null ? "" : projectFeatures;
+    }
+
+    public void setProjectFeatures(String projectFeatures) {
+        this.projectFeatures = projectFeatures;
+    }
+
+    public String getShopName() {
+        return shopName == null ? "" : shopName;
+    }
+
+    public void setShopName(String shopName) {
+        this.shopName = shopName;
+    }
+
+    public String getOrderNumber() {
+        return orderNumber == null ? "" : orderNumber;
+    }
+
+    public void setOrderNumber(String orderNumber) {
+        this.orderNumber = orderNumber;
     }
 }

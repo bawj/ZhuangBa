@@ -36,6 +36,9 @@ public class AdOrderInformation {
     private float lat;
     private float lon;
     private String userText;
+    private String bareheadedPhotoUrl;
+    /** 拍照模板 */
+    private String serviceSample;
     /** 1：下刊 2：上刊  */
     private String operating;
     private List<DeviceSurfaceInformation> list;
@@ -163,12 +166,28 @@ public class AdOrderInformation {
         this.userText = userText;
     }
 
+    public String getBareheadedPhotoUrl() {
+        return bareheadedPhotoUrl == null ? "" : bareheadedPhotoUrl;
+    }
+
+    public void setBareheadedPhotoUrl(String bareheadedPhotoUrl) {
+        this.bareheadedPhotoUrl = bareheadedPhotoUrl;
+    }
+
     public String getOperating() {
         return operating == null ? "" : operating;
     }
 
     public void setOperating(String operating) {
         this.operating = operating;
+    }
+
+    public String getServiceSample() {
+        return serviceSample == null ? "" : serviceSample;
+    }
+
+    public void setServiceSample(String serviceSample) {
+        this.serviceSample = serviceSample;
     }
 
     public Integer getServiceId() {
