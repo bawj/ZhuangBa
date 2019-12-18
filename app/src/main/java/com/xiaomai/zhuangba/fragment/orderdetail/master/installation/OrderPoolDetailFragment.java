@@ -43,6 +43,7 @@ public class OrderPoolDetailFragment extends BaseMasterOrderDetailFragment {
         iModule.requestOrderPoolOrderDetail();
     }
 
+    @Override
     public void orderServiceItemsSuccess(List<OrderServiceItem> orderServiceItems) {
         if (ongoingOrdersList != null) {
             OrderServiceItem orderServiceItem = new OrderServiceItem();

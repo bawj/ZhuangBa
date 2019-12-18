@@ -11,6 +11,32 @@
         android:orientation="vertical">
 
         <LinearLayout
+            android:id="@+id/layNextLastTip"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:paddingStart="@dimen/tool_lib_16dp"
+            android:paddingTop="@dimen/tool_lib_6dp"
+            android:background="@color/tool_lib_color_FFEDEB"
+            android:paddingEnd="@dimen/tool_lib_16dp"
+            android:paddingBottom="@dimen/tool_lib_6dp">
+
+            <ImageView
+                android:layout_width="@dimen/tool_lib_16dp"
+                android:layout_height="@dimen/tool_lib_16dp"
+                android:src="@drawable/icon_warning" />
+
+            <TextView
+                android:id="@+id/tvNextLastTip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/tool_lib_6dp"
+                android:textColor="@color/tool_lib_color_E74C3C"
+                android:textSize="@dimen/tool_lib_14sp"
+                tools:text="需要上刊报告以及下刊报告" />
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/tool_lib_6dp"

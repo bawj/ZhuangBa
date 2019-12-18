@@ -479,7 +479,7 @@ public interface IApi {
     Observable<HttpResult<UserInfo>> getUser();
 
     /**
-     * 查询价目表
+     * 查询价目表 或 其它查询
      *
      * @param enumCode String
      * @return observable
@@ -1383,6 +1383,15 @@ public interface IApi {
     @GET("adOrder/notPassedAdOrder")
     Observable<HttpResult<Object>> notPassedAdvertisingOrder(@Query("orderCodes") String orderCodes
             , @Query("causes") String causes, @Query("employerDescribe") String employerDescribe);
+
+
+    /**
+     * 师傅申请空跑
+     *
+     * @return observable
+     */
+    @POST("installOrder/initiateAirRun")
+    Observable<HttpResult<Object>> initiateAirRun(@Body RequestBody requestBody);
 
 
 }

@@ -23,6 +23,7 @@ import com.xiaomai.zhuangba.adapter.OrderDateListAdapter;
 import com.xiaomai.zhuangba.data.bean.DeviceSurfaceInformation;
 import com.xiaomai.zhuangba.data.bean.OrderDateList;
 import com.xiaomai.zhuangba.data.bean.ServiceSampleEntity;
+import com.xiaomai.zhuangba.enums.AdvertisingEnum;
 import com.xiaomai.zhuangba.weight.GridSpacingItemDecoration;
 
 import java.util.ArrayList;
@@ -75,6 +76,10 @@ public class BaseAdvertisingBillDetailTabFragment extends BaseFragment {
      */
     @BindView(R.id.recyclerOrderInformation)
     RecyclerView recyclerOrderInformation;
+    @BindView(R.id.tvNextLastTip)
+    TextView tvNextLastTip;
+    @BindView(R.id.layNextLastTip)
+    LinearLayout layNextLastTip;
 
     public static BaseAdvertisingBillDetailTabFragment newInstance(String deviceSurfaceInformationString) {
         Bundle args = new Bundle();
@@ -178,6 +183,23 @@ public class BaseAdvertisingBillDetailTabFragment extends BaseFragment {
         List<OrderDateList> orderDateList = deviceSurfaceInformation.getOrderDateList();
         orderDateList.add(0, new OrderDateList(orderCode, "", getString(R.string.order_code)));
         orderDateListAdapter.setNewData(orderDateList);
+
+        //上刊或下刊描述
+        String nextLastTip = "";
+        String type = deviceSurfaceInformation.getType();
+        if (type.equals(String.valueOf(AdvertisingEnum.MASTER_PENDING_DISPOSAL_LAST_ISSUE_OR_NEXT_NOODLES.getCode()))){
+            nextLastTip = getString(R.string.last_report_and_next_report_required);
+        }else if (type.equals(String.valueOf(AdvertisingEnum.MASTER_PENDING_DISPOSAL_NEXT_ISSUE_NOODLES.getCode()))){
+            nextLastTip = getString(R.string.last_report_report_required);
+        }else if (type.equals(String.valueOf(AdvertisingEnum.MASTER_PENDING_DISPOSAL_LAST_ISSUE_NOODLES.getCode()))){
+            nextLastTip = getString(R.string.last_next_report_required);
+        }
+        if (TextUtils.isEmpty(nextLastTip)){
+            layNextLastTip.setVisibility(View.GONE);
+        }else {
+            tvNextLastTip.setText(nextLastTip);
+            layNextLastTip.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override

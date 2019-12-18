@@ -83,6 +83,8 @@ public class OngoingOrdersList implements Parcelable{
     /** 团长手机号 如果不为空 则是团队的订单 否则不是*/
     private String assigner;
 
+    /** 0：代表没有发起过空跑，其余状态为发起过空跑 */
+    private Integer flag;
     /**
      * 是否选中
      */
@@ -398,6 +400,15 @@ public class OngoingOrdersList implements Parcelable{
     @Override
     public int describeContents() {
         return 0;
+    }
+
+
+    public Integer getFlag() {
+        return flag;
+    }
+
+    public void setFlag(Integer flag) {
+        this.flag = flag;
     }
 
     @Override

@@ -145,7 +145,7 @@ public class BaseAdvertisingBillDetailFragment extends BaseFragment implements O
             String deviceSurface = deviceSurfaceInformation.getDeviceSurface();
             if (!TextUtils.isEmpty(deviceSurface)){
                 tabTitle[i] = deviceSurface;
-                tabFragmentList.add(BaseAdvertisingBillDetailTabFragment.newInstance(deviceSurfaceInformationString));
+                tabFragmentList.add(getAdvertisingBillDetailTab(deviceSurfaceInformationString));
             }
         }
         mViewPager.setAdapter(new BaseViewPagerAdapter<>(getChildFragmentManager(), tabFragmentList, tabTitle));
@@ -153,6 +153,10 @@ public class BaseAdvertisingBillDetailFragment extends BaseFragment implements O
         commonNavigator.setAdapter(new TabIncomeNavigator(tabTitle, mViewPager));
         magicIndicator.setNavigator(commonNavigator);
         ViewPagerHelper.bind(magicIndicator, mViewPager);
+    }
+
+    public BaseAdvertisingBillDetailTabFragment getAdvertisingBillDetailTab(String deviceSurfaceInformationString) {
+        return BaseAdvertisingBillDetailTabFragment.newInstance(deviceSurfaceInformationString);
     }
 
     @OnClick({R.id.tvBaseOrderDetailLocation})

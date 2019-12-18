@@ -648,4 +648,13 @@
     <string name="please_enter_the_contract_number">请输入合同编号</string>
     <string name="commit_success">提交成功</string>
     <string name="please_select_or_fill_in_the_reason_for_failure">请选择或填写不通过原因</string>
+    <string name="last_report_and_next_report_required">需要上刊报告以及下刊报告</string>
+    <string name="last_report_report_required">需要上刊报告</string>
+    <string name="last_next_report_required">需要下刊报告</string>
+    <string name="empty_race_application">空跑申请</string>
+    <string name="application_amount">申请金额</string>
+    <string name="reasons_for_application">申请理由</string>
+    <string name="re_appointment_time">再约时间</string>
+    <string name="please_check_time">请选择时间</string>
+    <string name="please_input_reasons_for_application">请填写申请理由</string>
 </resources>

@@ -34,7 +34,7 @@ public class DeviceSurfaceInformation {
     @SerializedName("newlyAdUrl")
     private String newAdUrl;
     /**
-     * 上刊或下刊 或 上下刊
+     * 操作类型：1.上下刊；2.上刊；3.下刊
      */
     private String type;
     private List<OrderDateList> orderDateList;
