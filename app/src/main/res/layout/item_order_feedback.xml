@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/tool_lib_1dp"
+    android:background="@color/tool_lib_gray_F5F8FA">
+
+    <TextView
+        android:id="@+id/tvMemberPhone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/tool_lib_12dp"
+        android:layout_marginTop="@dimen/tool_lib_12dp"
+        android:textColor="@color/tool_lib_gray_222222"
+        android:textSize="@dimen/tool_lib_14sp"
+        tools:text="16253637672申请空跑" />
+
+    <TextView
+        android:id="@+id/tvTeamDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvMemberPhone"
+        android:layout_marginStart="@dimen/tool_lib_12dp"
+        android:layout_marginTop="@dimen/tool_lib_4dp"
+        android:layout_marginBottom="@dimen/tool_lib_12dp"
+        android:textColor="@color/tool_lib_gray_999999"
+        android:textSize="@dimen/tool_lib_11sp"
+        tools:text="2019-05-07 17:03:09" />
+
+</RelativeLayout>

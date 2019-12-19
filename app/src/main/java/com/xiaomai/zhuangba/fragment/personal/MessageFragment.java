@@ -35,6 +35,8 @@ public class MessageFragment extends BaseFragment {
     TextView tvMessageTime;
     @BindView(R.id.relMessageTeam)
     RelativeLayout relMessageTeam;
+    @BindView(R.id.relOrderFeedback)
+    RelativeLayout relOrderFeedback;
 
     public static MessageFragment newInstance() {
         Bundle args = new Bundle();
@@ -67,9 +69,13 @@ public class MessageFragment extends BaseFragment {
         if (unique.getRole().equals(String.valueOf(StaticExplain.EMPLOYER.getCode()))){
             relMessageTeam.setVisibility(View.GONE);
         }
+        //师傅不显示 订单反馈
+        if (unique.getRole().equals(String.valueOf(StaticExplain.FU_FU_SHI.getCode()))){
+            relOrderFeedback.setVisibility(View.GONE);
+        }
     }
 
-    @OnClick({R.id.relMessageSystem, R.id.relMessageCustomerService , R.id.relMessageTeam})
+    @OnClick({R.id.relMessageSystem, R.id.relMessageCustomerService , R.id.relMessageTeam , R.id.relOrderFeedback})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.relMessageSystem:
@@ -79,6 +85,10 @@ public class MessageFragment extends BaseFragment {
             case R.id.relMessageTeam:
                 //团队
                 startFragment(TeamMessageFragment.newInstance());
+                break;
+            case R.id.relOrderFeedback:
+                //订单反馈
+                startFragment(OrderFeedBackFragment.newInstance());
                 break;
             case R.id.relMessageCustomerService:
                 // TODO: 2019/6/3 0003 客服

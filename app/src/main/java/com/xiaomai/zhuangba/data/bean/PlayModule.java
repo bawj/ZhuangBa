@@ -30,7 +30,7 @@ import io.reactivex.schedulers.Schedulers;
  */
 public class PlayModule<V> extends BaseModule<V> implements IPlayModule<V> {
 
-    private static final String RESULT_STATUS = "9000";
+    public static final String RESULT_STATUS = "9000";
     public static final String WE_CHAT_APP_ID = "wx6fb4ab8d28f3360a";
 
     @SuppressLint("CheckResult")

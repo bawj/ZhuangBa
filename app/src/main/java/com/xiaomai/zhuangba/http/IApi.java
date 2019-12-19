@@ -2,6 +2,7 @@ package com.xiaomai.zhuangba.http;
 
 import com.example.toollib.http.HttpResult;
 import com.xiaomai.zhuangba.data.AdvertisingBillsBean;
+import com.xiaomai.zhuangba.data.DryRunOrder;
 import com.xiaomai.zhuangba.data.OuterLayerMaintenanceOverman;
 import com.xiaomai.zhuangba.data.Patrol;
 import com.xiaomai.zhuangba.data.bean.AdOrderInformation;
@@ -1394,4 +1395,37 @@ public interface IApi {
     Observable<HttpResult<Object>> initiateAirRun(@Body RequestBody requestBody);
 
 
+    /**
+     * 雇主查询空跑列表
+     * @param pageIndex 页码
+     * @param pageSize 每页显示
+     * @return observable
+     */
+    @FormUrlEncoded
+    @POST("installOrder/selectAirRun")
+    Observable<HttpResult<RefreshBaseList<DryRunOrder>>> selectAirRun(@Field("pageIndex") String pageIndex,
+                                                           @Field("pageSize") String pageSize);
+
+    /**
+     * 雇主不通过申请
+     * @param cause 理由
+     * @param id 主键
+     * @return observable
+     */
+    @FormUrlEncoded
+    @POST("installOrder/failAirRun")
+    Observable<HttpResult<Object>> failAirRun(@Field("cause") String cause, @Field("id") String id);
+
+    /**
+     * 雇主通过申请
+     * @param cause 理由
+     * @param id 主键
+     * @param payType  支付类型
+     * @param password 支付密码
+     * @return observable
+     */
+    @FormUrlEncoded
+    @POST("installOrder/adoptAirRun")
+    Observable<HttpResult<PayData>> adoptAirRun(@Field("cause") String cause, @Field("id") String id ,
+                                               @Field("payType") String payType , @Field("password") String password);
 }

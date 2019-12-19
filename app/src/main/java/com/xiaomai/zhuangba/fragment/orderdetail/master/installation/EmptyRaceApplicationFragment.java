@@ -102,11 +102,12 @@ public class EmptyRaceApplicationFragment extends BaseFragment {
         RequestBody requestBody = RequestBody.create(MediaType.parse("application/json;charset=utf-8"), new Gson().toJson(hashMap));
         RxUtils.getObservable(ServiceUrl.getUserApi().initiateAirRun(requestBody))
                 .compose(this.<HttpResult<Object>>bindToLifecycle())
-                .subscribe(new BaseHttpRxObserver<Object>() {
+                .subscribe(new BaseHttpRxObserver<Object>(getActivity()) {
                     @Override
                     protected void onSuccess(Object response) {
                         //提交空跑成功
                         setFragmentResult(ForResultCode.RESULT_OK.getCode() , new Intent());
+                        popBackStack();
                     }
                 });
     }

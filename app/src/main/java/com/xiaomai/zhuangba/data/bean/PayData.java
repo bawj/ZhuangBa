@@ -15,7 +15,7 @@ public class PayData {
     private String aliPay;
 
     public String getAppId() {
-        return appId;
+        return appId == null ? "" : appId;
     }
 
     public void setAppId(String appId) {
@@ -23,7 +23,7 @@ public class PayData {
     }
 
     public String getNonceStr() {
-        return nonceStr;
+        return nonceStr == null ? "" : nonceStr;
     }
 
     public void setNonceStr(String nonceStr) {
@@ -31,7 +31,7 @@ public class PayData {
     }
 
     public String getPrepayId() {
-        return prepayId;
+        return prepayId == null ? "" : prepayId;
     }
 
     public void setPrepayId(String prepayId) {
@@ -39,7 +39,7 @@ public class PayData {
     }
 
     public String getPartnerId() {
-        return partnerId;
+        return partnerId == null ? "" : partnerId;
     }
 
     public void setPartnerId(String partnerId) {
@@ -47,7 +47,7 @@ public class PayData {
     }
 
     public String getTimeStamp() {
-        return timeStamp;
+        return timeStamp == null ? "" : timeStamp;
     }
 
     public void setTimeStamp(String timeStamp) {
@@ -55,7 +55,7 @@ public class PayData {
     }
 
     public String getSign() {
-        return sign;
+        return sign == null ? "" : sign;
     }
 
     public void setSign(String sign) {
@@ -63,7 +63,7 @@ public class PayData {
     }
 
     public String getPackageName() {
-        return packageName;
+        return packageName == null ? "" : packageName;
     }
 
     public void setPackageName(String packageName) {
@@ -71,7 +71,7 @@ public class PayData {
     }
 
     public String getAliPay() {
-        return aliPay;
+        return aliPay == null ? "" : aliPay;
     }
 
     public void setAliPay(String aliPay) {

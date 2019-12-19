@@ -77,9 +77,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/tool_lib_16dp"
-            android:visibility="gone"
             android:layout_marginTop="@dimen/tool_lib_16dp"
-            android:layout_marginRight="@dimen/tool_lib_16dp">
+            android:layout_marginRight="@dimen/tool_lib_16dp"
+            android:visibility="gone">
 
             <ImageView
                 android:id="@+id/ivMessageCustomerService"
@@ -180,6 +180,62 @@
                 android:layout_marginLeft="@dimen/tool_lib_11dp"
                 android:layout_toEndOf="@+id/ivMessageTeam"
                 android:layout_toRightOf="@+id/ivMessageTeam"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="@string/not_message"
+                android:textColor="@color/tool_lib_gray_666666"
+                android:textSize="@dimen/tool_lib_12sp"
+                android:visibility="gone" />
+
+            <View
+                style="@style/tool_lib_horizontal_line"
+                android:layout_below="@+id/ivMessageTeam"
+                android:layout_marginStart="@dimen/tool_lib_11dp"
+                android:layout_marginTop="@dimen/tool_lib_16dp"
+                android:layout_toEndOf="@+id/ivMessageTeam" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/relOrderFeedback"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/tool_lib_16dp"
+            android:layout_marginTop="@dimen/tool_lib_16dp"
+            android:layout_marginRight="@dimen/tool_lib_16dp"
+            android:layout_marginBottom="@dimen/tool_lib_16dp">
+
+            <ImageView
+                android:id="@+id/ivMessageOrderFeedback"
+                android:layout_width="@dimen/tool_lib_46dp"
+                android:layout_height="@dimen/tool_lib_46dp"
+                android:src="@drawable/ic_order_feedback" />
+
+            <TextView
+                android:id="@+id/tvMessageOrderFeedback"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/tool_lib_11dp"
+                android:layout_toEndOf="@+id/ivMessageOrderFeedback"
+                android:text="@string/order_feedback"
+                android:textColor="@color/tool_lib_gray_222222"
+                android:textSize="@dimen/tool_lib_14sp" />
+
+            <TextView
+                android:id="@+id/tvMessageOrderFeedbackTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:textColor="@color/tool_lib_gray_999999"
+                android:textSize="@dimen/tool_lib_12sp"
+                tools:text="2019-05-07 17:03:09" />
+
+            <TextView
+                android:id="@+id/tvMessagesTeamOrderFeedback"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/ivMessageOrderFeedback"
+                android:layout_marginStart="@dimen/tool_lib_11dp"
+                android:layout_toEndOf="@+id/ivMessageOrderFeedback"
                 android:ellipsize="end"
                 android:maxLines="1"
                 android:text="@string/not_message"

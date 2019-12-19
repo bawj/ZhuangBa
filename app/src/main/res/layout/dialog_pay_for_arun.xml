@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/linearLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:paddingLeft="@dimen/tool_lib_16dp"
+        android:paddingTop="@dimen/tool_lib_16dp"
+        android:paddingRight="@dimen/tool_lib_16dp"
+        android:paddingBottom="@dimen/tool_lib_16dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/choose_payment_method"
+            android:textColor="@color/tool_lib_gray_222222"
+            android:textSize="@dimen/tool_lib_16sp" />
+
+
+        <ImageView
+            android:id="@+id/ivDialogPayClose"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_combined_shape_close" />
+    </RelativeLayout>
+
+    <View style="@style/tool_lib_horizontal_line" />
+
+    <TextView
+        android:id="@+id/tvDialogPayWallet"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:paddingLeft="@dimen/tool_lib_16dp"
+        android:paddingTop="@dimen/tool_lib_16dp"
+        android:paddingRight="@dimen/tool_lib_16dp"
+        android:paddingBottom="@dimen/tool_lib_16dp"
+        android:text="@string/wallet"
+        android:textColor="@color/tool_lib_gray_222222" />
+
+    <View
+        style="@style/tool_lib_horizontal_line"
+        android:layout_marginLeft="@dimen/tool_lib_16dp"
+        android:layout_marginRight="@dimen/tool_lib_16dp" />
+
+    <TextView
+        android:id="@+id/tvDialogPaymentMonthlyAccount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:paddingLeft="@dimen/tool_lib_16dp"
+        android:paddingTop="@dimen/tool_lib_16dp"
+        android:paddingRight="@dimen/tool_lib_16dp"
+        android:paddingBottom="@dimen/tool_lib_16dp"
+        android:text="@string/monthly_statement_"
+        android:textColor="@color/tool_lib_gray_222222" />
+
+    <View
+        android:id="@+id/viewDialogPaymentMonthlyAccount"
+        style="@style/tool_lib_horizontal_line"
+        android:layout_marginLeft="@dimen/tool_lib_16dp"
+        android:layout_marginRight="@dimen/tool_lib_16dp" />
+
+    <TextView
+        android:id="@+id/tvDialogPayWeChat"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:paddingLeft="@dimen/tool_lib_16dp"
+        android:paddingTop="@dimen/tool_lib_16dp"
+        android:paddingRight="@dimen/tool_lib_16dp"
+        android:paddingBottom="@dimen/tool_lib_16dp"
+        android:text="@string/we_chat"
+        android:textColor="@color/tool_lib_gray_222222" />
+
+    <View
+        style="@style/tool_lib_horizontal_line"
+        android:layout_marginLeft="@dimen/tool_lib_16dp"
+        android:layout_marginRight="@dimen/tool_lib_16dp" />
+
+    <TextView
+        android:id="@+id/tvDialogPayAli"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:paddingLeft="@dimen/tool_lib_16dp"
+        android:paddingTop="@dimen/tool_lib_16dp"
+        android:paddingRight="@dimen/tool_lib_16dp"
+        android:paddingBottom="@dimen/tool_lib_16dp"
+        android:text="@string/ali_pay"
+        android:textColor="@color/tool_lib_gray_222222" />
+</LinearLayout>
