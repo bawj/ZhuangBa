@@ -86,10 +86,14 @@ public class BaseAdvertisementPhotoFragment<T extends BaseAdvertisementPhotoTabF
     }
 
     public List<DeviceSurfaceInformation> getDeviceSurfaceInformation() {
-        if (getArguments() != null) {
-            String string = getArguments().getString(DEVICE_SURFACE_INFORMATION_LIST_STRING);
-            return new Gson().fromJson(string, new TypeToken<List<DeviceSurfaceInformation>>() {
-            }.getType());
+        try {
+            if (getArguments() != null) {
+                String string = getArguments().getString(DEVICE_SURFACE_INFORMATION_LIST_STRING);
+                return new Gson().fromJson(string, new TypeToken<List<DeviceSurfaceInformation>>() {
+                }.getType());
+            }
+        }catch (Exception e){
+            e.printStackTrace();
         }
         return new ArrayList<>();
     }

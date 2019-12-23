@@ -69,19 +69,32 @@
 
         <TextView
             android:id="@+id/tvItemAdvertisingAddress"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/viewHorizontalLine"
             android:layout_marginStart="@dimen/tool_lib_12dp"
-            android:layout_marginLeft="@dimen/tool_lib_12dp"
             android:layout_marginTop="@dimen/tool_lib_12dp"
             android:layout_marginEnd="@dimen/tool_lib_6dp"
-            android:layout_marginRight="@dimen/tool_lib_6dp"
             android:layout_marginBottom="@dimen/tool_lib_12dp"
+            android:layout_toStartOf="@+id/tvDistance"
             android:textColor="@color/tool_lib_gray_777777"
             android:textSize="@dimen/tool_lib_11sp"
             tools:text="地址：杭州市西湖区三墩镇润达花园" />
 
+
+        <TextView
+            android:id="@+id/tvDistance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/viewHorizontalLine"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="@dimen/tool_lib_12dp"
+            android:layout_marginTop="@dimen/tool_lib_12dp"
+            android:layout_marginEnd="@dimen/tool_lib_12dp"
+            android:layout_marginBottom="@dimen/tool_lib_12dp"
+            android:textColor="@color/tool_lib_gray_777777"
+            android:textSize="@dimen/tool_lib_11sp"
+            tools:text="距离100米" />
     </RelativeLayout>
 
 </com.qmuiteam.qmui.layout.QMUILinearLayout>

@@ -473,7 +473,6 @@ public interface IApi {
 
     /**
      * 查询用户
-     *
      * @return observable
      */
     @GET("user/getUser")
@@ -1389,6 +1388,7 @@ public interface IApi {
     /**
      * 师傅申请空跑
      *
+     * @param requestBody body
      * @return observable
      */
     @POST("installOrder/initiateAirRun")

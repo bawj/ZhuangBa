@@ -11,6 +11,7 @@ import com.xiaomai.zhuangba.R;
 import com.xiaomai.zhuangba.data.bean.AdOrderInformation;
 import com.xiaomai.zhuangba.data.bean.MessageEvent;
 import com.xiaomai.zhuangba.enums.EventBusEnum;
+import com.xiaomai.zhuangba.fragment.masterworker.MasterWorkerFragment;
 import com.xiaomai.zhuangba.http.ServiceUrl;
 
 import org.greenrobot.eventbus.EventBus;
@@ -58,10 +59,10 @@ public class MasterAdvertisementNewTaskFragment extends BaseAdvertisingBillDetai
                 //取消订单
                 RxUtils.getObservable(ServiceUrl.getUserApi().adOrderCancelAdOrder(getOrderCodes()))
                         .compose(this.<HttpResult<Object>>bindToLifecycle())
-                        .subscribe(new BaseHttpRxObserver<Object>() {
+                        .subscribe(new BaseHttpRxObserver<Object>(getActivity()) {
                             @Override
                             protected void onSuccess(Object response) {
-
+                                startFragment(MasterWorkerFragment.newInstance());
                             }
                         });
                 break;

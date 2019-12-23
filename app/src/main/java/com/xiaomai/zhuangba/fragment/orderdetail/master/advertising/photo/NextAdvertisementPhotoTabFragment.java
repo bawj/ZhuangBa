@@ -62,9 +62,13 @@ public class NextAdvertisementPhotoTabFragment extends BaseAdvertisementPhotoTab
         //拍过得图 回显下刊图
         DeviceSurfaceInformation deviceSurfaceInformation = getDeviceSurfaceInformation();
         String nextIssuePhotos = deviceSurfaceInformation.getNextIssuePhotos();
-        if (!TextUtils.isEmpty(nextIssuePhotos)) {
-            return new Gson().fromJson(nextIssuePhotos, new TypeToken<List<ServiceSampleEntity>>() {
-            }.getType());
+        try {
+            if (!TextUtils.isEmpty(nextIssuePhotos)) {
+                return new Gson().fromJson(nextIssuePhotos, new TypeToken<List<ServiceSampleEntity>>() {
+                }.getType());
+            }
+        }catch (Exception e){
+            e.printStackTrace();
         }
         return new ArrayList<>();
     }

@@ -38,7 +38,7 @@ import org.android.agoo.xiaomi.MiPushRegistar;
 import org.greenrobot.eventbus.EventBus;
 import org.json.JSONObject;
 
-/**x
+/**
  * @author Administrator
  * @date 2019/6/25 0025
  */
@@ -50,10 +50,10 @@ public class PretendApplication extends Application {
     private static PretendApplication pretendApplication;
 
 //   public static final String BASE_URL = "http://192.168.0.110:7966/";
-   public static final String BASE_URL = "http://192.168.0.168:7966/";
+//   public static final String BASE_URL = "http://192.168.0.168:7966/testZhuangBas/";
 //   public static final String BASE_URL = "http://192.168.0.109:7966/";
 //   public static final String BASE_URL = "https://zb.hangzhouzhuangba.com/zhuangBas/";
-//   public static final String BASE_URL = "https://zb.hangzhouzhuangba.com/testZhuangBas/";
+   public static final String BASE_URL = "https://zb.hangzhouzhuangba.com/testZhuangBas/";
 
     public static PretendApplication getInstance() {
         return pretendApplication;

@@ -75,7 +75,7 @@ public class BaseAdvertisementPhotoTabFragment extends BaseFragment implements B
      * @param deviceSurfaceInformationListString 集合 所有面的数据
      * @param deviceSurfaceInformationString     单个 当前面的数据
      */
-    public static BaseAdvertisementPhotoTabFragment newInstance(String orderCodes,String serviceSample, String deviceSurfaceInformationListString, String deviceSurfaceInformationString) {
+    public static BaseAdvertisementPhotoTabFragment newInstance(String orderCodes, String serviceSample, String deviceSurfaceInformationListString, String deviceSurfaceInformationString) {
         Bundle args = new Bundle();
         args.putString(DEVICE_SURFACE_INFORMATION_LIST_STRING, deviceSurfaceInformationListString);
         args.putString(DEVICE_SURFACE_INFORMATION, deviceSurfaceInformationString);
@@ -195,9 +195,13 @@ public class BaseAdvertisementPhotoTabFragment extends BaseFragment implements B
 
     public List<DeviceSurfaceInformation> getDeviceSurfaceInformationList() {
         if (getArguments() != null) {
-            return new Gson().fromJson(getArguments().getString(DEVICE_SURFACE_INFORMATION_LIST_STRING)
-                    , new TypeToken<List<DeviceSurfaceInformation>>() {
-                    }.getType());
+            try {
+                return new Gson().fromJson(getArguments().getString(DEVICE_SURFACE_INFORMATION_LIST_STRING)
+                        , new TypeToken<List<DeviceSurfaceInformation>>() {
+                        }.getType());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
         return new ArrayList<>();
     }
@@ -294,9 +298,13 @@ public class BaseAdvertisementPhotoTabFragment extends BaseFragment implements B
     }
 
     public List<ServiceSampleEntity> getServiceSample() {
-        if (getArguments() != null) {
-            return new Gson().fromJson(getArguments().getString(SERVICE_SAMPLE), new TypeToken<List<ServiceSampleEntity>>() {
-            }.getType());
+        try {
+            if (getArguments() != null) {
+                return new Gson().fromJson(getArguments().getString(SERVICE_SAMPLE), new TypeToken<List<ServiceSampleEntity>>() {
+                }.getType());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return new ArrayList<>();
     }
@@ -310,7 +318,7 @@ public class BaseAdvertisementPhotoTabFragment extends BaseFragment implements B
             waitForServiceSampleEntities.addAll(serviceSampleEntities);
             return serviceSampleEntities;
         }
-        if (serviceSample != null){
+        if (serviceSample != null) {
             for (ServiceSampleEntity serviceSampleEntity : serviceSample) {
                 waitForServiceSampleEntities.add(new ServiceSampleEntity("", serviceSampleEntity.getAdverName()));
             }
@@ -335,7 +343,7 @@ public class BaseAdvertisementPhotoTabFragment extends BaseFragment implements B
      * @param remark                   描述
      */
     private void completeSubmission(DeviceSurfaceInformation deviceSurfaceInformation, List<ServiceSampleEntity> serviceSampleEntities,
-                                   AMapLocation mapLocation, String address, String remark) {
+                                    AMapLocation mapLocation, String address, String remark) {
         //所有面的数据
         List<DeviceSurfaceInformation> deviceSurfaceInformationList = getDeviceSurfaceInformationList();
         HashMap<String, Object> hashMap = new HashMap<>();
@@ -380,9 +388,9 @@ public class BaseAdvertisementPhotoTabFragment extends BaseFragment implements B
     }
 
     /**
-     * @param submitted 已经提交
+     * @param submitted    已经提交
      * @param notSubmitted 未提交
-     * @param hashMap 待提交的参数
+     * @param hashMap      待提交的参数
      */
     public void submitAdvertisementPhoto(List<ServiceSampleEntity> submitted, List<ServiceSampleEntity> notSubmitted, HashMap<String, Object> hashMap) {
 

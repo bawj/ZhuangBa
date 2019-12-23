@@ -89,6 +89,7 @@ public class BaseAdvertisingBillDetailTabFragment extends BaseFragment {
         return fragment;
     }
 
+    private List<ServiceSampleEntity> sampleEntityList = new ArrayList<>();
     @Override
     public void initView() {
         DeviceSurfaceInformation deviceSurfaceInformation = getDeviceSurfaceInformation();
@@ -102,7 +103,11 @@ public class BaseAdvertisingBillDetailTabFragment extends BaseFragment {
             recyclerNextIssuePhoto.setVisibility(View.VISIBLE);
             recyclerNextIssuePhoto.setLayoutManager(new GridLayoutManager(getActivity() , 4));
             recyclerNextIssuePhoto.addItemDecoration(new GridSpacingItemDecoration(4, 32, false));
-            final List<ServiceSampleEntity> sampleEntityList= new Gson().fromJson(nextIssuePhotos, new TypeToken<List<ServiceSampleEntity>>(){}.getType());
+            try {
+                sampleEntityList= new Gson().fromJson(nextIssuePhotos, new TypeToken<List<ServiceSampleEntity>>(){}.getType());
+            }catch (Exception e){
+                e.printStackTrace();
+            }
             NextLastIssuePhotoAdapter nextIssuePhotoAdapter = new NextLastIssuePhotoAdapter();
             recyclerNextIssuePhoto.setAdapter(nextIssuePhotoAdapter);
             nextIssuePhotoAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
@@ -138,7 +143,11 @@ public class BaseAdvertisingBillDetailTabFragment extends BaseFragment {
             recyclerLastPhoto.setVisibility(View.VISIBLE);
             recyclerLastPhoto.setLayoutManager(new GridLayoutManager(getActivity() , 4));
             recyclerLastPhoto.addItemDecoration(new GridSpacingItemDecoration(4, 32, false));
-            final List<ServiceSampleEntity> sampleEntityList= new Gson().fromJson(publishedPhotos, new TypeToken<List<ServiceSampleEntity>>(){}.getType());
+            try {
+                sampleEntityList= new Gson().fromJson(publishedPhotos, new TypeToken<List<ServiceSampleEntity>>(){}.getType());
+            }catch (Exception e){
+                e.printStackTrace();
+            }
             NextLastIssuePhotoAdapter nextIssuePhotoAdapter = new NextLastIssuePhotoAdapter();
             recyclerLastPhoto.setAdapter(nextIssuePhotoAdapter);
             nextIssuePhotoAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
@@ -166,9 +175,14 @@ public class BaseAdvertisingBillDetailTabFragment extends BaseFragment {
 
         //旧广告
         String oldAdName = deviceSurfaceInformation.getOldAdName();
-        tvOldAdvertisementName.setText(getString(R.string.colon, oldAdName));
+        tvOldAdvertisementName.setText(getString(R.string.colon, (TextUtils.isEmpty(oldAdName)? getString(R.string.old_advertisement_) : oldAdName)));
         String oldAdUrl = deviceSurfaceInformation.getOldAdUrl();
         GlideManager.loadImage(getActivity() , oldAdUrl , ivOldAdvertisement);
+        if (TextUtils.isEmpty(oldAdUrl)){
+            ivOldAdvertisement.setVisibility(View.GONE);
+            tvOldAdvertisementName.setVisibility(View.GONE);
+        }
+
         //新广告
         String newAdName = deviceSurfaceInformation.getNewAdName();
         tvNewAdvertisementName.setText(getString(R.string.colon, newAdName));

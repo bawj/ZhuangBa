@@ -50,6 +50,10 @@ public class AdvertisingBillsAdapter extends BaseQuickAdapter<AdvertisingBillsBe
         stringBuffer.append(district).append(street).append(villageName);
         tvItemAdvertisingAddress.setText(mContext.getString(R.string.advertising_address , stringBuffer));
 
+        //距离
+        TextView tvDistance = helper.getView(R.id.tvDistance);
+        tvDistance.setText(mContext.getString(R.string.distance , String.valueOf(item.getDistance())));
+
         tvItemOrdersTitle.setTag(item);
     }
 }

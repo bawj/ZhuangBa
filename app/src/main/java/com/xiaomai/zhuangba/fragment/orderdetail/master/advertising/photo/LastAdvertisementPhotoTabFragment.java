@@ -10,7 +10,6 @@ import com.example.toollib.util.Log;
 import com.example.toollib.util.ToastUtil;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.xiaomai.zhuangba.R;
 import com.xiaomai.zhuangba.data.bean.DeviceSurfaceInformation;
 import com.xiaomai.zhuangba.data.bean.ServiceSampleEntity;
 import com.xiaomai.zhuangba.http.ServiceUrl;
@@ -35,7 +34,7 @@ import static com.xiaomai.zhuangba.fragment.orderdetail.master.advertising.photo
  * CreateDate: 2019/12/16 0016 20:57
  * 上刊 tab
  */
-public class LastAdvertisementPhotoTabFragment extends BaseAdvertisementPhotoTabFragment{
+public class LastAdvertisementPhotoTabFragment extends BaseAdvertisementPhotoTabFragment {
 
     /**
      * @param serviceSample                      默认样图
@@ -43,7 +42,7 @@ public class LastAdvertisementPhotoTabFragment extends BaseAdvertisementPhotoTab
      * @param deviceSurfaceInformationString     单个 当前面的数据
      * @return
      */
-    public static LastAdvertisementPhotoTabFragment newInstance(String orderCodes,String serviceSample, String deviceSurfaceInformationListString, String deviceSurfaceInformationString) {
+    public static LastAdvertisementPhotoTabFragment newInstance(String orderCodes, String serviceSample, String deviceSurfaceInformationListString, String deviceSurfaceInformationString) {
         Bundle args = new Bundle();
         args.putString(DEVICE_SURFACE_INFORMATION_LIST_STRING, deviceSurfaceInformationListString);
         args.putString(DEVICE_SURFACE_INFORMATION, deviceSurfaceInformationString);
@@ -59,45 +58,51 @@ public class LastAdvertisementPhotoTabFragment extends BaseAdvertisementPhotoTab
         //拍过得图 回显下刊图
         DeviceSurfaceInformation deviceSurfaceInformation = getDeviceSurfaceInformation();
         String publishedPhotos = deviceSurfaceInformation.getPublishedPhotos();
-        if (!TextUtils.isEmpty(publishedPhotos)) {
-            return new Gson().fromJson(publishedPhotos, new TypeToken<List<ServiceSampleEntity>>() {
-            }.getType());
+        try {
+            if (!TextUtils.isEmpty(publishedPhotos)) {
+                return new Gson().fromJson(publishedPhotos, new TypeToken<List<ServiceSampleEntity>>() {
+                }.getType());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return new ArrayList<>();
     }
 
     /**
-     * @param submitted 已经提交
+     * @param submitted    已经提交
      * @param notSubmitted 未提交
-     * @param hashMap 待提交的参数
+     * @param hashMap      待提交的参数
      */
     @Override
     public void submitAdvertisementPhoto(final List<ServiceSampleEntity> submitted, List<ServiceSampleEntity> notSubmitted,
                                          final HashMap<String, Object> hashMap) {
-        for (ServiceSampleEntity serviceSampleEntity : notSubmitted) {
-            Log.e(serviceSampleEntity.getPicUrl());
+        if (!notSubmitted.isEmpty()) {
+            for (ServiceSampleEntity serviceSampleEntity : notSubmitted) {
+                Log.e(serviceSampleEntity.getPicUrl());
+            }
+            RxUtils.getObservable(QiNiuUtil.newInstance().getAdvertisementPhotoObservable(notSubmitted))
+                    .compose(this.<List<ServiceSampleEntity>>bindToLifecycle())
+                    .doOnNext(new Consumer<List<ServiceSampleEntity>>() {
+                        @Override
+                        public void accept(List<ServiceSampleEntity> strings) throws Exception {
+                        }
+                    }).concatMap(new Function<List<ServiceSampleEntity>, ObservableSource<HttpResult<Object>>>() {
+                @Override
+                public ObservableSource<HttpResult<Object>> apply(List<ServiceSampleEntity> imgUrlList) {
+                    hashMap.put("pictureUrl", new Gson().toJson(submitted));
+                    RequestBody requestBody = RequestBody.create(MediaType.parse("application/json;charset=utf-8"), new Gson().toJson(hashMap));
+                    return RxUtils.getObservable(ServiceUrl.getUserApi().publishedPicture(requestBody));
+                }
+            }).subscribe(new BaseHttpRxObserver<Object>(getActivity()) {
+                @Override
+                protected void onSuccess(Object response) {
+                    //跳转到待开工
+                    ToastUtil.showShort(response.toString());
+                    startFragmentAndDestroyCurrent(AdvertisementPhotoSuccessFragment.newInstance(getOrderCodes()));
+                }
+            });
         }
-        RxUtils.getObservable(QiNiuUtil.newInstance().getAdvertisementPhotoObservable(notSubmitted))
-                .compose(this.<List<ServiceSampleEntity>>bindToLifecycle())
-                .doOnNext(new Consumer<List<ServiceSampleEntity>>() {
-                    @Override
-                    public void accept(List<ServiceSampleEntity> strings) throws Exception {
-                    }
-                }).concatMap(new Function<List<ServiceSampleEntity>, ObservableSource<HttpResult<Object>>>() {
-            @Override
-            public ObservableSource<HttpResult<Object>> apply(List<ServiceSampleEntity> imgUrlList){
-                hashMap.put("pictureUrl" ,new Gson().toJson(submitted));
-                RequestBody requestBody = RequestBody.create(MediaType.parse("application/json;charset=utf-8"), new Gson().toJson(hashMap));
-                return RxUtils.getObservable(ServiceUrl.getUserApi().publishedPicture(requestBody));
-            }
-        }).subscribe(new BaseHttpRxObserver<Object>(getActivity()) {
-            @Override
-            protected void onSuccess(Object response) {
-                //跳转到待开工
-                ToastUtil.showShort(response.toString());
-                startFragmentAndDestroyCurrent(AdvertisementPhotoSuccessFragment.newInstance(getOrderCodes()));
-            }
-        });
     }
 
 }

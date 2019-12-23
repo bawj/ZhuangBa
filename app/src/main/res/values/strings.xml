@@ -621,6 +621,7 @@
     <string name="distribution_point">分布点</string>
     <string name="acceptance_receipt">接单</string>
     <string name="old_advertisement">旧广告：</string>
+    <string name="old_advertisement_">旧广告</string>
     <string name="new_advertisement">新广告：</string>
     <string name="last_photo">上刊照片：</string>
     <string name="next_issue_photo">下刊照片：</string>
@@ -648,9 +649,9 @@
     <string name="please_enter_the_contract_number">请输入合同编号</string>
     <string name="commit_success">提交成功</string>
     <string name="please_select_or_fill_in_the_reason_for_failure">请选择或填写不通过原因</string>
-    <string name="last_report_and_next_report_required">需要上刊报告以及下刊报告</string>
-    <string name="last_report_report_required">需要上刊报告</string>
-    <string name="last_next_report_required">需要下刊报告</string>
+    <string name="last_report_and_next_report_required">需要下刊拍照以及上刊拍照</string>
+    <string name="last_report_report_required">需要上刊拍照</string>
+    <string name="last_next_report_required">需要下刊拍照</string>
     <string name="empty_race_application">申请空跑</string>
     <string name="empty_race_application_">%1$s申请空跑</string>
     <string name="application_amount">申请金额</string>
@@ -664,4 +665,5 @@
     <string name="application_for_approval">申请通过</string>
     <string name="application_failed">申请不通过</string>
     <string name="monthly_statement_">月结挂单</string>
+    <string name="distance">距离%1$s米</string>
 </resources>

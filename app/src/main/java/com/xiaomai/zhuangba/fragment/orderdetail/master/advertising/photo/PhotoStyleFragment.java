@@ -71,9 +71,13 @@ public class PhotoStyleFragment extends BaseFragment implements OnRefreshListene
                     protected void onSuccess(Rules rules) {
                         tvPhotoExplain.setText(rules.getNotice());
                         String pictUrl = rules.getPictUrl();
-                        List<ServiceSampleEntity> photoTabEntityList = new Gson().fromJson(pictUrl, new TypeToken<List<ServiceSampleEntity>>() {
-                        }.getType());
-                        photoStyleAdapter.setNewData(photoTabEntityList);
+                        try {
+                            List<ServiceSampleEntity> photoTabEntityList = new Gson().fromJson(pictUrl, new TypeToken<List<ServiceSampleEntity>>() {
+                            }.getType());
+                            photoStyleAdapter.setNewData(photoTabEntityList);
+                        }catch (Exception e){
+                            e.printStackTrace();
+                        }
                         refreshLayout.finishRefresh();
                     }
 
