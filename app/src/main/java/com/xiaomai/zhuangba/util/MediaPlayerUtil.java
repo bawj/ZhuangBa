@@ -16,16 +16,17 @@ public class MediaPlayerUtil {
     }
 
     public static MediaPlayerUtil getMediaPlayerUtil() {
-        synchronized (MediaPlayerUtil.class) {
-            if (mediaPlayerUtil == null) {
-                mediaPlayerUtil = new MediaPlayerUtil();
+        if (mediaPlayerUtil == null) {
+            synchronized (MediaPlayerUtil.class) {
+                if (mediaPlayerUtil == null) {
+                    mediaPlayerUtil = new MediaPlayerUtil();
+                }
             }
-            return mediaPlayerUtil;
         }
+        return mediaPlayerUtil;
     }
 
     public void switchPlayer(Context context) {
-        cancel();
         playMediaWashWelcome(context);
     }
 
@@ -36,7 +37,7 @@ public class MediaPlayerUtil {
     }
 
 
-    public void cancel() {
+    private void cancel() {
         try {
             if (mediaPlayer.isPlaying()) {
                 mediaPlayer.stop();
