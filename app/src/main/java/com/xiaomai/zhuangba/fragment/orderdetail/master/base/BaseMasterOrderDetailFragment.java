@@ -1,6 +1,8 @@
 package com.xiaomai.zhuangba.fragment.orderdetail.master.base;
 
 import android.text.TextUtils;
+import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.toollib.util.AmountUtil;
@@ -39,6 +41,9 @@ public class BaseMasterOrderDetailFragment extends BaseOrderDetailFragment<IMast
     @BindView(R.id.tvBaseOrderDetailTotalMoney)
     TextView tvBaseOrderDetailTotalMoney;
 
+    @BindView(R.id.layBaseOrderDetailDivideIntoColumns)
+    LinearLayout layBaseOrderDetailDivideIntoColumns;
+
     @Override
     public int getContentView() {
         return R.layout.fragment_base_master_order_detail;
@@ -63,6 +68,8 @@ public class BaseMasterOrderDetailFragment extends BaseOrderDetailFragment<IMast
             percentage = getString(R.string.proportion_, getString(R.string.asterisk), getString(R.string.asterisk));
         }
         tvBaseOrderDetailDivideIntoColumns.setText(percentage);
+
+        layBaseOrderDetailDivideIntoColumns.setVisibility(View.GONE);
     }
 
     @Override
