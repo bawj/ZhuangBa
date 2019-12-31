@@ -178,6 +178,7 @@
                             android:id="@+id/layBaseOrderDetailDivideIntoColumns"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:visibility="gone"
                             android:layout_below="@+id/tvBaseOrderConfirmationTime"
                             android:layout_marginLeft="@dimen/tool_lib_14dp"
                             android:layout_marginTop="@dimen/tool_lib_12dp"
@@ -211,6 +212,7 @@
                         <View
                             android:id="@+id/viewHorizontalLine"
                             style="@style/tool_lib_horizontal_line"
+                            android:layout_marginTop="@dimen/tool_lib_12dp"
                             android:layout_below="@+id/layBaseOrderDetailDivideIntoColumns"
                             android:layout_marginLeft="@dimen/tool_lib_12dp"
                             android:layout_marginRight="@dimen/tool_lib_12dp" />
