@@ -228,7 +228,7 @@ public class OrderStatusUtil {
             //验收中
             qmuiFragment.startFragment(EmployerCompleteFragment.newInstance(orderCode, orderType));
         } else if (orderStatus == OrdersEnum.EMPLOYER_COMPLETED.getCode()) {
-            //已取消
+            //已取消雇主信息
             qmuiFragment.startFragment(EmployerCancelledFragment.newInstance(orderCode, orderType));
         } else if (orderStatus == OrdersEnum.EMPLOYER_CANCELLED.getCode()) {
             //已完成

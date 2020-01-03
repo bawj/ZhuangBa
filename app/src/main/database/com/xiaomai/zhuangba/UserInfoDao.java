@@ -56,6 +56,7 @@ public class UserInfoDao extends AbstractDao<UserInfo, Long> {
         public final static Property RoleId = new Property(29, int.class, "roleId", false, "ROLE_ID");
         public final static Property Team = new Property(30, String.class, "team", false, "TEAM");
         public final static Property Push = new Property(31, String.class, "push", false, "PUSH");
+        public final static Property IdStr = new Property(32, String.class, "idStr", false, "ID_STR");
     }
 
 
@@ -102,7 +103,8 @@ public class UserInfoDao extends AbstractDao<UserInfo, Long> {
                 "\"MASTER_RANK_NAME\" TEXT," + // 28: masterRankName
                 "\"ROLE_ID\" INTEGER NOT NULL ," + // 29: roleId
                 "\"TEAM\" TEXT," + // 30: team
-                "\"PUSH\" TEXT);"); // 31: push
+                "\"PUSH\" TEXT," + // 31: push
+                "\"ID_STR\" TEXT);"); // 32: idStr
     }
 
     /** Drops the underlying database table. */
@@ -246,6 +248,11 @@ public class UserInfoDao extends AbstractDao<UserInfo, Long> {
         if (push != null) {
             stmt.bindString(32, push);
         }
+ 
+        String idStr = entity.getIdStr();
+        if (idStr != null) {
+            stmt.bindString(33, idStr);
+        }
     }
 
     @Override
@@ -383,6 +390,11 @@ public class UserInfoDao extends AbstractDao<UserInfo, Long> {
         if (push != null) {
             stmt.bindString(32, push);
         }
+ 
+        String idStr = entity.getIdStr();
+        if (idStr != null) {
+            stmt.bindString(33, idStr);
+        }
     }
 
     @Override
@@ -424,7 +436,8 @@ public class UserInfoDao extends AbstractDao<UserInfo, Long> {
             cursor.isNull(offset + 28) ? null : cursor.getString(offset + 28), // masterRankName
             cursor.getInt(offset + 29), // roleId
             cursor.isNull(offset + 30) ? null : cursor.getString(offset + 30), // team
-            cursor.isNull(offset + 31) ? null : cursor.getString(offset + 31) // push
+            cursor.isNull(offset + 31) ? null : cursor.getString(offset + 31), // push
+            cursor.isNull(offset + 32) ? null : cursor.getString(offset + 32) // idStr
         );
         return entity;
     }
@@ -463,6 +476,7 @@ public class UserInfoDao extends AbstractDao<UserInfo, Long> {
         entity.setRoleId(cursor.getInt(offset + 29));
         entity.setTeam(cursor.isNull(offset + 30) ? null : cursor.getString(offset + 30));
         entity.setPush(cursor.isNull(offset + 31) ? null : cursor.getString(offset + 31));
+        entity.setIdStr(cursor.isNull(offset + 32) ? null : cursor.getString(offset + 32));
      }
     
     @Override

@@ -86,17 +86,23 @@ public class UserInfo {
     /** 是否需要弹框；0：不要；1：要 */
     private String push;
 
+    /** 雇主选中的子需求ID */
+    private String idStr;
+
     @Transient
     private List<SkillList> skills;
 
-    @Generated(hash = 1008065082)
-    public UserInfo(Long id, String phoneNumber, String userText, String password, int lockFlag, String invitationCode,
-            String token, String role, String registrationTime, String identityCard, String validityDataStart,
-            String validityDataEnd, String idCardFrontPhoto, String idCardBackPhoto, String validityData,
-            String bareHeadedPhotoUrl, int authenticationStatue, String authenticationTime, String address,
-            double longitude, double latitude, String businessLicense, String emergencyContact, String contactAddress,
-            String companyName, int startFlag, int payFlag, String masterRankId, String masterRankName, int roleId,
-            String team, String push) {
+    @Generated(hash = 1923274668)
+    public UserInfo(Long id, String phoneNumber, String userText, String password,
+            int lockFlag, String invitationCode, String token, String role,
+            String registrationTime, String identityCard, String validityDataStart,
+            String validityDataEnd, String idCardFrontPhoto, String idCardBackPhoto,
+            String validityData, String bareHeadedPhotoUrl,
+            int authenticationStatue, String authenticationTime, String address,
+            double longitude, double latitude, String businessLicense,
+            String emergencyContact, String contactAddress, String companyName,
+            int startFlag, int payFlag, String masterRankId, String masterRankName,
+            int roleId, String team, String push, String idStr) {
         this.id = id;
         this.phoneNumber = phoneNumber;
         this.userText = userText;
@@ -129,6 +135,7 @@ public class UserInfo {
         this.roleId = roleId;
         this.team = team;
         this.push = push;
+        this.idStr = idStr;
     }
 
     @Generated(hash = 1279772520)
@@ -144,7 +151,7 @@ public class UserInfo {
     }
 
     public String getPhoneNumber() {
-        return TextUtils.isEmpty(phoneNumber) ? "" : phoneNumber;
+        return phoneNumber == null ? "" : phoneNumber;
     }
 
     public void setPhoneNumber(String phoneNumber) {
@@ -152,7 +159,7 @@ public class UserInfo {
     }
 
     public String getUserText() {
-        return TextUtils.isEmpty(userText) ? "" : userText;
+        return userText == null ? "" : userText;
     }
 
     public void setUserText(String userText) {
@@ -160,7 +167,7 @@ public class UserInfo {
     }
 
     public String getPassword() {
-        return TextUtils.isEmpty(password) ? "" : password;
+        return password == null ? "" : password;
     }
 
     public void setPassword(String password) {
@@ -176,7 +183,7 @@ public class UserInfo {
     }
 
     public String getInvitationCode() {
-        return TextUtils.isEmpty(invitationCode) ? "" : invitationCode;
+        return invitationCode == null ? "" : invitationCode;
     }
 
     public void setInvitationCode(String invitationCode) {
@@ -184,7 +191,7 @@ public class UserInfo {
     }
 
     public String getToken() {
-        return TextUtils.isEmpty(token) ? "" : token;
+        return token == null ? "" : token;
     }
 
     public void setToken(String token) {
@@ -192,7 +199,7 @@ public class UserInfo {
     }
 
     public String getRole() {
-        return TextUtils.isEmpty(role) ? "" : role;
+        return role == null ? "" : role;
     }
 
     public void setRole(String role) {
@@ -200,7 +207,7 @@ public class UserInfo {
     }
 
     public String getRegistrationTime() {
-        return TextUtils.isEmpty(registrationTime) ? "" : registrationTime;
+        return registrationTime == null ? "" : registrationTime;
     }
 
     public void setRegistrationTime(String registrationTime) {
@@ -208,7 +215,7 @@ public class UserInfo {
     }
 
     public String getIdentityCard() {
-        return TextUtils.isEmpty(identityCard) ? "" : identityCard;
+        return identityCard == null ? "" : identityCard;
     }
 
     public void setIdentityCard(String identityCard) {
@@ -216,7 +223,7 @@ public class UserInfo {
     }
 
     public String getValidityDataStart() {
-        return TextUtils.isEmpty(validityDataStart) ? "" : validityDataStart;
+        return validityDataStart == null ? "" : validityDataStart;
     }
 
     public void setValidityDataStart(String validityDataStart) {
@@ -224,7 +231,7 @@ public class UserInfo {
     }
 
     public String getValidityDataEnd() {
-        return TextUtils.isEmpty(validityDataEnd) ? "" : validityDataEnd;
+        return validityDataEnd == null ? "" : validityDataEnd;
     }
 
     public void setValidityDataEnd(String validityDataEnd) {
@@ -232,7 +239,7 @@ public class UserInfo {
     }
 
     public String getIdCardFrontPhoto() {
-        return TextUtils.isEmpty(idCardFrontPhoto) ? "" : idCardFrontPhoto;
+        return idCardFrontPhoto == null ? "" : idCardFrontPhoto;
     }
 
     public void setIdCardFrontPhoto(String idCardFrontPhoto) {
@@ -240,7 +247,7 @@ public class UserInfo {
     }
 
     public String getIdCardBackPhoto() {
-        return TextUtils.isEmpty(idCardBackPhoto) ? "" : idCardBackPhoto;
+        return idCardBackPhoto == null ? "" : idCardBackPhoto;
     }
 
     public void setIdCardBackPhoto(String idCardBackPhoto) {
@@ -248,7 +255,7 @@ public class UserInfo {
     }
 
     public String getValidityData() {
-        return TextUtils.isEmpty(validityData) ? "" : validityData;
+        return validityData == null ? "" : validityData;
     }
 
     public void setValidityData(String validityData) {
@@ -256,7 +263,7 @@ public class UserInfo {
     }
 
     public String getBareHeadedPhotoUrl() {
-        return TextUtils.isEmpty(bareHeadedPhotoUrl) ? "" : bareHeadedPhotoUrl;
+        return bareHeadedPhotoUrl == null ? "" : bareHeadedPhotoUrl;
     }
 
     public void setBareHeadedPhotoUrl(String bareHeadedPhotoUrl) {
@@ -272,7 +279,7 @@ public class UserInfo {
     }
 
     public String getAuthenticationTime() {
-        return TextUtils.isEmpty(authenticationTime) ? "" : authenticationTime;
+        return authenticationTime == null ? "" : authenticationTime;
     }
 
     public void setAuthenticationTime(String authenticationTime) {
@@ -280,7 +287,7 @@ public class UserInfo {
     }
 
     public String getAddress() {
-        return TextUtils.isEmpty(address) ? "" : address;
+        return address == null ? "" : address;
     }
 
     public void setAddress(String address) {
@@ -303,6 +310,38 @@ public class UserInfo {
         this.latitude = latitude;
     }
 
+    public String getBusinessLicense() {
+        return businessLicense == null ? "" : businessLicense;
+    }
+
+    public void setBusinessLicense(String businessLicense) {
+        this.businessLicense = businessLicense;
+    }
+
+    public String getEmergencyContact() {
+        return emergencyContact == null ? "" : emergencyContact;
+    }
+
+    public void setEmergencyContact(String emergencyContact) {
+        this.emergencyContact = emergencyContact;
+    }
+
+    public String getContactAddress() {
+        return contactAddress == null ? "" : contactAddress;
+    }
+
+    public void setContactAddress(String contactAddress) {
+        this.contactAddress = contactAddress;
+    }
+
+    public String getCompanyName() {
+        return companyName == null ? "" : companyName;
+    }
+
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
+    }
+
     public int getStartFlag() {
         return startFlag;
     }
@@ -319,24 +358,8 @@ public class UserInfo {
         this.payFlag = payFlag;
     }
 
-    public List<SkillList> getSkillLists() {
-        return skills == null ? new ArrayList<SkillList>() : skills;
-    }
-
-    public void setSkillLists(List<SkillList> skillLists) {
-        this.skills = skillLists;
-    }
-
-    public String getBusinessLicense() {
-        return TextUtils.isEmpty(businessLicense) ? "" : businessLicense;
-    }
-
-    public void setBusinessLicense(String businessLicense) {
-        this.businessLicense = businessLicense;
-    }
-
     public String getMasterRankId() {
-        return TextUtils.isEmpty(masterRankId) ? "" : masterRankId;
+        return masterRankId == null ? "" : masterRankId;
     }
 
     public void setMasterRankId(String masterRankId) {
@@ -344,35 +367,11 @@ public class UserInfo {
     }
 
     public String getMasterRankName() {
-        return TextUtils.isEmpty(masterRankName) ? "" : masterRankName;
+        return masterRankName == null ? "" : masterRankName;
     }
 
     public void setMasterRankName(String masterRankName) {
         this.masterRankName = masterRankName;
-    }
-
-    public String getEmergencyContact() {
-        return emergencyContact;
-    }
-
-    public void setEmergencyContact(String emergencyContact) {
-        this.emergencyContact = emergencyContact;
-    }
-
-    public String getCompanyName() {
-        return companyName == null ? "" : companyName;
-    }
-
-    public void setCompanyName(String companyName) {
-        this.companyName = companyName;
-    }
-
-    public String getContactAddress() {
-        return contactAddress;
-    }
-
-    public void setContactAddress(String contactAddress) {
-        this.contactAddress = contactAddress;
     }
 
     public int getRoleId() {
@@ -384,7 +383,7 @@ public class UserInfo {
     }
 
     public String getTeam() {
-        return TextUtils.isEmpty(team) ? "" : team;
+        return team == null ? "" : team;
     }
 
     public void setTeam(String team) {
@@ -392,10 +391,29 @@ public class UserInfo {
     }
 
     public String getPush() {
-        return push;
+        return push == null ? "" : push;
     }
 
     public void setPush(String push) {
         this.push = push;
+    }
+
+    public String getIdStr() {
+        return idStr == null ? "" : idStr;
+    }
+
+    public void setIdStr(String idStr) {
+        this.idStr = idStr;
+    }
+
+    public List<SkillList> getSkillLists() {
+        if (skills == null) {
+            return new ArrayList<>();
+        }
+        return skills;
+    }
+
+    public void setSkillLists(List<SkillList> skills) {
+        this.skills = skills;
     }
 }

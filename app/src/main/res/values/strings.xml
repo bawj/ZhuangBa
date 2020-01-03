@@ -666,4 +666,5 @@
     <string name="application_failed">申请不通过</string>
     <string name="monthly_statement_">月结挂单</string>
     <string name="distance">距离%1$s米</string>
+    <string name="select_enterprise_type">选择企业类型</string>
 </resources>

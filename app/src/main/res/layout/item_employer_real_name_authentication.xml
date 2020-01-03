@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <TextView
+        android:id="@+id/tvEmployerReal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_gray"
+        android:paddingStart="@dimen/tool_lib_17dp"
+        android:paddingTop="@dimen/tool_lib_7dp"
+        android:paddingEnd="@dimen/tool_lib_17dp"
+        android:paddingBottom="@dimen/tool_lib_7dp"
+        android:layout_marginBottom="@dimen/tool_lib_6dp"
+        android:textColor="@color/tool_lib_gray_777777"
+        android:textSize="@dimen/tool_lib_16sp"
+        tools:text="安防企业" />
+
+</RelativeLayout>

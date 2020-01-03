@@ -9,6 +9,7 @@ import com.xiaomai.zhuangba.data.bean.AdOrderInformation;
 import com.xiaomai.zhuangba.data.bean.AdvertisingReplacementBean;
 import com.xiaomai.zhuangba.data.bean.AdvertisingReplacementDetailBean;
 import com.xiaomai.zhuangba.data.bean.AliPayAccountBean;
+import com.xiaomai.zhuangba.data.bean.BusinessNeeds;
 import com.xiaomai.zhuangba.data.bean.Cause;
 import com.xiaomai.zhuangba.data.bean.CreateTeamBean;
 import com.xiaomai.zhuangba.data.bean.DataDetailsContent;
@@ -1428,4 +1429,11 @@ public interface IApi {
     @POST("installOrder/adoptAirRun")
     Observable<HttpResult<PayData>> adoptAirRun(@Field("cause") String cause, @Field("id") String id ,
                                                @Field("payType") String payType , @Field("password") String password);
+
+    /**
+     * 查询企业需求
+     * @return Observable
+     */
+    @GET("businessNeeds/getBusinessNeeds")
+    Observable<HttpResult<List<BusinessNeeds>>> getBusinessNeeds();
 }

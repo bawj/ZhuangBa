@@ -61,6 +61,8 @@ public enum StaticExplain {
     REFUSE(3, "拒绝加入团队"),
     EMPTY(5, "清空消息"),
     REFUND(1002, "退款中"),
+    EMPLOYER_NOT_CHECK(0 , "未选中"),
+    EMPLOYER_IS_CHECK(1 , "已选中"),
     ;
     /**
      * 状态
