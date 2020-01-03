@@ -269,8 +269,8 @@
                             android:id="@+id/viewPager"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:paddingBottom="@dimen/tool_lib_56dp"
-                            android:layout_marginTop="@dimen/tool_lib_12dp" />
+                            android:layout_marginTop="@dimen/tool_lib_12dp"
+                            android:paddingBottom="@dimen/tool_lib_56dp" />
                     </LinearLayout>
                 </android.support.design.widget.CoordinatorLayout>
             </RelativeLayout>
@@ -284,11 +284,34 @@
                 android:paddingStart="@dimen/tool_lib_16dp"
                 android:paddingEnd="@dimen/tool_lib_16dp">
 
+                <LinearLayout
+                    android:id="@+id/layCompensate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/tool_lib_16dp"
+                    android:layout_marginTop="@dimen/tool_lib_3dp"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_claim_demage" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/initiate_a_claim"
+                        android:textColor="@color/tool_lib_gray_777777"
+                        android:textSize="@dimen/tool_lib_12sp" />
+                </LinearLayout>
+
                 <ImageView
                     android:id="@+id/ivEmployerDetailMasterHeader"
                     android:layout_width="@dimen/tool_lib_34dp"
                     android:layout_height="@dimen/tool_lib_34dp"
                     android:layout_centerVertical="true"
+                    android:visibility="gone"
                     tools:src="@drawable/bg_def_head" />
 
                 <ImageView
@@ -297,7 +320,8 @@
                     android:layout_height="@dimen/tool_lib_16dp"
                     android:layout_alignBottom="@+id/ivEmployerDetailMasterHeader"
                     android:layout_marginStart="@dimen/tool_lib_24dp"
-                    android:src="@drawable/ic_master_log" />
+                    android:src="@drawable/ic_master_log"
+                    android:visibility="gone" />
 
                 <TextView
                     android:id="@+id/tvEmployerDetailMasterName"
@@ -306,6 +330,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginStart="@dimen/tool_lib_12dp"
                     android:layout_toEndOf="@+id/ivEmployerDetailMasterHeader"
+                    android:visibility="gone"
                     tools:text="康师傅" />
 
             </RelativeLayout>

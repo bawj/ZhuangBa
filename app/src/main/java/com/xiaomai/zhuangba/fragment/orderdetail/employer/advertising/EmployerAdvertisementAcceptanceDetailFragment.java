@@ -15,9 +15,11 @@ import com.example.toollib.util.ToastUtil;
 import com.xiaomai.zhuangba.R;
 import com.xiaomai.zhuangba.data.bean.AdOrderInformation;
 import com.xiaomai.zhuangba.data.bean.Cause;
+import com.xiaomai.zhuangba.data.bean.DeviceSurfaceInformation;
 import com.xiaomai.zhuangba.fragment.employer.EmployerFragment;
 import com.xiaomai.zhuangba.fragment.orderdetail.master.advertising.BaseAdvertisingBillDetailFragment;
 import com.xiaomai.zhuangba.http.ServiceUrl;
+import com.xiaomai.zhuangba.weight.dialog.CompensateDialog;
 import com.xiaomai.zhuangba.weight.dialog.EditTextDialogBuilder;
 import com.xiaomai.zhuangba.weight.dialog.EditTextDialogNoPassBuilder;
 
@@ -40,6 +42,8 @@ public class EmployerAdvertisementAcceptanceDetailFragment extends BaseAdvertisi
     @BindView(R.id.relNewTaskOrderDetailBottom)
     RelativeLayout relNewTaskOrderDetailBottom;
 
+    private List<DeviceSurfaceInformation> list;
+
     public static EmployerAdvertisementAcceptanceDetailFragment newInstance(String orderCodes) {
         Bundle args = new Bundle();
         args.putString(ORDER_CODES, orderCodes);
@@ -58,6 +62,7 @@ public class EmployerAdvertisementAcceptanceDetailFragment extends BaseAdvertisi
     @Override
     public void setViewData(AdOrderInformation adOrderInformationList) {
         super.setViewData(adOrderInformationList);
+        list = adOrderInformationList.getList();
         relNewTaskOrderDetailBottom.setVisibility(View.VISIBLE);
         //师傅名称
         String userText = adOrderInformationList.getUserText();
@@ -66,7 +71,7 @@ public class EmployerAdvertisementAcceptanceDetailFragment extends BaseAdvertisi
         GlideManager.loadCircleImage(getActivity() , bareheadedPhotoUrl , ivEmployerDetailMasterHeader , R.drawable.bg_def_head);
     }
 
-    @OnClick({R.id.btnAdvertisementNoPassage, R.id.btnAcceptanceApproval})
+    @OnClick({R.id.btnAdvertisementNoPassage, R.id.btnAcceptanceApproval,R.id.layCompensate})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btnAdvertisementNoPassage:
@@ -90,6 +95,13 @@ public class EmployerAdvertisementAcceptanceDetailFragment extends BaseAdvertisi
                                 startFragmentAndDestroyCurrent(EmployerFragment.newInstance());
                             }
                         });
+                break;
+            case R.id.layCompensate:
+                //发起索赔
+                new CompensateDialog<EmployerAdvertisementAcceptanceDetailFragment>()
+                        .initView(getActivity(), this)
+                        .setCompensate(getActivity(), list)
+                        .showDialog();
                 break;
             default:
         }

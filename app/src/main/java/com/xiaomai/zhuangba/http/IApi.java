@@ -1436,4 +1436,11 @@ public interface IApi {
      */
     @GET("businessNeeds/getBusinessNeeds")
     Observable<HttpResult<List<BusinessNeeds>>> getBusinessNeeds();
+
+    /**
+     * 发起索赔
+     * @return observable
+     */
+    @POST("order/initiateClaim")
+    Observable<HttpResult<Object>> initiateClaim(@Body RequestBody requestBody);
 }

@@ -667,4 +667,9 @@
     <string name="monthly_statement_">月结挂单</string>
     <string name="distance">距离%1$s米</string>
     <string name="select_enterprise_type">选择企业类型</string>
+    <string name="initiate_a_claim">发起索赔</string>
+    <string name="claim_amount">索赔金额：</string>
+    <string name="please_fill_in_the_amount">请填写金额</string>
+    <string name="claim_reason">索赔原因：</string>
+    <string name="please_fill_in_the_claim_reason">请填写索赔原因</string>
 </resources>

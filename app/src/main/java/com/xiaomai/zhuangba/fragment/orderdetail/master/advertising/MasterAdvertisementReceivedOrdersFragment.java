@@ -50,6 +50,7 @@ public class MasterAdvertisementReceivedOrdersFragment extends BaseAdvertisingBi
     private Integer serviceId;
     private String serviceSample;
 
+    private List<DeviceSurfaceInformation> list;
     public static MasterAdvertisementReceivedOrdersFragment newInstance(String orderCodes) {
         Bundle args = new Bundle();
         args.putString(ORDER_CODES, orderCodes);
@@ -72,6 +73,7 @@ public class MasterAdvertisementReceivedOrdersFragment extends BaseAdvertisingBi
     @Override
     public void setViewData(AdOrderInformation adOrderInformationList) {
         super.setViewData(adOrderInformationList);
+        list = adOrderInformationList.getList();
         relNewTaskOrderDetailBottom.setVisibility(View.VISIBLE);
         serviceId = adOrderInformationList.getServiceId();
         operating = adOrderInformationList.getOperating();
