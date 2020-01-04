@@ -284,10 +284,13 @@ public interface IApi {
      * @param serviceId 服务大类ID
      * @param province  省
      * @param city 市
+     * @param phoneNumber 雇主手机号 雇主端可以不传
      * @return observable
      */
     @GET("userRole/getServiceSubcategory/{serviceId}")
-    Observable<HttpResult<List<ServiceSubcategory>>> getServiceSubcategory(@Path("serviceId") String serviceId , @Query("province") String province, @Query("city")String city);
+    Observable<HttpResult<List<ServiceSubcategory>>> getServiceSubcategory(@Path("serviceId") String serviceId ,
+                                                                           @Query("province") String province, @Query("city")String city,
+                                                                           @Query("phoneNumber")String phoneNumber);
 
 
     /**
@@ -1443,4 +1446,14 @@ public interface IApi {
      */
     @POST("order/initiateClaim")
     Observable<HttpResult<Object>> initiateClaim(@Body RequestBody requestBody);
+
+    /**
+     * 师傅申请增加项目
+     * @return observable
+     */
+    @POST("installOrder/initiateAddItem")
+    Observable<HttpResult<Object>> initiateAddItem(@Body RequestBody requestBody);
+
+
+
 }

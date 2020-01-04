@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/tool_lib_color_32313E"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tvAddProject"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginStart="@dimen/tool_lib_12dp"
+        android:layout_marginTop="@dimen/tool_lib_12dp"
+        android:layout_marginEnd="@dimen/tool_lib_12dp"
+        android:text="@string/add_project"
+        android:textColor="@color/tool_lib_white_FFFFFF"
+        android:textSize="@dimen/tool_lib_12sp" />
+
+    <View
+        style="@style/tool_lib_horizontal_line"
+        android:layout_marginStart="@dimen/tool_lib_12dp"
+        android:layout_marginTop="@dimen/tool_lib_7dp"
+        android:layout_marginEnd="@dimen/tool_lib_12dp" />
+
+    <TextView
+        android:id="@+id/tvDeletionItem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginStart="@dimen/tool_lib_12dp"
+        android:layout_marginTop="@dimen/tool_lib_12dp"
+        android:layout_marginEnd="@dimen/tool_lib_12dp"
+        android:text="@string/deletion_item"
+        android:textColor="@color/tool_lib_white_FFFFFF"
+        android:textSize="@dimen/tool_lib_12sp" />
+
+    <View
+        style="@style/tool_lib_horizontal_line"
+        android:layout_marginStart="@dimen/tool_lib_12dp"
+        android:layout_marginTop="@dimen/tool_lib_7dp"
+        android:layout_marginEnd="@dimen/tool_lib_12dp" />
+
+    <TextView
+        android:id="@+id/tvCustom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginStart="@dimen/tool_lib_12dp"
+        android:layout_marginTop="@dimen/tool_lib_12dp"
+        android:layout_marginEnd="@dimen/tool_lib_12dp"
+        android:layout_marginBottom="@dimen/tool_lib_7dp"
+        android:text="@string/custom"
+        android:textColor="@color/tool_lib_white_FFFFFF"
+        android:textSize="@dimen/tool_lib_12sp" />
+</LinearLayout>

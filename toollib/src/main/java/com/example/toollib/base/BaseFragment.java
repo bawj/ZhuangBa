@@ -32,7 +32,7 @@ public abstract class BaseFragment<M extends IBaseModule> extends BaseRxFragment
 
     public M iModule;
     private Unbinder bind;
-    private QMUITopBarLayout topBarBase;
+    public QMUITopBarLayout topBarBase;
     public View view;
     @Override
     protected View onCreateView() {

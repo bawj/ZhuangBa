@@ -1,5 +1,6 @@
 package com.xiaomai.zhuangba.fragment.masterworker;
 
+import android.Manifest;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -19,12 +20,15 @@ import com.xiaomai.zhuangba.adapter.AdvertisingBillsAdapter;
 import com.xiaomai.zhuangba.data.AdvertisingBillsBean;
 import com.xiaomai.zhuangba.data.bean.LatAndLon;
 import com.xiaomai.zhuangba.data.bean.OuterLayerAdvertisingBills;
+import com.xiaomai.zhuangba.enums.ForResultCode;
 import com.xiaomai.zhuangba.enums.StaticExplain;
 import com.xiaomai.zhuangba.fragment.base.BaseListFragment;
 import com.xiaomai.zhuangba.fragment.masterworker.map.PlotDistributionFragment;
 import com.xiaomai.zhuangba.fragment.orderdetail.master.advertising.AllocationListFragment;
+import com.xiaomai.zhuangba.fragment.service.LocationFragment;
 import com.xiaomai.zhuangba.http.ServiceUrl;
 import com.xiaomai.zhuangba.util.MapUtils;
+import com.xiaomai.zhuangba.util.RxPermissionsUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -207,8 +211,19 @@ public class AdvertisingBillsFragment extends BaseListFragment<IBaseModule, Adve
                         .compose(this.<HttpResult<List<LatAndLon>>>bindToLifecycle())
                         .subscribe(new BaseHttpRxObserver<List<LatAndLon>>(getActivity()) {
                             @Override
-                            protected void onSuccess(List<LatAndLon> latAndLonList) {
-                                startFragment(PlotDistributionFragment.newInstance(getString(R.string.plot_distribution) , latAndLonList));
+                            protected void onSuccess(final List<LatAndLon> latAndLonList) {
+                                RxPermissionsUtils.applyPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION, new BaseCallback<String>() {
+                                    @Override
+                                    public void onSuccess(String obj) {
+                                        startFragment(PlotDistributionFragment.newInstance(getString(R.string.plot_distribution) , latAndLonList));
+                                    }
+
+                                    @Override
+                                    public void onFail(Object obj) {
+                                        super.onFail(obj);
+                                        showToast(getString(R.string.positioning_authority_tip));
+                                    }
+                                });
                             }
                         });
                 break;

@@ -240,26 +240,27 @@ public class ShopCarModule extends BaseModule<IShopCarView> implements IShopCarM
         hashMap.put("orderServices", orderServicesBeans);
         //雇主描述
         hashMap.put("employerDescribe", orderAddress.getEmployerDescribe());
-        setAuxiliaryMaterials(hashMap);
+        ShopCarUtil.setAuxiliaryMaterials(hashMap);
+        //setAuxiliaryMaterials(hashMap);
         //总金额
         hashMap.put("orderAmount", String.valueOf(ShopCarUtil.getTotalMoney()));
         return hashMap;
     }
 
-    private void setAuxiliaryMaterials(HashMap<String, Object> hashMap) {
-        //没有 添加图片 和 备注
-        ShopAuxiliaryMaterialsDB unique = DBHelper.getInstance().getShopAuxiliaryMaterialsDBDao().queryBuilder().unique();
-        //开槽
-        hashMap.put("slottingStartLength", unique.getSlottingStartLength());
-        hashMap.put("slottingEndLength", unique.getSlottingEndLength());
-        hashMap.put("slottingPrice", unique.getSlottingSlottingPrice());
-        //是否调试 0 调试 1 不调试
-        hashMap.put("debugging", unique.getDebuggingPrice() == 0 ? 0 : 1);
-        hashMap.put("debugPrice", unique.getDebuggingPrice());
-        //辅材
-        hashMap.put("materialsStartLength", unique.getMaterialsStartLength());
-        hashMap.put("materialsEndLength", unique.getMaterialsEndLength());
-        hashMap.put("materialsPrice", unique.getMaterialsSlottingPrice());
-    }
+//    private void setAuxiliaryMaterials(HashMap<String, Object> hashMap) {
+//        //没有 添加图片 和 备注
+//        ShopAuxiliaryMaterialsDB unique = DBHelper.getInstance().getShopAuxiliaryMaterialsDBDao().queryBuilder().unique();
+//        //开槽
+//        hashMap.put("slottingStartLength", unique.getSlottingStartLength());
+//        hashMap.put("slottingEndLength", unique.getSlottingEndLength());
+//        hashMap.put("slottingPrice", unique.getSlottingSlottingPrice());
+//        //是否调试 0 调试 1 不调试
+//        hashMap.put("debugging", unique.getDebuggingPrice() == 0 ? 0 : 1);
+//        hashMap.put("debugPrice", unique.getDebuggingPrice());
+//        //辅材
+//        hashMap.put("materialsStartLength", unique.getMaterialsStartLength());
+//        hashMap.put("materialsEndLength", unique.getMaterialsEndLength());
+//        hashMap.put("materialsPrice", unique.getMaterialsSlottingPrice());
+//    }
 
 }

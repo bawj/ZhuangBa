@@ -672,4 +672,9 @@
     <string name="please_fill_in_the_amount">请填写金额</string>
     <string name="claim_reason">索赔原因：</string>
     <string name="please_fill_in_the_claim_reason">请填写索赔原因</string>
+    <string name="site_replenishment">现场补充</string>
+    <string name="add_project">新增项目</string>
+    <string name="deletion_item">删减项目</string>
+    <string name="custom">自定义</string>
+    <string name="submitAudit">提交审核</string>
 </resources>

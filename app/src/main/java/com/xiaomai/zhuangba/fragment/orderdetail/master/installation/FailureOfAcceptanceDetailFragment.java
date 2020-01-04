@@ -39,6 +39,7 @@ public class FailureOfAcceptanceDetailFragment extends MasterCompleteFragment{
         relNewTaskOrderDetailBottom.setVisibility(View.VISIBLE);
     }
 
+    @Override
     @OnClick(R.id.btnSubmitForAcceptance)
     public void onViewBeUnderConstructionClicked() {
         //提交验收

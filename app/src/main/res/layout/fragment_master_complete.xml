@@ -141,7 +141,8 @@
                             android:layout_marginBottom="@dimen/tool_lib_12dp"
                             android:background="@drawable/bg_divide_into_columns_bg"
                             android:gravity="center_vertical"
-                            android:orientation="horizontal">
+                            android:orientation="horizontal"
+                            android:visibility="gone">
 
                             <ImageView
                                 android:layout_width="@dimen/tool_lib_16dp"
@@ -169,6 +170,7 @@
                             style="@style/tool_lib_horizontal_line"
                             android:layout_below="@+id/layBaseOrderDetailDivideIntoColumns"
                             android:layout_marginLeft="@dimen/tool_lib_12dp"
+                            android:layout_marginTop="@dimen/tool_lib_12dp"
                             android:layout_marginRight="@dimen/tool_lib_12dp" />
 
                         <RelativeLayout
@@ -290,11 +292,11 @@
                             android:layout_below="@+id/recyclerMasterWorkerDeliveryContent"
                             android:layout_marginLeft="@dimen/tool_lib_12dp"
                             android:layout_marginTop="@dimen/tool_lib_8dp"
-                            android:visibility="gone"
                             android:layout_marginRight="@dimen/tool_lib_12dp"
                             android:text="@string/confirmation_of_completion_of_construction"
                             android:textColor="@color/tool_lib_gray_222222"
-                            android:textSize="@dimen/tool_lib_12sp" />
+                            android:textSize="@dimen/tool_lib_12sp"
+                            android:visibility="gone" />
 
                         <ImageView
                             android:id="@+id/ivMasterWorkerSignature"
@@ -303,12 +305,12 @@
                             android:layout_below="@+id/tvMasterWorkerSignature"
                             android:layout_marginLeft="@dimen/tool_lib_12dp"
                             android:layout_marginTop="@dimen/tool_lib_8dp"
-                            android:visibility="gone"
                             android:layout_marginRight="@dimen/tool_lib_12dp"
                             android:layout_marginBottom="@dimen/tool_lib_8dp"
                             android:gravity="center"
                             android:lineSpacingExtra="@dimen/tool_lib_1dp"
-                            android:padding="@dimen/tool_lib_6dp" />
+                            android:padding="@dimen/tool_lib_6dp"
+                            android:visibility="gone" />
                     </RelativeLayout>
                     <!--现场照片-->
                     <RelativeLayout
@@ -330,8 +332,8 @@
                             android:layout_below="@+id/tvLivePhotos"
                             android:layout_marginLeft="@dimen/tool_lib_12dp"
                             android:layout_marginTop="@dimen/tool_lib_8dp"
-                            android:layout_marginBottom="@dimen/tool_lib_8dp"
                             android:layout_marginRight="@dimen/tool_lib_12dp"
+                            android:layout_marginBottom="@dimen/tool_lib_8dp"
                             android:descendantFocusability="blocksDescendants" />
                     </RelativeLayout>
                     <!--现场描述-->
@@ -355,10 +357,10 @@
                             android:layout_marginLeft="@dimen/tool_lib_16dp"
                             android:layout_marginTop="@dimen/tool_lib_8dp"
                             android:layout_marginRight="@dimen/tool_lib_16dp"
+                            android:layout_marginBottom="@dimen/tool_lib_8dp"
                             android:background="@drawable/gray_field_description_bg"
                             android:ellipsize="end"
                             android:maxLines="6"
-                            android:layout_marginBottom="@dimen/tool_lib_8dp"
                             android:padding="@dimen/tool_lib_8dp"
                             tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. " />
                     </RelativeLayout>
@@ -381,8 +383,8 @@
                             android:layout_below="@+id/tvBaseOrderDetailServiceItems"
                             android:layout_marginLeft="@dimen/tool_lib_12dp"
                             android:layout_marginTop="@dimen/tool_lib_8dp"
-                            android:layout_marginBottom="@dimen/tool_lib_8dp"
                             android:layout_marginRight="@dimen/tool_lib_12dp"
+                            android:layout_marginBottom="@dimen/tool_lib_8dp"
                             android:descendantFocusability="blocksDescendants" />
                     </RelativeLayout>
 

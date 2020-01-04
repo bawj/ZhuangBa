@@ -20,6 +20,8 @@
         <!-- 配置app自己的theme -->
         <item name="tool_lib_app_primary_color">?attr/qmui_config_color_blue</item>
         <item name="tool_lib_app_content_bg_color">@color/qmui_config_color_white</item>
+
+        <item name="qmui_popup_arrow_up">@drawable/qmui_popup_arrow_up_new</item>
     </style>
 
     <style name="tool_lib_QDTopBar" parent="QMUI.TopBar">

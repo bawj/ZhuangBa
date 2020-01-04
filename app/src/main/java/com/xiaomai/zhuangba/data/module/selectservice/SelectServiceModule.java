@@ -27,7 +27,8 @@ public class SelectServiceModule extends BaseModule<ISelectServiceView> implemen
         String serviceId = mViewRef.get().getServiceId();
         String province = mViewRef.get().getProvince();
         String city = mViewRef.get().getCity();
-        RxUtils.getObservable(ServiceUrl.getUserApi().getServiceSubcategory(serviceId , province , city))
+        String phoneNumber = mViewRef.get().getPhoneNumber();
+        RxUtils.getObservable(ServiceUrl.getUserApi().getServiceSubcategory(serviceId , province , city,phoneNumber))
                 .compose(mViewRef.get().<HttpResult<List<ServiceSubcategory>>>bindLifecycle())
                 .subscribe(new BaseHttpRxObserver<List<ServiceSubcategory>>() {
                     @Override

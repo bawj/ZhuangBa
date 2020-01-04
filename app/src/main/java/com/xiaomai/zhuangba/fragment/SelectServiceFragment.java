@@ -228,7 +228,7 @@ public class SelectServiceFragment extends BaseListFragment<ISelectServiceModule
         return orderAddress.getCity();
     }
 
-    private void startShopCarFragment() {
+    public void startShopCarFragment() {
         Integer totalNumber = ShopCarUtil.getTotalNumber();
         if (totalNumber != 0) {
             //是否选择了 服务
@@ -359,6 +359,11 @@ public class SelectServiceFragment extends BaseListFragment<ISelectServiceModule
             return getArguments().getString(ORDER_ADDRESS_GSON);
         }
         return null;
+    }
+
+    @Override
+    public String getPhoneNumber() {
+        return "";
     }
 
     @Override
