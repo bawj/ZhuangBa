@@ -152,7 +152,7 @@ public class BaseOrderDetailFragment<T extends IOrderDetailModule> extends BaseF
      * 详细信息
      */
     public OngoingOrdersList ongoingOrdersList;
-
+    public List<OrderServiceItem> orderServiceItems = new ArrayList<>();
     @Override
     protected T initModule() {
         return (T) new OrderDetailModule();
@@ -281,6 +281,7 @@ public class BaseOrderDetailFragment<T extends IOrderDetailModule> extends BaseF
 
     public void orderServiceItemsSuccess(List<OrderServiceItem> orderServiceItems) {
         if (ongoingOrdersList != null) {
+            this.orderServiceItems = orderServiceItems;
             OrderServiceItem orderServiceItem = new OrderServiceItem();
             orderServiceItem.setServiceText(getString(R.string.required_options));
             orderServiceItem.setSlottingStartLength(ongoingOrdersList.getSlottingStartLength());

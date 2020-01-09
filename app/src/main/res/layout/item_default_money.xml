@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/white"
+    android:paddingStart="@dimen/tool_lib_16dp"
+    android:paddingTop="@dimen/tool_lib_14dp"
+    android:paddingEnd="@dimen/tool_lib_16dp"
+    android:paddingBottom="@dimen/tool_lib_14dp">
+
+    <TextView
+        android:id="@+id/tvLiquidatedDamages"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/liquidated_damages_to_be_paid"
+        android:textColor="@color/tool_lib_gray_999999"
+        android:textSize="@dimen/tool_lib_16sp" />
+
+    <TextView
+        android:id="@+id/tvPaidUp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/tvLiquidatedDamages"
+        android:layout_alignBottom="@+id/tvLiquidatedDamages"
+        android:layout_marginStart="@dimen/tool_lib_6dp"
+        android:layout_toEndOf="@+id/tvLiquidatedDamages"
+        android:background="@drawable/bg_gray"
+        android:gravity="center"
+        android:paddingStart="@dimen/tool_lib_6dp"
+        android:paddingTop="@dimen/tool_lib_3dp"
+        android:paddingEnd="@dimen/tool_lib_6dp"
+        android:paddingBottom="@dimen/tool_lib_3dp"
+        android:text="@string/paid_up"
+        android:textColor="@color/tool_lib_gray_B1B1B1"
+        android:textSize="@dimen/tool_lib_12sp" />
+
+    <TextView
+        android:id="@+id/tvDefaultMoney"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/tvLiquidatedDamages"
+        android:layout_alignBottom="@+id/tvLiquidatedDamages"
+        android:layout_alignParentEnd="true"
+        android:textColor="@color/tool_lib_gray_999999"
+        android:textSize="@dimen/tool_lib_14sp"
+        tools:text="￥3000.00" />
+
+    <TextView
+        android:id="@+id/tvDefaultDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvPaidUp"
+        android:layout_marginTop="@dimen/tool_lib_6dp"
+        android:textColor="@color/tool_lib_gray_B1B1B1"
+        android:textSize="@dimen/tool_lib_12sp"
+        tools:text="2019/05/17  17:02:01" />
+
+    <View
+        android:id="@+id/viewHorizontalLine"
+        style="@style/tool_lib_horizontal_line"
+        android:layout_below="@+id/tvDefaultDate"
+        android:layout_marginTop="@dimen/tool_lib_9dp" />
+
+    <TextView
+        android:id="@+id/tvReasonsBreachContract"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/viewHorizontalLine"
+        android:textColor="@color/tool_lib_gray_999999"
+        android:textSize="@dimen/tool_lib_14sp"
+        tools:text="违约理由：
+一天睿推荐分毫不差那你吃，哈哈放假好好党纪国法，黄飞鸿价格和成本 v，换个风格的 v 成本，很多功夫剧诶红腹锦鸡想你吃不饱 v 你妈妈 v 。" />
+
+</RelativeLayout>

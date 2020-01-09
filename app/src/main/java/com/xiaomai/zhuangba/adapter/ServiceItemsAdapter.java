@@ -43,7 +43,6 @@ public class ServiceItemsAdapter extends BaseQuickAdapter<OrderServiceItem, Base
         }
 
         GlideManager.loadImage(mContext, orderServiceItem.getIconUrl(), ivItemServiceLogo , R.drawable.ic_required_options);
-
         tvItemServiceName.setText(orderServiceItem.getServiceText());
 
         //项目总金额

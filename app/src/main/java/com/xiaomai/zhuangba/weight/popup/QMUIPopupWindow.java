@@ -52,13 +52,13 @@ public class QMUIPopupWindow implements View.OnClickListener {
                 break;
             case R.id.tvDeletionItem:
                 if (iqmuiPopupCallBack != null){
-                    iqmuiPopupCallBack.addProject();
+                    iqmuiPopupCallBack.deletionItem();
                 }
                 dismiss();
                 break;
             case R.id.tvCustom:
                 if (iqmuiPopupCallBack != null){
-                    iqmuiPopupCallBack.addProject();
+                    iqmuiPopupCallBack.custom();
                 }
                 dismiss();
                 break;

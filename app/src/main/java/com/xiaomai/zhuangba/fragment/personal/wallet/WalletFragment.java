@@ -66,6 +66,8 @@ public class WalletFragment extends BaseFragment implements OnRefreshListener {
     TextView tvWasWithdraw;
     @BindView(R.id.tvFrozenAmount)
     TextView tvFrozenAmount;
+    @BindView(R.id.tvDefaultMoney)
+    TextView tvDefaultMoney;
 
     private WalletBean walletBeans;
 
@@ -129,6 +131,8 @@ public class WalletFragment extends BaseFragment implements OnRefreshListener {
                         //收入 = 已提现 + 可提现
                         tvIncome.setText(getString(R.string.content_money,
                                 String.valueOf(AmountUtil.add(walletBean.getCashAlreadyAvailable(), walletBean.getWithDrawableCash(), 2))));
+                        //违约金
+                        tvDefaultMoney.setText(String.valueOf(walletBean.getDamages()));
                         //已提现
                         tvWasWithdraw.setText(getString(R.string.content_money, Util.getZero(walletBean.getCashAlreadyAvailable())));
                         //冻结金额
@@ -147,7 +151,7 @@ public class WalletFragment extends BaseFragment implements OnRefreshListener {
     }
 
     @OnClick({R.id.btnWithdraw, R.id.tvAccountManager, R.id.tvAccountSafe, R.id.rlEarNest
-            , R.id.rlIncome, R.id.rlAlreadyWithdraw , R.id.relWalletFrozenAmount})
+            , R.id.rlIncome, R.id.rlAlreadyWithdraw , R.id.relWalletFrozenAmount,R.id.rlDefaultMoney})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btnWithdraw:
@@ -179,6 +183,10 @@ public class WalletFragment extends BaseFragment implements OnRefreshListener {
             case R.id.relWalletFrozenAmount:
                 // 冻结金额
                 startFragment(MasterPersonalFrozenAmount.newInstance());
+                break;
+            case R.id.rlDefaultMoney:
+                //违约金
+                startFragment(DefaultMoneyFragment.newInstance());
                 break;
             default:
         }

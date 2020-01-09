@@ -14,6 +14,8 @@ public class WalletBean {
     private String presentationPassword;
     private double withDrawableCash;
     private double freezeMoney;
+    /** 违约金 */
+    private double damages;
 
     public double getFreezeMoney() {
         return freezeMoney;
@@ -63,4 +65,11 @@ public class WalletBean {
         this.withDrawableCash = withDrawableCash;
     }
 
+    public double getDamages() {
+        return damages;
+    }
+
+    public void setDamages(double damages) {
+        this.damages = damages;
+    }
 }

@@ -16,6 +16,7 @@ import com.example.toollib.http.observer.BaseHttpRxObserver;
 import com.example.toollib.http.util.RxUtils;
 import com.example.toollib.manager.GlideManager;
 import com.example.toollib.util.Log;
+import com.example.toollib.util.ToastUtil;
 import com.google.gson.Gson;
 import com.qmuiteam.qmui.util.QMUIViewHelper;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
@@ -31,6 +32,7 @@ import com.xiaomai.zhuangba.http.ServiceUrl;
 import com.xiaomai.zhuangba.util.ConstantUtil;
 import com.xiaomai.zhuangba.util.Util;
 import com.xiaomai.zhuangba.weight.GridSpacingItemDecoration;
+import com.xiaomai.zhuangba.weight.dialog.CustomDialog;
 import com.xiaomai.zhuangba.weight.popup.QMUIPopupWindow;
 
 import java.util.ArrayList;
@@ -94,17 +96,40 @@ public class BeUnderConstructionFragment extends BaseMasterOrderDetailFragment {
 
                     @Override
                     public void deletionItem() {
-
+                        deletionItemProject();
                     }
 
                     @Override
                     public void custom() {
-
+                        customProject();
                     }
                 });
                 qmuiPopupWindow.initPopup(getActivity()).show(button);
             }
         });
+    }
+
+    private void customProject() {
+        CustomDialog.getInstance().initView(getActivity()).setCustomDialogCallBack(new CustomDialog.ICustomDialogCallBack() {
+            @Override
+            public void ok(String supplementaryAmount, String cancellation) {
+                RxUtils.getObservable(ServiceUrl.getUserApi().initiateCustomizeItem(getOrderCode(),supplementaryAmount , cancellation))
+                        .compose(BeUnderConstructionFragment.this.<HttpResult<Object>>bindToLifecycle())
+                        .subscribe(new BaseHttpRxObserver<Object>(getActivity()) {
+                            @Override
+                            protected void onSuccess(Object response) {
+                                ToastUtil.showShort(getString(R.string.commit_success));
+                                refreshBaseList.autoRefresh();
+                            }
+                        });
+            }
+        }).showDialog();
+    }
+
+    private void deletionItemProject() {
+        //删减项目
+        startFragmentForResult(DeletionItemFragment.newInstance(new Gson().toJson(ongoingOrdersList), new Gson().toJson(orderServiceItems))
+                ,ForResultCode.START_FOR_RESULT_CODE.getCode());
     }
 
     private void addProjectRequest() {
@@ -117,7 +142,7 @@ public class BeUnderConstructionFragment extends BaseMasterOrderDetailFragment {
                             int serviceId = serviceDataList.get(0).getServiceId();
                             String orderAddressGson = new Gson().toJson(orderAddress);
                             startFragmentForResult(AddProjectInstallationList.newInstance(String.valueOf(serviceId),
-                                    "", orderAddressGson , getOrderCode(),ongoingOrdersList.getPublisher())
+                                    "", orderAddressGson, getOrderCode(), ongoingOrdersList.getPublisher())
                                     , ForResultCode.START_FOR_RESULT_CODE.getCode());
                         }
                     }
@@ -128,9 +153,9 @@ public class BeUnderConstructionFragment extends BaseMasterOrderDetailFragment {
     public void ongoingOrdersListSuccess(OngoingOrdersList ongoingOrdersList) {
         super.ongoingOrdersListSuccess(ongoingOrdersList);
         String address = ongoingOrdersList.getAddress();
-        if (!TextUtils.isEmpty(address) && address.contains("/")){
+        if (!TextUtils.isEmpty(address) && address.contains("/")) {
             String city[] = address.split("/");
-            if (city.length > 1){
+            if (city.length > 1) {
                 orderAddress.setProvince(city[0]);
                 orderAddress.setCity(city[1]);
             }

@@ -7,6 +7,7 @@ import android.text.TextUtils;
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Generated;
 import org.greenrobot.greendao.annotation.Id;
+import org.greenrobot.greendao.annotation.Transient;
 
 /**
  * @author Administrator
@@ -55,6 +56,12 @@ public class OrderServiceItem{
 
     /** 维保选中ID */
     private int maintenanceId;
+
+    /**
+     * 是否选中
+     */
+    @Transient
+    private boolean isCheck;
 
     public OrderServiceItem() {
     }
@@ -250,5 +257,13 @@ public class OrderServiceItem{
 
     public void setMaterialsEndLength(String materialsEndLength) {
         this.materialsEndLength = materialsEndLength;
+    }
+
+    public boolean isCheck() {
+        return isCheck;
+    }
+
+    public void setCheck(boolean check) {
+        isCheck = check;
     }
 }

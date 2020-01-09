@@ -11,6 +11,7 @@ import com.xiaomai.zhuangba.data.bean.AdvertisingReplacementDetailBean;
 import com.xiaomai.zhuangba.data.bean.AliPayAccountBean;
 import com.xiaomai.zhuangba.data.bean.BusinessNeeds;
 import com.xiaomai.zhuangba.data.bean.Cause;
+import com.xiaomai.zhuangba.data.bean.Claim;
 import com.xiaomai.zhuangba.data.bean.CreateTeamBean;
 import com.xiaomai.zhuangba.data.bean.DataDetailsContent;
 import com.xiaomai.zhuangba.data.bean.DeliveryContent;
@@ -208,6 +209,7 @@ public interface IApi {
 
     /**
      * 维保单
+     *
      * @param pageNum  页码
      * @param pageSize 一页显示多少条
      * @return Observable
@@ -281,16 +283,16 @@ public interface IApi {
     /**
      * 根据大类ID查询小类，根据服务小类查询服务项目
      *
-     * @param serviceId 服务大类ID
-     * @param province  省
-     * @param city 市
+     * @param serviceId   服务大类ID
+     * @param province    省
+     * @param city        市
      * @param phoneNumber 雇主手机号 雇主端可以不传
      * @return observable
      */
     @GET("userRole/getServiceSubcategory/{serviceId}")
-    Observable<HttpResult<List<ServiceSubcategory>>> getServiceSubcategory(@Path("serviceId") String serviceId ,
-                                                                           @Query("province") String province, @Query("city")String city,
-                                                                           @Query("phoneNumber")String phoneNumber);
+    Observable<HttpResult<List<ServiceSubcategory>>> getServiceSubcategory(@Path("serviceId") String serviceId,
+                                                                           @Query("province") String province, @Query("city") String city,
+                                                                           @Query("phoneNumber") String phoneNumber);
 
 
     /**
@@ -477,6 +479,7 @@ public interface IApi {
 
     /**
      * 查询用户
+     *
      * @return observable
      */
     @GET("user/getUser")
@@ -663,12 +666,12 @@ public interface IApi {
      *
      * @param serviceId 小类服务ID
      * @param province  省
-     * @param city  市
+     * @param city      市
      * @return observable
      */
     @FormUrlEncoded
     @POST("maintenance/getMaintenance")
-    Observable<HttpResult<List<Maintenance>>> getMaintenance(@Field("serviceId") String serviceId,@Field("province") String province,@Field("city") String city);
+    Observable<HttpResult<List<Maintenance>>> getMaintenance(@Field("serviceId") String serviceId, @Field("province") String province, @Field("city") String city);
 
 
     /**
@@ -925,6 +928,7 @@ public interface IApi {
 
     /**
      * 广告单 列表
+     *
      * @param requestBody body
      * @return observable
      */
@@ -1010,7 +1014,7 @@ public interface IApi {
      *
      * @param pageNum  页
      * @param pageSize 显示多少条
-     * @param addr 子订单编号
+     * @param addr     子订单编号
      * @param current  巡查任务传：current ，记录传0
      * @return observable
      */
@@ -1032,7 +1036,6 @@ public interface IApi {
     Observable<HttpResult<PatrolInspectionRecordsDetailImgBean>> selectByTaskId(@Field("id") String id);
 
 
-
     /**
      * 师傅巡查任务 列表
      *
@@ -1044,6 +1047,7 @@ public interface IApi {
 
     /**
      * 查询 是否加入了团队
+     *
      * @return observable
      */
     @POST("teamwork/selectByTeam")
@@ -1051,6 +1055,7 @@ public interface IApi {
 
     /**
      * 查询 是否加入了团队
+     *
      * @return observable
      */
     @POST("user/getLevel")
@@ -1058,6 +1063,7 @@ public interface IApi {
 
     /**
      * 创建团队
+     *
      * @param nameTeam 团队名称
      * @return observable
      */
@@ -1067,6 +1073,7 @@ public interface IApi {
 
     /**
      * 查询团队成员
+     *
      * @param type 1:团长；2:团员
      * @return observable
      */
@@ -1076,6 +1083,7 @@ public interface IApi {
 
     /**
      * 解散团队
+     *
      * @param type 1:团长；2:团员
      * @return observable
      */
@@ -1085,6 +1093,7 @@ public interface IApi {
 
     /**
      * 加入团队
+     *
      * @param phone 团长手机号
      * @return observable
      */
@@ -1094,6 +1103,7 @@ public interface IApi {
 
     /**
      * 退出团队
+     *
      * @param phone 团长手机号
      * @return observable
      */
@@ -1103,6 +1113,7 @@ public interface IApi {
 
     /**
      * 邀请团员
+     *
      * @param member 团员手机号
      * @return observable
      */
@@ -1113,6 +1124,7 @@ public interface IApi {
 
     /**
      * 删除团队成员
+     *
      * @param phone 团员手机号
      * @return observable
      */
@@ -1122,27 +1134,29 @@ public interface IApi {
 
     /**
      * 安装单
+     *
      * @param staffNumber 团员手机号
-     * @param pageNum  页
-     * @param pageSize 显示多少条
+     * @param pageNum     页
+     * @param pageSize    显示多少条
      * @return observable
      */
     @GET("order/getOrderListByStaff")
     Observable<HttpResult<RefreshBaseList<OngoingOrdersList>>> getOrderListByStaff(@Query("staffNumber") String staffNumber,
-                                                       @Query("pageNum") String pageNum,
-                                                       @Query("pageSize") String pageSize);
+                                                                                   @Query("pageNum") String pageNum,
+                                                                                   @Query("pageSize") String pageSize);
 
     /**
      * 广告单
+     *
      * @param staffNumber 团员手机号
-     * @param pageNum  页
-     * @param pageSize 显示多少条
+     * @param pageNum     页
+     * @param pageSize    显示多少条
      * @return observable
      */
     @GET("order/getAdvertisingOrderByStaff")
     Observable<HttpResult<RefreshBaseList<AdvertisingBillsBean>>> getAdvertisingOrderByStaff(@Query("staffNumber") String staffNumber,
-                                                       @Query("pageNum") String pageNum,
-                                                       @Query("pageSize") String pageSize);
+                                                                                             @Query("pageNum") String pageNum,
+                                                                                             @Query("pageSize") String pageSize);
 
 
     /**
@@ -1176,6 +1190,7 @@ public interface IApi {
 
     /**
      * 冻结金额
+     *
      * @param phoneNumber 手机号
      * @return observable
      */
@@ -1185,36 +1200,40 @@ public interface IApi {
 
     /**
      * 系统通知列表
+     *
      * @param userNumber 师傅手机号
      * @param isAgree    3:拒绝:拒绝加入时将删除状态改为y;4同意;  不传 返回通知列表
      * @return observable
      */
     @FormUrlEncoded
     @POST("user/selectTeamUserByPhone")
-    Observable<HttpResult<List<TeamMessageBean>>> selectTeamUserByPhone(@Field("userNumber") String userNumber , @Field("isAgree") String isAgree);
+    Observable<HttpResult<List<TeamMessageBean>>> selectTeamUserByPhone(@Field("userNumber") String userNumber, @Field("isAgree") String isAgree);
 
     /**
      * 是否同意师傅加入团队
-     * @param id id
-     * @param isAgree    3:拒绝:拒绝加入时将删除状态改为y;4同意;  不传 返回通知列表
+     *
+     * @param id      id
+     * @param isAgree 3:拒绝:拒绝加入时将删除状态改为y;4同意;  不传 返回通知列表
      * @return observable
      */
     @FormUrlEncoded
     @POST("user/updateTeam")
-    Observable<HttpResult<Object>> updateTeam(@Field("id") String id , @Field("isAgree") String isAgree);
+    Observable<HttpResult<Object>> updateTeam(@Field("id") String id, @Field("isAgree") String isAgree);
 
     /**
      * 清空消息
+     *
      * @param userNumber 师傅手机号
      * @param isAgree    5 清空
      * @return observable
      */
     @FormUrlEncoded
     @POST("user/updateAll")
-    Observable<HttpResult<Object>> updateAll(@Field("userNumber") String userNumber , @Field("isAgree") String isAgree);
+    Observable<HttpResult<Object>> updateAll(@Field("userNumber") String userNumber, @Field("isAgree") String isAgree);
 
     /**
      * 师傅巡查任务接受订单
+     *
      * @param orderCode 订单编号
      * @return observable
      */
@@ -1224,6 +1243,7 @@ public interface IApi {
 
     /**
      * 师傅巡查任务取消订单
+     *
      * @param orderCode 订单编号
      * @return observable
      */
@@ -1233,6 +1253,7 @@ public interface IApi {
 
     /**
      * 师傅取消广告维保单
+     *
      * @param orderCode 订单编号
      * @return observable
      */
@@ -1241,6 +1262,7 @@ public interface IApi {
 
     /**
      * 师傅接受广告维保单
+     *
      * @param orderCode 订单编号
      * @return observable
      */
@@ -1250,6 +1272,7 @@ public interface IApi {
 
     /**
      * 雇主巡查任务取消订单
+     *
      * @param orderCode 订单编号
      * @return observable
      */
@@ -1258,6 +1281,7 @@ public interface IApi {
 
     /**
      * 团队 删除 广告单
+     *
      * @param requestBody body
      * @return observable
      */
@@ -1267,6 +1291,7 @@ public interface IApi {
 
     /**
      * 查询该用户是否有月结单选项
+     *
      * @return observable
      */
     @GET("user/getUserMonthly")
@@ -1274,16 +1299,18 @@ public interface IApi {
 
     /**
      * 师傅维保订单详情
+     *
      * @param orderCode 订单编号
      * @param orderType 订单类型：1;安装单 2；广告单
      * @return observable
      */
     @FormUrlEncoded
     @POST("order/getMasterMaintenanceOrderDetails")
-    Observable<HttpResult<GuaranteeDeatil>> getMasterMaintenanceOrderDetails(@Field("orderCode") String orderCode , @Field("orderType") String orderType);
+    Observable<HttpResult<GuaranteeDeatil>> getMasterMaintenanceOrderDetails(@Field("orderCode") String orderCode, @Field("orderType") String orderType);
 
     /**
      * 师傅维保订单详情
+     *
      * @param requestBody body
      * @return observable
      */
@@ -1293,6 +1320,7 @@ public interface IApi {
 
     /**
      * 小区分布
+     *
      * @return observable
      */
     @POST("adOrder/getMasterHandleAdvertisingOrderLatAndLon")
@@ -1300,6 +1328,7 @@ public interface IApi {
 
     /**
      * 设配分布
+     *
      * @return observable
      */
     @POST("adOrder/getMasterHandleAdEquipmentDistributionPoint")
@@ -1308,6 +1337,7 @@ public interface IApi {
 
     /**
      * 设配列表
+     *
      * @return observable
      */
     @POST("adOrder/getMasterHandleAdvertisingOrderListByEquipment")
@@ -1316,6 +1346,7 @@ public interface IApi {
 
     /**
      * 根据订单编号集合查询订单的详细信息
+     *
      * @return observable
      */
     @FormUrlEncoded
@@ -1324,6 +1355,7 @@ public interface IApi {
 
     /**
      * 根据订单编号集合进行接单
+     *
      * @return observable
      */
     @FormUrlEncoded
@@ -1333,6 +1365,7 @@ public interface IApi {
 
     /**
      * 根据订单编号取消广告订单
+     *
      * @return observable
      */
     @FormUrlEncoded
@@ -1341,6 +1374,7 @@ public interface IApi {
 
     /**
      * 广告订单查询上刊和下刊拍照样式和说明
+     *
      * @param serviceId serviceId
      * @return observable
      */
@@ -1349,6 +1383,7 @@ public interface IApi {
 
     /**
      * 师傅上传下刊图片
+     *
      * @return observable
      */
     @POST("adOrder/nextIssuePicture")
@@ -1356,6 +1391,7 @@ public interface IApi {
 
     /**
      * 师傅上传上刊图片
+     *
      * @return observable
      */
     @POST("adOrder/publishedPicture")
@@ -1363,6 +1399,7 @@ public interface IApi {
 
     /**
      * 查询验收不通过理由
+     *
      * @return observable
      */
     @GET("communal/getNotPassReasons")
@@ -1370,6 +1407,7 @@ public interface IApi {
 
     /**
      * 广告订单通过
+     *
      * @param orderCodes 订单编号集合
      * @return observable
      */
@@ -1379,9 +1417,9 @@ public interface IApi {
     /**
      * 广告单验收不通过
      *
-     * @param orderCodes        订单编号
-     * @param causes 选择的不通过理由，多个用逗号隔开
-     * @param employerDescribe  验收不通过说明
+     * @param orderCodes       订单编号
+     * @param causes           选择的不通过理由，多个用逗号隔开
+     * @param employerDescribe 验收不通过说明
      * @return observable
      */
     @GET("adOrder/notPassedAdOrder")
@@ -1401,19 +1439,21 @@ public interface IApi {
 
     /**
      * 雇主查询空跑列表
+     *
      * @param pageIndex 页码
-     * @param pageSize 每页显示
+     * @param pageSize  每页显示
      * @return observable
      */
     @FormUrlEncoded
     @POST("installOrder/selectAirRun")
     Observable<HttpResult<RefreshBaseList<DryRunOrder>>> selectAirRun(@Field("pageIndex") String pageIndex,
-                                                           @Field("pageSize") String pageSize);
+                                                                      @Field("pageSize") String pageSize);
 
     /**
      * 雇主不通过申请
+     *
      * @param cause 理由
-     * @param id 主键
+     * @param id    主键
      * @return observable
      */
     @FormUrlEncoded
@@ -1422,19 +1462,21 @@ public interface IApi {
 
     /**
      * 雇主通过申请
-     * @param cause 理由
-     * @param id 主键
+     *
+     * @param cause    理由
+     * @param id       主键
      * @param payType  支付类型
      * @param password 支付密码
      * @return observable
      */
     @FormUrlEncoded
     @POST("installOrder/adoptAirRun")
-    Observable<HttpResult<PayData>> adoptAirRun(@Field("cause") String cause, @Field("id") String id ,
-                                               @Field("payType") String payType , @Field("password") String password);
+    Observable<HttpResult<PayData>> adoptAirRun(@Field("cause") String cause, @Field("id") String id,
+                                                @Field("payType") String payType, @Field("password") String password);
 
     /**
      * 查询企业需求
+     *
      * @return Observable
      */
     @GET("businessNeeds/getBusinessNeeds")
@@ -1442,6 +1484,7 @@ public interface IApi {
 
     /**
      * 发起索赔
+     *
      * @return observable
      */
     @POST("order/initiateClaim")
@@ -1449,11 +1492,42 @@ public interface IApi {
 
     /**
      * 师傅申请增加项目
+     *
      * @return observable
      */
     @POST("installOrder/initiateAddItem")
     Observable<HttpResult<Object>> initiateAddItem(@Body RequestBody requestBody);
 
+    /**
+     * 师傅申请删减项目
+     *
+     * @return observable
+     */
+    @POST("installOrder/initiateCutItem")
+    Observable<HttpResult<Object>> initiateCutItem(@Body RequestBody requestBody);
+
+    /**
+     * 师傅申请删减项目
+     *
+     * @param orderCode   订单编号
+     * @param amount 金额
+     * @param description 备注
+     * @return observable
+     */
+    @FormUrlEncoded
+    @POST("installOrder/initiateCustomizeItem")
+    Observable<HttpResult<Object>> initiateCustomizeItem(@Field("orderCode") String orderCode,
+                                                         @Field("amount") String amount, @Field("description") String description);
+
+    /**
+     * 查询缴纳的违约金
+     *
+     * @param pageNum  页
+     * @param pageSize 每页显示
+     * @return observable
+     */
+    @GET("wallet/getLiquidatedDamages")
+    Observable<HttpResult<RefreshBaseList<Claim>>> getLiquidatedDamages(@Query("pageNum") String pageNum, @Query("pageSize") String pageSize);
 
 
 }

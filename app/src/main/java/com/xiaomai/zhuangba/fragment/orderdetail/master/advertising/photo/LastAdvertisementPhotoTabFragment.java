@@ -99,7 +99,7 @@ public class LastAdvertisementPhotoTabFragment extends BaseAdvertisementPhotoTab
                 protected void onSuccess(Object response) {
                     //跳转到待开工
                     ToastUtil.showShort(response.toString());
-                    startFragmentAndDestroyCurrent(AdvertisementPhotoSuccessFragment.newInstance(getOrderCodes()));
+                    //startFragmentAndDestroyCurrent(AdvertisementPhotoSuccessFragment.newInstance(getOrderCodes()));
                 }
             });
         }
