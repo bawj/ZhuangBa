@@ -100,7 +100,6 @@ public class NextAdvertisementPhotoTabFragment extends BaseAdvertisementPhotoTab
         }).subscribe(new BaseHttpRxObserver<Object>(getActivity()) {
             @Override
             protected void onSuccess(Object response) {
-                //跳转到待开工
                 ToastUtil.showShort(response.toString());
                 //startFragmentAndDestroyCurrent(AdvertisementPhotoSuccessFragment.newInstance(getOrderCodes()));
             }
