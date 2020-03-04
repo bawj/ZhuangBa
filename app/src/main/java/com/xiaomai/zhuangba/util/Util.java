@@ -37,6 +37,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -361,6 +362,19 @@ public class Util {
             title = new String[]{noodles};
         }
         return title;
+    }
+
+    public static List<String> getUrl(String noodles){
+        if (TextUtils.isEmpty(noodles)){
+            return new ArrayList<>();
+        }
+        String[] title = null;
+        if (noodles.contains(",")){
+            title = noodles.split(",");
+        }else if (!TextUtils.isEmpty(noodles)){
+            title = new String[]{noodles};
+        }
+        return Arrays.asList(title);
     }
 
     public static String getAddress(String address) {

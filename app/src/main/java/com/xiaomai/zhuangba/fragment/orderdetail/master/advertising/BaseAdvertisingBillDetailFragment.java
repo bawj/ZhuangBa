@@ -4,14 +4,18 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.toollib.base.BaseFragment;
 import com.example.toollib.data.IBaseModule;
+import com.example.toollib.fragment.ImgPreviewFragment;
 import com.example.toollib.http.HttpResult;
 import com.example.toollib.http.exception.ApiException;
 import com.example.toollib.http.observer.BaseHttpRxObserver;
@@ -22,12 +26,21 @@ import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.xiaomai.zhuangba.R;
 import com.xiaomai.zhuangba.adapter.BaseViewPagerAdapter;
+import com.xiaomai.zhuangba.adapter.NearbyPhotoAdapter;
+import com.xiaomai.zhuangba.adapter.NextLastIssuePhotoAdapter;
 import com.xiaomai.zhuangba.adapter.TabIncomeNavigator;
 import com.xiaomai.zhuangba.data.bean.AdOrderInformation;
 import com.xiaomai.zhuangba.data.bean.DeviceSurfaceInformation;
+import com.xiaomai.zhuangba.data.bean.ServiceSampleEntity;
+import com.xiaomai.zhuangba.data.bean.UserInfo;
+import com.xiaomai.zhuangba.data.db.DBHelper;
+import com.xiaomai.zhuangba.enums.StaticExplain;
+import com.xiaomai.zhuangba.fragment.orderdetail.master.EquipmentSurfaceRulesFragment;
 import com.xiaomai.zhuangba.http.ServiceUrl;
 import com.xiaomai.zhuangba.util.AdvertisingStatusUtil;
 import com.xiaomai.zhuangba.util.MapUtils;
+import com.xiaomai.zhuangba.util.Util;
+import com.xiaomai.zhuangba.weight.GridSpacingItemDecoration;
 
 import net.lucode.hackware.magicindicator.MagicIndicator;
 import net.lucode.hackware.magicindicator.ViewPagerHelper;
@@ -72,7 +85,10 @@ public class BaseAdvertisingBillDetailFragment extends BaseFragment implements O
     MagicIndicator magicIndicator;
     @BindView(R.id.refreshBaseList)
     SmartRefreshLayout refreshBaseList;
+    @BindView(R.id.recyclerNearbyPhoto)
+    RecyclerView recyclerNearbyPhoto;
 
+    private AdOrderInformation adOrderInformationList;
     public static BaseAdvertisingBillDetailFragment newInstance(String orderCodes) {
         Bundle args = new Bundle();
         args.putString(ORDER_CODES, orderCodes);
@@ -85,6 +101,8 @@ public class BaseAdvertisingBillDetailFragment extends BaseFragment implements O
     public void initView() {
         layOrderInfo.setVisibility(View.GONE);
         refreshBaseList.setOnRefreshListener(this);
+        recyclerNearbyPhoto.setLayoutManager(new GridLayoutManager(getActivity() , 3));
+        recyclerNearbyPhoto.addItemDecoration(new GridSpacingItemDecoration(3, 32, false));
         //默认刷新
         refreshBaseList.autoRefresh();
     }
@@ -100,6 +118,7 @@ public class BaseAdvertisingBillDetailFragment extends BaseFragment implements O
                         setViewData(adOrderInformationList);
                         refreshBaseList.finishRefresh();
                     }
+
                     @Override
                     public void onError(ApiException apiException) {
                         super.onError(apiException);
@@ -109,9 +128,11 @@ public class BaseAdvertisingBillDetailFragment extends BaseFragment implements O
     }
 
     public void setViewData(AdOrderInformation adOrderInformationList) {
+        this.adOrderInformationList = adOrderInformationList;
         layOrderInfo.setVisibility(View.VISIBLE);
+        setNearbyPhoto(adOrderInformationList);
         //订单状态
-        AdvertisingStatusUtil.masterStatus(getContext() ,adOrderInformationList.getOrderStatus(), tvBaseOrderDetailItemOrdersType);
+        AdvertisingStatusUtil.masterStatus(getContext(), adOrderInformationList.getOrderStatus(), tvBaseOrderDetailItemOrdersType);
         //设备编号 标题
         tvBaseOrderDetailItemOrdersTitle.setText(adOrderInformationList.getEquipmentNum());
         tvBaseEquipmentNumber.setText(adOrderInformationList.getEquipmentNum());
@@ -134,6 +155,23 @@ public class BaseAdvertisingBillDetailFragment extends BaseFragment implements O
         initTab(list);
     }
 
+    private void setNearbyPhoto(AdOrderInformation adOrderInformationList) {
+        String addressUrl = adOrderInformationList.getAddressUrl();
+        final List<String> urlList = Util.getUrl(addressUrl);
+        NearbyPhotoAdapter nearbyPhotoAdapter = new NearbyPhotoAdapter();
+        recyclerNearbyPhoto.setAdapter(nearbyPhotoAdapter);
+        nearbyPhotoAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                ArrayList<String> url = new ArrayList<>(urlList);
+                if (url != null) {
+                    startFragment(ImgPreviewFragment.newInstance(position, url));
+                }
+            }
+        });
+        nearbyPhotoAdapter.setNewData(urlList);
+    }
+
     private void initTab(List<DeviceSurfaceInformation> list) {
         //tab 标题
         String[] tabTitle = new String[list.size()];
@@ -143,7 +181,7 @@ public class BaseAdvertisingBillDetailFragment extends BaseFragment implements O
             DeviceSurfaceInformation deviceSurfaceInformation = list.get(i);
             String deviceSurfaceInformationString = new Gson().toJson(deviceSurfaceInformation);
             String deviceSurface = deviceSurfaceInformation.getDeviceSurface();
-            if (!TextUtils.isEmpty(deviceSurface)){
+            if (!TextUtils.isEmpty(deviceSurface)) {
                 tabTitle[i] = deviceSurface;
                 tabFragmentList.add(getAdvertisingBillDetailTab(deviceSurfaceInformationString));
             }
@@ -164,10 +202,22 @@ public class BaseAdvertisingBillDetailFragment extends BaseFragment implements O
         switch (view.getId()) {
             case R.id.tvBaseOrderDetailLocation:
                 //定位
-                String address = tvBaseOrderDetailLocation.getText().toString();
-                MapUtils.mapNavigation(getActivity(), address);
+                startMap();
                 break;
             default:
+        }
+    }
+
+    public void startMap() {
+        String address = tvBaseOrderDetailLocation.getText().toString();
+        UserInfo userInfo = DBHelper.getInstance().getUserInfoDao().queryBuilder().unique();
+        String role = userInfo.getRole();
+        if (role.equals(String.valueOf(StaticExplain.EMPLOYER.getCode()))) {
+            //雇主端
+            MapUtils.mapNavigation(getActivity(), address);
+        } else if (role.equals(String.valueOf(StaticExplain.FU_FU_SHI.getCode()))) {
+            //师傅端
+            MapUtils.mapMasterNavigation(getActivity(), address, adOrderInformationList.getEquipmentId());
         }
     }
 
@@ -179,6 +229,17 @@ public class BaseAdvertisingBillDetailFragment extends BaseFragment implements O
     @Override
     protected String getActivityTitle() {
         return getString(R.string.order_detail);
+    }
+
+    @Override
+    public String getRightTitle() {
+        return getString(R.string.equipment_surface_rules);
+    }
+
+    @Override
+    public void rightTitleClick(View v) {
+        //设备面规则
+        startFragment(EquipmentSurfaceRulesFragment.newInstance());
     }
 
     @Override

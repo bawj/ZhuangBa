@@ -19,6 +19,8 @@ import com.xiaomai.zhuangba.fragment.orderdetail.master.installation.CompleteFra
 import com.xiaomai.zhuangba.fragment.orderdetail.master.module.IMasterOrderDetailModule;
 import com.xiaomai.zhuangba.fragment.orderdetail.master.module.IMasterOrderDetailView;
 import com.xiaomai.zhuangba.fragment.orderdetail.master.module.MasterOrderDetailModule;
+import com.xiaomai.zhuangba.util.MapUtils;
+import com.xiaomai.zhuangba.util.Util;
 
 import butterknife.BindView;
 

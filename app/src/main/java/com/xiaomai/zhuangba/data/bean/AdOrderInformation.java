@@ -20,7 +20,9 @@ public class AdOrderInformation {
      * remark : null
      * list : [{"orderCode":"255868593706336256","equipmentNum":"fd345","deviceSurface":"234","oldAdName":"的","oldAdUrl":"|","newAdName":null,"newAdUrl":null,"orderDateList":[{"orderCode":"255868593706336256","time":"2019-12-03 11:01:02","typeText":"发布时间"},{"orderCode":"255868593706336256","time":"2019-12-03 11:03:09","typeText":"接单时间"},{"orderCode":"255868593706336256","time":"2019-12-03 15:48:38","typeText":"出发时间"},{"orderCode":"255868593706336256","time":"2019-12-03 15:48:55","typeText":"开始时间"},{"orderCode":"255868593706336256","time":"2019-12-03 15:51:50","typeText":"提交验证时间"}]}]
      */
-
+    private int equipmentId;
+    /** 图片地址 用 , 隔开 */
+    private String addressUrl;
     private String orderCodes;
     private String equipmentNum;
     private String address;
@@ -42,6 +44,22 @@ public class AdOrderInformation {
     /** 1：下刊 2：上刊  */
     private String operating;
     private List<DeviceSurfaceInformation> list;
+
+    public int getEquipmentId() {
+        return equipmentId;
+    }
+
+    public void setEquipmentId(int equipmentId) {
+        this.equipmentId = equipmentId;
+    }
+
+    public String getAddressUrl() {
+        return addressUrl == null ? "" : addressUrl;
+    }
+
+    public void setAddressUrl(String addressUrl) {
+        this.addressUrl = addressUrl;
+    }
 
     public String getOrderCodes() {
         return orderCodes == null ? "" : orderCodes;

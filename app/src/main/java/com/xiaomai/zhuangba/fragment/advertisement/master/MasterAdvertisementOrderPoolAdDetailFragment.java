@@ -34,6 +34,7 @@ public class MasterAdvertisementOrderPoolAdDetailFragment extends BaseAdvertisem
         return fragment;
     }
 
+    @Override
     @OnClick({R.id.relBaseOrderDetailLocation})
     public void onViewBaseClicked(View view) {
         switch (view.getId()) {

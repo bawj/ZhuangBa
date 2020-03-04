@@ -688,4 +688,8 @@
     <string name="default_money_tip">需缴纳违约金才能进行提现</string>
     <string name="paid_up">已缴清</string>
     <string name="reasons_for_breach_of_contract">违约理由：\n%1$s</string>
+    <string name="equipment_relocation">设备重定位</string>
+    <string name="nearby_pictures">上传附近图片</string>
+    <string name="please_upload_photos_of_point_devices">请上传点位设备的照片</string>
+    <string name="equipment_surface_rules">设备面规则</string>
 </resources>

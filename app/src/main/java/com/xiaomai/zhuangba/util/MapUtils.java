@@ -39,10 +39,12 @@ import com.example.toollib.data.base.BaseCallback;
 import com.example.toollib.http.util.DialogUtil;
 import com.example.toollib.util.AmountUtil;
 import com.example.toollib.util.ToastUtil;
+import com.qmuiteam.qmui.arch.QMUIFragmentActivity;
 import com.qmuiteam.qmui.widget.dialog.QMUIBottomSheet;
 import com.xiaomai.zhuangba.R;
 import com.xiaomai.zhuangba.data.bean.LocationSearch;
 import com.xiaomai.zhuangba.enums.StringTypeExplain;
+import com.xiaomai.zhuangba.fragment.orderdetail.master.EquipmentRelocationFragment;
 import com.zaaach.citypicker.db.DBManager;
 import com.zaaach.citypicker.model.City;
 import com.zaaach.citypicker.model.HotCity;
@@ -442,6 +444,41 @@ public class MapUtils {
                                 getLatitudeLongitude(mContext, address, position);
                                 break;
                             case 2:
+                                dialog.dismiss();
+                                break;
+                            default:
+                        }
+                        dialog.dismiss();
+                    }
+                }).build().show();
+    }
+
+    /**
+     * 地图导航 师傅端地图导航多一个设备重定位
+     * @param mContext context
+     * @param address 导航的地址
+     * @param equipmentId 设备ID
+     */
+    public static void mapMasterNavigation(final Context mContext, final String address , final int equipmentId) {
+        new QMUIBottomSheet.BottomListSheetBuilder(mContext)
+                .addItem(mContext.getString(R.string.using_bai_du_map_navigation))
+                .addItem(mContext.getString(R.string.navigation_using_golden_map))
+                .addItem(mContext.getString(R.string.equipment_relocation))
+                .addItem(mContext.getString(R.string.close))
+                .setOnSheetItemClickListener(new QMUIBottomSheet.BottomListSheetBuilder.OnSheetItemClickListener() {
+                    @Override
+                    public void onClick(QMUIBottomSheet dialog, View itemView, final int position, String tag) {
+                        switch (position) {
+                            case 0:
+                                getLatitudeLongitude(mContext, address, position);
+                                break;
+                            case 1:
+                                getLatitudeLongitude(mContext, address, position);
+                                break;
+                            case 2:
+                                ((QMUIFragmentActivity)mContext).startFragment(EquipmentRelocationFragment.newInstance(equipmentId));
+                                break;
+                            case 3:
                                 dialog.dismiss();
                                 break;
                             default:

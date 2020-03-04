@@ -49,7 +49,7 @@ import butterknife.OnClick;
  * @author Administrator
  * @date 2019/7/9 0009
  * <p>
- * base 订单详情
+ * base 安装单 订单详情
  */
 public class BaseOrderDetailFragment<T extends IOrderDetailModule> extends BaseFragment<T>
         implements OnRefreshListener, IOrderDetailView, BaseQuickAdapter.OnItemClickListener {

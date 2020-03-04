@@ -43,6 +43,7 @@ import io.reactivex.schedulers.Schedulers;
 /**
  * @author Administrator
  * @date 2019/11/7 0007
+ * 维保单详情 base
  */
 public class BaseGuaranteeDetailFragment extends BaseFragment implements OnRefreshListener {
 

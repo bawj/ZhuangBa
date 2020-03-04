@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:id="@+id/layBaseOrderDetailDivideIntoColumns"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_divide_into_columns_bg"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingTop="@dimen/tool_lib_7dp"
+        android:paddingBottom="@dimen/tool_lib_7dp">
+
+        <ImageView
+            android:layout_width="@dimen/tool_lib_12dp"
+            android:layout_height="@dimen/tool_lib_12dp"
+            android:layout_marginStart="@dimen/tool_lib_8dp"
+            android:layout_marginTop="@dimen/tool_lib_3dp"
+            android:layout_marginBottom="@dimen/tool_lib_3dp"
+            android:src="@drawable/ic_tip" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/tool_lib_6dp"
+            android:maxLength="30"
+            android:text="@string/please_upload_photos_of_point_devices"
+            android:textColor="@color/tool_lib_gray_C76900"
+            android:textSize="@dimen/tool_lib_12sp" />
+    </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerLocationUrl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/tool_lib_16dp"
+        android:layout_marginTop="@dimen/tool_lib_9dp"
+        android:layout_marginRight="@dimen/tool_lib_16dp" />
+
+    <RelativeLayout
+        android:id="@+id/relBaseOrderDetailLocation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/tool_lib_12dp"
+        android:paddingBottom="@dimen/tool_lib_12dp">
+
+        <ImageView
+            android:id="@+id/ivBaseOrderDetailLocation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/tool_lib_16dp"
+            android:background="@drawable/ic_location_order" />
+
+        <TextView
+            android:id="@+id/tvLocationAddress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/tool_lib_6dp"
+            android:layout_marginRight="@dimen/tool_lib_6dp"
+            android:layout_toStartOf="@+id/ivRight"
+            android:layout_toEndOf="@+id/ivBaseOrderDetailLocation"
+            android:textColor="@color/tool_lib_gray_222222"
+            android:textSize="@dimen/tool_lib_12sp"
+            tools:text="杭州市余杭区西溪北苑西区38幢3单元1502" />
+
+        <ImageView
+            android:id="@+id/ivRight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="@dimen/tool_lib_16dp"
+            android:src="@drawable/ic_right" />
+    </RelativeLayout>
+</LinearLayout>

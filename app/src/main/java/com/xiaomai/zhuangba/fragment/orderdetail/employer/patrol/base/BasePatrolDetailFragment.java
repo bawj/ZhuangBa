@@ -34,6 +34,7 @@ import butterknife.OnClick;
 /**
  * @author Administrator
  * @date 2019/10/7 0007
+ * 巡查单 base
  */
 public class BasePatrolDetailFragment<T extends IBasePatrolModule> extends BaseFragment<T>
         implements OnRefreshListener, IBasePatrolView{

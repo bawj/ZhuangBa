@@ -1530,4 +1530,20 @@ public interface IApi {
     Observable<HttpResult<RefreshBaseList<Claim>>> getLiquidatedDamages(@Query("pageNum") String pageNum, @Query("pageSize") String pageSize);
 
 
+    /**
+     * 师傅上传重定位的图片
+     *
+     * @param id 设备ID
+     * @param address 地址信息
+     * @param picturesUrl 地址图片
+     * @param equipmentLon 设备经度
+     * @param equipmentLat 设备纬度
+     * @return observable
+     */
+    @FormUrlEncoded
+    @POST("adOrder/relocation")
+    Observable<HttpResult<Object>> postRelocation(@Field("id") int id,@Field("address") String address,
+                                                  @Field("picturesUrl") String picturesUrl,
+                                                  @Field("equipmentLon") double equipmentLon ,@Field("equipmentLat") double equipmentLat);
+
 }
