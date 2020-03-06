@@ -63,6 +63,8 @@ public enum StaticExplain {
     REFUND(1002, "退款中"),
     EMPLOYER_NOT_CHECK(0 , "未选中"),
     EMPLOYER_IS_CHECK(1 , "已选中"),
+    POPUP_FLAG(0,"设备面规则 弹窗"),
+    NO_POPUP_FLAG(1,"设备面规则 不弹出"),
     ;
     /**
      * 状态

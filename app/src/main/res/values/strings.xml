@@ -692,4 +692,5 @@
     <string name="nearby_pictures">上传附近图片</string>
     <string name="please_upload_photos_of_point_devices">请上传点位设备的照片</string>
     <string name="equipment_surface_rules">设备面规则</string>
+    <string name="got_it">我知道了</string>
 </resources>

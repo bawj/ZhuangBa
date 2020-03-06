@@ -20,6 +20,7 @@ import com.example.toollib.http.HttpResult;
 import com.example.toollib.http.exception.ApiException;
 import com.example.toollib.http.observer.BaseHttpRxObserver;
 import com.example.toollib.http.util.RxUtils;
+import com.example.toollib.util.Log;
 import com.google.gson.Gson;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -29,6 +30,7 @@ import com.xiaomai.zhuangba.adapter.BaseViewPagerAdapter;
 import com.xiaomai.zhuangba.adapter.NearbyPhotoAdapter;
 import com.xiaomai.zhuangba.adapter.NextLastIssuePhotoAdapter;
 import com.xiaomai.zhuangba.adapter.TabIncomeNavigator;
+import com.xiaomai.zhuangba.data.EquipmentSurfaceRules;
 import com.xiaomai.zhuangba.data.bean.AdOrderInformation;
 import com.xiaomai.zhuangba.data.bean.DeviceSurfaceInformation;
 import com.xiaomai.zhuangba.data.bean.ServiceSampleEntity;
@@ -41,6 +43,7 @@ import com.xiaomai.zhuangba.util.AdvertisingStatusUtil;
 import com.xiaomai.zhuangba.util.MapUtils;
 import com.xiaomai.zhuangba.util.Util;
 import com.xiaomai.zhuangba.weight.GridSpacingItemDecoration;
+import com.xiaomai.zhuangba.weight.dialog.EquipmentSurfaceDialog;
 
 import net.lucode.hackware.magicindicator.MagicIndicator;
 import net.lucode.hackware.magicindicator.ViewPagerHelper;
@@ -51,6 +54,8 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import io.reactivex.Observable;
+import io.reactivex.schedulers.Schedulers;
 
 
 public class BaseAdvertisingBillDetailFragment extends BaseFragment implements OnRefreshListener {
@@ -153,6 +158,29 @@ public class BaseAdvertisingBillDetailFragment extends BaseFragment implements O
         //生成 ‘面’的tab 页
         List<DeviceSurfaceInformation> list = adOrderInformationList.getList();
         initTab(list);
+
+        //查询设备面规则
+        queryEquipmentSurfaceRules(adOrderInformationList);
+    }
+
+    private void queryEquipmentSurfaceRules(final AdOrderInformation adOrderInformationList) {
+        //获取设备规则
+        Integer serviceId = adOrderInformationList.getServiceId();
+        RxUtils.getObservableZip(ServiceUrl.getUserApi().getDeviceSurfaceRules(String.valueOf(serviceId) , 0))
+                .compose(this.<HttpResult<EquipmentSurfaceRules>>bindToLifecycle())
+                .subscribe(new BaseHttpRxObserver<EquipmentSurfaceRules>(getActivity()) {
+                    @Override
+                    protected void onSuccess(EquipmentSurfaceRules equipmentSurfaceRules) {
+                        //opupFlag 是否是弹框0：否；1：是
+                        int popupFlag = equipmentSurfaceRules.getPopupFlag();
+                        if (popupFlag == StaticExplain.POPUP_FLAG.getCode()){
+                            new EquipmentSurfaceDialog<BaseAdvertisingBillDetailFragment>()
+                                    .setContext(getActivity(), BaseAdvertisingBillDetailFragment.this , String.valueOf(adOrderInformationList.getServiceId()))
+                                    .initView(equipmentSurfaceRules)
+                                    .show();
+                        }
+                    }
+                });
     }
 
     private void setNearbyPhoto(AdOrderInformation adOrderInformationList) {
@@ -239,7 +267,7 @@ public class BaseAdvertisingBillDetailFragment extends BaseFragment implements O
     @Override
     public void rightTitleClick(View v) {
         //设备面规则
-        startFragment(EquipmentSurfaceRulesFragment.newInstance());
+        startFragment(EquipmentSurfaceRulesFragment.newInstance(String.valueOf(adOrderInformationList.getServiceId())));
     }
 
     @Override

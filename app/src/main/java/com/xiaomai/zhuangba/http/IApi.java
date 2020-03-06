@@ -3,6 +3,7 @@ package com.xiaomai.zhuangba.http;
 import com.example.toollib.http.HttpResult;
 import com.xiaomai.zhuangba.data.AdvertisingBillsBean;
 import com.xiaomai.zhuangba.data.DryRunOrder;
+import com.xiaomai.zhuangba.data.EquipmentSurfaceRules;
 import com.xiaomai.zhuangba.data.OuterLayerMaintenanceOverman;
 import com.xiaomai.zhuangba.data.Patrol;
 import com.xiaomai.zhuangba.data.bean.AdOrderInformation;
@@ -1347,6 +1348,7 @@ public interface IApi {
     /**
      * 根据订单编号集合查询订单的详细信息
      *
+     * @param orderCodes 订单
      * @return observable
      */
     @FormUrlEncoded
@@ -1545,5 +1547,28 @@ public interface IApi {
     Observable<HttpResult<Object>> postRelocation(@Field("id") int id,@Field("address") String address,
                                                   @Field("picturesUrl") String picturesUrl,
                                                   @Field("equipmentLon") double equipmentLon ,@Field("equipmentLat") double equipmentLat);
+
+
+
+    /**
+     * 获取设备规则
+     *
+     * @param serviceId serviceId
+     * @param popupFlag 是否是弹框0：否；1：是
+     * @return observable
+     */
+    @GET("adOrder/getDeviceSurfaceRules/{serviceId}")
+    Observable<HttpResult<EquipmentSurfaceRules>> getDeviceSurfaceRules(@Path("serviceId") String serviceId ,
+                                                                        @Query("popupFlag") int popupFlag);
+
+    /**
+     * 点击知道了保存当前用户弹框信息
+     *
+     * @param serviceId serviceId
+     * @return observable
+     */
+    @FormUrlEncoded
+    @POST("adOrder/savePopup")
+    Observable<HttpResult<Object>> savePopup(@Field("serviceId") String serviceId );
 
 }
