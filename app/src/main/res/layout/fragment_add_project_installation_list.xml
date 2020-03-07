@@ -9,7 +9,7 @@
     <com.qmuiteam.qmui.widget.QMUITopBarLayout
         android:id="@+id/topBarSelectService"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/tool_lib_56dp"
         android:fitsSystemWindows="true"
         app:qmui_layout_collapseMode="pin"
         app:qmui_topbar_bg_color="@color/qmui_config_color_transparent"
@@ -19,8 +19,8 @@
         android:id="@+id/refreshBaseList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/tool_lib_77dp"
         android:background="#F2F2F2"
+        android:layout_marginTop="@dimen/tool_lib_56dp"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         app:srlAccentColor="@android:color/white"
         app:srlEnableHeaderTranslationContent="false"
@@ -42,7 +42,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="@dimen/tool_lib_1dp"
-                android:layout_marginBottom="@dimen/tool_lib_56dp"
+                android:layout_marginBottom="@dimen/tool_lib_80dp"
                 android:orientation="horizontal">
 
                 <android.support.v7.widget.RecyclerView
@@ -174,12 +174,11 @@
 
     </LinearLayout>
 
-
     <!-- 底部 任务个数 和金额 下一步-->
     <com.qmuiteam.qmui.layout.QMUILinearLayout
         android:id="@+id/itemSelectServiceLayoutFor"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/tool_lib_56dp"
+        android:layout_height="@dimen/tool_lib_80dp"
         android:layout_alignParentBottom="true"
         android:layout_gravity="bottom"
         android:background="@color/qmui_config_color_white"
@@ -189,75 +188,86 @@
         android:visibility="gone"
         app:qmui_showBorderOnlyBeforeL="true">
 
-        <RelativeLayout
-            android:id="@+id/relServiceTask"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_toStartOf="@+id/btnSelectServiceNext"
-            android:layout_toLeftOf="@+id/btnSelectServiceNext">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/tvSelectServiceTaskNumber"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="@dimen/tool_lib_16dp"
-                android:layout_marginLeft="@dimen/tool_lib_16dp"
-                android:gravity="center"
-                android:textColor="@color/tool_lib_gray_777777"
-                android:textSize="@dimen/tool_lib_14sp"
-                android:visibility="gone"
-                tools:text="任务个数0个" />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/tool_lib_34dp">
 
-            <ImageView
-                android:id="@+id/ivSelectServiceArrow"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="@dimen/tool_lib_3dp"
-                android:layout_marginLeft="@dimen/tool_lib_3dp"
-                android:layout_toEndOf="@+id/tvSelectServiceTaskNumber"
-                android:layout_toRightOf="@+id/tvSelectServiceTaskNumber"
-                android:src="@drawable/ic_up_arrow"
-                android:visibility="gone" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:text="@string/add_auxiliary_material_item"
+                    android:textColor="@color/tool_lib_red_EF2B2B"
+                    android:textSize="@dimen/tool_lib_12sp" />
+            </RelativeLayout>
 
-            <TextView
-                android:id="@+id/tvSelectServiceTotal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_toStartOf="@+id/tvSelectServiceMonty"
-                android:layout_toLeftOf="@+id/tvSelectServiceMonty"
-                android:text="@string/total"
-                android:textColor="@color/tool_lib_gray_222222"
-                android:textSize="@dimen/tool_lib_12sp" />
+            <RelativeLayout
+                android:id="@+id/relServiceTask"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-            <TextView
-                android:id="@+id/tvSelectServiceMonty"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginEnd="@dimen/tool_lib_10dp"
-                android:layout_marginRight="@dimen/tool_lib_10dp"
-                android:layout_toStartOf="@+id/btnSelectServiceNext"
-                android:layout_toLeftOf="@+id/btnSelectServiceNext"
-                android:ellipsize="end"
-                android:maxLines="1"
-                android:textColor="@color/tool_lib_red_EF2B2B"
-                android:textSize="@dimen/tool_lib_16sp"
-                tools:text="$0.0000" />
+                <TextView
+                    android:id="@+id/tvSelectServiceTaskNumber"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="@dimen/tool_lib_16dp"
+                    android:gravity="center"
+                    android:textColor="@color/tool_lib_gray_777777"
+                    android:textSize="@dimen/tool_lib_14sp"
+                    android:visibility="gone"
+                    tools:text="任务个数0个" />
 
-            <Button
-                android:id="@+id/btnSelectServiceNext"
-                style="@style/base_btn"
-                android:layout_width="@dimen/tool_lib_90dp"
-                android:layout_height="@dimen/tool_lib_40dp"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginEnd="@dimen/tool_lib_16dp"
-                android:layout_marginRight="@dimen/tool_lib_16dp"
-                android:text="@string/submitAudit" />
-        </RelativeLayout>
+                <ImageView
+                    android:id="@+id/ivSelectServiceArrow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="@dimen/tool_lib_3dp"
+                    android:layout_toEndOf="@+id/tvSelectServiceTaskNumber"
+                    android:src="@drawable/ic_up_arrow"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/tvSelectServiceTotal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toStartOf="@+id/tvSelectServiceMonty"
+                    android:text="@string/total"
+                    android:textColor="@color/tool_lib_gray_222222"
+                    android:textSize="@dimen/tool_lib_12sp" />
+
+                <TextView
+                    android:id="@+id/tvSelectServiceMonty"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="@dimen/tool_lib_10dp"
+                    android:layout_toStartOf="@+id/btnSelectServiceNext"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:textColor="@color/tool_lib_red_EF2B2B"
+                    android:textSize="@dimen/tool_lib_16sp"
+                    tools:text="$0.0000" />
+
+                <Button
+                    android:id="@+id/btnSelectServiceNext"
+                    style="@style/base_btn"
+                    android:layout_width="@dimen/tool_lib_90dp"
+                    android:layout_height="@dimen/tool_lib_40dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="@dimen/tool_lib_16dp"
+                    android:text="@string/submitAudit" />
+            </RelativeLayout>
+        </LinearLayout>
+
     </com.qmuiteam.qmui.layout.QMUILinearLayout>
 </android.support.design.widget.CoordinatorLayout>

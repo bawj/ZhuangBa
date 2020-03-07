@@ -693,4 +693,8 @@
     <string name="please_upload_photos_of_point_devices">请上传点位设备的照片</string>
     <string name="equipment_surface_rules">设备面规则</string>
     <string name="got_it">我知道了</string>
+    <string name="please_fill_in_the_re_appointment_time">请填写再约时间</string>
+    <string name="application_amount_cannot_be_empty">申请金额不能为空</string>
+    <string name="please_fill_in_the_application_amount">请填写申请金额</string>
+    <string name="add_auxiliary_material_item">+添加辅材项</string>
 </resources>

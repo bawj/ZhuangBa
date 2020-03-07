@@ -264,7 +264,7 @@ public class AdvertisingStatusUtil {
             //验收中
             qmuiFragment.startFragment(MasterAdvertisementAcceptanceOrdersFragment.newInstance(orderCodes));
         } else if (orderStatus == AdvertisingEnum.MASTER_FAILURE_OF_ACCEPTANCE.getCode()) {
-            //验收不通过
+            //验收不通过 到已接单状态
             //qmuiFragment.startFragment(MasterAdvertisementNotPassFragment.newInstance(orderCodes));
             qmuiFragment.startFragment(MasterAdvertisementReceivedOrdersFragment.newInstance(orderCodes));
         } else if (orderStatus == OrdersEnum.MASTER_CANCELLED.getCode()) {

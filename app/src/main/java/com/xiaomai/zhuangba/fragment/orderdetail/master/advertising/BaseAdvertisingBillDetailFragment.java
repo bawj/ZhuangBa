@@ -2,14 +2,12 @@ package com.xiaomai.zhuangba.fragment.orderdetail.master.advertising;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -20,7 +18,6 @@ import com.example.toollib.http.HttpResult;
 import com.example.toollib.http.exception.ApiException;
 import com.example.toollib.http.observer.BaseHttpRxObserver;
 import com.example.toollib.http.util.RxUtils;
-import com.example.toollib.util.Log;
 import com.google.gson.Gson;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -28,12 +25,10 @@ import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.xiaomai.zhuangba.R;
 import com.xiaomai.zhuangba.adapter.BaseViewPagerAdapter;
 import com.xiaomai.zhuangba.adapter.NearbyPhotoAdapter;
-import com.xiaomai.zhuangba.adapter.NextLastIssuePhotoAdapter;
 import com.xiaomai.zhuangba.adapter.TabIncomeNavigator;
 import com.xiaomai.zhuangba.data.EquipmentSurfaceRules;
 import com.xiaomai.zhuangba.data.bean.AdOrderInformation;
 import com.xiaomai.zhuangba.data.bean.DeviceSurfaceInformation;
-import com.xiaomai.zhuangba.data.bean.ServiceSampleEntity;
 import com.xiaomai.zhuangba.data.bean.UserInfo;
 import com.xiaomai.zhuangba.data.db.DBHelper;
 import com.xiaomai.zhuangba.enums.StaticExplain;
@@ -54,8 +49,6 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import io.reactivex.Observable;
-import io.reactivex.schedulers.Schedulers;
 
 
 public class BaseAdvertisingBillDetailFragment extends BaseFragment implements OnRefreshListener {
@@ -94,6 +87,7 @@ public class BaseAdvertisingBillDetailFragment extends BaseFragment implements O
     RecyclerView recyclerNearbyPhoto;
 
     private AdOrderInformation adOrderInformationList;
+
     public static BaseAdvertisingBillDetailFragment newInstance(String orderCodes) {
         Bundle args = new Bundle();
         args.putString(ORDER_CODES, orderCodes);
@@ -106,7 +100,7 @@ public class BaseAdvertisingBillDetailFragment extends BaseFragment implements O
     public void initView() {
         layOrderInfo.setVisibility(View.GONE);
         refreshBaseList.setOnRefreshListener(this);
-        recyclerNearbyPhoto.setLayoutManager(new GridLayoutManager(getActivity() , 3));
+        recyclerNearbyPhoto.setLayoutManager(new GridLayoutManager(getActivity(), 3));
         recyclerNearbyPhoto.addItemDecoration(new GridSpacingItemDecoration(3, 32, false));
         //默认刷新
         refreshBaseList.autoRefresh();
@@ -159,23 +153,28 @@ public class BaseAdvertisingBillDetailFragment extends BaseFragment implements O
         List<DeviceSurfaceInformation> list = adOrderInformationList.getList();
         initTab(list);
 
-        //查询设备面规则
-        queryEquipmentSurfaceRules(adOrderInformationList);
+        UserInfo userInfo = DBHelper.getInstance().getUserInfoDao().queryBuilder().unique();
+        String role = userInfo.getRole();
+        //已选择角色
+        if (role.equals(String.valueOf(StaticExplain.FU_FU_SHI.getCode()))) {
+            //师傅端 查询设备面规则
+            queryEquipmentSurfaceRules(adOrderInformationList);
+        }
     }
 
     private void queryEquipmentSurfaceRules(final AdOrderInformation adOrderInformationList) {
         //获取设备规则
         Integer serviceId = adOrderInformationList.getServiceId();
-        RxUtils.getObservableZip(ServiceUrl.getUserApi().getDeviceSurfaceRules(String.valueOf(serviceId) , 0))
+        RxUtils.getObservableZip(ServiceUrl.getUserApi().getDeviceSurfaceRules(String.valueOf(serviceId), 1))
                 .compose(this.<HttpResult<EquipmentSurfaceRules>>bindToLifecycle())
                 .subscribe(new BaseHttpRxObserver<EquipmentSurfaceRules>(getActivity()) {
                     @Override
                     protected void onSuccess(EquipmentSurfaceRules equipmentSurfaceRules) {
                         //opupFlag 是否是弹框0：否；1：是
                         int popupFlag = equipmentSurfaceRules.getPopupFlag();
-                        if (popupFlag == StaticExplain.POPUP_FLAG.getCode()){
+                        if (popupFlag == StaticExplain.POPUP_FLAG.getCode()) {
                             new EquipmentSurfaceDialog<BaseAdvertisingBillDetailFragment>()
-                                    .setContext(getActivity(), BaseAdvertisingBillDetailFragment.this , String.valueOf(adOrderInformationList.getServiceId()))
+                                    .setContext(getActivity(), BaseAdvertisingBillDetailFragment.this, String.valueOf(adOrderInformationList.getServiceId()))
                                     .initView(equipmentSurfaceRules)
                                     .show();
                         }
@@ -261,7 +260,12 @@ public class BaseAdvertisingBillDetailFragment extends BaseFragment implements O
 
     @Override
     public String getRightTitle() {
-        return getString(R.string.equipment_surface_rules);
+        UserInfo userInfo = DBHelper.getInstance().getUserInfoDao().queryBuilder().unique();
+        String role = userInfo.getRole();
+        if (role.equals(String.valueOf(StaticExplain.FU_FU_SHI.getCode()))) {
+            return getString(R.string.equipment_surface_rules);
+        }
+        return null;
     }
 
     @Override

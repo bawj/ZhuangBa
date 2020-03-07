@@ -282,16 +282,7 @@ public class SelectServiceFragment extends BaseListFragment<ISelectServiceModule
             case R.id.btnSelectServiceNext:
                 Log.e("btnSelectServiceNext 点击下一步");
                 //是否选了 必选项
-                ShopAuxiliaryMaterialsDB shopAuxiliaryMaterialsDB = DBHelper.getInstance().getShopAuxiliaryMaterialsDBDao().queryBuilder().unique();
-                if (shopAuxiliaryMaterialsDB == null) {
-                    iModule.requestSlottingAndDebug();
-                } else if (shopAuxiliaryMaterialsDB.getMaterialsSlottingId() == 0
-                        || shopAuxiliaryMaterialsDB.getSlottingSlottingId() == 0
-                        || shopAuxiliaryMaterialsDB.getDebuggingPrice() == 0f) {
-                    iModule.requestSlottingAndDebug();
-                } else {
-                    startShopCarFragment();
-                }
+                selectServiceNext();
                 break;
             case R.id.tvShopCarEmpty:
                 //清空
@@ -302,6 +293,19 @@ public class SelectServiceFragment extends BaseListFragment<ISelectServiceModule
                 startFragment(PricingSheetFragment.newInstance());
                 break;
             default:
+        }
+    }
+
+    public void selectServiceNext() {
+        ShopAuxiliaryMaterialsDB shopAuxiliaryMaterialsDB = DBHelper.getInstance().getShopAuxiliaryMaterialsDBDao().queryBuilder().unique();
+        if (shopAuxiliaryMaterialsDB == null) {
+            iModule.requestSlottingAndDebug();
+        } else if (shopAuxiliaryMaterialsDB.getMaterialsSlottingId() == 0
+                || shopAuxiliaryMaterialsDB.getSlottingSlottingId() == 0
+                || shopAuxiliaryMaterialsDB.getDebuggingPrice() == 0f) {
+            iModule.requestSlottingAndDebug();
+        } else {
+            startShopCarFragment();
         }
     }
 

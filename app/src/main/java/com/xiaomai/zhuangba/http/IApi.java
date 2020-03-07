@@ -1375,6 +1375,15 @@ public interface IApi {
     Observable<HttpResult<Object>> adOrderCancelAdOrder(@Field("orderCodes") String orderCodes);
 
     /**
+     * 1.7.0 师傅取消订单操作
+     *
+     * @return observable
+     */
+    @FormUrlEncoded
+    @POST("adOrder/masterCancelAdOrder")
+    Observable<HttpResult<Object>> masterCancelAdOrder(@Field("orderCodes") String orderCodes);
+
+    /**
      * 广告订单查询上刊和下刊拍照样式和说明
      *
      * @param serviceId serviceId

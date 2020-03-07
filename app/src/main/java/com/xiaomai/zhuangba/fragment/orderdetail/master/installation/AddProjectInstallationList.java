@@ -10,6 +10,8 @@ import com.example.toollib.util.ToastUtil;
 import com.google.gson.Gson;
 import com.xiaomai.zhuangba.R;
 import com.xiaomai.zhuangba.data.bean.OrderServicesBean;
+import com.xiaomai.zhuangba.data.bean.db.ShopAuxiliaryMaterialsDB;
+import com.xiaomai.zhuangba.data.db.DBHelper;
 import com.xiaomai.zhuangba.enums.ForResultCode;
 import com.xiaomai.zhuangba.fragment.SelectServiceFragment;
 import com.xiaomai.zhuangba.http.ServiceUrl;
@@ -47,6 +49,19 @@ public class AddProjectInstallationList extends SelectServiceFragment {
     @Override
     public int getContentView() {
         return R.layout.fragment_add_project_installation_list;
+    }
+
+    @Override
+    public void selectServiceNext() {
+        //提交
+        ShopAuxiliaryMaterialsDB shopAuxiliaryMaterials = DBHelper.getInstance().getShopAuxiliaryMaterialsDBDao().queryBuilder().unique();
+        if (shopAuxiliaryMaterials == null) {
+            iModule.requestSlottingAndDebug();
+        } else if (shopAuxiliaryMaterials.getMaterialsSlottingId() == 0
+                || shopAuxiliaryMaterials.getSlottingSlottingId() == 0
+                || shopAuxiliaryMaterials.getDebuggingPrice() == 0f) {
+            iModule.requestSlottingAndDebug();
+        }
     }
 
     @Override

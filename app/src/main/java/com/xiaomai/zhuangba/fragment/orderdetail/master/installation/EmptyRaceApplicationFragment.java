@@ -2,6 +2,7 @@ package com.xiaomai.zhuangba.fragment.orderdetail.master.installation;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -13,6 +14,7 @@ import com.example.toollib.data.IBaseModule;
 import com.example.toollib.http.HttpResult;
 import com.example.toollib.http.observer.BaseHttpRxObserver;
 import com.example.toollib.http.util.RxUtils;
+import com.example.toollib.util.ToastUtil;
 import com.google.gson.Gson;
 import com.qmuiteam.qmui.layout.QMUIButton;
 import com.xiaomai.zhuangba.R;
@@ -91,25 +93,33 @@ public class EmptyRaceApplicationFragment extends BaseFragment {
         String raceMoney = tvEmptyRaceMoney.getText().toString();
         String filedDescription = editFiledDescription.getText().toString();
         String appointmentTime = tvReAppointmentTime.getText().toString();
-        //订单编号
-        hashMap.put("orderCode" , getOrderCode());
-        //申请金额
-        hashMap.put("amount" , raceMoney);
-        //申请理由
-        hashMap.put("applyReason" , filedDescription);
-        //在约时间
-        hashMap.put("onceAgainDate" , appointmentTime);
-        RequestBody requestBody = RequestBody.create(MediaType.parse("application/json;charset=utf-8"), new Gson().toJson(hashMap));
-        RxUtils.getObservable(ServiceUrl.getUserApi().initiateAirRun(requestBody))
-                .compose(this.<HttpResult<Object>>bindToLifecycle())
-                .subscribe(new BaseHttpRxObserver<Object>(getActivity()) {
-                    @Override
-                    protected void onSuccess(Object response) {
-                        //提交空跑成功
-                        setFragmentResult(ForResultCode.RESULT_OK.getCode() , new Intent());
-                        popBackStack();
-                    }
-                });
+        if (TextUtils.isEmpty(appointmentTime)){
+            ToastUtil.showShort(getString(R.string.please_fill_in_the_re_appointment_time));
+        }else if (TextUtils.isEmpty(raceMoney)){
+            ToastUtil.showShort(getString(R.string.application_amount_cannot_be_empty));
+        }else if (TextUtils.isEmpty(raceMoney)){
+            ToastUtil.showShort(getString(R.string.please_fill_in_the_application_amount));
+        }else {
+            //订单编号
+            hashMap.put("orderCode" , getOrderCode());
+            //申请金额
+            hashMap.put("amount" , raceMoney);
+            //申请理由
+            hashMap.put("applyReason" , filedDescription);
+            //在约时间
+            hashMap.put("onceAgainDate" , appointmentTime);
+            RequestBody requestBody = RequestBody.create(MediaType.parse("application/json;charset=utf-8"), new Gson().toJson(hashMap));
+            RxUtils.getObservable(ServiceUrl.getUserApi().initiateAirRun(requestBody))
+                    .compose(this.<HttpResult<Object>>bindToLifecycle())
+                    .subscribe(new BaseHttpRxObserver<Object>(getActivity()) {
+                        @Override
+                        protected void onSuccess(Object response) {
+                            //提交空跑成功
+                            setFragmentResult(ForResultCode.RESULT_OK.getCode() , new Intent());
+                            popBackStack();
+                        }
+                    });
+        }
     }
 
     @Override

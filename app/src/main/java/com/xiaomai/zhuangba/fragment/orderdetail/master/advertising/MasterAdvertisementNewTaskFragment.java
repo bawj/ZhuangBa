@@ -57,7 +57,7 @@ public class MasterAdvertisementNewTaskFragment extends BaseAdvertisingBillDetai
         switch (view.getId()) {
             case R.id.btnCancelAdvertisementOrder:
                 //取消订单
-                RxUtils.getObservable(ServiceUrl.getUserApi().adOrderCancelAdOrder(getOrderCodes()))
+                RxUtils.getObservable(ServiceUrl.getUserApi().masterCancelAdOrder(getOrderCodes()))
                         .compose(this.<HttpResult<Object>>bindToLifecycle())
                         .subscribe(new BaseHttpRxObserver<Object>(getActivity()) {
                             @Override
