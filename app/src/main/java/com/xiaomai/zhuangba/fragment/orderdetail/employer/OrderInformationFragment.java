@@ -8,7 +8,9 @@ import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
 import com.xiaomai.zhuangba.R;
+import com.xiaomai.zhuangba.data.bean.OngoingOrdersList;
 import com.xiaomai.zhuangba.fragment.employer.EmployerFragment;
 import com.xiaomai.zhuangba.fragment.service.BaseOrderInformationFragment;
 import com.xiaomai.zhuangba.util.ConstantUtil;
@@ -41,15 +43,28 @@ public class OrderInformationFragment extends BaseOrderInformationFragment {
     EditText editInstallationNotes;
     @BindView(R.id.recyclerNotes)
     RecyclerView recyclerNotes;
+    @BindView(R.id.editContractNumber)
+    EditText editContractNumber;
+    @BindView(R.id.editAccountManager)
+    EditText editAccountManager;
+    @BindView(R.id.editEntryName)
+    EditText editEntryName;
+    @BindView(R.id.editProjectCharacteristics)
+    EditText editProjectCharacteristics;
+    @BindView(R.id.editShopName)
+    EditText editShopName;
+    @BindView(R.id.editOrderCode)
+    EditText editOrderCode;
 
     public static final String NAME = "name";
     public static final String PHONE = "phone";
-
-    public static OrderInformationFragment newInstance(String orderCode, String name, String phone) {
+    public static final String ONGOING_ORDERS_LIST = "ongoing_orders_list";
+    public static OrderInformationFragment newInstance(String orderCode, String name, String phone , String ongoingOrdersList) {
         Bundle args = new Bundle();
         args.putString(ConstantUtil.ORDER_CODE, orderCode);
         args.putString(NAME, name);
         args.putString(PHONE, phone);
+        args.putString(ONGOING_ORDERS_LIST , ongoingOrdersList);
         OrderInformationFragment fragment = new OrderInformationFragment();
         fragment.setArguments(args);
         return fragment;
@@ -65,8 +80,13 @@ public class OrderInformationFragment extends BaseOrderInformationFragment {
         editInstallationNotes.setVisibility(View.GONE);
         recyclerNotes.setVisibility(View.GONE);
 
-
-        // TODO: 2019/9/27 0027  姓名电话地址 不能修改
+        OngoingOrdersList ongoingOrdersList = getOngoingOrdersList();
+        editContractNumber.setText(ongoingOrdersList.getContractNo());
+        editAccountManager.setText(ongoingOrdersList.getAccountManager());
+        editEntryName.setText(ongoingOrdersList.getProjectName());
+        editProjectCharacteristics.setText(ongoingOrdersList.getProjectFeatures());
+        editShopName.setText(ongoingOrdersList.getShopName());
+        editOrderCode.setText(ongoingOrdersList.getOrderNumber());
     }
 
     @Override
@@ -103,6 +123,13 @@ public class OrderInformationFragment extends BaseOrderInformationFragment {
             return getArguments().getString(NAME);
         }
         return "";
+    }
+
+    private OngoingOrdersList getOngoingOrdersList(){
+        if (getArguments() != null){
+            return new Gson().fromJson(getArguments().getString(ONGOING_ORDERS_LIST) , OngoingOrdersList.class);
+        }
+        return new OngoingOrdersList();
     }
 
     private String getPhone() {

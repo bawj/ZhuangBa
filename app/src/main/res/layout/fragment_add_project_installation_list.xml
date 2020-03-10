@@ -9,7 +9,7 @@
     <com.qmuiteam.qmui.widget.QMUITopBarLayout
         android:id="@+id/topBarSelectService"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/tool_lib_56dp"
+        android:layout_height="wrap_content"
         android:fitsSystemWindows="true"
         app:qmui_layout_collapseMode="pin"
         app:qmui_topbar_bg_color="@color/qmui_config_color_transparent"
@@ -19,7 +19,7 @@
         android:id="@+id/refreshBaseList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/tool_lib_80dp"
+        android:layout_marginTop="@dimen/tool_lib_56dp"
         android:background="#F2F2F2"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         app:srlAccentColor="@android:color/white"

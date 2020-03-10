@@ -55,6 +55,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
                 android:text="@string/check_number"
                 android:textColor="@color/tool_lib_gray_777777"
                 android:textSize="@dimen/tool_lib_12sp" />
@@ -71,6 +72,7 @@
         </RelativeLayout>
 
         <LinearLayout
+            android:id="@+id/layChoosingGoods"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/tool_lib_18dp"

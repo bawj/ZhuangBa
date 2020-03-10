@@ -151,7 +151,7 @@ public class BaseOrderInformationFragment extends BaseFragment<IOrderInformation
                 break;
             case R.id.btnOrderInformation:
                 //提交 或 修改信息
-                hideKeyboard(view);
+                //hideKeyboard(view);
                 btnOrderInformationClick();
                 break;
             case R.id.relOrderInformationTime:

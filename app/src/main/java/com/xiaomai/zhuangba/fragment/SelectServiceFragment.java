@@ -218,6 +218,7 @@ public class SelectServiceFragment extends BaseListFragment<ISelectServiceModule
                 .initView(serviceSubcategoryProject, getActivity())
                 .setTvChoosingGoodsName(serviceSubcategoryProject.getServiceText())
                 .setRvChoosingGoods(getActivity(), serviceSubcategoryProject, maintenanceList)
+                .isLayChoosingGoods(getVisibility())
                 .setICallBase(new ChoosingGoodsDialog.BaseCallback() {
                     @Override
                     public void sure(Maintenance maintenance, int count) {
@@ -234,7 +235,9 @@ public class SelectServiceFragment extends BaseListFragment<ISelectServiceModule
 
     @Override
     public void slottingAndDebugSuccess(Slotting slotting) {
-        SlottingAndDebugDialog.getInstance().initView(getActivity(), slotting)
+        SlottingAndDebugDialog.getInstance()
+                .initView(getActivity(), slotting)
+                .isSelectDebugging(getVisibility())
                 .setICallBase(new SlottingAndDebugDialog.BaseCallback() {
                     @Override
                     public void ok() {
@@ -399,6 +402,10 @@ public class SelectServiceFragment extends BaseListFragment<ISelectServiceModule
             return getArguments().getString(ORDER_ADDRESS_GSON);
         }
         return null;
+    }
+
+    public int getVisibility() {
+        return View.VISIBLE;
     }
 
     @Override

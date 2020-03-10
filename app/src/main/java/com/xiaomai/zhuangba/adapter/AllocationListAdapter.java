@@ -12,6 +12,8 @@ import com.qmuiteam.qmui.layout.QMUILinearLayout;
 import com.qmuiteam.qmui.util.QMUIDisplayHelper;
 import com.xiaomai.zhuangba.R;
 import com.xiaomai.zhuangba.data.bean.DeviceOrder;
+import com.xiaomai.zhuangba.data.bean.UserInfo;
+import com.xiaomai.zhuangba.data.db.DBHelper;
 import com.xiaomai.zhuangba.enums.AdvertisingEnum;
 import com.xiaomai.zhuangba.enums.StaticExplain;
 import com.xiaomai.zhuangba.util.AdvertisingStatusUtil;
@@ -62,7 +64,7 @@ public class AllocationListAdapter extends BaseQuickAdapter<DeviceOrder, BaseVie
             tvMaintenance.setText(mContext.getString(R.string.continuous_service));
             tvMaintenance.setBackgroundResource(R.drawable.violet_radius_bg);
             tvMaintenance.setTextColor(mContext.getResources().getColor(R.color.tool_lib_color_542BE9));
-            ivItemMaintenanceTime.setVisibility(View.VISIBLE);
+            ivItemMaintenanceTime.setVisibility(View.GONE);
             // TODO: 2019/12/10 0010 暂时隐藏
             tvItemOrdersMaintenanceTime.setVisibility(View.GONE);
 
@@ -90,25 +92,21 @@ public class AllocationListAdapter extends BaseQuickAdapter<DeviceOrder, BaseVie
             button.setVisibility(View.GONE);
         }
 
-        // TODO: 2019/12/9 0009  是否是团队的订单
-        //TextView tvMaintenanceTeam = helper.getView(R.id.tvMaintenanceTeam);
-        //String assigner = ongoingOrders.getAssigner();
-        // if (!TextUtils.isEmpty(assigner)){
-        //    tvMaintenanceTeam.setVisibility(View.VISIBLE);
-        //}else {
-        //     tvMaintenanceTeam.setVisibility(View.GONE);
-        // }
+        TextView tvMaintenanceTeam = helper.getView(R.id.tvMaintenanceTeam);
+        String assigner = deviceOrder.getAssigner();
+         if (!TextUtils.isEmpty(assigner)){
+            tvMaintenanceTeam.setVisibility(View.VISIBLE);
+        }else {
+             tvMaintenanceTeam.setVisibility(View.GONE);
+         }
         //如果 assigner == 登录账号 则是 团长 显示金额 否则不显示
-//        UserInfo unique = DBHelper.getInstance().getUserInfoDao().queryBuilder().unique();
-//        String phoneNumber = unique.getPhoneNumber();
-//        if (TextUtils.isEmpty(assigner) || phoneNumber.equals(assigner)) {
-//            tvItemOrdersMoney.setText(String.valueOf(mContext.getString(R.string.content_money, String.valueOf(ongoingOrders.getMasterOrderAmount()))));
-//        } else {
-//            tvItemOrdersMoney.setText(String.valueOf(mContext.getString(R.string.asterisk)));
-//        }
-
-
-        tvItemOrdersMoney.setText(String.valueOf(mContext.getString(R.string.content_money, String.valueOf(deviceOrder.getMasterOrderAmount()))));
+        UserInfo unique = DBHelper.getInstance().getUserInfoDao().queryBuilder().unique();
+        String phoneNumber = unique.getPhoneNumber();
+        if (TextUtils.isEmpty(assigner) || phoneNumber.equals(assigner)) {
+            tvItemOrdersMoney.setText(String.valueOf(mContext.getString(R.string.content_money, String.valueOf(deviceOrder.getMasterOrderAmount()))));
+        } else {
+            tvItemOrdersMoney.setText(String.valueOf(mContext.getString(R.string.asterisk)));
+        }
 
         tvItemOrdersType.setTag(deviceOrder);
     }

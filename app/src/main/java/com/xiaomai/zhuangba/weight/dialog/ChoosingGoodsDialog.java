@@ -42,6 +42,7 @@ public class ChoosingGoodsDialog {
 
     private AnimShopsButton animChoosingShopBtn;
     private RecyclerView rvChoosingGoods;
+    private LinearLayout layChoosingGoods;
     private TextView tvChoosingGoodsName, tvChoosingMoney, tvChoosingMaintenanceTime;
     private Maintenance maintenance;
 
@@ -66,6 +67,7 @@ public class ChoosingGoodsDialog {
         tvChoosingMoney = view.findViewById(R.id.tvChoosingMoney);
         //选择的维保时间
         tvChoosingMaintenanceTime = view.findViewById(R.id.tvChoosingMaintenanceTime);
+        layChoosingGoods = view.findViewById(R.id.layChoosingGoods);
         //确认添加
         LinearLayout laySelectAdd = view.findViewById(R.id.laySelectAdd);
 
@@ -185,6 +187,17 @@ public class ChoosingGoodsDialog {
         });
         rvChoosingGoods.setAdapter(dialogRVChoosingAdapter);
         dialogRVChoosingAdapter.checkItem(maintenance.getId());
+        return this;
+    }
+
+
+    /**
+     * 是否显示维保
+     * @param visibility 隐藏或显示
+     * @return ChoosingGoodsDialog
+     */
+    public ChoosingGoodsDialog isLayChoosingGoods(int visibility){
+        layChoosingGoods.setVisibility(visibility);
         return this;
     }
 

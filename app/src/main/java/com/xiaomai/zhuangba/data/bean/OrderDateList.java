@@ -39,8 +39,8 @@ public class OrderDateList {
     }
 
     public String getTime() {
-//        String date = DateUtil.getDate(time, "yyyy-MM-dd HH:mm");
-        return TextUtils.isEmpty(time) ? time : time;
+        String date = DateUtil.getDate(time, "yyyy-MM-dd HH:mm");
+        return TextUtils.isEmpty(date) ? time : date;
     }
 
     public void setTime(String time) {

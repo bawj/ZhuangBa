@@ -125,6 +125,7 @@
             android:layout_centerVertical="true"
             android:textColor="@color/tool_lib_gray_222222"
             android:textSize="@dimen/tool_lib_14sp"
+            android:visibility="gone"
             tools:text="¥80" />
 
         <TextView
@@ -148,6 +149,7 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginEnd="@dimen/tool_lib_16dp"
+            android:visibility="gone"
             android:layout_marginRight="@dimen/tool_lib_16dp"
             android:layout_toStartOf="@+id/ivServiceItemRight"
             android:layout_toLeftOf="@+id/ivServiceItemRight"

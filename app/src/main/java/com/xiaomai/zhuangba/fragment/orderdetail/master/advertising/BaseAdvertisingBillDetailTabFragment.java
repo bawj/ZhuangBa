@@ -81,9 +81,11 @@ public class BaseAdvertisingBillDetailTabFragment extends BaseFragment {
     @BindView(R.id.layNextLastTip)
     LinearLayout layNextLastTip;
 
-    public static BaseAdvertisingBillDetailTabFragment newInstance(String deviceSurfaceInformationString) {
+    public static final String ORDER_STATUS = "order_status";
+    public static BaseAdvertisingBillDetailTabFragment newInstance(String deviceSurfaceInformationString , int status) {
         Bundle args = new Bundle();
         args.putString(DEVICE_SURFACE_INFORMATION, deviceSurfaceInformationString);
+        args.putInt(ORDER_STATUS , status);
         BaseAdvertisingBillDetailTabFragment fragment = new BaseAdvertisingBillDetailTabFragment();
         fragment.setArguments(args);
         return fragment;
@@ -214,6 +216,12 @@ public class BaseAdvertisingBillDetailTabFragment extends BaseFragment {
             tvNextLastTip.setText(nextLastTip);
             layNextLastTip.setVisibility(View.VISIBLE);
         }
+
+        if (getOrderStatus() == AdvertisingEnum.EMPLOYER_ACCEPTANCE.getCode() || getOrderStatus() == AdvertisingEnum.EMPLOYER_CANCELLED.getCode()){
+            layNextLastTip.setVisibility(View.GONE);
+        }else {
+            layNextLastTip.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override
@@ -227,6 +235,13 @@ public class BaseAdvertisingBillDetailTabFragment extends BaseFragment {
             return new Gson().fromJson(string, DeviceSurfaceInformation.class);
         }
         return new DeviceSurfaceInformation();
+    }
+
+    public int getOrderStatus(){
+        if (getArguments() != null){
+            return getArguments().getInt(ORDER_STATUS);
+        }
+        return 0;
     }
 
     @Override

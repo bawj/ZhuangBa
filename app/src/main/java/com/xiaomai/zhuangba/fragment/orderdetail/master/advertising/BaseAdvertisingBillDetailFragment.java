@@ -221,7 +221,7 @@ public class BaseAdvertisingBillDetailFragment extends BaseFragment implements O
     }
 
     public BaseAdvertisingBillDetailTabFragment getAdvertisingBillDetailTab(String deviceSurfaceInformationString) {
-        return BaseAdvertisingBillDetailTabFragment.newInstance(deviceSurfaceInformationString);
+        return BaseAdvertisingBillDetailTabFragment.newInstance(deviceSurfaceInformationString , adOrderInformationList.getOrderStatus());
     }
 
     @OnClick({R.id.tvBaseOrderDetailLocation})

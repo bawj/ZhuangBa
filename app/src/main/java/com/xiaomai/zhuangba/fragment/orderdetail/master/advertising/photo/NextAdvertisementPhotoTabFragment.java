@@ -101,6 +101,7 @@ public class NextAdvertisementPhotoTabFragment extends BaseAdvertisementPhotoTab
             @Override
             protected void onSuccess(Object response) {
                 ToastUtil.showShort(response.toString());
+
                 //startFragmentAndDestroyCurrent(AdvertisementPhotoSuccessFragment.newInstance(getOrderCodes()));
             }
         });

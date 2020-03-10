@@ -40,6 +40,7 @@
             android:gravity="center_vertical"
             android:hint="@string/please_enter_the_contract_number"
             android:inputType="number"
+            android:maxLength="80"
             android:textColor="@color/tool_lib_gray_222222"
             android:textSize="@dimen/tool_lib_14sp" />
     </LinearLayout>
@@ -73,6 +74,7 @@
             android:background="@null"
             android:gravity="center_vertical"
             android:hint="@string/please_enter_account_manager_name"
+            android:maxLength="80"
             android:textColor="@color/tool_lib_gray_222222"
             android:textSize="@dimen/tool_lib_14sp" />
     </LinearLayout>
@@ -107,6 +109,7 @@
             android:background="@null"
             android:gravity="center_vertical"
             android:hint="@string/please_enter_project_name"
+            android:maxLength="80"
             android:textColor="@color/tool_lib_gray_222222"
             android:textSize="@dimen/tool_lib_14sp" />
     </LinearLayout>
@@ -141,6 +144,7 @@
             android:background="@null"
             android:gravity="center_vertical"
             android:hint="@string/please_enter_project_characteristics"
+            android:maxLength="80"
             android:textColor="@color/tool_lib_gray_222222"
             android:textSize="@dimen/tool_lib_14sp" />
     </LinearLayout>
@@ -175,6 +179,7 @@
             android:background="@null"
             android:gravity="center_vertical"
             android:hint="@string/please_enter_the_store_name"
+            android:maxLength="80"
             android:textColor="@color/tool_lib_gray_222222"
             android:textSize="@dimen/tool_lib_14sp" />
     </LinearLayout>
@@ -210,6 +215,7 @@
             android:gravity="center_vertical"
             android:hint="@string/please_enter_the_third_party_order_number"
             android:inputType="number"
+            android:maxLength="80"
             android:textColor="@color/tool_lib_gray_222222"
             android:textSize="@dimen/tool_lib_14sp" />
     </LinearLayout>

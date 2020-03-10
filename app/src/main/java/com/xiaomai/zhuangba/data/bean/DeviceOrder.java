@@ -35,6 +35,9 @@ public class DeviceOrder {
     /** 预约时间 */
     private String reservation;
 
+    /** 团队 */
+    private String assigner;
+
     public Integer getId() {
         return id;
     }
@@ -121,5 +124,13 @@ public class DeviceOrder {
 
     public void setReservation(String reservation) {
         this.reservation = reservation;
+    }
+
+    public String getAssigner() {
+        return assigner == null ? "" : assigner;
+    }
+
+    public void setAssigner(String assigner) {
+        this.assigner = assigner;
     }
 }

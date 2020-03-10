@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.example.toollib.weight.dialog.CommonlyDialog;
+import com.google.gson.Gson;
 import com.xiaomai.zhuangba.R;
 import com.xiaomai.zhuangba.fragment.orderdetail.employer.base.BaseEmployerDetailFragment;
 import com.xiaomai.zhuangba.util.ConstantUtil;
@@ -57,7 +58,7 @@ public class EmployerDistributionFragment extends BaseEmployerDetailFragment {
                 //更改信息重新发布
                 startFragment(OrderInformationFragment.newInstance(getOrderCode(),
                         tvBaseOrderDetailName.getText().toString(),
-                        tvBaseOrderDetailPhone.getText().toString()));
+                        tvBaseOrderDetailPhone.getText().toString() , new Gson().toJson(ongoingOrdersList)));
                 break;
             default:
         }

@@ -310,6 +310,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/recyclerNotes"
+            android:layout_marginBottom="@dimen/tool_lib_56dp"
             android:layout_marginTop="@dimen/tool_lib_16dp"
             android:orientation="vertical">
 
@@ -336,7 +337,7 @@
         <Button
             android:id="@+id/btnOrderInformation"
             style="@style/base_btn"
-            android:layout_below="@+id/layFillInMoreInformation"
+            android:layout_alignParentBottom="true"
             android:layout_marginLeft="@dimen/tool_lib_16dp"
             android:layout_marginTop="@dimen/tool_lib_35dp"
             android:layout_marginRight="@dimen/tool_lib_16dp"

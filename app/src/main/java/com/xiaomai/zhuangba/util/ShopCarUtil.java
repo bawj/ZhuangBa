@@ -4,6 +4,7 @@ import android.text.TextUtils;
 
 import com.example.toollib.util.AmountUtil;
 import com.example.toollib.util.DensityUtils;
+import com.example.toollib.util.Log;
 import com.xiaomai.zhuangba.ShopAuxiliaryMaterialsDBDao;
 import com.xiaomai.zhuangba.ShopCarDataDao;
 import com.xiaomai.zhuangba.data.Enumerate;
@@ -124,8 +125,7 @@ public class ShopCarUtil {
      * @param item 开槽长度
      */
     public static void updateSelectionSlotLength(SlottingListDB item) {
-        ShopAuxiliaryMaterialsDBDao shopAuxiliaryMaterialsDBDao = DBHelper.getInstance().getShopAuxiliaryMaterialsDBDao();
-        ShopAuxiliaryMaterialsDB unique = shopAuxiliaryMaterialsDBDao.queryBuilder().unique();
+        ShopAuxiliaryMaterialsDB unique = DBHelper.getInstance().getShopAuxiliaryMaterialsDBDao().queryBuilder().unique();
         if (unique == null) {
             unique = new ShopAuxiliaryMaterialsDB();
             unique.setSlottingId(item.getId());
@@ -133,27 +133,29 @@ public class ShopCarUtil {
             unique.setSlottingStartLength(item.getStartLength());
             unique.setSlottingEndLength(item.getEndLength());
             unique.setSlottingSlottingPrice(item.getSlottingPrice());
-            shopAuxiliaryMaterialsDBDao.insert(unique);
+            DBHelper.getInstance().getShopAuxiliaryMaterialsDBDao().insert(unique);
         } else {
             unique.setSlottingId(item.getId());
             unique.setSlottingSlottingId(item.getSlottingId());
             unique.setSlottingStartLength(item.getStartLength());
             unique.setSlottingEndLength(item.getEndLength());
             unique.setSlottingSlottingPrice(item.getSlottingPrice());
-            shopAuxiliaryMaterialsDBDao.update(unique);
+            DBHelper.getInstance().getShopAuxiliaryMaterialsDBDao().update(unique);
+            ShopAuxiliaryMaterialsDB materials = DBHelper.getInstance().getShopAuxiliaryMaterialsDBDao().queryBuilder().unique();
+            Log.e(String.valueOf(materials.getSlottingSlottingId()));
         }
     }
     public static SlottingListDB getSelectionSlotLength() {
-        ShopAuxiliaryMaterialsDBDao shopAuxiliaryMaterialsDBDao = DBHelper.getInstance().getShopAuxiliaryMaterialsDBDao();
-        ShopAuxiliaryMaterialsDB unique = shopAuxiliaryMaterialsDBDao.queryBuilder().unique();
+        ShopAuxiliaryMaterialsDB unique = DBHelper.getInstance().getShopAuxiliaryMaterialsDBDao().queryBuilder().unique();
 
-        SlottingListDB slottingListDB = new SlottingListDB();
-        slottingListDB.setId(unique.getSlottingId());
-        slottingListDB.setStartLength(unique.getSlottingStartLength());
-        slottingListDB.setEndLength(unique.getSlottingEndLength());
-        slottingListDB.setSlottingPrice(unique.getSlottingSlottingPrice());
+        SlottingListDB slottingList = new SlottingListDB();
+        slottingList.setId(DensityUtils.stringTypeLong(String.valueOf(unique.getSlottingSlottingId())));
+        slottingList.setSlottingId(unique.getSlottingSlottingId());
+        slottingList.setStartLength(unique.getSlottingStartLength());
+        slottingList.setEndLength(unique.getSlottingEndLength());
+        slottingList.setSlottingPrice(unique.getSlottingSlottingPrice());
 
-        return slottingListDB;
+        return slottingList;
     }
 
     /**

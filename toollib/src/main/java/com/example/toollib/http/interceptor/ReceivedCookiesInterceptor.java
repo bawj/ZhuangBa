@@ -27,7 +27,7 @@ public class ReceivedCookiesInterceptor implements Interceptor {
         Request request = chain.request();
         Response response = chain.proceed(request);
         String url = request.url().uri().toString();
-        if ((url.indexOf("userLogin/login")) != -1){
+        if (((url.indexOf("userLogin/login")) != -1)){
             String cookie = response.headers().get("Set-Cookie");
             if (cookie != null){
                 Log.e("保存 cookie = " + cookie);

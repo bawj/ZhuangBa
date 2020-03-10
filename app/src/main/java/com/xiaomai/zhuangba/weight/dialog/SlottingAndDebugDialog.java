@@ -41,7 +41,8 @@ public class SlottingAndDebugDialog implements BaseQuickAdapter.OnItemClickListe
     private SelectionSlotLengthAdapter selectionSlotLengthAdapter;
     private SelectDebuggingAdapter selectDebuggingAdapter;
     private AuxiliaryMaterialsAdapter auxiliaryMaterialsAdapter;
-    private TextView tvSlottingMoney;
+    private TextView tvSlottingMoney , tvSelectDebugging;
+    private RecyclerView rvSelectDebugging;
     private Context mContext;
 
     private double slottingSlottingPrice = 0d,
@@ -64,7 +65,8 @@ public class SlottingAndDebugDialog implements BaseQuickAdapter.OnItemClickListe
         qmuiDialog.setContentView(inflater.inflate(R.layout.dialog_slotting_and_debug, null));
 
         RecyclerView rvSelectionOfSlotLength = qmuiDialog.findViewById(R.id.rvSelectionOfSlotLength);
-        RecyclerView rvSelectDebugging = qmuiDialog.findViewById(R.id.rvSelectDebugging);
+        rvSelectDebugging = qmuiDialog.findViewById(R.id.rvSelectDebugging);
+        tvSelectDebugging = qmuiDialog.findViewById(R.id.tvSelectDebugging);
         RecyclerView rvAuxiliaryMaterials = qmuiDialog.findViewById(R.id.rvAuxiliaryMaterials);
         //开槽长度
         rvSelectionOfSlotLength.setLayoutManager(new GridLayoutManager(mContext, 3));
@@ -114,9 +116,11 @@ public class SlottingAndDebugDialog implements BaseQuickAdapter.OnItemClickListe
         qmuiDialog.findViewById(R.id.btnSlotting).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (item != null && debugging != null && materialsListDB != null) {
+                if (item != null && /*debugging != null &&*/ materialsListDB != null) {
                     ShopCarUtil.updateSelectionSlotLength(item);
-                    ShopCarUtil.updateSelectDebugging(debugging.getId(), debugging.getPrice());
+                    if (debugging != null){
+                        ShopCarUtil.updateSelectDebugging(debugging.getId(), debugging.getPrice());
+                    }
                     ShopCarUtil.updateAuxiliaryMaterials(materialsListDB);
                     qmuiDialog.dismiss();
                     baseCallback.ok();
@@ -186,6 +190,12 @@ public class SlottingAndDebugDialog implements BaseQuickAdapter.OnItemClickListe
         debugging1.setPrice(debugPrice);
         debuggingList.add(debugging1);
         return debuggingList;
+    }
+
+    public SlottingAndDebugDialog isSelectDebugging(int visibility){
+        tvSelectDebugging.setVisibility(visibility);
+        rvSelectDebugging.setVisibility(visibility);
+        return this;
     }
 
     public interface BaseCallback {

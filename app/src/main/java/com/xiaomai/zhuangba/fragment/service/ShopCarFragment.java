@@ -146,6 +146,7 @@ public class ShopCarFragment extends BaseFragment<IShopCarModule> implements Sho
                         headView = getShopCarHeaderView();
                         shopCarAdapter.addHeaderView(headView);
                         rvShopCar.setAdapter(shopCarAdapter);
+                        shopCarAdapter.setIShopCarAdapterCallBack(ShopCarFragment.this);
                         setSelectServiceMoney();
                     }
 

@@ -160,7 +160,7 @@ public class WalletFragment extends BaseFragment implements OnRefreshListener {
         switch (view.getId()) {
             case R.id.btnWithdraw:
                 //提现
-                startToWithdraw();
+                showTipDialog();
                 break;
             case R.id.tvAccountManager:
                 //提现账号管理
@@ -227,7 +227,7 @@ public class WalletFragment extends BaseFragment implements OnRefreshListener {
                     .setICallBase(new CommonlyDialog.BaseCallback() {
                         @Override
                         public void sure() {
-                            showTipDialog();
+                            startFragment(TradePhoneFragment.newInstance(walletBeans.getPresentationPassword()));
                         }
                     }).showDialog();
         } else if (walletBeans != null) {
@@ -248,7 +248,7 @@ public class WalletFragment extends BaseFragment implements OnRefreshListener {
                     .setICallBase(new CommonlyDialog.BaseCallback() {
                         @Override
                         public void sure() {
-                            startFragment(TradePhoneFragment.newInstance(walletBeans.getPresentationPassword()));
+                            startToWithdraw();
                         }
                     })
                     .showDialog();

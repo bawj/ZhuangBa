@@ -131,4 +131,9 @@ public class AddProjectInstallationList extends SelectServiceFragment {
         return "";
     }
 
+    @Override
+    public int getVisibility(){
+        return View.GONE;
+    }
+
 }

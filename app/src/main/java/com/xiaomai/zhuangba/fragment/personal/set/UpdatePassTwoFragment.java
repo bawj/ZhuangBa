@@ -81,18 +81,15 @@ public class UpdatePassTwoFragment extends BaseFragment {
                 verificationCode(tag);
                 break;
             case R.id.singleCountDown:
-                if (!singleCountDown.isContinue()) {
-                    RxUtils.getObservable(ServiceUrl.getUserApi().getAuthenticationCode(getPhone(),
-                            StringTypeExplain.REGISTERED_FORGET_PASSWORD.getCode())
-                            .compose(this.<HttpResult<Object>>bindLifecycle()))
-                            .subscribe(new BaseHttpRxObserver<Object>(getActivity()) {
-                                @Override
-                                protected void onSuccess(Object response) {
-                                    singleCountDown.startCountDown();
-                                    verificationCode = response.toString();
-                                }
-                            });
-                }
+                RxUtils.getObservable(ServiceUrl.getUserApi().getAuthenticationCode(getPhone(),StringTypeExplain.REGISTERED_FORGET_PASSWORD.getCode())
+                        .compose(this.<HttpResult<Object>>bindToLifecycle()))
+                        .subscribe(new BaseHttpRxObserver<Object>(getActivity()) {
+                            @Override
+                            protected void onSuccess(Object response) {
+                                singleCountDown.startCountDown();
+                                verificationCode = response.toString();
+                            }
+                        });
                 break;
             default:
         }

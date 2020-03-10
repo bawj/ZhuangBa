@@ -13,6 +13,7 @@ import com.example.toollib.data.IBaseModule;
 import com.example.toollib.http.HttpResult;
 import com.example.toollib.http.observer.BaseHttpRxObserver;
 import com.example.toollib.http.util.RxUtils;
+import com.example.toollib.util.DensityUtils;
 import com.example.toollib.util.ToastUtil;
 import com.xiaomai.zhuangba.R;
 import com.xiaomai.zhuangba.data.bean.OngoingOrdersList;
@@ -106,12 +107,17 @@ public class ConfirmationTimeFragment extends BaseFragment {
             String time = getTime();
             Long aLong;
             if (!TextUtils.isEmpty(time)){
-                aLong = DateUtil.dateToCurrentTimeMilli(time, "yyyy-MM-dd HH:mm:ss");
+               // aLong = DateUtil.dateToCurrentTimeMilli(time, "yyyy-MM-dd HH:mm:ss");
+                aLong = DensityUtils.stringTypeLong(time);
             }else {
-                aLong = DateUtil.dateToCurrentTimeMilli(appointmentTime, "yyyy-MM-dd HH:mm:ss");
+                //aLong = DateUtil.dateToCurrentTimeMilli(appointmentTime, "yyyy-MM-dd HH:mm:ss");
+                aLong = DensityUtils.stringTypeLong(appointmentTime);
             }
             //确认时间
             String date = tvDate.getText().toString();
+            if (TextUtils.isEmpty(date)){
+                ToastUtil.showShort(getString(R.string.please_input_time));
+            }
             Long aLong1 = DateUtil.dateToCurrentTimeMilli(date, "yyyy-MM-dd HH:mm:ss");
             if (aLong1 < aLong) {
                 ToastUtil.showShort(getString(R.string.order_time_tip));
