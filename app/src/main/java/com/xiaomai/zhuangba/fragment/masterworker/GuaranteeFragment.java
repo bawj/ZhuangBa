@@ -18,13 +18,10 @@ import com.xiaomai.zhuangba.adapter.GuaranteeAdapter;
 import com.xiaomai.zhuangba.data.OuterLayerMaintenanceOverman;
 import com.xiaomai.zhuangba.data.bean.MaintenanceOverman;
 import com.xiaomai.zhuangba.enums.ForResultCode;
-import com.xiaomai.zhuangba.enums.GuaranteeEnums;
 import com.xiaomai.zhuangba.enums.StaticExplain;
 import com.xiaomai.zhuangba.fragment.base.BaseListFragment;
-import com.xiaomai.zhuangba.fragment.masterworker.guarantee.HaveInHandGuaranteeFragment;
-import com.xiaomai.zhuangba.fragment.masterworker.guarantee.NewTaskGuaranteeDetailFragment;
-import com.xiaomai.zhuangba.fragment.masterworker.guarantee.NotYetBegunGuaranteeFragment;
 import com.xiaomai.zhuangba.http.ServiceUrl;
+import com.xiaomai.zhuangba.util.GuaranteeUtil;
 
 import java.util.List;
 
@@ -119,19 +116,7 @@ public class GuaranteeFragment extends BaseListFragment<IBaseModule , GuaranteeA
         String orderCode = maintenanceOverman.getOrderCode();
         String orderType = maintenanceOverman.getOrderType();
         String status = maintenanceOverman.getStatus();
-        //GuaranteeUtil.startGuaranteeOrderDetail(getBaseFragmentActivity() , orderCode , orderType , status);
-        if (status.equals(String.valueOf(GuaranteeEnums.GUARANTEE_NEW_TASK.getCode()))) {
-            //新任务
-            startFragmentForResult(NewTaskGuaranteeDetailFragment.newInstance(orderCode , orderType)  , ForResultCode.RESULT_OK.getCode());
-        } else if (status.equals(String.valueOf(GuaranteeEnums.GUARANTEE_HAVE_IN_HAND.getCode()))) {
-            //进行中
-            startFragment(HaveInHandGuaranteeFragment.newInstance(orderCode, orderType));
-        } else if (status.equals(String.valueOf(GuaranteeEnums.GUARANTEE_NOT_YET_BEGUN.getCode()))) {
-            //未开始
-            startFragment(NotYetBegunGuaranteeFragment.newInstance(orderCode, orderType));
-        } else if (status.equals(String.valueOf(GuaranteeEnums.GUARANTEE_HAS_ENDED.getCode()))) {
-            //已结束
-        }
+        GuaranteeUtil.startGuaranteeOrderDetail(getBaseFragmentActivity() , orderCode , orderType , status);
     }
 
 

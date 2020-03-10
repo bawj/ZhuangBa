@@ -87,4 +87,9 @@ public class DefaultMoneyFragment extends BaseListFragment<IBaseModule, DefaultM
     public int getContentView() {
         return R.layout.fragment_default_money;
     }
+
+    @Override
+    protected String getActivityTitle() {
+        return getString(R.string.penalty_for_breach_of_contract);
+    }
 }

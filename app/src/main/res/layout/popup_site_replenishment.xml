@@ -33,13 +33,15 @@
         android:layout_marginEnd="@dimen/tool_lib_12dp"
         android:text="@string/deletion_item"
         android:textColor="@color/tool_lib_white_FFFFFF"
-        android:textSize="@dimen/tool_lib_12sp" />
+        android:textSize="@dimen/tool_lib_12sp"
+        android:visibility="gone" />
 
     <View
         style="@style/tool_lib_horizontal_line"
         android:layout_marginStart="@dimen/tool_lib_12dp"
         android:layout_marginTop="@dimen/tool_lib_7dp"
-        android:layout_marginEnd="@dimen/tool_lib_12dp" />
+        android:layout_marginEnd="@dimen/tool_lib_12dp"
+        android:visibility="gone" />
 
     <TextView
         android:id="@+id/tvCustom"

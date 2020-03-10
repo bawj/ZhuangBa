@@ -19,8 +19,8 @@
         android:id="@+id/refreshBaseList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/tool_lib_80dp"
         android:background="#F2F2F2"
-        android:layout_marginTop="@dimen/tool_lib_56dp"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         app:srlAccentColor="@android:color/white"
         app:srlEnableHeaderTranslationContent="false"
@@ -194,6 +194,7 @@
             android:orientation="vertical">
 
             <RelativeLayout
+                android:id="@+id/relAddAuxiliaryMaterial"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/tool_lib_34dp">
 
@@ -232,6 +233,28 @@
                     android:layout_marginStart="@dimen/tool_lib_3dp"
                     android:layout_toEndOf="@+id/tvSelectServiceTaskNumber"
                     android:src="@drawable/ic_up_arrow"
+                    android:visibility="gone" />
+
+                <CheckBox
+                    android:id="@+id/chkUrgent"
+                    style="@style/CustomCheckAllElection"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="@dimen/tool_lib_12dp"
+                    android:layout_marginTop="@dimen/tool_lib_12dp"
+                    android:layout_marginEnd="@dimen/tool_lib_8dp"
+                    android:checked="false"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toEndOf="@+id/chkUrgent"
+                    android:text="@string/urgent"
+                    android:textColor="@color/tool_lib_gray_222222"
+                    android:textSize="@dimen/tool_lib_14sp"
                     android:visibility="gone" />
 
                 <TextView

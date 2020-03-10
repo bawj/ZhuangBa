@@ -258,7 +258,6 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/tool_lib_10dp"
                         android:background="@android:color/white"
                         android:fillViewport="true"
                         android:orientation="vertical"
@@ -267,15 +266,14 @@
                         <net.lucode.hackware.magicindicator.MagicIndicator
                             android:id="@+id/magicIndicator"
                             android:layout_width="match_parent"
-                            android:layout_height="@dimen/tool_lib_56dp"
+                            android:layout_height="@dimen/tool_lib_46dp"
                             android:paddingLeft="@dimen/tool_lib_8dp"
                             android:paddingRight="@dimen/tool_lib_8dp" />
 
                         <android.support.v4.view.ViewPager
                             android:id="@+id/viewPager"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/tool_lib_12dp" />
+                            android:layout_height="wrap_content" />
                     </LinearLayout>
                 </android.support.design.widget.CoordinatorLayout>
             </RelativeLayout>

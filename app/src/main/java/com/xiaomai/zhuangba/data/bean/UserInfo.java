@@ -1,7 +1,5 @@
 package com.xiaomai.zhuangba.data.bean;
 
-import android.text.TextUtils;
-
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Generated;
 import org.greenrobot.greendao.annotation.Id;
@@ -77,6 +75,9 @@ public class UserInfo {
     /** 师傅等级名称 */
     private String  masterRankName;
 
+    /** 师傅角色(1:外部师傅 2:专职师傅) */
+    private String masterRole;
+
     /** 超管1   管理员2   员工3 */
     private int roleId;
 
@@ -92,7 +93,7 @@ public class UserInfo {
     @Transient
     private List<SkillList> skills;
 
-    @Generated(hash = 1923274668)
+    @Generated(hash = 1698865383)
     public UserInfo(Long id, String phoneNumber, String userText, String password,
             int lockFlag, String invitationCode, String token, String role,
             String registrationTime, String identityCard, String validityDataStart,
@@ -102,7 +103,7 @@ public class UserInfo {
             double longitude, double latitude, String businessLicense,
             String emergencyContact, String contactAddress, String companyName,
             int startFlag, int payFlag, String masterRankId, String masterRankName,
-            int roleId, String team, String push, String idStr) {
+            String masterRole, int roleId, String team, String push, String idStr) {
         this.id = id;
         this.phoneNumber = phoneNumber;
         this.userText = userText;
@@ -132,6 +133,7 @@ public class UserInfo {
         this.payFlag = payFlag;
         this.masterRankId = masterRankId;
         this.masterRankName = masterRankName;
+        this.masterRole = masterRole;
         this.roleId = roleId;
         this.team = team;
         this.push = push;
@@ -415,5 +417,13 @@ public class UserInfo {
 
     public void setSkillLists(List<SkillList> skills) {
         this.skills = skills;
+    }
+
+    public String getMasterRole() {
+        return this.masterRole;
+    }
+
+    public void setMasterRole(String masterRole) {
+        this.masterRole = masterRole;
     }
 }

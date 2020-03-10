@@ -8,6 +8,7 @@ import com.qmuiteam.qmui.arch.QMUIFragmentActivity;
 import com.xiaomai.zhuangba.R;
 import com.xiaomai.zhuangba.enums.ForResultCode;
 import com.xiaomai.zhuangba.enums.GuaranteeEnums;
+import com.xiaomai.zhuangba.fragment.masterworker.guarantee.HasEndedFragment;
 import com.xiaomai.zhuangba.fragment.masterworker.guarantee.HaveInHandGuaranteeFragment;
 import com.xiaomai.zhuangba.fragment.masterworker.guarantee.NewTaskGuaranteeDetailFragment;
 import com.xiaomai.zhuangba.fragment.masterworker.guarantee.NotYetBegunGuaranteeFragment;
@@ -42,6 +43,8 @@ public class GuaranteeUtil {
             tvItemOrdersType.setBackgroundResource(R.drawable.distribution_half_fillet_bg);
         } else if (orderStatus.equals(String.valueOf(GuaranteeEnums.GUARANTEE_HAS_ENDED.getCode()))) {
             //已结束
+            tvItemOrdersType.setText(mContext.getString(R.string.has_ended));
+            tvItemOrdersType.setBackgroundResource(R.drawable.distribution_half_fillet_bg);
         }
     }
 
@@ -64,6 +67,7 @@ public class GuaranteeUtil {
             qmuiFragment.startFragment(NotYetBegunGuaranteeFragment.newInstance(orderCode, orderType));
         } else if (orderStatus.equals(String.valueOf(GuaranteeEnums.GUARANTEE_HAS_ENDED.getCode()))) {
             //已结束
+            qmuiFragment.startFragment(HasEndedFragment.newInstance(orderCode, orderType));
         }
     }
 

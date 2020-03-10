@@ -6,6 +6,7 @@ import com.example.toollib.util.AmountUtil;
 import com.example.toollib.util.DensityUtils;
 import com.xiaomai.zhuangba.ShopAuxiliaryMaterialsDBDao;
 import com.xiaomai.zhuangba.ShopCarDataDao;
+import com.xiaomai.zhuangba.data.Enumerate;
 import com.xiaomai.zhuangba.data.bean.Debugging;
 import com.xiaomai.zhuangba.data.bean.Maintenance;
 import com.xiaomai.zhuangba.data.bean.OrderServicesBean;
@@ -293,7 +294,17 @@ public class ShopCarUtil {
         //计算辅材价格
         double price = ShopCarUtil.getAuxiliaryMaterialsPrice();
         totalMoney = totalMoney + price;
+        //计算加急单价格
+        totalMoney = totalMoney + getEnumeratePrice();
         return new BigDecimal(totalMoney).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+    }
+
+    private static Double getEnumeratePrice(){
+        Enumerate enumerate = DBHelper.getInstance().getEnumerateDao().queryBuilder().unique();
+        if (enumerate != null){
+            return enumerate.getUrgentPrice();
+        }
+        return 0d;
     }
 
     /**
@@ -397,16 +408,18 @@ public class ShopCarUtil {
     public static void setAuxiliaryMaterials(HashMap<String, Object> hashMap) {
         //没有 添加图片 和 备注
         ShopAuxiliaryMaterialsDB unique = DBHelper.getInstance().getShopAuxiliaryMaterialsDBDao().queryBuilder().unique();
-        //开槽
-        hashMap.put("slottingStartLength", unique.getSlottingStartLength());
-        hashMap.put("slottingEndLength", unique.getSlottingEndLength());
-        hashMap.put("slottingPrice", unique.getSlottingSlottingPrice());
-        //是否调试 0 调试 1 不调试
-        hashMap.put("debugging", unique.getDebuggingPrice() == 0 ? 0 : 1);
-        hashMap.put("debugPrice", unique.getDebuggingPrice());
-        //辅材
-        hashMap.put("materialsStartLength", unique.getMaterialsStartLength());
-        hashMap.put("materialsEndLength", unique.getMaterialsEndLength());
-        hashMap.put("materialsPrice", unique.getMaterialsSlottingPrice());
+        if (unique != null){
+            //开槽
+            hashMap.put("slottingStartLength", unique.getSlottingStartLength());
+            hashMap.put("slottingEndLength", unique.getSlottingEndLength());
+            hashMap.put("slottingPrice", unique.getSlottingSlottingPrice());
+            //是否调试 0 调试 1 不调试
+            hashMap.put("debugging", unique.getDebuggingPrice() == 0 ? 0 : 1);
+            hashMap.put("debugPrice", unique.getDebuggingPrice());
+            //辅材
+            hashMap.put("materialsStartLength", unique.getMaterialsStartLength());
+            hashMap.put("materialsEndLength", unique.getMaterialsEndLength());
+            hashMap.put("materialsPrice", unique.getMaterialsSlottingPrice());
+        }
     }
 }

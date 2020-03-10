@@ -174,7 +174,6 @@
 
     </LinearLayout>
 
-
     <!-- 底部 任务个数 和金额 下一步-->
     <com.qmuiteam.qmui.layout.QMUILinearLayout
         android:id="@+id/itemSelectServiceLayoutFor"
@@ -208,6 +207,26 @@
                 android:textSize="@dimen/tool_lib_14sp"
                 android:visibility="gone"
                 tools:text="任务个数0个" />
+
+            <CheckBox
+                android:id="@+id/chkUrgent"
+                style="@style/CustomCheckAllElection"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/tool_lib_12dp"
+                android:layout_marginTop="@dimen/tool_lib_12dp"
+                android:layout_marginEnd="@dimen/tool_lib_8dp"
+                android:checked="false" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@+id/chkUrgent"
+                android:text="@string/urgent"
+                android:textColor="@color/tool_lib_gray_222222"
+                android:textSize="@dimen/tool_lib_14sp" />
 
             <ImageView
                 android:id="@+id/ivSelectServiceArrow"

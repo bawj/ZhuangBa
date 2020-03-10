@@ -275,7 +275,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
-                        android:text="@string/liquidated_damages_to_be_paid"
+                        android:text="@string/penalty_for_breach_of_contract"
                         android:textColor="@color/tool_lib_gray_222222"
                         android:textSize="@dimen/tool_lib_16sp"
                         android:textStyle="bold" />

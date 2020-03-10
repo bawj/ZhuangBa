@@ -95,11 +95,12 @@ public class MasterAdvertisementReceivedOrdersFragment extends BaseAdvertisingBi
                 //取消订单
                 RxUtils.getObservable(ServiceUrl.getUserApi().masterCancelAdOrder(getOrderCodes()))
                         .compose(this.<HttpResult<Object>>bindToLifecycle())
-                        .subscribe(new BaseHttpRxObserver<Object>() {
+                        .subscribe(new BaseHttpRxObserver<Object>(getActivity()) {
                             @Override
                             protected void onSuccess(Object response) {
                                 //刷新广告单列表
                                 EventBus.getDefault().post(new MessageEvent(EventBusEnum.ALLOCATION_LIST_REFRESH.getCode()));
+                                popBackStack();
                             }
                         });
                 break;

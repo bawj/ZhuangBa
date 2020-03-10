@@ -4,8 +4,10 @@ import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
+import com.example.toollib.util.DensityUtils;
 import com.xiaomai.zhuangba.R;
 import com.xiaomai.zhuangba.data.bean.Claim;
+import com.xiaomai.zhuangba.util.DateUtil;
 
 /**
  * @author Bawj
@@ -23,7 +25,7 @@ public class DefaultMoneyAdapter extends BaseQuickAdapter<Claim, BaseViewHolder>
         TextView tvDefaultDate = baseViewHolder.getView(R.id.tvDefaultDate);
         TextView tvReasonsBreachContract = baseViewHolder.getView(R.id.tvReasonsBreachContract);
         tvDefaultMoney.setText(mContext.getString(R.string.content_money, String.valueOf(claim.getMasterPrice())));
-        tvDefaultDate.setText(claim.getCreateTime());
+        tvDefaultDate.setText(DateUtil.getDate2String(DensityUtils.stringTypeLong(claim.getCreateTime()), "yyyy/MM/dd HH:mm:ss"));
         tvReasonsBreachContract.setText(mContext.getString(R.string.reasons_for_breach_of_contract , claim.getReason()));
     }
 }

@@ -2,6 +2,7 @@ package com.xiaomai.zhuangba.data.db;
 
 
 import com.xiaomai.zhuangba.DaoSession;
+import com.xiaomai.zhuangba.EnumerateDao;
 import com.xiaomai.zhuangba.OrderServiceItemDao;
 import com.xiaomai.zhuangba.PushNotificationDBDao;
 import com.xiaomai.zhuangba.ShopAuxiliaryMaterialsDBDao;
@@ -57,6 +58,13 @@ public class DBHelper {
      */
     public ShopCarDataDao getShopCarDataDao() {
         return daoSession.getShopCarDataDao();
+    }
+
+    /**
+     * 加急单
+     */
+    public EnumerateDao getEnumerateDao() {
+        return daoSession.getEnumerateDao();
     }
 
     /**

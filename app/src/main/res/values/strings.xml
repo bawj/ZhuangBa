@@ -685,6 +685,8 @@
     <string name="please_fill_in_the_reason_for_cancellation">请填写取消原因</string>
     <string name="custom_supplement">自定义补充</string>
     <string name="liquidated_damages_to_be_paid">需缴纳违约金</string>
+    <string name="penalty_for_breach_of_contract">违约金</string>
+    <string name="penalty_for_breach_of_contract_tip">专属师傅，每个月28号方能提现上个月所得金额以及奖励金。违约金额，将在总额度中扣除！\n具体可以在明细中查看</string>
     <string name="default_money_tip">需缴纳违约金才能进行提现</string>
     <string name="paid_up">已缴清</string>
     <string name="reasons_for_breach_of_contract">违约理由：\n%1$s</string>
@@ -697,4 +699,7 @@
     <string name="application_amount_cannot_be_empty">申请金额不能为空</string>
     <string name="please_fill_in_the_application_amount">请填写申请金额</string>
     <string name="add_auxiliary_material_item">+添加辅材项</string>
+    <string name="urgent">加急单</string>
+    <string name="has_ended">已结束</string>
+    <string name="dialog_tip">提示</string>
 </resources>

@@ -64,4 +64,10 @@ public interface ISelectServiceView extends IBaseListView {
      * @return String
      */
     String getPhoneNumber();
+
+    /**
+     * 查询成功返回
+     * @param enumerate 加急单价格
+     */
+    void enumerateSuccess(String enumerate);
 }

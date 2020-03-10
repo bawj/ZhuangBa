@@ -3,6 +3,7 @@ package com.xiaomai.zhuangba.fragment.personal.wallet;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.TextView;
 
@@ -23,9 +24,12 @@ import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.xiaomai.zhuangba.R;
 import com.xiaomai.zhuangba.data.bean.MessageEvent;
+import com.xiaomai.zhuangba.data.bean.UserInfo;
 import com.xiaomai.zhuangba.data.bean.WalletBean;
+import com.xiaomai.zhuangba.data.db.DBHelper;
 import com.xiaomai.zhuangba.enums.EventBusEnum;
 import com.xiaomai.zhuangba.enums.ForResultCode;
+import com.xiaomai.zhuangba.enums.StringTypeExplain;
 import com.xiaomai.zhuangba.enums.WalletOrderTypeEnum;
 import com.xiaomai.zhuangba.fragment.personal.master.MasterPersonalFrozenAmount;
 import com.xiaomai.zhuangba.fragment.personal.wallet.detailed.CashWithdrawalFragment;
@@ -223,13 +227,34 @@ public class WalletFragment extends BaseFragment implements OnRefreshListener {
                     .setICallBase(new CommonlyDialog.BaseCallback() {
                         @Override
                         public void sure() {
-                            startFragment(TradePhoneFragment.newInstance(walletBeans.getPresentationPassword()));
+                            showTipDialog();
                         }
                     }).showDialog();
         } else if (walletBeans != null) {
             startFragment(WithdrawFragment.newInstance(walletBeans.getWithDrawableCash()));
         }
     }
+
+    private void showTipDialog(){
+        UserInfo userInfo = DBHelper.getInstance().getUserInfoDao().queryBuilder().unique();
+        String masterRole = userInfo.getMasterRole();
+        if (masterRole.equals(StringTypeExplain.FULL_TIME_MASTER.getCode())){
+            CommonlyDialog.getInstance().initView(getActivity())
+                    .setTvDialogBondTips(getString(R.string.dialog_tip))
+                    .setTvDialogCommonlyContent(getString(R.string.penalty_for_breach_of_contract_tip))
+                    .setTvDialogCommonlyContentTextGravity(Gravity.START)
+                    .setTvDialogCommonlyOkColor(getResources().getColor(R.color.tool_lib_gray_777777))
+                    .setTvDialogCommonlyCloseTextColor(getResources().getColor(R.color.tool_lib_gray_222222))
+                    .setICallBase(new CommonlyDialog.BaseCallback() {
+                        @Override
+                        public void sure() {
+                            startFragment(TradePhoneFragment.newInstance(walletBeans.getPresentationPassword()));
+                        }
+                    })
+                    .showDialog();
+        }
+    }
+
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onWeChatSuccess(MessageEvent messageEvent) {

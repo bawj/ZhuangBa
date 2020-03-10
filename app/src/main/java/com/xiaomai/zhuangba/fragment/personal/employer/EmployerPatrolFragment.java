@@ -87,7 +87,7 @@ public class EmployerPatrolFragment extends BaseListFragment<IBaseModule, Employ
                 .isVisibleClose(false)
                 .setTvDialogBondTips("")
                 .setTvDialogCommonlyContent(getString(R.string.patrol_deatil_tip))
-                .setTvDialogCommonlyOkTextColoe(R.color.tool_lib_gray_222222)
+                .setTvDialogCommonlyCloseTextColor(R.color.tool_lib_gray_222222)
                 .showDialog();
     }
 

@@ -2,10 +2,13 @@ package com.xiaomai.zhuangba.fragment.orderdetail.master.installation;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.RelativeLayout;
 
 import com.example.toollib.http.HttpResult;
 import com.example.toollib.http.observer.BaseHttpRxObserver;
 import com.example.toollib.http.util.RxUtils;
+import com.example.toollib.util.Log;
 import com.example.toollib.util.ToastUtil;
 import com.google.gson.Gson;
 import com.xiaomai.zhuangba.R;
@@ -14,6 +17,7 @@ import com.xiaomai.zhuangba.data.bean.db.ShopAuxiliaryMaterialsDB;
 import com.xiaomai.zhuangba.data.db.DBHelper;
 import com.xiaomai.zhuangba.enums.ForResultCode;
 import com.xiaomai.zhuangba.fragment.SelectServiceFragment;
+import com.xiaomai.zhuangba.fragment.personal.PricingSheetFragment;
 import com.xiaomai.zhuangba.http.ServiceUrl;
 import com.xiaomai.zhuangba.util.ConstantUtil;
 import com.xiaomai.zhuangba.util.ShopCarUtil;
@@ -21,6 +25,8 @@ import com.xiaomai.zhuangba.util.ShopCarUtil;
 import java.util.HashMap;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.OnClick;
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
 
@@ -31,6 +37,9 @@ import okhttp3.RequestBody;
 public class AddProjectInstallationList extends SelectServiceFragment {
 
     public static final String PUBLISHER = "publisher";
+
+    @BindView(R.id.relAddAuxiliaryMaterial)
+    RelativeLayout relAddAuxiliaryMaterial;
 
     public static AddProjectInstallationList newInstance(String serviceId, String serviceText,
                                                          String orderAddressGson,String orderCode , String publisher) {
@@ -45,6 +54,16 @@ public class AddProjectInstallationList extends SelectServiceFragment {
         return fragment;
     }
 
+    @OnClick({R.id.relAddAuxiliaryMaterial})
+    public void onViewAddAuxiliaryMaterialClicked(View view) {
+        switch (view.getId()) {
+            case R.id.relAddAuxiliaryMaterial:
+                //新增辅材
+                iModule.requestSlottingAndDebug();
+                break;
+            default:
+        }
+    }
 
     @Override
     public int getContentView() {
@@ -55,24 +74,20 @@ public class AddProjectInstallationList extends SelectServiceFragment {
     public void selectServiceNext() {
         //提交
         ShopAuxiliaryMaterialsDB shopAuxiliaryMaterials = DBHelper.getInstance().getShopAuxiliaryMaterialsDBDao().queryBuilder().unique();
-        if (shopAuxiliaryMaterials == null) {
-            iModule.requestSlottingAndDebug();
-        } else if (shopAuxiliaryMaterials.getMaterialsSlottingId() == 0
-                || shopAuxiliaryMaterials.getSlottingSlottingId() == 0
-                || shopAuxiliaryMaterials.getDebuggingPrice() == 0f) {
-            iModule.requestSlottingAndDebug();
+        boolean isShopAuxiliaryMaterials = shopAuxiliaryMaterials != null &&  shopAuxiliaryMaterials.getMaterialsSlottingId() != 0
+                && shopAuxiliaryMaterials.getSlottingSlottingId() != 0 && shopAuxiliaryMaterials.getDebuggingPrice() != 0f;
+
+        Integer totalNumber = ShopCarUtil.getTotalNumber();
+        if (isShopAuxiliaryMaterials || totalNumber != 0){
+            submitAudit();
+        }else {
+            ToastUtil.showShort(getString(R.string.please_service));
         }
     }
 
     @Override
     public void startShopCarFragment() {
-        Integer totalNumber = ShopCarUtil.getTotalNumber();
-        if (totalNumber != 0) {
-            //提交审核
-            submitAudit();
-        } else {
-            ToastUtil.showShort(getString(R.string.please_service));
-        }
+        updateUi();
     }
 
     private void submitAudit() {

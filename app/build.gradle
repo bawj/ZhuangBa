@@ -71,7 +71,7 @@ static def buildTime() {
 
 greendao {
     //数据库
-    schemaVersion 20
+    schemaVersion 21
     targetGenDir 'src/main/database'
     daoPackage "com.xiaomai.zhuangba"
 }

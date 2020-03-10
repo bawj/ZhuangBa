@@ -25,6 +25,10 @@ public enum StringTypeExplain {
     PROCESSED("processed" , "巡查任务已处理"),
     CURRENT("current" , "巡查任务"),
     PATROL_RECORD("0" , "巡查记录"),
+    YES("y" , "yes"),
+    NO("n" , "no"),
+    FULL_TIME_MASTER("2" , "2专职师傅"),
+    EXTERNAL_MASTER("1" , "外部师傅"),
     ;
 
     private String code;

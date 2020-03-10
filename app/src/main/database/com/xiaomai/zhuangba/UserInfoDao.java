@@ -53,10 +53,11 @@ public class UserInfoDao extends AbstractDao<UserInfo, Long> {
         public final static Property PayFlag = new Property(26, int.class, "payFlag", false, "PAY_FLAG");
         public final static Property MasterRankId = new Property(27, String.class, "masterRankId", false, "MASTER_RANK_ID");
         public final static Property MasterRankName = new Property(28, String.class, "masterRankName", false, "MASTER_RANK_NAME");
-        public final static Property RoleId = new Property(29, int.class, "roleId", false, "ROLE_ID");
-        public final static Property Team = new Property(30, String.class, "team", false, "TEAM");
-        public final static Property Push = new Property(31, String.class, "push", false, "PUSH");
-        public final static Property IdStr = new Property(32, String.class, "idStr", false, "ID_STR");
+        public final static Property MasterRole = new Property(29, String.class, "masterRole", false, "MASTER_ROLE");
+        public final static Property RoleId = new Property(30, int.class, "roleId", false, "ROLE_ID");
+        public final static Property Team = new Property(31, String.class, "team", false, "TEAM");
+        public final static Property Push = new Property(32, String.class, "push", false, "PUSH");
+        public final static Property IdStr = new Property(33, String.class, "idStr", false, "ID_STR");
     }
 
 
@@ -101,10 +102,11 @@ public class UserInfoDao extends AbstractDao<UserInfo, Long> {
                 "\"PAY_FLAG\" INTEGER NOT NULL ," + // 26: payFlag
                 "\"MASTER_RANK_ID\" TEXT," + // 27: masterRankId
                 "\"MASTER_RANK_NAME\" TEXT," + // 28: masterRankName
-                "\"ROLE_ID\" INTEGER NOT NULL ," + // 29: roleId
-                "\"TEAM\" TEXT," + // 30: team
-                "\"PUSH\" TEXT," + // 31: push
-                "\"ID_STR\" TEXT);"); // 32: idStr
+                "\"MASTER_ROLE\" TEXT," + // 29: masterRole
+                "\"ROLE_ID\" INTEGER NOT NULL ," + // 30: roleId
+                "\"TEAM\" TEXT," + // 31: team
+                "\"PUSH\" TEXT," + // 32: push
+                "\"ID_STR\" TEXT);"); // 33: idStr
     }
 
     /** Drops the underlying database table. */
@@ -237,21 +239,26 @@ public class UserInfoDao extends AbstractDao<UserInfo, Long> {
         if (masterRankName != null) {
             stmt.bindString(29, masterRankName);
         }
-        stmt.bindLong(30, entity.getRoleId());
+ 
+        String masterRole = entity.getMasterRole();
+        if (masterRole != null) {
+            stmt.bindString(30, masterRole);
+        }
+        stmt.bindLong(31, entity.getRoleId());
  
         String team = entity.getTeam();
         if (team != null) {
-            stmt.bindString(31, team);
+            stmt.bindString(32, team);
         }
  
         String push = entity.getPush();
         if (push != null) {
-            stmt.bindString(32, push);
+            stmt.bindString(33, push);
         }
  
         String idStr = entity.getIdStr();
         if (idStr != null) {
-            stmt.bindString(33, idStr);
+            stmt.bindString(34, idStr);
         }
     }
 
@@ -379,21 +386,26 @@ public class UserInfoDao extends AbstractDao<UserInfo, Long> {
         if (masterRankName != null) {
             stmt.bindString(29, masterRankName);
         }
-        stmt.bindLong(30, entity.getRoleId());
+ 
+        String masterRole = entity.getMasterRole();
+        if (masterRole != null) {
+            stmt.bindString(30, masterRole);
+        }
+        stmt.bindLong(31, entity.getRoleId());
  
         String team = entity.getTeam();
         if (team != null) {
-            stmt.bindString(31, team);
+            stmt.bindString(32, team);
         }
  
         String push = entity.getPush();
         if (push != null) {
-            stmt.bindString(32, push);
+            stmt.bindString(33, push);
         }
  
         String idStr = entity.getIdStr();
         if (idStr != null) {
-            stmt.bindString(33, idStr);
+            stmt.bindString(34, idStr);
         }
     }
 
@@ -434,10 +446,11 @@ public class UserInfoDao extends AbstractDao<UserInfo, Long> {
             cursor.getInt(offset + 26), // payFlag
             cursor.isNull(offset + 27) ? null : cursor.getString(offset + 27), // masterRankId
             cursor.isNull(offset + 28) ? null : cursor.getString(offset + 28), // masterRankName
-            cursor.getInt(offset + 29), // roleId
-            cursor.isNull(offset + 30) ? null : cursor.getString(offset + 30), // team
-            cursor.isNull(offset + 31) ? null : cursor.getString(offset + 31), // push
-            cursor.isNull(offset + 32) ? null : cursor.getString(offset + 32) // idStr
+            cursor.isNull(offset + 29) ? null : cursor.getString(offset + 29), // masterRole
+            cursor.getInt(offset + 30), // roleId
+            cursor.isNull(offset + 31) ? null : cursor.getString(offset + 31), // team
+            cursor.isNull(offset + 32) ? null : cursor.getString(offset + 32), // push
+            cursor.isNull(offset + 33) ? null : cursor.getString(offset + 33) // idStr
         );
         return entity;
     }
@@ -473,10 +486,11 @@ public class UserInfoDao extends AbstractDao<UserInfo, Long> {
         entity.setPayFlag(cursor.getInt(offset + 26));
         entity.setMasterRankId(cursor.isNull(offset + 27) ? null : cursor.getString(offset + 27));
         entity.setMasterRankName(cursor.isNull(offset + 28) ? null : cursor.getString(offset + 28));
-        entity.setRoleId(cursor.getInt(offset + 29));
-        entity.setTeam(cursor.isNull(offset + 30) ? null : cursor.getString(offset + 30));
-        entity.setPush(cursor.isNull(offset + 31) ? null : cursor.getString(offset + 31));
-        entity.setIdStr(cursor.isNull(offset + 32) ? null : cursor.getString(offset + 32));
+        entity.setMasterRole(cursor.isNull(offset + 29) ? null : cursor.getString(offset + 29));
+        entity.setRoleId(cursor.getInt(offset + 30));
+        entity.setTeam(cursor.isNull(offset + 31) ? null : cursor.getString(offset + 31));
+        entity.setPush(cursor.isNull(offset + 32) ? null : cursor.getString(offset + 32));
+        entity.setIdStr(cursor.isNull(offset + 33) ? null : cursor.getString(offset + 33));
      }
     
     @Override

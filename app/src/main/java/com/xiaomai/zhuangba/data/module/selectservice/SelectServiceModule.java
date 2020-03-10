@@ -74,4 +74,16 @@ public class SelectServiceModule extends BaseModule<ISelectServiceView> implemen
                 });
     }
 
+    @Override
+    public void requestEnumerate() {
+        RxUtils.getObservable(ServiceUrl.getUserApi().getEnumerate("URGENTPRICES"))
+                .compose(mViewRef.get().<HttpResult<String>>bindLifecycle())
+                .subscribe(new BaseHttpRxObserver<String>(mContext.get()) {
+                    @Override
+                    protected void onSuccess(String enumerate) {
+                        mViewRef.get().enumerateSuccess(enumerate);
+                    }
+                });
+    }
+
 }

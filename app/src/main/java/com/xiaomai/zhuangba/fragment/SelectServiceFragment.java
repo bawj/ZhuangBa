@@ -8,11 +8,14 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.example.toollib.util.DensityUtils;
 import com.example.toollib.util.Log;
 import com.example.toollib.util.ToastUtil;
 import com.google.gson.Gson;
@@ -23,6 +26,7 @@ import com.xiaomai.zhuangba.R;
 import com.xiaomai.zhuangba.adapter.ServiceContentAdapter;
 import com.xiaomai.zhuangba.adapter.ServiceTitleAdapter;
 import com.xiaomai.zhuangba.adapter.SheetBehaviorAdapter;
+import com.xiaomai.zhuangba.data.Enumerate;
 import com.xiaomai.zhuangba.data.bean.Maintenance;
 import com.xiaomai.zhuangba.data.bean.OrderAddress;
 import com.xiaomai.zhuangba.data.bean.ServiceSubcategory;
@@ -34,6 +38,7 @@ import com.xiaomai.zhuangba.data.module.selectservice.ISelectServiceModule;
 import com.xiaomai.zhuangba.data.module.selectservice.ISelectServiceView;
 import com.xiaomai.zhuangba.data.module.selectservice.SelectServiceModule;
 import com.xiaomai.zhuangba.enums.ForResultCode;
+import com.xiaomai.zhuangba.enums.StringTypeExplain;
 import com.xiaomai.zhuangba.fragment.base.BaseListFragment;
 import com.xiaomai.zhuangba.fragment.personal.PricingSheetFragment;
 import com.xiaomai.zhuangba.fragment.service.ServiceDetailFragment;
@@ -101,6 +106,8 @@ public class SelectServiceFragment extends BaseListFragment<ISelectServiceModule
     RecyclerView rvBottomSheetShop;
     @BindView(R.id.tvShopCarEmpty)
     TextView tvShopCarEmpty;
+    @BindView(R.id.chkUrgent)
+    CheckBox chkUrgent;
     @BindView(R.id.laySelectServiceTip)
     LinearLayout laySelectServiceTip;
     /**
@@ -121,11 +128,11 @@ public class SelectServiceFragment extends BaseListFragment<ISelectServiceModule
 
     public static final String ORDER_ADDRESS_GSON = "order_address_gson";
 
-    public static SelectServiceFragment newInstance(String serviceId, String serviceText , String orderAddressGson) {
+    public static SelectServiceFragment newInstance(String serviceId, String serviceText, String orderAddressGson) {
         Bundle args = new Bundle();
         args.putString(SERVICE_ID, serviceId);
         args.putString(SERVICE_TEXT, serviceText);
-        args.putString(ORDER_ADDRESS_GSON , orderAddressGson);
+        args.putString(ORDER_ADDRESS_GSON, orderAddressGson);
         SelectServiceFragment fragment = new SelectServiceFragment();
         fragment.setArguments(args);
         return fragment;
@@ -159,7 +166,23 @@ public class SelectServiceFragment extends BaseListFragment<ISelectServiceModule
         //设置返回
         TopBarLayoutUtil.addLeftImageBlackButton(topBarSelectService, getBaseFragmentActivity());
 
+        //加急单
+        chkUrgent.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                //请求加急单价格
+                if (isChecked) {
+                    iModule.requestEnumerate();
+                } else {
+                    //直接删除加急单
+                    DBHelper.getInstance().getEnumerateDao().deleteAll();
+                    updateUi();
+                }
+            }
+        });
+
         //默认清除购物车
+        DBHelper.getInstance().getEnumerateDao().deleteAll();
         DBHelper.getInstance().getShopCarDataDao().deleteAll();
         DBHelper.getInstance().getShopAuxiliaryMaterialsDBDao().deleteAll();
         updateUi();
@@ -169,6 +192,17 @@ public class SelectServiceFragment extends BaseListFragment<ISelectServiceModule
     public void onRefresh(@NonNull RefreshLayout refreshLayout) {
         super.onRefresh(refreshLayout);
         iModule.requestServiceData();
+    }
+
+    @Override
+    public void enumerateSuccess(String enumeratePrice) {
+        //计算总金额
+        DBHelper.getInstance().getEnumerateDao().deleteAll();
+        Enumerate enumerate = new Enumerate();
+        enumerate.setUrgentPrice(DensityUtils.stringTypeDouble(enumeratePrice));
+        enumerate.setUrgent(StringTypeExplain.YES.getCode());
+        DBHelper.getInstance().getEnumerateDao().insert(enumerate);
+        updateUi();
     }
 
     @Override
@@ -206,6 +240,7 @@ public class SelectServiceFragment extends BaseListFragment<ISelectServiceModule
                     public void ok() {
                         startShopCarFragment();
                     }
+
                     @Override
                     public void calculationPrice() {
                         updateUi();
@@ -217,14 +252,14 @@ public class SelectServiceFragment extends BaseListFragment<ISelectServiceModule
     @Override
     public String getProvince() {
         String orderAddressGson = getOrderAddressGson();
-        OrderAddress orderAddress = new Gson().fromJson(orderAddressGson , OrderAddress.class);
+        OrderAddress orderAddress = new Gson().fromJson(orderAddressGson, OrderAddress.class);
         return orderAddress.getProvince();
     }
 
     @Override
     public String getCity() {
         String orderAddressGson = getOrderAddressGson();
-        OrderAddress orderAddress = new Gson().fromJson(orderAddressGson , OrderAddress.class);
+        OrderAddress orderAddress = new Gson().fromJson(orderAddressGson, OrderAddress.class);
         return orderAddress.getCity();
     }
 
@@ -233,7 +268,7 @@ public class SelectServiceFragment extends BaseListFragment<ISelectServiceModule
         if (totalNumber != 0) {
             //是否选择了 服务
             startFragmentForResult(ShopCarFragment.newInstance(getServiceId(),
-                    getServiceText() , getOrderAddressGson()), ForResultCode.START_FOR_RESULT_CODE_.getCode());
+                    getServiceText(), getOrderAddressGson()), ForResultCode.START_FOR_RESULT_CODE_.getCode());
         } else {
             ToastUtil.showShort(getString(R.string.please_service));
         }
@@ -260,7 +295,7 @@ public class SelectServiceFragment extends BaseListFragment<ISelectServiceModule
             ServiceSubcategoryProject serviceSubcategoryProject = (ServiceSubcategoryProject)
                     view.findViewById(R.id.tvServiceContentMoney).getTag();
             startFragment(ServiceDetailFragment.newInstance(serviceSubcategoryProject.getServiceText(),
-                    serviceSubcategoryProject.getServiceStandard() , serviceSubcategoryProject.getVideo() , serviceSubcategoryProject.getIconUrl()));
+                    serviceSubcategoryProject.getServiceStandard(), serviceSubcategoryProject.getVideo(), serviceSubcategoryProject.getIconUrl()));
         }
     }
 
@@ -295,6 +330,7 @@ public class SelectServiceFragment extends BaseListFragment<ISelectServiceModule
             default:
         }
     }
+
 
     public void selectServiceNext() {
         ShopAuxiliaryMaterialsDB shopAuxiliaryMaterialsDB = DBHelper.getInstance().getShopAuxiliaryMaterialsDBDao().queryBuilder().unique();
@@ -358,8 +394,8 @@ public class SelectServiceFragment extends BaseListFragment<ISelectServiceModule
     }
 
     @Override
-    public String getOrderAddressGson(){
-        if (getArguments() != null){
+    public String getOrderAddressGson() {
+        if (getArguments() != null) {
             return getArguments().getString(ORDER_ADDRESS_GSON);
         }
         return null;

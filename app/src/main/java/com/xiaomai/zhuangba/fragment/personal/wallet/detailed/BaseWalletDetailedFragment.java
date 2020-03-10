@@ -11,6 +11,7 @@ import com.example.toollib.http.HttpResult;
 import com.example.toollib.http.exception.ApiException;
 import com.example.toollib.http.observer.BaseHttpRxObserver;
 import com.example.toollib.http.util.RxUtils;
+import com.example.toollib.util.DensityUtils;
 import com.haibin.calendarview.Calendar;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -165,7 +166,7 @@ public class BaseWalletDetailedFragment extends BaseListFragment implements Expa
         int type = getType();
         for (WalletDetailBean.ListBean listBean : listBeans) {
             String time = type == WalletOrderTypeEnum.DETAIL_OUT.getCode() ? listBean.getTimes() : listBean.getModifyTime();
-            String title = DateUtil.dateToStr(time , "yyyy-MM");
+            String title = DateUtil.getDate2String(DensityUtils.stringTypeLong(time) , "yyyy-MM");
             if (!groupList.contains(title)) {
                 groupList.add(title);
             }
@@ -189,7 +190,7 @@ public class BaseWalletDetailedFragment extends BaseListFragment implements Expa
                 }else {
                     time = listBean1.getModifyTime();
                 }
-                if (time.contains(s)) {
+                if (DateUtil.getDate2String(DensityUtils.stringTypeLong(time) , "yyyy-MM").contains(s)) {
                     list.add(listBean1);
                 }
             }

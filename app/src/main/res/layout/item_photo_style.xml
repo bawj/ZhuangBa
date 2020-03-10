@@ -12,9 +12,9 @@
 
         <ImageView
             android:id="@+id/ivBaseAdvertisementPhotoTab"
-            android:layout_width="@dimen/tool_lib_135dp"
-            android:layout_height="@dimen/tool_lib_135dp"
-            android:padding="@dimen/tool_lib_2dp" />
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:src="@drawable/ic_sample_head" />
 
         <TextView
             android:id="@+id/tvPhotoTapExplain"

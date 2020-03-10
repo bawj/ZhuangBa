@@ -81,8 +81,8 @@ public class CommonlyDialog {
         return this;
     }
 
-    public CommonlyDialog setTvDialogCommonlyOkTextColoe(int color) {
-        tvDialogCommonlyOk.setTextColor(color);
+    public CommonlyDialog setTvDialogCommonlyCloseTextColor(int color) {
+        tvDialogCommonlyClose.setTextColor(color);
         return this;
     }
 
@@ -93,6 +93,11 @@ public class CommonlyDialog {
 
     public CommonlyDialog isVisibleClose(boolean flag) {
         tvDialogCommonlyClose.setVisibility(flag ? View.VISIBLE : View.GONE);
+        return this;
+    }
+
+    public CommonlyDialog setTvDialogCommonlyContentTextGravity(int gravity){
+        tvDialogCommonlyContent.setGravity(gravity);
         return this;
     }
 

@@ -25,4 +25,9 @@ public interface ISelectServiceModule extends IBaseModule<ISelectServiceView> {
      * 查询开槽、辅材和调试
      */
     void requestSlottingAndDebug();
+
+    /**
+     * 查询加急单价格
+     */
+    void requestEnumerate();
 }

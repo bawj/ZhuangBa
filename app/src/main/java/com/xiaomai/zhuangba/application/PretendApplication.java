@@ -50,10 +50,10 @@ public class PretendApplication extends Application {
     private static PretendApplication pretendApplication;
 
 //   public static final String BASE_URL = "http://192.168.0.110:7966/";
-//   public static final String BASE_URL = "http://192.168.0.168:7966/testZhuangBas/";
+   public static final String BASE_URL = "http://192.168.0.167:7966/testZhuangBas/";
 //   public static final String BASE_URL = "http://192.168.0.109:7966/";
 //   public static final String BASE_URL = "https://zb.hangzhouzhuangba.com/zhuangBas/";
-   public static final String BASE_URL = "https://zb.hangzhouzhuangba.com/testZhuangBas/";
+//   public static final String BASE_URL = "https://zb.hangzhouzhuangba.com/testZhuangBas/";
 
     public static PretendApplication getInstance() {
         return pretendApplication;
@@ -100,13 +100,8 @@ public class PretendApplication extends Application {
     private void uMengMessageHandler(PushAgent mPushAgent) {
         UmengMessageHandler messageHandler = new UmengMessageHandler() {
             @Override
-            public void dealWithNotificationMessage(Context context, UMessage msg) {
-                //调用super则会走通知展示流程，不调用super则不展示通知
-                savePushMessage(msg);
-                super.dealWithNotificationMessage(context, msg);
-            }
-            @Override
             public Notification getNotification(Context context, UMessage msg) {
+                Log.e("getNotification");
                 savePushMessage(msg);
                 //默认为0，若填写的builder_id并不存在，也使用默认。
                 return super.getNotification(context, msg);
@@ -146,8 +141,7 @@ public class PretendApplication extends Application {
         if (unique != null) {
             String phoneNumber = unique.getPhoneNumber();
             pushNotificationDB.setPhone(phoneNumber);
-            PushNotificationDBDao pushNotificationDBDao = DBHelper.getInstance().getPushNotificationDBDao();
-            pushNotificationDBDao.insert(pushNotificationDB);
+            DBHelper.getInstance().getPushNotificationDBDao().insert(pushNotificationDB);
             //通知 通知列表 刷新数据
             EventBus.getDefault().post(new MessageEvent(EventBusEnum.NOTIFICATION_REFRESH.getCode()));
         }

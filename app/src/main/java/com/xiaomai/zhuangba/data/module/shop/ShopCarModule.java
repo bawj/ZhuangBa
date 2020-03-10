@@ -11,6 +11,7 @@ import com.example.toollib.util.DensityUtils;
 import com.google.gson.Gson;
 import com.xiaomai.zhuangba.R;
 import com.xiaomai.zhuangba.ShopCarDataDao;
+import com.xiaomai.zhuangba.data.Enumerate;
 import com.xiaomai.zhuangba.data.bean.OrderAddress;
 import com.xiaomai.zhuangba.data.bean.OrderServicesBean;
 import com.xiaomai.zhuangba.data.bean.ShopCarData;
@@ -242,6 +243,12 @@ public class ShopCarModule extends BaseModule<IShopCarView> implements IShopCarM
         hashMap.put("employerDescribe", orderAddress.getEmployerDescribe());
         ShopCarUtil.setAuxiliaryMaterials(hashMap);
         //setAuxiliaryMaterials(hashMap);
+        //加急单 价格
+        Enumerate enumerate = DBHelper.getInstance().getEnumerateDao().queryBuilder().unique();
+        if (enumerate != null){
+            hashMap.put("urgentPrice", enumerate.getUrgentPrice());
+            hashMap.put("urgent", enumerate.getUrgent());
+        }
         //总金额
         hashMap.put("orderAmount", String.valueOf(ShopCarUtil.getTotalMoney()));
         return hashMap;
