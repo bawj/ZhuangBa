@@ -31,7 +31,7 @@ public class UpdatePassTwoFragment extends BaseFragment {
     @BindView(R.id.codeTxt)
     CodeEditText codeTxt;
 
-    private String verificationCode;
+    public String verificationCode;
     public static final String PHONE = "phone";
     public static final String VERIFICATION_CODE = "verification_code";
 

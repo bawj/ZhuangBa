@@ -46,6 +46,11 @@ public class DryRunOrder {
     /**理由*/
     private String refusalReason;
 
+    /** 1：新增；2：删减 3 自定义项 4空跑*/
+    private String orderType;
+    /** 支付code */
+    private String code;
+
     private Integer rake;
 
     public int getId() {
@@ -144,6 +149,14 @@ public class DryRunOrder {
         this.masterOrderAmount = masterOrderAmount;
     }
 
+    public String getOrderType() {
+        return orderType;
+    }
+
+    public void setOrderType(String orderType) {
+        this.orderType = orderType;
+    }
+
     public String getRefusalReason() {
         return refusalReason == null ? "" : refusalReason;
     }
@@ -158,5 +171,13 @@ public class DryRunOrder {
 
     public void setRake(Integer rake) {
         this.rake = rake;
+    }
+
+    public String getCode() {
+        return code == null ? "" : code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 }

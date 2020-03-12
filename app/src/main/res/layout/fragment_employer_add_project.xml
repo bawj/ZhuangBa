@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:id="@+id/refreshBaseList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#F2F2F2"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        app:srlAccentColor="@android:color/white"
+        app:srlEnableHeaderTranslationContent="false"
+        app:srlEnableLoadMore="false"
+        app:srlPrimaryColor="@color/colorPrimary">
+
+        <com.scwang.smartrefresh.header.MaterialHeader
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <RelativeLayout
+            android:id="@+id/relEmployerProject"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="@dimen/tool_lib_6dp"
+                android:layout_marginBottom="@dimen/tool_lib_56dp"
+                android:background="@android:color/white"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvEmployerAddProject"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/tool_lib_12dp"
+                    android:paddingStart="@dimen/tool_lib_16dp"
+                    android:paddingEnd="@dimen/tool_lib_16dp"
+                    android:text="@string/employer_add_project"
+                    android:textColor="@color/tool_lib_gray_222222"
+                    android:textSize="@dimen/tool_lib_16sp" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rvBaseList"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="@dimen/tool_lib_12dp"
+                    android:paddingStart="@dimen/tool_lib_16dp"
+                    android:paddingEnd="@dimen/tool_lib_16dp" />
+            </LinearLayout>
+
+            <RelativeLayout
+                android:id="@+id/relEmployerAddProject"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/tool_lib_56dp"
+                android:layout_alignParentBottom="true"
+                android:background="@android:color/white">
+
+                <TextView
+                    android:id="@+id/tvEmployerAddProjectTotal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="@dimen/tool_lib_16dp"
+                    android:text="@string/total"
+                    android:textColor="@color/tool_lib_gray_777777"
+                    android:textSize="@dimen/tool_lib_14sp" />
+
+                <TextView
+                    android:id="@+id/tvEmployerTotal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toEndOf="@+id/tvEmployerAddProjectTotal"
+                    android:textColor="@color/tool_lib_red_EF2B2B"
+                    android:textSize="@dimen/tool_lib_14sp"
+                    tools:text="24" />
+
+                <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
+                    android:id="@+id/btnNoPassage"
+                    android:layout_width="@dimen/tool_lib_90dp"
+                    android:layout_height="@dimen/tool_lib_40dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="@dimen/tool_lib_16dp"
+                    android:layout_toStartOf="@+id/btnAuditPass"
+                    android:text="@string/no_passage"
+                    android:textColor="@color/tool_lib_gray_777777"
+                    android:textSize="@dimen/tool_lib_14sp"
+                    app:qmui_backgroundColor="@android:color/white"
+                    app:qmui_borderColor="@color/tool_lib_gray_E8E8E8"
+                    app:qmui_borderWidth="@dimen/tool_lib_1dp" />
+
+                <com.qmuiteam.qmui.layout.QMUIButton
+                    android:id="@+id/btnAuditPass"
+                    style="@style/base_btn"
+                    android:layout_width="@dimen/tool_lib_90dp"
+                    android:layout_height="@dimen/tool_lib_40dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="@dimen/tool_lib_16dp"
+                    android:text="@string/audit_pass" />
+            </RelativeLayout>
+        </RelativeLayout>
+
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
+</RelativeLayout>

@@ -22,6 +22,7 @@ public class ApplyForARunDialog {
     private TextView tvApplicationAmount;
     private TextView tvDialogContent;
     private TextView tvReAppointmentTime;
+    private TextView tvProblemFeedback;
 
     private BaseCallback baseCallback;
 
@@ -42,7 +43,7 @@ public class ApplyForARunDialog {
         tvDialogContent = qmuiDialog.findViewById(R.id.tvDialogContent);
         //再约时间
         tvReAppointmentTime = qmuiDialog.findViewById(R.id.tvReAppointmentTime);
-
+        tvProblemFeedback = qmuiDialog.findViewById(R.id.tvProblemFeedback);
         TextView tvDialogOk = qmuiDialog.findViewById(R.id.tvDialogOk);
         TextView tvDialogClose = qmuiDialog.findViewById(R.id.tvDialogClose);
 
@@ -88,6 +89,16 @@ public class ApplyForARunDialog {
     }
     public ApplyForARunDialog setReAppointmentTime(String reAppointmentTime){
         tvReAppointmentTime.setText(reAppointmentTime);
+        return this;
+    }
+
+    public ApplyForARunDialog isReAppointmentTime(int visibility){
+        tvReAppointmentTime.setVisibility(visibility);
+        return this;
+    }
+
+    public ApplyForARunDialog setTvProblemFeedback(String content){
+        tvProblemFeedback.setText(content);
         return this;
     }
 

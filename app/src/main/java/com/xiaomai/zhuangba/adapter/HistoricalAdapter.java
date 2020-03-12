@@ -76,6 +76,7 @@ public class HistoricalAdapter extends BaseQuickAdapter<OngoingOrdersList, BaseV
             } else if (userInfo.getRole().equals(String.valueOf(StaticExplain.EMPLOYER.getCode()))) {
                 //雇主 安装单
                 OrderStatusUtil.employerStatus(mContext, orderStatus, tvItemHistoricalOrdersType);
+                tvItemHistoricalOrdersMoney.setText(mContext.getString(R.string.content_money, String.valueOf(ordersList.getOrderAmount())));
             }
             if (ordersList.getMaintenanceFlag() == StaticExplain.YES_MAINTENANCE.getCode()){
                 //有维保

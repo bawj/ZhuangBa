@@ -50,8 +50,8 @@ public class EquipmentRelocationFragment extends BaseFragment implements MultiGr
     @BindView(R.id.tvLocationAddress)
     TextView tvLocationAddress;
 
-    private AMapLocation mapLocation;
     private Uri imageUriFromCamera;
+    private AMapLocation mapLocation;
     public Uri resultUri = null;
     public List<String> mediaSelectorFiles = new ArrayList<>();
     private MultiGraphSelectionAdapter multiGraphSelectionAdapter;

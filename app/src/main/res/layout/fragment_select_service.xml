@@ -19,7 +19,7 @@
         android:id="@+id/refreshBaseList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/tool_lib_56dp"
+        android:layout_marginTop="@dimen/tool_lib_76dp"
         android:background="#F2F2F2"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         app:srlAccentColor="@android:color/white"

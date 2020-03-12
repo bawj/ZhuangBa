@@ -18,6 +18,7 @@ import com.xiaomai.zhuangba.data.bean.DataDetailsContent;
 import com.xiaomai.zhuangba.data.bean.DeliveryContent;
 import com.xiaomai.zhuangba.data.bean.DeviceOrder;
 import com.xiaomai.zhuangba.data.bean.EarnestBean;
+import com.xiaomai.zhuangba.data.bean.EmployerAddProjectData;
 import com.xiaomai.zhuangba.data.bean.EmployerAdvertisingReplacement;
 import com.xiaomai.zhuangba.data.bean.EmployerWalletBean;
 import com.xiaomai.zhuangba.data.bean.EmployerWalletDetailBean;
@@ -1398,7 +1399,7 @@ public interface IApi {
      * @return observable
      */
     @POST("adOrder/nextIssuePicture")
-    Observable<HttpResult<Object>> nextIssuePicture(@Body RequestBody body);
+    Observable<HttpResult<Boolean>> nextIssuePicture(@Body RequestBody body);
 
     /**
      * 师傅上传上刊图片
@@ -1406,7 +1407,7 @@ public interface IApi {
      * @return observable
      */
     @POST("adOrder/publishedPicture")
-    Observable<HttpResult<Object>> publishedPicture(@Body RequestBody body);
+    Observable<HttpResult<Boolean>> publishedPicture(@Body RequestBody body);
 
     /**
      * 查询验收不通过理由
@@ -1485,6 +1486,23 @@ public interface IApi {
     Observable<HttpResult<PayData>> adoptAirRun(@Field("cause") String cause, @Field("id") String id,
                                                 @Field("payType") String payType, @Field("password") String password);
 
+
+    /**
+     * 雇主通过自定义项
+     *
+     * @param id       主键
+     * @param orderCode 订单号
+     * @param code 支付code
+     * @param payType  支付类型
+     * @param password 支付密码
+     * @return observable
+     */
+    @FormUrlEncoded
+    @POST("installOrder/adoptCustomizeItem")
+    Observable<HttpResult<PayData>> adoptCustomizeItem(@Field("id") String id, @Field("orderCode") String orderCode,
+                                                       @Field("code") String code, @Field("payType") String payType, @Field("password") String password);
+
+
     /**
      * 查询企业需求
      *
@@ -1521,7 +1539,7 @@ public interface IApi {
      * 师傅申请删减项目
      *
      * @param orderCode   订单编号
-     * @param amount 金额
+     * @param amount      金额
      * @param description 备注
      * @return observable
      */
@@ -1544,19 +1562,18 @@ public interface IApi {
     /**
      * 师傅上传重定位的图片
      *
-     * @param id 设备ID
-     * @param address 地址信息
-     * @param picturesUrl 地址图片
+     * @param id           设备ID
+     * @param address      地址信息
+     * @param picturesUrl  地址图片
      * @param equipmentLon 设备经度
      * @param equipmentLat 设备纬度
      * @return observable
      */
     @FormUrlEncoded
     @POST("adOrder/relocation")
-    Observable<HttpResult<Object>> postRelocation(@Field("id") int id,@Field("address") String address,
+    Observable<HttpResult<Object>> postRelocation(@Field("id") int id, @Field("address") String address,
                                                   @Field("picturesUrl") String picturesUrl,
-                                                  @Field("equipmentLon") double equipmentLon ,@Field("equipmentLat") double equipmentLat);
-
+                                                  @Field("equipmentLon") double equipmentLon, @Field("equipmentLat") double equipmentLat);
 
 
     /**
@@ -1567,7 +1584,7 @@ public interface IApi {
      * @return observable
      */
     @GET("adOrder/getDeviceSurfaceRules/{serviceId}")
-    Observable<HttpResult<EquipmentSurfaceRules>> getDeviceSurfaceRules(@Path("serviceId") String serviceId ,
+    Observable<HttpResult<EquipmentSurfaceRules>> getDeviceSurfaceRules(@Path("serviceId") String serviceId,
                                                                         @Query("popupFlag") int popupFlag);
 
     /**
@@ -1578,6 +1595,53 @@ public interface IApi {
      */
     @FormUrlEncoded
     @POST("adOrder/savePopup")
-    Observable<HttpResult<Object>> savePopup(@Field("serviceId") String serviceId );
+    Observable<HttpResult<Object>> savePopup(@Field("serviceId") String serviceId);
 
+
+    /**
+     * 雇主不通过自定义项
+     *
+     * @param orderCode orderCode
+     * @return observable
+     */
+    @FormUrlEncoded
+    @POST("installOrder/failCustomizeItem")
+    Observable<HttpResult<Object>> failCustomizeItem(@Field("orderCode") String orderCode, @Field("code") String code);
+
+
+    /**
+     * 雇主查询增减项详情
+     *
+     * @param orderType 类型；1：新增；2：删减
+     * @param orderCode orderCode
+     * @return observable
+     */
+    @FormUrlEncoded
+    @POST("installOrder/getIncreaseDecrease")
+    Observable<HttpResult<EmployerAddProjectData>> getIncreaseDecrease(@Field("orderType") String orderType, @Field("orderCode") String orderCode);
+
+
+    /**
+     * 雇主不通过增减项申请
+     *
+     * @param orderCode orderCode
+     * @param code      code
+     * @return observable
+     */
+    @FormUrlEncoded
+    @POST("installOrder/failIncreaseDecrease")
+    Observable<HttpResult<Object>> failIncreaseDecrease(@Field("orderCode") String orderCode, @Field("code") String code);
+    /**
+     * 雇主通过增项
+     *
+     * @param orderCode orderCode
+     * @param code      code
+     * @param payType   类型
+     * @param password 密码
+     * @return observable
+     */
+    @FormUrlEncoded
+    @POST("installOrder/adoptIncrease")
+    Observable<HttpResult<PayData>> adoptIncrease(@Field("orderCode") String orderCode, @Field("code") String code ,
+                                                 @Field("payType") String payType ,@Field("password") String password );
 }

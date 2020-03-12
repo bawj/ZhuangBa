@@ -143,6 +143,16 @@ public class CompensateDialog<T extends BaseFragment> implements View.OnClickLis
         }
     }
 
+    public CompensateDialog isRecyclerCompensateVisibility(int visibility){
+        recyclerCompensate.setVisibility(visibility);
+        return this;
+    }
+
+    public CompensateDialog setOrderCode(String orderCode) {
+        this.orderCode = orderCode;
+        return this;
+    }
+
     private void dismiss() {
         if (qmuiDialog != null){
             qmuiDialog.dismiss();

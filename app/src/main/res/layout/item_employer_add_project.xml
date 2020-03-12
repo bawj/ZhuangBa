@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="@dimen/tool_lib_5dp"
+    android:paddingBottom="@dimen/tool_lib_12dp">
+
+    <ImageView
+        android:id="@+id/ivItemServiceLogo"
+        android:layout_width="@dimen/tool_lib_80dp"
+        android:layout_height="@dimen/tool_lib_80dp"
+        tools:src="@drawable/bg_employer" />
+
+    <RelativeLayout
+        android:id="@+id/relServiceItem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/ivItemServiceLogo"
+        android:layout_toEndOf="@+id/ivItemServiceLogo">
+
+        <TextView
+            android:id="@+id/tvItemServiceName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/tool_lib_12dp"
+            android:ellipsize="end"
+            android:maxLength="15"
+            android:singleLine="true"
+            android:textColor="@color/tool_lib_gray_222222"
+            android:textSize="@dimen/tool_lib_14sp"
+            tools:text="智能通讯座调试" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/relAuxiliaryMaterials"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/relServiceItem"
+        android:layout_marginStart="@dimen/tool_lib_6dp"
+        android:layout_marginTop="@dimen/tool_lib_3dp"
+        android:layout_toEndOf="@+id/ivItemServiceLogo">
+
+        <TextView
+            android:id="@+id/tvSlotting"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/tool_lib_6dp"
+            android:background="@drawable/bg_gray"
+            android:padding="@dimen/tool_lib_3dp"
+            android:textColor="@color/tool_lib_gray_777777"
+            android:textSize="@dimen/tool_lib_12sp"
+            tools:text="0-5米开槽" />
+
+        <TextView
+            android:id="@+id/tvAuxiliaryMaterials"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/tool_lib_6dp"
+            android:layout_toEndOf="@+id/tvSlotting"
+            android:background="@drawable/bg_gray"
+            android:padding="@dimen/tool_lib_3dp"
+            android:text="@string/auxiliary_materials"
+            android:textColor="@color/tool_lib_gray_777777"
+            android:textSize="@dimen/tool_lib_12sp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/ivItemServiceLogo"
+        android:layout_marginStart="@dimen/tool_lib_12dp"
+        android:layout_toEndOf="@+id/ivItemServiceLogo">
+
+        <TextView
+            android:id="@+id/tvItemServiceMoney"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:textColor="@color/tool_lib_gray_222222"
+            android:textSize="@dimen/tool_lib_14sp"
+            tools:text="¥80" />
+
+        <TextView
+            android:id="@+id/tvServiceItemNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/tool_lib_3dp"
+            android:layout_toEndOf="@+id/tvItemServiceMoney"
+            android:textColor="@color/tool_lib_gray_777777"
+            android:textSize="@dimen/tool_lib_12sp"
+            tools:text="x2" />
+
+        <TextView
+            android:id="@+id/tvItemServiceTotalMoney"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="@dimen/tool_lib_16dp"
+            android:layout_toStartOf="@+id/ivServiceItemRight"
+            android:textColor="@color/tool_lib_red_EF2B2B"
+            android:textSize="@dimen/tool_lib_14sp"
+            tools:text="¥160.00" />
+
+        <ImageView
+            android:id="@+id/ivServiceItemRight"
+            android:layout_width="@dimen/tool_lib_7dp"
+            android:layout_height="@dimen/tool_lib_13dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_right" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

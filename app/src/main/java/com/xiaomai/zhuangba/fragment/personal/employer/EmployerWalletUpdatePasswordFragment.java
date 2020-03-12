@@ -25,7 +25,7 @@ public class EmployerWalletUpdatePasswordFragment extends WalletUpdatePasswordFr
     @Override
     public void verificationCode(Object tag) {
         //下一步
-        if (getVerificationCode().equals(tag)) {
+        if (verificationCode.equals(tag)) {
             //设置交易密码
             startFragment(EmployerSetTradePasswordFragment.newInstance());
         } else {

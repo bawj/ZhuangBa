@@ -64,6 +64,7 @@ public class BaseAdvertisementPhotoTabFragment extends BaseFragment implements B
     private AMapLocation mapLocation;
     public Uri resultUri = null;
     private Uri imageUriFromCamera;
+    private List<ServiceSampleEntity> serviceSample;
     /**
      * 待上传到服务器的图片
      */
@@ -97,8 +98,8 @@ public class BaseAdvertisementPhotoTabFragment extends BaseFragment implements B
         relPhoto.setLayoutManager(new LinearLayoutManager(getActivity()));
         relPhoto.setAdapter(baseAdvertisementPhotoTabAdapter);
         //样式图  或者 默认图
-        List<ServiceSampleEntity> serviceSample = getDataInit();
-        if (!serviceSample.isEmpty()) {
+        serviceSample = getDataInit();
+        if (serviceSample != null && !serviceSample.isEmpty()) {
             GlideManager.loadImage(getActivity(), serviceSample.get(1).getPicUrl()
                     , ivAdvertisementPhoto, R.drawable.ic_notice_img_add);
         }
@@ -129,7 +130,11 @@ public class BaseAdvertisementPhotoTabFragment extends BaseFragment implements B
         switch (view.getId()) {
             case R.id.ivAdvertisementShot:
                 //拍摄
-                showUploadDialog();
+                if (serviceSample != null && serviceSample.size() > 0){
+                    showUploadDialog();
+                }else {
+                    showToast(getString(R.string.tip));
+                }
                 break;
             case R.id.btnPhotoSave:
                 //完成提交

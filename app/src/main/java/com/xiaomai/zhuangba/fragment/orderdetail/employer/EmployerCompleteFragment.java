@@ -19,6 +19,7 @@ import com.xiaomai.zhuangba.data.db.DBHelper;
 import com.xiaomai.zhuangba.util.ConstantUtil;
 import com.xiaomai.zhuangba.util.Util;
 import com.xiaomai.zhuangba.weight.GridSpacingItemDecoration;
+import com.xiaomai.zhuangba.weight.dialog.CompensateDialog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -108,27 +109,40 @@ public class EmployerCompleteFragment extends EmployerUnderConstructionFragment 
         this.orderServiceItemList = orderServiceItems;
     }
 
-    @OnClick(R.id.btnAddMaintenance)
-    public void onViewEmployerCompleteClicked() {
-        DBHelper.getInstance().getOrderServiceItemDao().deleteAll();
-        //新增维保
-        List<OrderServiceItem> orderServiceItems = new ArrayList<>();
-        for (OrderServiceItem orderServiceItem : orderServiceItemList) {
-            if (orderServiceItem.getMonthNumber() == 0 && !orderServiceItem.getServiceText().equals(getString(R.string.required_options))) {
-                orderServiceItems.add(orderServiceItem);
-            }
-        }
-        if (!orderServiceItems.isEmpty()) {
-            DBHelper.getInstance().getOrderServiceItemDao().insertInTx(orderServiceItems);
-            String address = ongoingOrdersList.getAddress();
-            String[] provinceCity = Util.getProvinceCity(address);
-            String province;
-            String city = "";
-            province = provinceCity[0];
-            if (provinceCity.length > 1) {
-                city = provinceCity[1];
-            }
-            startFragment(AddMaintenanceFragment.newInstance(province , city));
+    @OnClick({R.id.btnAddMaintenance, R.id.layCompensate})
+    public void onViewEmployerCompleteClicked(View view) {
+        switch (view.getId()) {
+            case R.id.btnAddMaintenance:
+                DBHelper.getInstance().getOrderServiceItemDao().deleteAll();
+                //新增维保
+                List<OrderServiceItem> orderServiceItems = new ArrayList<>();
+                for (OrderServiceItem orderServiceItem : orderServiceItemList) {
+                    if (orderServiceItem.getMonthNumber() == 0 && !orderServiceItem.getServiceText().equals(getString(R.string.required_options))) {
+                        orderServiceItems.add(orderServiceItem);
+                    }
+                }
+                if (!orderServiceItems.isEmpty()) {
+                    DBHelper.getInstance().getOrderServiceItemDao().insertInTx(orderServiceItems);
+                    String address = ongoingOrdersList.getAddress();
+                    String[] provinceCity = Util.getProvinceCity(address);
+                    String province;
+                    String city = "";
+                    province = provinceCity[0];
+                    if (provinceCity.length > 1) {
+                        city = provinceCity[1];
+                    }
+                    startFragment(AddMaintenanceFragment.newInstance(province, city));
+                }
+                break;
+            case R.id.layCompensate:
+                //发起索赔
+                new CompensateDialog<EmployerCompleteFragment>()
+                        .initView(getActivity(), this)
+                        .setOrderCode(getOrderCode())
+                        .isRecyclerCompensateVisibility(View.GONE)
+                        .showDialog();
+                break;
+            default:
         }
     }
 

@@ -29,6 +29,10 @@ public enum StringTypeExplain {
     NO("n" , "no"),
     FULL_TIME_MASTER("2" , "2专职师傅"),
     EXTERNAL_MASTER("1" , "外部师傅"),
+    ADD_PROJECT("1" , "新增项目"),
+    DEL_PROJECT("2" , "删减项目"),
+    CUSTOM_PROJECT("3" , "自定义项"),
+    DRY_RUN_PROJECT("4" , "空跑"),
     ;
 
     private String code;

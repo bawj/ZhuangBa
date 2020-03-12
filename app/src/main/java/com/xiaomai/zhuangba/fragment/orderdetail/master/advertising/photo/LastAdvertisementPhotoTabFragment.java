@@ -12,6 +12,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.xiaomai.zhuangba.data.bean.DeviceSurfaceInformation;
 import com.xiaomai.zhuangba.data.bean.ServiceSampleEntity;
+import com.xiaomai.zhuangba.fragment.orderdetail.master.advertising.ResultPageFragment;
 import com.xiaomai.zhuangba.http.ServiceUrl;
 import com.xiaomai.zhuangba.util.QiNiuUtil;
 
@@ -87,19 +88,20 @@ public class LastAdvertisementPhotoTabFragment extends BaseAdvertisementPhotoTab
                         @Override
                         public void accept(List<ServiceSampleEntity> strings) throws Exception {
                         }
-                    }).concatMap(new Function<List<ServiceSampleEntity>, ObservableSource<HttpResult<Object>>>() {
+                    }).concatMap(new Function<List<ServiceSampleEntity>, ObservableSource<HttpResult<Boolean>>>() {
                 @Override
-                public ObservableSource<HttpResult<Object>> apply(List<ServiceSampleEntity> imgUrlList) {
+                public ObservableSource<HttpResult<Boolean>> apply(List<ServiceSampleEntity> imgUrlList) {
                     hashMap.put("pictureUrl", new Gson().toJson(submitted));
                     RequestBody requestBody = RequestBody.create(MediaType.parse("application/json;charset=utf-8"), new Gson().toJson(hashMap));
                     return RxUtils.getObservable(ServiceUrl.getUserApi().publishedPicture(requestBody));
                 }
-            }).subscribe(new BaseHttpRxObserver<Object>(getActivity()) {
+            }).subscribe(new BaseHttpRxObserver<Boolean>(getActivity()) {
                 @Override
-                protected void onSuccess(Object response) {
-                    //跳转到待开工
-                    ToastUtil.showShort(response.toString());
-                    //startFragmentAndDestroyCurrent(AdvertisementPhotoSuccessFragment.newInstance(getOrderCodes()));
+                protected void onSuccess(Boolean response) {
+                    if (response){
+                        //结果页
+                        ResultPageFragment.newInstance(getOrderCodes());
+                    }
                 }
             });
         }

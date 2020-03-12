@@ -7,12 +7,12 @@ import com.example.toollib.http.HttpResult;
 import com.example.toollib.http.observer.BaseHttpRxObserver;
 import com.example.toollib.http.util.RxUtils;
 import com.example.toollib.util.Log;
-import com.example.toollib.util.ToastUtil;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.xiaomai.zhuangba.R;
 import com.xiaomai.zhuangba.data.bean.DeviceSurfaceInformation;
 import com.xiaomai.zhuangba.data.bean.ServiceSampleEntity;
+import com.xiaomai.zhuangba.fragment.orderdetail.master.advertising.ResultPageFragment;
 import com.xiaomai.zhuangba.http.ServiceUrl;
 import com.xiaomai.zhuangba.util.QiNiuUtil;
 
@@ -90,19 +90,20 @@ public class NextAdvertisementPhotoTabFragment extends BaseAdvertisementPhotoTab
                     @Override
                     public void accept(List<ServiceSampleEntity> strings) throws Exception {
                     }
-                }).concatMap(new Function<List<ServiceSampleEntity>, ObservableSource<HttpResult<Object>>>() {
+                }).concatMap(new Function<List<ServiceSampleEntity>, ObservableSource<HttpResult<Boolean>>>() {
             @Override
-            public ObservableSource<HttpResult<Object>> apply(List<ServiceSampleEntity> imgUrlList){
+            public ObservableSource<HttpResult<Boolean>> apply(List<ServiceSampleEntity> imgUrlList){
                 hashMap.put("pictureUrl" ,new Gson().toJson(submitted));
                 RequestBody requestBody = RequestBody.create(MediaType.parse("application/json;charset=utf-8"), new Gson().toJson(hashMap));
                 return RxUtils.getObservable(ServiceUrl.getUserApi().nextIssuePicture(requestBody));
             }
-        }).subscribe(new BaseHttpRxObserver<Object>(getActivity()) {
+        }).subscribe(new BaseHttpRxObserver<Boolean>(getActivity()) {
             @Override
-            protected void onSuccess(Object response) {
-                ToastUtil.showShort(response.toString());
-
-                //startFragmentAndDestroyCurrent(AdvertisementPhotoSuccessFragment.newInstance(getOrderCodes()));
+            protected void onSuccess(Boolean response) {
+                if (response){
+                    //结果页
+                    ResultPageFragment.newInstance(getOrderCodes());
+                }
             }
         });
     }
