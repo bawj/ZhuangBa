@@ -7,10 +7,10 @@ import com.example.toollib.http.HttpResult;
 import com.example.toollib.http.observer.BaseHttpRxObserver;
 import com.example.toollib.http.util.RxUtils;
 import com.example.toollib.util.Log;
-import com.example.toollib.util.ToastUtil;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.xiaomai.zhuangba.data.bean.DeviceSurfaceInformation;
+import com.xiaomai.zhuangba.data.bean.Picture;
 import com.xiaomai.zhuangba.data.bean.ServiceSampleEntity;
 import com.xiaomai.zhuangba.fragment.orderdetail.master.advertising.ResultPageFragment;
 import com.xiaomai.zhuangba.http.ServiceUrl;
@@ -88,17 +88,18 @@ public class LastAdvertisementPhotoTabFragment extends BaseAdvertisementPhotoTab
                         @Override
                         public void accept(List<ServiceSampleEntity> strings) throws Exception {
                         }
-                    }).concatMap(new Function<List<ServiceSampleEntity>, ObservableSource<HttpResult<Boolean>>>() {
+                    }).concatMap(new Function<List<ServiceSampleEntity>, ObservableSource<HttpResult<Picture>>>() {
                 @Override
-                public ObservableSource<HttpResult<Boolean>> apply(List<ServiceSampleEntity> imgUrlList) {
+                public ObservableSource<HttpResult<Picture>> apply(List<ServiceSampleEntity> imgUrlList) {
                     hashMap.put("pictureUrl", new Gson().toJson(submitted));
                     RequestBody requestBody = RequestBody.create(MediaType.parse("application/json;charset=utf-8"), new Gson().toJson(hashMap));
                     return RxUtils.getObservable(ServiceUrl.getUserApi().publishedPicture(requestBody));
                 }
-            }).subscribe(new BaseHttpRxObserver<Boolean>(getActivity()) {
+            }).subscribe(new BaseHttpRxObserver<Picture>(getActivity()) {
                 @Override
-                protected void onSuccess(Boolean response) {
-                    if (response){
+                protected void onSuccess(Picture picture) {
+                    //上刊flag = true-结果页，=false不变
+                    if (picture.isFlag()){
                         //结果页
                         ResultPageFragment.newInstance(getOrderCodes());
                     }

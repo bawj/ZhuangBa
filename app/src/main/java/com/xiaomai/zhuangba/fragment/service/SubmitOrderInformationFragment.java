@@ -144,6 +144,8 @@ public class SubmitOrderInformationFragment extends BaseOrderInformationFragment
                                 orderAddress.setShopName(getShopName());
                                 // 第三方订单编号
                                 orderAddress.setOrderNumber(getOrderNumber());
+                                //新增订单标识
+                                orderAddress.setType(1);
                                 String orderAddressGson = new Gson().toJson(orderAddress);
                                 ServiceData serviceData = serviceDataList.get(0);
                                 startFragment(SelectServiceFragment.newInstance(

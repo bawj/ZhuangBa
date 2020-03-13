@@ -135,9 +135,9 @@
                         <View
                             android:id="@+id/viewHorizontalLine"
                             style="@style/tool_lib_horizontal_line"
-                            android:layout_marginTop="@dimen/tool_lib_12dp"
                             android:layout_below="@+id/tvBaseOrderConfirmationTime"
                             android:layout_marginLeft="@dimen/tool_lib_12dp"
+                            android:layout_marginTop="@dimen/tool_lib_12dp"
                             android:layout_marginRight="@dimen/tool_lib_12dp" />
 
                         <RelativeLayout
@@ -206,8 +206,8 @@
                             android:layout_below="@+id/tvLivePhotos"
                             android:layout_marginLeft="@dimen/tool_lib_12dp"
                             android:layout_marginTop="@dimen/tool_lib_8dp"
-                            android:layout_marginBottom="@dimen/tool_lib_8dp"
                             android:layout_marginRight="@dimen/tool_lib_12dp"
+                            android:layout_marginBottom="@dimen/tool_lib_8dp"
                             android:descendantFocusability="blocksDescendants" />
                     </RelativeLayout>
                     <!--现场描述-->
@@ -230,8 +230,8 @@
                             android:layout_below="@+id/tvFiledDescription_"
                             android:layout_marginLeft="@dimen/tool_lib_16dp"
                             android:layout_marginTop="@dimen/tool_lib_8dp"
-                            android:layout_marginBottom="@dimen/tool_lib_8dp"
                             android:layout_marginRight="@dimen/tool_lib_16dp"
+                            android:layout_marginBottom="@dimen/tool_lib_8dp"
                             android:background="@drawable/gray_field_description_bg"
                             android:ellipsize="end"
                             android:maxLines="6"
@@ -328,11 +328,11 @@
                     android:id="@+id/btnCancelTask"
                     android:layout_width="@dimen/tool_lib_90dp"
                     android:layout_height="@dimen/tool_lib_40dp"
+                    android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
                     android:layout_marginEnd="@dimen/tool_lib_16dp"
                     android:layout_marginRight="@dimen/tool_lib_16dp"
                     android:layout_toStartOf="@+id/btnNewTaskReceipt"
-                    android:layout_toLeftOf="@+id/btnNewTaskReceipt"
                     android:text="@string/cancel_task"
                     android:textColor="@color/tool_lib_gray_777777"
                     android:textSize="@dimen/tool_lib_14sp"
@@ -346,9 +346,9 @@
                     android:layout_width="@dimen/tool_lib_90dp"
                     android:layout_height="@dimen/tool_lib_40dp"
                     android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:text="@string/add_order" />
+                    android:text="@string/add_order"
+                    android:visibility="gone" />
             </RelativeLayout>
         </RelativeLayout>
 

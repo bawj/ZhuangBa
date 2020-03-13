@@ -11,6 +11,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.xiaomai.zhuangba.R;
 import com.xiaomai.zhuangba.data.bean.DeviceSurfaceInformation;
+import com.xiaomai.zhuangba.data.bean.Picture;
 import com.xiaomai.zhuangba.data.bean.ServiceSampleEntity;
 import com.xiaomai.zhuangba.fragment.orderdetail.master.advertising.ResultPageFragment;
 import com.xiaomai.zhuangba.http.ServiceUrl;
@@ -90,18 +91,19 @@ public class NextAdvertisementPhotoTabFragment extends BaseAdvertisementPhotoTab
                     @Override
                     public void accept(List<ServiceSampleEntity> strings) throws Exception {
                     }
-                }).concatMap(new Function<List<ServiceSampleEntity>, ObservableSource<HttpResult<Boolean>>>() {
+                }).concatMap(new Function<List<ServiceSampleEntity>, ObservableSource<HttpResult<Picture>>>() {
             @Override
-            public ObservableSource<HttpResult<Boolean>> apply(List<ServiceSampleEntity> imgUrlList){
+            public ObservableSource<HttpResult<Picture>> apply(List<ServiceSampleEntity> imgUrlList){
                 hashMap.put("pictureUrl" ,new Gson().toJson(submitted));
                 RequestBody requestBody = RequestBody.create(MediaType.parse("application/json;charset=utf-8"), new Gson().toJson(hashMap));
                 return RxUtils.getObservable(ServiceUrl.getUserApi().nextIssuePicture(requestBody));
             }
-        }).subscribe(new BaseHttpRxObserver<Boolean>(getActivity()) {
+        }).subscribe(new BaseHttpRxObserver<Picture>(getActivity()) {
             @Override
-            protected void onSuccess(Boolean response) {
-                if (response){
-                    //结果页
+            protected void onSuccess(Picture picture) {
+                //下刊flag = true-结果页，false判断jump=true跳结果 ，jump=false不变
+                boolean flag = !picture.isFlag() && picture.isJump();
+                if (picture.isFlag() || flag){
                     ResultPageFragment.newInstance(getOrderCodes());
                 }
             }

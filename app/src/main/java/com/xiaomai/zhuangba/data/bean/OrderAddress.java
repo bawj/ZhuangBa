@@ -52,6 +52,9 @@ public class OrderAddress {
     /** 第三方订单编号 */
     private String orderNumber;
 
+    /** 新增订单标识 */
+    private int type;
+
     public String getUserText() {
         return userText == null ? "" : userText;
     }
@@ -197,5 +200,13 @@ public class OrderAddress {
 
     public void setOrderNumber(String orderNumber) {
         this.orderNumber = orderNumber;
+    }
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
     }
 }

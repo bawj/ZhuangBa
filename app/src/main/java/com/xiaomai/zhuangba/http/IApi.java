@@ -40,6 +40,7 @@ import com.xiaomai.zhuangba.data.bean.PatrolInspectionRecordsDetailImgBean;
 import com.xiaomai.zhuangba.data.bean.PatrolMissionDetailListBean;
 import com.xiaomai.zhuangba.data.bean.PayData;
 import com.xiaomai.zhuangba.data.bean.PayDepositBean;
+import com.xiaomai.zhuangba.data.bean.Picture;
 import com.xiaomai.zhuangba.data.bean.ProvincialBean;
 import com.xiaomai.zhuangba.data.bean.RefreshBaseList;
 import com.xiaomai.zhuangba.data.bean.Rules;
@@ -1399,7 +1400,7 @@ public interface IApi {
      * @return observable
      */
     @POST("adOrder/nextIssuePicture")
-    Observable<HttpResult<Boolean>> nextIssuePicture(@Body RequestBody body);
+    Observable<HttpResult<Picture>> nextIssuePicture(@Body RequestBody body);
 
     /**
      * 师傅上传上刊图片
@@ -1407,7 +1408,7 @@ public interface IApi {
      * @return observable
      */
     @POST("adOrder/publishedPicture")
-    Observable<HttpResult<Boolean>> publishedPicture(@Body RequestBody body);
+    Observable<HttpResult<Picture>> publishedPicture(@Body RequestBody body);
 
     /**
      * 查询验收不通过理由
