@@ -20,7 +20,6 @@ import com.xiaomai.zhuangba.fragment.employer.EmployerFragment;
 import com.xiaomai.zhuangba.fragment.orderdetail.master.advertising.BaseAdvertisingBillDetailFragment;
 import com.xiaomai.zhuangba.http.ServiceUrl;
 import com.xiaomai.zhuangba.weight.dialog.CompensateDialog;
-import com.xiaomai.zhuangba.weight.dialog.EditTextDialogBuilder;
 import com.xiaomai.zhuangba.weight.dialog.EditTextDialogNoPassBuilder;
 
 import java.util.List;

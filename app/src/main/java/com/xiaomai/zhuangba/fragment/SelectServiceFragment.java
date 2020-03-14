@@ -277,6 +277,7 @@ public class SelectServiceFragment extends BaseListFragment<ISelectServiceModule
         }
     }
 
+
     @Override
     public void sheetBehaviorUpdate() {
         serviceContentAdapter.notifyDataSetChanged();
