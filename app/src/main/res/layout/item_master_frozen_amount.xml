@@ -23,6 +23,7 @@
         android:paddingBottom="@dimen/tool_lib_12dp">
 
         <TextView
+            android:id="@+id/tvMonthlyStatement"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/monthly_statement"

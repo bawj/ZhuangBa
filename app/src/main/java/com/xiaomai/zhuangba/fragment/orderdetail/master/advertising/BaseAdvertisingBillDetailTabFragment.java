@@ -110,13 +110,14 @@ public class BaseAdvertisingBillDetailTabFragment extends BaseFragment {
             }catch (Exception e){
                 e.printStackTrace();
             }
-            NextLastIssuePhotoAdapter nextIssuePhotoAdapter = new NextLastIssuePhotoAdapter();
+            final NextLastIssuePhotoAdapter nextIssuePhotoAdapter = new NextLastIssuePhotoAdapter();
             recyclerNextIssuePhoto.setAdapter(nextIssuePhotoAdapter);
             nextIssuePhotoAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
                 @Override
                 public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                     ArrayList<String> url = new ArrayList<>();
-                    for (ServiceSampleEntity serviceSampleEntity : sampleEntityList) {
+                    List<ServiceSampleEntity> data = nextIssuePhotoAdapter.getData();
+                    for (ServiceSampleEntity serviceSampleEntity : data) {
                         url.add(serviceSampleEntity.getPicUrl());
                     }
                     if (url != null) {
@@ -150,13 +151,14 @@ public class BaseAdvertisingBillDetailTabFragment extends BaseFragment {
             }catch (Exception e){
                 e.printStackTrace();
             }
-            NextLastIssuePhotoAdapter nextIssuePhotoAdapter = new NextLastIssuePhotoAdapter();
+            final NextLastIssuePhotoAdapter nextIssuePhotoAdapter = new NextLastIssuePhotoAdapter();
             recyclerLastPhoto.setAdapter(nextIssuePhotoAdapter);
             nextIssuePhotoAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
                 @Override
                 public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                    List<ServiceSampleEntity> data = nextIssuePhotoAdapter.getData();
                     ArrayList<String> url = new ArrayList<>();
-                    for (ServiceSampleEntity serviceSampleEntity : sampleEntityList) {
+                    for (ServiceSampleEntity serviceSampleEntity : data) {
                         url.add(serviceSampleEntity.getPicUrl());
                     }
                     if (url != null) {

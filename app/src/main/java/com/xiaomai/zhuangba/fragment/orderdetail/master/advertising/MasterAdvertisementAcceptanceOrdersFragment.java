@@ -2,6 +2,8 @@ package com.xiaomai.zhuangba.fragment.orderdetail.master.advertising;
 
 import android.os.Bundle;
 
+import com.xiaomai.zhuangba.R;
+
 /**
  * Author: Bawj
  * CreateDate: 2019/12/16 0016 21:06
@@ -18,4 +20,8 @@ public class MasterAdvertisementAcceptanceOrdersFragment extends BaseAdvertising
         return fragment;
     }
 
+    @Override
+    public int getContentView() {
+        return R.layout.fragment_master_advertisement_acceptance_orders;
+    }
 }

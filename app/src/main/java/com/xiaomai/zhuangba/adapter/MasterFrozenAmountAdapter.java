@@ -39,5 +39,12 @@ public class MasterFrozenAmountAdapter extends BaseQuickAdapter<FrozenAmountBean
         //入账金额
         TextView tvAmountOfAccount = helper.getView(R.id.tvAmountOfAccount);
         tvAmountOfAccount.setText(mContext.getString(R.string.amount_of_account_symbol , String.valueOf(item.getAmount())));
+
+        TextView tvMonthlyStatement = helper.getView(R.id.tvMonthlyStatement);
+        if (item.getStatus() == 0){
+            tvMonthlyStatement.setText(mContext.getString(R.string.monthly_statement));
+        }else if (item.getStatus() ==  1){
+            tvMonthlyStatement.setText(mContext.getString(R.string.continuous_income));
+        }
     }
 }

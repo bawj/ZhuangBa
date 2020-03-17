@@ -31,6 +31,7 @@ import com.xiaomai.zhuangba.fragment.orderdetail.master.advertising.MasterAdvert
 import com.xiaomai.zhuangba.fragment.orderdetail.master.advertising.MasterAdvertisementNewTaskFragment;
 import com.xiaomai.zhuangba.fragment.orderdetail.master.advertising.MasterAdvertisementReceivedOrdersFragment;
 import com.xiaomai.zhuangba.fragment.orderdetail.master.advertising.photo.MasterAdvertisementCompletedFragment;
+import com.xiaomai.zhuangba.fragment.orderdetail.master.advertising.photo.MasterAdvertisementNotPassFragment;
 
 /**
  * @author Administrator
@@ -265,8 +266,8 @@ public class AdvertisingStatusUtil {
             qmuiFragment.startFragment(MasterAdvertisementAcceptanceOrdersFragment.newInstance(orderCodes));
         } else if (orderStatus == AdvertisingEnum.MASTER_FAILURE_OF_ACCEPTANCE.getCode()) {
             //验收不通过 到已接单状态
-            //qmuiFragment.startFragment(MasterAdvertisementNotPassFragment.newInstance(orderCodes));
-            qmuiFragment.startFragment(MasterAdvertisementReceivedOrdersFragment.newInstance(orderCodes));
+            qmuiFragment.startFragment(MasterAdvertisementNotPassFragment.newInstance(orderCodes));
+//            qmuiFragment.startFragment(MasterAdvertisementReceivedOrdersFragment.newInstance(orderCodes));
         } else if (orderStatus == OrdersEnum.MASTER_CANCELLED.getCode()) {
             //已完成
             qmuiFragment.startFragment(MasterAdvertisementCompletedFragment.newInstance(orderCodes));

@@ -79,10 +79,22 @@ public class LastAdvertisementPhotoTabFragment extends BaseAdvertisementPhotoTab
     @Override
     public void submitAdvertisementPhoto(final List<ServiceSampleEntity> submitted, List<ServiceSampleEntity> notSubmitted,
                                          final HashMap<String, Object> hashMap) {
-        if (!notSubmitted.isEmpty()) {
-            for (ServiceSampleEntity serviceSampleEntity : notSubmitted) {
-                Log.e(serviceSampleEntity.getPicUrl());
-            }
+        for (ServiceSampleEntity serviceSampleEntity : notSubmitted) {
+            Log.e(serviceSampleEntity.getPicUrl());
+        }
+        List<ServiceSampleEntity> serviceSampleEntities = getServiceSampleEntities();
+        if (notSubmitted.isEmpty() && serviceSampleEntities != null && !serviceSampleEntities.isEmpty()){
+            hashMap.put("pictureUrl", new Gson().toJson(serviceSampleEntities));
+            RequestBody requestBody = RequestBody.create(MediaType.parse("application/json;charset=utf-8"), new Gson().toJson(hashMap));
+            RxUtils.getObservable(ServiceUrl.getUserApi().publishedPicture(requestBody))
+                    .compose(this.<HttpResult<Boolean>>bindToLifecycle())
+                    .subscribe(new BaseHttpRxObserver<Boolean>(getActivity()) {
+                        @Override
+                        protected void onSuccess(Boolean picture) {
+                            commitSuccess(picture);
+                        }
+                    });
+        }else {
             RxUtils.getObservable(QiNiuUtil.newInstance().getAdvertisementPhotoObservable(notSubmitted))
                     .compose(this.<List<ServiceSampleEntity>>bindToLifecycle())
                     .doOnNext(new Consumer<List<ServiceSampleEntity>>() {
@@ -99,14 +111,18 @@ public class LastAdvertisementPhotoTabFragment extends BaseAdvertisementPhotoTab
             }).subscribe(new BaseHttpRxObserver<Boolean>(getActivity()) {
                 @Override
                 protected void onSuccess(Boolean picture) {
-                    ToastUtil.showShort(getString(R.string.commit_success));
-                    //上刊flag = true-结果页，=false不变
-                    if (picture){
-                        //结果页
-                        startFragment(ResultPageFragment.newInstance(getOrderCodes()));
-                    }
+                    commitSuccess(picture);
                 }
             });
+        }
+    }
+
+    private void commitSuccess(Boolean picture) {
+        ToastUtil.showShort(getString(R.string.commit_success));
+        //上刊flag = true-结果页，=false不变
+        if (picture) {
+            //结果页
+            startFragment(ResultPageFragment.newInstance(getOrderCodes()));
         }
     }
 

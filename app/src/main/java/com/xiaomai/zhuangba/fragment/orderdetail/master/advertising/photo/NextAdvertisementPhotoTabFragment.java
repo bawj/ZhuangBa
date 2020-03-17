@@ -86,30 +86,47 @@ public class NextAdvertisementPhotoTabFragment extends BaseAdvertisementPhotoTab
         for (ServiceSampleEntity serviceSampleEntity : notSubmitted) {
             Log.e(serviceSampleEntity.getPicUrl());
         }
-        RxUtils.getObservable(QiNiuUtil.newInstance().getAdvertisementPhotoObservable(notSubmitted))
-                .compose(this.<List<ServiceSampleEntity>>bindToLifecycle())
-                .doOnNext(new Consumer<List<ServiceSampleEntity>>() {
-                    @Override
-                    public void accept(List<ServiceSampleEntity> strings) throws Exception {
-                    }
-                }).concatMap(new Function<List<ServiceSampleEntity>, ObservableSource<HttpResult<Picture>>>() {
-            @Override
-            public ObservableSource<HttpResult<Picture>> apply(List<ServiceSampleEntity> imgUrlList){
-                hashMap.put("pictureUrl" ,new Gson().toJson(submitted));
-                RequestBody requestBody = RequestBody.create(MediaType.parse("application/json;charset=utf-8"), new Gson().toJson(hashMap));
-                return RxUtils.getObservable(ServiceUrl.getUserApi().nextIssuePicture(requestBody));
-            }
-        }).subscribe(new BaseHttpRxObserver<Picture>(getActivity()) {
-            @Override
-            protected void onSuccess(Picture picture) {
-                ToastUtil.showShort(getString(R.string.commit_success));
-                //下刊flag = true-结果页，false判断jump=true跳结果 ，jump=false不变
-                boolean flag = !picture.isFlag() && picture.isJump();
-                if (picture.isFlag() || flag){
-                    startFragment(ResultPageFragment.newInstance(getOrderCodes()));
+        List<ServiceSampleEntity> serviceSampleEntities = getServiceSampleEntities();
+        if (notSubmitted.isEmpty() && serviceSampleEntities != null && !getServiceSampleEntities().isEmpty()){
+            hashMap.put("pictureUrl" ,new Gson().toJson(serviceSampleEntities));
+            RequestBody requestBody = RequestBody.create(MediaType.parse("application/json;charset=utf-8"), new Gson().toJson(hashMap));
+            RxUtils.getObservable(RxUtils.getObservable(ServiceUrl.getUserApi().nextIssuePicture(requestBody)))
+                    .compose(this.<HttpResult<Picture>>bindToLifecycle()).subscribe(new BaseHttpRxObserver<Picture>(getActivity()) {
+                        @Override
+                        protected void onSuccess(Picture picture) {
+                            commitSuccess(picture);
+                        }
+                    });
+        }else {
+            RxUtils.getObservable(QiNiuUtil.newInstance().getAdvertisementPhotoObservable(notSubmitted))
+                    .compose(this.<List<ServiceSampleEntity>>bindToLifecycle())
+                    .doOnNext(new Consumer<List<ServiceSampleEntity>>() {
+                        @Override
+                        public void accept(List<ServiceSampleEntity> strings) throws Exception {
+                        }
+                    }).concatMap(new Function<List<ServiceSampleEntity>, ObservableSource<HttpResult<Picture>>>() {
+                @Override
+                public ObservableSource<HttpResult<Picture>> apply(List<ServiceSampleEntity> imgUrlList){
+                    hashMap.put("pictureUrl" ,new Gson().toJson(submitted));
+                    RequestBody requestBody = RequestBody.create(MediaType.parse("application/json;charset=utf-8"), new Gson().toJson(hashMap));
+                    return RxUtils.getObservable(ServiceUrl.getUserApi().nextIssuePicture(requestBody));
                 }
-            }
-        });
+            }).subscribe(new BaseHttpRxObserver<Picture>(getActivity()) {
+                @Override
+                protected void onSuccess(Picture picture) {
+                    commitSuccess(picture);
+                }
+            });
+        }
+    }
+
+    private void commitSuccess(Picture picture) {
+        ToastUtil.showShort(getString(R.string.commit_success));
+        //下刊flag = true-结果页，false判断jump=true跳结果 ，jump=false不变
+        boolean flag = !picture.isFlag() && picture.isJump();
+        if (picture.isFlag() || flag){
+            startFragment(ResultPageFragment.newInstance(getOrderCodes()));
+        }
     }
 
 }
