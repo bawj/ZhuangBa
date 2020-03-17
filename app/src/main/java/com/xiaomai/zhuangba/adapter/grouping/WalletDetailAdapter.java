@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.TextView;
 
+import com.example.toollib.util.DensityUtils;
 import com.xiaomai.zhuangba.R;
 import com.xiaomai.zhuangba.data.bean.WalletDetailBean;
 import com.xiaomai.zhuangba.enums.WalletOrderTypeEnum;
@@ -112,13 +113,14 @@ public class WalletDetailAdapter extends BaseExpandableListAdapter {
 
         String modifyTime = childrenList.get(groupPosition).get(childPosition).getModifyTime();
         String time = childrenList.get(groupPosition).get(childPosition).getTimes();
-        tvTime.setText(TextUtils.isEmpty(modifyTime) ? time : modifyTime);
+        tvTime.setText(TextUtils.isEmpty(modifyTime) ? DateUtil.getDate2String(DensityUtils.stringTypeLong(time) , "yyyy-MM-dd HH:mm:ss")
+                : DateUtil.getDate2String(DensityUtils.stringTypeLong(modifyTime) , "yyyy-MM-dd HH:mm:ss"));
 
         //收入：1，支出：2
         String typeStr = "" ;
         ///int streamType = childrenList.get(groupPosition).get(childPosition).getStreamType();
         int wallerType = childrenList.get(groupPosition).get(childPosition).getWallerType();
-        if (wallerType == 1 || wallerType == 6){
+        if (wallerType == 1 || wallerType == 6 || wallerType == 43){
             typeStr = "-";
             tvInfo.setTextColor(context.getResources().getColor(R.color.tool_lib_red_EF2B2B));
         }else{

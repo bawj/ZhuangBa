@@ -252,6 +252,8 @@ public class WalletFragment extends BaseFragment implements OnRefreshListener {
                         }
                     })
                     .showDialog();
+        }else {
+            startToWithdraw();
         }
     }
 

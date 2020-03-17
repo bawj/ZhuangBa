@@ -30,7 +30,7 @@ public class BaseAdvertisementPhotoTabAdapter extends BaseQuickAdapter<ServiceSa
         tvPhotoTapExplain.setText(explain);
         int adapterPosition = helper.getAdapterPosition();
         if (checkPosition == adapterPosition){
-            ivBaseAdvertisementPhotoTab.setBackground(mContext.getResources().getDrawable(R.drawable.ic_green_frame));
+            ivBaseAdvertisementPhotoTab.setBackground(mContext.getResources().getDrawable(R.drawable.red_bg));
         }else {
             ivBaseAdvertisementPhotoTab.setBackground(mContext.getResources().getDrawable(R.drawable.transparent));
         }

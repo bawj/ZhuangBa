@@ -4,10 +4,13 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.TextView;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.toollib.base.BaseFragment;
 import com.example.toollib.data.IBaseModule;
+import com.example.toollib.fragment.ImgPreviewFragment;
 import com.example.toollib.http.HttpResult;
 import com.example.toollib.http.exception.ApiException;
 import com.example.toollib.http.observer.BaseHttpRxObserver;
@@ -24,6 +27,7 @@ import com.xiaomai.zhuangba.data.bean.ServiceSampleEntity;
 import com.xiaomai.zhuangba.http.ServiceUrl;
 import com.xiaomai.zhuangba.weight.GridSpacingItemDecoration;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -60,6 +64,19 @@ public class PhotoStyleFragment extends BaseFragment implements OnRefreshListene
         rvBaseList.setAdapter(photoStyleAdapter);
         rvBaseList.addItemDecoration(new GridSpacingItemDecoration(3, 11, false));
         refreshLayout.autoRefresh();
+        photoStyleAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
+            @Override
+            public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+                List<ServiceSampleEntity> data = photoStyleAdapter.getData();
+                ArrayList<String> url = new ArrayList<>();
+                for (ServiceSampleEntity serviceSampleEntity : data) {
+                    url.add(serviceSampleEntity.getPicUrl());
+                }
+                if (url != null) {
+                    startFragment(ImgPreviewFragment.newInstance(position, url));
+                }
+            }
+        });
     }
 
     @Override

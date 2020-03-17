@@ -117,7 +117,6 @@ public class QiNiuUtil {
                                         }
                                     } else {
                                         Log.e("上传结果：Upload Fail");
-                                        throw new ApiException(Integer.parseInt(String.valueOf(info.statusCode)), info.error, response.toString());
                                     }
                                 }
                             }, null);

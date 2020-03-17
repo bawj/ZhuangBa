@@ -16,6 +16,7 @@ import com.xiaomai.zhuangba.data.bean.UserInfo;
 import com.xiaomai.zhuangba.data.db.DBHelper;
 import com.xiaomai.zhuangba.enums.OrdersEnum;
 import com.xiaomai.zhuangba.enums.StaticExplain;
+import com.xiaomai.zhuangba.enums.StringTypeExplain;
 import com.xiaomai.zhuangba.util.OrderStatusUtil;
 
 import java.util.ArrayList;
@@ -126,25 +127,6 @@ public class NeedDealWithAdapter extends BaseQuickAdapter<OngoingOrdersList, Bas
         } else {
             tvAuxiliaryMaterials.setVisibility(View.GONE);
         }
-        ///广告单
-         /*else if (orderType.equals(String.valueOf(StaticExplain.ADVERTISING_BILLS.getCode()))) {
-            tvMaintenance.setVisibility(View.VISIBLE);
-            tvItemOrdersTime.setText(mContext.getString(R.string.time, ongoingOrders.getSlottingStartLength()));
-            //如果是广告单  maintenanceFlag  0 单次 1 持续
-            int maintenanceFlag = ongoingOrders.getMaintenanceFlag();
-            if (maintenanceFlag == StaticExplain.SINGLE_SERVICE.getCode()) {
-                tvMaintenance.setText(mContext.getString(R.string.single_service));
-                tvMaintenance.setBackgroundResource(R.drawable.blue_radius_bg);
-                tvMaintenance.setTextColor(mContext.getResources().getColor(R.color.tool_lib_color_287CDF));
-            } else {
-                tvMaintenance.setText(mContext.getString(R.string.continuous_service));
-                tvMaintenance.setBackgroundResource(R.drawable.violet_radius_bg);
-                tvMaintenance.setTextColor(mContext.getResources().getColor(R.color.tool_lib_color_542BE9));
-            }
-            tvSlotting.setVisibility(View.GONE);
-            tvDebugging.setVisibility(View.GONE);
-            tvAuxiliaryMaterials.setVisibility(View.GONE);
-        }*/
 
         //是否是团队的订单
         TextView tvMaintenanceTeam = helper.getView(R.id.tvMaintenanceTeam);
@@ -161,6 +143,15 @@ public class NeedDealWithAdapter extends BaseQuickAdapter<OngoingOrdersList, Bas
             tvItemOrdersMoney.setText(String.valueOf(mContext.getString(R.string.content_money, String.valueOf(ongoingOrders.getMasterOrderAmount()))));
         }else {
             tvItemOrdersMoney.setText(String.valueOf(mContext.getString(R.string.asterisk)));
+        }
+
+        //是否加急
+        ImageView ivOrderUrgent = helper.getView(R.id.ivOrderUrgent);
+        String urgent = ongoingOrders.getUrgent();
+        if (urgent.equals(StringTypeExplain.YES.getCode())){
+            ivOrderUrgent.setVisibility(View.VISIBLE);
+        }else {
+            ivOrderUrgent.setVisibility(View.GONE);
         }
 
         OrderStatusUtil.masterStatus(mContext, orderStatus, tvItemOrdersType);

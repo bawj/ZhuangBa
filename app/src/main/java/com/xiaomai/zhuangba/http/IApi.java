@@ -801,7 +801,7 @@ public interface IApi {
      * @return observable
      */
     @GET("userRole/getSlottingAndDebug")
-    Observable<HttpResult<Slotting>> getSlottingAndDebug();
+    Observable<HttpResult<Slotting>> getSlottingAndDebug(@Query("province") String province, @Query("city") String city);
 
 
     /**
@@ -1408,7 +1408,7 @@ public interface IApi {
      * @return observable
      */
     @POST("adOrder/publishedPicture")
-    Observable<HttpResult<Picture>> publishedPicture(@Body RequestBody body);
+    Observable<HttpResult<Boolean>> publishedPicture(@Body RequestBody body);
 
     /**
      * 查询验收不通过理由
@@ -1491,11 +1491,11 @@ public interface IApi {
     /**
      * 雇主通过自定义项
      *
-     * @param id       主键
+     * @param id        主键
      * @param orderCode 订单号
-     * @param code 支付code
-     * @param payType  支付类型
-     * @param password 支付密码
+     * @param code      支付code
+     * @param payType   支付类型
+     * @param password  支付密码
      * @return observable
      */
     @FormUrlEncoded
@@ -1632,17 +1632,18 @@ public interface IApi {
     @FormUrlEncoded
     @POST("installOrder/failIncreaseDecrease")
     Observable<HttpResult<Object>> failIncreaseDecrease(@Field("orderCode") String orderCode, @Field("code") String code);
+
     /**
      * 雇主通过增项
      *
      * @param orderCode orderCode
      * @param code      code
      * @param payType   类型
-     * @param password 密码
+     * @param password  密码
      * @return observable
      */
     @FormUrlEncoded
     @POST("installOrder/adoptIncrease")
-    Observable<HttpResult<PayData>> adoptIncrease(@Field("orderCode") String orderCode, @Field("code") String code ,
-                                                 @Field("payType") String payType ,@Field("password") String password );
+    Observable<HttpResult<PayData>> adoptIncrease(@Field("orderCode") String orderCode, @Field("code") String code,
+                                                  @Field("payType") String payType, @Field("password") String password);
 }

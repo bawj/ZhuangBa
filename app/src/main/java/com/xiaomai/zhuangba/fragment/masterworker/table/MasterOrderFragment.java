@@ -81,7 +81,7 @@ public class MasterOrderFragment extends BaseFragment implements ViewPager.OnPag
         fragmentList.add(AdvertisingBillsFragment.newInstance());
         //巡查单
         fragmentList.add(InspectionSheetFragment.newInstance());
-        //title
+        //titlegetAdvertisingList
         String[] strTitle = getTabTitle();
         mViewPager.setAdapter(new MasterOrderAdapter(getChildFragmentManager(), fragmentList, strTitle));
         CommonNavigator commonNavigator = new CommonNavigator(getActivity());
@@ -89,6 +89,8 @@ public class MasterOrderFragment extends BaseFragment implements ViewPager.OnPag
         magicIndicator.setNavigator(commonNavigator);
         ViewPagerHelper.bind(magicIndicator, mViewPager);
         mViewPager.addOnPageChangeListener(this);
+
+        relScreen.setVisibility(View.GONE);
     }
 
     public String[] getTabTitle() {

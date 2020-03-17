@@ -392,6 +392,7 @@
     <string name="maintenance_time">%1$s个月</string>
     <string name="total_maintenance_price">维保总价：¥%1$s</string>
     <string name="shop_car_maintenance">%1$s个月维保：¥%2$s</string>
+    <string name="shop_car_maintenance_">%1$s个月维保</string>
     <string name="no_maintenance">暂无维保</string>
     <string name="please_input_pay_password">请输入支付密码</string>
     <string name="recharge">充值</string>

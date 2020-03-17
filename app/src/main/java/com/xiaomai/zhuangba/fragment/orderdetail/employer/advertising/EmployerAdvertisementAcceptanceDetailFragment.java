@@ -68,6 +68,7 @@ public class EmployerAdvertisementAcceptanceDetailFragment extends BaseAdvertisi
         tvEmployerDetailMasterName.setText(userText);
         String bareheadedPhotoUrl = adOrderInformationList.getBareheadedPhotoUrl();
         GlideManager.loadCircleImage(getActivity() , bareheadedPhotoUrl , ivEmployerDetailMasterHeader , R.drawable.bg_def_head);
+        tvBaseAdvertisementMoney.setText(getString(R.string.content_money, String.valueOf(adOrderInformationList.getOrderAmount())));
     }
 
     @OnClick({R.id.btnAdvertisementNoPassage, R.id.btnAcceptanceApproval,R.id.layCompensate})

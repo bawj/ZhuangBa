@@ -245,6 +245,7 @@
                                         android:layout_marginEnd="@dimen/tool_lib_12dp"
                                         android:src="@drawable/ic_right" />
                                 </RelativeLayout>
+
                                 <android.support.v7.widget.RecyclerView
                                     android:id="@+id/recyclerNearbyPhoto"
                                     android:layout_width="match_parent"
@@ -296,7 +297,8 @@
                     android:layout_marginStart="@dimen/tool_lib_16dp"
                     android:layout_marginTop="@dimen/tool_lib_3dp"
                     android:gravity="center"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:visibility="gone">
 
                     <ImageView
                         android:layout_width="wrap_content"
@@ -316,7 +318,6 @@
                     android:layout_width="@dimen/tool_lib_34dp"
                     android:layout_height="@dimen/tool_lib_34dp"
                     android:layout_centerVertical="true"
-                    android:visibility="gone"
                     tools:src="@drawable/bg_def_head" />
 
                 <ImageView
@@ -325,8 +326,7 @@
                     android:layout_height="@dimen/tool_lib_16dp"
                     android:layout_alignBottom="@+id/ivEmployerDetailMasterHeader"
                     android:layout_marginStart="@dimen/tool_lib_24dp"
-                    android:src="@drawable/ic_master_log"
-                    android:visibility="gone" />
+                    android:src="@drawable/ic_master_log" />
 
                 <TextView
                     android:id="@+id/tvEmployerDetailMasterName"
@@ -335,7 +335,6 @@
                     android:layout_centerVertical="true"
                     android:layout_marginStart="@dimen/tool_lib_12dp"
                     android:layout_toEndOf="@+id/ivEmployerDetailMasterHeader"
-                    android:visibility="gone"
                     tools:text="康师傅" />
 
             </RelativeLayout>

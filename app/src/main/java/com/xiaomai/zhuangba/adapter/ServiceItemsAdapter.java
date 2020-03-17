@@ -57,8 +57,8 @@ public class ServiceItemsAdapter extends BaseQuickAdapter<OrderServiceItem, Base
         } else {
             //有维保
             //String.valueOf(orderServiceItem.getMaintenanceAmount()) 维保金额
-            tvOrderDetailMaintenance.setText(mContext.getString(R.string.shop_car_maintenance
-                    , String.valueOf(orderServiceItem.getMonthNumber()), mContext.getString(R.string.asterisk)));
+            tvOrderDetailMaintenance.setText(mContext.getString(R.string.shop_car_maintenance_
+                    , String.valueOf(orderServiceItem.getMonthNumber())));
             tvOrderDetailMaintenance.setBackgroundResource(R.drawable.green_radius_bg);
             tvOrderDetailMaintenance.setTextColor(mContext.getResources().getColor(R.color.tool_lib_color_199898));
         }

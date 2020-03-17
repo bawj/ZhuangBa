@@ -27,7 +27,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.OnClick;
 
-/**
+/**W
  * 广告单已接单
  */
 public class MasterAdvertisementReceivedOrdersFragment extends BaseAdvertisingBillDetailFragment {

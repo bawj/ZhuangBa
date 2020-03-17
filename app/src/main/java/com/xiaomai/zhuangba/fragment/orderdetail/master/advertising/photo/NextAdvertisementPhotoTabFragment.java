@@ -7,6 +7,7 @@ import com.example.toollib.http.HttpResult;
 import com.example.toollib.http.observer.BaseHttpRxObserver;
 import com.example.toollib.http.util.RxUtils;
 import com.example.toollib.util.Log;
+import com.example.toollib.util.ToastUtil;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.xiaomai.zhuangba.R;
@@ -101,10 +102,11 @@ public class NextAdvertisementPhotoTabFragment extends BaseAdvertisementPhotoTab
         }).subscribe(new BaseHttpRxObserver<Picture>(getActivity()) {
             @Override
             protected void onSuccess(Picture picture) {
+                ToastUtil.showShort(getString(R.string.commit_success));
                 //下刊flag = true-结果页，false判断jump=true跳结果 ，jump=false不变
                 boolean flag = !picture.isFlag() && picture.isJump();
                 if (picture.isFlag() || flag){
-                    ResultPageFragment.newInstance(getOrderCodes());
+                    startFragment(ResultPageFragment.newInstance(getOrderCodes()));
                 }
             }
         });

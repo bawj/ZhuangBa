@@ -90,6 +90,9 @@ public class OngoingOrdersList implements Parcelable{
      */
     private boolean isCheck;
 
+    /** 是否加急 y 是 n 不是 */
+    private String urgent;
+
     /**合同编号**/
     private String contractNo;
 
@@ -107,6 +110,12 @@ public class OngoingOrdersList implements Parcelable{
 
     /**第三方订单编号*/
     private String orderNumber;
+
+    /**新增项实际金额*/
+    private double increasedeCreaseAmount;
+
+    /**新增项师傅得到的金额*/
+    private double increasedeCreaseMasterAmount;
 
     public OngoingOrdersList() {
     }
@@ -164,6 +173,14 @@ public class OngoingOrdersList implements Parcelable{
 
     public String getSlottingEndLength() {
         return TextUtils.isEmpty(slottingEndLength) ? "" : slottingEndLength;
+    }
+
+    public String getUrgent() {
+        return urgent == null ? "" : urgent;
+    }
+
+    public void setUrgent(String urgent) {
+        this.urgent = urgent;
     }
 
     public void setSlottingEndLength(String slottingEndLength) {
@@ -475,6 +492,22 @@ public class OngoingOrdersList implements Parcelable{
 
     public void setOrderNumber(String orderNumber) {
         this.orderNumber = orderNumber;
+    }
+
+    public double getIncreasedeCreaseAmount() {
+        return increasedeCreaseAmount;
+    }
+
+    public void setIncreasedeCreaseAmount(double increasedeCreaseAmount) {
+        this.increasedeCreaseAmount = increasedeCreaseAmount;
+    }
+
+    public double getIncreasedeCreaseMasterAmount() {
+        return increasedeCreaseMasterAmount;
+    }
+
+    public void setIncreasedeCreaseMasterAmount(double increasedeCreaseMasterAmount) {
+        this.increasedeCreaseMasterAmount = increasedeCreaseMasterAmount;
     }
 
     @Override

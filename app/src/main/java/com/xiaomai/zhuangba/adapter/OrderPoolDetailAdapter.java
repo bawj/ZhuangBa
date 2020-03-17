@@ -51,8 +51,8 @@ public class OrderPoolDetailAdapter extends BaseQuickAdapter<OrderServiceItem, B
             tvOrderDetailMaintenance.setTextColor(mContext.getResources().getColor(R.color.tool_lib_gray_B1B1B1));
         } else {
             //有维保
-            tvOrderDetailMaintenance.setText(mContext.getString(R.string.shop_car_maintenance
-                    , String.valueOf(orderServiceItem.getMonthNumber()), String.valueOf(orderServiceItem.getMaintenanceAmount())));
+            tvOrderDetailMaintenance.setText(mContext.getString(R.string.shop_car_maintenance_
+                    , String.valueOf(orderServiceItem.getMonthNumber())));
             tvOrderDetailMaintenance.setBackgroundResource(R.drawable.green_radius_bg);
             tvOrderDetailMaintenance.setTextColor(mContext.getResources().getColor(R.color.tool_lib_color_199898));
         }

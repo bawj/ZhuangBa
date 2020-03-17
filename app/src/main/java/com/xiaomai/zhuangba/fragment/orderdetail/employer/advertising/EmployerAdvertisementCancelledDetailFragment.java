@@ -2,6 +2,8 @@ package com.xiaomai.zhuangba.fragment.orderdetail.employer.advertising;
 
 import android.os.Bundle;
 
+import com.xiaomai.zhuangba.R;
+import com.xiaomai.zhuangba.data.bean.AdOrderInformation;
 import com.xiaomai.zhuangba.fragment.orderdetail.master.advertising.BaseAdvertisingBillDetailFragment;
 
 /**
@@ -17,5 +19,11 @@ public class EmployerAdvertisementCancelledDetailFragment extends BaseAdvertisin
         EmployerAdvertisementCancelledDetailFragment fragment = new EmployerAdvertisementCancelledDetailFragment();
         fragment.setArguments(args);
         return fragment;
+    }
+
+    @Override
+    public void setViewData(AdOrderInformation adOrderInformationList) {
+        super.setViewData(adOrderInformationList);
+        tvBaseAdvertisementMoney.setText(getString(R.string.content_money, String.valueOf(adOrderInformationList.getOrderAmount())));
     }
 }

@@ -84,7 +84,7 @@ public class HistoricalOrderFragment extends BaseListFragment<IBaseModule, Histo
                         ongoingOrdersList.getOrderStatus() , ongoingOrdersList.getExpireTime());
                 //广告单
             }else if (orderType.equals(String.valueOf(StaticExplain.ADVERTISING_BILLS.getCode()))){
-                AdvertisingStatusUtil.startMasterOrderDetail(getBaseFragmentActivity() ,ongoingOrdersList.getOrderCode() , ongoingOrdersList.getOrderType(),
+                AdvertisingStatusUtil.startMasterOrderDetail(getBaseFragmentActivity() ,ongoingOrdersList.getOrderCode(),
                         ongoingOrdersList.getOrderStatus() );
             }if (orderType.equals(String.valueOf(StaticExplain.PATROL.getCode()))){
                 PatrolStatusUtil.startMasterPatrol(getBaseFragmentActivity() ,ongoingOrdersList.getOrderCode() , ongoingOrdersList.getOrderType(),

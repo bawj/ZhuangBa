@@ -125,7 +125,9 @@ public class ShopCarFragment extends BaseFragment<IShopCarModule> implements Sho
     }
 
     private void requestSlottingAndDebug() {
-        RxUtils.getObservable(ServiceUrl.getUserApi().getSlottingAndDebug())
+        String orderAddressGson = getOrderAddressGson();
+        OrderAddress orderAddress = new Gson().fromJson(orderAddressGson, OrderAddress.class);
+        RxUtils.getObservable(ServiceUrl.getUserApi().getSlottingAndDebug(orderAddress.getProvince() , orderAddress.getCity()))
                 .compose(this.<HttpResult<Slotting>>bindToLifecycle())
                 .subscribe(new BaseHttpRxObserver<Slotting>(getActivity()) {
                     @Override

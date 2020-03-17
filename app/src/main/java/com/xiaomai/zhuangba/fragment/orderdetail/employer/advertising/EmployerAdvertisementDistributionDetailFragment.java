@@ -43,6 +43,7 @@ public class EmployerAdvertisementDistributionDetailFragment extends BaseAdverti
     public void setViewData(AdOrderInformation adOrderInformationList) {
         super.setViewData(adOrderInformationList);
         relNewTaskOrderDetailBottom.setVisibility(View.VISIBLE);
+        tvBaseAdvertisementMoney.setText(getString(R.string.content_money, String.valueOf(adOrderInformationList.getOrderAmount())));
     }
 
     @Override

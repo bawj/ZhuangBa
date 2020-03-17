@@ -64,7 +64,9 @@ public class SelectServiceModule extends BaseModule<ISelectServiceView> implemen
 
     @Override
     public void requestSlottingAndDebug() {
-        RxUtils.getObservable(ServiceUrl.getUserApi().getSlottingAndDebug())
+        String orderAddressGson = mViewRef.get().getOrderAddressGson();
+        OrderAddress orderAddress = new Gson().fromJson(orderAddressGson, OrderAddress.class);
+        RxUtils.getObservable(ServiceUrl.getUserApi().getSlottingAndDebug(orderAddress.getProvince() , orderAddress.getCity()))
                 .compose(mViewRef.get().<HttpResult<Slotting>>bindLifecycle())
                 .subscribe(new BaseHttpRxObserver<Slotting>(mContext.get()) {
                     @Override

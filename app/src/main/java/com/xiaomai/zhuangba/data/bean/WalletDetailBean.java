@@ -2,6 +2,7 @@ package com.xiaomai.zhuangba.data.bean;
 
 import android.text.TextUtils;
 
+import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;

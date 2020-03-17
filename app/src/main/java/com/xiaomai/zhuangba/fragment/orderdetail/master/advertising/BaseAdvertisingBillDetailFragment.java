@@ -62,7 +62,7 @@ public class BaseAdvertisingBillDetailFragment extends BaseFragment implements O
     @BindView(R.id.tvBaseEquipmentNumber)
     TextView tvBaseEquipmentNumber;
     @BindView(R.id.tvBaseAdvertisementMoney)
-    TextView tvBaseAdvertisementMoney;
+    public TextView tvBaseAdvertisementMoney;
     @BindView(R.id.tvBaseAdvertisementChangePlaces)
     TextView tvBaseAdvertisementChangePlaces;
     @BindView(R.id.tvBaseAdvertisementBatchQueryNumber)
@@ -100,8 +100,8 @@ public class BaseAdvertisingBillDetailFragment extends BaseFragment implements O
     public void initView() {
         layOrderInfo.setVisibility(View.GONE);
         refreshBaseList.setOnRefreshListener(this);
-        recyclerNearbyPhoto.setLayoutManager(new GridLayoutManager(getActivity(), 3));
-        recyclerNearbyPhoto.addItemDecoration(new GridSpacingItemDecoration(3, 32, false));
+        recyclerNearbyPhoto.setLayoutManager(new GridLayoutManager(getActivity(), 4));
+        recyclerNearbyPhoto.addItemDecoration(new GridSpacingItemDecoration(4, 12, false));
         //默认刷新
         refreshBaseList.autoRefresh();
     }
