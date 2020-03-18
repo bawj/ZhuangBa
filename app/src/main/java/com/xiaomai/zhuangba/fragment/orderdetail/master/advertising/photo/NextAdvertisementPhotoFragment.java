@@ -20,9 +20,10 @@ public class NextAdvertisementPhotoFragment extends BaseAdvertisementPhotoFragme
      * @param deviceSurfaceInformationListString 集合 所有面的数据
      * @return
      */
-    public static NextAdvertisementPhotoFragment newInstance(String orderCodes,String serviceId, String serviceSample, String deviceSurfaceInformationListString) {
+    public static NextAdvertisementPhotoFragment newInstance(String orderCodes,String serviceId, String serviceSample,String previousPublicatioList, String deviceSurfaceInformationListString) {
         Bundle args = new Bundle();
         args.putString(DEVICE_SURFACE_INFORMATION_LIST_STRING, deviceSurfaceInformationListString);
+        args.putString(PREVIOUS_PUBLICATIO_LIST , previousPublicatioList);
         args.putString(PhotoStyleFragment.SERVICE_ID, serviceId);
         args.putString(SERVICE_SAMPLE, serviceSample);
         args.putString(ORDER_CODES , orderCodes);
@@ -33,7 +34,7 @@ public class NextAdvertisementPhotoFragment extends BaseAdvertisementPhotoFragme
 
     @Override
     public NextAdvertisementPhotoTabFragment getBaseAdvertisementPhotoTabFragment(String deviceSurfaceInformationString) {
-        return NextAdvertisementPhotoTabFragment.newInstance(getOrderCodes(),getServiceSample(),getDeviceSurfaceInformationS(), deviceSurfaceInformationString);
+        return NextAdvertisementPhotoTabFragment.newInstance(getOrderCodes(),getServiceSample(),getDeviceSurfaceInformationS(),deviceSurfaceInformationString);
     }
 
     public String getDeviceSurfaceInformationS() {

@@ -121,16 +121,16 @@ public class MasterAdvertisementReceivedOrdersFragment extends BaseAdvertisingBi
      * 下刊拍照
      */
     private void nextAdvertisement() {
-        List<DeviceSurfaceInformation> deviceSurfaceInformationList = getNextDeviceSurfaceInformationList();
-        startFragment(NextAdvertisementPhotoFragment.newInstance(getOrderCodes(),String.valueOf(serviceId), serviceSample, new Gson().toJson(deviceSurfaceInformationList)));
+        startFragment(NextAdvertisementPhotoFragment.newInstance(getOrderCodes(),String.valueOf(serviceId),
+                serviceSample,new Gson().toJson(getNextDeviceSurfaceInformationList()), new Gson().toJson(deviceSurfaceInformationList)));
     }
 
     /**
      * 上刊拍照
      */
     private void lastAdvertisement() {
-        List<DeviceSurfaceInformation> deviceSurfaceInformationList = getLastNextDeviceSurfaceInformationList();
-        startFragment(LastAdvertisementPhotoFragment.newInstance(getOrderCodes(),String.valueOf(serviceId), serviceSample, new Gson().toJson(deviceSurfaceInformationList)));
+        startFragment(LastAdvertisementPhotoFragment.newInstance(getOrderCodes(),String.valueOf(serviceId),
+                serviceSample,new Gson().toJson(getLastNextDeviceSurfaceInformationList()), new Gson().toJson(deviceSurfaceInformationList)));
     }
 
 

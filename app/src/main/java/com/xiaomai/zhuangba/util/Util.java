@@ -367,14 +367,19 @@ public class Util {
     public static List<String> getUrl(String noodles){
         if (TextUtils.isEmpty(noodles)){
             return new ArrayList<>();
+        }if (noodles.contains("[")){
+            List<String> stringList = new Gson().fromJson(noodles, new TypeToken<List<String>>() {
+            }.getType());
+            return stringList;
+        }else {
+            String[] title = null;
+            if (noodles.contains(",")){
+                title = noodles.split(",");
+            }else if (!TextUtils.isEmpty(noodles)){
+                title = new String[]{noodles};
+            }
+            return Arrays.asList(title);
         }
-        String[] title = null;
-        if (noodles.contains(",")){
-            title = noodles.split(",");
-        }else if (!TextUtils.isEmpty(noodles)){
-            title = new String[]{noodles};
-        }
-        return Arrays.asList(title);
     }
 
     public static String getAddress(String address) {

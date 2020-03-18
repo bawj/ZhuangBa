@@ -27,6 +27,7 @@ import static com.xiaomai.zhuangba.fragment.orderdetail.master.advertising.BaseA
 public class BaseAdvertisementPhotoFragment<T extends BaseAdvertisementPhotoTabFragment> extends BaseFragment {
 
     public static final String DEVICE_SURFACE_INFORMATION_LIST_STRING = "device_surface_information_list_string";
+    public static final String PREVIOUS_PUBLICATIO_LIST = "previous_publicatio_list";
     public static final String SERVICE_SAMPLE = "service_sample";
     @BindView(R.id.magicIndicator)
     MagicIndicator magicIndicator;
@@ -39,9 +40,10 @@ public class BaseAdvertisementPhotoFragment<T extends BaseAdvertisementPhotoTabF
      * @param deviceSurfaceInformationListString 集合 所有面的数据
      * @return
      */
-    public static BaseAdvertisementPhotoFragment newInstance(String orderCodes, String serviceId, String serviceSample, String deviceSurfaceInformationListString) {
+    public static BaseAdvertisementPhotoFragment newInstance(String orderCodes, String serviceId, String serviceSample,String previousPublicatioList, String deviceSurfaceInformationListString) {
         Bundle args = new Bundle();
         args.putString(DEVICE_SURFACE_INFORMATION_LIST_STRING, deviceSurfaceInformationListString);
+        args.putString(PREVIOUS_PUBLICATIO_LIST , previousPublicatioList);
         args.putString(PhotoStyleFragment.SERVICE_ID, serviceId);
         args.putString(SERVICE_SAMPLE, serviceSample);
         args.putString(ORDER_CODES, orderCodes);
@@ -57,17 +59,16 @@ public class BaseAdvertisementPhotoFragment<T extends BaseAdvertisementPhotoTabF
 
     @Override
     public void initView() {
-        List<DeviceSurfaceInformation> deviceSurfaceInformation1 = getDeviceSurfaceInformation();
+        List<DeviceSurfaceInformation> deviceSurfaceInformation1 = getPreviousPublicatio();
         //tab 标题
         String[] tabTitle = new String[deviceSurfaceInformation1.size()];
         //tab 页
         List<T> tabFragmentList = new ArrayList<>();
         for (int i = 0; i < deviceSurfaceInformation1.size(); i++) {
             DeviceSurfaceInformation deviceSurfaceInformation = deviceSurfaceInformation1.get(i);
-            String deviceSurfaceInformationString = new Gson().toJson(deviceSurfaceInformation);
             String deviceSurface = deviceSurfaceInformation.getDeviceSurface();
             tabTitle[i] = deviceSurface;
-            tabFragmentList.add(getBaseAdvertisementPhotoTabFragment(deviceSurfaceInformationString));
+            tabFragmentList.add(getBaseAdvertisementPhotoTabFragment(new Gson().toJson(deviceSurfaceInformation)));
         }
         mViewPager.setAdapter(new BaseViewPagerAdapter<>(getChildFragmentManager(), tabFragmentList, tabTitle));
         CommonNavigator commonNavigator = new CommonNavigator(getActivity());
@@ -89,6 +90,19 @@ public class BaseAdvertisementPhotoFragment<T extends BaseAdvertisementPhotoTabF
         try {
             if (getArguments() != null) {
                 String string = getArguments().getString(DEVICE_SURFACE_INFORMATION_LIST_STRING);
+                return new Gson().fromJson(string, new TypeToken<List<DeviceSurfaceInformation>>() {
+                }.getType());
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return new ArrayList<>();
+    }
+
+    public List<DeviceSurfaceInformation> getPreviousPublicatio() {
+        try {
+            if (getArguments() != null) {
+                String string = getArguments().getString(PREVIOUS_PUBLICATIO_LIST);
                 return new Gson().fromJson(string, new TypeToken<List<DeviceSurfaceInformation>>() {
                 }.getType());
             }

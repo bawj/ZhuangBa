@@ -124,6 +124,8 @@ public class NextAdvertisementPhotoTabFragment extends BaseAdvertisementPhotoTab
         ToastUtil.showShort(getString(R.string.commit_success));
         //下刊flag = true-结果页，false判断jump=true跳结果 ，jump=false不变
         boolean flag = !picture.isFlag() && picture.isJump();
+        Log.e("flag = " + flag);
+        Log.e("picture.isFlag() = " + flag);
         if (picture.isFlag() || flag){
             startFragment(ResultPageFragment.newInstance(getOrderCodes()));
         }

@@ -61,12 +61,9 @@ public class PhotoStyleFragment extends BaseFragment implements OnRefreshListene
         refreshLayout.setOnRefreshListener(this);
         rvBaseList.setLayoutManager(new GridLayoutManager(getActivity(), 3));
         photoStyleAdapter = new PhotoStyleAdapter();
-        rvBaseList.setAdapter(photoStyleAdapter);
-        rvBaseList.addItemDecoration(new GridSpacingItemDecoration(3, 11, false));
-        refreshLayout.autoRefresh();
-        photoStyleAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
+        photoStyleAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
-            public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 List<ServiceSampleEntity> data = photoStyleAdapter.getData();
                 ArrayList<String> url = new ArrayList<>();
                 for (ServiceSampleEntity serviceSampleEntity : data) {
@@ -77,6 +74,9 @@ public class PhotoStyleFragment extends BaseFragment implements OnRefreshListene
                 }
             }
         });
+        rvBaseList.setAdapter(photoStyleAdapter);
+        rvBaseList.addItemDecoration(new GridSpacingItemDecoration(3, 11, false));
+        refreshLayout.autoRefresh();
     }
 
     @Override

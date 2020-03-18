@@ -251,8 +251,8 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_marginStart="@dimen/tool_lib_12dp"
-                                    android:layout_marginEnd="@dimen/tool_lib_12dp"
-                                    android:layout_marginTop="@dimen/tool_lib_6dp" />
+                                    android:layout_marginTop="@dimen/tool_lib_6dp"
+                                    android:layout_marginEnd="@dimen/tool_lib_12dp" />
                             </LinearLayout>
                         </android.support.design.widget.CollapsingToolbarLayout>
                     </android.support.design.widget.AppBarLayout>
@@ -275,7 +275,8 @@
                         <android.support.v4.view.ViewPager
                             android:id="@+id/viewPager"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content" />
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/tool_lib_8dp" />
                     </LinearLayout>
                 </android.support.design.widget.CoordinatorLayout>
             </RelativeLayout>

@@ -4,8 +4,10 @@ import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
+import com.example.toollib.util.DensityUtils;
 import com.xiaomai.zhuangba.R;
 import com.xiaomai.zhuangba.data.bean.OrderDateList;
+import com.xiaomai.zhuangba.util.DateUtil;
 
 /**
  * @author Administrator
@@ -26,7 +28,7 @@ public class OrderDateListAdapter extends BaseQuickAdapter<OrderDateList, BaseVi
         if (item.getTypeText().equals(mContext.getString(R.string.order_code))){
             tvItemOrderDateListCode.setText(item.getOrderCode());
         }else{
-            tvItemOrderDateListCode.setText(item.getTime());
+            tvItemOrderDateListCode.setText(DateUtil.getDate2String(DensityUtils.stringTypeLong(item.getTime()) , "yyyy-MM-dd HH:mm:ss"));
         }
     }
 }
