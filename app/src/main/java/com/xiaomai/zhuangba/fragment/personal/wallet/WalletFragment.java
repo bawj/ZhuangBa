@@ -231,7 +231,16 @@ public class WalletFragment extends BaseFragment implements OnRefreshListener {
                         }
                     }).showDialog();
         } else if (walletBeans != null) {
-            startFragment(WithdrawFragment.newInstance(walletBeans.getWithDrawableCash()));
+            //可提现金额
+            RxUtils.getObservable(ServiceUrl.getUserApi().withdrawable())
+                    .compose(this.<HttpResult<Double>>bindToLifecycle())
+                    .subscribe(new BaseHttpRxObserver<Double>(getActivity()) {
+                        @Override
+                        protected void onSuccess(Double amount) {
+                            //walletBeans.getWithDrawableCash()
+                            startFragment(WithdrawFragment.newInstance(amount));
+                        }
+                    });
         }
     }
 

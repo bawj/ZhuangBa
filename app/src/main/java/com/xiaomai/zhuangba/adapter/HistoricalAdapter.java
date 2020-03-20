@@ -53,10 +53,17 @@ public class HistoricalAdapter extends BaseQuickAdapter<OngoingOrdersList, BaseV
         UserInfo unique = DBHelper.getInstance().getUserInfoDao().queryBuilder().unique();
         String phoneNumber = unique.getPhoneNumber();
 
+
         if (TextUtils.isEmpty(assigner) || phoneNumber.equals(assigner)){
             tvItemHistoricalOrdersMoney.setText(mContext.getString(R.string.content_money, String.valueOf(ordersList.getMasterOrderAmount())));
         }else {
             tvItemHistoricalOrdersMoney.setText(mContext.getString(R.string.asterisk));
+        }
+
+        UserInfo userInfo = DBHelper.getInstance().getUserInfoDao().queryBuilder().unique();
+        if (userInfo.getRole().equals(String.valueOf(StaticExplain.EMPLOYER.getCode()))) {
+            //雇主
+            tvItemHistoricalOrdersMoney.setText(mContext.getString(R.string.content_money, String.valueOf(ordersList.getOrderAmount())));
         }
 
         tvItemHistoricalOrdersMoney.setTag(ordersList);
@@ -65,7 +72,6 @@ public class HistoricalAdapter extends BaseQuickAdapter<OngoingOrdersList, BaseV
 
         //order status
         int orderStatus = ordersList.getOrderStatus();
-        UserInfo userInfo = DBHelper.getInstance().getUserInfoDao().queryBuilder().unique();
 
         String orderType = ordersList.getOrderType();
         //安装单

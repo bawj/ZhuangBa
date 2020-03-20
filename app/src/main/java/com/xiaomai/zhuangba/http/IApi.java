@@ -1646,4 +1646,12 @@ public interface IApi {
     @POST("installOrder/adoptIncrease")
     Observable<HttpResult<PayData>> adoptIncrease(@Field("orderCode") String orderCode, @Field("code") String code,
                                                   @Field("payType") String payType, @Field("password") String password);
+
+
+    /**
+     * 专属师傅可提现的金额
+     * @return observable
+     */
+    @POST("wallet/withdrawable")
+    Observable<HttpResult<Double>> withdrawable();
 }
