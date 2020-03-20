@@ -5,7 +5,6 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
@@ -71,8 +70,7 @@ public class EditTextDialogNoPassBuilder {
         tvDialogOk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String s = editDialogContent.getText().toString();
-                if (baseCallback != null && !TextUtils.isEmpty(s)){
+                if (baseCallback != null){
                     qmuiDialog.dismiss();
                     baseCallback.ok(cause,editDialogContent.getText().toString());
                 }else{

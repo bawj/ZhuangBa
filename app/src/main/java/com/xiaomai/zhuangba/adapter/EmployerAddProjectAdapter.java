@@ -35,14 +35,17 @@ public class EmployerAddProjectAdapter extends BaseQuickAdapter<OrderServiceCond
         //金额
         TextView tvItemServiceTotalMoney = helper.getView(R.id.tvItemServiceTotalMoney);
         tvItemServiceTotalMoney.setText(mContext.getString(R.string.content_money , String.valueOf(item.getAmount())));
+        //开槽
+        TextView tvSlotting = helper.getView(R.id.tvSlotting);
+        //辅材
+        TextView tvAuxiliaryMaterials = helper.getView(R.id.tvAuxiliaryMaterials);
 
         int adapterPosition = helper.getAdapterPosition();
         //必选项
         if (adapterPosition == 0){
             tvItemServiceMoney.setVisibility(View.GONE);
             tvServiceItemNumber.setVisibility(View.GONE);
-            //开槽
-            TextView tvSlotting = helper.getView(R.id.tvSlotting);
+
             String slottingStartLength = item.getSlottingStartLength();
             String slottingEndLength = item.getSlottingEndLength();
             if (TextUtils.isEmpty(slottingStartLength) && TextUtils.isEmpty(slottingEndLength)){
@@ -51,8 +54,6 @@ public class EmployerAddProjectAdapter extends BaseQuickAdapter<OrderServiceCond
                 tvSlotting.setVisibility(View.VISIBLE);
                 tvSlotting.setText(mContext.getString(R.string.slotting_start_end_length_service_text , slottingStartLength , slottingEndLength));
             }
-            //辅材
-            TextView tvAuxiliaryMaterials = helper.getView(R.id.tvAuxiliaryMaterials);
             String materialsStartLength = item.getMaterialsStartLength();
             String materialsEndLength = item.getMaterialsEndLength();
             if (TextUtils.isEmpty(materialsStartLength) && TextUtils.isEmpty(materialsEndLength)){
@@ -63,6 +64,8 @@ public class EmployerAddProjectAdapter extends BaseQuickAdapter<OrderServiceCond
             }
         }else {
             tvItemServiceMoney.setVisibility(View.VISIBLE);
+            tvSlotting.setVisibility(View.GONE);
+            tvAuxiliaryMaterials.setVisibility(View.GONE);
             tvServiceItemNumber.setVisibility(View.VISIBLE);
             tvItemServiceMoney.setText(mContext.getString(R.string.content_money , String.valueOf(item.getPrice())));
             tvServiceItemNumber.setText(mContext.getString(R.string.number , String.valueOf(item.getNumber())));

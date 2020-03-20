@@ -1,6 +1,7 @@
 package com.xiaomai.zhuangba.fragment.orderdetail.employer.advertising;
 
 import android.os.Bundle;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -26,6 +27,8 @@ public class EmployerAdvertisementCompleteDetailFragment extends BaseAdvertising
     TextView tvEmployerDetailMasterName;
     @BindView(R.id.relNewTaskOrderDetailBottom)
     RelativeLayout relNewTaskOrderDetailBottom;
+    @BindView(R.id.recyclerNearbyPhoto)
+    RecyclerView recyclerNearbyPhoto;
 
     public static EmployerAdvertisementCompleteDetailFragment newInstance(String orderCodes) {
         Bundle args = new Bundle();
@@ -39,6 +42,7 @@ public class EmployerAdvertisementCompleteDetailFragment extends BaseAdvertising
     public void initView() {
         super.initView();
         relNewTaskOrderDetailBottom.setVisibility(View.GONE);
+        recyclerNearbyPhoto.setVisibility(View.GONE);
     }
 
     @Override

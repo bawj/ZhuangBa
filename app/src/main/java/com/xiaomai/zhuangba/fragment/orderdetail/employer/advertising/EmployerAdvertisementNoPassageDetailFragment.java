@@ -1,6 +1,7 @@
 package com.xiaomai.zhuangba.fragment.orderdetail.employer.advertising;
 
 import android.os.Bundle;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -31,6 +32,8 @@ public class EmployerAdvertisementNoPassageDetailFragment extends BaseAdvertisin
     TextView tvEmployerDetailMasterName;
     @BindView(R.id.relNewTaskOrderDetailBottom)
     RelativeLayout relNewTaskOrderDetailBottom;
+    @BindView(R.id.recyclerNearbyPhoto)
+    RecyclerView recyclerNearbyPhoto;
 
     private List<DeviceSurfaceInformation> list;
 
@@ -46,6 +49,7 @@ public class EmployerAdvertisementNoPassageDetailFragment extends BaseAdvertisin
     public void initView() {
         super.initView();
         relNewTaskOrderDetailBottom.setVisibility(View.GONE);
+        recyclerNearbyPhoto.setVisibility(View.GONE);
     }
 
     @Override

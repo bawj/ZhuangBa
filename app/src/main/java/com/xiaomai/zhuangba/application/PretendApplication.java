@@ -20,7 +20,6 @@ import com.umeng.message.UmengMessageHandler;
 import com.umeng.message.UmengNotificationClickHandler;
 import com.umeng.message.entity.UMessage;
 import com.xiaomai.zhuangba.MainActivity;
-import com.xiaomai.zhuangba.PushNotificationDBDao;
 import com.xiaomai.zhuangba.data.bean.MessageEvent;
 import com.xiaomai.zhuangba.data.bean.PushNotification;
 import com.xiaomai.zhuangba.data.bean.PushNotificationDB;

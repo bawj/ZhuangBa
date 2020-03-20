@@ -1,6 +1,7 @@
 package com.xiaomai.zhuangba.fragment.orderdetail.employer.advertising;
 
 import android.os.Bundle;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -41,6 +42,8 @@ public class EmployerAdvertisementAcceptedOrdersDetailFragment extends BaseAdver
     TextView tvEmployerDetailMasterName;
     @BindView(R.id.relNewTaskOrderDetailBottom)
     RelativeLayout relNewTaskOrderDetailBottom;
+    @BindView(R.id.recyclerNearbyPhoto)
+    RecyclerView recyclerNearbyPhoto;
 
     private List<DeviceSurfaceInformation> list;
 
@@ -63,6 +66,7 @@ public class EmployerAdvertisementAcceptedOrdersDetailFragment extends BaseAdver
         super.setViewData(adOrderInformationList);
         list = adOrderInformationList.getList();
         relNewTaskOrderDetailBottom.setVisibility(View.VISIBLE);
+        recyclerNearbyPhoto.setVisibility(View.GONE);
         //师傅名称
         String userText = adOrderInformationList.getUserText();
         tvEmployerDetailMasterName.setText(userText);

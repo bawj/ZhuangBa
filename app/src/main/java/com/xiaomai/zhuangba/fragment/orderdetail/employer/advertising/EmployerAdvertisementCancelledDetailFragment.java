@@ -1,10 +1,14 @@
 package com.xiaomai.zhuangba.fragment.orderdetail.employer.advertising;
 
 import android.os.Bundle;
+import android.support.v7.widget.RecyclerView;
+import android.view.View;
 
 import com.xiaomai.zhuangba.R;
 import com.xiaomai.zhuangba.data.bean.AdOrderInformation;
 import com.xiaomai.zhuangba.fragment.orderdetail.master.advertising.BaseAdvertisingBillDetailFragment;
+
+import butterknife.BindView;
 
 /**
  * Author: Bawj
@@ -13,12 +17,21 @@ import com.xiaomai.zhuangba.fragment.orderdetail.master.advertising.BaseAdvertis
  */
 public class EmployerAdvertisementCancelledDetailFragment extends BaseAdvertisingBillDetailFragment {
 
+    @BindView(R.id.recyclerNearbyPhoto)
+     RecyclerView recyclerNearbyPhoto;
+
     public static EmployerAdvertisementCancelledDetailFragment newInstance(String orderCodes) {
         Bundle args = new Bundle();
         args.putString(ORDER_CODES, orderCodes);
         EmployerAdvertisementCancelledDetailFragment fragment = new EmployerAdvertisementCancelledDetailFragment();
         fragment.setArguments(args);
         return fragment;
+    }
+
+    @Override
+    public void initView() {
+        super.initView();
+        recyclerNearbyPhoto.setVisibility(View.GONE);
     }
 
     @Override
