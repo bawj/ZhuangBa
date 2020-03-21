@@ -4,8 +4,10 @@ import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
+import com.example.toollib.util.DensityUtils;
 import com.xiaomai.zhuangba.R;
 import com.xiaomai.zhuangba.data.bean.EmployerWalletDetailBean;
+import com.xiaomai.zhuangba.util.DateUtil;
 
 /**
  * @author Administrator
@@ -22,7 +24,7 @@ public class EmployerWalletDetailAdapter extends BaseQuickAdapter<EmployerWallet
         TextView tvOrderCode = helper.getView(R.id.tvOrderCode);
         tvOrderCode.setText(item.getAccountNumber());
         TextView tvOrderTime = helper.getView(R.id.tvOrderTime);
-        tvOrderTime.setText(item.getTimes());
+        tvOrderTime.setText(DateUtil.getDate2String(DensityUtils.stringTypeLong(item.getTimes()), "yyyy-MM-dd"));
         TextView tvOrderInfo = helper.getView(R.id.tvOrderInfo);
         int wallerType = item.getWallerType();
 

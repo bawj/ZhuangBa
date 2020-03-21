@@ -25,7 +25,6 @@ import com.xiaomai.zhuangba.data.db.DBHelper;
 import com.xiaomai.zhuangba.enums.StaticExplain;
 import com.xiaomai.zhuangba.enums.StringTypeExplain;
 import com.xiaomai.zhuangba.http.ServiceUrl;
-import com.xiaomai.zhuangba.util.AdvertisingStatusUtil;
 import com.xiaomai.zhuangba.util.GuaranteeUtil;
 import com.xiaomai.zhuangba.util.OrderStatusUtil;
 import com.xiaomai.zhuangba.util.PatrolStatusUtil;
@@ -135,8 +134,8 @@ public class NotificationMessageFragment extends BaseFragment {
                     ongoingOrdersList.getOrderStatus(), ongoingOrdersList.getExpireTime());
             //广告单
         } else if (orderType.equals(String.valueOf(StaticExplain.ADVERTISING_BILLS.getCode()))) {
-            AdvertisingStatusUtil.startMasterOrderDetail(getBaseFragmentActivity(), ongoingOrdersList.getOrderCode(), orderType,
-                    ongoingOrdersList.getOrderStatus());
+            /*AdvertisingStatusUtil.startMasterOrderDetail(getBaseFragmentActivity(), ongoingOrdersList.getOrderCode(), orderType,
+                    ongoingOrdersList.getOrderStatus());*/
             //巡查单
         }else if (orderType.equals(String.valueOf(StaticExplain.PATROL.getCode()))){
             PatrolStatusUtil.startMasterPatrol(getBaseFragmentActivity(), ongoingOrdersList.getOrderCode(), orderType,
@@ -161,10 +160,8 @@ public class NotificationMessageFragment extends BaseFragment {
                     , orderType, ongoingOrdersList.getOrderStatus());
         } else if (orderType.equals(String.valueOf(StaticExplain.ADVERTISING_BILLS.getCode()))) {
             //广告单
-//            AdvertisingStatusUtil.startEmployerAdvertisingBills(getBaseFragmentActivity(), ongoingOrdersList.getOrderCode()
-//                    , orderType, ongoingOrdersList.getOrderStatus());
-            AdvertisingStatusUtil.startEmployerAdvertisinOrderDetail(getBaseFragmentActivity(),
-                    ongoingOrdersList.getOrderCode(), ongoingOrdersList.getOrderStatus());
+            /*AdvertisingStatusUtil.startEmployerAdvertisinOrderDetail(getBaseFragmentActivity(),
+                    ongoingOrdersList.getOrderCode(), ongoingOrdersList.getOrderStatus());*/
             //巡查单
         }else if (orderType.equals(String.valueOf(StaticExplain.PATROL.getCode()))){
             PatrolStatusUtil.startEmployerPatrol(getBaseFragmentActivity(), ongoingOrdersList.getOrderCode(), orderType,
