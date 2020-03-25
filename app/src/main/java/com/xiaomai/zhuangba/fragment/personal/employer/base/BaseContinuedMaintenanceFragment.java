@@ -107,11 +107,13 @@ public class BaseContinuedMaintenanceFragment extends BaseFragment implements Ba
                     public void sure(Maintenance maintenance) {
                         Integer serviceId = maintenance.getServiceId();
                         if (serviceId != null && serviceId != 0) {
-                            OrderServiceItem orderServiceItem = DBHelper.getInstance().getOrderServiceItemDao().queryBuilder()
+                            List<OrderServiceItem> orderServiceItemList = DBHelper.getInstance().getOrderServiceItemDao().queryBuilder()
                                     .where(OrderServiceItemDao.Properties.ServiceId.eq(serviceId))
-                                    .unique();
-                            if (orderServiceItem != null) {
-                                DBHelper.getInstance().getOrderServiceItemDao().delete(orderServiceItem);
+                                    .list();
+                            OrderServiceItem orderServiceItem;
+                            if (orderServiceItemList != null && orderServiceItemList.size() > 0) {
+                                DBHelper.getInstance().getOrderServiceItemDao().deleteAll();
+                                orderServiceItem = orderServiceItemList.get(0);
                             } else {
                                 orderServiceItem = new OrderServiceItem();
                             }
@@ -147,14 +149,15 @@ public class BaseContinuedMaintenanceFragment extends BaseFragment implements Ba
     }
 
     private ShopCarData findShopCarDataList(Maintenance maintenance) {
-        OrderServiceItem unique = DBHelper.getInstance().getOrderServiceItemDao().queryBuilder()
+        List<OrderServiceItem> unique = DBHelper.getInstance().getOrderServiceItemDao().queryBuilder()
                 .where(OrderServiceItemDao.Properties.ServiceId.eq(maintenance.getServiceId()))
-                .unique();
-        if (unique != null) {
-            return getShopCarData(unique);
+                .list();
+        if (unique != null && unique.size() > 0) {
+            return getShopCarData(unique.get(0));
         }
         return null;
     }
+
 
     private ShopCarData getShopCarData(OrderServiceItem unique) {
         ShopCarData shopCarData = new ShopCarData();

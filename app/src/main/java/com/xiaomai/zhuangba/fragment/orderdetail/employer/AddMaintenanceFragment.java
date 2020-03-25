@@ -82,6 +82,7 @@ public class AddMaintenanceFragment extends BaseContinuedMaintenanceFragment imp
             price += number * maintenanceAmount;
         }
         totalPrice = price;
+
         return price;
     }
 

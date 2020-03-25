@@ -73,13 +73,12 @@ public class AddProjectInstallationList extends SelectServiceFragment {
         //提交
         ShopAuxiliaryMaterialsDB shopAuxiliaryMaterials = DBHelper.getInstance().getShopAuxiliaryMaterialsDBDao().queryBuilder().unique();
         boolean isShopAuxiliaryMaterials = shopAuxiliaryMaterials != null &&  shopAuxiliaryMaterials.getMaterialsSlottingId() != 0
-                && shopAuxiliaryMaterials.getSlottingSlottingId() != 0 && shopAuxiliaryMaterials.getDebuggingPrice() != 0f;
-
+                && shopAuxiliaryMaterials.getSlottingSlottingId() != 0 ;
         Integer totalNumber = ShopCarUtil.getTotalNumber();
         if (isShopAuxiliaryMaterials || totalNumber != 0){
             submitAudit();
         }else {
-            ToastUtil.showShort(getString(R.string.please_service));
+            ToastUtil.showShort(getString(R.string.please_service_or_materials));
         }
     }
 

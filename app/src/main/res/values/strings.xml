@@ -453,6 +453,7 @@
     <string name="no_debugging_required">无需调试</string>
     <string name="need_debugging">需调试</string>
     <string name="please_service">请选择服务项目</string>
+    <string name="please_service_or_materials">请选择服务项目或辅材</string>
     <string name="cabling_slotting">布线开槽</string>
     <string name="debugging">调试</string>
     <string name="auxiliary_materials">辅材</string>
@@ -689,7 +690,7 @@
     <string name="select_items_to_reduce">选择需减少的项目：</string>
     <string name="supplementary_amount">补充金额：</string>
     <string name="remarks">备注：</string>
-    <string name="please_fill_in_the_reason_for_cancellation">请填写取消原因</string>
+    <string name="please_fill_in_the_reason_for_cancellation">请填写自定义补充原因</string>
     <string name="custom_supplement">自定义补充</string>
     <string name="liquidated_damages_to_be_paid">需缴纳违约金</string>
     <string name="penalty_for_breach_of_contract">违约金</string>
