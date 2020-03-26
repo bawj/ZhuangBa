@@ -24,7 +24,7 @@ public class EmployerWalletDetailAdapter extends BaseQuickAdapter<EmployerWallet
         TextView tvOrderCode = helper.getView(R.id.tvOrderCode);
         tvOrderCode.setText(item.getAccountNumber());
         TextView tvOrderTime = helper.getView(R.id.tvOrderTime);
-        tvOrderTime.setText(DateUtil.getDate2String(DensityUtils.stringTypeLong(item.getTimes()), "yyyy-MM-dd"));
+        tvOrderTime.setText(DateUtil.getDate2String(DensityUtils.stringTypeLong(item.getTimes()), "yyyy-MM-dd HH:mm:ss"));
         TextView tvOrderInfo = helper.getView(R.id.tvOrderInfo);
         int wallerType = item.getWallerType();
 
