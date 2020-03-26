@@ -37,18 +37,18 @@ import okhttp3.RequestBody;
 /**
  * @author Administrator
  * @date 2019/8/9 0009
- *
+ * <p>
  * 新增维保
  */
-public class AddMaintenanceFragment extends BaseContinuedMaintenanceFragment implements PayDialog.IHeadPortraitPopupCallBack{
+public class AddMaintenanceFragment extends BaseContinuedMaintenanceFragment implements PayDialog.IHeadPortraitPopupCallBack {
 
     public static final String PROVINCE = "province";
     public static final String CITY = "city";
 
-    public static AddMaintenanceFragment newInstance(String province , String city) {
+    public static AddMaintenanceFragment newInstance(String province, String city) {
         Bundle args = new Bundle();
-        args.putString(PROVINCE , province);
-        args.putString(CITY , city);
+        args.putString(PROVINCE, province);
+        args.putString(CITY, city);
         AddMaintenanceFragment fragment = new AddMaintenanceFragment();
         fragment.setArguments(args);
         return fragment;
@@ -82,7 +82,6 @@ public class AddMaintenanceFragment extends BaseContinuedMaintenanceFragment imp
             price += number * maintenanceAmount;
         }
         totalPrice = price;
-
         return price;
     }
 
@@ -111,12 +110,12 @@ public class AddMaintenanceFragment extends BaseContinuedMaintenanceFragment imp
 
     @Override
     public void weChatPay() {
-        requestPay(StringTypeExplain.WE_CHAT_PAYMENT.getCode() , "");
+        requestPay(StringTypeExplain.WE_CHAT_PAYMENT.getCode(), "");
     }
 
     @Override
     public void aliPay() {
-        requestPay(StringTypeExplain.A_ALIPAY_PAYMENT.getCode() , "");
+        requestPay(StringTypeExplain.A_ALIPAY_PAYMENT.getCode(), "");
     }
 
     /**
@@ -180,14 +179,14 @@ public class AddMaintenanceFragment extends BaseContinuedMaintenanceFragment imp
             maintenanceProjects.setAmout(number * maintenanceAmount);
             //服务项目ID
             maintenanceProjects.setServiceId(orderServiceItem.getServiceId());
-            if (maintenanceAmount > 0){
+            if (maintenanceAmount > 0) {
                 maintenanceProjectsList.add(maintenanceProjects);
             }
         }
 
-        hashMap.put("maintenanceProjects" , maintenanceProjectsList);
+        hashMap.put("maintenanceProjects", maintenanceProjectsList);
         //支付密码
-        hashMap.put("code" , code);
+        hashMap.put("code", code);
         //维保金额
         hashMap.put("maintenanceAmount", String.valueOf(pay));
         //支付类型:1:支付宝;2:微信;3:钱包
@@ -215,7 +214,7 @@ public class AddMaintenanceFragment extends BaseContinuedMaintenanceFragment imp
 
     @Override
     public String getProvince() {
-        if (getArguments() != null){
+        if (getArguments() != null) {
             return getArguments().getString(PROVINCE);
         }
         return "";
@@ -223,7 +222,7 @@ public class AddMaintenanceFragment extends BaseContinuedMaintenanceFragment imp
 
     @Override
     public String getCity() {
-        if (getArguments() != null){
+        if (getArguments() != null) {
             return getArguments().getString(CITY);
         }
         return "";

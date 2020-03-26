@@ -8,6 +8,7 @@ import android.widget.RelativeLayout;
 import com.example.toollib.http.HttpResult;
 import com.example.toollib.http.observer.BaseHttpRxObserver;
 import com.example.toollib.http.util.RxUtils;
+import com.example.toollib.util.ToastUtil;
 import com.xiaomai.zhuangba.R;
 import com.xiaomai.zhuangba.data.bean.AdOrderInformation;
 import com.xiaomai.zhuangba.fragment.orderdetail.master.advertising.BaseAdvertisingBillDetailFragment;
@@ -65,7 +66,7 @@ public class EmployerAdvertisementDistributionDetailFragment extends BaseAdverti
                         .subscribe(new BaseHttpRxObserver<Object>() {
                             @Override
                             protected void onSuccess(Object response) {
-
+                                ToastUtil.showShort(response.toString());
                             }
                         });
                 break;

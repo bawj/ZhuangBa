@@ -112,8 +112,8 @@ public class BaseContinuedMaintenanceFragment extends BaseFragment implements Ba
                                     .list();
                             OrderServiceItem orderServiceItem;
                             if (orderServiceItemList != null && orderServiceItemList.size() > 0) {
-                                DBHelper.getInstance().getOrderServiceItemDao().deleteAll();
                                 orderServiceItem = orderServiceItemList.get(0);
+                                DBHelper.getInstance().getOrderServiceItemDao().delete(orderServiceItem);
                             } else {
                                 orderServiceItem = new OrderServiceItem();
                             }
