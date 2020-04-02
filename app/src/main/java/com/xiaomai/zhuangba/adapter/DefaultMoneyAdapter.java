@@ -26,6 +26,6 @@ public class DefaultMoneyAdapter extends BaseQuickAdapter<Claim, BaseViewHolder>
         TextView tvReasonsBreachContract = baseViewHolder.getView(R.id.tvReasonsBreachContract);
         tvDefaultMoney.setText(mContext.getString(R.string.content_money, String.valueOf(claim.getMasterPrice())));
         tvDefaultDate.setText(DateUtil.getDate2String(DensityUtils.stringTypeLong(claim.getCreateTime()), "yyyy/MM/dd HH:mm:ss"));
-        tvReasonsBreachContract.setText(mContext.getString(R.string.reasons_for_breach_of_contract , claim.getReason()));
+        tvReasonsBreachContract.setText(mContext.getString(R.string.reasons_for_breach_of_contract , claim.getMasterReason()));
     }
 }

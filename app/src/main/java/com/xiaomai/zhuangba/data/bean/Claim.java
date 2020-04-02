@@ -36,6 +36,9 @@ public class Claim {
     /**雇主发起理赔原因*/
     private String reason;
 
+    /**平台设置师傅罚款理由*/
+    private String masterReason;
+
     /**雇主申请索赔状态：0未赔偿, 1已赔偿,2拒绝赔偿,3已取消*/
     private Integer businessStatus;
 
@@ -121,6 +124,14 @@ public class Claim {
 
     public void setMasterPrice(Double masterPrice) {
         this.masterPrice = masterPrice;
+    }
+
+    public String getMasterReason() {
+        return masterReason == null ? "" : masterReason;
+    }
+
+    public void setMasterReason(String masterReason) {
+        this.masterReason = masterReason;
     }
 
     public String getReason() {

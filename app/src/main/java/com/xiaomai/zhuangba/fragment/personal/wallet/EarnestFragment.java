@@ -9,10 +9,12 @@ import com.example.toollib.data.IBaseModule;
 import com.example.toollib.http.HttpResult;
 import com.example.toollib.http.observer.BaseHttpRxObserver;
 import com.example.toollib.http.util.RxUtils;
+import com.example.toollib.util.DensityUtils;
 import com.xiaomai.zhuangba.R;
 import com.xiaomai.zhuangba.data.bean.EarnestBean;
 import com.xiaomai.zhuangba.enums.ForResultCode;
 import com.xiaomai.zhuangba.http.ServiceUrl;
+import com.xiaomai.zhuangba.util.DateUtil;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -53,7 +55,7 @@ public class EarnestFragment extends BaseFragment {
     public void earnestSuccess(EarnestBean bean) {
         tvEarnestMoney.setText(getString(R.string.content_money, bean.getAmount()));
         tvEarnestHint.setText(String.format(getString(R.string.wallet_earnest_return_hint),
-                bean.getTimes(), bean.getAmount()));
+                DateUtil.getDate2String(DensityUtils.stringTypeLong(bean.getTimes()) , "yyyy-MM-dd HH:mm:ss"), bean.getAmount()));
     }
 
     @OnClick(R.id.tvReturn)

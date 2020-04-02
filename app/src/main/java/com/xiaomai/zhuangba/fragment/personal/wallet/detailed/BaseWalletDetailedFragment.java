@@ -117,6 +117,7 @@ public class BaseWalletDetailedFragment extends BaseListFragment implements Expa
         if (getPage() != StaticExplain.PAGE_NUMBER.getCode()) {
             //加载
             loadSuccess(list);
+            loadMoreEnd();
         } else {
             refreshSuccess(list);
             finishRefresh();

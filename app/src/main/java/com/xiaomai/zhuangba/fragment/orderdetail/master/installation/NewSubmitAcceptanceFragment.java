@@ -93,7 +93,6 @@ public class NewSubmitAcceptanceFragment extends BaseAutographFragment {
         }).subscribe(new BaseHttpRxObserver<Object>(getActivity()) {
             @Override
             protected void onSuccess(Object response) {
-                //跳转到待开工
                 startFragment(MasterWorkerFragment.newInstance());
             }
         });

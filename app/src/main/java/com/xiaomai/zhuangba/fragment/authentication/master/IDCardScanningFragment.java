@@ -17,6 +17,8 @@ import com.example.toollib.data.IBaseModule;
 import com.example.toollib.data.base.BaseCallback;
 import com.example.toollib.http.HttpResult;
 import com.example.toollib.http.observer.BaseHttpZipRxObserver;
+import com.example.toollib.manager.GlideManager;
+import com.example.toollib.util.Log;
 import com.example.toollib.util.ToastUtil;
 import com.google.gson.Gson;
 import com.xiaomai.zhuangba.R;
@@ -28,6 +30,9 @@ import com.xiaomai.zhuangba.http.ServiceUrl;
 import com.xiaomai.zhuangba.util.FileUtil;
 import com.xiaomai.zhuangba.util.RxPermissionsUtils;
 import com.xiaomai.zhuangba.util.Util;
+import com.xiaomai.zhuangba.weight.camera.global.Constant;
+import com.xiaomai.zhuangba.weight.camera.utils.FileUtils;
+import com.xiaomai.zhuangba.weight.camera.utils.ImageUtils;
 
 import java.io.File;
 import java.net.URI;
@@ -151,7 +156,7 @@ public class IDCardScanningFragment extends BaseFragment {
                 MultipartBody.Builder builderBack = new MultipartBody.Builder().setType(MultipartBody.FORM);
                 File fileBack = new File(new URI(back.toString()));
                 builderBack.addFormDataPart("file", fileBack.getName(),
-                        RequestBody.create(MediaType.parse("multipart/form-data"), file));
+                        RequestBody.create(MediaType.parse("multipart/form-data"), fileBack));
                 Observable<HttpResult<Object>> httpResultObservableBack = ServiceUrl.getUserApi().uploadFile(builderBack.build());
 
                 Observable<Object> zip = Observable.zip(httpResultObservable, httpResultObservableBack
@@ -194,28 +199,49 @@ public class IDCardScanningFragment extends BaseFragment {
                 this.name = result.name;
                 this.cardnum = result.cardnum;
 
-                String absolutePath = FileUtil.getSaveFile(PretendApplication.getInstance()).getAbsolutePath();
-
                 byte[] decode = Base64.decode(result.base64bitmap, Base64.DEFAULT);
                 Bitmap bitmap = BitmapFactory.decodeByteArray(decode, 0, decode.length);
-                FileUtil.saveBitmap(absolutePath, bitmap);
-                this.absolutePath = absolutePath;
-                ivAuthenticationFont.setImageBitmap(bitmap);
+                //String absolutePath = FileUtil.getSaveFile(PretendApplication.getInstance()).getAbsolutePath();
+                //FileUtil.saveBitmap(absolutePath, bitmap);
+
+                this.absolutePath = saveImg(bitmap);
+                GlideManager.loadUriImage(getActivity() , absolutePath , ivAuthenticationFont);
+
+                //this.absolutePath = absolutePath;
+               // ivAuthenticationFont.setImageBitmap(bitmap);
 
             } else if (requestCode == ForResultCode.START_FOR_RESULT_CODE_.getCode() && null != data) {
                 final EXOCRModel result = (EXOCRModel) data.getSerializableExtra(RESULT);
                 byte[] decode = Base64.decode(result.base64bitmap, Base64.DEFAULT);
                 Bitmap bitmap = BitmapFactory.decodeByteArray(decode, 0, decode.length);
-                String absolutePath = FileUtil.getSaveFile(PretendApplication.getInstance()).getAbsolutePath();
-                FileUtil.saveBitmap(absolutePath, bitmap);
-                absoluteBlackPath = absolutePath;
-                ivAuthenticationBack.setImageBitmap(bitmap);
+
+//                String absolutePath = FileUtil.getSaveFile(PretendApplication.getInstance()).getAbsolutePath();
+//                FileUtil.saveBitmap(absolutePath, bitmap);
+
+                this.absoluteBlackPath = saveImg(bitmap);
+                GlideManager.loadUriImage(getActivity() , absoluteBlackPath , ivAuthenticationBack);
+
+//                absoluteBlackPath = absolutePath;
+//                ivAuthenticationBack.setImageBitmap(bitmap);
+
                 String[] valDate = Util.getValDate(result.validdate);
                 if (valDate != null && valDate.length > 1) {
                     idCardDate = getString(R.string.id_card_date, Util.getDate(valDate[0]), Util.getDate(valDate[1]));
                 }
             }
         }
+    }
+
+    private String saveImg(Bitmap bitmap){
+        if (FileUtils.createOrExistsDir(Constant.DIR_ROOT)) {
+            String imagePath = Constant.DIR_ROOT +
+                    Constant.APP_NAME + System.currentTimeMillis() + ".jpg";
+            if (ImageUtils.save(bitmap, imagePath, Bitmap.CompressFormat.JPEG)) {
+                Log.e("bitMap = " + imagePath);
+                return imagePath;
+            }
+        }
+        return "";
     }
 
     @Override

@@ -162,8 +162,39 @@ public class WalletDetailAdapter extends BaseExpandableListAdapter {
     }
 
     public void loadNotifyDataChanged(List<String> groupList, List<List<WalletDetailBean.ListBean>> childrenList) {
-        this.groupList.addAll(groupList);
-        this.childrenList.addAll(childrenList);
+        for (String s : groupList) {
+            if (!this.groupList.contains(s)){
+                this.groupList.add(s);
+            }
+        }
+        if (childrenList != null && childrenList.size() > 0){
+            List<WalletDetailBean.ListBean> listBeans = childrenList.get(0);
+            List<WalletDetailBean.ListBean> listBeans1 = this.childrenList.get(this.childrenList.size() - 1);
+            String time;
+            String time1;
+            if (listBeans != null && listBeans.size() > 0){
+                WalletDetailBean.ListBean listBean = listBeans.get(0);
+                WalletDetailBean.ListBean listBean1 = listBeans1.get(0);
+                if (type == WalletOrderTypeEnum.DETAIL_OUT.getCode()){
+                    time =  listBean.getTimes();
+                    time1 = listBean1.getTimes();
+                }else if (type == WalletOrderTypeEnum.EMPLOYER_DETAIL_OUT.getCode()){
+                    time =  listBean.getTimes();
+                    time1 = listBean1.getTimes();
+                }else {
+                    time = listBean.getModifyTime();
+                    time1 = listBean1.getModifyTime();
+                }
+                if (DateUtil.getDate2String(DensityUtils.stringTypeLong(time) , "yyyy-MM").equals(DateUtil.getDate2String(DensityUtils.stringTypeLong(time1) , "yyyy-MM"))){
+                    listBeans1.addAll(listBeans);
+                    childrenList.remove(0);
+                }
+                this.childrenList.addAll(childrenList);
+            }
+        }
+
+        //this.groupList.addAll(groupList);
+
         notifyDataSetChanged();
     }
 }
