@@ -29,21 +29,15 @@ import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
+import static com.xiaomai.zhuangba.application.PretendApplication.BUCKET;
+import static com.xiaomai.zhuangba.application.PretendApplication.IMG_URL;
+
 public class QiNiuUtil {
 
     private static QiNiuUtil qiNiuUtil;
     private static final String accessKey = "0jyopzon2rvnQJsBsEDYspeeLo9grHoUmL_fFbuR";
     private static final String secretKey = "maSmlklPLx66YRShRzQ6dyPgll1MPTJ_xA0sE5vE";
 
-    // TODO: 2019/11/27 0027 正式发布需要修改
-//    private static final String IMG_URL = "http://pic.hangzhouzhuangba.com/";
-//    private static final String bucket = "zhengshi-zhuangba";
-
-    /**
-     * 测试服 地址
-     */
-    public static final String IMG_URL = "http://testpic.hangzhouzhuangba.com/";
-    private static final String bucket = "zhuangba-upload-image";
 
 
     public static QiNiuUtil newInstance() {
@@ -66,6 +60,7 @@ public class QiNiuUtil {
         //默认使用key的url_safe_base64编码字符串作为断点记录文件的文件名
         //避免记录文件冲突（特别是key指定为null时），也可自定义文件名(下方为默认实现)：
         KeyGenerator keyGen = new KeyGenerator() {
+            @Override
             public String gen(String key, File file) {
                 // 不必使用url_safe_base64转换，uploadManager内部会处理
                 // 该返回值可替换为基于key、文件内容、上下文的其它信息生成的文件名
@@ -90,7 +85,7 @@ public class QiNiuUtil {
     public Observable<List<String>> getObservable(final List<String> uriList) {
         //上传到七牛云的图片路径
         final List<String> resultImagePath = new ArrayList<>();
-        final String token = Auth.create(QiNiuUtil.accessKey, QiNiuUtil.secretKey).uploadToken(QiNiuUtil.bucket);
+        final String token = Auth.create(QiNiuUtil.accessKey, QiNiuUtil.secretKey).uploadToken(BUCKET);
         return Observable.create(new ObservableOnSubscribe<List<String>>() {
             @Override
             public void subscribe(final ObservableEmitter<List<String>> emitter) throws URISyntaxException {
@@ -134,7 +129,7 @@ public class QiNiuUtil {
      * @return observable
      */
     public Observable<List<ServiceSampleEntity>> getAdvertisementPhotoObservable(final List<ServiceSampleEntity> uriList) {
-        final String token = Auth.create(QiNiuUtil.accessKey, QiNiuUtil.secretKey).uploadToken(QiNiuUtil.bucket);
+        final String token = Auth.create(QiNiuUtil.accessKey, QiNiuUtil.secretKey).uploadToken(BUCKET);
         return Observable.create(new ObservableOnSubscribe<List<ServiceSampleEntity>>() {
             @Override
             public void subscribe(final ObservableEmitter<List<ServiceSampleEntity>> emitter) throws URISyntaxException {

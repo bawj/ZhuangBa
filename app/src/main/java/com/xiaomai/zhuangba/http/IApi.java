@@ -1537,7 +1537,7 @@ public interface IApi {
     Observable<HttpResult<Object>> initiateCutItem(@Body RequestBody requestBody);
 
     /**
-     * 师傅申请删减项目
+     * 师傅申请自定义补充
      *
      * @param orderCode   订单编号
      * @param amount      金额

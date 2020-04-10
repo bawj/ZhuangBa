@@ -47,7 +47,7 @@ import okhttp3.RequestBody;
  * @author Administrator
  * @date 2019/8/2 0002
  */
-public class EmployerInformationFragment extends BaseFragment implements BaseQuickAdapter.OnItemClickListener{
+public class EmployerInformationFragment extends BaseFragment implements BaseQuickAdapter.OnItemClickListener {
 
     @BindView(R.id.editPhone)
     public EditText editPhone;
@@ -106,7 +106,7 @@ public class EmployerInformationFragment extends BaseFragment implements BaseQui
                 .subscribe(new BaseHttpRxObserver<List<BusinessNeeds>>(getActivity()) {
                     @Override
                     protected void onSuccess(List<BusinessNeeds> response) {
-                        if (response != null) {
+                        if (response != null && response.size() > 0) {
                             for (int i = 0; i < response.size(); i++) {
                                 if (i == 0) {
                                     BusinessNeeds businessNeeds = response.get(i);
@@ -115,14 +115,17 @@ public class EmployerInformationFragment extends BaseFragment implements BaseQui
                                     tvSecurity.setText(name);
                                     recyclerMediaSecurity.setAdapter(employerRealNameAuthenticationAdapter);
                                     employerRealNameAuthenticationAdapter.setNewData(securityList);
-                                    isCheck(businessNeeds.getFlag() , tvSecurity);
+                                    isCheck(businessNeeds.getFlag(), tvSecurity);
                                 }
                                 if (i == 1) {
                                     BusinessNeeds businessNeeds = response.get(i);
                                     String name = businessNeeds.getName();
                                     mediaList = businessNeeds.getChildDemand();
                                     tvMedia.setText(name);
-                                    isCheck(businessNeeds.getFlag() , tvMedia);
+                                    isCheck(businessNeeds.getFlag(), tvMedia);
+                                    if (businessNeeds.getFlag() == StaticExplain.EMPLOYER_IS_CHECK.getCode()){
+                                        employerRealNameAuthenticationAdapter.setNewData(mediaList);
+                                    }
                                 }
                             }
                         }
@@ -130,7 +133,7 @@ public class EmployerInformationFragment extends BaseFragment implements BaseQui
                 });
     }
 
-    @OnClick({R.id.btnUpload, R.id.relAddress , R.id.tvSecurity, R.id.tvMedia})
+    @OnClick({R.id.btnUpload, R.id.relAddress, R.id.tvSecurity, R.id.tvMedia})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btnUpload:
@@ -141,14 +144,16 @@ public class EmployerInformationFragment extends BaseFragment implements BaseQui
                 break;
             case R.id.tvSecurity:
                 itemPosition = 0;
-                isCheck(StaticExplain.EMPLOYER_IS_CHECK.getCode() , tvSecurity);
+                isCheck(StaticExplain.EMPLOYER_IS_CHECK.getCode(), tvSecurity);
                 employerRealNameAuthenticationAdapter.setNewData(securityList);
                 tvMedia.setBackground(getResources().getDrawable(R.drawable.bg_gray));
                 tvMedia.setTextColor(getResources().getColor(R.color.tool_lib_gray_777777));
                 break;
             case R.id.tvMedia:
                 itemPosition = 1;
-                isCheck(StaticExplain.EMPLOYER_IS_CHECK.getCode() , tvMedia);
+                //媒体企业 默认选中
+                defaultSelection();
+                isCheck(StaticExplain.EMPLOYER_IS_CHECK.getCode(), tvMedia);
                 employerRealNameAuthenticationAdapter.setNewData(mediaList);
                 tvSecurity.setBackground(getResources().getDrawable(R.drawable.bg_gray));
                 tvSecurity.setTextColor(getResources().getColor(R.color.tool_lib_gray_777777));
@@ -157,11 +162,31 @@ public class EmployerInformationFragment extends BaseFragment implements BaseQui
         }
     }
 
-    private void isCheck(int flag , TextView tv){
-        if (flag == StaticExplain.EMPLOYER_NOT_CHECK.getCode()){
+    private void defaultSelection() {
+        if (mediaList != null && mediaList.size() > 0) {
+            boolean flag = false;
+            for (BusinessNeeds needs : mediaList) {
+                if (needs.getFlag() == StaticExplain.EMPLOYER_IS_CHECK.getCode()) {
+                    flag = true;
+                    break;
+                } else {
+                    flag = false;
+                }
+            }
+            int flagOne = mediaList.get(0).getFlag();
+            if (flag && flagOne != StaticExplain.EMPLOYER_IS_CHECK.getCode()) {
+                mediaList.get(0).setFlag(StaticExplain.EMPLOYER_NOT_CHECK.getCode());
+            } else {
+                mediaList.get(0).setFlag(StaticExplain.EMPLOYER_IS_CHECK.getCode());
+            }
+        }
+    }
+
+    private void isCheck(int flag, TextView tv) {
+        if (flag == StaticExplain.EMPLOYER_NOT_CHECK.getCode()) {
             tv.setBackground(getResources().getDrawable(R.drawable.bg_gray));
             tv.setTextColor(getResources().getColor(R.color.tool_lib_gray_777777));
-        }else if (flag == StaticExplain.EMPLOYER_IS_CHECK.getCode()){
+        } else if (flag == StaticExplain.EMPLOYER_IS_CHECK.getCode()) {
             tv.setBackground(getResources().getDrawable(R.drawable.bg_red));
             tv.setTextColor(getResources().getColor(R.color.tool_lib_color_E74C3C));
         }
@@ -169,12 +194,12 @@ public class EmployerInformationFragment extends BaseFragment implements BaseQui
 
     @Override
     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-        if (itemPosition == 0){
+        if (itemPosition == 0) {
             BusinessNeeds businessNeeds = securityList.get(position);
             businessNeeds.setFlag(businessNeeds.getFlag() == StaticExplain.EMPLOYER_NOT_CHECK.getCode()
                     ? StaticExplain.EMPLOYER_IS_CHECK.getCode() : StaticExplain.EMPLOYER_NOT_CHECK.getCode());
             employerRealNameAuthenticationAdapter.setNewData(securityList);
-        }else if (itemPosition == 1){
+        } else if (itemPosition == 1) {
             BusinessNeeds businessNeeds = mediaList.get(position);
             businessNeeds.setFlag(businessNeeds.getFlag() == StaticExplain.EMPLOYER_NOT_CHECK.getCode()
                     ? StaticExplain.EMPLOYER_IS_CHECK.getCode() : StaticExplain.EMPLOYER_NOT_CHECK.getCode());
@@ -261,19 +286,19 @@ public class EmployerInformationFragment extends BaseFragment implements BaseQui
 
     public String getIdStr() {
         StringBuilder idStr = new StringBuilder();
-        if (itemPosition == 0){
+        if (itemPosition == 0) {
             for (BusinessNeeds businessNeeds : securityList) {
                 int flag = businessNeeds.getFlag();
-                if (flag == StaticExplain.EMPLOYER_IS_CHECK.getCode()){
+                if (flag == StaticExplain.EMPLOYER_IS_CHECK.getCode()) {
                     idStr.append(businessNeeds.getId());
                     idStr.append(",");
                 }
             }
             idStr.append("-2");
-        }else if (itemPosition == 1){
+        } else if (itemPosition == 1) {
             for (BusinessNeeds businessNeeds : mediaList) {
                 int flag = businessNeeds.getFlag();
-                if (flag == StaticExplain.EMPLOYER_IS_CHECK.getCode()){
+                if (flag == StaticExplain.EMPLOYER_IS_CHECK.getCode()) {
                     idStr.append(businessNeeds.getId());
                     idStr.append(",");
                 }

@@ -69,6 +69,7 @@ public class EmployerRealNameAuthenticationFragment extends EmployerInformationF
         String employerName = editEmployerName.getText().toString();
         String phone = editPhone.getText().toString();
         String address = editAddress.getText().toString();
+        String addressDetail = editAddressDetail.getText().toString();
         String enterpriseName = editEnterpriseName.getText().toString();
         if (TextUtils.isEmpty(employerName)) {
             ToastUtil.showShort(getString(R.string.please_enter_the_employer_name));
@@ -84,7 +85,7 @@ public class EmployerRealNameAuthenticationFragment extends EmployerInformationF
             userInfo.setEmergencyContact(phone);
             userInfo.setRole(String.valueOf(StaticExplain.EMPLOYER.getCode()));
             userInfo.setAddress(address);
-            userInfo.setContactAddress(address);
+            userInfo.setContactAddress(addressDetail);
             userInfo.setCompanyName(enterpriseName);
             userInfo.setIdStr(getIdStr());
             RequestBody requestBody = RequestBody.create(MediaType.parse("application/json;charset=utf-8"), new Gson().toJson(userInfo));

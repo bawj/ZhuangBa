@@ -41,6 +41,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.OnClick;
 
+import static com.xiaomai.zhuangba.application.PretendApplication.IMG_URL;
 import static com.xiaomai.zhuangba.fragment.orderdetail.master.advertising.BaseAdvertisingBillDetailFragment.ORDER_CODES;
 import static com.xiaomai.zhuangba.fragment.orderdetail.master.advertising.photo.BaseAdvertisementPhotoFragment.DEVICE_SURFACE_INFORMATION_LIST_STRING;
 import static com.xiaomai.zhuangba.fragment.orderdetail.master.advertising.photo.BaseAdvertisementPhotoFragment.SERVICE_SAMPLE;
@@ -379,10 +380,10 @@ public class BaseAdvertisementPhotoTabFragment extends BaseFragment implements B
         //判断 是否是重复的图片 已经提交过的 不提交到七牛云
         for (ServiceSampleEntity serviceSampleEntity : serviceSampleEntities) {
             String picUrl = serviceSampleEntity.getPicUrl();
-            if (!TextUtils.isEmpty(picUrl) && !picUrl.contains(QiNiuUtil.IMG_URL)) {
+            if (!TextUtils.isEmpty(picUrl) && !picUrl.contains(IMG_URL)) {
                 //已经提交的
                 String imgName = QiNiuUtil.newInstance().getImgName();
-                submitted.add(new ServiceSampleEntity(QiNiuUtil.IMG_URL + imgName, serviceSampleEntity.getAdverName()));
+                submitted.add(new ServiceSampleEntity(IMG_URL + imgName, serviceSampleEntity.getAdverName()));
                 //需要提交的
                 notSubmitted.add(new ServiceSampleEntity(serviceSampleEntity.getPicUrl(), serviceSampleEntity.getAdverName(), imgName));
             } else {

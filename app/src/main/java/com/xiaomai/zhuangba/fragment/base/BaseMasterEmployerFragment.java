@@ -118,7 +118,7 @@ public class BaseMasterEmployerFragment extends BaseFragment<IMasterEmployerModu
         refreshBaseList.setHeaderInsetStart(76);
         UserInfo unique = getUserInfo();
         if (unique != null) {
-            GlideManager.loadCircleImage(getActivity(), unique.getBareHeadedPhotoUrl(), ivUserHead);
+            GlideManager.loadCircleImage(getActivity(), unique.getBareHeadedPhotoUrl(), ivUserHead , R.drawable.ic_employer_head);
             tvUserName.setText(unique.getUserText());
         }
 

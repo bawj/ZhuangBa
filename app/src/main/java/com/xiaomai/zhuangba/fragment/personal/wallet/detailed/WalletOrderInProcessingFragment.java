@@ -4,9 +4,11 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.widget.TextView;
 
+import com.example.toollib.util.DensityUtils;
 import com.xiaomai.zhuangba.R;
 import com.xiaomai.zhuangba.data.bean.WalletDetailBean;
 import com.xiaomai.zhuangba.data.bean.WalletOrderDetailBean;
+import com.xiaomai.zhuangba.util.DateUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,7 +44,7 @@ public class WalletOrderInProcessingFragment extends WalletOrderDetailFragment{
     public List<WalletOrderDetailBean> getList(WalletDetailBean.ListBean bean) {
         tvNumber.setText(String.format(getString(R.string.content_money), String.valueOf( bean.getAmount() == 0 ? bean.getMasterOrderAmount() : bean.getAmount() )));
         List<WalletOrderDetailBean> list = new ArrayList<>();
-        list.add(new WalletOrderDetailBean(getString(R.string.wallet_out_time), TextUtils.isEmpty(bean.getModifyTime()) ? bean.getTimes() : bean.getModifyTime()));
+        list.add(new WalletOrderDetailBean(getString(R.string.wallet_out_time), DateUtil.getDate2String(DensityUtils.stringTypeLong(bean.getModifyTime()) , "yyyy-MM-dd HH:mm:ss")));
         list.add(new WalletOrderDetailBean(getString(R.string.wallet_out_account), bean.getWithdrawalsAccount()));
         list.add(new WalletOrderDetailBean(getString(R.string.wallet_out_status), getString(R.string.in_processing)));
         return list;
