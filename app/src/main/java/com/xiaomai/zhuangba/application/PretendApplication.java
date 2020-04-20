@@ -50,21 +50,20 @@ public class PretendApplication extends Application {
 
 //   public static final String BASE_URL = "http://192.168.0.110:7966/";
 //   public static final String BASE_URL = "http://192.168.0.167:7966/testZhuangBas/";
-//   public static final String BASE_URL = "http://192.168.0.110:7966/testZhuangBas/";
+//   public static final String BASE_URL = "http://192.168.0.109:7966/testZhuangBas/";
 //    public static final String BASE_URL = "http://47.114.123.140:7968/zhuangBas/";
 //   public static final String BASE_URL = "http://192.168.0.109:7966/";
 
-   public static final String BASE_URL = "https://zb.hangzhouzhuangba.com/testZhuangBas/";
-
     // 正式发布需要修改
-//    public static final String IMG_URL = "http://pic.hangzhouzhuangba.com/";
-//    public static final String BUCKET = "zhengshi-zhuangba";
-    //public static final String BASE_URL = "https://zb.hangzhouzhuangba.com/zhuangBas/";
+    public static final String IMG_URL = "http://pic.hangzhouzhuangba.com/";
+    public static final String BUCKET = "zhengshi-zhuangba";
+    public static final String BASE_URL = "https://zb.hangzhouzhuangba.com/zhuangBas/";
     /**
      * 七牛云测试服 地址
      */
-    public static final String IMG_URL = "http://testpic.hangzhouzhuangba.com/";
-    public static final String BUCKET = "zhuangba-upload-image";
+//    public static final String IMG_URL = "http://testpic.hangzhouzhuangba.com/";
+//    public static final String BUCKET = "zhuangba-upload-image";
+    //public static finadl String BASE_URL = "https://zb.hangzhouzhuangba.com/testZhuangBas/";
 
     public static PretendApplication getInstance() {
         return pretendApplication;

@@ -380,7 +380,8 @@ public class BaseAdvertisementPhotoTabFragment extends BaseFragment implements B
         //判断 是否是重复的图片 已经提交过的 不提交到七牛云
         for (ServiceSampleEntity serviceSampleEntity : serviceSampleEntities) {
             String picUrl = serviceSampleEntity.getPicUrl();
-            if (!TextUtils.isEmpty(picUrl) && !picUrl.contains(IMG_URL)) {
+            //正服 和 测服 图片地址混乱 不知道什么原因(多个端上传) http://pic.hangzhouzhuangba.com/  http://testpic.hangzhouzhuangba.com/
+            if (!TextUtils.isEmpty(picUrl) && !picUrl.contains(IMG_URL) && !picUrl.contains("http://pic.hangzhouzhuangba.com/")) {
                 //已经提交的
                 String imgName = QiNiuUtil.newInstance().getImgName();
                 submitted.add(new ServiceSampleEntity(IMG_URL + imgName, serviceSampleEntity.getAdverName()));

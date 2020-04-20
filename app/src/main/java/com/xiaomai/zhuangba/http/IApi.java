@@ -945,7 +945,7 @@ public interface IApi {
      * @param pageSize 一页显示行数
      * @return observable
      */
-    @GET("order/getMasterHandleInspectionOrder ")
+    @GET("order/getMasterHandleInspectionOrder")
     Observable<HttpResult<RefreshBaseList<InspectionSheetBean>>> getMasterHandleInspectionOrder(@Query("pageNum") int pageNum, @Query("pageSize") int pageSize);
 
 
